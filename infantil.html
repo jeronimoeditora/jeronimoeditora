@@ -8,7 +8,7 @@
     <!-- Google Fonts: Playfair Display (Serif), Roboto (Sans) & Crimson Text (Classic) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;00;500;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -51,6 +51,7 @@
         .thumbnail-selected {
             border: 2px solid #ff8c00;
         }
+        /* Utilitários para fechar modais ao clicar no fundo */
         .modal-overlay {
             cursor: pointer;
         }
@@ -104,7 +105,7 @@
             <h3 id="info-modal-title" class="text-2xl font-bold font-serif text-brand-child-dark mb-4 border-b pb-3 text-center"></h3>
             <div id="info-modal-content" class="flex flex-col sm:flex-row gap-4 flex-grow overflow-y-auto">
                 <div class="sm:w-2/5 flex flex-col items-center flex-shrink-0">
-                    <img id="info-modal-image" src="" alt="Capa do Livro" class="w-32 h-48 object-contain rounded-lg shadow-md mb-3" onerror="this.onerror=null;this.src='https://placehold.co/128x192/FF8C00/000?text=CAPA';" />
+                    <img id="info-modal-image" src="" alt="Capa" class="w-32 h-48 object-contain rounded-lg shadow-md mb-3" onerror="this.onerror=null;this.src='https://placehold.co/128x192/FF8C00/000?text=CAPA';" />
                     <div id="info-modal-gallery" class="flex space-x-2 mt-2 justify-center"></div>
                 </div>
                 <div class="sm:w-3/5 space-y-4 text-sm">
@@ -123,9 +124,11 @@
                 </div>
             </div>
             <div class="mt-6 pt-4 border-t border-gray-100 flex flex-col sm:flex-row justify-center gap-3">
-                <button id="info-modal-add-to-cart" onclick="modalAddToCart()" class="flex-grow bg-brand-child text-white py-3 rounded-lg hover:bg-brand-child-dark transition-colors font-bold shadow-md text-base">ADICIONAR AO CARRINHO</button>
+                <button id="info-modal-add-to-cart" onclick="modalAddToCart()" class="flex-grow bg-brand-child text-white py-3 rounded-lg hover:bg-brand-child-dark transition-colors font-bold shadow-md text-base uppercase tracking-wider">
+                    ADICIONAR AO CARRINHO
+                </button>
             </div>
-            <button onclick="closeInfoModal()" class="mt-3 text-sm text-gray-500 hover:text-brand-child-dark transition-colors">Fechar</button>
+            <button onclick="closeInfoModal()" class="mt-3 text-sm text-gray-500 hover:text-brand-child-dark transition-colors font-semibold">Fechar</button>
         </div>
     </div>
 
@@ -136,7 +139,6 @@
                 <img src="Logo J.png" alt="Logótipo Jerónimo Editora" class="h-9 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';" />
                 <span class="font-serif text-2xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors duration-200">Jerónimo Editora</span>
             </a>
-            
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-700 tracking-wide">
                 <a href="index.html#hero" class="hover:text-brand-accent-red transition-colors duration-200">INÍCIO</a>
                 <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors duration-200">CATÁLOGO</a> 
@@ -150,35 +152,24 @@
                         <span id="fav-count" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
                     </button>
                     <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="openCart()">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>
                         <span id="cart-count" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
                     </button>
                 </div>
                 <a id="user-nav-link" href="login.html" class="pl-4 text-gray-700 hover:text-brand-accent-red transition-colors duration-200" aria-label="Aceder à Conta"></a>
             </div>
-            <button id="menu-button" class="md:hidden text-2xl text-brand-text focus:outline-none hover:text-brand-accent-red">&#9776;</button>
+            <button id="menu-button" class="md:hidden text-2xl text-brand-text">&#9776;</button>
         </div>
     </nav>
     
     <div id="mobile-menu" class="hidden fixed top-20 left-0 w-full bg-white shadow-xl z-40 md:hidden">
         <div class="flex flex-col p-4 text-center space-y-3">
-            <a href="index.html#hero" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">INÍCIO</a>
-            <a href="catalogo-completo.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">CATÁLOGO</a>
+            <a href="index.html#hero" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">INÍCIO</a>
+            <a href="catalogo-completo.html" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">CATÁLOGO</a>
             <a href="infantil.html" class="py-2 text-brand-accent-red font-bold hover:bg-gray-100 transition-colors" onclick="toggleMenu()">INFANTIL</a>
-            <a href="produtos.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">PRODUTOS</a>
-            <a href="index.html#sobre" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">SOBRE</a>
-            <a href="contato.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">CONTATO</a>
-            <div class="flex justify-center space-x-8 pt-4 border-t border-gray-100">
-                <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="openFavorites()">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-                    <span id="fav-count-mobile" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
-                </button>
-                <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="openCart()">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>
-                    <span id="cart-count-mobile" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
-                </button>
-            </div>
-            <a href="login.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors font-bold" onclick="toggleMenu()">CONTA</a>
+            <a href="produtos.html" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">PRODUTOS</a>
+            <a href="index.html#sobre" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">SOBRE</a>
+            <a href="contato.html" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">CONTATO</a>
         </div>
     </div>
 
@@ -220,7 +211,7 @@
             <div class="col-span-2 md:col-span-1 space-y-4">
                 <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Newsletter</h4>
                 <form onsubmit="handleSubscribe(event)" class="flex flex-col space-y-3">
-                    <input type="email" id="newsletter-email" placeholder="O seu email" required class="p-2 rounded-md bg-gray-800 border border-gray-700 text-white focus:border-brand-gold">
+                    <input type="email" id="newsletter-email" placeholder="O seu email" required class="p-2 rounded-md bg-gray-800 border border-gray-700 text-white focus:border-brand-gold outline-none">
                     <button type="submit" id="subscribe-button" class="bg-brand-gold text-brand-accent-blue font-bold py-2 rounded-md shadow-lg hover:bg-yellow-600 transition-colors">SUBSCREVER</button>
                     <p id="subscribe-message" class="text-xs text-green-400 font-bold hidden"></p>
                 </form>
@@ -260,7 +251,6 @@
         function closeCartConfirmation() { document.getElementById('add-to-cart-modal').classList.add('hidden'); }
         function closeFavorites() { document.getElementById('favorites-modal').classList.add('hidden'); }
         function closeInfoModal() { document.getElementById('info-modal').classList.add('hidden'); }
-        function closeCart() { window.location.href = 'checkout.html'; }
 
         function addToCart(id, title) {
             let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
@@ -283,7 +273,7 @@
         }
 
         function checkoutFromModal() { window.location.href = 'checkout.html'; }
-        function checkout() { window.location.href = 'checkout.html'; }
+        function openCart() { window.location.href = 'checkout.html'; }
 
         function renderFavoritesList() {
             const list = document.getElementById('favorites-list');
@@ -298,8 +288,8 @@
                 if (book) {
                     count++;
                     html += `<div class="flex items-center space-x-4 p-3 border rounded bg-gray-50">
-                        <a href="${book.link}" class="flex items-center space-x-4 flex-grow"><img src="${book.image}" class="w-12 h-16 object-contain" /><div><h4 class="font-bold text-sm">${book.title}</h4><p class="text-brand-accent-red font-bold text-xs">${formatPrice(book.price)}</p></div></a>
-                        <button onclick="toggleFavorite(${id === 1 ? "'suma-teologica'" : id}, true)" class="text-gray-400 hover:text-red-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                        <a href="${book.link}" class="flex items-center space-x-4 flex-grow"><img src="${book.image}" class="w-12 h-16 object-contain" /><div><h4 class="font-bold text-sm text-brand-text">${book.title}</h4><p class="text-brand-accent-red font-bold text-xs">${formatPrice(book.price)}</p></div></a>
+                        <button onclick="toggleFavorite(${id}, true)" class="text-gray-400 hover:text-red-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                     </div>`;
                 }
             });
@@ -340,12 +330,14 @@
                 const isFav = localStorage.getItem(`fav-${b.id}`) === 'true';
                 const favClass = isFav ? 'text-red-500 fill-red-500' : 'text-gray-400 fill-none';
                 
-                // Títulos com cor Laranja Escuro para contraste (text-brand-child-dark)
+                // --- ATUALIZAÇÃO DO TÍTULO E PREÇO ---
+                // Título: Cor padrão (brand-text), sem negrito (font-normal), hover em laranja escuro
+                // Preço: Sempre laranja escuro (text-brand-child-dark)
                 container.innerHTML += `
                     <div class="text-center group book-shadow bg-white rounded-xl p-4 flex flex-col justify-between cursor-pointer" onclick="openInfoModal(${b.id})">
                         <div class="flex-grow">
                             <img src="${b.image}" class="mx-auto w-32 h-48 object-contain mb-3" />
-                            <h4 class="font-serif text-lg group-hover:text-brand-child text-brand-child-dark font-bold transition-colors">${b.title}</h4>
+                            <h4 class="font-serif text-lg text-brand-text font-normal group-hover:text-brand-child-dark transition-colors duration-200 mt-2">${b.title}</h4>
                             <p class="text-xs text-gray-500 italic">${b.author}</p>
                             <span class="text-xl font-classic font-extrabold text-brand-child-dark mt-2 block">${formatPrice(b.price)}</span>
                         </div>
@@ -357,6 +349,7 @@
                                 ${infoIcon}
                                 <span class="hidden md:inline">Info</span>
                             </button>
+                            <!-- Botão Comprar com Ícone do Carrinho -->
                             <button class="bg-brand-child text-white py-1 px-2 md:px-3 rounded-lg hover:bg-brand-child-dark flex items-center justify-center space-x-1 h-8 min-w-[32px] transition-all" onclick="addToCart(${b.id}, '${b.title}'); event.stopPropagation();">
                                 ${cartIcon}
                                 <span class="hidden md:inline">Comprar</span>
@@ -374,7 +367,7 @@
         }
 
         function openInfoModal(id) {
-            const b = getBookDataById(id);
+            const b = bookData.find(book => book.id === id);
             if (!b) return;
             document.getElementById('info-modal-title').textContent = b.title;
             document.getElementById('info-modal-image').src = b.image;
@@ -425,8 +418,8 @@
                 <div class="mb-10 flex flex-col gap-3 md:gap-4 bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 items-center w-full">
                         <div class="md:col-span-1 border border-gray-300 rounded-lg focus-within:ring-brand-child focus-within:ring-2"><input type="text" id="search-input" placeholder="Pesquisar..." class="w-full py-2 px-3 text-sm outline-none" onkeyup="filterAndSortBooks()"></div>
-                        <select id="category-filter" class="w-full py-2 px-3 border border-gray-300 rounded-lg text-sm" onchange="filterAndSortBooks()"><option value="all">Todas as Idades</option><option value="0-3">0-3 Anos</option><option value="4-7">4-7 Anos</option><option value="8-12">8-12 Anos</option><option value="Atividades">Atividades</option></select>
-                        <select id="sort-order" class="w-full py-2 px-3 border border-gray-300 rounded-lg text-sm" onchange="filterAndSortBooks()"><option value="default">Ordenar Por...</option><option value="az">Título (A-Z)</option><option value="price-asc">Preço (Crescente)</option><option value="rating-desc">Melhor Avaliado</option></select>
+                        <select id="category-filter" class="w-full py-2 px-3 border border-gray-300 rounded-lg text-sm focus:ring-brand-child" onchange="filterAndSortBooks()"><option value="all">Todas as Idades</option><option value="0-3">0-3 Anos</option><option value="4-7">4-7 Anos</option><option value="8-12">8-12 Anos</option><option value="Atividades">Atividades</option></select>
+                        <select id="sort-order" class="w-full py-2 px-3 border border-gray-300 rounded-lg text-sm focus:ring-brand-child" onchange="filterAndSortBooks()"><option value="default">Ordenar Por...</option><option value="az">Título (A-Z)</option><option value="price-asc">Preço (Crescente)</option><option value="rating-desc">Melhor Avaliado</option></select>
                         <button onclick="clearFiltersAndSort()" class="w-full py-2 px-3 bg-brand-child text-white font-bold rounded-lg hover:bg-brand-child-dark shadow-md text-sm">Limpar Filtros</button>
                     </div>
                 </div>
