@@ -2,12 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Produtos Diversos | Jerónimo Editora</title>
+    <title>Produtos e Artigos | Jerónimo Editora</title>
     
     <!-- Google Fonts: Playfair Display (Serif), Roboto (Sans) & Crimson Text (Classic) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;00;500;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -51,6 +51,7 @@
         .thumbnail-selected {
             border: 2px solid #b38e4a;
         }
+        /* Utilitários para fechar modais ao clicar no fundo */
         .modal-overlay {
             cursor: pointer;
         }
@@ -101,7 +102,7 @@
     <!-- Modal Detalhes (+Info) -->
     <div id="info-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-60 flex items-center justify-center hidden modal-overlay" onclick="closeInfoModal()">
         <div class="bg-white p-6 rounded-xl shadow-2xl max-w-md w-full mx-4 sm:max-w-lg transform transition-all duration-300 max-h-[90vh] flex flex-col modal-content" onclick="event.stopPropagation()">
-            <h3 id="info-modal-title" class="text-2xl font-bold font-serif text-brand-product-dark mb-4 border-b pb-3 text-center"></h3>
+            <h3 id="info-modal-title" class="text-2xl font-bold font-serif text-brand-gold-dark mb-4 border-b pb-3 text-center"></h3>
             <div id="info-modal-content" class="flex flex-col sm:flex-row gap-4 flex-grow overflow-y-auto">
                 <div class="sm:w-2/5 flex flex-col items-center flex-shrink-0">
                     <img id="info-modal-image" src="" alt="Produto" class="w-32 h-48 object-contain rounded-lg shadow-md mb-3" onerror="this.onerror=null;this.src='https://placehold.co/128x192/002147/cfaf5c?text=PRODUTO';" />
@@ -110,7 +111,7 @@
                 <div class="sm:w-3/5 space-y-4 text-sm">
                     <p id="info-modal-summary" class="text-gray-700 italic leading-snug"></p>
                     <div class="pt-2 border-t border-gray-100">
-                        <p class="font-bold text-brand-accent-red text-xl font-classic mb-2" id="info-modal-price"></p>
+                        <p class="font-bold text-brand-gold-dark text-xl font-classic mb-2" id="info-modal-price"></p>
                         <ul id="info-modal-details-list" class="text-xs text-gray-500 mt-2 space-y-1">
                             <li id="info-modal-material"></li>
                             <li id="info-modal-weight"></li>
@@ -120,9 +121,11 @@
                 </div>
             </div>
             <div class="mt-6 pt-4 border-t border-gray-100 flex flex-col sm:flex-row justify-center gap-3">
-                <button id="info-modal-add-to-cart" onclick="modalAddToCart()" class="flex-grow bg-brand-product-highlight text-white py-3 rounded-lg hover:bg-brand-product-dark transition-colors font-bold shadow-md text-base">ADICIONAR AO CARRINHO</button>
+                <button id="info-modal-add-to-cart" onclick="modalAddToCart()" class="flex-grow bg-brand-gold-dark text-white py-3 rounded-lg hover:bg-brand-product-dark transition-colors font-bold shadow-md text-base uppercase tracking-wider">
+                    ADICIONAR AO CARRINHO
+                </button>
             </div>
-            <button onclick="closeInfoModal()" class="mt-3 text-sm text-gray-500 hover:text-brand-accent-red transition-colors">Fechar</button>
+            <button onclick="closeInfoModal()" class="mt-3 text-sm text-gray-500 hover:text-brand-accent-red transition-colors font-semibold">Fechar</button>
         </div>
     </div>
 
@@ -159,34 +162,24 @@
     
     <div id="mobile-menu" class="hidden fixed top-20 left-0 w-full bg-white shadow-xl z-40 md:hidden">
         <div class="flex flex-col p-4 text-center space-y-3">
-            <a href="index.html#hero" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">INÍCIO</a>
-            <a href="catalogo-completo.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">CATÁLOGO</a>
-            <a href="infantil.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">INFANTIL</a>
+            <a href="index.html#hero" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">INÍCIO</a>
+            <a href="catalogo-completo.html" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">CATÁLOGO</a>
+            <a href="infantil.html" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">INFANTIL</a>
             <a href="produtos.html" class="py-2 text-brand-accent-red font-bold hover:bg-gray-100 transition-colors" onclick="toggleMenu()">PRODUTOS</a>
-            <a href="index.html#sobre" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">SOBRE</a>
-            <a href="contato.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">CONTATO</a>
-            <div class="flex justify-center space-x-8 pt-4 border-t border-gray-100">
-                <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="openFavorites()">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-                    <span id="fav-count-mobile" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
-                </button>
-                <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="openCart()">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>
-                    <span id="cart-count-mobile" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
-                </button>
-            </div>
-            <a href="login.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors font-bold" onclick="toggleMenu()">CONTA</a>
+            <a href="index.html#sobre" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">SOBRE</a>
+            <a href="contato.html" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">CONTATO</a>
+            <a href="login.html" class="py-2 text-gray-700 hover:bg-gray-100 font-bold" onclick="toggleMenu()">CONTA</a>
         </div>
     </div>
 
     <main class="flex-grow pt-24 pb-24"> 
         <div class="max-w-6xl mx-auto px-6">
-            <h1 class="font-serif text-4xl sm:text-5xl text-brand-product-dark mb-4 border-b pb-3 text-center border-brand-product-highlight/50">Produtos e Artigos Religiosos</h1>
+            <h1 class="font-serif text-4xl sm:text-5xl text-brand-gold-dark mb-4 border-b pb-3 text-center border-brand-gold/50">Produtos e Artigos Religiosos</h1>
             <p class="text-center text-lg text-gray-600 mb-8">Complemente a sua biblioteca com os nossos artigos de papelaria e peças de devoção.</p>
 
             <div class="mb-10 flex flex-col gap-3 md:gap-4 bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 items-center w-full">
-                    <div class="md:col-span-1 border border-gray-300 rounded-lg focus-within:ring-brand-product-highlight focus-within:ring-2">
+                    <div class="md:col-span-1 border border-gray-300 rounded-lg focus-within:ring-brand-gold focus-within:ring-2">
                         <input type="text" id="search-input" placeholder="Pesquisar..." class="w-full py-2 px-3 text-sm outline-none bg-transparent" onkeyup="filterAndSortBooks()">
                     </div>
                     <select id="category-filter" class="w-full py-2 px-3 border border-gray-300 rounded-lg text-sm" onchange="filterAndSortBooks()">
@@ -200,9 +193,9 @@
                         <option value="default">Ordenar Por...</option>
                         <option value="az">Nome (A-Z)</option>
                         <option value="price-asc">Preço (Crescente)</option>
-                        <option value="rating-desc">Avaliação</option>
+                        <option value="rating-desc">Melhor Avaliado</option>
                     </select>
-                    <button onclick="clearFiltersAndSort()" class="w-full py-2 px-3 bg-brand-product-dark text-white font-bold rounded-lg hover:bg-brand-product-highlight transition-colors shadow-md text-sm">Limpar Filtros</button>
+                    <button onclick="clearFiltersAndSort()" class="w-full py-2 px-3 bg-brand-gold-dark text-white font-bold rounded-lg hover:bg-brand-product-dark transition-colors shadow-md text-sm">Limpar Filtros</button>
                 </div>
             </div>
 
@@ -215,7 +208,7 @@
         <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
             <div class="col-span-2 md:col-span-1 space-y-4">
                 <div class="flex items-center space-x-2">
-                    <img src="Logo J Dourado.png" alt="Jerónimo Editora" class="h-7 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';" />
+                    <img src="Logo J Dourado.png" alt="Logótipo Jerónimo Editora" class="h-7 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';" />
                     <span class="font-serif text-xl font-bold text-white">Jerónimo Editora</span>
                 </div>
                 <p class="text-sm text-gray-400">Edições de rigor dos pilares do pensamento ocidental e da tradição católica.</p>
@@ -259,12 +252,12 @@
     <script>
         const USER_STORAGE_KEY = 'currentUser';
         const bookData = [
-            { id: 201, title: "Marcador em Pele", author: "Artesanato Local", price: 12.00, category: "Papelaria", image: "https://placehold.co/128x192/4B4B4B/cfaf5c?text=MARCADOR", link: "detalhes.html", rating: 5.0, summary: "Marcador elegante em pele genuína.", techDetails: { material: "Pele", dimensions: "18x3 cm", weight: "0.05 kg" }, gallery: ["https://placehold.co/128x192/4B4B4B/cfaf5c?text=MARCADOR"] },
-            { id: 202, title: "Conjunto Postais", author: "Jerónimo Editora", price: 6.50, category: "Papelaria", image: "https://placehold.co/128x192/E0FFFF/002147?text=POSTAIS", link: "detalhes.html", rating: 4.5, summary: "Quatro postais ilustrados.", techDetails: { material: "Cartão", dimensions: "10x15 cm", weight: "0.1 kg" }, gallery: ["https://placehold.co/128x192/E0FFFF/002147?text=POSTAIS"] },
-            { id: 203, title: "Terço Madeira Nobre", author: "Devoção", price: 25.00, category: "Outros", image: "https://placehold.co/128x192/A52A2A/FFFFFF?text=TERÇO", link: "detalhes.html", rating: 4.9, summary: "Terço artesanal robusto.", techDetails: { material: "Madeira", dimensions: "40 cm", weight: "0.15 kg" }, gallery: ["https://placehold.co/128x192/A52A2A/FFFFFF?text=TERÇO"] },
-            { id: 204, title: "Figura São Tomás", author: "Atelier Artístico", price: 75.00, category: "Figuras", image: "https://placehold.co/128x192/D2B48C/002147?text=SÃO+TOMÁS", link: "detalhes.html", rating: 4.7, summary: "Estatueta em resina pintada à mão.", techDetails: { material: "Resina", dimensions: "25 cm", weight: "0.5 kg" }, gallery: ["https://placehold.co/128x192/D2B48C/002147?text=SÃO+TOMÁS"] },
-            { id: 205, title: "Placa Cerâmica", author: "Ceramista Rita", price: 45.00, category: "Artes", image: "https://placehold.co/128x192/FFFFFF/800000?text=CERÂMICA", link: "detalhes.html", rating: 4.8, summary: "Placa com frase latina.", techDetails: { material: "Cerâmica", dimensions: "15x15 cm", weight: "0.4 kg" }, gallery: ["https://placehold.co/128x192/FFFFFF/800000?text=CERÂMICA"] },
-            { id: 206, title: "Agenda Clássica", author: "Jerónimo Editora", price: 19.90, category: "Papelaria", image: "https://placehold.co/128x192/36454F/FFFFFF?text=AGENDA", link: "detalhes.html", rating: 4.6, summary: "Agenda anual com design antigo.", techDetails: { material: "Capa Dura", dimensions: "14x21 cm", weight: "0.45 kg" }, gallery: ["https://placehold.co/128x192/36454F/FFFFFF?text=AGENDA"] }
+            { id: 201, title: "Marcador em Pele", author: "Artesanato Local", price: 12.00, category: "Papelaria", image: "https://placehold.co/128x192/4B4B4B/cfaf5c?text=MARCADOR", link: "detalhes.html", rating: 5.0, summary: "Marcador elegante em pele genuína de cordeiro.", techDetails: { material: "Pele Genuína", dimensions: "18x3 cm", weight: "0.05 kg" }, gallery: ["https://placehold.co/128x192/4B4B4B/cfaf5c?text=MARCADOR"] },
+            { id: 202, title: "Conjunto Postais", author: "Jerónimo Editora", price: 6.50, category: "Papelaria", image: "https://placehold.co/128x192/E0FFFF/002147?text=POSTAIS", link: "detalhes.html", rating: 4.5, summary: "Quatro postais ilustrados com temas clássicos.", techDetails: { material: "Cartão 300g", dimensions: "10x15 cm", weight: "0.1 kg" }, gallery: ["https://placehold.co/128x192/E0FFFF/002147?text=POSTAIS"] },
+            { id: 203, title: "Terço Madeira Nobre", author: "Devoção", price: 25.00, category: "Outros", image: "https://placehold.co/128x192/A52A2A/FFFFFF?text=TERÇO", link: "detalhes.html", rating: 4.9, summary: "Terço artesanal feito em madeira escura.", techDetails: { material: "Madeira de Oliveira", dimensions: "40 cm", weight: "0.15 kg" }, gallery: ["https://placehold.co/128x192/A52A2A/FFFFFF?text=TERÇO"] },
+            { id: 204, title: "Figura São Tomás", author: "Atelier Artístico", price: 75.00, category: "Figuras", image: "https://placehold.co/128x192/D2B48C/002147?text=SÃO+TOMÁS", link: "detalhes.html", rating: 4.7, summary: "Estatueta em resina pintada à mão.", techDetails: { material: "Resina Maciça", dimensions: "25 cm", weight: "0.5 kg" }, gallery: ["https://placehold.co/128x192/D2B48C/002147?text=SÃO+TOMÁS"] },
+            { id: 205, title: "Placa Cerâmica", author: "Ceramista Rita", price: 45.00, category: "Artes", image: "https://placehold.co/128x192/FFFFFF/800000?text=CERÂMICA", link: "detalhes.html", rating: 4.8, summary: "Placa decorativa com frase em latim.", techDetails: { material: "Cerâmica Vidrada", dimensions: "15x15 cm", weight: "0.4 kg" }, gallery: ["https://placehold.co/128x192/FFFFFF/800000?text=CERÂMICA"] },
+            { id: 206, title: "Agenda Clássica", author: "Jerónimo Editora", price: 19.90, category: "Papelaria", image: "https://placehold.co/128x192/36454F/FFFFFF?text=AGENDA", link: "detalhes.html", rating: 4.6, summary: "Agenda anual com design inspirado em manuscritos.", techDetails: { material: "Papel Creme 90g", dimensions: "14x21 cm", weight: "0.45 kg" }, gallery: ["https://placehold.co/128x192/36454F/FFFFFF?text=AGENDA"] }
         ];
 
         function getBookDataById(id) {
@@ -322,8 +315,8 @@
                 if (prod) {
                     count++;
                     html += `<div class="flex items-center space-x-4 p-3 border rounded bg-gray-50">
-                        <a href="${prod.link}" class="flex items-center space-x-4 flex-grow"><img src="${prod.image}" class="w-12 h-16 object-contain" /><div><h4 class="font-bold text-sm">${prod.title}</h4><p class="text-brand-accent-red font-bold text-xs">${formatPrice(prod.price)}</p></div></a>
-                        <button onclick="toggleFavorite(${id === 1 ? "'suma-teologica'" : id}, true)" class="text-gray-400 hover:text-red-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                        <a href="${prod.link}" class="flex items-center space-x-4 flex-grow"><img src="${prod.image}" class="w-12 h-16 object-contain" /><div><h4 class="font-bold text-sm text-brand-text">${prod.title}</h4><p class="text-brand-accent-red font-bold text-xs">${formatPrice(prod.price)}</p></div></a>
+                        <button onclick="toggleFavorite(${id}, true)" class="text-gray-400 hover:text-red-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                     </div>`;
                 }
             });
@@ -347,7 +340,12 @@
             const cat = document.getElementById('category-filter')?.value || 'all';
             const sort = document.getElementById('sort-order')?.value || 'default'; 
             const filtered = bookData.filter(b => (b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term)) && (cat === 'all' || b.category === cat));
-            const sorted = filtered.sort((a,b) => sort === 'az' ? a.title.localeCompare(b.title) : sort === 'price-asc' ? a.price - b.price : sort === 'rating-desc' ? b.rating - a.rating : 0);
+            const sorted = filtered.sort((a,b) => {
+                if(sort === 'az') return a.title.localeCompare(b.title);
+                if(sort === 'price-asc') return a.price - b.price;
+                if(sort === 'rating-desc') return b.rating - a.rating;
+                return 0;
+            });
             if (shouldRender) renderProducts(sorted);
             return sorted;
         }
@@ -364,24 +362,25 @@
                 const isFav = localStorage.getItem(`fav-${p.id}`) === 'true';
                 const favClass = isFav ? 'text-red-500 fill-red-500' : 'text-gray-400 fill-none';
                 
-                // Títulos com cor Castanho Escuro para contraste (text-brand-product-dark)
+                // Títulos em Cinza Escuro (brand-text), Sem Negrito, Hover em Dourado Escuro (group-hover:text-brand-gold-dark)
+                // Preço sempre em Dourado Escuro (text-brand-gold-dark)
                 container.innerHTML += `
                     <div class="text-center group item-shadow bg-white rounded-xl p-4 flex flex-col justify-between cursor-pointer" onclick="openInfoModal(${p.id})">
                         <div class="flex-grow">
                             <img src="${p.image}" class="mx-auto w-32 h-48 object-contain mb-3" />
-                            <h4 class="font-serif text-lg group-hover:text-brand-product-highlight text-brand-product-dark font-bold transition-colors">${p.title}</h4>
+                            <h4 class="font-serif text-lg text-brand-text font-normal group-hover:text-brand-gold-dark transition-colors duration-200 mt-2">${p.title}</h4>
                             <p class="text-xs text-gray-500 italic">${p.author}</p>
-                            <span class="text-xl font-classic font-extrabold text-brand-product-dark mt-2 block">${formatPrice(p.price)}</span>
+                            <span class="text-xl font-classic font-extrabold text-brand-gold-dark mt-2 block">${formatPrice(p.price)}</span>
                         </div>
                         <div class="flex items-center justify-center mt-4 border-t pt-3 space-x-2 md:space-x-3">
                             <button onclick="toggleFavorite(${p.id}); event.stopPropagation();" class="${favClass} hover:text-red-500 transition-colors p-1 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="${isFav ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
                             </button>
-                            <button class="text-brand-product-dark transition-all duration-200 text-xs font-bold py-1 px-2 md:px-3 rounded-lg border border-brand-product-dark bg-white hover:bg-gray-50 flex items-center justify-center space-x-1 h-8 min-w-[32px]" onclick="openInfoModal(${p.id}); event.stopPropagation();">
+                            <button class="text-brand-accent-blue transition-all duration-200 text-xs font-bold py-1 px-2 md:px-3 rounded-lg border border-brand-accent-blue bg-white hover:bg-gray-50 flex items-center justify-center space-x-1 h-8 min-w-[32px]" onclick="openInfoModal(${p.id}); event.stopPropagation();">
                                 ${infoIcon}
                                 <span class="hidden md:inline">Info</span>
                             </button>
-                            <button class="bg-brand-product-highlight text-white py-1 px-2 md:px-3 rounded-lg hover:bg-brand-product-dark flex items-center justify-center space-x-1 h-8 min-w-[32px] transition-all" onclick="addToCart(${p.id}, '${p.title}'); event.stopPropagation();">
+                            <button class="bg-brand-accent-blue text-white py-1 px-2 md:px-3 rounded-lg hover:bg-brand-accent-red flex items-center justify-center space-x-1 h-8 min-w-[32px] transition-all" onclick="addToCart(${p.id}, '${p.title}'); event.stopPropagation();">
                                 ${cartIcon}
                                 <span class="hidden md:inline">Comprar</span>
                             </button>
@@ -398,7 +397,7 @@
         }
 
         function openInfoModal(id) {
-            const p = getBookDataById(id);
+            const p = bookData.find(book => book.id === id);
             if (!p) return;
             document.getElementById('info-modal-title').textContent = p.title;
             document.getElementById('info-modal-image').src = p.image;
