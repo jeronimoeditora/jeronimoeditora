@@ -9,6 +9,7 @@
     <!-- Adicionada a fonte Crimson Text para uso nos preços, mantendo as restantes -->
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -64,7 +65,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Estilo para desativar visualmente o botão (Tailwind não inclui este estado por padrão) */
+        /* Estilo para desativar visualmente o botão */
         button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
@@ -79,14 +80,14 @@
             <a href="index.html" class="flex items-center space-x-2">
                 <img 
                     src="Logo J.png" 
-                    alt="Logótipo Jerónimo Editora (Logo J.png)" 
+                    alt="Logótipo Jerónimo Editora" 
                     class="h-9 w-auto"
                     onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';"
                 />
                 <span class="font-serif text-2xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors duration-200">Jerónimo Editora</span>
             </a>
             
-            <!-- Menu Desktop: INÍCIO ATIVO -->
+            <!-- Menu Desktop -->
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-700 tracking-wide">
                 <a href="index.html" class="hover:text-brand-accent-red transition-colors duration-200 text-brand-accent-red font-bold">INÍCIO</a>
                 <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors duration-200">CATÁLOGO</a> 
@@ -95,10 +96,8 @@
                 <a href="index.html#sobre" class="hover:text-brand-accent-red transition-colors duration-200">SOBRE</a>
                 <a href="contato.html" class="hover:text-brand-accent-red transition-colors duration-200">CONTATO</a>
                 
-                <!-- ÍCONE/NOME DA CONTA (Placeholder dinâmico) -->
-                <a id="user-nav-link" href="login.html" class="pl-4 text-gray-700 hover:text-brand-accent-red transition-colors duration-200" aria-label="Aceder à Conta">
-                    <!-- Conteúdo gerado por JavaScript (renderUserNav) -->
-                </a>
+                <!-- ÍCONE/NOME DA CONTA -->
+                <a id="user-nav-link" href="login.html" class="pl-4 text-gray-700 hover:text-brand-accent-red transition-colors duration-200" aria-label="Aceder à Conta"></a>
             </div>
             
             <button id="menu-button" class="md:hidden text-2xl text-brand-text focus:outline-none hover:text-brand-accent-red">
@@ -107,7 +106,7 @@
         </div>
     </nav>
 
-    <!-- Menu Mobile Deslizante: INÍCIO ATIVO -->
+    <!-- Menu Mobile -->
     <div id="mobile-menu" class="hidden fixed top-20 left-0 w-full bg-white shadow-xl z-40 md:hidden">
         <div class="flex flex-col p-4 text-center space-y-3">
             <a href="index.html" class="py-2 text-brand-accent-red font-bold hover:bg-gray-100 transition-colors" onclick="toggleMenu()">INÍCIO</a>
@@ -116,13 +115,13 @@
             <a href="produtos.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">PRODUTOS</a>
             <a href="index.html#sobre" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">SOBRE</a>
             <a href="contato.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">CONTATO</a>
-            <!-- Link de Conta no Mobile (mantendo o texto para clareza) -->
             <a href="login.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors font-bold" onclick="toggleMenu()">CONTA</a>
         </div>
     </div>
 
     <main class="flex-grow pt-20">
 
+        <!-- Hero Section -->
         <section id="hero" class="w-full min-h-[60vh] flex items-center justify-center bg-white border-b-8 border-gray-100/50">
             <div class="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center px-6 py-16 fade-in">
                 
@@ -154,15 +153,17 @@
             </div>
         </section>
 
+        <!-- Secção Novidades (ATUALIZADA) -->
         <section id="novidades" class="w-full bg-brand-bg py-16 border-b-8 border-gray-100/50">
             <div class="max-w-6xl mx-auto px-6 fade-in">
-                <h2 class="font-serif text-3xl text-center text-gray-900 mb-12 border-b-2 border-brand-accent-red/30 pb-3">Novidades na Coleção</h2>
+                <!-- TÍTULO ATUALIZADO: De 'Novidades na Coleção' para 'Novidades do Catálogo' -->
+                <h2 class="font-serif text-3xl text-center text-gray-900 mb-12 border-b-2 border-brand-accent-red/30 pb-3">Novidades do Catálogo</h2>
                 
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
 
-                    <!-- Livro 1: Jesus e o Jubileu -->
+                    <!-- Livro 1: Jesus e o Jubileu (Link alterado para catalogo-completo.html) -->
                     <div class="text-center group cursor-pointer book-shadow bg-white rounded-lg transition-all duration-300 hover:shadow-xl">
-                        <a href="detalhes.html">
+                        <a href="catalogo-completo.html">
                             <img 
                                 src="Bergsma.png" 
                                 alt="Capa do livro Jesus e o Jubileu" 
@@ -173,15 +174,14 @@
                                 <h4 class="font-serif text-xl text-gray-900 group-hover:text-brand-accent-red transition-colors duration-200">Jesus e o Jubileu</h4>
                                 <p class="text-sm text-gray-500 italic font-medium mt-2">John S. Bergsma</p>
                                 <p class="text-sm text-gray-400 mt-4">Uma visão surpreendente da missão de Cristo na perspetiva judaica.</p>
-                                <!-- Preço com fonte Crimson Text (font-price) e destaque -->
                                 <p class="font-price text-2xl font-bold text-brand-accent-red mt-4">35,00€</p>
                             </div>
                         </a>
                     </div>
 
-                    <!-- Livro 2: Tu podes entender a Bíblia -->
+                    <!-- Livro 2: Tu podes entender a Bíblia (Link alterado para catalogo-completo.html) -->
                     <div class="text-center group cursor-pointer book-shadow bg-white rounded-lg transition-all duration-300 hover:shadow-xl">
-                        <a href="detalhes.html">
+                        <a href="catalogo-completo.html">
                             <img 
                                 src="Kreeft.png" 
                                 alt="Capa do livro Tu podes entender a Bíblia" 
@@ -192,15 +192,14 @@
                                 <h4 class="font-serif text-xl text-gray-900 group-hover:text-brand-accent-red transition-colors duration-200">Tu podes entender a Bíblia</h4>
                                 <p class="text-sm text-gray-500 italic font-medium mt-2">Peter Kreeft</p>
                                 <p class="text-sm text-gray-400 mt-4">Um guia prático e iluminador para cada livro da Bíblia.</p>
-                                <!-- Preço com fonte Crimson Text (font-price) e destaque -->
                                 <p class="font-price text-2xl font-bold text-brand-accent-red mt-4">29,90€</p>
                             </div>
                         </a>
                     </div>
 
-                    <!-- Livro 3: Convite aos Salmos -->
+                    <!-- Livro 3: Convite aos Salmos (Link alterado para catalogo-completo.html) -->
                     <div class="text-center group cursor-pointer book-shadow bg-white rounded-lg transition-all duration-300 hover:shadow-xl">
-                        <a href="detalhes.html">
+                        <a href="catalogo-completo.html">
                             <img 
                                 src="Jacobson.png" 
                                 alt="Capa do livro Convite aos Salmos" 
@@ -211,15 +210,14 @@
                                 <h4 class="font-serif text-xl text-gray-900 group-hover:text-brand-accent-red transition-colors duration-200">Convite aos Salmos</h4>
                                 <p class="text-sm text-gray-500 italic font-medium mt-2">Rolf A. Jacobson & Karl N. Jacobson</p>
                                 <p class="text-sm text-gray-400 mt-4">Uma leitura devocional para a oração mais antiga da Igreja.</p>
-                                <!-- Preço com fonte Crimson Text (font-price) e destaque -->
                                 <p class="font-price text-2xl font-bold text-brand-accent-red mt-4">22,50€</p>
                             </div>
                         </a>
                     </div>
                     
-                    <!-- Livro 4: As mãos vazias (CORRIGIDO: "Therese.png" para "Teresinha.png") -->
+                    <!-- Livro 4: As mãos vazias (Link alterado para catalogo-completo.html) -->
                     <div class="text-center group cursor-pointer book-shadow bg-white rounded-lg transition-all duration-300 hover:shadow-xl hidden sm:block">
-                        <a href="detalhes.html">
+                        <a href="catalogo-completo.html">
                             <img 
                                 src="Teresinha.png" 
                                 alt="Capa do livro As mãos vazias" 
@@ -230,7 +228,6 @@
                                 <h4 class="font-serif text-xl text-gray-900 group-hover:text-brand-accent-red transition-colors duration-200">As mãos vazias</h4>
                                 <p class="text-sm text-gray-500 italic font-medium mt-2">Santa Teresinha</p>
                                 <p class="text-sm text-gray-400 mt-4">A mensagem de Santa Teresinha de Lisieux sobre a confiança.</p>
-                                <!-- Preço com fonte Crimson Text (font-price) e destaque -->
                                 <p class="font-price text-2xl font-bold text-brand-accent-red mt-4">15,00€</p>
                             </div>
                         </a>
@@ -247,36 +244,29 @@
             </div>
         </section>
 
+        <!-- Testemunhos -->
         <section id="testemunhos" class="w-full bg-gray-100 py-16 border-b-8 border-white/50">
             <div class="max-w-6xl mx-auto px-6 fade-in">
                 <h2 class="font-serif text-3xl text-center text-gray-900 mb-12 border-b-2 border-brand-accent-red/30 pb-3">O Que Dizem os Nossos Leitores</h2>
                 
                 <div class="grid md:grid-cols-3 gap-8">
-                    
                     <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 fade-in">
-                        <blockquote class="italic text-gray-600 mb-4">
-                            "Qualidade de impressão excecional e traduções de grande rigor. A Jerónimo Editora é agora a minha editora de eleição para os Clássicos."
-                        </blockquote>
+                        <blockquote class="italic text-gray-600 mb-4">"Qualidade de impressão excecional e traduções de grande rigor. A Jerónimo Editora é agora a minha editora de eleição para os Clássicos."</blockquote>
                         <p class="font-bold text-sm text-brand-accent-blue">- João R., Professor Universitário</p>
                     </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 fade-in delay-150" style="animation-delay: 0.15s;">
-                        <blockquote class="italic text-gray-600 mb-4">
-                            "A 'Suma Teológica' é uma obra-prima. O cuidado na apresentação torna o estudo dos Clássicos. Recomendo."
-                        </blockquote>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 fade-in" style="animation-delay: 0.15s;">
+                        <blockquote class="italic text-gray-600 mb-4">"A 'Suma Teológica' é uma obra-prima. O cuidado na apresentação torna o estudo dos Clássicos. Recomendo."</blockquote>
                         <p class="font-bold text-sm text-brand-accent-blue">- Sofia P., Estudante</p>
                     </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 fade-in delay-300" style="animation-delay: 0.3s;">
-                        <blockquote class="italic text-gray-600 mb-4">
-                            "O papel é de uma qualidade superior. A leitura é fluida e o livro dura gerações. Excelente trabalho da Jerónimo."
-                        </blockquote>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 fade-in" style="animation-delay: 0.3s;">
+                        <blockquote class="italic text-gray-600 mb-4">"O papel é de uma qualidade superior. A leitura é fluida e o livro dura gerações. Excelente trabalho da Jerónimo."</blockquote>
                         <p class="font-bold text-sm text-brand-accent-blue">- Pe. Ricardo, Pároco</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Sobre Nós -->
         <section id="sobre" class="w-full bg-white border-b-8 border-gray-100/50 py-16">
             <div class="max-w-6xl mx-auto px-6 fade-in">
                 <h2 class="font-serif text-3xl text-center text-gray-900 mb-12 border-b-2 border-brand-accent-blue/30 pb-3">Sobre a Jerónimo Editora</h2>
@@ -285,19 +275,10 @@
                     <div class="md:col-span-2 text-lg text-gray-700 space-y-4 leading-relaxed">
                         <p>Fundada com a missão de preservar e divulgar os pilares do pensamento ocidental e da tradição católica, a Jerónimo Editora dedica-se à publicação de obras clássicas em edições de rigor e qualidade excecionais.</p>
                         <p>Acreditamos que a forma como o livro é apresentado é tão importante quanto o seu conteúdo. Por isso, cada volume é um artefato cuidadosamente desenhado para durar, oferecendo uma experiência de leitura digna dos maiores autores da História.</p>
-                        
-                        <div class="mt-6 p-4 border-l-4 border-brand-gold-dark bg-brand-gold-light italic">
-                            O nosso compromisso é com a Verdade, a Beleza e a Tradição.
-                        </div>
+                        <div class="mt-6 p-4 border-l-4 border-brand-gold-dark bg-brand-gold-light italic">O nosso compromisso é com a Verdade, a Beleza e a Tradição.</div>
                     </div>
-                    
                     <div class="md:col-span-1 flex justify-center">
-                        <img 
-			            src="Logo J.png" 
-                        alt="Logótipo da Jerónimo Editora" 
-                            class="w-32 h-32 object-contain opacity-70"
-                            onerror="this.onerror=null;this.src='https://placehold.co/128x128/cfaf5c/800000?text=LOGO';"
-                        />
+                        <img src="Logo J.png" alt="Logótipo da Jerónimo Editora" class="w-32 h-32 object-contain opacity-70" onerror="this.onerror=null;this.src='https://placehold.co/128x128/cfaf5c/800000?text=LOGO';"/>
                     </div>
                 </div>
             </div>
@@ -305,22 +286,15 @@
 
     </main>
 
+    <!-- Footer -->
     <footer id="footer" class="bg-gray-900 text-gray-300 py-16 px-6 border-t-8 border-brand-accent-red">
         <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
-
             <div class="col-span-2 md:col-span-1 space-y-4">
                 <div class="flex items-center space-x-2">
-                    <img 
-                        src="Logo J Dourado.png" 
-                        alt="Logótipo Jerónimo Editora (Logo J Dourado.png)" 
-                        class="h-7 w-auto"
-                        onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';"
-                    />
+                    <img src="Logo J Dourado.png" alt="Logótipo Jerónimo Editora" class="h-7 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';"/>
                     <span class="font-serif text-xl font-bold text-white">Jerónimo Editora</span>
                 </div>
                 <p class="text-sm text-gray-400">Edições de rigor dos pilares do pensamento ocidental e da tradição católica.</p>
-                
-                <!-- REMOVIDO: Bloco de ícones das redes sociais daqui -->
             </div>
 
             <div class="space-y-4">
@@ -332,8 +306,6 @@
                     <li><a href="produtos.html" class="hover:text-white transition">Produtos</a></li>
                     <li><a href="index.html#sobre" class="hover:text-white transition">Sobre Nós</a></li>
                     <li><a href="contato.html" class="hover:text-white transition">Contato</a></li>
-                    <!-- Link de Conta no Rodapé -->
-                    <li><a href="login.html" class="hover:text-white transition">Conta</a></li>
                 </ul>
             </div>
 
@@ -342,45 +314,21 @@
                 <ul class="space-y-2 text-sm mb-4">
                     <li><a href="mailto:editorajeronimo@gmail.com" class="hover:text-white transition">editorajeronimo@gmail.com</a></li>
                     <li class="text-gray-400">Braga, Portugal</li>
-                    <li><a href="#" class="hover:text-white transition">Política de Privacidade</a></li>
                 </ul>
-                
-                <!-- ADICIONADO: Bloco de ícones de redes sociais aqui (Facebook e Instagram) -->
                 <div class="flex space-x-4">
-                    <!-- Facebook -->
-                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Facebook Jerónimo Editora">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                    </a>
-                    <!-- Instagram -->
-                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Instagram Jerónimo Editora">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
                 </div>
             </div>
 
             <div class="col-span-2 md:col-span-1 space-y-4">
-                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Subscrever Newsletter</h4>
-                <p class="text-sm text-gray-400">Receba as últimas novidades e ofertas exclusivas diretamente no seu email.</p>
-                
+                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Newsletter</h4>
                 <form onsubmit="handleSubscribe(event)" class="flex flex-col space-y-3">
-                    <input 
-                        type="email" 
-                        id="newsletter-email"
-                        placeholder="O seu email" 
-                        required 
-                        class="p-2 rounded-md bg-gray-800 border border-gray-700 text-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold"
-                    >
-                    <button 
-                        type="submit" 
-                        id="subscribe-button"
-                        class="bg-brand-gold text-brand-accent-blue font-bold py-2 rounded-md shadow-lg hover:bg-yellow-600 transition-colors"
-                    >
-                        SUBSCREVER
-                    </button>
+                    <input type="email" id="newsletter-email" placeholder="O seu email" required class="p-2 rounded-md bg-gray-800 border border-gray-700 text-white focus:border-brand-gold">
+                    <button type="submit" id="subscribe-button" class="bg-brand-gold text-brand-accent-blue font-bold py-2 rounded-md shadow-lg hover:bg-yellow-600 transition-colors">SUBSCREVER</button>
                     <p id="subscribe-message" class="text-xs text-green-400 font-bold hidden"></p>
                 </form>
             </div>
-
         </div>
 
         <div class="max-w-6xl mx-auto text-center pt-8 mt-10 border-t border-gray-800">
@@ -392,74 +340,44 @@
     <script>
         const USER_STORAGE_KEY = 'currentUser';
 
-        /**
-         * Renders the user status (name or icon) in the navigation bar.
-         */
         function renderUserNav() {
             const userNavElement = document.getElementById('user-nav-link');
             const user = JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || 'null');
-            
-            if (user && user.isLoggedIn) {
-                // Se estiver logado, mostra "Olá, [Nome]!"
-                const firstName = user.name ? user.name.split(' ')[0] : 'Utilizador';
-                
-                userNavElement.href = 'login.html'; 
-                userNavElement.classList.remove('pl-4', 'text-gray-700'); 
-                userNavElement.classList.add('font-bold', 'text-brand-accent-red');
-                userNavElement.innerHTML = `<span class="font-bold hover:text-red-900 transition-colors">Olá, ${firstName}!</span>`;
-            } else {
-                // Se não estiver logado, mostra o ícone de conta
-                userNavElement.href = 'login.html';
-                userNavElement.classList.add('pl-4', 'text-gray-700');
-                userNavElement.classList.remove('font-bold', 'text-brand-accent-red');
-                userNavElement.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                    </svg>
-                `;
+            if (userNavElement) {
+                if (user && user.isLoggedIn) {
+                    const firstName = user.name ? user.name.split(' ')[0] : 'Utilizador';
+                    userNavElement.innerHTML = `<span class="font-bold hover:text-red-900 transition-colors">Olá, ${firstName}!</span>`;
+                } else {
+                    userNavElement.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+                }
             }
         }
         
-        // Lógica do Menu Mobile
         function toggleMenu() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
         document.getElementById('menu-button').addEventListener('click', toggleMenu);
 
-        // Lógica para desativar e reativar o botão de subscrição
         function handleSubscribe(event) {
-            // Evita a submissão de um formulário real (se o botão estivesse num <form>)
             event.preventDefault(); 
-            
             const button = document.getElementById('subscribe-button');
             const message = document.getElementById('subscribe-message');
             const emailInput = document.getElementById('newsletter-email');
-
-            // 1. DESATIVA o botão
             button.disabled = true;
             button.textContent = 'A processar...';
-            
-            // 2. Simula o envio de dados (poderia ser uma chamada de API real aqui)
             setTimeout(() => {
-                // Limpa o input
                 emailInput.value = '';
-
-                // 3. MOSTRA a mensagem de sucesso
                 message.classList.remove('hidden');
                 message.textContent = 'Subscrição confirmada! Obrigado.';
                 button.textContent = 'SUBSCRITO';
-                
-                // 4. Temporizador para reativar o botão (após 3 segundos)
                 setTimeout(() => {
                     button.disabled = false;
                     button.textContent = 'SUBSCREVER';
-                    message.classList.add('hidden'); // Oculta a mensagem
+                    message.classList.add('hidden');
                 }, 3000); 
-
-            }, 1000); // Espera 1 segundo para simular o processamento
+            }, 1000);
         }
         
-        // Inicializar a navegação de utilizador ao carregar a página
         window.onload = renderUserNav;
     </script>
 </body>
