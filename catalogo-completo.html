@@ -242,8 +242,48 @@
         </div>
     </main>
 
-    <footer class="bg-gray-900 text-gray-300 py-6 px-6 border-t-4 border-brand-accent-red">
-        <div class="max-w-6xl mx-auto text-center">
+    <!-- Rodapé Atualizado (Copiado do index.html) -->
+    <footer id="footer" class="bg-gray-900 text-gray-300 py-16 px-6 border-t-8 border-brand-accent-red">
+        <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
+            <div class="col-span-2 md:col-span-1 space-y-4">
+                <div class="flex items-center space-x-2">
+                    <img src="Logo J Dourado.png" alt="Jerónimo Editora" class="h-7 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
+                    <span class="font-serif text-xl font-bold text-white">Jerónimo Editora</span>
+                </div>
+                <p class="text-sm text-gray-400">Edições de rigor dos pilares do pensamento ocidental e da tradição católica.</p>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Navegação</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="index.html#hero" class="hover:text-white transition">Início</a></li>
+                    <li><a href="catalogo-completo.html" class="hover:text-white transition">Catálogo</a></li>
+                    <li><a href="infantil.html" class="hover:text-white transition">Infantil</a></li>
+                    <li><a href="produtos.html" class="hover:text-white transition">Produtos</a></li>
+                    <li><a href="index.html#sobre" class="hover:text-white transition">Sobre Nós</a></li>
+                    <li><a href="contato.html" class="hover:text-white transition">Contato</a></li>
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Contacto</h4>
+                <ul class="space-y-2 text-sm mb-4">
+                    <li><a href="mailto:editorajeronimo@gmail.com" class="hover:text-white transition">editorajeronimo@gmail.com</a></li>
+                    <li class="text-gray-400">Braga, Portugal</li>
+                </ul>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                </div>
+            </div>
+            <div class="col-span-2 md:col-span-1 space-y-4">
+                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Newsletter</h4>
+                <form onsubmit="handleSubscribe(event)" class="flex flex-col space-y-3">
+                    <input type="email" id="newsletter-email" placeholder="O seu email" required class="p-2 rounded-md bg-gray-800 border border-gray-700 text-white focus:border-brand-gold outline-none">
+                    <button type="submit" id="subscribe-button" class="bg-brand-gold text-brand-accent-blue font-bold py-2 rounded-md shadow-lg hover:bg-yellow-600 transition-colors">SUBSCREVER</button>
+                    <p id="subscribe-message" class="text-xs text-green-400 font-bold hidden"></p>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto text-center pt-8 mt-10 border-t border-gray-800">
             <p class="text-xs text-gray-500">© 2025 Jerónimo Editora. Todos os direitos reservados.</p>
         </div>
     </footer>
@@ -510,6 +550,25 @@
                 el.classList.toggle('scale-0', favCount === 0);
             });
             renderUserNav();
+        }
+
+        function handleSubscribe(event) {
+            event.preventDefault(); 
+            const button = document.getElementById('subscribe-button');
+            const message = document.getElementById('subscribe-message');
+            button.disabled = true;
+            button.textContent = 'A PROCESSAR...';
+            setTimeout(() => {
+                document.getElementById('newsletter-email').value = '';
+                message.classList.remove('hidden');
+                message.textContent = 'Subscrição confirmada! Obrigado.';
+                button.textContent = 'SUBSCRITO';
+                setTimeout(() => {
+                    button.disabled = false;
+                    button.textContent = 'SUBSCREVER';
+                    message.classList.add('hidden');
+                }, 3000); 
+            }, 1000);
         }
 
         function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
