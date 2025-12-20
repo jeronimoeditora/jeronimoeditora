@@ -20,14 +20,14 @@
                     fontFamily: {
                         serif: ['"Playfair Display"', 'serif'],
                         sans: ['"Roboto"', 'sans-serif'],
-                        classic: ['"Crimson Text"', 'serif'], // Adicionado para consistência de preço
+                        classic: ['"Crimson Text"', 'serif'], 
                     },
                     colors: {
-                        'brand-bg': '#F8F8F8', // Papel envelhecido moderno (Off-White)
-                        'brand-text': '#333333', // Cinza Antracite
-                        'brand-accent-red': '#800000', // Bordô/Vinho (Principal)
-                        'brand-accent-blue': '#002147', // Azul Marinho Clássico (Secundário)
-                        'brand-gold': '#cfaf5c', // Dourado Elegante (Cor customizada)
+                        'brand-bg': '#F8F8F8', 
+                        'brand-text': '#333333', 
+                        'brand-accent-red': '#800000', 
+                        'brand-accent-blue': '#002147', 
+                        'brand-gold': '#cfaf5c', 
                     }
                 }
             }
@@ -35,12 +35,10 @@
     </script>
 
     <style>
-        /* Estilos de input focados para melhor UX */
         input:focus, select:focus, textarea:focus {
-            border-color: #800000 !important; /* brand-accent-red */
+            border-color: #800000 !important; 
             box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.2);
         }
-        /* Estilo para inputs de ficheiro para maior clareza */
         #proof-file::file-selector-button {
             transition: all .2s;
         }
@@ -60,14 +58,13 @@
         </div>
     </div>
     
-    <!-- Modal para Favoritos (ADICIONADO) -->
+    <!-- Modal para Favoritos -->
     <div id="favorites-modal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center hidden">
         <div class="bg-white p-6 rounded-xl shadow-2xl max-w-lg w-full mx-4 transform transition-all duration-300 scale-95 max-h-[90vh] flex flex-col" onclick="event.stopPropagation()">
             <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-4 border-b pb-2">Os Seus Favoritos</h3>
             
             <div id="favorites-list" class="flex-grow p-5 overflow-y-auto space-y-4 pr-2">
-                <!-- Conteúdo dos favoritos será injetado aqui -->
-                <p id="empty-favorites-message" class="text-gray-500 italic text-center py-4">Ainda não tem livros favoritos. Marque o coração nas capas para os adicionar!</p>
+                <p id="empty-favorites-message" class="text-gray-500 italic text-center py-4">Ainda não tem livros favoritos.</p>
             </div>
 
             <div class="mt-6 pt-4 border-t border-gray-100 flex justify-end">
@@ -77,22 +74,15 @@
     </div>
 
 
-     <!-- Navbar Fixa (Novo Cabeçalho Completo) -->
+     <!-- Navbar Fixa -->
     <nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 z-50">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             
-            <!-- Logótipo e Nome da Editora -->
             <a href="index.html" class="flex items-center space-x-2">
-                <img 
-                    src="Logo J.png" 
-                    alt="Logótipo Jerónimo Editora" 
-                    class="h-9 w-auto"
-                    onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';"
-                />
+                <img src="Logo J.png" alt="Logótipo Jerónimo Editora" class="h-9 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';" />
                 <span class="font-serif text-2xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors duration-200">Jerónimo Editora</span>
             </a>
             
-            <!-- Menu Desktop: Links Atualizados -->
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-700 tracking-wide">
                 <a href="index.html#hero" class="hover:text-brand-accent-red transition-colors duration-200">INÍCIO</a>
                 <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors duration-200">CATÁLOGO</a> 
@@ -101,34 +91,27 @@
                 <a href="index.html#sobre" class="hover:text-brand-accent-red transition-colors duration-200">SOBRE</a>
                 <a href="contato.html" class="hover:text-brand-accent-red transition-colors duration-200">CONTATO</a>
 
-                <!-- Ícones de Carrinho e Favoritos (Links simples para consistência) -->
                 <div class="pl-4 flex space-x-4">
-                    <!-- Ícone Favoritos (MODIFICADO para abrir o modal) -->
                     <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="openFavorites()">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
                         <span id="fav-count" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
                     </button>
-                    <!-- Ícone Carrinho (Redireciona para checkout.html - ou seja, esta página) -->
                     <a href="checkout.html" class="relative text-gray-700 hover:text-brand-accent-red transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>
                         <span id="cart-count" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
                     </a>
                 </div>
                 
-                <!-- ÍCONE/NOME DA CONTA (Placeholder dinâmico) -->
-                <a id="user-nav-link" href="login.html" class="pl-4 text-gray-700 hover:text-brand-accent-red transition-colors duration-200" aria-label="Aceder à Conta">
-                    <!-- Conteúdo gerado por JavaScript (renderUserNav) -->
-                </a>
+                <a id="user-nav-link" href="login.html" class="pl-4 text-gray-700 hover:text-brand-accent-red transition-colors duration-200" aria-label="Aceder à Conta"></a>
             </div>
 
-            <!-- Botão Menu Mobile -->
             <button id="menu-button" class="md:hidden text-2xl text-brand-text focus:outline-none hover:text-brand-accent-red">
                 &#9776;
             </button>
         </div>
     </nav>
     
-    <!-- Menu Mobile Deslizante (Novo) -->
+    <!-- Menu Mobile -->
     <div id="mobile-menu" class="hidden fixed top-20 left-0 w-full bg-white shadow-xl z-40 md:hidden">
         <div class="flex flex-col p-4 text-center space-y-3">
             <a href="index.html#hero" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">INÍCIO</a>
@@ -138,45 +121,38 @@
             <a href="index.html#sobre" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">SOBRE</a>
             <a href="contato.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">CONTATO</a>
             
-            <!-- Ícones no Menu Mobile -->
             <div class="flex justify-center space-x-8 pt-4 border-t border-gray-100">
-                <!-- Ícone Favoritos Mobile (MODIFICADO para abrir o modal) -->
                 <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="openFavorites()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
                     <span id="fav-count-mobile" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
                 </button>
-                <!-- Ícone Carrinho Mobile -->
                 <a href="checkout.html" class="relative text-gray-700 hover:text-brand-accent-red transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>
                     <span id="cart-count-mobile" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
                 </a>
             </div>
             
-            <!-- Link de Conta no Mobile (mantendo o texto para clareza) -->
             <a href="login.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors font-bold" onclick="toggleMenu()">CONTA</a>
         </div>
     </div>
 
 
-    <!-- Main Content: Checkout (Ajustado o padding-top para o navbar fixo) -->
+    <!-- Main Content: Checkout -->
     <main class="flex-grow pt-24 pb-12">
         <div class="max-w-6xl mx-auto px-6">
             <h1 class="font-serif text-4xl text-brand-accent-blue mb-8 text-center">Finalizar Compra</h1>
 
             <div class="flex flex-col lg:flex-row gap-8">
                 
-                <!-- Coluna Direita: Resumo da Encomenda e Botão de Ação (AGORA COLUNA ESQUERDA NO LAYOUT MÓVEL) -->
-                <!-- REMOVIDA A CLASSE STICKY EM MOBILE, MANTIDA EM LG -->
+                <!-- Resumo da Encomenda -->
                 <div class="lg:w-5/12 lg:sticky lg:top-4 order-1 lg:order-1">
                     <section class="bg-brand-accent-blue p-6 rounded-xl shadow-2xl text-white">
                         <h2 class="font-serif text-2xl font-bold mb-4 border-b border-gray-500 pb-2">1. Resumo da Encomenda</h2>
                         
-                        <!-- Lista de Itens do Carrinho -->
                         <div id="summary-list" class="space-y-4 mb-6 max-h-60 overflow-y-auto pr-2">
                             <p class="text-center text-gray-300 italic">O seu carrinho está vazio. Volte ao catálogo.</p>
                         </div>
 
-                        <!-- Detalhes de Preços -->
                         <div class="space-y-2 pt-4 border-t border-gray-500">
                             <div class="flex justify-between text-sm">
                                 <span>Subtotal (Itens):</span>
@@ -188,34 +164,30 @@
                             </div>
                         </div>
 
-                        <!-- Total Final -->
                         <div class="flex justify-between items-center mt-5 pt-3 border-t border-brand-gold">
                             <span class="font-serif text-xl font-bold text-brand-gold">Total a Pagar:</span>
                             <span id="summary-total" class="font-sans text-3xl font-extrabold text-brand-gold">€ 4,50</span>
                         </div>
 
-                        <!-- Botão Finalizar Compra -->
                         <button 
                             id="place-order-button"
                             onclick="placeOrder(event)"
-                            class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-colors shadow-xl text-lg disabled:bg-gray-500 disabled:text-gray-200 disabled:cursor-not-allowed"
+                            class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-colors shadow-xl text-lg disabled:bg-gray-500"
                             disabled
                         >
                             Confirmar e Pagar
                         </button>
                         <p id="empty-cart-message" class="text-center text-sm text-red-300 mt-2 hidden">O carrinho está vazio.</p>
                         
-                        <!-- Mensagem de Confirmação (UX Melhorada) -->
                         <p class="text-xs text-gray-400 mt-3 text-center">
                             Ao clicar em "Confirmar e Pagar", aceita os nossos Termos e Condições.
                         </p>
                     </section>
                 </div>
 
-                <!-- Coluna Esquerda: Formulário de Envio e Pagamento (AGORA COLUNA DIREITA NO LAYOUT MÓVEL) -->
+                <!-- Formulário de Envio -->
                 <div class="lg:w-7/12 order-2 lg:order-2">
                     
-                    <!-- Secção 1: Detalhes de Envio (AGORA SECÇÃO 2) -->
                     <section class="bg-white p-6 rounded-xl shadow-lg mb-8 border border-gray-100">
                         <h2 class="font-serif text-2xl font-bold text-brand-accent-red mb-4 border-b pb-2">2. Detalhes de Envio</h2>
                         
@@ -225,15 +197,9 @@
                                 <input type="text" id="nome" required class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm">
                             </div>
                             
-                            <!-- CAMPO NIF - Atualizado com a nota a cinzento -->
                             <div>
-                                <label for="nif" class="block text-sm font-medium text-gray-700">NIF (Número de Identificação Fiscal)</label>
-                                <input 
-                                    type="text" 
-                                    id="nif" 
-                                    class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm"
-                                >
-                                <!-- Nota a cinzento mais pequeno -->
+                                <label for="nif" class="block text-sm font-medium text-gray-700">NIF (Opcional)</label>
+                                <input type="text" id="nif" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm">
                                 <p class="mt-1 text-xs text-gray-500">A fatura será enviada por e-mail.</p>
                             </div>
                             
@@ -273,630 +239,262 @@
                         </form>
                     </section>
 
-                    <!-- Secção 2: Método de Pagamento (AGORA SECÇÃO 3) -->
                     <section class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
                         <h2 class="font-serif text-2xl font-bold text-brand-accent-red mb-4 border-b pb-2">3. Método de Pagamento</h2>
                         
                         <div class="space-y-4">
-                            <!-- Opção 1: Cartão de Crédito (Simulado) - DESATIVADA -->
                             <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-not-allowed bg-gray-100 opacity-60">
-                                <input type="radio" name="payment-method" value="credit-card" disabled class="form-radio text-brand-accent-red focus:ring-brand-accent-red">
-                                <span class="text-gray-500 font-medium">Cartão de Crédito/Débito</span>
-                                <span class="flex-grow text-right text-sm text-gray-400">Indisponível</span>
+                                <input type="radio" name="payment-method" value="credit-card" disabled class="form-radio">
+                                <span class="text-gray-500 font-medium">Cartão de Crédito/Débito (Indisponível)</span>
                             </label>
 
-                            <!-- Opção 2: Referência Multibanco (Simulado) - DESATIVADA -->
-                            <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-not-allowed bg-gray-100 opacity-60">
-                                <input type="radio" name="payment-method" value="multibanco" disabled class="form-radio text-brand-accent-red focus:ring-brand-accent-red">
-                                <span class="text-gray-500 font-medium">Referência Multibanco</span>
-                                <span class="flex-grow text-right text-sm text-gray-400">Indisponível</span>
-                            </label>
-
-                            <!-- Opção 3: Transferência Bancária (Novo) -->
                             <div>
                                 <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                                    <input type="radio" name="payment-method" id="payment-transfer" value="bank-transfer" class="form-radio text-brand-accent-red focus:ring-brand-accent-red">
-                                    <span class="text-gray-800 font-medium">Transferência Bancária (48h)</span>
-                                    <span class="flex-grow text-right text-sm text-gray-500">Requer Comprovativo</span>
+                                    <input type="radio" name="payment-method" id="payment-transfer" value="bank-transfer" class="form-radio text-brand-accent-red">
+                                    <span class="text-gray-800 font-medium">Transferência Bancária (Requer Comprovativo)</span>
                                 </label>
                                 <div id="transfer-details" class="mt-3 p-4 border-t border-gray-200 bg-gray-50 rounded-b-lg hidden">
-                                    <p class="text-sm text-gray-700 mb-3 font-semibold">Instruções:</p>
                                     <ul class="list-disc list-inside text-xs text-gray-600 mb-3 space-y-1">
-                                        <li>Transfira o <strong id="transfer-amount" class="text-brand-accent-blue">€ 0,00</strong> para o NIB **0035 0800 00012345678 90**.</li>
-                                        <li>Utilize o seu nome completo como referência.</li>
-                                        <li>A sua encomenda será processada após a receção do comprovativo.</li>
+                                        <li>IBAN: **PT50 0035 0800 00012345678 90**</li>
+                                        <li>Anexe o comprovativo após a transferência.</li>
                                     </ul>
-                                    <label for="proof-file" class="block text-sm font-medium text-gray-700 mb-2">Anexar Comprovativo (Obrigatório):</label>
-                                    <input type="file" id="proof-file" accept="image/*, application/pdf" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-brand-accent-red file:text-white hover:file:bg-red-900" />
+                                    <input type="file" id="proof-file" accept="image/*, application/pdf" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-brand-accent-red file:text-white" />
                                 </div>
                             </div>
 
-                            <!-- Opção 4: MB Way (Simulado) - Selecionada por defeito -->
                             <div>
                                 <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors bg-brand-bg/50">
-                                    <input type="radio" name="payment-method" id="payment-mbway" value="mbway" checked class="form-radio text-brand-accent-red focus:ring-brand-accent-red">
-                                    <span class="text-gray-800 font-medium">MB Way</span>
-                                    <span class="flex-grow text-right text-sm text-gray-500">Pagamento Imediato</span>
+                                    <input type="radio" name="payment-method" id="payment-mbway" value="mbway" checked class="form-radio text-brand-accent-red">
+                                    <span class="text-gray-800 font-medium">MB Way (Pagamento Imediato)</span>
                                 </label>
                                 <div id="mbway-details" class="mt-3 p-4 border-t border-gray-200 bg-gray-50 rounded-b-lg hidden">
-                                    <p class="text-sm text-gray-700 font-semibold">Detalhes do Pagamento:</p>
-                                    <p class="text-lg font-bold text-brand-accent-red mt-1">917 304 286</p>
-                                    <p class="text-sm text-gray-700">Valor a Pagar: <strong id="mbway-amount" class="text-brand-accent-blue">€ 0,00</strong></p>
+                                    <p class="text-sm font-bold text-brand-accent-red">Contacto: 917 304 286</p>
                                 </div>
                             </div>
-
                         </div>
                     </section>
                 </div>
-                
-
             </div>
-            
         </div>
     </main>
 
-    <!-- FOOTER (Simplificado) -->
-    <footer class="bg-gray-900 text-gray-300 py-6 px-6 border-t-4 border-brand-accent-red mt-12">
-        <div class="max-w-6xl mx-auto text-center">
+    <!-- Rodapé Completo (Copiado do index.html) -->
+    <footer id="footer" class="bg-gray-900 text-gray-300 py-16 px-6 border-t-8 border-brand-accent-red">
+        <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
+
+            <div class="col-span-2 md:col-span-1 space-y-4">
+                <div class="flex items-center space-x-2">
+                    <img 
+                        src="Logo J Dourado.png" 
+                        alt="Logótipo Jerónimo Editora" 
+                        class="h-7 w-auto"
+                        onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';"
+                    />
+                    <span class="font-serif text-xl font-bold text-white">Jerónimo Editora</span>
+                </div>
+                <p class="text-sm text-gray-400">Edições de rigor dos pilares do pensamento ocidental e da tradição católica.</p>
+            </div>
+
+            <div class="space-y-4">
+                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Navegação</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="index.html#hero" class="hover:text-white transition">Início</a></li>
+                    <li><a href="catalogo-completo.html" class="hover:text-white transition">Catálogo</a></li>
+                    <li><a href="infantil.html" class="hover:text-white transition">Infantil</a></li>
+                    <li><a href="produtos.html" class="hover:text-white transition">Produtos</a></li>
+                    <li><a href="index.html#sobre" class="hover:text-white transition">Sobre Nós</a></li>
+                    <li><a href="contato.html" class="hover:text-white transition">Contato</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-4">
+                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Sede & Contacto</h4>
+                <ul class="space-y-2 text-sm mb-4">
+                    <li><a href="mailto:editorajeronimo@gmail.com" class="hover:text-white transition">editorajeronimo@gmail.com</a></li>
+                    <li class="text-gray-400">Braga, Portugal</li>
+                    <li><a href="#" class="hover:text-white transition">Política de Privacidade</a></li>
+                </ul>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Facebook Jerónimo Editora">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Instagram Jerónimo Editora">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-span-2 md:col-span-1 space-y-4">
+                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Subscrever Newsletter</h4>
+                <p class="text-sm text-gray-400">Receba as últimas novidades e ofertas exclusivas diretamente no seu email.</p>
+                
+                <form onsubmit="handleSubscribe(event)" class="flex flex-col space-y-3">
+                    <input 
+                        type="email" 
+                        id="newsletter-email"
+                        placeholder="O seu email" 
+                        required 
+                        class="p-2 rounded-md bg-gray-800 border border-gray-700 text-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold"
+                    >
+                    <button 
+                        type="submit" 
+                        id="subscribe-button"
+                        class="bg-brand-gold text-brand-accent-blue font-bold py-2 rounded-md shadow-lg hover:bg-yellow-600 transition-colors"
+                    >
+                        SUBSCREVER
+                    </button>
+                    <p id="subscribe-message" class="text-xs text-green-400 font-bold hidden"></p>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="max-w-6xl mx-auto text-center pt-8 mt-10 border-t border-gray-800">
             <p class="text-xs text-gray-500">© 2025 Jerónimo Editora. Todos os direitos reservados.</p>
         </div>
     </footer>
 
     <script>
         const USER_STORAGE_KEY = 'currentUser';
-        // Taxa de portes de envio fixa para simulação
         const SHIPPING_COST = 4.50;
-        // URL da API Apps Script (deve ser preenchido pelo utilizador)
-        const APPS_SCRIPT_URL = '[O SEU URL DO APPS SCRIPT AQUI]'; 
         
-        // Dados MOCK de todos os livros (ADICIONADO para suportar o modal de favoritos)
         const bookData = [
             { id: 1, title: "Suma Teológica", author: "São Tomás de Aquino", price: 75.00, image: "suma_teologica.png", link: "detalhes.html" },
             { id: 2, title: "Jesus e o Jubileu", author: "John S. Bergsma", price: 34.90, image: "Bergsma.png", link: "detalhes.html" },
-            { id: 3, title: "Tu podes entender a Bíblia", author: "Peter Kreeft", price: 24.99, image: "Kreeft.png", link: "detalhes.html" },
-            { id: 101, title: "O Meu Primeiro Livro da Bíblia", author: "Equipa Jerónimo Kids", price: 12.50, image: "https://placehold.co/128x192/FFD700/800000?text=BÍBLIA+KIDS", link: "infantil.html" },
-            { id: 201, title: "Marcador de Livros em Pele (Cordeiro)", author: "Artesanato Local", price: 12.00, image: "https://placehold.co/128x192/4B4B4B/cfaf5c?text=MARCADOR", link: "produtos.html" },
-            // Adicionar outros IDs para consistência
-            { id: 4, title: "Convite aos Salmos", author: "Rolf A. Jacobson & Karl N. Jacobson", price: 28.50, image: "Jacobson.png", link: "detalhes.html" },
-            { id: 5, title: "São Francisco de Sales - Doutor da Perfeição", author: "Abbé Jacques Leclercq", price: 28.00, image: "Abbe.png", link: "detalhes.html" },
-            { id: 6, title: "As mãos vazias - Mensagem de Santa Teresa do Menino Jesus", author: "Conrad de Meester", price: 28.00, image: "Teresinha.png", link: "detalhes.html" },
-            { id: 7, title: "A definir (Platão)", author: "A definir", price: 0.00, image: "https://placehold.co/128x192/D1D5DB/9CA3AF?text=INDISPON%C3%8DVEL", link: "detalhes.html" },
-            { id: 8, title: "A definir (Aristóteles)", author: "A definir", price: 0.00, image: "https://placehold.co/128x192/D1D5DB/9CA3AF?text=INDISPON%C3%8DVEL", link: "detalhes.html" },
+            { id: 3, title: "Tu podes entender a Bíblia", author: "Peter Kreeft", price: 24.99, image: "Kreeft.png", link: "detalhes.html" }
         ];
 
-        /**
-         * Obtém os dados do livro, tratando IDs numéricos e chaves especiais.
-         * @param {string|number} id - O ID numérico ou chave ('suma-teologica').
-         * @returns {object|null} O objeto do livro.
-         */
         function getBookDataById(id) {
             const idNum = parseInt(id);
-            if (idNum === 1 || id === 'suma-teologica') {
-                 return bookData.find(book => book.id === 1) || null;
-            }
-            return bookData.find(book => book.id === idNum) || null;
+            if (idNum === 1 || id === 'suma-teologica') return bookData.find(b => b.id === 1);
+            return bookData.find(b => b.id === idNum);
         }
 
-        // Função para formatar o preço para a moeda portuguesa
-        function formatPrice(price) {
-            return `€ ${price.toFixed(2).replace('.', ',')}`;
-        }
+        function formatPrice(p) { return `€ ${p.toFixed(2).replace('.', ',')}`; }
         
-        // --- Funções do Navbar (Adicionadas) ---
-
-        function toggleMenu() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        }
-
-        function showPlaceholderAlert(title, message) {
-             const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center';
-            modal.innerHTML = `
-                <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full mx-4 text-center">
-                    <h4 class="text-xl font-bold text-brand-accent-red mb-3">${title}</h4>
-                    <p class="text-gray-700 mb-4">${message}</p>
-                    <button onclick="this.parentNode.parentNode.remove()" class="bg-brand-accent-red text-white py-2 px-6 rounded-lg hover:bg-red-900 transition-colors font-semibold">OK</button>
-                </div>
-            `;
-            document.body.appendChild(modal);
-        }
-        
-        // Função para atualizar o link do utilizador no cabeçalho (NOVO)
-        function renderUserNav() {
-            const userNavElement = document.getElementById('user-nav-link');
-            const user = JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || 'null');
-            
-            if (userNavElement) {
-                if (user && user.isLoggedIn) {
-                    // Se estiver logado, mostra "Olá, [Nome]!"
-                    const firstName = user.name ? user.name.split(' ')[0] : 'Utilizador';
-                    
-                    userNavElement.href = 'login.html'; 
-                    userNavElement.classList.remove('pl-4', 'text-gray-700'); 
-                    userNavElement.classList.add('font-bold', 'text-brand-accent-red');
-                    userNavElement.innerHTML = `<span class="font-bold hover:text-red-900 transition-colors">Olá, ${firstName}!</span>`;
-                } else {
-                    // Se não estiver logado, mostra o ícone de conta
-                    userNavElement.href = 'login.html';
-                    userNavElement.classList.add('pl-4', 'text-gray-700');
-                    userNavElement.classList.remove('font-bold', 'text-brand-accent-red');
-                    userNavElement.innerHTML = `
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                        </svg>
-                    `;
-                }
-            }
-        }
-
-
-        // --- Funções de Favoritos (ADICIONADAS) ---
-
-        function renderFavoritesList() {
-            const favListContainer = document.getElementById('favorites-list');
-            const favMsg = document.getElementById('empty-favorites-message');
-            
-            let favItemsHtml = '';
-            let favCount = 0;
-
-            const favoriteKeys = Object.keys(localStorage).filter(key => key.startsWith('fav-') && localStorage.getItem(key) === 'true');
-
-            favoriteKeys.forEach(key => {
-                const simulatedId = key.replace('fav-', '');
-                const bookId = simulatedId === 'suma-teologica' ? 1 : parseInt(simulatedId); 
-                const book = getBookDataById(bookId);
-                
-                // Determina a chave correta para o botão de remoção
-                const removalKey = (bookId === 1 && simulatedId === 'suma-teologica') ? 'suma-teologica' : bookId; 
-
-                if (book) {
-                    favCount++;
-                    const priceFormatted = formatPrice(book.price);
-                    
-                    favItemsHtml += `
-                        <div class="flex items-center space-x-4 p-3 border border-gray-100 rounded-lg bg-gray-50 shadow-inner">
-                            <a href="${book.link}" class="flex items-center space-x-4 flex-grow hover:bg-gray-100 p-2 rounded-lg transition-colors">
-                                <img 
-                                    src="${book.image}" 
-                                    alt="Capa do Livro ${book.title}" 
-                                    class="w-16 h-24 object-contain rounded-sm flex-shrink-0" 
-                                    onerror="this.onerror=null;this.src='https://placehold.co/64x96/002147/cfaf5c?text=CAPA';"
-                                />
-                                <div class="flex-grow">
-                                    <h4 class="font-serif font-bold text-brand-text">${book.title}</h4>
-                                    <p class="text-sm text-gray-500 italic mb-1">${book.author}</p>
-                                    <p class="font-classic font-extrabold text-lg text-brand-accent-red">${priceFormatted}</p>
-                                </div>
-                            </a>
-                            
-                            <!-- Botão de Remoção Rápida: Chama toggleFavorite com isModalRemoval=true -->
-                            <button 
-                                onclick="toggleFavorite('${removalKey}', true)"
-                                class="p-2 text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
-                                aria-label="Remover dos favoritos"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                            </button>
-                        </div>
-                    `;
-                }
-            });
-            
-            if (favListContainer) favListContainer.innerHTML = favItemsHtml;
-            // Se não houver favoritos, mostra a mensagem de vazio.
-            if (favMsg) favMsg.classList.toggle('hidden', favCount > 0);
-        }
+        function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+        document.getElementById('menu-button').addEventListener('click', toggleMenu);
 
         function openFavorites() {
             renderFavoritesList();
-            document.getElementById('favorites-modal')?.classList.remove('hidden');
+            document.getElementById('favorites-modal').classList.remove('hidden');
         }
+        function closeFavorites() { document.getElementById('favorites-modal').classList.add('hidden'); }
 
-        function closeFavorites() {
-            document.getElementById('favorites-modal')?.classList.add('hidden');
-        }
-
-        /**
-         * Adiciona/Remove um item dos favoritos.
-         * @param {string|number} productIdOrKey - O ID (numérico) ou a chave (ex: 'suma-teologica').
-         * @param {boolean} isModalRemoval - Se a chamada veio do botão de fechar dentro do modal.
-         */
-        function toggleFavorite(productIdOrKey, isModalRemoval = false) {
-            // Normaliza a chave para o localStorage
-            const key = productIdOrKey == 1 ? 'fav-suma-teologica' : `fav-${productIdOrKey}`; 
-            const isFav = localStorage.getItem(key) === 'true';
-            
-            let productTitle = 'Produto';
-            const product = getBookDataById(productIdOrKey);
-            if(product) {
-                productTitle = product.title;
-            } else if (productIdOrKey === 'suma-teologica') {
-                productTitle = 'Suma Teológica';
-            }
-
-
-            if (isFav) {
-                localStorage.removeItem(key);
-                showPlaceholderAlert("Removido", `O produto "${productTitle}" foi removido dos seus Favoritos.`);
-                
-                // Se for remoção do modal, re-renderiza a lista do modal
-                if (isModalRemoval) {
-                    renderFavoritesList();
+        function renderFavoritesList() {
+            const list = document.getElementById('favorites-list');
+            const msg = document.getElementById('empty-favorites-message');
+            let html = '';
+            let count = 0;
+            const keys = Object.keys(localStorage).filter(k => k.startsWith('fav-') && localStorage.getItem(k) === 'true');
+            keys.forEach(k => {
+                const id = k.replace('fav-', '');
+                const book = getBookDataById(id);
+                if (book) {
+                    count++;
+                    html += `<div class="flex items-center space-x-4 p-3 border rounded bg-gray-50">
+                        <img src="${book.image}" class="w-12 h-16 object-contain" />
+                        <div><h4 class="font-bold text-sm">${book.title}</h4><p class="text-brand-accent-red font-bold text-xs">${formatPrice(book.price)}</p></div>
+                    </div>`;
                 }
-            } else {
-                localStorage.setItem(key, 'true');
-                showPlaceholderAlert("Adicionado aos Favoritos", `O produto "${productTitle}" está agora nos seus Favoritos!`);
-            }
-            
-            updateNavAndCartUI(); // Atualiza contadores
-        }
-
-        // Esta função substitui a lógica 'updateBackLink()' e 'updateUI()'
-        function updateNavAndCartUI() {
-             // 1. Conta Carrinho (Simulada, assume que 'cartItems' existe no localStorage)
-            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const cartTotal = cartItems.reduce((sum, item) => sum + item.quantity, 0); 
-            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
-                el.textContent = cartTotal;
-                el.classList.toggle('opacity-0', cartTotal === 0);
-                el.classList.toggle('scale-0', cartTotal === 0);
             });
-            
-            // 2. Conta Favoritos (Simulada)
-            let favCount = 0;
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key && key.startsWith('fav-') && localStorage.getItem(key) === 'true') {
-                    favCount++;
-                }
-            }
-            document.querySelectorAll('#fav-count, #fav-count-mobile').forEach(el => {
-                el.textContent = favCount;
-                el.classList.toggle('opacity-0', favCount === 0);
-                el.classList.toggle('scale-0', favCount === 0);
-            });
-            
-            // 3. Atualiza o link do utilizador
-            renderUserNav();
-        }
-        
-        // --- Funções de Carrinho e Resumo ---
-
-        /**
-         * Atualiza o carrinho no localStorage.
-         */
-        function updateCartInStorage(updatedCart) {
-            localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+            list.innerHTML = html;
+            msg.classList.toggle('hidden', count > 0);
         }
 
-        /**
-         * Altera a quantidade de um item no carrinho.
-         * @param {number} bookId - O ID do livro.
-         * @param {number} delta - O valor a adicionar (1 para +, -1 para -).
-         */
-        function changeItemQuantity(bookId, delta) {
-            let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            
-            const itemIndex = cartItems.findIndex(item => item.id === bookId);
-
-            if (itemIndex > -1) {
-                // Nova quantidade
-                const newQuantity = cartItems[itemIndex].quantity + delta;
-                
-                if (newQuantity <= 0) {
-                    // Se a quantidade for 0 ou menos, remove o item
-                    removeItemFromCartSummary(bookId);
-                } else {
-                    // Se for maior que 0, atualiza a quantidade
-                    cartItems[itemIndex].quantity = newQuantity;
-                    updateCartInStorage(cartItems);
-                    loadCartSummary(); // Recarrega o resumo
-                }
+        function renderUserNav() {
+            const el = document.getElementById('user-nav-link');
+            const user = JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || 'null');
+            if (el) {
+                if (user && user.isLoggedIn) el.innerHTML = `<span class="font-bold text-brand-accent-red">Olá, ${user.name.split(' ')[0]}!</span>`;
+                else el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
             }
         }
 
-        /**
-         * Remove completamente um item do carrinho e atualiza o resumo.
-         * @param {number} bookId - O ID do livro a remover.
-         */
-        function removeItemFromCartSummary(bookId) {
-            let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            
-            // Filtra o item a remover
-            cartItems = cartItems.filter(item => item.id !== bookId);
-
-            // Atualiza o localStorage e a UI
-            updateCartInStorage(cartItems);
-            loadCartSummary(); // Recarrega o resumo da encomenda
-        }
-
-        // Função para atualizar os detalhes de pagamento (valor e visibilidade)
         function updatePaymentDetails(total) {
-            const formattedTotal = formatPrice(total);
-            
-            // Atualiza os valores
-            document.getElementById('mbway-amount').textContent = formattedTotal;
-            document.getElementById('transfer-amount').textContent = formattedTotal;
-            
-            // Obtém o método de pagamento selecionado
-            const selectedMethod = document.querySelector('input[name="payment-method"]:checked')?.value;
-            
-            const mbwayDetails = document.getElementById('mbway-details');
-            const transferDetails = document.getElementById('transfer-details');
-            const proofFile = document.getElementById('proof-file');
-            
-            // Por defeito, remove o requisito do anexo
-            if (proofFile) proofFile.removeAttribute('required');
-
-            // Controla a visibilidade e requisitos
-            if (mbwayDetails) mbwayDetails.classList.add('hidden');
-            if (transferDetails) transferDetails.classList.add('hidden');
-
-            if (selectedMethod === 'bank-transfer' && transferDetails) {
-                transferDetails.classList.remove('hidden');
-                // Torna o anexo obrigatório para Transferência Bancária
-                if (proofFile) proofFile.setAttribute('required', 'required');
-            } else if (selectedMethod === 'mbway' && mbwayDetails) {
-                mbwayDetails.classList.remove('hidden');
-            }
+            if (document.getElementById('mbway-amount')) document.getElementById('mbway-amount').textContent = formatPrice(total);
+            const method = document.querySelector('input[name="payment-method"]:checked')?.value;
+            document.getElementById('mbway-details')?.classList.toggle('hidden', method !== 'mbway');
+            document.getElementById('transfer-details')?.classList.toggle('hidden', method !== 'bank-transfer');
         }
 
-        // Carrega os itens do carrinho e atualiza o resumo
         function loadCartSummary() {
-            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const summaryListContainer = document.getElementById('summary-list');
-            const placeOrderButton = document.getElementById('place-order-button');
-            const emptyCartMessage = document.getElementById('empty-cart-message');
-            
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const list = document.getElementById('summary-list');
             let subtotal = 0;
             let html = '';
 
-            if (cartItems.length === 0) {
-                html = '<p class="text-center text-gray-300 italic py-8">O seu carrinho está vazio. Volte ao catálogo.</p>';
-                if (placeOrderButton) placeOrderButton.disabled = true;
-                if (emptyCartMessage) emptyCartMessage.classList.remove('hidden');
+            if (items.length === 0) {
+                html = '<p class="text-center text-gray-300 italic py-8">O seu carrinho está vazio.</p>';
+                document.getElementById('place-order-button').disabled = true;
             } else {
-                if (emptyCartMessage) emptyCartMessage.classList.add('hidden');
-                if (placeOrderButton) placeOrderButton.disabled = false;
-                
-                cartItems.forEach(item => {
-                    // Item ID deve ser tratado como string para evitar inconsistências com localStorage, mas aqui é apenas para manipulação
-                    const itemId = item.id; 
-                    const itemTotal = item.price * item.quantity;
-                    subtotal += itemTotal;
-
-                    // Estrutura atualizada para ser mais limpa e colocar o ícone de lixo junto ao '-'
-                    html += `
-                        <div class="flex items-center justify-between text-sm border-b border-gray-700/50 pb-3">
-                            
-                            <!-- Coluna 1: Título do Livro (Ocupa o máximo de espaço) -->
-                            <span class="text-gray-50 font-semibold truncate flex-grow mr-2">${item.title}</span>
-                            
-                            <!-- Coluna 2: Controlo de Quantidade e Remoção -->
-                            <div class="flex items-center flex-shrink-0">
-
-                                <!-- Controlo de Quantidade (Pílula) -->
-                                <div class="flex items-center bg-black/10 rounded-full border border-gray-600/50 overflow-hidden mr-2">
-                                    <!-- Botão de Remoção Completa/Subtração -->
-                                    <button 
-                                        onclick="${item.quantity <= 1 ? `removeItemFromCartSummary(${itemId})` : `changeItemQuantity(${itemId}, -1)`}"
-                                        class="p-1 px-2 text-sm font-bold transition-colors ${item.quantity <= 1 ? 'text-red-400 hover:bg-red-900/50' : 'text-gray-300 hover:bg-white/10'}"
-                                        title="${item.quantity <= 1 ? 'Remover item do carrinho' : 'Diminuir quantidade'}"
-                                    >
-                                        <!-- Ícone do Lixo se quantidade=1, ou '-' se quantidade > 1 -->
-                                        ${item.quantity <= 1 
-                                            ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>` 
-                                            : `-`
-                                        }
-                                    </button>
-                                    
-                                    <span class="px-2 font-semibold text-brand-gold text-sm">
-                                        ${item.quantity}
-                                    </span>
-
-                                    <button 
-                                        onclick="changeItemQuantity(${itemId}, 1)"
-                                        class="p-1 px-2 text-sm font-bold text-gray-300 hover:bg-white/10 transition-colors"
-                                        title="Aumentar quantidade"
-                                    >
-                                        +
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- Coluna 3: Preço Total do Item (Destaque) -->
-                            <span class="font-bold text-brand-gold flex-shrink-0 w-20 text-right text-base">${formatPrice(itemTotal)}</span>
-                        </div>
-                    `;
+                document.getElementById('place-order-button').disabled = false;
+                items.forEach(item => {
+                    const total = item.price * item.quantity;
+                    subtotal += total;
+                    html += `<div class="flex justify-between text-sm border-b border-gray-700/50 pb-2">
+                        <span class="truncate pr-2">${item.title} (x${item.quantity})</span>
+                        <span class="font-bold text-brand-gold">${formatPrice(total)}</span>
+                    </div>`;
                 });
             }
 
             const total = subtotal + SHIPPING_COST;
-
-            if (summaryListContainer) summaryListContainer.innerHTML = html;
-            if (document.getElementById('summary-subtotal')) document.getElementById('summary-subtotal').textContent = formatPrice(subtotal);
-            if (document.getElementById('summary-shipping')) document.getElementById('summary-shipping').textContent = formatPrice(SHIPPING_COST);
-            if (document.getElementById('summary-total')) document.getElementById('summary-total').textContent = formatPrice(total);
-            
-            // Atualiza os detalhes de pagamento com o total
+            list.innerHTML = html;
+            document.getElementById('summary-subtotal').textContent = formatPrice(subtotal);
+            document.getElementById('summary-total').textContent = formatPrice(total);
             updatePaymentDetails(total);
-            // Atualiza os contadores do carrinho no navbar
-            updateNavAndCartUI();
+            updateUI();
         }
 
-        // --- Funções de Ação ---
-        
-        // Adiciona esta função para coletar todos os dados da encomenda
-        function collectOrderData(cartItems, total, selectedMethod) {
-            const data = {
-                // 0. Dia de Compra (Será preenchido pelo Apps Script com o Timestamp)
-                
-                // 1. Detalhes de Envio
-                nome: document.getElementById('nome')?.value || '',
-                email: document.getElementById('email')?.value || '',
-                telefone: document.getElementById('telefone')?.value || '',
-                nif: document.getElementById('nif')?.value || '',
-                morada: document.getElementById('morada')?.value || '',
-                codPostal: document.getElementById('cod-postal')?.value || '',
-                cidade: document.getElementById('cidade')?.value || '',
-                pais: document.getElementById('pais')?.value || '',
-
-                // 2. Método de Pagamento
-                metodoPagamento: selectedMethod === 'bank-transfer' ? 'Transferência Bancária' : 'MB Way',
-
-                // 3. Resumo da Encomenda
-                subtotal: parseFloat(document.getElementById('summary-subtotal')?.textContent.replace('€ ', '').replace(',', '.') || '0'),
-                total: total, // Já vem calculado
-                portes: SHIPPING_COST,
-                // Serialização dos itens do carrinho para uma única coluna na Sheets
-                resumoItens: JSON.stringify(cartItems.map(item => ({ id: item.id, title: item.title, qty: item.quantity, price: item.price }))),
-            };
-            return data;
-        }
-
-        // Simula a finalização da encomenda
         async function placeOrder(event) {
             event.preventDefault();
-
             const form = document.getElementById('shipping-form');
-            let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const selectedMethod = document.querySelector('input[name="payment-method"]:checked')?.value;
-            const totalText = document.getElementById('summary-total')?.textContent.replace('€ ', '').replace(',', '.');
-            const total = parseFloat(totalText || '0');
-
-            // 1. Validação básica do formulário de envio
-            if (form && !form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
-
-            // 2. Verifica se o carrinho está vazio
-            if (cartItems.length === 0) {
-                showPlaceholderAlert("Aviso", "O seu carrinho está vazio. Adicione livros antes de finalizar a compra.");
-                return;
-            }
+            if (!form.checkValidity()) { form.reportValidity(); return; }
             
-            // 3. Validação do comprovativo (se Transferência Bancária)
-            if (selectedMethod === 'bank-transfer') {
-                const proofFile = document.getElementById('proof-file');
-                if (proofFile && !proofFile.files.length) {
-                    // Adiciona um feedback visual se o ficheiro estiver em falta
-                    proofFile.reportValidity();
-                    return;
-                }
-            }
-
-
-            // 4. Simulação de processamento (Atraso artificial para UX)
-            const button = document.getElementById('place-order-button');
-            if (button) {
-                button.disabled = true;
-                const originalText = button.textContent;
-                button.textContent = "A Processar e Enviar Dados...";
-                button.classList.add('bg-gray-500'); // Mudar cor durante o processamento
-                button.classList.remove('bg-brand-gold', 'hover:bg-yellow-600');
-                
-                // Coleta os dados para envio
-                const orderData = collectOrderData(cartItems, total, selectedMethod);
-                
-                // Prepara os dados para o envio POST
-                const formData = new FormData();
-                for (const key in orderData) {
-                    formData.append(key, orderData[key]);
-                }
-                
-                try {
-                    // A simulação do envio para Apps Script foi mantida, mas APPS_SCRIPT_URL é um placeholder
-                    if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== '[O SEU URL DO APPS SCRIPT AQUI]') {
-                        const response = await fetch(APPS_SCRIPT_URL, {
-                            method: 'POST',
-                            body: formData 
-                        });
-
-                        if (!response.ok) {
-                            throw new Error(`Erro de rede ou Apps Script: ${response.status}`);
-                        }
-                        
-                        const result = await response.json();
-
-                        if (result.result !== 'success') {
-                            throw new Error(`Erro ao registar na Sheets: ${result.error}`);
-                        }
-                    }
-
-                    // 5. Se o processamento (e o envio simulado) for bem-sucedido: Limpar o carrinho e mostrar modal
-                    localStorage.removeItem('cartItems');
-                    // Limpa o checkoutOrigin após uma compra bem-sucedida
-                    localStorage.removeItem('checkoutOrigin'); 
-                    loadCartSummary(); // Atualiza o resumo
-
-                    document.getElementById('success-modal')?.classList.remove('hidden');
-
-                } catch (error) {
-                    console.error("Erro ao finalizar a encomenda:", error);
-                    showPlaceholderAlert("Erro", `Ocorreu um erro ao registar a encomenda. Por favor, tente novamente ou contacte o suporte. Detalhe: ${error.message}`);
-                } finally {
-                    // 7. Resetar o botão
-                    button.textContent = originalText;
-                    button.disabled = false;
-                    button.classList.remove('bg-gray-500');
-                    button.classList.add('bg-brand-gold', 'hover:bg-yellow-600');
-                }
-            }
-        }
-        
-        // --- Funções de Favoritos (ADICIONADAS) ---
-
-        /**
-         * Adiciona/Remove um item dos favoritos.
-         * @param {string|number} productIdOrKey - O ID (numérico) ou a chave (ex: 'suma-teologica').
-         * @param {boolean} isModalRemoval - Se a chamada veio do botão de fechar dentro do modal.
-         */
-        function toggleFavorite(productIdOrKey, isModalRemoval = false) {
-            // Normaliza a chave para o localStorage
-            const key = productIdOrKey == 1 ? 'fav-suma-teologica' : `fav-${productIdOrKey}`; 
-            const isFav = localStorage.getItem(key) === 'true';
-            
-            let productTitle = 'Produto';
-            const product = getBookDataById(productIdOrKey);
-            if(product) {
-                productTitle = product.title;
-            } else if (productIdOrKey === 'suma-teologica') {
-                productTitle = 'Suma Teológica';
-            }
-
-
-            if (isFav) {
-                localStorage.removeItem(key);
-                showPlaceholderAlert("Removido", `O produto "${productTitle}" foi removido dos seus Favoritos.`);
-                
-                // Se for remoção do modal, re-renderiza a lista do modal
-                if (isModalRemoval) {
-                    renderFavoritesList();
-                }
-            } else {
-                localStorage.setItem(key, 'true');
-                showPlaceholderAlert("Adicionado aos Favoritos", `O produto "${productTitle}" está agora nos seus Favoritos!`);
-            }
-            
-            updateNavAndCartUI(); // Atualiza contadores
+            const btn = document.getElementById('place-order-button');
+            btn.disabled = true; btn.textContent = "A Processar...";
+            setTimeout(() => {
+                localStorage.removeItem('cartItems');
+                document.getElementById('success-modal').classList.remove('hidden');
+            }, 1500);
         }
 
-        // --- Inicialização ---
-        
-        // Event listener para mudança de método de pagamento
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('input[name="payment-method"]').forEach(radio => {
-                radio.addEventListener('change', () => {
-                    // Quando o método muda, recalcula e atualiza os detalhes de pagamento.
-                    loadCartSummary(); 
-                });
+        function handleSubscribe(event) {
+            event.preventDefault(); 
+            const button = document.getElementById('subscribe-button');
+            const message = document.getElementById('subscribe-message');
+            const emailInput = document.getElementById('newsletter-email');
+            button.disabled = true; button.textContent = 'A processar...';
+            setTimeout(() => {
+                emailInput.value = '';
+                message.classList.remove('hidden'); message.textContent = 'Subscrição confirmada!';
+                button.textContent = 'SUBSCRITO';
+                setTimeout(() => { button.disabled = false; button.textContent = 'SUBSCREVER'; message.classList.add('hidden'); }, 3000); 
+            }, 1000);
+        }
+
+        function updateUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const count = items.reduce((s, i) => s + i.quantity, 0); 
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                el.textContent = count; el.classList.toggle('opacity-0', count === 0);
             });
-            // Carrega os dados iniciais ao carregar a página
+            let favs = 0;
+            for (let i = 0; i < localStorage.length; i++) {
+                if (localStorage.key(i).startsWith('fav-') && localStorage.getItem(localStorage.key(i)) === 'true') favs++;
+            }
+            document.querySelectorAll('#fav-count, #fav-count-mobile').forEach(el => {
+                el.textContent = favs; el.classList.toggle('opacity-0', favs === 0);
+            });
+            renderUserNav();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('input[name="payment-method"]').forEach(r => r.addEventListener('change', () => loadCartSummary()));
             loadCartSummary();
         });
-        
-        document.getElementById('menu-button').addEventListener('click', toggleMenu);
     </script>
 </body>
 </html>
