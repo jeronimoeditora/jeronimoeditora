@@ -20,16 +20,15 @@
                     fontFamily: {
                         serif: ['"Playfair Display"', 'serif'],
                         sans: ['"Roboto"', 'sans-serif'],
-                        // CLASSE ADICIONADA: Crimson Text para os preços
                         classic: ['"Crimson Text"', 'serif'], 
                     },
                     colors: {
-                        'brand-bg': '#F8F8F8', // Papel envelhecido moderno (Off-White)
-                        'brand-text': '#333333', // Cinza Antracite
-                        'brand-accent-red': '#800000', // Bordô/Vinho (Principal)
-                        'brand-accent-blue': '#002147', // Azul Marinho Clássico (Secundário)
-                        'brand-gold': '#cfaf5c', // Dourado Elegante (Cor customizada)
-                        'brand-gold-dark': '#b38e4a', // Traço Dourado Escuro (o tom mais escuro)
+                        'brand-bg': '#F8F8F8', 
+                        'brand-text': '#333333', 
+                        'brand-accent-red': '#800000', 
+                        'brand-accent-blue': '#002147', 
+                        'brand-gold': '#cfaf5c', 
+                        'brand-gold-dark': '#b38e4a', 
                     }
                 }
             }
@@ -37,7 +36,7 @@
     </script>
 
     <style>
-        /* Estilização da Sombra do Livro (Simulando 3D Clássico) */
+        /* Estilização da Sombra do Livro */
         .book-shadow {
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 0 5px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
@@ -46,7 +45,7 @@
             transform: translateY(-3px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        /* Estilos específicos para o sidebar do carrinho */
+        /* Painel do Carrinho */
         .cart-sidebar-panel {
             right: -100%;
             transition: right 0.3s ease-in-out;
@@ -54,7 +53,6 @@
         .cart-sidebar-open .cart-sidebar-panel {
             right: 0;
         }
-        /* Usado para garantir que o overlay some antes do painel */
         .cart-sidebar-overlay {
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
@@ -62,176 +60,107 @@
         .cart-sidebar-open .cart-sidebar-overlay {
             opacity: 1;
         }
-        /* Estilos para a galeria de fotos na modal +Info */
-        .gallery-image {
-            aspect-ratio: 3/4; /* Capa de livro */
-            width: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .gallery-image:hover {
-            transform: scale(1.05);
-        }
-        /* Botão de Coração sempre alinhado ao centro */
-        .fav-button-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
         /* Estilo para a miniatura selecionada */
         .thumbnail-selected {
-            border: 2px solid #800000; /* Borda da cor principal */
+            border: 2px solid #800000;
         }
-        
+        .modal-overlay {
+            cursor: pointer;
+        }
+        .modal-content {
+            cursor: default;
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- Modal genérico para mensagens simples (ex: Remover Favorito) -->
-    <div id="custom-modal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center hidden" onclick="this.classList.add('hidden')">
-        <div class="bg-white p-6 rounded-lg shadow-2xl max-w-sm w-full mx-4 transform transition-all duration-300 scale-95" onclick="event.stopPropagation()">
+    <!-- Modal Mensagens Simples -->
+    <div id="custom-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-60 flex items-center justify-center hidden modal-overlay" onclick="this.classList.add('hidden')">
+        <div class="bg-white p-6 rounded-lg shadow-2xl max-w-sm w-full mx-4 transform transition-all duration-300 scale-95 modal-content" onclick="event.stopPropagation()">
             <h3 id="modal-title" class="text-xl font-bold font-serif text-brand-accent-red mb-3">Ação Concluída</h3>
             <p id="modal-message" class="text-gray-700">A operação foi um sucesso!</p>
             <button onclick="document.getElementById('custom-modal').classList.add('hidden')" class="mt-4 w-full bg-brand-accent-blue text-white py-2 rounded-md hover:bg-brand-accent-red transition-colors">Fechar</button>
         </div>
     </div>
 
-    <!-- Modal de Confirmação de Adição ao Carrinho -->
-    <div id="add-to-cart-modal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center hidden" onclick="closeCartConfirmation()">
-        <div class="bg-white p-6 rounded-lg shadow-2xl max-w-md w-full mx-4 transform transition-all duration-300 scale-100" onclick="event.stopPropagation()">
+    <!-- Modal Confirmação Carrinho -->
+    <div id="add-to-cart-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-60 flex items-center justify-center hidden modal-overlay" onclick="closeCartConfirmation()">
+        <div class="bg-white p-6 rounded-lg shadow-2xl max-w-md w-full mx-4 transform transition-all duration-300 scale-100 modal-content" onclick="event.stopPropagation()">
             <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-5 text-center flex items-center justify-center space-x-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                <span>Item Adicionado ao Carrinho!</span>
+                <span>Item Adicionado!</span>
             </h3>
-            
-            <!-- Detalhes do Item Adicionado -->
-            <div id="cart-confirmation-details" class="flex items-center space-x-4 p-3 border border-gray-100 rounded-lg bg-gray-50 shadow-inner mb-6">
-                <!-- Conteúdo será injetado aqui pelo JS -->
-            </div>
-
-            <!-- Opções de Ação -->
+            <div id="cart-confirmation-details" class="flex items-center space-x-4 p-3 border border-gray-100 rounded-lg bg-gray-50 shadow-inner mb-6"></div>
             <div class="flex flex-col space-y-3">
-                <button 
-                    onclick="closeCartConfirmation()" 
-                    class="w-full bg-brand-accent-red text-white py-3 rounded-lg hover:bg-red-900 transition-colors font-bold shadow-md text-lg"
-                >
-                    Continuar a Comprar
-                </button>
-                <button 
-                    onclick="checkoutFromModal();" 
-                    class="w-full bg-brand-gold text-brand-accent-blue font-bold py-3 rounded-lg hover:bg-yellow-600 transition-colors shadow-md text-lg"
-                >
-                    Finalizar Compra
-                </button>
+                <button onclick="closeCartConfirmation()" class="w-full bg-brand-accent-red text-white py-3 rounded-lg hover:bg-red-900 transition-colors font-bold shadow-md text-lg">Continuar a Comprar</button>
+                <button onclick="checkoutFromModal();" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-3 rounded-lg hover:bg-yellow-600 transition-colors shadow-md text-lg">Finalizar Compra</button>
             </div>
         </div>
     </div>
     
-    <!-- Modal para Favoritos (ADICIONADO) -->
-    <div id="favorites-modal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-lg w-full mx-4 transform transition-all duration-300 scale-95 max-h-[90vh] flex flex-col" onclick="event.stopPropagation()">
+    <!-- Modal Favoritos -->
+    <div id="favorites-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-60 flex items-center justify-center hidden modal-overlay" onclick="closeFavorites()">
+        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-lg w-full mx-4 transform transition-all duration-300 scale-95 max-h-[90vh] flex flex-col modal-content" onclick="event.stopPropagation()">
             <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-4 border-b pb-2">Os Seus Favoritos</h3>
-            
-            <div id="favorites-list" class="flex-grow p-5 overflow-y-auto space-y-4 pr-2">
-                <!-- Conteúdo dos favoritos será injetado aqui -->
-                <p id="empty-favorites-message" class="text-gray-500 italic text-center py-4">Ainda não tem livros favoritos. Marque o coração nas capas para os adicionar!</p>
+            <div id="favorites-list" class="flex-grow p-2 overflow-y-auto space-y-4">
+                <p id="empty-favorites-message" class="text-gray-500 italic text-center py-4">Ainda não tem livros favoritos.</p>
             </div>
-
             <div class="mt-6 pt-4 border-t border-gray-100 flex justify-end">
-                <!-- Alterado para 'Continuar' conforme o último pedido -->
                 <button onclick="closeFavorites()" class="bg-brand-accent-red text-white py-2 px-6 rounded-md hover:bg-red-900 transition-colors shadow-lg">Continuar</button>
             </div>
         </div>
     </div>
 
 
-    <!-- Modal para Detalhes (+Info) - SUCINTO E RESPONSIVO -->
-    <div id="info-modal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-md w-full mx-4 sm:max-w-lg transform transition-all duration-300 max-h-[90vh] flex flex-col" onclick="event.stopPropagation()">
+    <!-- Modal Detalhes (+Info) -->
+    <div id="info-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-60 flex items-center justify-center hidden modal-overlay" onclick="closeInfoModal()">
+        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-md w-full mx-4 sm:max-w-lg transform transition-all duration-300 max-h-[90vh] flex flex-col modal-content" onclick="event.stopPropagation()">
             
             <h3 id="info-modal-title" class="text-2xl font-bold font-serif text-brand-accent-blue mb-4 border-b pb-3 text-center"></h3>
             
-            <!-- Conteúdo Principal: Imagem Principal + Mini Galeria + Resumo + Ficha -->
             <div id="info-modal-content" class="flex flex-col sm:flex-row gap-4 flex-grow overflow-y-auto">
                 
-                <!-- Coluna Imagem e Galeria (2/5 do espaço) -->
                 <div class="sm:w-2/5 flex flex-col items-center flex-shrink-0">
-                    
-                    <!-- Imagem Principal -->
-                    <img 
-                        id="info-modal-image" 
-                        src="" 
-                        alt="Capa do Livro" 
-                        class="w-32 h-48 object-contain rounded-lg shadow-md mb-3" 
-                        onerror="this.onerror=null;this.src='https://placehold.co/128x192/002147/cfaf5c?text=CAPA';" 
-                    />
-                    
-                    <!-- Mini Galeria (NOVO ELEMENTO) -->
-                    <div id="info-modal-gallery" class="flex space-x-2 mt-2 justify-center">
-                        <!-- Miniaturas serão injetadas aqui pelo JS -->
-                    </div>
-
+                    <img id="info-modal-image" src="" alt="Capa do Livro" class="w-32 h-48 object-contain rounded-lg shadow-md mb-3" onerror="this.onerror=null;this.src='https://placehold.co/128x192/002147/cfaf5c?text=CAPA';" />
+                    <div id="info-modal-gallery" class="flex space-x-2 mt-2 justify-center"></div>
                 </div>
 
-                <!-- Coluna Detalhes (3/5 do espaço) -->
                 <div class="sm:w-3/5 space-y-4 text-sm">
                     <p id="info-modal-summary" class="text-gray-700 italic leading-snug"></p>
-
-                    <!-- Ficha Técnica Rápida (CONSOLIDADA E REORDENADA) -->
                     <div class="pt-2 border-t border-gray-100">
                         <p class="font-bold text-brand-accent-red text-xl font-classic mb-2" id="info-modal-price"></p>
-                        
-                        <!-- Lista Única de Detalhes Técnicos (text-gray-500 aplicado no ul) -->
                         <ul id="info-modal-details-list" class="text-xs text-gray-500 mt-2 space-y-1">
-                            <li id="info-modal-author"></li>    <!-- 1. Autor -->
-                            <li id="info-modal-isbn"></li>      <!-- 2. ISBN -->
-                            <li id="info-modal-pages"></li>     <!-- 3. Páginas -->
-                            <li id="info-modal-format"></li>    <!-- 4. Formato (Binding) -->
-                            <li id="info-modal-weight"></li>    <!-- 5. Peso -->
-                            <li id="info-modal-dimensions"></li><!-- 6. Dimensões -->
+                            <li id="info-modal-author"></li>
+                            <li id="info-modal-isbn"></li>
+                            <li id="info-modal-pages"></li>
+                            <li id="info-modal-format"></li>
+                            <li id="info-modal-weight"></li>
+                            <li id="info-modal-dimensions"></li>
                         </ul>
                     </div>
                 </div>
-
             </div>
 
-            <!-- Footer: Ações (REMOVIDO O BOTÃO "VER DETALHES COMPLETOS") -->
             <div class="mt-6 pt-4 border-t border-gray-100 flex flex-col sm:flex-row justify-center gap-3">
-                
-                <!-- Botão de Ação Rápida: ADICIONAR AO CARRINHO -->
-                <button 
-                    id="info-modal-add-to-cart"
-                    onclick="modalAddToCart()"
-                    class="flex-grow bg-brand-accent-red text-white py-3 rounded-lg hover:bg-red-900 transition-colors font-bold shadow-md text-base"
-                >
+                <button id="info-modal-add-to-cart" onclick="modalAddToCart()" class="flex-grow bg-brand-accent-red text-white py-3 rounded-lg hover:bg-red-900 transition-colors font-bold shadow-md text-base uppercase tracking-wider">
                     ADICIONAR AO CARRINHO
                 </button>
-                
             </div>
             
-            <button onclick="closeInfoModal()" class="mt-3 text-sm text-gray-500 hover:text-brand-accent-red transition-colors">
+            <button onclick="closeInfoModal()" class="mt-3 text-sm text-gray-500 hover:text-brand-accent-red transition-colors font-semibold">
                 Fechar
             </button>
         </div>
     </div>
 
-
-    <!-- Navbar Fixa -->
+    <!-- Navbar -->
     <nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 z-50">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            
-            <!-- Logótipo e Nome da Editora -->
             <a href="index.html" class="flex items-center space-x-2">
-                <img 
-                    src="Logo J.png" 
-                    alt="Logótipo Jerónimo Editora" 
-                    class="h-9 w-auto"
-                    onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';"
-                />
+                <img src="Logo J.png" alt="Logótipo Jerónimo Editora" class="h-9 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';" />
                 <span class="font-serif text-2xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors duration-200">Jerónimo Editora</span>
             </a>
             
-            <!-- Menu Desktop: Incluído text-sm e tracking-wide -->
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-700 tracking-wide">
                 <a href="index.html" class="hover:text-brand-accent-red transition-colors duration-200">INÍCIO</a>
                 <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors duration-200 text-brand-accent-red font-bold">CATÁLOGO</a> 
@@ -239,37 +168,24 @@
                 <a href="produtos.html" class="hover:text-brand-accent-red transition-colors duration-200">PRODUTOS</a>
                 <a href="index.html#sobre" class="hover:text-brand-accent-red transition-colors duration-200">SOBRE</a>
                 <a href="contato.html" class="hover:text-brand-accent-red transition-colors duration-200">CONTATO</a>
-
-                <!-- Ícones de Carrinho e Favoritos -->
                 <div class="pl-4 flex space-x-4">
-                    <!-- Ícone Favoritos (MODIFICADO) -->
                     <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="openFavorites()">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
                         <span id="fav-count" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
                     </button>
-                    <!-- Ícone Carrinho -->
                     <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="openCart()">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>
                         <span id="cart-count" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
                     </button>
                 </div>
-                
-                <!-- ÍCONE/NOME DA CONTA (Placeholder dinâmico) -->
-                <a id="user-nav-link" href="login.html" class="pl-4 text-gray-700 hover:text-brand-accent-red transition-colors duration-200" aria-label="Aceder à Conta">
-                    <!-- Conteúdo gerado por JavaScript (renderUserNav) -->
-                </a>
+                <a id="user-nav-link" href="login.html" class="pl-4 text-gray-700 hover:text-brand-accent-red transition-colors duration-200" aria-label="Aceder à Conta"></a>
             </div>
 
-
-            
-            <!-- Botão Menu Mobile -->
-            <button id="menu-button" class="md:hidden text-2xl text-brand-text focus:outline-none hover:text-brand-accent-red">
-                &#9776;
-            </button>
+            <button id="menu-button" class="md:hidden text-2xl text-brand-text focus:outline-none hover:text-brand-accent-red">&#9776;</button>
         </div>
     </nav>
     
-    <!-- Menu Mobile Deslizante -->
+    <!-- Menu Mobile -->
     <div id="mobile-menu" class="hidden fixed top-20 left-0 w-full bg-white shadow-xl z-40 md:hidden">
         <div class="flex flex-col p-4 text-center space-y-3">
             <a href="index.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">INÍCIO</a>
@@ -278,93 +194,54 @@
             <a href="produtos.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">PRODUTOS</a>
             <a href="index.html#sobre" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">SOBRE</a>
             <a href="contato.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">CONTATO</a>
-            
-            <!-- Ícones no Menu Mobile -->
             <div class="flex justify-center space-x-8 pt-4 border-t border-gray-100">
-                <!-- Ícone Favoritos Mobile (MODIFICADO) -->
                 <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="openFavorites()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
                     <span id="fav-count-mobile" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
                 </button>
-                <!-- Ícone Carrinho Mobile -->
                 <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="openCart()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>
                     <span id="cart-count-mobile" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
                 </button>
             </div>
-
-            <!-- Link de Conta no Mobile (mantendo o texto para clareza) -->
             <a href="login.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors font-bold" onclick="toggleMenu()">CONTA</a>
         </div>
     </div>
 
+    <main class="flex-grow pt-24 pb-12"> 
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h1 class="font-serif text-4xl sm:text-5xl text-brand-accent-blue mb-4 border-b pb-3 inline-block">Catálogo Completo</h1>
+            <p class="text-lg text-gray-600 mb-8 mt-2">Pensamento clássico, filosofia e teologia.</p>
 
-    <!-- Main Content: Catálogo Completo -->
-    <!-- Adicionado pt-24 (padding-top) para dar espaço ao navbar fixo -->
-    <main class="flex-grow pt-24"> 
-        <div class="max-w-6xl mx-auto px-6">
-            <!-- Título e Introdução -->
-            <h1 class="font-serif text-4xl sm:text-5xl text-brand-accent-blue mb-4 border-b pb-3 text-center">Catálogo Completo</h1>
-            <p class="text-center text-lg text-gray-600 mb-8">Descubra todas as nossas publicações de pensamento clássico, filosofia e teologia.</p>
-
-            <!-- Filtros e Pesquisa (AJUSTADO PARA UMA ÚNICA LINHA NO DESKTOP) -->
-            <div class="mb-10 flex flex-col gap-3 md:gap-4 bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-                
-                <!-- Secção de Filtros Completa -->
+            <!-- Filtros -->
+            <div class="mb-10 flex flex-col gap-3 md:gap-4 bg-white p-4 rounded-xl shadow-lg border border-gray-100 text-left">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 items-center w-full">
-                    
-                    <!-- Coluna 1: Pesquisa -->
-                    <div class="md:col-span-1 border border-gray-300 rounded-lg focus-within:ring-brand-accent-red focus-within:ring-2 focus-within:border-brand-accent-red transition duration-200">
-                        <input 
-                            type="text" 
-                            id="search-input" 
-                            placeholder="Pesquisar..." 
-                            class="w-full py-2 px-3 text-sm outline-none text-brand-text" 
-                            onkeyup="filterAndSortBooks()"
-                        >
+                    <div class="md:col-span-1 border border-gray-300 rounded-lg focus-within:ring-brand-accent-red transition duration-200">
+                        <input type="text" id="search-input" placeholder="Pesquisar..." class="w-full py-2 px-3 text-sm outline-none text-brand-text bg-transparent" onkeyup="filterAndSortBooks()">
                     </div>
-
-                    <!-- Coluna 2: Filtro de Categoria -->
-                    <select id="category-filter" class="w-full py-2 px-3 border border-gray-300 rounded-lg bg-white appearance-none cursor-pointer focus:ring-brand-accent-red focus:border-brand-accent-red transition duration-200 text-brand-text text-sm" onchange="filterAndSortBooks()">
+                    <select id="category-filter" class="w-full py-2 px-3 border border-gray-300 rounded-lg bg-white cursor-pointer text-brand-text text-sm" onchange="filterAndSortBooks()">
                         <option value="all">Todas as Categorias</option>
                         <option value="Teologia">Teologia</option>
                         <option value="Filosofia">Filosofia Clássica</option>
                         <option value="História">História Antiga</option>
                         <option value="Estudos Bíblicos">Estudos Bíblicos</option>
                     </select>
-
-                    <!-- Coluna 3: Ordenação (Sort) -->
-                    <select id="sort-order" class="w-full py-2 px-3 border border-gray-300 rounded-lg bg-white appearance-none cursor-pointer focus:ring-brand-accent-red focus:border-brand-accent-red transition duration-200 text-brand-text text-sm" onchange="filterAndSortBooks()">
+                    <select id="sort-order" class="w-full py-2 px-3 border border-gray-300 rounded-lg bg-white cursor-pointer text-brand-text text-sm" onchange="filterAndSortBooks()">
                         <option value="default">Ordenar Por...</option>
                         <option value="az">Título (A-Z)</option>
                         <option value="za">Título (Z-A)</option>
                         <option value="price-asc">Preço (Crescente)</option>
                         <option value="price-desc">Preço (Decrescente)</option>
-                        <option value="rating-desc">Melhor Avaliado</option>
                     </select>
-
-                    <!-- Coluna 4: Botão Limpar -->
-                    <button 
-                        onclick="clearFiltersAndSort()" 
-                        class="w-full py-2 px-3 bg-brand-accent-blue text-white font-bold rounded-lg hover:bg-brand-accent-red transition-colors shadow-md flex-shrink-0 text-sm"
-                    >
-                        Limpar Filtros
-                    </button>
+                    <button onclick="clearFiltersAndSort()" class="w-full py-2 px-3 bg-brand-accent-blue text-white font-bold rounded-lg hover:bg-brand-accent-red transition-colors text-sm">Limpar Filtros</button>
                 </div>
             </div>
 
-            <!-- MENSAGEM DE ERRO -->
-            <p id="no-results" class="col-span-full text-center text-xl text-gray-500 hidden py-10">Nenhum livro encontrado com os critérios de pesquisa.</p>
-
-            <!-- Grid de Produtos (REVERTIDO PARA 4 COLUNAS NO DESKTOP, mantendo 3 colunas no sm e 2 no base) -->
-            <div id="book-list-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
-                <!-- Os cartões dos livros serão injetados aqui via JavaScript -->
-            </div>
-            
+            <p id="no-results" class="col-span-full text-center text-xl text-gray-500 hidden py-10">Nenhum livro encontrado.</p>
+            <div id="book-list-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6"></div>
         </div>
     </main>
 
-    <!-- FOOTER (Simplificado) -->
     <footer class="bg-gray-900 text-gray-300 py-6 px-6 border-t-4 border-brand-accent-red">
         <div class="max-w-6xl mx-auto text-center">
             <p class="text-xs text-gray-500">© 2025 Jerónimo Editora. Todos os direitos reservados.</p>
@@ -374,217 +251,22 @@
     <script>
         const USER_STORAGE_KEY = 'currentUser';
         
-        // Dados dos Livros (Array para renderização dinâmica)
         const bookData = [
-            {
-                id: 1,
-                title: "Suma Teológica",
-                author: "São Tomás de Aquino",
-                price: 75.00,
-                category: "Teologia",
-                image: "suma_teologica.png",
-                link: "detalhes.html",
-                rating: 4.8, 
-                summary: "A Suma Teológica é a obra-prima de São Tomás de Aquino, um compêndio sistemático da teologia e filosofia cristã. Dividida em três partes, aborda Deus, o movimento das criaturas para Deus, e Cristo como caminho para a união com Deus. É uma das obras mais influentes da literatura ocidental e da história da Igreja.",
-                aboutAuthor: "São Tomás de Aquino (1225–1274) foi um frade dominicano, filósofo, teólogo e doutor da Igreja Católica. Conhecido como Doutor Angélico, procurou conciliar a fé cristã com a razão aristotélica, influenciando profundamente o pensamento ocidental.",
-                techDetails: { pages: 3000, isbn: "978-989-98218-1-5", binding: "Capa Dura", year: 2021, dimensions: "16x23 cm", weight: "4.8 kg" },
-                // Galeria Atualizada com as imagens pedidas
-                gallery: ["suma_teologica.png", "Logo J.png", "Logo J Dourado.png"]
-            },
-            {
-                id: 2,
-                title: "Jesus e o Jubileu",
-                author: "John S. Bergsma",
-                price: 34.90,
-                category: "Estudos Bíblicos",
-                image: "Bergsma.png",
-                link: "detalhes.html",
-                rating: 4.5,
-                summary: "O livro 'Jesus e o Jubileu' explora a profunda conexão entre o ministério de Jesus e a lei do Jubileu no Antigo Testamento. Bergsma argumenta que Jesus se apresenta como o cumprimento desta lei de liberdade e restauração, oferecendo uma nova perspetiva sobre as suas parábolas e ações.",
-                aboutAuthor: "John S. Bergsma é professor de Teologia no Steubenville e um académico católico reconhecido pela sua capacidade de tornar as Escrituras acessíveis. É um ex-pastor protestante convertido ao catolicismo.",
-                techDetails: { pages: 280, isbn: "978-989-98218-2-2", binding: "Capa Mole", year: 2022, dimensions: "14x21 cm", weight: "0.5 kg" },
-                // Galeria Atualizada com as imagens pedidas
-                gallery: ["Bergsma.png", "Logo J.png", "Logo J Dourado.png"]
-            },
-            {
-                id: 3,
-                title: "Tu podes entender a Bíblia",
-                author: "Peter Kreeft",
-                price: 24.99,
-                category: "Estudos Bíblicos",
-                image: "Kreeft.png",
-                link: "detalhes.html",
-                rating: 4.9,
-                summary: "Peter Kreeft, de forma concisa e envolvente, desmistifica a Bíblia e guia o leitor a compreender a sua estrutura e mensagem principal. Ideal para quem é novo nas Escrituras ou procura uma visão unificada da Revelação.",
-                aboutAuthor: "Peter Kreeft é um filósofo e teólogo católico amplamente respeitado. Professor no Boston College, é autor de dezenas de livros sobre filosofia, teologia e apologética, conhecido pela sua clareza e humor.",
-                techDetails: { pages: 200, isbn: "978-989-98218-3-9", binding: "Capa Mole", year: 2023, dimensions: "14x21 cm", weight: "0.3 kg" },
-                // Galeria Atualizada com as imagens pedidas
-                gallery: ["Kreeft.png", "Logo J.png", "Logo J Dourado.png"]
-            },
-            {
-                id: 4,
-                title: "Convite aos Salmos",
-                author: "Rolf A. Jacobson & Karl N. Jacobson",
-                price: 28.50,
-                category: "Teologia",
-                image: "Jacobson.png",
-                link: "detalhes.html",
-                rating: 4.2,
-                summary: "Uma introdução acessível e profunda ao livro dos Salmos, explorando os seus géneros literários, contextos históricos e aplicação na vida de oração contemporânea. Ajuda o leitor a rezar os Salmos com maior entendimento.",
-                aboutAuthor: "Rolf e Karl Jacobson são teólogos e professores dedicados ao estudo do Antigo Testamento. O seu trabalho é focado em tornar o texto bíblico vivo e relevante para a comunidade moderna.",
-                techDetails: { pages: 350, isbn: "978-989-98218-4-6", binding: "Capa Mole", year: 2021, dimensions: "15x22 cm", weight: "0.7 kg" },
-                // Galeria Atualizada com as imagens pedidas
-                gallery: ["Jacobson.png", "Logo J.png", "Logo J Dourado.png"]
-            },
-            {
-                id: 5,
-                title: "São Francisco de Sales - Doutor da Perfeição",
-                author: "Abbé Jacques Leclercq",
-                price: 28.00,
-                category: "Teologia",
-                image: "Abbe.png",
-                link: "detalhes.html",
-                rating: 4.7,
-                summary: "Uma biografia espiritual de São Francisco de Sales, destacando o seu papel como Doutor da Perfeição, que ensinou que a santidade é acessível a todos, independentemente do seu estado de vida. Essencial para a espiritualidade católica.",
-                aboutAuthor: "Abbé Jacques Leclercq (1891–1971) foi um teólogo e pensador católico belga, conhecido pela sua vasta obra sobre moralidade, filosofia social e história da Igreja.",
-                techDetails: { pages: 320, isbn: "978-989-98218-5-3", binding: "Capa Dura", year: 2020, dimensions: "16x23 cm", weight: "0.6 kg" },
-                // Galeria Atualizada com as imagens pedidas
-                gallery: ["Abbe.png", "Logo J.png", "Logo J Dourado.png"]
-            },
-            {
-                id: 6,
-                title: "As mãos vazias - Mensagem de Santa Teresa do Menino Jesus",
-                author: "Conrad de Meester",
-                price: 28.00,
-                category: "Teologia",
-                image: "Teresinha.png",
-                link: "detalhes.html",
-                rating: 4.6,
-                summary: "Uma análise profunda e tocante da 'pequena via' de Santa Teresinha, focada na sua mensagem de confiança total e abandono em Deus, mesmo na fraqueza humana. Um clássico da espiritualidade carmelita.",
-                aboutAuthor: "Conrad de Meester (1936–2018) foi um monge carmelita e teólogo, especialista na vida e na obra de Santa Teresinha de Lisieux. As suas obras são referência no estudo da 'pequena via'.",
-                techDetails: { pages: 180, isbn: "978-989-98218-6-0", binding: "Capa Mole", year: 2019, dimensions: "14x21 cm", weight: "0.2 kg" },
-                // Galeria Atualizada com as imagens pedidas
-                gallery: ["Teresinha.png", "Logo J.png", "Logo J Dourado.png"]
-            },
-            {
-                id: 7,
-                title: "A definir (Platão)",
-                author: "A definir",
-                price: 0.00,
-                category: "Filosofia",
-                image: "https://placehold.co/128x192/D1D5DB/9CA3AF?text=INDISPON%C3%8DVEL",
-                link: "detalhes.html",
-                rating: 0,
-                summary: "Este é um espaço reservado para uma futura edição de obras selecionadas de Platão, o fundador da Academia de Atenas e o pilar da filosofia ocidental.",
-                aboutAuthor: "Platão (c. 428/427 – 348/347 a.C.) foi um dos mais influentes filósofos da Grécia Antiga. Discípulo de Sócrates e mestre de Aristóteles, é conhecido pela Teoria das Ideias.",
-                techDetails: { pages: 0, isbn: "000-0000000-0-0", binding: "A definir", year: 2026, dimensions: "A definir", weight: "N/A" },
-                gallery: ["https://placehold.co/128x192/D1D5DB/9CA3AF?text=CAPA", "Logo J.png", "Logo J Dourado.png"]
-            },
-            {
-                id: 8,
-                title: "A definir (Aristóteles)",
-                author: "A definir",
-                price: 0.00,
-                category: "Filosofia",
-                image: "https://placehold.co/128x192/D1D5DB/9CA3AF?text=INDISPON%C3%8DVEL",
-                link: "detalhes.html",
-                rating: 0,
-                summary: "Este é um espaço reservado para uma futura edição de obras de Aristóteles, um polímata grego cujos escritos abrangem uma vasta gama de assuntos.",
-                aboutAuthor: "Aristóteles (384–322 a.C.) foi um filósofo e cientista grego, considerado um dos fundadores da lógica e um dos maiores pensadores de todos os tempos.",
-                techDetails: { pages: 0, isbn: "000-0000000-0-0", binding: "A definir", year: 2026, dimensions: "A definir", weight: "N/A" },
-                gallery: ["https://placehold.co/128x192/D1D5DB/9CA3AF?text=CAPA", "Logo J.png", "Logo J Dourado.png"]
-            },
-            {
-                id: 9,
-                title: "A definir (História Antiga)",
-                author: "A definir",
-                price: 0.00,
-                category: "História",
-                image: "https://placehold.co/128x192/D1D5DB/9CA3AF?text=INDISPON%C3%8DVEL",
-                link: "detalhes.html",
-                rating: 0,
-                summary: "Este é um espaço reservado para uma obra sobre a História Antiga do Mediterrâneo, focada nos períodos Greco-Romano e da Alta Idade Média.",
-                aboutAuthor: "O autor será um especialista em historiografia clássica, trazendo uma análise baseada em fontes primárias.",
-                techDetails: { pages: 0, isbn: "000-0000000-0-0", binding: "A definir", year: 2026, dimensions: "A definir", weight: "N/A" },
-                gallery: ["https://placehold.co/128x192/D1D5DB/9CA3AF?text=CAPA", "Logo J.png", "Logo J Dourado.png"]
-            },
-            {
-                id: 10,
-                title: "A definir (Teologia Mística)",
-                author: "A definir",
-                price: 0.00,
-                category: "Teologia",
-                image: "https://placehold.co/128x192/D1D5DB/9CA3AF?text=INDISPON%C3%8DVEL",
-                link: "detalhes.html",
-                rating: 0,
-                summary: "Este é um espaço reservado para uma obra sobre teologia mística e a união da alma com Deus, explorando autores como Santa Teresa de Ávila e São João da Cruz.",
-                aboutAuthor: "O autor será um teólogo especializado na tradição mística carmelita.",
-                techDetails: { pages: 0, isbn: "000-0000000-0-0", binding: "A definir", year: 2026, dimensions: "A definir", weight: "N/A" },
-                gallery: ["https://placehold.co/128x192/D1D5DB/9CA3AF?text=CAPA", "Logo J.png", "Logo J Dourado.png"]
-            },
-             // Adicionar dados de Infantil e Produtos para que a modal de favoritos funcione em todas as páginas
-            {
-                id: 101, // ID de Infantil 1
-                title: "O Meu Primeiro Livro da Bíblia",
-                author: "Equipa Jerónimo Kids",
-                price: 12.50,
-                category: "0-3",
-                image: "https://placehold.co/128x192/FFD700/800000?text=BÍBLIA+KIDS",
-                link: "infantil.html",
-                rating: 4.9,
-                summary: "Livro cartonado resistente, com ilustrações coloridas e histórias curtas de Gênesis e Evangelhos.",
-            },
-            {
-                id: 102,
-                title: "As Aventuras do Anjo Guardião",
-                author: "Maria Clara Sousa",
-                price: 15.90,
-                category: "4-7",
-                image: "https://placehold.co/128x192/87CEEB/002147?text=ANJO",
-                link: "infantil.html",
-                rating: 4.7,
-                summary: "Uma história mágica sobre um menino e o seu anjo, que o ajuda a ultrapassar medos e a fazer boas escolhas.",
-            },
-            {
-                id: 201,
-                title: "Marcador de Livros em Pele (Cordeiro)",
-                author: "Artesanato Local",
-                price: 12.00,
-                category: "Papelaria",
-                image: "https://placehold.co/128x192/4B4B4B/cfaf5c?text=MARCADOR",
-                link: "produtos.html",
-                rating: 5.0,
-                summary: "Marcador de livros elegante em pele genuína, com o símbolo do Cordeiro Místico gravado a dourado.",
-            },
-            {
-                id: 203, // ID de Produtos 1
-                title: "Terço de Madeira Nobre",
-                author: "Devoção",
-                price: 25.00,
-                category: "Outros",
-                image: "https://placehold.co/128x192/A52A2A/FFFFFF?text=TERÇO",
-                link: "produtos.html",
-                rating: 4.9,
-                summary: "Terço artesanal feito em madeira escura com medalha de São Bento.",
-            }
+            { id: 1, title: "Suma Teológica", author: "São Tomás de Aquino", price: 75.00, category: "Teologia", image: "suma_teologica.png", link: "detalhes.html", rating: 4.8, summary: "A obra-prima de São Tomás de Aquino, um compêndio sistemático da teologia e filosofia cristã.", techDetails: { pages: 3000, isbn: "978-989-98218-1-5", binding: "Capa Dura", year: 2021, dimensions: "16x23 cm", weight: "4.8 kg" }, gallery: ["suma_teologica.png", "Logo J.png", "Logo J Dourado.png"] },
+            { id: 2, title: "Jesus e o Jubileu", author: "John S. Bergsma", price: 34.90, category: "Estudos Bíblicos", image: "Bergsma.png", link: "detalhes.html", rating: 4.5, summary: "O livro explora a conexão entre o ministério de Jesus e a lei do Jubileu.", techDetails: { pages: 280, isbn: "978-989-98218-2-2", binding: "Capa Mole", year: 2022, dimensions: "14x21 cm", weight: "0.5 kg" }, gallery: ["Bergsma.png", "Logo J.png", "Logo J Dourado.png"] },
+            { id: 3, title: "Tu podes entender a Bíblia", author: "Peter Kreeft", price: 24.99, category: "Estudos Bíblicos", image: "Kreeft.png", link: "detalhes.html", rating: 4.9, summary: "Guia prático e iluminador para compreender a estrutura da Bíblia.", techDetails: { pages: 200, isbn: "978-989-98218-3-9", binding: "Capa Mole", year: 2023, dimensions: "14x21 cm", weight: "0.3 kg" }, gallery: ["Kreeft.png", "Logo J.png", "Logo J Dourado.png"] },
+            { id: 4, title: "Convite aos Salmos", author: "Rolf A. Jacobson & Karl N. Jacobson", price: 28.50, category: "Teologia", image: "Jacobson.png", link: "detalhes.html", rating: 4.2, summary: "Introdução profunda ao livro dos Salmos.", techDetails: { pages: 350, isbn: "978-989-98218-4-6", binding: "Capa Mole", year: 2021, dimensions: "15x22 cm", weight: "0.7 kg" }, gallery: ["Jacobson.png", "Logo J.png", "Logo J Dourado.png"] },
+            { id: 5, title: "São Francisco de Sales", author: "Abbé Jacques Leclercq", price: 28.00, category: "Teologia", image: "Abbe.png", link: "detalhes.html", rating: 4.7, summary: "Biografia espiritual do Doutor da Perfeição.", techDetails: { pages: 320, isbn: "978-989-98218-5-3", binding: "Capa Dura", year: 2020, dimensions: "16x23 cm", weight: "0.6 kg" }, gallery: ["Abbe.png", "Logo J.png", "Logo J Dourado.png"] },
+            { id: 6, title: "As mãos vazias", author: "Conrad de Meester", price: 28.00, category: "Teologia", image: "Teresinha.png", link: "detalhes.html", rating: 4.6, summary: "Mensagem de confiança de Santa Teresinha.", techDetails: { pages: 180, isbn: "978-989-98218-6-0", binding: "Capa Mole", year: 2019, dimensions: "14x21 cm", weight: "0.2 kg" }, gallery: ["Teresinha.png", "Logo J.png", "Logo J Dourado.png"] },
+            { id: 7, title: "A definir (Platão)", author: "A definir", price: 0.00, category: "Filosofia", image: "https://placehold.co/128x192/D1D5DB/9CA3AF?text=INDISPON%C3%8DVEL", link: "detalhes.html", rating: 0, summary: "Futura edição de Platão.", techDetails: { pages: 0, isbn: "000-0000000-0-0", binding: "A definir", year: 2026, dimensions: "A definir", weight: "N/A" }, gallery: ["https://placehold.co/128x192/D1D5DB/9CA3AF?text=CAPA"] },
+            { id: 8, title: "A definir (Aristóteles)", author: "A definir", price: 0.00, category: "Filosofia", image: "https://placehold.co/128x192/D1D5DB/9CA3AF?text=INDISPON%C3%8DVEL", link: "detalhes.html", rating: 0, summary: "Futura edição de Aristóteles.", techDetails: { pages: 0, isbn: "000-0000000-0-0", binding: "A definir", year: 2026, dimensions: "A definir", weight: "N/A" }, gallery: ["https://placehold.co/128x192/D1D5DB/9CA3AF?text=CAPA"] },
+            { id: 9, title: "A definir (História Antiga)", author: "A definir", price: 0.00, category: "História", image: "https://placehold.co/128x192/D1D5DB/9CA3AF?text=INDISPON%C3%8DVEL", link: "detalhes.html", rating: 0, summary: "Obra sobre História Antiga.", techDetails: { pages: 0, isbn: "000-0000000-0-0", binding: "A definir", year: 2026, dimensions: "A definir", weight: "N/A" }, gallery: ["https://placehold.co/128x192/D1D5DB/9CA3AF?text=CAPA"] },
+            { id: 10, title: "A definir (Teologia Mística)", author: "A definir", price: 0.00, category: "Teologia", image: "https://placehold.co/128x192/D1D5DB/9CA3AF?text=INDISPON%C3%8DVEL", link: "detalhes.html", rating: 0, summary: "Obra sobre teologia mística.", techDetails: { pages: 0, isbn: "000-0000000-0-0", binding: "A definir", year: 2026, dimensions: "A definir", weight: "N/A" }, gallery: ["https://placehold.co/128x192/D1D5DB/9CA3AF?text=CAPA"] }
         ];
-        
-        // Função auxiliar para simular a URL da imagem interna da Jerónimo Editora
-        function getBookImageUrl(imageName) {
-            // Se for um placeholder URL ou não tiver extensão .png/jpg, retorna como está.
-            if (imageName.startsWith('http') || !imageName.includes('.')) {
-                return imageName;
-            }
-            // Retorna o nome do ficheiro para simulação de recurso local.
-            return imageName; 
-        }
 
-        // Função para formatar o preço
-        function formatPrice(price) {
-            return `€ ${price.toFixed(2).replace('.', ',')}`;
-        }
+        function getBookImageUrl(imageName) { return imageName; }
+        function formatPrice(price) { return `€ ${price.toFixed(2).replace('.', ',')}`; }
         
-        // Função para mostrar modal genérico (substitui alert())
         function showCustomModal(title, message) {
             const modal = document.getElementById('custom-modal');
             document.getElementById('modal-title').textContent = title;
@@ -592,583 +274,247 @@
             modal.classList.remove('hidden');
         }
 
-        // --- Funções de Modal de Favoritos (COPIADO DO DETALHES) ---
-        
         function getBookDataById(id) {
-            // Converte id para número, pois no catalogo é sempre numérico (exceto 'suma-teologica')
             const idNum = parseInt(id);
-            // Verifica se o ID é o da Suma Teológica (que pode ser a chave 'suma-teologica')
-            if (idNum === 1 || id === 'suma-teologica') {
-                 return bookData.find(book => book.id === 1) || null;
-            }
-            return bookData.find(book => book.id === idNum) || null;
+            if (idNum === 1 || id === 'suma-teologica') return bookData.find(book => book.id === 1);
+            return bookData.find(book => book.id === idNum);
         }
 
         function renderFavoritesList() {
             const favListContainer = document.getElementById('favorites-list');
             const favMsg = document.getElementById('empty-favorites-message');
-            
             let favItemsHtml = '';
             let favCount = 0;
-
             const favoriteKeys = Object.keys(localStorage).filter(key => key.startsWith('fav-') && localStorage.getItem(key) === 'true');
-
+            
             favoriteKeys.forEach(key => {
                 const simulatedId = key.replace('fav-', '');
                 const bookId = simulatedId === 'suma-teologica' ? 1 : parseInt(simulatedId); 
                 const book = getBookDataById(bookId);
-                
-                // Determina a chave correta para o botão de remoção
                 const removalKey = (bookId === 1 && simulatedId === 'suma-teologica') ? 'suma-teologica' : bookId; 
-
+                
                 if (book) {
                     favCount++;
-                    const priceFormatted = formatPrice(book.price);
-                    
-                    // Nota: O link do favorito agora usa um âncora com o URL do livro
                     favItemsHtml += `
                         <div class="flex items-center space-x-4 p-3 border border-gray-100 rounded-lg bg-gray-50 shadow-inner">
                             <a href="${book.link}" class="flex items-center space-x-4 flex-grow hover:bg-gray-100 p-2 rounded-lg transition-colors">
-                                <img 
-                                    src="${book.image}" 
-                                    alt="Capa do Livro ${book.title}" 
-                                    class="w-16 h-24 object-contain rounded-sm flex-shrink-0" 
-                                    onerror="this.onerror=null;this.src='https://placehold.co/64x96/002147/cfaf5c?text=CAPA';"
-                                />
-                                <div class="flex-grow">
+                                <img src="${book.image}" alt="${book.title}" class="w-16 h-24 object-contain rounded-sm" onerror="this.onerror=null;this.src='https://placehold.co/64x96/002147/cfaf5c?text=CAPA';" />
+                                <div class="flex-grow text-left">
                                     <h4 class="font-serif font-bold text-brand-text">${book.title}</h4>
                                     <p class="text-sm text-gray-500 italic mb-1">${book.author}</p>
-                                    <p class="font-classic font-extrabold text-lg text-brand-accent-red">${priceFormatted}</p>
+                                    <p class="font-classic font-extrabold text-lg text-brand-accent-red">${formatPrice(book.price)}</p>
                                 </div>
                             </a>
-                            
-                            <!-- Botão de Remoção Rápida: Usa a chave correta (simulatedId ou bookId) -->
-                            <button 
-                                onclick="toggleFavorite('${removalKey}', '${book.title}', true)"
-                                class="p-2 text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
-                                aria-label="Remover dos favoritos"
-                            >
+                            <button onclick="toggleFavorite('${removalKey}', '${book.title}', true); event.stopPropagation();" class="p-2 text-gray-400 hover:text-red-600 transition-colors flex-shrink-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                             </button>
-                        </div>
-                    `;
+                        </div>`;
                 }
             });
             
             favListContainer.innerHTML = favItemsHtml;
-            // Se não houver favoritos, mostra a mensagem de vazio.
             favMsg.classList.toggle('hidden', favCount > 0);
         }
         
-        function openFavorites() {
-            renderFavoritesList();
-            document.getElementById('favorites-modal').classList.remove('hidden');
-        }
-
-        function closeFavorites() {
-            document.getElementById('favorites-modal').classList.add('hidden');
-        }
-
-        // --- Fim das Funções de Modal de Favoritos ---
-
-
-        function closeCartConfirmation() {
-            document.getElementById('add-to-cart-modal').classList.add('hidden');
-        }
+        function openFavorites() { renderFavoritesList(); document.getElementById('favorites-modal').classList.remove('hidden'); }
+        function closeFavorites() { document.getElementById('favorites-modal').classList.add('hidden'); }
+        function closeCartConfirmation() { document.getElementById('add-to-cart-modal').classList.add('hidden'); }
         
-        function showCartConfirmationModal(book) {
-            const priceFormatted = formatPrice(book.price);
-            
+        function addToCart(bookId, bookTitle) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const book = bookData.find(b => b.id === bookId);
+            if (!book || book.price === 0) { showCustomModal("Aviso", "Produto indisponível."); return; }
+            const existing = cartItems.findIndex(item => item.id === bookId);
+            if (existing > -1) { cartItems[existing].quantity += 1; } 
+            else { cartItems.push({ id: bookId, title: bookTitle, price: book.price, quantity: 1, image: book.image, author: book.author }); }
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartUI();
             const html = `
-                <img src="${book.image}" alt="${book.title}" class="w-16 h-24 object-contain rounded-sm flex-shrink-0" onerror="this.onerror=null;this.src='https://placehold.co/64x96/002147/cfaf5c?text=J';" />
-                <div class="flex-grow">
+                <img src="${book.image}" alt="${book.title}" class="w-16 h-24 object-contain rounded-sm" onerror="this.onerror=null;this.src='https://placehold.co/64x96/002147/cfaf5c?text=J';" />
+                <div class="flex-grow text-left">
                     <h4 class="font-serif font-bold text-brand-text">${book.title}</h4>
-                    <p class="text-sm text-gray-500 italic mb-1">${book.author}</p>
-                    <p class="font-classic font-extrabold text-xl text-brand-accent-red">${priceFormatted}</p>
-                </div>
-            `;
-            
+                    <p class="font-classic font-extrabold text-xl text-brand-accent-red">${formatPrice(book.price)}</p>
+                </div>`;
             document.getElementById('cart-confirmation-details').innerHTML = html;
             document.getElementById('add-to-cart-modal').classList.remove('hidden');
         }
         
-        function addToCart(bookId, bookTitle) {
-            let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const existingItemIndex = cartItems.findIndex(item => item.id === bookId);
-            const book = bookData.find(b => b.id === bookId);
-            
-            if (!book) {
-                showCustomModal("Erro", "Não foi possível adicionar o livro ao carrinho.");
-                return;
-            }
-            
-            // Verifica se o produto está indisponível (preço 0)
-            if (book.price === 0) {
-                 showCustomModal("Produto Indisponível", `O livro "${book.title}" está indisponível para compra.`);
-                 return;
-            }
-
-
-            if (existingItemIndex > -1) {
-                cartItems[existingItemIndex].quantity += 1;
-            } else {
-                cartItems.push({ 
-                    id: bookId, 
-                    title: bookTitle, 
-                    price: book.price, 
-                    quantity: 1,
-                    image: book.image,
-                    author: book.author
-                });
-            }
-            
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
-            updateCartUI();
-            showCartConfirmationModal(book);
-        }
-        
-        // Função modalAddToCart para adicionar item do modal ao carrinho
         function modalAddToCart() {
              const bookId = parseInt(document.getElementById('info-modal').dataset.activeBookId);
              const book = bookData.find(b => b.id === bookId);
-             
-             if (book && book.price > 0) {
-                 addToCart(bookId, book.title);
-                 closeInfoModal(); // Fecha o modal de info
-             } else if (book && book.price === 0) {
-                 showCustomModal("Produto Indisponível", `O livro "${book.title}" está indisponível para compra.`);
-             }
+             if (book && book.price > 0) { addToCart(bookId, book.title); closeInfoModal(); }
         }
         
-        // Função para ir para o checkout a partir do modal
-        function checkoutFromModal() {
-            closeCartConfirmation();
-            window.location.href = 'checkout.html';
-        }
+        function checkoutFromModal() { window.location.href = 'checkout.html'; }
 
-
-        // --- Funções do Modal +Info (Sucinto) ---
-        
-        /**
-         * Altera a imagem principal na modal de detalhes.
-         * @param {string} imageSrc - O novo URL da imagem.
-         * @param {HTMLElement} thumbnailElement - O elemento miniatura clicado.
-         */
         function changeModalImage(imageSrc, thumbnailElement) {
-            const mainImage = document.getElementById('info-modal-image');
-            mainImage.src = imageSrc;
-            mainImage.alt = `Detalhe do livro`;
-            
-            // Remove a seleção de todas as miniaturas
-            document.querySelectorAll('#info-modal-gallery img').forEach(img => {
-                img.classList.remove('thumbnail-selected');
-            });
-            
-            // Adiciona a seleção à miniatura clicada
+            document.getElementById('info-modal-image').src = imageSrc;
+            document.querySelectorAll('#info-modal-gallery img').forEach(img => img.classList.remove('thumbnail-selected'));
             thumbnailElement.classList.add('thumbnail-selected');
         }
-
 
         function openInfoModal(bookId) {
             const book = bookData.find(b => b.id === bookId);
             if (!book) return;
-            
-            const priceFormatted = formatPrice(book.price);
-            
-            // 1. Atualiza elementos fixos da modal
             document.getElementById('info-modal-title').textContent = book.title;
-            
-            const imgElement = document.getElementById('info-modal-image');
-            imgElement.src = book.image;
-            imgElement.alt = `Capa do Livro ${book.title}`;
-            
+            document.getElementById('info-modal-image').src = book.image;
             document.getElementById('info-modal-summary').textContent = book.summary;
-            document.getElementById('info-modal-price').textContent = priceFormatted;
-            
-            // Ficha Técnica Rápida (Consolidada e Reordenada)
-            
-            // 1. Autor
+            document.getElementById('info-modal-price').textContent = formatPrice(book.price);
             document.getElementById('info-modal-author').textContent = `Autor: ${book.author}`;
-            // 2. ISBN
             document.getElementById('info-modal-isbn').textContent = `ISBN: ${book.techDetails.isbn || 'N/A'}`;
-            // 3. Páginas
             document.getElementById('info-modal-pages').textContent = `Páginas: ${book.techDetails.pages > 0 ? book.techDetails.pages : 'N/A'}`;
-            // 4. Formato (Binding)
             document.getElementById('info-modal-format').textContent = `Formato: ${book.techDetails.binding || 'N/A'}`;
-            // 5. Peso
             document.getElementById('info-modal-weight').textContent = `Peso: ${book.techDetails.weight || 'N/A'}`;
-            // 6. Dimensões
             document.getElementById('info-modal-dimensions').textContent = `Dimensões: ${book.techDetails.dimensions || 'N/A'}`;
             
-            // 2. Cria e preenche a Mini Galeria
-            const galleryContainer = document.getElementById('info-modal-gallery');
-            galleryContainer.innerHTML = ''; // Limpa o conteúdo anterior
-            
-            let galleryHtml = '';
-            
-            book.gallery.forEach((imageSrc, index) => {
-                // Determine se esta é a imagem principal para aplicar a seleção inicial
-                const isSelected = index === 0;
-                const selectedClass = isSelected ? 'thumbnail-selected' : '';
-                
-                // Note: o onerror garante que mesmo que as imagens 'Logo J.png' não existam, aparece um placeholder
-                const placeholderText = imageSrc.includes('Logo') ? 'LOGO' : 'CAPA';
-
-                galleryHtml += `
-                    <img 
-                        src="${getBookImageUrl(imageSrc)}" 
-                        alt="Imagem ${index + 1}" 
-                        class="w-12 h-16 object-contain rounded-md cursor-pointer border-2 border-transparent hover:border-brand-gold transition-all ${selectedClass}"
-                        onclick="changeModalImage('${imageSrc}', this)"
-                        onerror="this.onerror=null;this.src='https://placehold.co/48x64/002147/cfaf5c?text=${placeholderText}';"
-                    />
-                `;
+            const gallery = document.getElementById('info-modal-gallery');
+            gallery.innerHTML = ''; 
+            book.gallery?.forEach((imageSrc, index) => {
+                const selectedClass = index === 0 ? 'thumbnail-selected' : '';
+                gallery.innerHTML += `<img src="${imageSrc}" class="w-12 h-16 object-contain rounded-md cursor-pointer border-2 border-transparent hover:border-brand-gold ${selectedClass}" onclick="changeModalImage('${imageSrc}', this); event.stopPropagation();" onerror="this.onerror=null;this.src='https://placehold.co/48x64/002147/cfaf5c?text=CAPA';" />`;
             });
-
-            galleryContainer.innerHTML = galleryHtml;
-            
-            // 3. Define a ação de "Adicionar ao Carrinho"
-            const addButton = document.getElementById('info-modal-add-to-cart');
-            const isUnavailable = book.price === 0;
-            
-            addButton.disabled = isUnavailable;
-            addButton.textContent = isUnavailable ? 'INDISPONÍVEL' : 'ADICIONAR AO CARRINHO';
-            addButton.classList.toggle('bg-gray-300', isUnavailable);
-            addButton.classList.toggle('bg-brand-accent-red', !isUnavailable);
-
-            // 4. Mostra a modal
+            const btn = document.getElementById('info-modal-add-to-cart');
+            btn.disabled = book.price === 0;
+            btn.textContent = book.price === 0 ? 'INDISPONÍVEL' : 'ADICIONAR AO CARRINHO';
+            btn.classList.toggle('bg-gray-300', book.price === 0);
+            btn.classList.toggle('bg-brand-accent-red', book.price > 0);
             document.getElementById('info-modal').dataset.activeBookId = bookId;
             document.getElementById('info-modal').classList.remove('hidden');
         }
 
-        function closeInfoModal() {
-            document.getElementById('info-modal').classList.add('hidden');
-        }
-        
+        function closeInfoModal() { document.getElementById('info-modal').classList.add('hidden'); }
+        function removeDiacritics(text) { return text.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
 
-        // --- Funções de Catálogo e Filtragem ---
-
-        function removeDiacritics(text) {
-            return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        }
-
-        function sortBooks(books, sortBy) {
-            if (sortBy === 'default') {
-                return books; 
-            }
-
-            return books.sort((a, b) => {
-                switch (sortBy) {
-                    case 'az':
-                        return a.title.localeCompare(b.title);
-                    case 'za':
-                        return b.title.localeCompare(a.title);
-                    case 'price-asc':
-                        return a.price - b.price;
-                    case 'price-desc':
-                        return b.price - a.price;
-                    case 'rating-desc':
-                        return b.rating - a.rating; 
-                    default:
-                        return 0;
-                }
+        function filterAndSortBooks() {
+            const searchTerm = removeDiacritics(document.getElementById('search-input').value.toLowerCase()); 
+            const category = document.getElementById('category-filter').value;
+            const sortBy = document.getElementById('sort-order').value; 
+            const filtered = bookData.filter(book => book.id <= 10).filter(book => {
+                const matchSearch = removeDiacritics(book.title.toLowerCase()).includes(searchTerm) || removeDiacritics(book.author.toLowerCase()).includes(searchTerm);
+                const matchCat = category === 'all' || book.category === category;
+                return matchSearch && matchCat;
             });
-        }
-
-
-        function filterAndSortBooks(shouldRender = true) {
-            const searchTerm = document.getElementById('search-input')?.value.toLowerCase().trim() || '';
-            const normalizedSearchTerm = removeDiacritics(searchTerm); 
-
-            const category = document.getElementById('category-filter')?.value || 'all';
-            
-            const sortBy = document.getElementById('sort-order')?.value || 'default'; 
-
-            // Filtra apenas os livros da categoria 'Catálogo Completo' (IDs 1 a 10)
-            const baseBooks = bookData.filter(book => book.id >= 1 && book.id <= 10);
-            
-            const filtered = baseBooks.filter(book => {
-                const normalizedTitle = removeDiacritics(book.title.toLowerCase());
-                const normalizedAuthor = removeDiacritics(book.author.toLowerCase());
-                
-                const matchesSearch = normalizedSearchTerm === '' ||
-                                      normalizedTitle.includes(normalizedSearchTerm) || 
-                                      normalizedAuthor.includes(normalizedSearchTerm);
-                
-                const matchesCategory = category === 'all' || book.category === category;
-
-                return matchesSearch && matchesCategory;
+            const sorted = filtered.sort((a, b) => {
+                if (sortBy === 'az') return a.title.localeCompare(b.title);
+                if (sortBy === 'za') return b.title.localeCompare(a.title);
+                if (sortBy === 'price-asc') return a.price - b.price;
+                if (sortBy === 'price-desc') return b.price - a.price;
+                return 0;
             });
-            
-            const sortedBooks = sortBooks([...filtered], sortBy);
-            
-            if (shouldRender) {
-                renderBooks(sortedBooks);
-            }
-            
-            return sortedBooks;
+            renderBooks(sorted);
         }
         
         function clearFiltersAndSort() {
-            const searchInput = document.getElementById('search-input');
-            const categoryFilter = document.getElementById('category-filter');
-            const sortOrder = document.getElementById('sort-order');
-            
-            if (searchInput) searchInput.value = '';
-            if (categoryFilter) categoryFilter.value = 'all';
-            if (sortOrder) sortOrder.value = 'default';
-            
+            document.getElementById('search-input').value = '';
+            document.getElementById('category-filter').value = 'all';
+            document.getElementById('sort-order').value = 'default';
             filterAndSortBooks();
         }
 
         function renderBooks(books) {
             const container = document.getElementById('book-list-container');
-            const noResults = document.getElementById('no-results');
-            
-            if (!container || !noResults) return;
-
             container.innerHTML = ''; 
+            document.getElementById('no-results').classList.toggle('hidden', books.length > 0);
             
-            if (books.length === 0) {
-                noResults.classList.remove('hidden'); 
-                return;
-            } else {
-                noResults.classList.add('hidden'); 
-            }
-
-            // INFO Icon SVG
             const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
-            const cartIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>`;
+            const cartIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>`;
             const unavailableIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 2 20 20"/><path d="M11 6h7l-1 4h-4"/><path d="M3 6h2l3 12h10l-1-4"/><circle cx="7" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>`; 
 
-
             books.forEach(book => {
-                const priceFormatted = formatPrice(book.price);
-                const isUnavailable = book.price === 0.00;
-
-                let buyButtonHtml;
-
-                if (isUnavailable) {
-                    buyButtonHtml = `
-                        <button 
-                            disabled 
-                            class="flex items-center justify-center space-x-1 bg-gray-300 text-gray-500 text-xs font-bold py-1 px-3 rounded-lg cursor-not-allowed shadow-none w-10 md:w-24 h-8 flex-shrink-0"
-                        >
-                            <span class="flex items-center space-x-1">
-                                ${unavailableIcon}
-                                <span class="hidden md:inline">Indisp.</span>
-                            </span>
-                        </button>
-                    `;
-                } else {
-                    // Botão Comprar: Adicionada classe hidden para a palavra "Comprar" em mobile
-                    buyButtonHtml = `
-                        <button 
-                            class="flex items-center justify-center space-x-1 bg-brand-accent-blue text-white text-sm font-bold py-1 px-3 rounded-lg hover:bg-brand-accent-red transition-all duration-200 shadow-xl hover:scale-[1.05] focus:outline-none focus:ring-2 focus:ring-brand-accent-red w-10 md:w-24 h-8 flex-shrink-0"
-                            onclick="addToCart(${book.id}, '${book.title}')"
-                        >
-                            <span class="flex items-center space-x-1">
-                                ${cartIcon}
-                                <!-- A palavra "Comprar" está agora oculta em mobile -->
-                                <span class="hidden md:inline">Comprar</span>
-                            </span>
-                        </button>
-                    `;
-                }
-                
-                // Trata a chave de favorito. Se o id for 1, usa 'suma-teologica', senão usa o ID numérico.
                 const favKey = book.id === 1 ? 'suma-teologica' : book.id;
                 const isFav = localStorage.getItem(`fav-${favKey}`) === 'true';
-                
-                // Aumentado o tamanho do ícone do coração para 18px (h-4 -> h-5)
-                const favIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`;
                 const favClass = isFav ? 'text-red-500 fill-red-500' : 'text-gray-400 fill-none';
                 
-                // Botão +INFO: A palavra "Info" é agora oculta em mobile
-                const infoButtonHtml = `
-                    <button 
-                        aria-label="Mais Informações" 
-                        class="text-brand-accent-blue transition-all duration-200 text-xs font-bold py-1 px-3 rounded-lg border border-brand-accent-blue hover:border-brand-gold-dark hover:text-brand-gold-dark focus:outline-none focus:ring-2 focus:ring-brand-accent-blue w-10 md:w-20 h-8 flex items-center justify-center space-x-1 bg-white hover:bg-gray-50 shadow-md hover:scale-[1.05] transform flex-shrink-0"
-                        onclick="openInfoModal(${book.id})"
-                    >
-                        <span class="flex items-center space-x-0.5">
-                            ${infoIcon}
-                            <span class="hidden md:inline font-extrabold">Info</span>
-                        </span>
-                    </button>
-                `;
+                const infoBtnHtml = `
+                    <button class="text-brand-accent-blue transition-all duration-200 text-xs font-bold py-1 px-2 md:px-3 rounded-lg border border-brand-accent-blue bg-white hover:bg-gray-50 flex items-center justify-center space-x-1 h-8 min-w-[32px]" onclick="openInfoModal(${book.id}); event.stopPropagation();">
+                        ${infoIcon}
+                        <span class="hidden md:inline">Info</span>
+                    </button>`;
                 
-                const favButtonHtml = `
-                    <button 
-                        aria-label="Adicionar aos Favoritos" 
-                        class="${favClass} hover:text-red-500 transition-colors p-1 rounded-full hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 flex-shrink-0 w-8 h-8 flex items-center justify-center"
-                        onclick="toggleFavorite('${favKey}', '${book.title}')"
-                        id="fav-btn-${book.id}"
-                    >
-                        ${favIcon}
-                    </button>
-                `;
+                let buyBtnHtml = book.price === 0 ? `
+                    <button disabled class="flex items-center justify-center space-x-1 bg-gray-300 text-gray-500 text-xs font-bold py-1 px-2 md:px-3 rounded-lg cursor-not-allowed h-8 min-w-[32px]">
+                        ${unavailableIcon}
+                        <span class="hidden md:inline">Indisp.</span>
+                    </button>` : `
+                    <button class="bg-brand-accent-blue text-white py-1 px-2 md:px-3 rounded-lg hover:bg-brand-accent-red flex items-center justify-center space-x-1 h-8 min-w-[32px] transition-all" onclick="addToCart(${book.id}, '${book.title}'); event.stopPropagation();">
+                        ${cartIcon}
+                        <span class="hidden md:inline">Comprar</span>
+                    </button>`;
 
+                const favBtnHtml = `
+                    <button onclick="toggleFavorite('${favKey}', '${book.title}'); event.stopPropagation();" class="${favClass} hover:text-red-500 transition-colors p-1 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                    </button>`;
 
-                const cardHtml = `
-                    <div class="text-center group book-shadow bg-white rounded-xl transition-all duration-300 hover:shadow-xl p-4 flex flex-col justify-between">
-                        <!-- Link principal: ALTERADO PARA ABRIR O MODAL -->
-                        <div class="flex-grow block cursor-pointer" onclick="openInfoModal(${book.id})">
-                            <img 
-                                src="${book.image}" 
-                                alt="Capa do livro ${book.title}" 
-                                class="mx-auto w-32 h-48 object-contain mb-3 rounded-sm"
-                                onerror="this.onerror=null;this.src='https://placehold.co/128x192/002147/cfaf5c?text=JERÓNIMO';"
-                            />
-                            <h4 class="font-serif text-lg text-gray-900 group-hover:text-brand-accent-red transition-colors duration-200 mt-2">${book.title}</h4>
-                            <p class="text-xs text-gray-500 italic font-medium">${book.author}</p>
-                            <!-- Preço mais proeminente - Aplicado font-classic (Crimson Text) -->
-                            <span class="text-xl font-classic font-extrabold text-brand-accent-red mt-2 block">${priceFormatted}</span>
+                container.innerHTML += `
+                    <div class="text-center group book-shadow bg-white rounded-xl p-4 flex flex-col justify-between cursor-pointer" onclick="openInfoModal(${book.id})">
+                        <div class="flex-grow">
+                            <img src="${book.image}" class="mx-auto w-32 h-48 object-contain mb-3" onerror="this.onerror=null;this.src='https://placehold.co/128x192/002147/cfaf5c?text=JERÓNIMO';" />
+                            <h4 class="font-serif text-lg group-hover:text-brand-accent-red transition-colors duration-200 mt-2">${book.title}</h4>
+                            <p class="text-xs text-gray-500 italic">${book.author}</p>
+                            <span class="text-xl font-classic font-extrabold text-brand-accent-red mt-2 block">${formatPrice(book.price)}</span>
                         </div>
-                        
-                        <!-- Secção de Ação (Favorito, +Info e Comprar) -->
-                        <div class="flex items-center justify-between mt-4 border-t pt-3 border-gray-100 space-x-1">
-                            
-                            <!-- Botão de Favorito (Fica na extrema esquerda) -->
-                            <div class="flex-shrink-0">
-                                ${favButtonHtml}
-                            </div>
-                            
-                            <!-- Botões +Info e Comprar (Ficam à direita) -->
-                            <div class="flex space-x-1 items-center flex-shrink-0">
-                                <!-- Botão +Info -->
-                                ${infoButtonHtml}
-                                <!-- Botão de Comprar/Indisponível (Variável) -->
-                                ${buyButtonHtml}
-                            </div>
+                        <div class="flex items-center justify-center mt-4 border-t pt-3 space-x-2 md:space-x-3">
+                            ${favBtnHtml}
+                            ${infoBtnHtml}
+                            ${buyBtnHtml}
                         </div>
-                    </div>
-                `;
-                container.innerHTML += cardHtml;
+                    </div>`;
             });
         }
         
-        // --- Funções de Navegação e Estado ---
-
         function toggleFavorite(bookIdOrKey, bookTitle, isModalRemoval = false) {
-            // Obtém a chave real (ID numérico ou 'suma-teologica')
-            const key = bookIdOrKey === 1 ? 'fav-suma-teologica' : `fav-${bookIdOrKey}`;
+            const key = `fav-${bookIdOrKey}`;
             const isFavorite = localStorage.getItem(key) === 'true';
-
-            if (isFavorite) {
-                localStorage.removeItem(key);
-                showCustomModal("Removido", `O livro "${bookTitle}" foi removido dos seus Favoritos.`);
-                
-                // Se for remoção do modal, re-renderiza a lista do modal E a lista de produtos
-                if (isModalRemoval) {
-                    renderFavoritesList();
-                }
-            } else {
-                localStorage.setItem(key, 'true');
-                showCustomModal("Adicionado aos Favoritos", `O livro "${bookTitle}" está agora nos seus Favoritos!`);
+            if (isFavorite) { 
+                localStorage.removeItem(key); 
+                showCustomModal("Removido", `O livro "${bookTitle}" foi removido dos seus Favoritos.`); 
+            } 
+            else { 
+                localStorage.setItem(key, 'true'); 
+                showCustomModal("Adicionado aos Favoritos", `O livro "${bookTitle}" está agora nos seus Favoritos!`); 
             }
-            
-            updateCartUI(); // Atualiza contadores (incluindo favoritos)
-            // Força a re-renderização da lista de produtos para repintar o coração
-            renderBooks(filterAndSortBooks(false)); 
+            if (isModalRemoval) renderFavoritesList();
+            updateCartUI();
+            filterAndSortBooks();
         }
         
-        // openFavorites já implementado acima
+        function openCart() { window.location.href = 'checkout.html'; }
 
-        function openCart() {
-            // Redireciona diretamente para o checkout
-            window.location.href = 'checkout.html';
-        }
-
-        // Função para atualizar o link do utilizador no cabeçalho
         function renderUserNav() {
-            const USER_STORAGE_KEY = 'currentUser';
-            const userNavElement = document.getElementById('user-nav-link');
+            const userNav = document.getElementById('user-nav-link');
             const user = JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || 'null');
-            
             if (user && user.isLoggedIn) {
-                // Se estiver logado, mostra "Olá, [Nome]!"
-                const firstName = user.name ? user.name.split(' ')[0] : 'Utilizador';
-                
-                userNavElement.href = 'login.html'; 
-                userNavElement.classList.remove('pl-4', 'text-gray-700'); 
-                userNavElement.classList.add('font-bold', 'text-brand-accent-red');
-                userNavElement.innerHTML = `<span class="font-bold hover:text-red-900 transition-colors">Olá, ${firstName}!</span>`;
+                const name = user.name ? user.name.split(' ')[0] : 'Utilizador';
+                userNav.innerHTML = `<span class="font-bold text-brand-accent-red">Olá, ${name}!</span>`;
             } else {
-                // Se não estiver logado, mostra o ícone de conta
-                userNavElement.href = 'login.html';
-                userNavElement.classList.add('pl-4', 'text-gray-700');
-                userNavElement.classList.remove('font-bold', 'text-brand-accent-red');
-                userNavElement.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                    </svg>
-                `;
-            }
-        }
-        
-        function updateFavoritesCount() {
-            let count = 0;
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key && key.startsWith('fav-') && localStorage.getItem(key) === 'true') {
-                    count++;
-                }
-            }
-            
-            const favCount = document.getElementById('fav-count');
-            const favCountMobile = document.getElementById('fav-count-mobile');
-            
-            if (favCount) {
-                favCount.textContent = count;
-                favCount.classList.toggle('opacity-0', count === 0);
-                favCount.classList.toggle('scale-0', count === 0);
-            }
-            if (favCountMobile) {
-                favCountMobile.textContent = count;
-                favCountMobile.classList.toggle('opacity-0', count === 0);
-                favCountMobile.classList.toggle('scale-0', count === 0);
+                userNav.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
             }
         }
         
         function updateCartUI() {
-            // Assume que estamos a usar 'cartItems' para consistência do Checkout
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]'); 
-            const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-            
+            const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
             document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
-                el.textContent = totalQuantity;
-                el.classList.toggle('opacity-0', totalQuantity === 0);
-                el.classList.toggle('scale-0', totalQuantity === 0);
+                el.textContent = total;
+                el.classList.toggle('opacity-0', total === 0);
+                el.classList.toggle('scale-0', total === 0);
             });
-            
-            updateFavoritesCount();
-            renderUserNav(); // Chamada adicionada para atualizar o nome do utilizador
+            let favCount = 0;
+            for (let i = 0; i < localStorage.length; i++) { 
+                if (localStorage.key(i).startsWith('fav-') && localStorage.getItem(localStorage.key(i)) === 'true') favCount++; 
+            }
+            document.querySelectorAll('#fav-count, #fav-count-mobile').forEach(el => {
+                el.textContent = favCount;
+                el.classList.toggle('opacity-0', favCount === 0);
+                el.classList.toggle('scale-0', favCount === 0);
+            });
+            renderUserNav();
         }
 
-        function toggleMenu() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        }
+        function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
         document.getElementById('menu-button').addEventListener('click', toggleMenu);
-        
-        function clearFiltersAndSort() {
-            const searchInput = document.getElementById('search-input');
-            const categoryFilter = document.getElementById('category-filter');
-            const sortOrder = document.getElementById('sort-order');
-            
-            if (searchInput) searchInput.value = '';
-            if (categoryFilter) categoryFilter.value = 'all';
-            if (sortOrder) sortOrder.value = 'default';
-            
-            filterAndSortBooks();
-        }
-
-
-        // Inicializar a renderização dos livros e contadores quando a página carregar
-        window.onload = () => {
-            filterAndSortBooks(); // Chama a função que agora filtra e ordena
-            updateCartUI();
-        };
+        window.onload = () => { filterAndSortBooks(); updateCartUI(); };
     </script>
 </body>
 </html>
