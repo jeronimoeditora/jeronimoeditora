@@ -206,7 +206,7 @@
                             onerror="this.onerror=null;this.src='https://placehold.co/300x450/800000/cfaf5c?text=SUMA+TEOLÓGICA';"
                         />
                         
-                        <!-- PONTO 2: Galeria de Miniaturas -->
+                        <!-- Galeria de Miniaturas -->
                         <div class="flex space-x-3 justify-center">
                             <!-- Miniatura 1 (Capa) -->
                             <img 
@@ -238,7 +238,7 @@
                     <!-- Coluna dos Detalhes (Colunas 3, 4 e 5) -->
                     <div class="md:col-span-3">
 
-                        <!-- 2. DISPONIBILIDADE: MAIS CLÁSSICO E APELATIVO -->
+                        <!-- DISPONIBILIDADE -->
                         <div class="mb-3 text-sm font-semibold text-green-700 tracking-wide border-b border-green-100 pb-2">
                              Em Stock (2 unidades)
                         </div>
@@ -246,10 +246,9 @@
                         <h1 class="font-serif text-4xl lg:text-5xl text-gray-900 mb-2 leading-tight">Suma Teológica</h1>
                         <h2 class="font-serif text-2xl text-gray-500 italic mb-4 border-b border-gray-200 pb-2">São Tomás de Aquino</h2>
                         
-                        <!-- Classificação Média Geral (Overall Rating) - CLASSIFICAÇÃO 4.9 -->
+                        <!-- Classificação Média Geral -->
                         <div class="flex items-center space-x-2 mb-4">
                             <div class="flex text-2xl">
-                                <!-- 5 Estrelas Douradas (Simulando 4.9) -->
                                 <span class="text-brand-gold">&#9733;</span>
                                 <span class="text-brand-gold">&#9733;</span>
                                 <span class="text-brand-gold">&#9733;</span>
@@ -257,18 +256,16 @@
                                 <span class="text-brand-gold">&#9733;</span>
                             </div>
                             <span class="text-xl font-bold text-gray-800">4.9</span>
-                            <!-- MANTER 12 OPINIÕES -->
-                            <!-- ALTERADO: Adicionado onclick para a função showTabAndScroll, em vez de apenas showTab -->
                             <span class="text-sm text-gray-500 font-medium">| 12 Opiniões</span> 
                             <button onclick="showTabAndScroll('opinioes')" class="text-sm font-medium text-brand-accent-blue hover:text-brand-accent-red underline transition-colors duration-200">Ver todas</button>
                         </div>
                         
-                        <!-- 2. BREVE RESUMO DO LIVRO -->
+                        <!-- BREVE RESUMO DO LIVRO -->
                         <p class="text-lg italic text-gray-700 mb-6 border-b border-gray-200 pb-4">
                             A obra-prima do Aquinate, concebida como um compêndio didático, que sintetiza de forma lógica e exaustiva toda a doutrina teológica e filosófica cristã, abordando Deus, a moralidade e os sacramentos.
                         </p>
                         
-                        <!-- 2. PREÇO MOVIDO PARA CIMA DO CARRINHO (AGORA AQUI) -->
+                        <!-- PREÇO -->
                         <div class="mb-6">
                             <span class="font-classic text-4xl font-extrabold text-brand-accent-red">75,00€</span>
                         </div>
@@ -284,24 +281,21 @@
                                 ADICIONAR AO CARRINHO
                             </button>
 
-                            <!-- PONTO 3: Botão de Favorito (Coração) - Classes ajustadas para ser um quadrado pequeno em mobile e desktop -->
+                            <!-- Botão de Favorito (Coração) -->
                             <button 
                                 id="fav-btn"
                                 onclick="toggleFavorite('suma-teologica', this)"
                                 class="flex-shrink-0 w-14 h-14 p-3 border border-gray-300 bg-white rounded-lg text-gray-400 hover:text-red-500 transition-colors duration-200"
                                 aria-label="Marcar como favorito"
                             >
-                                <!-- SVG do Coração (preenchido se favorito, ou só contorno) -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-transparent fav-icon mx-auto" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                                 </svg>
                             </button>
                         </div>
                         
-                        <!-- Mensagem de Sucesso (invisível por padrão) -->
-                        <div id="cart-message" class="hidden p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg font-medium">
-                            <!-- Mensagem é preenchida pelo JavaScript -->
-                        </div>
+                        <!-- Mensagem de Sucesso -->
+                        <div id="cart-message" class="hidden p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg font-medium"></div>
 
                     </div>
                 </div>
@@ -310,26 +304,21 @@
         </section>
 
         <!-- Secção Detalhes e Opiniões -->
-        <!-- O ID 'info-extra' é o alvo para o scroll -->
         <section id="info-extra" class="w-full bg-brand-bg py-16">
             <div class="max-w-6xl mx-auto px-6">
                 
-                <!-- Navegação por Abas (Tabs) -->
+                <!-- Navegação por Abas -->
                 <div class="border-b border-gray-200">
                     <nav class="flex space-x-4 -mb-px overflow-x-auto pb-1">
-                        <!-- Aba Detalhes Completos -->
                         <button id="tab-detalhes" onclick="showTab('detalhes')" class="tab-button py-2 px-4 text-base font-medium border-b-2 border-brand-accent-blue text-brand-accent-blue transition-colors duration-200 whitespace-nowrap">
                             Detalhes Completos
                         </button>
-                        <!-- PONTO 1: Nova Aba "Sobre o Autor" -->
                         <button id="tab-autor" onclick="showTab('autor')" class="tab-button py-2 px-4 text-base font-medium border-b-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-brand-text transition-colors duration-200 whitespace-nowrap">
                             Sobre o Autor
                         </button>
-                        <!-- Aba Ficha Técnica -->
                         <button id="tab-ficha" onclick="showTab('ficha')" class="tab-button py-2 px-4 text-base font-medium border-b-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-brand-text transition-colors duration-200 whitespace-nowrap">
                             Ficha Técnica
                         </button>
-                        <!-- Aba Opiniões -->
                         <button id="tab-opinioes" onclick="showTab('opinioes')" class="tab-button py-2 px-4 text-base font-medium border-b-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-brand-text transition-colors duration-200 whitespace-nowrap">
                             Opiniões (<span id="review-count">12</span>)
                         </button>
@@ -338,95 +327,54 @@
                 
                 <!-- Conteúdo das Abas -->
                 <div class="mt-8">
-                    
-                    <!-- Conteúdo 1: Detalhes Completos (Visível por Padrão) -->
                     <div id="content-detalhes" class="tab-content text-gray-700 space-y-6 leading-relaxed">
                         <h3 class="font-serif text-2xl text-gray-900 border-l-4 border-brand-accent-red pl-3">Conteúdo e Estrutura</h3>
                         <p>A <strong>Suma Teológica</strong> é o trabalho mais famoso de São Tomás de Aquino, composto entre 1265 e 1274. Concebida como um manual para seminaristas, é uma síntese estruturada e enciclopédica de toda a doutrina cristã, organizada em três partes principais.</p>
-                        
                         <div class="grid md:grid-cols-2 gap-6 pt-4 border-t border-gray-200">
                             <div>
                                 <h4 class="font-bold text-lg text-brand-accent-blue mb-2">Prima Pars (Primeira Parte)</h4>
-                                <p>Foca-se em Deus, na criação, na natureza do homem, e nas provas da existência de Deus. É o alicerce filosófico e teológico da obra.</p>
+                                <p>Foca-se em Deus, na criação, na natureza do homem, e nas provas da existência de Deus.</p>
                             </div>
                             <div>
                                 <h4 class="font-bold text-lg text-brand-accent-blue mb-2">Secunda Pars (Segunda Parte)</h4>
-                                <p>Divide-se em *Prima Secundæ* e *Secunda Secundæ*, tratando da moralidade, dos atos humanos, dos vícios e virtudes, e dos diversos estados de vida.</p>
+                                <p>Tratando da moralidade, dos atos humanos, dos vícios e virtudes, e dos diversos estados de vida.</p>
                             </div>
                             <div>
                                 <h4 class="font-bold text-lg text-brand-accent-blue mb-2">Tertia Pars (Terceira Parte)</h4>
-                                <p>Dedica-se à Cristologia e aos Sacramentos. Foi deixada incompleta com a morte do autor, sendo complementada pelos seus discípulos.</p>
+                                <p>Dedica-se à Cristologia e aos Sacramentos.</p>
                             </div>
                             <div>
                                 <h4 class="font-bold text-lg text-brand-accent-blue mb-2">Metodologia Exclusiva</h4>
-                                <p>Tomás utiliza o método escolástico, apresentando questões, objeções e a sua resposta (*Sed Contra*), seguida da resolução final (*Respondeo*), tornando a leitura um exercício de raciocínio rigoroso.</p>
+                                <p>Tomás utiliza o método escolástico, apresentando questões, objeções e a sua resposta.</p>
                             </div>
                         </div>
-
                     </div>
                     
-                    <!-- PONTO 1: Novo Conteúdo "Sobre o Autor" -->
                     <div id="content-autor" class="tab-content hidden text-gray-700 space-y-6 leading-relaxed">
                         <h3 class="font-serif text-2xl text-gray-900 border-l-4 border-brand-accent-red pl-3">São Tomás de Aquino: O Doutor Angélico</h3>
                         <div class="grid md:grid-cols-3 gap-6">
                             <div class="md:col-span-2 space-y-4">
-                                <p>Nascido por volta de 1225 em Roccasecca, Itália, São Tomás de Aquino é considerado um dos maiores teólogos e filósofos da história da Igreja. Foi o expoente máximo da escolástica medieval.</p>
-                                <p>A sua maior contribuição foi a síntese magistral entre a filosofia aristotélica e a doutrina cristã, demonstrando que a razão e a fé não são inimigas, mas sim duas vias que levam à mesma Verdade.</p>
-                                <p>Além da **Suma Teológica**, obras notáveis incluem a *Summa contra Gentiles* e os *Comentários* sobre Aristóteles. Tomás de Aquino foi canonizado em 1323 e proclamado Doutor da Igreja (Doutor Angélico) em 1567.</p>
+                                <p>Nascido por volta de 1225 em Roccasecca, Itália, São Tomás de Aquino é considerado um dos maiores teólogos e filósofos da história da Igreja.</p>
+                                <p>A sua maior contribuição foi a síntese magistral entre a filosofia aristotélica e a doutrina cristã.</p>
                             </div>
                             <div class="md:col-span-1 flex justify-center items-start">
-                                <!-- Placeholder para uma imagem do Santo/Autor -->
-                                <img 
-                                    src="https://placehold.co/150x200/cfaf5c/800000?text=S.+TOMÁS+AQUINO" 
-                                    alt="Retrato de São Tomás de Aquino" 
-                                    class="rounded-lg shadow-lg border border-gray-200"
-                                />
+                                <img src="https://placehold.co/150x200/cfaf5c/800000?text=S.+TOMÁS+AQUINO" alt="Retrato de São Tomás de Aquino" class="rounded-lg shadow-lg border border-gray-200"/>
                             </div>
                         </div>
                     </div>
 
-                    
-                    <!-- Conteúdo 2: Ficha Técnica -->
                     <div id="content-ficha" class="tab-content hidden">
                         <h3 class="font-serif text-2xl text-gray-900 border-l-4 border-brand-accent-red pl-3 mb-6">Especificações da Edição</h3>
-                        
                         <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
                             <dl class="divide-y divide-gray-200">
-                                
                                 <div class="py-4 grid grid-cols-3 gap-4">
                                     <dt class="font-medium text-gray-500">Autor</dt>
                                     <dd class="col-span-2 text-brand-text font-bold">São Tomás de Aquino</dd>
-                                </div>
-                                
-                                <div class="py-4 grid grid-cols-3 gap-4">
-                                    <dt class="font-medium text-gray-500">Título Original</dt>
-                                    <dd class="col-span-2 text-brand-text italic">Summa Theologiae</dd>
-                                </div>
-                                <div class="py-4 grid grid-cols-3 gap-4">
-                                    <dt class="font-medium text-gray-500">Formato</dt>
-                                    <dd class="col-span-2 text-brand-text">Capa Dura, Luxo</dd>
-                                </div>
-                                <div class="py-4 grid grid-cols-3 gap-4">
-                                    <dt class="font-medium text-gray-500">Número de Páginas</dt>
-                                    <dd class="col-span-2 text-brand-text">4.500 (em 4 volumes)</dd>
-                                </div>
-                                <div class="py-4 grid grid-cols-3 gap-4">
-                                    <dt class="font-medium text-gray-500">Peso (Total)</dt>
-                                    <dd class="col-span-2 text-brand-text">4.8 kg</dd>
                                 </div>
                                 <div class="py-4 grid grid-cols-3 gap-4">
                                     <dt class="font-medium text-gray-500">ISBN</dt>
                                     <dd class="col-span-2 text-brand-text">978-989-123456-7</dd>
                                 </div>
-                                <div class="py-4 grid grid-cols-3 gap-4">
-                                    <dt class="font-medium text-gray-500">Dimensões</dt>
-                                    <dd class="col-span-2 text-brand-text">16 x 24 cm</dd>
-                                </div>
-                                <div class="py-4 grid grid-cols-3 gap-4">
-                                    <dt class="font-medium text-gray-500">Tradução</dt>
-                                    <dd class="col-span-2 text-brand-text">Revista e anotada por P. J. da Conceição</dd>
-                                </div>
-                                
                                 <div class="py-4 grid grid-cols-3 gap-4">
                                     <dt class="font-medium text-gray-500">Edição</dt>
                                     <dd class="col-span-2 text-brand-accent-red font-bold">Jerónimo Editora (1ª Edição de Luxo)</dd>
@@ -435,39 +383,15 @@
                         </div>
                     </div>
                     
-                    <!-- Conteúdo 3: Opiniões dos Leitores (Invisível por Padrão) -->
                     <div id="content-opinioes" class="tab-content hidden">
                         <h3 class="font-serif text-2xl text-gray-900 border-l-4 border-brand-accent-red pl-3 mb-6">Opiniões de Clientes</h3>
-
-                        <!-- Conteúdo das opiniões será gerado dinamicamente aqui (loadReviews) -->
-                        <div id="reviews-list-container" class="space-y-6">
-                            <!-- Reviews iniciais e do localStorage serão injetadas aqui -->
-                        </div>
-
-                        <!-- Botão VER MAIS (APENAS PARA SIMULAÇÃO INICIAL) -->
-                        <div class="flex justify-center mt-6">
-                            <button 
-                                id="load-more-btn"
-                                onclick="loadMoreReviews()"
-                                class="flex items-center space-x-2 text-brand-accent-blue font-medium hover:text-brand-accent-red underline transition-colors duration-200 hidden"
-                            >
-                                <span>Ver Mais Opiniões</span>
-                                <!-- Ícone de Seta para Baixo -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                            </button>
-                        </div>
-
-
-                        <!-- Formulário de Opinião -->
+                        <div id="reviews-list-container" class="space-y-6"></div>
                         <div class="md:col-span-2 mt-12 p-6 bg-white rounded-xl shadow-lg border border-gray-200">
                             <h4 class="font-serif text-xl text-gray-900 mb-4 border-b pb-2 border-gray-100">Deixe a Sua Opinião</h4>
                             <form id="review-form" onsubmit="handleReviewSubmit(event)" class="space-y-4">
-                                
-                                <!-- 1. Classificação por Estrelas Clicáveis -->
                                 <div class="flex flex-col">
                                     <label class="block text-sm font-medium text-gray-700 mb-1">Classificação *</label>
                                     <div id="rating-container" class="flex space-x-1 text-2xl">
-                                        <!-- O valor é armazenado neste input escondido -->
                                         <input type="hidden" id="review-rating-value" name="rating" value="0" required>
                                         <span class="rating-star text-gray-300" data-value="1">&#9733;</span>
                                         <span class="rating-star text-gray-300" data-value="2">&#9733;</span>
@@ -476,55 +400,35 @@
                                         <span class="rating-star text-gray-300" data-value="5">&#9733;</span>
                                     </div>
                                 </div>
-
-                                <!-- 2. Partilhe a Sua Opinião -->
                                 <div>
                                     <label for="review-text" class="block text-sm font-medium text-gray-700">Partilhe a Sua Opinião *</label>
-                                    <textarea id="review-text" name="review" rows="4" required class="mt-1 block w-full rounded-md bg-white border border-gray-300 p-3 focus:border-brand-accent-red focus:ring-brand-accent-red transition-colors duration-150"></textarea>
+                                    <textarea id="review-text" name="review" rows="4" required class="mt-1 block w-full rounded-md bg-white border border-gray-300 p-3"></textarea>
                                 </div>
-
-                                <!-- 3. O seu Nome -->
                                 <div>
                                     <label for="review-name" class="block text-sm font-medium text-gray-700">O seu Nome *</label>
-                                    <input type="text" id="review-name" name="name" required class="mt-1 block w-full rounded-md bg-white border border-gray-300 p-3 focus:border-brand-accent-red focus:ring-brand-accent-red transition-colors duration-150">
+                                    <input type="text" id="review-name" name="name" required class="mt-1 block w-full rounded-md bg-white border border-gray-300 p-3">
                                 </div>
-                                
-                                <button 
-                                    type="submit" 
-                                    id="review-button"
-                                    class="w-full bg-brand-accent-blue text-white py-3 font-bold text-sm tracking-wider shadow-md hover:bg-blue-900 transition-colors duration-200 rounded-lg"
-                                >
-                                    SUBMETER OPINIÃO
-                                </button>
+                                <button type="submit" id="review-button" class="w-full bg-brand-accent-blue text-white py-3 font-bold text-sm tracking-wider shadow-md hover:bg-blue-900 transition-colors duration-200 rounded-lg">SUBMETER OPINIÃO</button>
                                 <p id="review-message" class="text-sm font-semibold hidden pt-2"></p>
                             </form>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Rodapé (Código do index.html copiado para consistência) -->
+    <!-- Rodapé Atualizado (Copiado do index.html) -->
     <footer id="footer" class="bg-gray-900 text-gray-300 py-16 px-6 border-t-8 border-brand-accent-red">
         <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
-
             <div class="col-span-2 md:col-span-1 space-y-4">
                 <div class="flex items-center space-x-2">
-                    <img 
-                        src="Logo J Dourado.png" 
-                        alt="Logótipo Jerónimo Editora" 
-                        class="h-7 w-auto"
-                        onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';"
-                    />
+                    <img src="Logo J Dourado.png" alt="Jerónimo Editora" class="h-7 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
                     <span class="font-serif text-xl font-bold text-white">Jerónimo Editora</span>
                 </div>
                 <p class="text-sm text-gray-400">Edições de rigor dos pilares do pensamento ocidental e da tradição católica.</p>
             </div>
-
             <div class="space-y-4">
                 <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Navegação</h4>
                 <ul class="space-y-2 text-sm">
@@ -536,53 +440,26 @@
                     <li><a href="contato.html" class="hover:text-white transition">Contato</a></li>
                 </ul>
             </div>
-
             <div class="space-y-4">
-                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Sede & Contacto</h4>
+                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Contacto</h4>
                 <ul class="space-y-2 text-sm mb-4">
                     <li><a href="mailto:editorajeronimo@gmail.com" class="hover:text-white transition">editorajeronimo@gmail.com</a></li>
                     <li class="text-gray-400">Braga, Portugal</li>
-                    <li><a href="#" class="hover:text-white transition">Política de Privacidade</a></li>
                 </ul>
-                
-                <!-- Ícones de redes sociais (Facebook e Instagram) -->
                 <div class="flex space-x-4">
-                    <!-- Facebook SVG Icon -->
-                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Facebook Jerónimo Editora">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                    </a>
-                    <!-- Instagram SVG Icon -->
-                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Instagram Jerónimo Editora">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry=\"5\"/><path d=\"M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z\"/><line x1=\"17.5\" x2=\"17.51\" y1=\"6.5\" y2=\"6.5\"/></svg></a>
                 </div>
             </div>
-
             <div class="col-span-2 md:col-span-1 space-y-4">
-                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Subscrever Newsletter</h4>
-                <p class="text-sm text-gray-400">Receba as últimas novidades e ofertas exclusivas diretamente no seu email.</p>
-                
+                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Newsletter</h4>
                 <form onsubmit="handleSubscribe(event)" class="flex flex-col space-y-3">
-                    <input 
-                        type="email" 
-                        id="newsletter-email"
-                        placeholder="O seu email" 
-                        required 
-                        class="p-2 rounded-md bg-gray-800 border border-gray-700 text-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold"
-                    >
-                    <button 
-                        type="submit" 
-                        id="subscribe-button"
-                        class="bg-brand-gold text-brand-accent-blue font-bold py-2 rounded-md shadow-lg hover:bg-yellow-600 transition-colors"
-                    >
-                        SUBSCREVER
-                    </button>
+                    <input type="email" id="newsletter-email" placeholder="O seu email" required class="p-2 rounded-md bg-gray-800 border border-gray-700 text-white focus:border-brand-gold outline-none">
+                    <button type="submit" id="subscribe-button" class="bg-brand-gold text-brand-accent-blue font-bold py-2 rounded-md shadow-lg hover:bg-yellow-600 transition-colors">SUBSCREVER</button>
                     <p id="subscribe-message" class="text-xs text-green-400 font-bold hidden"></p>
                 </form>
             </div>
-
         </div>
-
         <div class="max-w-6xl mx-auto text-center pt-8 mt-10 border-t border-gray-800">
             <p class="text-xs text-gray-500">© 2025 Jerónimo Editora. Todos os direitos reservados.</p>
         </div>
@@ -590,169 +467,33 @@
 
 
     <script>
-        // ID do produto para esta página de detalhes (hardcoded para Suma Teológica)
         const PRODUCT_ID = 1;
         const LOCAL_STORAGE_KEY = `product_reviews_${PRODUCT_ID}`;
         const USER_STORAGE_KEY = 'currentUser';
         
-        // Dados iniciais (mock) de opiniões que serão combinados com o localStorage
         const MOCK_REVIEWS = [
             { id: 1, user: "Miguel A.", rating: 5, comment: "Um trabalho editorial que faz jus à grandeza da obra. Essencial.", date: "05 de Dezembro de 2025", isMock: true },
             { id: 2, user: "Mariana P.", rating: 4, comment: "A tradução é de qualidade. O conteúdo, claro, é insuperável.", date: "28 de Novembro de 2025", isMock: true },
-            { id: 3, user: "João S.", rating: 5, comment: "A melhor edição da Suma que alguma vez vi. A qualidade do papel e da impressão é notável.", date: "12 de Dezembro de 2025", isMock: true },
-            { id: 4, user: "Sofia B.", rating: 5, comment: "Entrega rápida e embalagem segura. O livro superou as expectativas.", date: "01 de Novembro de 2025", isMock: true },
-            { id: 5, user: "Ricardo V.", rating: 5, comment: "A estrutura em capa dura é fundamental para a durabilidade de uma obra desta dimensão.", date: "20 de Dezembro de 2025", isMock: true },
-            { id: 6, user: "Ana F.", rating: 5, comment: "A clareza da tradução é excelente, tornando a leitura deste clássico acessível.", date: "10 de Novembro de 2025", isMock: true },
-            { id: 7, user: "Pedro C.", rating: 4, comment: "Quatro volumes de sabedoria. As notas de rodapé são muito úteis.", date: "22 de Novembro de 2025", isMock: true },
-            { id: 8, user: "Teresa L.", rating: 5, comment: "Compra fantástica. O design da capa é elegante e a Jerónimo Editora não desilude.", date: "03 de Dezembro de 2025", isMock: true },
-            { id: 9, user: "Paulo G.", rating: 5, comment: "Um livro de referência com uma apresentação de luxo. Essencial para a biblioteca.", date: "27 de Dezembro de 2025", isMock: true },
-            { id: 10, user: "Filipa C.", rating: 5, comment: "O método escolástico é desafiante, mas esta edição está muito bem organizada.", date: "08 de Novembro de 2025", isMock: true },
-            { id: 11, user: "Manuel D.", rating: 5, comment: "Chegou em perfeitas condições. A qualidade do produto é superior. Parabéns à editora pelo rigor.", date: "19 de Dezembro de 2025", isMock: true },
-            { id: 12, user: "Helena R.", rating: 5, comment: "Uma obra incontornável. A leitura é fluida e o índice é de grande ajuda.", date: "24 de Novembro de 2025", isMock: true },
+            { id: 3, user: "João S.", rating: 5, comment: "A melhor edição da Suma que alguma vez vi.", date: "12 de Dezembro de 2025", isMock: true }
         ];
         
-        // Dados dos Livros (Array copiado de catalogo-completo.html para suportar a modal de favoritos)
         const bookData = [
-            {
-                id: 1,
-                title: "Suma Teológica",
-                author: "São Tomás de Aquino",
-                price: 75.00, // Preço corrigido para 75.00€
-                category: "Teologia",
-                image: "suma_teologica.png",
-                link: "detalhes.html",
-                rating: 4.9, 
-                summary: "A Suma Teológica é a obra-prima de São Tomás de Aquino, um compêndio sistemático da teologia e filosofia cristã. É uma das obras mais influentes da literatura ocidental e da história da Igreja.",
-            },
-            {
-                id: 2,
-                title: "Jesus e o Jubileu",
-                author: "John S. Bergsma",
-                price: 34.90,
-                category: "Estudos Bíblicos",
-                image: "Bergsma.png",
-                link: "detalhes.html",
-                rating: 4.5,
-                summary: "O livro 'Jesus e o Jubileu' explora a profunda conexão entre o ministério de Jesus e a lei do Jubileu no Antigo Testamento.",
-            },
-            {
-                id: 3,
-                title: "Tu podes entender a Bíblia",
-                author: "Peter Kreeft",
-                price: 24.99,
-                category: "Estudos Bíblicos",
-                image: "Kreeft.png",
-                link: "detalhes.html",
-                rating: 4.9,
-                summary: "Peter Kreeft, de forma concisa e envolvente, desmistifica a Bíblia e guia o leitor a compreender a sua estrutura e mensagem principal.",
-            },
-            {
-                id: 4,
-                title: "Convite aos Salmos",
-                author: "Rolf A. Jacobson & Karl N. Jacobson",
-                price: 28.50,
-                category: "Teologia",
-                image: "Jacobson.png",
-                link: "detalhes.html",
-                rating: 4.2,
-                summary: "Uma introdução acessível e profunda ao livro dos Salmos, explorando os seus géneros literários, contextos históricos e aplicação na vida de oração contemporânea.",
-            },
-            {
-                id: 5,
-                title: "São Francisco de Sales - Doutor da Perfeição",
-                author: "Abbé Jacques Leclercq",
-                price: 28.00,
-                category: "Teologia",
-                image: "Abbe.png",
-                link: "detalhes.html",
-                rating: 4.7,
-                summary: "Uma biografia espiritual de São Francisco de Sales, destacando o seu papel como Doutor da Perfeição, que ensinou que a santidade é acessível a todos.",
-            },
-            {
-                id: 6,
-                title: "As mãos vazias - Mensagem de Santa Teresa do Menino Jesus",
-                author: "Conrad de Meester",
-                price: 28.00,
-                category: "Teologia",
-                image: "Teresinha.png",
-                link: "detalhes.html",
-                rating: 4.6,
-                summary: "Uma análise profunda e tocante da 'pequena via' de Santa Teresinha, focada na sua mensagem de confiança total e abandono em Deus.",
-            },
-            // Produtos Indisponíveis (para teste)
-            {
-                id: 7,
-                title: "A definir (Platão)",
-                author: "A definir",
-                price: 0.00,
-                category: "Filosofia",
-                image: "https://placehold.co/128x192/D1D5DB/9CA3AF?text=INDISPON%C3%8DVEL",
-                link: "detalhes.html",
-                rating: 0,
-                summary: "Este é um espaço reservado para uma futura edição de obras selecionadas de Platão.",
-            },
-            {
-                id: 8,
-                title: "A definir (Aristóteles)",
-                author: "A definir",
-                price: 0.00,
-                category: "Filosofia",
-                image: "https://placehold.co/128x192/D1D5DB/9CA3AF?text=INDISPON%C3%8DVEL",
-                link: "detalhes.html",
-                rating: 0,
-                summary: "Este é um espaço reservado para uma futura edição de obras de Aristóteles.",
-            },
-            {
-                id: 101, // ID de Infantil 1
-                title: "O Meu Primeiro Livro da Bíblia",
-                author: "Equipa Jerónimo Kids",
-                price: 12.50,
-                category: "0-3",
-                image: "https://placehold.co/128x192/FFD700/800000?text=BÍBLIA+KIDS",
-                link: "infantil.html",
-                rating: 4.9,
-                summary: "Livro cartonado resistente, com ilustrações coloridas e histórias curtas de Gênesis e Evangelhos.",
-            },
-            {
-                id: 203, // ID de Produtos 1
-                title: "Terço de Madeira Nobre",
-                author: "Devoção",
-                price: 25.00,
-                category: "Outros",
-                image: "https://placehold.co/128x192/A52A2A/FFFFFF?text=TERÇO",
-                link: "produtos.html",
-                rating: 4.9,
-                summary: "Terço artesanal feito em madeira escura com medalha de São Bento.",
-            }
-            // Adicionar mais dados se necessário para completar a lista
+            { id: 1, title: "Suma Teológica", author: "São Tomás de Aquino", price: 75.00, category: "Teologia", image: "suma_teologica.png", link: "detalhes.html", rating: 4.9, summary: "A Suma Teológica é a obra-prima de São Tomás de Aquino." }
         ];
         
         function getBookDataById(id) {
-            // Suporta IDs numéricos e a chave 'suma-teologica' para consistência
             const idNum = parseInt(id);
-            if (idNum === 1 || id === 'suma-teologica') {
-                 return bookData.find(book => book.id === 1) || null;
-            }
-            return bookData.find(book => book.id === idNum) || null;
+            if (idNum === 1 || id === 'suma-teologica') return bookData.find(book => book.id === 1);
+            return null;
         }
 
-        // --- FUNÇÕES DE UTILIDADE ---
+        function formatPrice(price) { return `€ ${price.toFixed(2).replace('.', ',')}`; }
         
-        function formatPrice(price) {
-            return `€ ${price.toFixed(2).replace('.', ',')}`;
-        }
-        
-        // Função para mostrar modal (substitui alert())
         function showCustomAlert(title, message, isError = false) {
              const modal = document.createElement('div');
              modal.className = 'fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center';
-             const iconSvg = isError 
-                 ? '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 22h16a2 2 0 0 0 1.73-4Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>'
-                 : '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>';
-
-            modal.innerHTML = `
+             modal.innerHTML = `
                 <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full mx-4 text-center">
-                    ${iconSvg}
                     <h4 class="text-xl font-bold text-brand-accent-blue mb-3">${title}</h4>
                     <p class="text-gray-700 mb-4">${message}</p>
                     <button onclick="this.parentNode.parentNode.remove()" class="bg-brand-accent-red text-white py-2 px-6 rounded-lg hover:bg-red-900 transition-colors font-semibold">OK</button>
@@ -761,726 +502,124 @@
             document.body.appendChild(modal);
         }
         
-        // Função para simular o ícone de estrelas
         function renderStars(rating) {
             const fullStar = '<span class="text-brand-gold">&#9733;</span>';
             const emptyStar = '<span class="text-gray-300">&#9733;</span>';
             return fullStar.repeat(rating) + emptyStar.repeat(5 - rating);
         }
 
-        // --- Lógica do Modal de Favoritos ---
-        
+        function openFavorites() { document.getElementById('favorites-modal').classList.remove('hidden'); renderFavoritesList(); }
+        function closeFavorites() { document.getElementById('favorites-modal').classList.add('hidden'); }
+
         function renderFavoritesList() {
             const favListContainer = document.getElementById('favorites-list');
-            const favMsg = document.getElementById('empty-favorites-message');
-            
-            let favItemsHtml = '';
-            let favCount = 0;
-
-            // Coleta todos os itens favoritos do localStorage
             const favoriteKeys = Object.keys(localStorage).filter(key => key.startsWith('fav-') && localStorage.getItem(key) === 'true');
-
+            let html = '';
             favoriteKeys.forEach(key => {
-                const simulatedId = key.replace('fav-', '');
-                const bookId = simulatedId === 'suma-teologica' ? 1 : parseInt(simulatedId); 
-                const book = getBookDataById(bookId);
-                
-                // Determina a chave correta para o botão de remoção
-                const removalKey = (bookId === 1 && simulatedId === 'suma-teologica') ? 'suma-teologica' : bookId; 
-
+                const id = key.replace('fav-', '');
+                const book = getBookDataById(id);
                 if (book) {
-                    favCount++;
-                    const priceFormatted = formatPrice(book.price);
-                    
-                    // O link do favorito usa um âncora com o URL do livro
-                    favItemsHtml += `
-                        <div class="flex items-center space-x-4 p-3 border border-gray-100 rounded-lg bg-gray-50 shadow-inner">
-                            <a href="${book.link}" class="flex items-center space-x-4 flex-grow hover:bg-gray-100 p-2 rounded-lg transition-colors">
-                                <img 
-                                    src="${book.image}" 
-                                    alt="Capa do Livro ${book.title}" 
-                                    class="w-16 h-24 object-contain rounded-sm flex-shrink-0" 
-                                    onerror="this.onerror=null;this.src='https://placehold.co/64x96/002147/cfaf5c?text=CAPA';"
-                                />
-                                <div class="flex-grow">
-                                    <h4 class="font-serif font-bold text-brand-text">${book.title}</h4>
-                                    <p class="text-sm text-gray-500 italic mb-1">${book.author}</p>
-                                    <p class="font-classic font-extrabold text-lg text-brand-accent-red">${priceFormatted}</p>
-                                </div>
-                            </a>
-                            
-                            <!-- Botão de Remoção Rápida: Usa a chave correta (simulatedId ou bookId) -->
-                            <button 
-                                onclick="toggleFavorite('${removalKey}', true)"
-                                class="p-2 text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
-                                aria-label="Remover dos favoritos"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                            </button>
-                        </div>
-                    `;
+                    html += `<div class="flex items-center space-x-4 p-3 border rounded-lg bg-gray-50">
+                        <img src="${book.image}" class="w-16 h-24 object-contain" />
+                        <div><h4 class="font-bold">${book.title}</h4><p class="text-brand-accent-red font-bold">${formatPrice(book.price)}</p></div>
+                    </div>`;
                 }
             });
-            
-            favListContainer.innerHTML = favItemsHtml;
-            // Se não houver favoritos, mostra a mensagem de vazio.
-            favMsg.classList.toggle('hidden', favCount > 0);
-        }
-        
-        function openFavorites() {
-            renderFavoritesList();
-            document.getElementById('favorites-modal').classList.remove('hidden');
+            favListContainer.innerHTML = html || '<p class="text-center italic">Sem favoritos.</p>';
         }
 
-        function closeFavorites() {
-            document.getElementById('favorites-modal').classList.add('hidden');
-        }
-
-        // --- Fim das Funções de Modal de Favoritos ---
-
-
-        function closeCartConfirmation() {
-            document.getElementById('add-to-cart-modal').classList.add('hidden');
-        }
-        
-        function showCartConfirmationModal(book) {
-            const priceFormatted = formatPrice(book.price);
-            
-            const html = `
-                <img src="${book.image}" alt="${book.title}" class="w-16 h-24 object-contain rounded-sm flex-shrink-0" onerror="this.onerror=null;this.src='https://placehold.co/64x96/002147/cfaf5c?text=J';" />
-                <div class="flex-grow">
-                    <h4 class="font-serif font-bold text-brand-text">${book.title}</h4>
-                    <p class="text-sm text-gray-500 italic mb-1">${book.author}</p>
-                    <p class="font-classic font-extrabold text-xl text-brand-accent-red">${priceFormatted}</p>
-                </div>
-            `;
-            
-            document.getElementById('cart-confirmation-details').innerHTML = html;
-            document.getElementById('add-to-cart-modal').classList.remove('hidden');
-        }
-        
         function addToCart(productName, quantity) {
-            const messageBox = document.getElementById('cart-message');
-            
-            // Simulação de adicionar ao carrinho no localStorage
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const book = getBookDataById(PRODUCT_ID);
-            
-            if (book) {
-                 const existingItemIndex = cartItems.findIndex(item => item.id === PRODUCT_ID);
-
-                 if (existingItemIndex > -1) {
-                     cartItems[existingItemIndex].quantity += quantity;
-                 } else {
-                     cartItems.push({ 
-                         id: PRODUCT_ID, 
-                         title: productName, 
-                         price: book.price, 
-                         quantity: quantity 
-                     });
-                 }
-                 localStorage.setItem('cartItems', JSON.stringify(cartItems));
-            } else {
-                showCustomAlert("Erro", "Detalhes do produto indisponíveis para adicionar ao carrinho.", true);
-                return;
-            }
-            
-            updateUI(); // Atualiza contadores
-            
-            messageBox.textContent = `"${productName}" adicionado ao carrinho!`;
-            messageBox.classList.remove('hidden');
-            messageBox.classList.remove('bg-red-100', 'border-red-400', 'text-red-700');
-            messageBox.classList.add('bg-green-100', 'border-green-400', 'text-green-700');
-
-
-            setTimeout(() => {
-                messageBox.classList.add('hidden');
-            }, 3000);
-        }
-        
-        // Função modalAddToCart para adicionar item do modal ao carrinho
-        function modalAddToCart() {
-             const bookId = parseInt(document.getElementById('info-modal').dataset.activeBookId);
-             const book = bookData.find(b => b.id === bookId);
-             
-             if (book && book.price > 0) {
-                 addToCart(bookId, book.title);
-                 closeInfoModal(); // Fecha o modal de info
-             } else if (book && book.price === 0) {
-                 showCustomAlert("Produto Indisponível", `O livro "${book.title}" está indisponível para compra.`);
-             }
-        }
-        
-        // Função para ir para o checkout a partir do modal
-        function checkoutFromModal() {
-            closeCartConfirmation();
-            window.location.href = 'checkout.html';
+            cartItems.push({ id: PRODUCT_ID, title: productName, price: 75.0, quantity: quantity });
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateUI();
+            const msg = document.getElementById('cart-message');
+            msg.textContent = `"${productName}" adicionado ao carrinho!`;
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 3000);
         }
 
-
-        // --- Funções do Modal +Info (Sucinto) ---
-        
-        /**
-         * Altera a imagem principal na modal de detalhes.
-         * @param {string} imageSrc - O novo URL da imagem.
-         * @param {HTMLElement} thumbnailElement - O elemento miniatura clicado.
-         */
-        function changeMainImage(imageSrc, thumbnailElement) {
-            document.getElementById('main-image').src = imageSrc;
-            
-            document.querySelectorAll('.flex-col .space-x-3 img').forEach(img => {
-                img.classList.remove('thumbnail-selected');
-            });
-            
-            thumbnailElement.classList.add('thumbnail-selected');
-        }
-
-
-        function openInfoModal(bookId) {
-            const book = bookData.find(b => b.id === bookId);
-            if (!book) return;
-            
-            const priceFormatted = formatPrice(book.price);
-            
-            // 1. Atualiza elementos fixos da modal
-            document.getElementById('info-modal-title').textContent = book.title;
-            
-            const imgElement = document.getElementById('info-modal-image');
-            imgElement.src = book.image;
-            imgElement.alt = `Capa do Livro ${book.title}`;
-            
-            document.getElementById('info-modal-summary').textContent = book.summary;
-            document.getElementById('info-modal-price').textContent = priceFormatted;
-            
-            // Ficha Técnica Rápida (Consolidada e Reordenada)
-            
-            // 1. Autor
-            document.getElementById('info-modal-author').textContent = `Autor: ${book.author}`;
-            // 2. ISBN
-            document.getElementById('info-modal-isbn').textContent = `ISBN: ${book.techDetails.isbn || 'N/A'}`;
-            // 3. Páginas
-            document.getElementById('info-modal-pages').textContent = `Páginas: ${book.techDetails.pages > 0 ? book.techDetails.pages : 'N/A'}`;
-            // 4. Formato (Binding)
-            document.getElementById('info-modal-format').textContent = `Formato: ${book.techDetails.binding || 'N/A'}`;
-            // 5. Peso
-            document.getElementById('info-modal-weight').textContent = `Peso: ${book.techDetails.weight || 'N/A'}`;
-            // 6. Dimensões
-            document.getElementById('info-modal-dimensions').textContent = `Dimensões: ${book.techDetails.dimensions || 'N/A'}`;
-            
-            // 2. Cria e preenche a Mini Galeria
-            const galleryContainer = document.getElementById('info-modal-gallery');
-            galleryContainer.innerHTML = ''; // Limpa o conteúdo anterior
-            
-            let galleryHtml = '';
-            
-            book.gallery.forEach((imageSrc, index) => {
-                // Determine se esta é a imagem principal para aplicar a seleção inicial
-                const isSelected = index === 0;
-                const selectedClass = isSelected ? 'thumbnail-selected' : '';
-                
-                // Note: o onerror garante que mesmo que as imagens 'Logo J.png' não existam, aparece um placeholder
-                const placeholderText = imageSrc.includes('Logo') ? 'LOGO' : 'CAPA';
-
-                galleryHtml += `
-                    <img 
-                        src="${getBookImageUrl(imageSrc)}" 
-                        alt="Imagem ${index + 1}" 
-                        class="w-12 h-16 object-contain rounded-md cursor-pointer border-2 border-transparent hover:border-brand-gold transition-all ${selectedClass}"
-                        onclick="changeMainImage('${imageSrc}', this)"
-                        onerror="this.onerror=null;this.src='https://placehold.co/48x64/002147/cfaf5c?text=${placeholderText}';"
-                    />
-                `;
-            });
-
-            galleryContainer.innerHTML = galleryHtml;
-            
-            // 3. Define a ação de "Adicionar ao Carrinho"
-            const addButton = document.getElementById('info-modal-add-to-cart');
-            const isUnavailable = book.price === 0;
-            
-            addButton.disabled = isUnavailable;
-            addButton.textContent = isUnavailable ? 'INDISPONÍVEL' : 'ADICIONAR AO CARRINHO';
-            addButton.classList.toggle('bg-gray-300', isUnavailable);
-            addButton.classList.toggle('bg-brand-accent-red', !isUnavailable);
-
-            // 4. Mostra a modal
-            document.getElementById('info-modal').dataset.activeBookId = bookId;
-            document.getElementById('info-modal').classList.remove('hidden');
-        }
-
-        function closeInfoModal() {
-            document.getElementById('info-modal').classList.add('hidden');
-        }
-        
-
-        // --- Funções de Catálogo e Filtragem ---
-
-        function removeDiacritics(text) {
-            return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        }
-
-        function sortBooks(books, sortBy) {
-            if (sortBy === 'default') {
-                return books; 
-            }
-
-            return books.sort((a, b) => {
-                switch (sortBy) {
-                    case 'az':
-                        return a.title.localeCompare(b.title);
-                    case 'za':
-                        return b.title.localeCompare(a.title);
-                    case 'price-asc':
-                        return a.price - b.price;
-                    case 'price-desc':
-                        return b.price - a.price;
-                    case 'rating-desc':
-                        return b.rating - a.rating; 
-                    default:
-                        return 0;
-                }
-            });
-        }
-
-
-        function filterAndSortBooks(shouldRender = true) {
-            const searchTerm = document.getElementById('search-input')?.value.toLowerCase().trim() || '';
-            const normalizedSearchTerm = removeDiacritics(searchTerm); 
-
-            const category = document.getElementById('category-filter')?.value || 'all';
-            
-            const sortBy = document.getElementById('sort-order')?.value || 'default'; 
-
-            // Filtra apenas os livros da categoria 'Catálogo Completo' (IDs 1 a 10)
-            const baseBooks = bookData.filter(book => book.id >= 1 && book.id <= 10);
-            
-            const filtered = baseBooks.filter(book => {
-                const normalizedTitle = removeDiacritics(book.title.toLowerCase());
-                const normalizedAuthor = removeDiacritics(book.author.toLowerCase());
-                
-                const matchesSearch = normalizedSearchTerm === '' ||
-                                      normalizedTitle.includes(normalizedSearchTerm) || 
-                                      normalizedAuthor.includes(normalizedSearchTerm);
-                
-                const matchesCategory = category === 'all' || book.category === category;
-
-                return matchesSearch && matchesCategory;
-            });
-            
-            const sortedBooks = sortBooks([...filtered], sortBy);
-            
-            if (shouldRender) {
-                renderBooks(sortedBooks);
-            }
-            
-            return sortedBooks;
-        }
-        
-        function clearFiltersAndSort() {
-            const searchInput = document.getElementById('search-input');
-            const categoryFilter = document.getElementById('category-filter');
-            const sortOrder = document.getElementById('sort-order');
-            
-            if (searchInput) searchInput.value = '';
-            if (categoryFilter) categoryFilter.value = 'all';
-            if (sortOrder) sortOrder.value = 'default';
-            
-            filterAndSortBooks();
-        }
-
-        function renderBooks(books) {
-            const container = document.getElementById('book-list-container');
-            const noResults = document.getElementById('no-results');
-            
-            if (!container || !noResults) return;
-
-            container.innerHTML = ''; 
-            
-            if (books.length === 0) {
-                noResults.classList.remove('hidden'); 
-                return;
-            } else {
-                noResults.classList.add('hidden'); 
-            }
-
-            // INFO Icon SVG
-            const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
-            const cartIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>`;
-            const unavailableIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 2 20 20"/><path d="M11 6h7l-1 4h-4"/><path d="M3 6h2l3 12h10l-1-4"/><circle cx="7" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>`; 
-
-
-            books.forEach(book => {
-                const priceFormatted = formatPrice(book.price);
-                const isUnavailable = book.price === 0.00;
-
-                let buyButtonHtml;
-
-                if (isUnavailable) {
-                    buyButtonHtml = `
-                        <button 
-                            disabled 
-                            class="flex items-center justify-center space-x-1 bg-gray-300 text-gray-500 text-xs font-bold py-1 px-3 rounded-lg cursor-not-allowed shadow-none w-20 md:w-24 h-8 flex-shrink-0"
-                        >
-                            <span class="flex items-center space-x-1">
-                                ${unavailableIcon}
-                                <span>Indisp.</span>
-                            </span>
-                        </button>
-                    `;
-                } else {
-                    // Botão Comprar: Cores alteradas para: Azul Marinho -> Bordô/Vinho
-                    buyButtonHtml = `
-                        <button 
-                            class="flex items-center justify-center space-x-1 bg-brand-accent-blue text-white text-sm font-bold py-1 px-3 rounded-lg hover:bg-brand-accent-red transition-all duration-200 shadow-xl hover:scale-[1.05] focus:outline-none focus:ring-2 focus:ring-brand-accent-red w-20 md:w-24 h-8 flex-shrink-0"
-                            onclick="addToCart(${book.id}, '${book.title}')"
-                        >
-                            <span class="flex items-center space-x-1">
-                                ${cartIcon}
-                                <span>Comprar</span>
-                            </span>
-                        </button>
-                    `;
-                }
-                
-                // Trata a chave de favorito. Se o id for 1, usa 'suma-teologica', senão usa o ID numérico.
-                const favKey = book.id === 1 ? 'suma-teologica' : book.id;
-                const isFav = localStorage.getItem(`fav-${favKey}`) === 'true';
-                
-                // Aumentado o tamanho do ícone do coração para 18px (h-4 -> h-5)
-                const favIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`;
-                const favClass = isFav ? 'text-red-500 fill-red-500' : 'text-gray-400 fill-none';
-                
-                // Botão +INFO: Cores alteradas para: Azul Marinho -> Dourado Escuro, Texto 'Info'
-                const infoButtonHtml = `
-                    <button 
-                        aria-label="Mais Informações" 
-                        class="text-brand-accent-blue transition-all duration-200 text-xs font-bold py-1 px-3 rounded-lg border border-brand-accent-blue hover:border-brand-gold-dark hover:text-brand-gold-dark focus:outline-none focus:ring-2 focus:ring-brand-accent-blue w-14 md:w-20 h-8 flex items-center justify-center space-x-1 bg-white hover:bg-gray-50 shadow-md hover:scale-[1.05] transform flex-shrink-0"
-                        onclick="openInfoModal(${book.id})"
-                    >
-                        <span class="flex items-center space-x-0.5">
-                            ${infoIcon}
-                            <span class="hidden md:inline font-extrabold">Info</span>
-                        </span>
-                    </button>
-                `;
-                
-                const favButtonHtml = `
-                    <button 
-                        aria-label="Adicionar aos Favoritos" 
-                        class="${favClass} hover:text-red-500 transition-colors p-1 rounded-full hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 flex-shrink-0 w-8 h-8 flex items-center justify-center"
-                        onclick="toggleFavorite('${favKey}', this)"
-                        id="fav-btn-${book.id}"
-                    >
-                        ${favIcon}
-                    </button>
-                `;
-
-
-                const cardHtml = `
-                    <div class="text-center group book-shadow bg-white rounded-xl transition-all duration-300 hover:shadow-xl p-4 flex flex-col justify-between">
-                        <!-- Link principal: ALTERADO PARA ABRIR O MODAL -->
-                        <div class="flex-grow block cursor-pointer" onclick="openInfoModal(${book.id})">
-                            <img 
-                                src="${book.image}" 
-                                alt="Capa do livro ${book.title}" 
-                                class="mx-auto w-32 h-48 object-contain mb-3 rounded-sm"
-                                onerror="this.onerror=null;this.src='https://placehold.co/128x192/002147/cfaf5c?text=JERÓNIMO';"
-                            />
-                            <h4 class="font-serif text-lg text-gray-900 group-hover:text-brand-accent-red transition-colors duration-200 mt-2">${book.title}</h4>
-                            <p class="text-xs text-gray-500 italic font-medium">${book.author}</p>
-                            <!-- Preço mais proeminente - Aplicado font-classic (Crimson Text) -->
-                            <span class="text-xl font-classic font-extrabold text-brand-accent-red mt-2 block">${priceFormatted}</span>
-                        </div>
-                        
-                        <!-- Secção de Ação (Favorito, +Info e Comprar) -->
-                        <div class="flex items-center justify-between mt-4 border-t pt-3 border-gray-100 space-x-1">
-                            
-                            <!-- Botão de Favorito (Fica na extrema esquerda) -->
-                            <div class="flex-shrink-0">
-                                ${favButtonHtml}
-                            </div>
-                            
-                            <!-- Botões +Info e Comprar (Ficam à direita) -->
-                            <div class="flex space-x-1 items-center flex-shrink-0">
-                                <!-- Botão +Info -->
-                                ${infoButtonHtml}
-                                <!-- Botão de Comprar/Indisponível (Variável) -->
-                                ${buyButtonHtml}
-                            </div>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += cardHtml;
-            });
-        }
-        
-        // --- Funções de Navegação e Estado ---
-
-        function toggleFavorite(productId, buttonElement, isModalRemoval = false) {
-            // Se o ID for 1 (Suma Teológica), usamos a chave 'fav-suma-teologica'
-            const key = productId == 1 ? 'fav-suma-teologica' : `fav-${productId}`; 
+        function toggleFavorite(productId, btn) {
+            const key = `fav-${productId}`;
             const isFav = localStorage.getItem(key) === 'true';
-            
-            // Tentativa de obter o título. 
-            let bookTitle = 'Livro';
-            const book = getBookDataById(productId);
-            if(book) {
-                bookTitle = book.title;
-            } else if (productId === 'suma-teologica') {
-                bookTitle = 'Suma Teológica';
-            }
-
-
-            if (isFav) {
-                localStorage.removeItem(key);
-                showCustomAlert("Removido", `O livro "${bookTitle}" foi removido dos seus Favoritos.`);
-                
-                // Atualiza o estado do botão na página atual se for a Suma Teológica
-                const favBtn = document.getElementById('fav-btn');
-                if (productId === 'suma-teologica' && favBtn) {
-                    favBtn.classList.remove('text-red-500');
-                    favBtn.querySelector('.fav-icon').classList.remove('fill-red-500');
-                    favBtn.querySelector('.fav-icon').classList.add('fill-transparent');
-                }
-
-                // Se for remoção do modal, re-renderiza a lista do modal
-                if (isModalRemoval) {
-                    renderFavoritesList();
-                }
-            } else {
-                localStorage.setItem(key, 'true');
-                showCustomAlert("Adicionado aos Favoritos", `O livro "${bookTitle}" está agora nos seus Favoritos!`);
-            }
-            
+            if (isFav) localStorage.removeItem(key); else localStorage.setItem(key, 'true');
             updateUI();
         }
-        
-        // LÓGICA DE CLASSIFICAÇÃO POR ESTRELAS
-        let currentRating = 0;
 
-        function initializeRating() {
-            const stars = document.querySelectorAll('.rating-star');
-            const ratingValueInput = document.getElementById('review-rating-value');
-            
-            stars.forEach(star => {
-                star.addEventListener('mouseover', function() {
-                    highlightStars(this.dataset.value);
-                });
+        function showTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            document.getElementById(`content-${tab}`).classList.remove('hidden');
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('border-brand-accent-blue', 'text-brand-accent-blue'));
+            document.getElementById(`tab-${tab}`).classList.add('border-brand-accent-blue', 'text-brand-accent-blue');
+        }
 
-                star.addEventListener('mouseout', function() {
-                    highlightStars(currentRating);
-                });
+        function showTabAndScroll(tab) { showTab(tab); document.getElementById('info-extra').scrollIntoView({ behavior: 'smooth' }); }
 
-                star.addEventListener('click', function() {
-                    currentRating = parseInt(this.dataset.value);
-                    ratingValueInput.value = currentRating;
-                    highlightStars(currentRating);
-                });
-            });
-            
+        function handleReviewSubmit(e) {
+            e.preventDefault();
+            const rating = document.getElementById('review-rating-value').value;
+            if (rating == 0) return showCustomAlert("Erro", "Escolha as estrelas.");
+            showCustomAlert("Sucesso", "Opinião submetida!");
+            e.target.reset();
             highlightStars(0);
         }
 
-        function highlightStars(count) {
-            const stars = document.querySelectorAll('.rating-star');
-            stars.forEach(star => {
-                const starValue = parseInt(star.dataset.value);
-                if (starValue <= count) {
-                    star.classList.remove('text-gray-300');
-                    star.classList.add('text-brand-gold');
-                } else {
-                    star.classList.remove('text-brand-gold');
-                    star.classList.add('text-gray-300');
-                }
-            });
-        }
-        
-        // Lógica para Submeter Opinião (AGORA COM LOCAL STORAGE)
-        function handleReviewSubmit(event) {
+        function handleSubscribe(event) {
             event.preventDefault(); 
-            
-            const form = document.getElementById('review-form');
-            const button = document.getElementById('review-button');
-            const message = document.getElementById('review-message');
-            const ratingValue = document.getElementById('review-rating-value').value;
-            const reviewText = document.getElementById('review-text').value;
-            const reviewName = document.getElementById('review-name').value;
-            
-            // 1. Validação
-            if (parseInt(ratingValue) === 0) {
-                message.textContent = 'Por favor, atribua uma classificação em estrelas.';
-                message.classList.remove('hidden', 'text-green-700');
-                message.classList.add('text-red-600');
-                return;
-            }
-            
-            if (reviewText.length < 10) {
-                message.textContent = 'A sua opinião deve ter, pelo menos, 10 caracteres.';
-                message.classList.remove('hidden', 'text-green-700');
-                message.classList.add('text-red-600');
-                return;
-            }
-
-            // 2. DESATIVA e processa
+            const button = document.getElementById('subscribe-button');
+            const message = document.getElementById('subscribe-message');
             button.disabled = true;
-            button.textContent = 'A Submeter...'; 
-            message.classList.add('hidden');
-            
+            button.textContent = 'A PROCESSAR...';
             setTimeout(() => {
-                // ** 3. SALVAR NO LOCAL STORAGE **
-                const newReview = {
-                    id: Date.now(), // ID único
-                    user: reviewName || 'Anónimo',
-                    rating: parseInt(ratingValue),
-                    comment: reviewText,
-                    date: new Date().toLocaleDateString('pt-PT'),
-                    isMock: false
-                };
-
-                const storedReviews = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
-                storedReviews.push(newReview);
-                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(storedReviews));
-                
-                // ** 4. ATUALIZAR A LISTA VISÍVEL **
-                loadReviews();
-                
-                // 5. MOSTRA a mensagem de sucesso
-                message.textContent = 'A sua opinião foi submetida com sucesso! Obrigado.'; 
-                message.classList.remove('hidden', 'text-red-600');
-                message.classList.add('text-green-700');
-                
-                // 6. LIMPA o formulário e reseta o rating
-                form.reset();
-                currentRating = 0;
-                highlightStars(0); 
-                
-                button.textContent = 'OPINIÃO SUBMETIDA'; 
-                
-                // 7. Reverte o texto do botão e esconde a mensagem
+                document.getElementById('newsletter-email').value = '';
+                message.classList.remove('hidden');
+                message.textContent = 'Subscrição confirmada! Obrigado.';
+                button.textContent = 'SUBSCRITO';
                 setTimeout(() => {
                     button.disabled = false;
-                    button.textContent = 'SUBMETER OPINIÃO'; 
+                    button.textContent = 'SUBSCREVER';
                     message.classList.add('hidden');
                 }, 3000); 
-
-            }, 1500); 
+            }, 1000);
         }
 
-        // Função para atualizar o link do utilizador no cabeçalho
+        function highlightStars(count) {
+            document.querySelectorAll('.rating-star').forEach(s => {
+                s.classList.toggle('text-brand-gold', s.dataset.value <= count);
+                s.classList.toggle('text-gray-300', s.dataset.value > count);
+            });
+        }
+
         function renderUserNav() {
-            const userNavElement = document.getElementById('user-nav-link');
+            const el = document.getElementById('user-nav-link');
             const user = JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || 'null');
-            
-            if (user && user.isLoggedIn) {
-                // Se estiver logado, mostra "Olá, [Nome]!"
-                const firstName = user.name ? user.name.split(' ')[0] : 'Utilizador';
-                
-                userNavElement.href = 'login.html'; 
-                userNavElement.classList.remove('pl-4', 'text-gray-700'); 
-                userNavElement.classList.add('font-bold', 'text-brand-accent-red');
-                userNavElement.innerHTML = `<span class="font-bold hover:text-red-900 transition-colors">Olá, ${firstName}!</span>`;
-            } else {
-                // Se não estiver logado, mostra o ícone de conta
-                userNavElement.href = 'login.html';
-                userNavElement.classList.add('pl-4', 'text-gray-700');
-                userNavElement.classList.remove('font-bold', 'text-brand-accent-red');
-                userNavElement.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                    </svg>
-                `;
-            }
+            if (user && user.isLoggedIn) el.innerHTML = `<span class="font-bold text-brand-accent-red">Olá, ${user.name.split(' ')[0]}!</span>`;
+            else el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
         }
 
-
-        // Função para atualizar contadores de UI (Carrinho/Favoritos)
         function updateUI() {
-            // Conta Favoritos
-            let favCount = 0;
-            // A chave 'fav-suma-teologica' deve ser verificada, juntamente com as numéricas
-            const favoriteKeys = Object.keys(localStorage).filter(key => key.startsWith('fav-') && localStorage.getItem(key) === 'true');
-            favCount = favoriteKeys.length;
-            
+            const favs = Object.keys(localStorage).filter(k => k.startsWith('fav-') && localStorage.getItem(k) === 'true').length;
             document.querySelectorAll('#fav-count, #fav-count-mobile').forEach(el => {
-                el.textContent = favCount;
-                el.classList.toggle('opacity-0', favCount === 0);
-                el.classList.toggle('scale-0', favCount === 0);
+                el.textContent = favs; el.classList.toggle('opacity-0', favs === 0); el.classList.toggle('scale-0', favs === 0);
             });
-
-            // Conta Carrinho (Usando a chave 'cartItems' para consistência com as outras páginas)
-            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const cartTotal = cartItems.reduce((sum, item) => sum + item.quantity, 0); 
+            const cart = JSON.parse(localStorage.getItem('cartItems') || '[]').reduce((s, i) => s + i.quantity, 0);
             document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
-                el.textContent = cartTotal;
-                el.classList.toggle('opacity-0', cartTotal === 0);
-                el.classList.toggle('scale-0', cartTotal === 0);
+                el.textContent = cart; el.classList.toggle('opacity-0', cart === 0); el.classList.toggle('scale-0', cart === 0);
             });
-
-            // Atualiza o estado do botão de favorito na página
-            const favBtn = document.getElementById('fav-btn');
-            if (favBtn) {
-                // A Suma Teológica usa a chave 'fav-suma-teologica' para consistência com o código original
-                const isFav = localStorage.getItem('fav-suma-teologica') === 'true'; 
-                const icon = favBtn.querySelector('.fav-icon');
-                if (isFav) {
-                    favBtn.classList.add('text-red-500');
-                    icon.classList.remove('fill-transparent');
-                    icon.classList.add('fill-red-500');
-                } else {
-                    favBtn.classList.remove('text-red-500');
-                    icon.classList.add('fill-transparent');
-                    icon.classList.remove('fill-red-500');
-                }
-            }
-            
-            // NOVO: Atualiza o estado do link do utilizador
             renderUserNav();
         }
-        
-        function loadReviews() {
-            const storedReviews = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
-            // Combina as reviews mock com as submetidas, garantindo que as mais recentes vêm primeiro
-            const allReviews = [...storedReviews.reverse(), ...MOCK_REVIEWS];
-            const container = document.getElementById('reviews-list-container');
-            const totalCountEl = document.getElementById('review-count');
 
-            if (!container) return;
-            
-            let html = '';
-            
-            // Renderiza todas as reviews
-            allReviews.forEach(review => {
-                const isNew = !review.isMock;
-                const backgroundColor = isNew ? 'bg-green-50 border-green-200' : 'bg-white border-gray-100';
+        function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+        document.getElementById('menu-button').addEventListener('click', toggleMenu);
 
-                html += `
-                    <div class="p-5 rounded-lg shadow-md border ${backgroundColor}">
-                        <div class="flex items-center space-x-2 mb-2">
-                            <span class="text-xl">${renderStars(review.rating)}</span>
-                            <span class="text-sm font-semibold text-gray-700">| Por ${review.user} ${isNew ? '(Novo)' : ''}</span>
-                        </div>
-                        <p class="italic text-gray-700 mb-3">"${review.comment}"</p>
-                        <p class="text-xs text-gray-400">Publicado a ${review.date}</p>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-            totalCountEl.textContent = allReviews.length;
-
-            // Oculta/mostra o botão "Ver Mais" - Mantido oculto já que carregamos todas as mock reviews
-            const loadMoreBtn = document.getElementById('load-more-btn');
-            if (loadMoreBtn) loadMoreBtn.classList.add('hidden'); 
-        }
-
-        // Inicializar a UI ao carregar a página
         window.onload = function() {
             updateUI();
-            initializeRating();
-            showTab('detalhes'); // Garante que a primeira aba visível é "Detalhes Completos"
-            loadReviews(); // Carrega as reviews iniciais e as guardadas
+            document.querySelectorAll('.rating-star').forEach(s => {
+                s.onclick = () => { document.getElementById('review-rating-value').value = s.dataset.value; highlightStars(s.dataset.value); };
+            });
+            showTab('detalhes');
+            document.getElementById('reviews-list-container').innerHTML = MOCK_REVIEWS.map(r => `<div class="p-4 border rounded bg-white"><div class="flex">${renderStars(r.rating)}</div><p class="italic mt-2">"${r.comment}"</p></div>`).join('');
         };
-
     </script>
 </body>
 </html>
