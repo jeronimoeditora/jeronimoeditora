@@ -2,17 +2,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato | Jerónimo Editora</title>
+    <title>Contacto | Jerónimo Editora</title>
     
-    <!-- Google Fonts: Playfair Display (Serif), Roboto (Sans) & Crimson Text (Classic) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;00;500;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -35,45 +34,41 @@
     </script>
 
     <style>
-        /* Estilos para input focados */
         input:focus, textarea:focus {
-            border-color: #800000 !important; /* brand-accent-red */
+            border-color: #800000 !important;
             box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.2);
         }
-        /* Ajuste de estilo para a foto para ter um contorno leve */
         .photo-container {
-            border-radius: 0.75rem; /* rounded-xl */
+            border-radius: 0.75rem;
             overflow: hidden;
-            border: 1px solid #e5e7eb; /* border-gray-200 */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Sombra mais leve */
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
         .photo-image {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Garante que a foto inteira é visível */
+            object-fit: contain;
             padding: 10px; 
         }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- Modal de Confirmação de Mensagem -->
+    <!-- Modal de Confirmação -->
     <div id="message-modal" class="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center hidden" onclick="closeMessageModal()">
         <div class="bg-white p-8 rounded-xl shadow-2xl max-w-lg w-full mx-4 text-center transform scale-100 transition-all duration-300" onclick="event.stopPropagation()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-brand-accent-red mb-4"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-brand-accent-red mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
             <h3 class="text-3xl font-bold font-serif text-brand-accent-blue mb-3">Mensagem Enviada!</h3>
-            <p class="text-gray-700 mb-6">Obrigado por nos contatar. Entraremos em contacto consigo o mais brevemente possível.</p>
-            <button onclick="closeMessageModal()" class="inline-block bg-brand-accent-red text-white py-3 px-8 rounded-lg hover:bg-red-900 transition-colors font-bold shadow-lg">
+            <p class="text-gray-700 mb-6">Recebemos a sua mensagem. Entraremos em contacto o mais brevemente possível.</p>
+            <button onclick="closeMessageModal()" class="inline-block bg-brand-accent-red text-white py-3 px-8 rounded-lg hover:bg-red-900 transition-colors font-bold shadow-lg uppercase tracking-wider">
                 Fechar
             </button>
         </div>
     </div>
 
-
-     <!-- Navbar Fixa -->
+    <!-- Navbar Fixa -->
     <nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 z-50">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            
             <a href="index.html" class="flex items-center space-x-2">
                 <img src="Logo J.png" alt="Logótipo Jerónimo Editora" class="h-9 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';" />
                 <span class="font-serif text-2xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors duration-200">Jerónimo Editora</span>
@@ -85,20 +80,14 @@
                 <a href="infantil.html" class="hover:text-brand-accent-red transition-colors duration-200">INFANTIL</a>
                 <a href="produtos.html" class="hover:text-brand-accent-red transition-colors duration-200">PRODUTOS</a>
                 <a href="index.html#sobre" class="hover:text-brand-accent-red transition-colors duration-200">SOBRE</a>
-                <a href="contato.html" class="hover:text-brand-accent-red transition-colors duration-200 text-brand-accent-red font-bold">CONTATO</a>
+                <a href="contacto.html" class="hover:text-brand-accent-red transition-colors duration-200 text-brand-accent-red font-bold">CONTACTO</a>
 
-                <div class="pl-4 flex space-x-4">
-                    <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="showPlaceholderAlert('Função Favoritos')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-                        <span id="fav-count" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
-                    </button>
+                <div class="pl-4">
                     <a href="checkout.html" class="relative text-gray-700 hover:text-brand-accent-red transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>
                         <span id="cart-count" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
                     </a>
                 </div>
-                
-                <a id="user-nav-link" href="login.html" class="pl-4 text-gray-700 hover:text-brand-accent-red transition-colors duration-200" aria-label="Aceder à Conta"></a>
             </div>
             
             <button id="menu-button" class="md:hidden text-2xl text-brand-text focus:outline-none hover:text-brand-accent-red">&#9776;</button>
@@ -108,50 +97,42 @@
     <!-- Menu Mobile -->
     <div id="mobile-menu" class="hidden fixed top-20 left-0 w-full bg-white shadow-xl z-40 md:hidden">
         <div class="flex flex-col p-4 text-center space-y-3">
-            <a href="index.html#hero" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">INÍCIO</a>
-            <a href="catalogo-completo.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">CATÁLOGO</a>
-            <a href="infantil.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">INFANTIL</a>
-            <a href="produtos.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">PRODUTOS</a>
-            <a href="index.html#sobre" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">SOBRE</a>
-            <a href="contato.html" class="py-2 text-brand-accent-red font-bold hover:bg-gray-100 transition-colors" onclick="toggleMenu()">CONTATO</a>
+            <a href="index.html#hero" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">INÍCIO</a>
+            <a href="catalogo-completo.html" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">CATÁLOGO</a>
+            <a href="infantil.html" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">INFANTIL</a>
+            <a href="produtos.html" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">PRODUTOS</a>
+            <a href="index.html#sobre" class="py-2 text-gray-700 hover:bg-gray-100 transition-colors" onclick="toggleMenu()">SOBRE</a>
+            <a href="contacto.html" class="py-2 text-brand-accent-red font-bold hover:bg-gray-100 transition-colors" onclick="toggleMenu()">CONTACTO</a>
             
-            <div class="flex justify-center space-x-8 pt-4 border-t border-gray-100">
-                <button class="relative text-gray-700 hover:text-brand-accent-red transition-colors" onclick="showPlaceholderAlert('Função Favoritos')">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-                    <span id="fav-count-mobile" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
-                </button>
+            <div class="flex justify-center pt-4 border-t border-gray-100">
                 <a href="checkout.html" class="relative text-gray-700 hover:text-brand-accent-red transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>
                     <span id="cart-count-mobile" class="absolute -top-1 -right-2 bg-brand-accent-red text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 scale-0 transition-all duration-300">0</span>
                 </a>
             </div>
-            
-            <a id="user-nav-link-mobile" href="login.html" class="py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-accent-red transition-colors font-bold" onclick="toggleMenu()">CONTA</a>
         </div>
     </div>
 
-
-    <!-- Main Content: Contato -->
+    <!-- Main Content -->
     <main class="flex-grow pt-24 pb-16"> 
         <div class="max-w-6xl mx-auto px-6">
             
-            <h1 class="font-serif text-4xl sm:text-5xl text-brand-accent-red mb-8 border-b pb-3 text-center">Fale Connosco</h1>
+            <h1 class="font-serif text-4xl sm:text-5xl text-brand-accent-red mb-8 border-b pb-3 text-center font-bold">Fale Connosco</h1>
             
             <section class="mb-12 border-b border-gray-200 pb-10">
                 <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-                    
                     <div class="lg:col-span-3 space-y-4 pt-4">
-                        <h2 class="font-serif text-3xl font-bold text-brand-accent-blue border-b border-brand-gold/50 pb-2">A Jerónimo Editora: Tradição e Rigor</h2>
-                        <p class="text-lg text-gray-700 leading-relaxed">Fundada em 2025, a Jerónimo Editora nasceu do desejo de trazer os pilares do pensamento clássico, filosófico e teológico para o leitor moderno em edições de alta qualidade e rigor.</p>
-                        <p class="text-gray-600 italic">O nosso compromisso é com a Verdade, a Beleza e a Tradição.</p>
+                        <h2 class="font-serif text-3xl font-bold text-brand-accent-blue border-b border-brand-gold/50 pb-2">Jerónimo Editora</h2>
+                        <p class="text-lg text-gray-700 leading-relaxed">Fundada em 2025, trazemos os pilares do pensamento clássico e teológico em edições de rigor para o leitor moderno.</p>
+                        <p class="text-gray-600 italic">Compromisso com a Verdade, a Beleza e a Tradição.</p>
                         
                         <div class="pt-4">
-                            <h3 class="font-bold text-lg text-brand-text">Siga-nos nas Redes:</h3>
+                            <h3 class="font-bold text-lg text-brand-text">Redes Sociais:</h3>
                             <div class="flex space-x-6 mt-2">
-                                <a href="#" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors" aria-label="Facebook Jerónimo Editora">
+                                <a href="https://www.facebook.com" target="_blank" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors" aria-label="Facebook">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                                 </a>
-                                <a href="#" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors" aria-label="Instagram Jerónimo Editora">
+                                <a href="https://www.instagram.com" target="_blank" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors" aria-label="Instagram">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                                 </a>
                             </div>
@@ -159,50 +140,49 @@
                     </div>
 
                     <div class="lg:col-span-2 flex flex-col justify-start items-center">
-                        <h2 class="font-serif text-3xl font-bold text-brand-accent-blue mb-4 self-start lg:self-center">A Equipa</h2>
                         <div class="photo-container w-full max-h-[450px]">
-                            <img src="bacelos.png" alt="Equipa Jerónimo Editora" class="photo-image" onerror="this.onerror=null;this.src='https://placehold.co/400x450/800000/cfaf5c?text=EQUIPA.PNG';" />
+                            <img src="bacelos.png" alt="Equipa" class="photo-image" onerror="this.onerror=null;this.src='https://placehold.co/400x450/800000/cfaf5c?text=JERONIMO';" />
                         </div>
                     </div>
                 </div>
             </section>
             
             <section class="mb-12">
-                <h2 class="font-serif text-3xl font-bold text-brand-accent-blue mb-6 border-b border-brand-accent-blue/30 pb-2 text-center lg:text-left">Detalhes de Contato</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-4 bg-white rounded-xl">
-                    <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-2">
-                        <dt class="font-semibold text-lg text-brand-text">Email Principal</dt>
-                        <dd><a href="mailto:editorajeronimo@gmail.com" class="hover:text-brand-accent-red transition-colors underline">editorajeronimo@gmail.com</a></dd>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                    <div class="flex flex-col items-center text-center space-y-2">
+                        <span class="font-bold text-lg text-brand-text">E-mail</span>
+                        <a href="mailto:editorajeronimo@gmail.com" class="text-brand-accent-red hover:underline">editorajeronimo@gmail.com</a>
                     </div>
-                    <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-2 border-y md:border-y-0 md:border-x border-gray-200 py-4 md:py-0 md:px-6">
-                        <dt class="font-semibold text-lg text-brand-text">Telefone (Pedidos)</dt>
-                        <dd class="font-bold text-brand-accent-red text-xl">917 304 286</dd>
+                    <div class="flex flex-col items-center text-center space-y-2 border-y md:border-y-0 md:border-x border-gray-200 py-4 md:py-0">
+                        <span class="font-bold text-lg text-brand-text">Telefone</span>
+                        <span class="font-bold text-brand-accent-red">917 304 286</span>
                     </div>
-                    <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-2">
-                        <dt class="font-semibold text-lg text-brand-text">Localização (Sede)</dt>
-                        <dd>Braga, Portugal</dd>
+                    <div class="flex flex-col items-center text-center space-y-2">
+                        <span class="font-bold text-lg text-brand-text">Localização</span>
+                        <span>Braga, Portugal</span>
                     </div>
                 </div>
             </section>
             
+            <!-- Formulário de Mensagem -->
             <section class="mt-12 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                <h2 class="font-serif text-3xl font-bold text-brand-accent-red mb-4 border-b border-brand-accent-red/30 pb-2">Deixe a Sua Mensagem</h2>
+                <h2 class="font-serif text-3xl font-bold text-brand-accent-red mb-6 border-b border-brand-accent-red/20 pb-2">Deixe a Sua Mensagem</h2>
                 <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-6">
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label for="nome" class="block text-sm font-medium text-gray-700">Nome Completo *</label>
-                            <input type="text" id="nome" required class="mt-1 block w-full p-3 border border-gray-300 rounded-lg bg-gray-50">
+                            <input type="text" id="nome" name="nome" required class="mt-1 block w-full p-3 border border-gray-300 rounded-lg bg-gray-50 outline-none transition-all">
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email *</label>
-                            <input type="email" id="email" required class="mt-1 block w-full p-3 border border-gray-300 rounded-lg bg-gray-50">
+                            <label for="email" class="block text-sm font-medium text-gray-700">E-mail *</label>
+                            <input type="email" id="email" name="email" required class="mt-1 block w-full p-3 border border-gray-300 rounded-lg bg-gray-50 outline-none transition-all">
                         </div>
                     </div>
                     <div>
                         <label for="mensagem" class="block text-sm font-medium text-gray-700">Mensagem *</label>
-                        <textarea id="mensagem" rows="4" required class="mt-1 block w-full p-3 border border-gray-300 rounded-lg bg-gray-50"></textarea>
+                        <textarea id="mensagem" name="mensagem" rows="4" required class="mt-1 block w-full p-3 border border-gray-300 rounded-lg bg-gray-50 outline-none transition-all"></textarea>
                     </div>
-                    <button type="submit" id="submit-button" class="w-full bg-brand-accent-red text-white font-bold py-3 rounded-lg shadow-xl hover:bg-red-900 transition-colors text-lg disabled:bg-gray-400">
+                    <button type="submit" id="submit-button" class="w-full bg-brand-accent-red text-white font-bold py-4 rounded-lg shadow-xl hover:bg-red-900 transition-colors text-lg disabled:bg-gray-400 uppercase tracking-widest">
                         ENVIAR MENSAGEM
                     </button>
                 </form>
@@ -211,130 +191,139 @@
         </div>
     </main>
 
-    <!-- Rodapé Completo (Copiado do index.html) -->
+    <!-- Rodapé -->
     <footer id="footer" class="bg-gray-900 text-gray-300 py-16 px-6 border-t-8 border-brand-accent-red mt-12">
         <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
-
             <div class="col-span-2 md:col-span-1 space-y-4">
                 <div class="flex items-center space-x-2">
-                    <img src="Logo J Dourado.png" alt="Logótipo Jerónimo Editora" class="h-7 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';" />
+                    <img src="Logo J Dourado.png" alt="Logótipo" class="h-7 w-auto" />
                     <span class="font-serif text-xl font-bold text-white">Jerónimo Editora</span>
                 </div>
-                <p class="text-sm text-gray-400">Edições de rigor dos pilares do pensamento ocidental e da tradição católica.</p>
+                <p class="text-sm text-gray-400">Edições de rigor dos pilares do pensamento ocidental.</p>
             </div>
-
             <div class="space-y-4">
                 <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Navegação</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="index.html#hero" class="hover:text-white transition">Início</a></li>
+                    <li><a href="index.html" class="hover:text-white transition">Início</a></li>
                     <li><a href="catalogo-completo.html" class="hover:text-white transition">Catálogo</a></li>
                     <li><a href="infantil.html" class="hover:text-white transition">Infantil</a></li>
                     <li><a href="produtos.html" class="hover:text-white transition">Produtos</a></li>
-                    <li><a href="index.html#sobre" class="hover:text-white transition">Sobre Nós</a></li>
-                    <li><a href="contato.html" class="hover:text-white transition">Contato</a></li>
+                    <li><a href="index.html#sobre" class="hover:text-white transition">Sobre</a></li>
+                    <li><a href="contacto.html" class="hover:text-white transition">Contacto</a></li>
                 </ul>
             </div>
-
             <div class="space-y-4">
-                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Sede & Contacto</h4>
+                <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Contacto</h4>
                 <ul class="space-y-2 text-sm mb-4">
-                    <li><a href="mailto:editorajeronimo@gmail.com" class="hover:text-white transition">editorajeronimo@gmail.com</a></li>
+                    <li><a href="mailto:editorajeronimo@gmail.com" class="hover:text-white">editorajeronimo@gmail.com</a></li>
                     <li class="text-gray-400">Braga, Portugal</li>
                 </ul>
                 <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://www.facebook.com" target="_blank" class="hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="https://www.instagram.com" target="_blank" class="hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
                 </div>
             </div>
-
             <div class="col-span-2 md:col-span-1 space-y-4">
                 <h4 class="font-bold text-lg text-brand-gold uppercase tracking-wider">Newsletter</h4>
                 <form onsubmit="handleSubscribe(event)" class="flex flex-col space-y-3">
-                    <input type="email" id="newsletter-email" placeholder="O seu email" required class="p-2 rounded-md bg-gray-800 border border-gray-700 text-white focus:border-brand-gold">
-                    <button type="submit" id="subscribe-button" class="bg-brand-gold text-brand-accent-blue font-bold py-2 rounded-md shadow-lg hover:bg-yellow-600 transition-colors">SUBSCREVER</button>
+                    <input type="email" id="newsletter-email" placeholder="O seu e-mail" required class="p-2 rounded-md bg-gray-800 border border-gray-700 text-white focus:border-brand-gold outline-none">
+                    <button type="submit" id="subscribe-button" class="bg-brand-gold text-brand-accent-blue font-bold py-2 rounded-md hover:bg-yellow-600 transition-colors uppercase text-xs tracking-widest">Subscrever</button>
                     <p id="subscribe-message" class="text-xs text-green-400 font-bold hidden"></p>
                 </form>
             </div>
-
         </div>
-
         <div class="max-w-6xl mx-auto text-center pt-8 mt-10 border-t border-gray-800">
             <p class="text-xs text-gray-500">© 2025 Jerónimo Editora. Todos os direitos reservados.</p>
         </div>
     </footer>
 
     <script>
-        const USER_STORAGE_KEY = 'currentUser';
-        
-        function renderUserNav() {
-            const userNavElement = document.getElementById('user-nav-link');
-            const user = JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || 'null');
-            if (userNavElement) {
-                if (user && user.isLoggedIn) {
-                    const firstName = user.name ? user.name.split(' ')[0] : 'Utilizador';
-                    userNavElement.innerHTML = `<span class="font-bold text-brand-accent-red">Olá, ${firstName}!</span>`;
-                } else {
-                    userNavElement.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
-                }
-            }
-        }
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwG4gRx2N1eClo78wlkg-M5nzMxVrSl9iAluI1w21dwU59eRcT-pbqoYN_ukWca4Pqn/exec'; 
         
         function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
         document.getElementById('menu-button').addEventListener('click', toggleMenu);
 
-        function handleContactSubmit(event) {
+        // Envio do formulário de contacto
+        async function handleContactSubmit(event) {
             event.preventDefault(); 
             const button = document.getElementById('submit-button');
+            const formData = new FormData(event.target);
+            
+            const payload = {
+                type: 'contact_message',
+                nome: formData.get('nome'),
+                email: formData.get('email'),
+                mensagem: formData.get('mensagem')
+            };
+
             button.disabled = true;
             button.textContent = 'A ENVIAR...';
-            setTimeout(() => {
+
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(payload)
+                });
                 event.target.reset();
                 document.getElementById('message-modal').classList.remove('hidden');
+            } catch (error) {
+                console.error('Erro:', error);
+            } finally {
                 button.disabled = false;
                 button.textContent = 'ENVIAR MENSAGEM';
-            }, 1500);
+            }
         }
 
-        function handleSubscribe(event) {
+        // Envio da Newsletter
+        async function handleSubscribe(event) {
             event.preventDefault(); 
             const button = document.getElementById('subscribe-button');
             const message = document.getElementById('subscribe-message');
             const emailInput = document.getElementById('newsletter-email');
+            const email = emailInput.value;
+
             button.disabled = true;
-            button.textContent = 'A processar...';
-            setTimeout(() => {
+            button.textContent = '...';
+
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify({
+                        type: 'newsletter_subscribe',
+                        email: email
+                    })
+                });
+
                 emailInput.value = '';
                 message.classList.remove('hidden');
-                message.textContent = 'Subscrição confirmada! Obrigado.';
-                button.textContent = 'SUBSCRITO';
+                message.textContent = 'Subscrição efetuada!';
+                button.textContent = 'OK';
                 setTimeout(() => {
                     button.disabled = false;
-                    button.textContent = 'SUBSCREVER';
+                    button.textContent = 'Subscrever';
                     message.classList.add('hidden');
                 }, 3000); 
-            }, 1000);
+            } catch (error) {
+                console.error('Erro:', error);
+                button.disabled = false;
+                button.textContent = 'Erro';
+            }
         }
 
         function updateUI() {
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const cartTotal = cartItems.reduce((sum, item) => sum + item.quantity, 0); 
+            const count = cartItems.reduce((sum, item) => sum + item.quantity, 0); 
             document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
-                el.textContent = cartTotal;
-                el.classList.toggle('opacity-0', cartTotal === 0);
+                el.textContent = count;
+                el.classList.toggle('opacity-0', count === 0);
+                el.classList.toggle('scale-0', count === 0);
+                el.classList.toggle('scale-100', count > 0);
             });
-            let favCount = 0;
-            for (let i = 0; i < localStorage.length; i++) {
-                if (localStorage.key(i).startsWith('fav-') && localStorage.getItem(localStorage.key(i)) === 'true') favCount++;
-            }
-            document.querySelectorAll('#fav-count, #fav-count-mobile').forEach(el => {
-                el.textContent = favCount;
-                el.classList.toggle('opacity-0', favCount === 0);
-            });
-            renderUserNav();
         }
 
         function closeMessageModal() { document.getElementById('message-modal').classList.add('hidden'); }
-        function showPlaceholderAlert(f) { alert('Função ' + f + ' em breve.'); }
         
         window.onload = updateUI;
     </script>
