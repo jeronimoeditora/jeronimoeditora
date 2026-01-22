@@ -47,8 +47,14 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2.5rem 1rem;
+            padding: 1.5rem 0.25rem; /* Reduzido para mobile */
             text-align: center;
+        }
+
+        @media (min-width: 640px) {
+            .contact-box {
+                padding: 2.5rem 1rem; /* Original para desktop */
+            }
         }
         
         /* Linhas da cruz muito finas */
@@ -67,9 +73,11 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
-        /* Prevenir quebras no email */
-        .no-break {
-            white-space: nowrap;
+        /* Prevenir quebras no email em desktop */
+        @media (min-width: 640px) {
+            .no-break {
+                white-space: nowrap;
+            }
         }
         
         /* Efeito de hover nos ícones de contacto */
@@ -110,49 +118,47 @@
                 <!-- Grelha em Cruz - Proporção 45% / 55% -->
                 <div class="grid grid-cols-[45%_55%] bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                     
-                    <!-- 1º Quadrante: Redes Sociais (Inclui LinkedIn) -->
+                    <!-- 1º Quadrante: Redes Sociais -->
                     <div class="contact-box line-r line-b">
-                        <span class="text-base font-bold text-brand-text mb-4 font-sans">Redes sociais</span>
-                        <div class="flex space-x-4">
+                        <span class="text-sm sm:text-base font-bold text-brand-text mb-4 font-sans">Redes sociais</span>
+                        <div class="flex space-x-2 sm:space-x-4">
                             <a href="#" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors" aria-label="Facebook">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sm:w-[22px] sm:h-[22px]"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                             </a>
                             <a href="#" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors" aria-label="Instagram">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sm:w-[22px] sm:h-[22px]"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                             </a>
-                            <!-- Ícone LinkedIn -->
                             <a href="#" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors" aria-label="LinkedIn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sm:w-[22px] sm:h-[22px]"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                             </a>
                         </div>
                     </div>
                     
-                    <!-- 2º Quadrante: Email (Abre mail client) -->
+                    <!-- 2º Quadrante: Email (Ajustado para Mobile) -->
                     <div class="contact-box line-b">
-                        <span class="text-base font-bold text-brand-text mb-3 font-sans">E-mail</span>
-                        <a href="mailto:editorajeronimo@gmail.com" class="text-lg font-normal text-brand-accent-red hover:underline italic no-break px-4 font-sans">
+                        <span class="text-sm sm:text-base font-bold text-brand-text mb-3 font-sans">E-mail</span>
+                        <a href="mailto:editorajeronimo@gmail.com" class="text-[10px] xs:text-xs sm:text-base lg:text-lg font-normal text-brand-accent-red hover:underline italic no-break px-1 sm:px-4 font-sans leading-tight">
                             editorajeronimo@gmail.com
                         </a>
                     </div>
                     
-                    <!-- 3º Quadrante: Telefone (Abre WhatsApp) -->
+                    <!-- 3º Quadrante: Telefone -->
                     <div class="contact-box line-r">
-                        <span class="text-base font-bold text-brand-text mb-3 font-sans">Telefone</span>
-                        <a href="https://wa.me/351917304286" target="_blank" class="flex items-center space-x-2 text-lg font-normal text-gray-700 font-sans contact-link-hover">
-                            <!-- Ícone WhatsApp -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <span class="text-sm sm:text-base font-bold text-brand-text mb-3 font-sans">Telefone</span>
+                        <a href="https://wa.me/351917304286" target="_blank" class="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-lg font-normal text-gray-700 font-sans contact-link-hover">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 sm:w-5 sm:h-5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                             <span class="no-break">917 304 286</span>
                         </a>
                     </div>
                     
                     <!-- 4º Quadrante: Localização -->
                     <div class="contact-box">
-                        <span class="text-base font-bold text-brand-text mb-3 font-sans">Localização</span>
-                        <span class="text-lg font-normal text-gray-700 font-sans">Braga, Portugal</span>
+                        <span class="text-sm sm:text-base font-bold text-brand-text mb-3 font-sans">Localização</span>
+                        <span class="text-xs sm:text-lg font-normal text-gray-700 font-sans">Braga, Portugal</span>
                     </div>
                 </div>
 
-                <!-- Foto (Altura igual à tabela) -->
+                <!-- Foto -->
                 <div class="photo-frame flex items-center justify-center p-2 bg-white">
                     <img src="Imagens/bacelos.png" alt="Sede Jerónimo Editora" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://placehold.co/600x400/800000/cfaf5c?text=JERÓNIMO+EDITORA';">
                 </div>
