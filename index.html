@@ -70,9 +70,11 @@
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            box-shadow: inset 0 40px 60px -20px rgba(0,0,0,0.5), inset 0 -40px 60px -20px rgba(0,0,0,0.5);
+            /* Sombras internas para criar o efeito de que a imagem está "atrás" */
+            box-shadow: inset 0 40px 60px -20px rgba(0,0,0,0.6), inset 0 -40px 60px -20px rgba(0,0,0,0.6);
         }
 
+        /* Ajuste para Mobile */
         @media (max-width: 1024px) {
             .art-viewport {
                 background-attachment: scroll;
@@ -83,17 +85,19 @@
             background: linear-gradient(to bottom, 
                 rgba(0,0,0,0.2) 0%, 
                 rgba(0,0,0,0) 40%, 
-                rgba(0,0,0,0.5) 80%, 
-                rgba(0,0,0,0.8) 100%);
+                rgba(0,0,0,0.5) 75%, 
+                rgba(0,0,0,0.85) 100%);
         }
         
+        /* Brilho atrás do texto (Glow) para legibilidade sobre Caravaggio */
         .text-glow-gold {
-            text-shadow: 0 0 25px rgba(0, 0, 0, 0.9), 0 0 10px rgba(207, 175, 92, 0.4);
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.95), 0 0 8px rgba(207, 175, 92, 0.5);
         }
         .text-glow-white {
             text-shadow: 0 2px 15px rgba(0, 0, 0, 1);
         }
 
+        /* Garantir título numa linha sem quebrar */
         .single-line-title {
             white-space: nowrap;
             font-size: clamp(1.5rem, 6vw, 4.5rem);
@@ -122,11 +126,14 @@
                         Um guia prático e iluminador que descomplica a estrutura das Escrituras Sagradas, ajudando o leitor a compreender o fio condutor da História da Salvação.
                     </p>
                     
+                    <!-- Botões: Ver Detalhes e Catálogo lado a lado -->
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start font-sans">
                         <a href="detalhes.html" class="bg-brand-accent-red text-white px-10 py-4 font-bold rounded-xl uppercase tracking-widest shadow-xl hover:bg-red-900 transition-all text-sm text-center">
                             Ver Detalhes
                         </a>
-                        <!-- Botão Catálogo removido daqui -->
+                        <a href="catalogo-completo.html" class="border-2 border-brand-accent-blue text-brand-accent-blue px-10 py-4 font-bold rounded-xl uppercase tracking-widest hover:bg-brand-accent-blue hover:text-white transition-all text-sm text-center">
+                            Catálogo
+                        </a>
                     </div>
                 </div>
                 
@@ -142,17 +149,24 @@
             </div>
         </section>
 
-        <!-- SECÇÃO EM DESTAQUE: SÃO JERÓNIMO A ESCREVER -->
+        <!-- SECÇÃO EM DESTAQUE: SÃO JERÓNIMO A ESCREVER (NÍVEL INFERIOR) -->
         <section id="art-showcase" class="art-viewport relative w-full h-[65vh] md:h-[95vh] flex items-end justify-center overflow-hidden pb-16 md:pb-24">
+            
+            <!-- Overlay para profundidade e legibilidade -->
             <div class="absolute inset-0 art-overlay-gradient"></div>
+
+            <!-- Legenda situada na parte inferior para respeitar a composição da pintura -->
             <div class="relative z-10 text-center px-6 fade-in max-w-5xl">
                 <h2 class="font-serif single-line-title text-white mb-3 italic font-bold text-glow-white">
                     São Jerónimo a Escrever
                 </h2>
+                
                 <p class="font-serif text-base sm:text-xl md:text-2xl text-brand-gold mb-6 italic text-glow-gold leading-tight">
                     padroeiro dos tradutores, bibliotecários e estudiosos das Escrituras
                 </p>
+
                 <div class="w-24 md:w-32 h-0.5 bg-brand-gold mx-auto mb-6 opacity-40"></div>
+                
                 <p class="font-sans text-[9px] md:text-xs text-white/70 uppercase tracking-[0.3em] md:tracking-[0.4em] font-medium text-glow-white">
                     Michelangelo Merisi da Caravaggio, 1605
                 </p>
@@ -162,24 +176,17 @@
         <!-- Secção Novidades -->
         <section id="novidades" class="py-16 md:py-24 bg-brand-bg border-b-8 border-gray-100/50">
             <div class="max-w-6xl mx-auto px-6 text-center">
-                <h2 class="font-serif text-3xl md:text-4xl mb-12 md:mb-16 border-b-4 border-brand-accent-red/20 pb-4 inline-block font-bold">Novidades do Catálogo</h2>
+                <h2 class="font-serif text-3xl md:text-4xl mb-12 md:mb-16 border-b-4 border-brand-accent-red/20 pb-4 inline-block font-bold tracking-tight">Novidades do Catálogo</h2>
                 
-                <div class="flex flex-col items-center">
-                    <!-- Livro de Peter Kreeft -->
-                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all group max-w-md w-full">
+                <div class="flex justify-center">
+                    <!-- Livro de Peter Kreeft centrado -->
+                    <div class="bg-white p-6 md:p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all group max-w-md w-full">
                         <a href="detalhes.html">
-                            <div class="overflow-hidden rounded-lg mb-6 flex justify-center py-6 md:py-8 bg-gray-50">
-                                <img src="Imagens/Kreeft2.png" alt="Tu podes compreender a Bíblia" class="h-48 md:h-64 object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/150x200?text=Kreeft';">
+                            <div class="overflow-hidden rounded-lg mb-6 flex justify-center py-8 bg-gray-50">
+                                <img src="Imagens/Kreeft2.png" alt="Tu podes compreender a Bíblia" class="h-56 md:h-72 object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/150x200?text=Kreeft';">
                             </div>
                             <h4 class="font-serif text-xl md:text-2xl mb-2 text-brand-accent-blue font-bold">Tu podes compreender a Bíblia</h4>
                             <p class="text-brand-accent-red font-black text-xl italic font-classic">15,00€</p>
-                        </a>
-                    </div>
-
-                    <!-- Botão Catálogo agora posicionado aqui -->
-                    <div class="mt-12 md:mt-16">
-                        <a href="catalogo-completo.html" class="border-2 border-brand-accent-blue text-brand-accent-blue px-12 py-4 font-bold rounded-xl uppercase tracking-widest hover:bg-brand-accent-blue hover:text-white transition-all text-sm inline-block shadow-md font-sans">
-                            Catálogo
                         </a>
                     </div>
                 </div>
@@ -217,7 +224,6 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // Função para carregar componentes externos (Menu e Rodapé)
         async function loadComponent(id, file) {
             try {
                 const response = await fetch(file + '?v=' + new Date().getTime());
@@ -227,7 +233,7 @@
                     if (id === 'nav-placeholder') updateCartUI();
                 }
             } catch (err) {
-                console.warn('Ambiente local detectado.');
+                console.warn('Utilize um servidor para visualizar os componentes modulares.');
             }
         }
 
@@ -236,7 +242,6 @@
             loadComponent('footer-placeholder', 'rodape.html');
         });
 
-        // Funções globais para os botões do menu injetado
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             if (menu) menu.classList.toggle('hidden');
