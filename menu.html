@@ -1,0 +1,55 @@
+<!-- Navbar Fixa -->
+<nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center space-x-2">
+            <img src="Imagens/Logo J.png" alt="Logótipo Jerónimo Editora" class="h-8 md:h-9 w-auto" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
+            <span class="font-serif text-xl md:text-2xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors duration-200 hidden sm:inline">Jerónimo Editora</span>
+        </a>
+        
+        <!-- Menu Desktop -->
+        <div class="hidden md:flex items-center space-x-6 text-[12px] font-bold uppercase tracking-widest text-gray-700">
+            <a href="index.html" class="text-brand-accent-red">Início</a>
+            <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
+            
+            <!-- Link Infantil Escondido (Para mostrar, retira a classe 'hidden') -->
+            <a href="infantil.html" class="hidden hover:text-brand-accent-red transition-colors">Infantil</a>
+            
+            <a href="produtos.html" class="hover:text-brand-accent-red transition-colors">Produtos</a>
+            <a href="index.html#sobre" class="hover:text-brand-accent-red transition-colors">Sobre</a>
+            <a href="contacto.html" class="hover:text-brand-accent-red transition-colors">Contacto</a>
+            
+            <!-- Carrinho -->
+            <div class="pl-4 border-l border-gray-200">
+                <a href="checkout.html" class="relative text-gray-700 hover:text-brand-accent-red transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/></svg>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-accent-red text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full opacity-0 transition-all">0</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Botão Menu Mobile -->
+        <div class="flex items-center md:hidden space-x-4">
+            <a href="checkout.html" class="relative text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/></svg>
+                <span id="cart-count-mobile" class="absolute -top-2 -right-2 bg-brand-accent-red text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full opacity-0">0</span>
+            </a>
+            <button class="text-2xl text-brand-text focus:outline-none" onclick="toggleMenu()">&#9776;</button>
+        </div>
+    </div>
+</nav>
+
+<!-- Menu Mobile Overlay -->
+<div id="mobile-menu" class="hidden fixed top-16 left-0 w-full bg-white shadow-2xl z-40 md:hidden border-t border-gray-100">
+    <div class="flex flex-col p-8 text-center space-y-6 font-bold uppercase tracking-widest text-sm">
+        <a href="index.html" class="text-brand-accent-red" onclick="toggleMenu()">Início</a>
+        <a href="catalogo-completo.html" class="text-gray-700 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">Catálogo</a>
+        
+        <!-- Link Infantil Escondido no Mobile (Para mostrar, retira a classe 'hidden') -->
+        <a href="infantil.html" class="hidden text-gray-700 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">Infantil</a>
+        
+        <a href="produtos.html" class="text-gray-700 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">Produtos</a>
+        <a href="index.html#sobre" class="text-gray-700 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">Sobre Nós</a>
+        <a href="contacto.html" class="text-gray-700 hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">Contacto</a>
+    </div>
+</div>
