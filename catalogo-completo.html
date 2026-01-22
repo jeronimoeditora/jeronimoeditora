@@ -83,29 +83,36 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             
-            <h3 id="info-modal-title" class="text-xl md:text-2xl font-bold font-serif text-brand-accent-blue mb-4 border-b pb-3 text-center pr-8 tracking-wide"></h3>
+            <!-- Título Desktop: Escondido em mobile para aparecer abaixo da imagem -->
+            <h3 id="info-modal-title" class="hidden sm:block text-xl md:text-2xl font-bold font-serif text-brand-accent-blue mb-4 border-b pb-3 text-center pr-8 tracking-wide"></h3>
             
             <div class="flex flex-col sm:flex-row gap-6 overflow-y-auto custom-scrollbar pr-1">
                 <div class="sm:w-2/5 flex flex-col items-center">
                     <img id="info-modal-image" src="" alt="Capa" class="w-32 h-48 md:w-40 md:h-56 object-contain rounded-lg shadow-md mb-3" />
                 </div>
                 <div class="sm:w-3/5 space-y-4">
-                    <!-- Resumo ligeiramente maior conforme solicitado -->
+                    <!-- Título Mobile: Aparece aqui em baixo da imagem -->
+                    <h3 id="info-modal-title-mobile" class="sm:hidden text-xl font-bold font-serif text-brand-accent-blue text-center mb-1 leading-tight"></h3>
+                    
+                    <!-- Resumo maior -->
                     <p id="info-modal-summary" class="text-gray-700 italic leading-relaxed text-base md:text-lg font-classic"></p>
+                    
                     <div class="pt-2 border-t border-gray-100 font-sans text-sm">
-                        <p class="font-bold text-brand-accent-red text-xl md:text-2xl font-classic mb-2" id="info-modal-price"></p>
+                        <!-- Linha de Preço + Botão Detalhes (Lado a Lado no Mobile) -->
+                        <div class="flex items-center justify-between mb-4">
+                            <p class="font-bold text-brand-accent-red text-xl md:text-2xl font-classic" id="info-modal-price"></p>
+                            <a id="info-modal-details-link" href="detalhes.html" class="inline-flex items-center justify-center bg-brand-accent-blue text-white px-4 md:px-7 py-2 rounded-lg font-bold text-sm hover:bg-brand-accent-red transition-all shadow-md">
+                                <span class="md:hidden text-lg">+</span>
+                                <span class="hidden md:inline">+ Detalhes</span>
+                            </a>
+                        </div>
+                        
                         <ul class="text-xs md:text-sm text-gray-500 space-y-2">
                             <li id="info-modal-author"></li>
                             <li id="info-modal-isbn"></li>
                             <li id="info-modal-pages"></li>
                             <li id="info-modal-weight"></li>
                             <li id="info-modal-format"></li>
-                            <li class="pt-4">
-                                <a id="info-modal-details-link" href="detalhes.html" class="inline-flex items-center justify-center bg-brand-accent-blue text-white px-5 md:px-7 py-2.5 rounded-lg font-bold text-sm hover:bg-brand-accent-red transition-all shadow-md">
-                                    <span class="md:hidden text-xl">+</span>
-                                    <span class="hidden md:inline">+ Detalhes</span>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -127,7 +134,7 @@
 
     <main class="flex-grow pt-24 md:pt-32 pb-12"> 
         <div class="max-w-6xl mx-auto px-4 md:px-6 text-center fade-in">
-            <!-- Título em Azul Escuro com Risco Fino em Azul conforme solicitado -->
+            <!-- Título em Azul Escuro com Risco Fino em Azul -->
             <h1 class="font-serif text-4xl sm:text-5xl text-brand-accent-blue mb-4 border-b pb-3 text-center border-brand-accent-blue/30 font-normal">
                 Catálogo Completo
             </h1>
@@ -169,7 +176,7 @@
         const bookData = [
             { id: 3, title: "Tu podes compreender a Bíblia", author: "Peter Kreeft", price: 15.00, category: "Estudos Bíblicos", image: "Imagens/Kreeft2.png", summary: "Guia prático e iluminador para compreender a estrutura da Bíblia.", techDetails: { pages: 200, isbn: "978-989-98218-3-9", binding: "Capa Mole", weight: "0,350 kg" }, visible: true, detailsUrl: "detalhes.html" },
             { id: 2, title: "Jesus e o Jubileu", author: "John S. Bergsma", price: 22.00, category: "Estudos Bíblicos", image: "Imagens/Bergsma.png", summary: "O livro explora a conexão entre o ministério de Jesus e a lei do Jubileu.", techDetails: { pages: 280, isbn: "978-989-98218-2-2", binding: "Capa Mole", weight: "0,420 kg" }, visible: false, detailsUrl: "detalhes-bergsma.html" },
-            { id: 7, title: "Duras Palavras", author: "Trent Horn", price: 0.00, category: "Apologética", image: "Imagens/TrentHorn.jpg", summary: "Uma exploração profunda sobre os ensinamentos difíceis da fé.", techDetails: { pages: 0, isbn: "A definir", binding: "A definir", weight: "A definir" }, visible: true, isComingSoon: true },
+            { id: 7, title: "Duras Palavras", author: "Trent Horn", price: 0.00, category: "Apologética", image: "https://placehold.co/400x600/f3f4f6/333333?text=Brevemente", summary: "Uma exploração profunda sobre os ensinamentos difíceis da fé.", techDetails: { pages: 0, isbn: "A definir", binding: "A definir", weight: "A definir" }, visible: true, isComingSoon: true },
             { id: 1, title: "Suma Teológica", author: "São Tomás de Aquino", price: 75.00, category: "Teologia", image: "Imagens/suma_teologica.png", visible: false },
             { id: 4, title: "Convite aos Salmos", author: "Rolf A. Jacobson & Karl N. Jacobson", price: 28.50, category: "Teologia", image: "Imagens/Jacobson.png", visible: false }
         ];
@@ -190,7 +197,7 @@
                 const footResp = await fetch(getSafePath('rodape.html'));
                 if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 updateCartUI();
-            } catch (e) { console.warn("Ambiente local: componentes carregados via fallback."); }
+            } catch (e) { console.warn("Componentes modulares não carregados localmente."); }
         }
 
         function formatPrice(p) { return `€ ${p.toFixed(2).replace('.', ',')}`; }
@@ -213,7 +220,11 @@
         function openInfoModal(bookId) {
             const book = bookData.find(b => b.id === bookId);
             if (!book || book.isComingSoon) return;
+            
+            // Popula ambos os títulos (Desktop e Mobile)
             document.getElementById('info-modal-title').textContent = book.title;
+            document.getElementById('info-modal-title-mobile').textContent = book.title;
+            
             document.getElementById('info-modal-image').src = book.image;
             document.getElementById('info-modal-summary').textContent = book.summary;
             document.getElementById('info-modal-price').textContent = formatPrice(book.price);
