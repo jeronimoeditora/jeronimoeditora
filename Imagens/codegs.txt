@@ -1,0 +1,248 @@
+/**
+ * URL DE IMPLEMENTAÇÃO (Web App):
+ * https://script.google.com/macros/s/AKfycbyKPm9bKzRaT3kV1Xqn0VYYucpi9MBMQ2WmJaePEH9gUpK1gJcDvG9swXPMzeWqZoRY/exec
+ */
+
+const EMAILS_LOJA = "editorajeronimo@gmail.com"; 
+const NOME_LOJA = "Jerónimo Editora";
+
+// Nomes das abas no Google Sheets
+const NOME_FOLHA_ENCOMENDAS = "Encomendas"; 
+const NOME_FOLHA_MENSAGENS = "Mensagens"; 
+const NOME_FOLHA_NEWSLETTER = "Newsletter";
+
+// Pasta no Google Drive para comprovativos
+const NOME_PASTA_DRIVE = "Comprovativos Encomendas";
+
+/**
+ * Função principal que processa todos os pedidos POST (Checkout, Contacto e Newsletter)
+ */
+function doPost(e) {
+  try {
+    const dados = JSON.parse(e.postData.contents);
+    
+    if (dados.type === 'contact_message') {
+      return processarMensagemContacto(dados);
+    } 
+    else if (dados.type === 'newsletter_subscribe') {
+      return processarSubscricaoNewsletter(dados);
+    } 
+    else {
+      // Pedido sem "type" é tratado como encomenda do Checkout
+      return processarEncomenda(dados);
+    }
+      
+  } catch (erro) {
+    console.error("Erro Fatal: " + erro.toString());
+    return ContentService.createTextOutput(JSON.stringify({ "status": "erro", "mensagem": erro.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
+ * --- LÓGICA PARA NEWSLETTER ---
+ */
+function processarSubscricaoNewsletter(dados) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(NOME_FOLHA_NEWSLETTER);
+  if (!sheet) {
+    sheet = ss.insertSheet(NOME_FOLHA_NEWSLETTER);
+    sheet.appendRow(["Data Subscrição", "Email"]);
+    sheet.getRange(1, 1, 1, 2).setFontWeight("bold").setBackground("#d1e9ff");
+  }
+  sheet.appendRow([new Date(), dados.email]);
+  return ContentService.createTextOutput(JSON.stringify({ "status": "sucesso" })).setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
+ * --- LÓGICA PARA MENSAGENS DE CONTACTO ---
+ */
+function processarMensagemContacto(dados) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(NOME_FOLHA_MENSAGENS);
+  if (!sheet) {
+    sheet = ss.insertSheet(NOME_FOLHA_MENSAGENS);
+    sheet.appendRow(["Data", "Nome", "Email", "Mensagem"]);
+    sheet.getRange(1, 1, 1, 4).setFontWeight("bold").setBackground("#fce5cd");
+  }
+  sheet.appendRow([new Date(), dados.nome, dados.email, dados.mensagem]);
+
+  const assunto = `NOVA MENSAGEM - ${NOME_LOJA}`;
+  const corpoHTML = `
+    <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+      <h2 style="color: #800000; border-bottom: 2px solid #800000; padding-bottom: 10px;">Nova Mensagem Recebida</h2>
+      <p><strong>Nome:</strong> ${dados.nome}</p>
+      <p><strong>Email:</strong> ${dados.email}</p>
+      <p><strong>Mensagem:</strong></p>
+      <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; border: 1px solid #ddd;">
+        ${dados.mensagem.replace(/\n/g, '<br>')}
+      </div>
+    </div>
+  `;
+  MailApp.sendEmail({ to: EMAILS_LOJA, subject: assunto, htmlBody: corpoHTML, name: NOME_LOJA });
+  return ContentService.createTextOutput(JSON.stringify({ "status": "sucesso" })).setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
+ * --- LÓGICA PARA ENCOMENDAS ---
+ */
+function processarEncomenda(dados) {
+  let urlComprovativo = "Sem anexo";
+  if (dados.comprovativo) {
+    urlComprovativo = guardarFicheiroDrive(dados.comprovativo, dados.cliente.nome);
+  }
+  
+  // 1. Registar na folha Encomendas (Estrutura de 11 colunas exata)
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(NOME_FOLHA_ENCOMENDAS);
+  if (!sheet) {
+    sheet = ss.insertSheet(NOME_FOLHA_ENCOMENDAS);
+    sheet.appendRow(["Data", "Nome Cliente", "Email", "NIF", "Método Pagamento", "Total (€)", "Estado", "Produtos", "Morada Envio", "Morada Facturação", "Comprovativo Anexado"]);
+    sheet.setFrozenRows(1);
+    sheet.getRange(1, 1, 1, 11).setFontWeight("bold").setBackground("#f3f3f3");
+  }
+  
+  const resumoItens = dados.itens.map(i => `${i.qtd}x ${i.titulo}`).join(", ");
+  const moradaEnvio = `${dados.envio.morada}, ${dados.envio.codigo_postal} ${dados.envio.cidade}, ${dados.envio.pais}`;
+  const moradaFacturacao = (dados.faturacao && dados.faturacao.morada)
+    ? `${dados.faturacao.morada}, ${dados.faturacao.codigo_postal} ${dados.faturacao.cidade}, ${dados.faturacao.pais}`
+    : moradaEnvio;
+
+  sheet.appendRow([
+    new Date(), 
+    dados.cliente.nome, 
+    dados.cliente.email, 
+    dados.cliente.nif || "N/A",
+    dados.pagamento.metodo, 
+    dados.pagamento.total, 
+    "Pendente", 
+    resumoItens,
+    moradaEnvio,
+    moradaFacturacao,
+    urlComprovativo
+  ]);
+
+  // 2. Email para a Jerónimo Editora (Design Original)
+  enviarEmailAlertaJeronimo(dados, urlComprovativo, moradaEnvio);
+  
+  // 3. Email para o Cliente (Design Original - Cabeçalho Verde)
+  enviarEmailConfirmacaoCliente(dados, moradaEnvio);
+  
+  return ContentService.createTextOutput(JSON.stringify({ "status": "sucesso" })).setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
+ * --- FORMATO DE EMAIL: JERÓNIMO ---
+ */
+function enviarEmailAlertaJeronimo(dados, urlComprovativo, moradaEnvio) {
+  const assunto = `Nova Encomenda: ${dados.cliente.nome} (€${dados.pagamento.total})`;
+  let linkHtml = urlComprovativo.startsWith("http") ? `<a href="${urlComprovativo}">Ver Comprovativo</a>` : urlComprovativo;
+
+  const corpoHTML = `
+    <div style="font-family: Arial, sans-serif; color: #333;">
+      <h2 style="color: #002147; border-bottom: 2px solid #002147; padding-bottom: 10px;">NOVA ENCOMENDA RECEBIDA!</h2>
+      <p><strong>Cliente:</strong> ${dados.cliente.nome}</p>
+      <p><strong>Email:</strong> ${dados.cliente.email}</p>
+      <p><strong>Total:</strong> €${dados.pagamento.total}</p>
+      <p><strong>Método:</strong> ${dados.pagamento.metodo}</p>
+      <p><strong>Comprovativo:</strong> ${linkHtml}</p>
+      <br>
+      <strong>DADOS DE ENVIO:</strong><br>
+      ${moradaEnvio.replace(/,/g, '<br>')}
+      <br><br>
+      <strong>PRODUTOS:</strong><br>
+      ${dados.itens.map(i => `- ${i.qtd}x ${i.titulo}`).join("<br>")}
+    </div>
+  `;
+  MailApp.sendEmail({ to: EMAILS_LOJA, subject: assunto, htmlBody: corpoHTML });
+}
+
+/**
+ * --- FORMATO DE EMAIL: CLIENTE ---
+ */
+function enviarEmailConfirmacaoCliente(dados, moradaCompleta) {
+  const uniqueId = new Date().getTime().toString(36);
+  const assunto = `Confirmação de Encomenda - ${NOME_LOJA}`;
+  
+  let linhasTabela = dados.itens.map(item => `
+    <tr style="border-bottom: 1px solid #eee;">
+      <td style="padding: 8px 0; color: #333;">${item.titulo}</td>
+      <td style="padding: 8px 0; text-align: center; color: #333;">${item.qtd}</td>
+      <td style="padding: 8px 0; text-align: right; color: #333;">€${Number(item.preco_unit).toFixed(2)}</td>
+    </tr>
+  `).join("");
+
+  let textoMetodo = (dados.pagamento.metodo === 'mbway') ? "Pagamento via MB Way (917 304 286)" : "Pagamento via Transferência Bancária";
+
+  const corpoHTML = `
+    <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333; line-height: 1.5; font-size: 14px;">
+      
+      <!-- Cabeçalho Verde -->
+      <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; padding: 20px; border-radius: 6px; text-align: center; margin-bottom: 25px;">
+        <h2 style="margin: 0 0 8px 0; font-size: 20px; font-weight: normal;">Olá ${dados.cliente.nome}</h2>
+        <p style="margin: 0;">Obrigado pela sua compra na Jerónimo Editora.<br>Recebemos o seu pedido com sucesso.</p>
+      </div>
+
+      <!-- Tabela -->
+      <h3 style="border-bottom: 1px solid #ddd; padding-bottom: 8px; color: #800000; font-size: 16px; margin-bottom: 10px;">Resumo do Pedido</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="text-transform: uppercase; font-size: 11px; color: #888;">
+            <th style="padding: 5px 0; text-align: left;">Produtos</th>
+            <th style="padding: 5px 0; text-align: center;">Qtd</th>
+            <th style="padding: 5px 0; text-align: right;">Preço</th>
+          </tr>
+        </thead>
+        <tbody>${linhasTabela}</tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2" style="padding: 10px 0; text-align: right; font-weight: bold; border-top: 1px solid #ddd;">Total</td>
+            <td style="padding: 10px 0; text-align: right; font-weight: bold; color: #800000; font-size: 16px; border-top: 1px solid #ddd;">€${dados.pagamento.total}</td>
+          </tr>
+        </tfoot>
+      </table>
+      
+      <!-- Método e Comprovativo -->
+      <div style="margin-top: 20px;">
+          <p style="margin: 0; font-size: 13px; color: #666;">${textoMetodo}</p>
+          <div style="margin-top: 5px; display: inline-block; background-color: #dcfce7; color: #166534; padding: 5px 10px; border-radius: 4px; font-size: 13px;">
+              Comprovativo de pagamento enviado
+          </div>
+      </div>
+
+      <!-- Envio -->
+      <div style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 10px; font-size: 11px; color: #999;">
+        <span style="color: #666; font-weight: bold;">Enviar para:</span> ${moradaCompleta}
+      </div>
+
+      <!-- Bloco de Texto Final -->
+      <div style="margin-top: 30px; padding: 20px; background-color: #fafafa; border-radius: 8px; color: #333; font-size: 14px; border: 1px solid #eee;">
+        <p style="margin-bottom: 15px; margin-top: 0;">
+          A sua encomenda será processada assim que o pagamento for confirmado. Enviaremos novo mail quando o pedido for expedido.
+        </p>
+        <p style="font-weight: bold; color: #800000; margin: 0;">
+          Com os melhores cumprimentos,<br>
+          Equipa Jerónimo Editora
+        </p>
+      </div>
+
+      <div style="display:none; font-size:1px; color:#fff;">Ref: ${uniqueId}</div>
+    </div>
+  `;
+
+  MailApp.sendEmail({ to: dados.cliente.email, subject: assunto, htmlBody: corpoHTML, name: NOME_LOJA, replyTo: EMAILS_LOJA });
+}
+
+/**
+ * Utilitário para salvar ficheiros no Drive
+ */
+function guardarFicheiroDrive(fileData, nomeCliente) {
+  try {
+    const blob = Utilities.newBlob(Utilities.base64Decode(fileData.data), fileData.type, fileData.name);
+    const pastas = DriveApp.getFoldersByName(NOME_PASTA_DRIVE);
+    let pasta = pastas.hasNext() ? pastas.next() : DriveApp.createFolder(NOME_PASTA_DRIVE);
+    const novoFicheiro = pasta.createFile(blob).setName(`${new Date().getTime()}_${nomeCliente.substring(0,10)}_${fileData.name}`);
+    novoFicheiro.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    return novoFicheiro.getUrl();
+  } catch (e) { return "Erro Drive: " + e.toString(); }
+}
