@@ -3,60 +3,62 @@
     <div class="max-w-6xl mx-auto flex justify-between items-center">
         <!-- Logo -->
         <a href="index.html" class="flex items-center space-x-2">
-            <img src="Imagens/Logo J.png" alt="Logótipo Jerónimo Editora" class="h-8 md:h-10 w-auto" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
+            <img src="Imagens/Logo J.png" alt="Logótipo Jerónimo Editora" class="h-9 md:h-11 w-auto" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
             <span class="font-serif text-2xl md:text-3xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors duration-200 hidden sm:inline">Jerónimo Editora</span>
         </a>
         
-        <!-- Menu Desktop: Letras maiores (text-[15px]) e tracking ajustado -->
-        <div class="hidden md:flex items-center space-x-8 text-[15px] font-bold uppercase tracking-wider text-gray-700 font-sans">
+        <!-- Menu Desktop: Letras maiores (text-[16px]) para maior destaque -->
+        <div class="hidden md:flex items-center space-x-10 text-[16px] font-bold uppercase tracking-widest text-gray-700 font-sans">
             <a href="index.html" class="hover:text-brand-accent-red transition-colors">Início</a>
             <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
             
+            <!-- Link Infantil Escondido -->
             <a href="infantil.html" class="hidden hover:text-brand-accent-red transition-colors">Infantil</a>
             
             <a href="produtos.html" class="hover:text-brand-accent-red transition-colors">Produtos</a>
             <a href="index.html#sobre" class="hover:text-brand-accent-red transition-colors">Sobre</a>
             <a href="contacto.html" class="hover:text-brand-accent-red transition-colors">Contacto</a>
             
-            <!-- Carrinho Tradicional -->
-            <div class="pl-4 border-l border-gray-200">
-                <a href="checkout.html" class="relative text-gray-700 hover:text-brand-accent-red transition-colors">
-                    <!-- Ícone de Carrinho mais tradicional (cesto completo) -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Carrinho Tradicional Robusto -->
+            <div class="pl-6 border-l border-gray-200">
+                <a href="checkout.html" class="relative text-gray-800 hover:text-brand-accent-red transition-colors flex items-center">
+                    <!-- Ícone de Carrinho Tradicional com traços mais fortes -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="9" cy="21" r="1"></circle>
                         <circle cx="20" cy="21" r="1"></circle>
                         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                     </svg>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-accent-red text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full opacity-0 transition-all font-sans shadow-sm">0</span>
+                    <!-- Contador mais visível -->
+                    <span id="cart-count" class="absolute -top-3 -right-3 bg-brand-accent-red text-white text-[11px] w-6 h-6 flex items-center justify-center rounded-full opacity-0 transition-all font-sans font-black shadow-md border-2 border-white">0</span>
                 </a>
             </div>
         </div>
         
         <!-- Botão Menu Mobile -->
-        <div class="flex items-center md:hidden space-x-5">
-            <a href="checkout.html" class="relative text-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="flex items-center md:hidden space-x-6">
+            <a href="checkout.html" class="relative text-gray-800">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                 </svg>
-                <span id="cart-count-mobile" class="absolute -top-2 -right-2 bg-brand-accent-red text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full opacity-0 font-sans shadow-sm">0</span>
+                <span id="cart-count-mobile" class="absolute -top-3 -right-3 bg-brand-accent-red text-white text-[11px] w-6 h-6 flex items-center justify-center rounded-full opacity-0 font-sans font-black shadow-md border-2 border-white">0</span>
             </a>
-            <button class="text-3xl text-brand-text focus:outline-none" onclick="toggleMenu()">&#9776;</button>
+            <button class="text-4xl text-brand-text focus:outline-none" onclick="toggleMenu()">&#9776;</button>
         </div>
     </div>
 </nav>
 
-<!-- Menu Mobile Overlay: Letras maiores (text-lg) -->
-<div id="mobile-menu" class="hidden fixed top-16 left-0 w-full h-screen bg-white/95 backdrop-blur-sm shadow-2xl z-40 md:hidden border-t border-gray-100">
-    <div class="flex flex-col p-10 text-center space-y-8 font-bold uppercase tracking-widest text-lg font-sans text-brand-accent-blue">
-        <a href="index.html" class="hover:text-brand-accent-red transition-colors border-b border-gray-50 pb-2" onclick="toggleMenu()">Início</a>
-        <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors border-b border-gray-50 pb-2" onclick="toggleMenu()">Catálogo</a>
+<!-- Menu Mobile Overlay com letras maiores -->
+<div id="mobile-menu" class="hidden fixed top-20 left-0 w-full h-screen bg-white/98 backdrop-blur-md shadow-2xl z-40 md:hidden border-t border-gray-100">
+    <div class="flex flex-col p-12 text-center space-y-10 font-bold uppercase tracking-widest text-xl font-sans text-brand-accent-blue">
+        <a href="index.html" class="hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">Início</a>
+        <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">Catálogo</a>
         
         <a href="infantil.html" class="hidden hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">Infantil</a>
         
-        <a href="produtos.html" class="hover:text-brand-accent-red transition-colors border-b border-gray-50 pb-2" onclick="toggleMenu()">Produtos</a>
-        <a href="index.html#sobre" class="hover:text-brand-accent-red transition-colors border-b border-gray-50 pb-2" onclick="toggleMenu()">Sobre Nós</a>
+        <a href="produtos.html" class="hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">Produtos</a>
+        <a href="index.html#sobre" class="hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">Sobre Nós</a>
         <a href="contacto.html" class="hover:text-brand-accent-red transition-colors" onclick="toggleMenu()">Contacto</a>
     </div>
 </div>
