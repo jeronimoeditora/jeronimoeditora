@@ -96,7 +96,7 @@
                         <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2">1. Carrinho de Compras</h2>
                         
                         <div id="summary-list" class="space-y-5 mb-6 max-h-[45vh] overflow-y-auto pr-2">
-                            <!-- Populated by JS -->
+                            <!-- JS popula isto -->
                         </div>
 
                         <div class="space-y-2 pt-4 border-t border-white/20">
@@ -126,6 +126,7 @@
                         >
                             Confirmar e Pagar
                         </button>
+                        <p id="upload-status" class="text-[10px] text-center mt-2 text-white/50 hidden">A converter comprovativo...</p>
                     </section>
                 </div>
 
@@ -472,12 +473,27 @@
             if (!form.checkValidity()) { form.reportValidity(); return; }
             
             const btn = document.getElementById('place-order-button');
+            const status = document.getElementById('upload-status');
             const originalText = btn.textContent;
-            btn.disabled = true; btn.textContent = "A PROCESSAR...";
+            
+            btn.disabled = true; 
+            btn.textContent = "A PROCESSAR...";
+            status.classList.remove('hidden');
             
             const method = document.querySelector('input[name="payment-method"]:checked').value;
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             const file = fileInput.files[0];
+
+            // Conversão segura do ficheiro
+            let base64 = "";
+            try {
+                base64 = await toBase64(file);
+            } catch (err) {
+                console.error("Erro no anexo:", err);
+                btn.disabled = false; btn.textContent = "Erro no anexo";
+                status.classList.add('hidden');
+                return;
+            }
 
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
@@ -508,11 +524,11 @@
                 },
                 pagamento: { 
                     metodo: method, 
-                    total: (subtotal + custoPortes).toFixed(2) + "€", 
+                    total: (subtotal + custoPortes).toFixed(2), // Enviado apenas como número para o Script
                     portes: custoPortes.toFixed(2),
                     fileName: file.name,
                     fileMimeType: file.type,
-                    fileBase64: await toBase64(file)
+                    fileBase64: base64
                 },
                 itens: cartItems.map(item => ({ titulo: item.title, qtd: item.quantity, preco_unit: item.price }))
             };
@@ -521,7 +537,10 @@
                 await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(orderData) });
                 localStorage.removeItem('cartItems');
                 document.getElementById('success-modal').classList.remove('hidden');
-            } catch (error) { btn.disabled = false; btn.textContent = originalText; }
+            } catch (error) { 
+                btn.disabled = false; btn.textContent = "Erro - Tente de novo"; 
+                status.classList.add('hidden');
+            }
         }
 
         document.querySelectorAll('.sync-field').forEach(field => { field.addEventListener('input', syncBillingAddress); });
