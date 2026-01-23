@@ -4,12 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto | Jerónimo Editora</title>
     
-    <!-- Google Fonts Originais -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -34,30 +32,25 @@
     </script>
 
     <style>
-        /* Estilo de letra baseado no original */
         body { font-family: 'Roboto', sans-serif; color: #333333; }
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
         
         .fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Grelha em Cruz */
         .contact-box {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem 0.25rem; /* Reduzido para mobile */
+            padding: 1.5rem 0.25rem;
             text-align: center;
         }
 
         @media (min-width: 640px) {
-            .contact-box {
-                padding: 2.5rem 1rem; /* Original para desktop */
-            }
+            .contact-box { padding: 2.5rem 1rem; }
         }
         
-        /* Linhas da cruz muito finas */
         .line-r { border-right: 1px solid #e5e7eb; }
         .line-b { border-bottom: 1px solid #e5e7eb; }
 
@@ -72,27 +65,10 @@
             border: 1px solid #e5e7eb;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
-
-        /* Prevenir quebras no email em desktop */
-        @media (min-width: 640px) {
-            .no-break {
-                white-space: nowrap;
-            }
-        }
-        
-        /* Efeito de hover nos ícones de contacto */
-        .contact-link-hover:hover svg {
-            transform: scale(1.1);
-            color: #800000;
-        }
-        .contact-link-hover svg {
-            transition: all 0.3s ease;
-        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- Modal de Confirmação -->
     <div id="message-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden" onclick="this.classList.add('hidden')">
         <div class="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full mx-4 text-center" onclick="event.stopPropagation()">
             <div class="text-green-500 mb-4 flex justify-center">
@@ -104,129 +80,76 @@
         </div>
     </div>
 
-    <!-- CONTENTOR DO MENU -->
     <div id="nav-placeholder"></div>
 
     <main class="flex-grow pt-24 md:pt-32 pb-16"> 
         <div class="max-w-6xl mx-auto px-6 fade-in">
-            
             <h1 class="font-serif text-4xl sm:text-5xl text-brand-accent-red mb-12 border-b pb-4 text-center font-bold">Fale Connosco</h1>
             
-            <!-- Secção Superior: Tabela em Cruz + Foto -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch mb-20">
-                
-                <!-- Grelha em Cruz - Proporção 45% / 55% -->
                 <div class="grid grid-cols-[45%_55%] bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    
-                    <!-- 1º Quadrante: Redes Sociais -->
                     <div class="contact-box line-r line-b">
                         <span class="text-sm sm:text-base font-bold text-brand-text mb-4 font-sans">Redes sociais</span>
                         <div class="flex space-x-2 sm:space-x-4">
-                            <a href="#" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors" aria-label="Facebook">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sm:w-[22px] sm:h-[22px]"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                            </a>
-                            <a href="#" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors" aria-label="Instagram">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sm:w-[22px] sm:h-[22px]"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                            </a>
-                            <a href="#" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors" aria-label="LinkedIn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sm:w-[22px] sm:h-[22px]"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                            </a>
+                            <a href="#" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                            <a href="#" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
                         </div>
                     </div>
-                    
-                    <!-- 2º Quadrante: Email (Ajustado para Mobile) -->
                     <div class="contact-box line-b">
                         <span class="text-sm sm:text-base font-bold text-brand-text mb-3 font-sans">E-mail</span>
-                        <a href="mailto:editorajeronimo@gmail.com" class="text-[10px] xs:text-xs sm:text-base lg:text-lg font-normal text-brand-accent-red hover:underline italic no-break px-1 sm:px-4 font-sans leading-tight">
-                            editorajeronimo@gmail.com
-                        </a>
+                        <a href="mailto:editorajeronimo@gmail.com" class="text-[10px] xs:text-xs sm:text-base lg:text-lg font-normal text-brand-accent-red hover:underline italic font-sans leading-tight">editorajeronimo@gmail.com</a>
                     </div>
-                    
-                    <!-- 3º Quadrante: Telefone -->
                     <div class="contact-box line-r">
                         <span class="text-sm sm:text-base font-bold text-brand-text mb-3 font-sans">Telefone</span>
-                        <a href="https://wa.me/351917304286" target="_blank" class="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-lg font-normal text-gray-700 font-sans contact-link-hover">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 sm:w-5 sm:h-5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            <span class="no-break">917 304 286</span>
+                        <a href="https://wa.me/351917304286" target="_blank" class="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-lg font-normal text-gray-700 font-sans">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-green-600 sm:w-5 sm:h-5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <span>917 304 286</span>
                         </a>
                     </div>
-                    
-                    <!-- 4º Quadrante: Localização -->
                     <div class="contact-box">
                         <span class="text-sm sm:text-base font-bold text-brand-text mb-3 font-sans">Localização</span>
                         <span class="text-xs sm:text-lg font-normal text-gray-700 font-sans">Braga, Portugal</span>
                     </div>
                 </div>
 
-                <!-- Foto -->
                 <div class="photo-frame flex items-center justify-center p-2 bg-white">
-                    <img src="Imagens/bacelos.png" alt="Sede Jerónimo Editora" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://placehold.co/600x400/800000/cfaf5c?text=JERÓNIMO+EDITORA';">
+                    <img src="Imagens/bacelos.png" alt="Sede" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://placehold.co/600x400/800000/cfaf5c?text=JERÓNIMO+EDITORA';">
                 </div>
             </div>
             
-            <!-- Formulário de Mensagem -->
             <section class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100 max-w-4xl mx-auto">
                 <h2 class="font-serif text-3xl font-bold text-brand-accent-red mb-8 border-b border-brand-accent-red/10 pb-4">Deixe a sua mensagem</h2>
-                
                 <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-6">
                     <div class="grid md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label for="nome" class="text-sm font-medium text-gray-600 font-sans">Nome completo *</label>
-                            <input type="text" id="nome" name="nome" required class="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white transition-all outline-none font-sans">
-                        </div>
-                        <div class="space-y-2">
-                            <label for="email" class="text-sm font-medium text-gray-600 font-sans">E-mail *</label>
-                            <input type="email" id="email" name="email" required class="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white transition-all outline-none font-sans">
-                        </div>
+                        <input type="text" name="nome" placeholder="Nome completo *" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
+                        <input type="email" name="email" placeholder="E-mail *" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
                     </div>
-                    <div class="space-y-2">
-                        <label for="mensagem" class="text-sm font-medium text-gray-600 font-sans">Mensagem *</label>
-                        <textarea id="mensagem" name="mensagem" rows="5" required class="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white transition-all outline-none resize-none font-sans"></textarea>
-                    </div>
-                    <button type="submit" id="submit-button" class="w-full bg-brand-accent-red text-white font-bold py-5 rounded-xl shadow-lg hover:bg-red-900 transition-all text-lg tracking-widest active:scale-[0.98] font-sans">
-                        Enviar mensagem
-                    </button>
+                    <textarea name="mensagem" placeholder="Mensagem *" rows="5" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none resize-none font-sans"></textarea>
+                    <button type="submit" id="submit-button" class="w-full bg-brand-accent-red text-white font-bold py-5 rounded-xl shadow-lg hover:bg-red-900 transition-all text-lg tracking-widest font-sans">Enviar mensagem</button>
                 </form>
             </section>
-            
         </div>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ -->
     <div id="footer-placeholder"></div>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwbmYL_ayZsCxsiezaitjTJEvsYVH2mBp40iBxAxMC6TT-h3uv7BOL3DgCyPdBZw_ZdZg/exec'; 
-
-        function getSafePath(file) {
-            const currentUrl = window.location.href;
-            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
-            try { 
-                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-                return new URL(file, baseUrl).href; 
-            } catch (e) { return file; }
-        }
+        // NOVO URL ATUALIZADO
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby1e5Tv0Z3nL20q8EAVYeIdDxQ8ne66fes7Oc9PYdUnU79d4ORPV9bsH4aqV-MJs12TKw/exec'; 
 
         async function loadComponents() {
             try {
-                const navResp = await fetch(getSafePath('menu.html'));
-                if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
-                
-                const footResp = await fetch(getSafePath('rodape.html'));
-                if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
-                
+                const nav = await fetch('menu.html'); if(nav.ok) document.getElementById('nav-placeholder').innerHTML = await nav.text();
+                const foot = await fetch('rodape.html'); if(foot.ok) document.getElementById('footer-placeholder').innerHTML = await foot.text();
                 updateCartUI();
-            } catch (e) { console.warn("Ambiente local detectado."); }
+            } catch (e) {}
         }
 
         async function handleContactSubmit(event) {
             event.preventDefault(); 
             const button = document.getElementById('submit-button');
             const formData = new FormData(event.target);
-            
-            button.disabled = true;
-            const originalText = button.textContent;
-            button.textContent = 'A enviar...';
+            button.disabled = true; button.textContent = 'A enviar...';
 
             try {
                 await fetch(GOOGLE_SCRIPT_URL, {
@@ -241,11 +164,8 @@
                 });
                 event.target.reset();
                 document.getElementById('message-modal').classList.remove('hidden');
-            } catch (error) {
-                console.error('Erro:', error);
-            } finally {
-                button.disabled = false;
-                button.textContent = originalText;
+            } catch (error) { console.error(error); } finally {
+                button.disabled = false; button.textContent = 'Enviar mensagem';
             }
         }
 
@@ -253,18 +173,9 @@
             const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const total = items.reduce((s, i) => s + i.quantity, 0);
             document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
-                if (el) {
-                    el.textContent = total;
-                    el.classList.toggle('opacity-0', total === 0);
-                }
+                if (el) { el.textContent = total; el.classList.toggle('opacity-0', total === 0); }
             });
         }
-
-        function toggleMenu() { 
-            const menu = document.getElementById('mobile-menu');
-            if (menu) menu.classList.toggle('hidden'); 
-        }
-
         window.onload = loadComponents;
     </script>
 </body>
