@@ -61,6 +61,11 @@
             height: 1.1rem;
             cursor: pointer;
         }
+
+        /* Scrollbar discreta para o resumo */
+        #summary-list::-webkit-scrollbar { width: 4px; }
+        #summary-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+        #summary-list::-webkit-scrollbar-thumb { background: rgba(207,175,92,0.3); border-radius: 10px; }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
@@ -85,22 +90,22 @@
 
             <div class="flex flex-col lg:flex-row gap-8">
                 
-                <!-- Resumo da Encomenda -->
+                <!-- 1. RESUMO DA ENCOMENDA -->
                 <div class="lg:w-5/12 lg:sticky lg:top-24 order-1 lg:order-1 h-fit">
                     <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10">
-                        <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-gray-500 pb-2">1. Carrinho de Compras</h2>
+                        <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2">1. Carrinho de Compras</h2>
                         
-                        <div id="summary-list" class="space-y-4 mb-6 max-h-[40vh] md:max-h-[50vh] overflow-y-auto pr-2 text-sm md:text-base">
-                            <!-- JS popula isto -->
+                        <div id="summary-list" class="space-y-5 mb-6 max-h-[45vh] overflow-y-auto pr-2">
+                            <!-- Populated by JS -->
                         </div>
 
-                        <div class="space-y-2 pt-4 border-t border-gray-500">
-                            <div class="flex justify-between text-sm font-sans">
+                        <div class="space-y-2 pt-4 border-t border-white/20">
+                            <div class="flex justify-between text-sm font-sans opacity-80">
                                 <span>Subtotal (Produtos):</span>
                                 <span id="summary-subtotal">€ 0,00</span>
                             </div>
                             <div class="flex flex-col items-end">
-                                <div class="flex justify-between w-full text-sm font-sans">
+                                <div class="flex justify-between w-full text-sm font-sans opacity-80">
                                     <span>Portes de Envio:</span>
                                     <span id="summary-shipping" class="font-medium text-brand-gold">€ 0,00</span>
                                 </div>
@@ -121,14 +126,13 @@
                         >
                             Confirmar e Pagar
                         </button>
-                        
-                        <p id="missing-file-message" class="text-center text-xs md:text-sm text-red-300 mt-2 hidden font-bold italic font-sans">Por favor, anexe o comprovativo de pagamento.</p>
                     </section>
                 </div>
 
-                <!-- Formulários -->
+                <!-- FORMULÁRIOS -->
                 <div class="lg:w-7/12 order-2 lg:order-2">
                     
+                    <!-- 2. DETALHES DE ENVIO -->
                     <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg mb-8 border border-gray-100">
                         <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">2. Detalhes de Envio e Facturação</h2>
                         <p class="text-[10px] md:text-xs text-gray-500 mb-6 font-sans italic">* Campos obrigatórios para finalizar encomenda</p>
@@ -151,7 +155,6 @@
                                     <input type="text" id="nif" name="nif" class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50">
                                     <p class="mt-1 text-[10px] text-gray-400 font-medium font-sans italic">A fatura será enviada por e-mail.</p>
                                 </div>
-                                <!-- Telefone eliminado -->
                             </div>
                             
                             <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
@@ -179,7 +182,6 @@
                                     <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white sync-field font-sans" data-target="pais-fat" onchange="loadCartSummary()">
                                         <option value="PT">Portugal (Continente e Ilhas)</option>
                                         <option value="ES">Espanha</option>
-                                        <option value="BR">Brasil</option>
                                         <option value="Resto">Resto do Mundo</option>
                                     </select>
                                 </div>
@@ -228,6 +230,7 @@
                         </form>
                     </section>
 
+                    <!-- 3. MÉTODO DE PAGAMENTO -->
                     <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg border border-gray-100">
                         <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">3. Método de Pagamento</h2>
                         <p class="text-[10px] md:text-xs text-gray-400 mb-6 font-sans italic">Efectue o pagamento através de um dos seguintes meios:</p>
@@ -240,20 +243,18 @@
                                     <span class="text-gray-800 font-medium text-sm md:text-base">MB WAY (Pagamento Imediato)</span>
                                 </label>
                                 <div id="mbway-details" class="mt-3 p-4 md:p-5 border-t border-gray-200 bg-gray-50 rounded-b-lg">
-                                    <div class="payment-box flex items-center space-x-4 mb-4 p-3 md:p-4">
-                                        <div class="bg-green-500 text-white p-2 rounded-full flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-                                        <div class="font-sans"><p class="text-[10px] text-blue-700 font-bold uppercase tracking-widest mb-1">Contacto:</p><p class="text-lg font-bold text-brand-accent-blue">917 304 286</p></div>
+                                    <div class="payment-box flex items-center space-x-4 mb-4 p-3 md:p-4 text-brand-accent-blue font-sans">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                        <div><p class="text-[10px] uppercase font-bold text-blue-800 opacity-70">Contacto:</p><p class="text-lg font-bold">917 304 286</p></div>
                                     </div>
-                                    <div class="flex flex-col space-y-3 font-sans">
-                                        <div class="flex flex-wrap items-center gap-3">
-                                            <input type="file" id="proof-file-mbway" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('mbway')" />
-                                            <label for="proof-file-mbway" class="cursor-pointer bg-brand-accent-blue text-white py-3 px-6 rounded-lg font-bold text-xs md:text-sm hover:bg-brand-accent-red transition-all shadow-sm">
-                                                Anexar comprovativo *
-                                            </label>
-                                            <div id="file-display-mbway" class="hidden items-center space-x-2 bg-gray-100 px-3 py-2 rounded-md">
-                                                <span id="file-name-mbway" class="text-xs text-gray-600 truncate max-w-[150px] italic"></span>
-                                                <button onclick="removeFile('mbway')" class="text-red-500 hover:text-red-700 font-bold text-lg leading-none" title="Remover anexo">&times;</button>
-                                            </div>
+                                    <div class="flex items-center gap-3">
+                                        <input type="file" id="proof-file-mbway" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('mbway')" />
+                                        <label for="proof-file-mbway" class="cursor-pointer bg-brand-accent-blue text-white py-3 px-6 rounded-lg font-bold text-xs md:text-sm hover:bg-brand-accent-red transition-all shadow-sm">
+                                            Anexar comprovativo *
+                                        </label>
+                                        <div id="file-display-mbway" class="hidden items-center space-x-2 bg-gray-100 px-3 py-2 rounded-md border border-gray-200">
+                                            <span id="file-name-mbway" class="text-xs text-gray-600 truncate max-w-[150px] italic"></span>
+                                            <button onclick="removeFile('mbway')" class="text-red-500 hover:text-red-700 font-bold text-xl leading-none" title="Remover">&times;</button>
                                         </div>
                                     </div>
                                 </div>
@@ -266,20 +267,18 @@
                                     <span class="text-gray-800 font-medium text-sm md:text-base">Transferência Bancária</span>
                                 </label>
                                 <div id="transfer-details" class="mt-3 p-4 md:p-5 border-t border-gray-200 bg-gray-50 rounded-b-lg hidden">
-                                    <div class="payment-box flex items-center space-x-4 mb-4 p-3 md:p-4">
-                                        <div class="bg-brand-accent-blue text-white p-2 rounded-full flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18"/><path d="M7 15h.01"/><path d="M11 15h.01"/><rect width="20" height="14" x="2" y="5" rx="2"/></svg></div>
-                                        <div class="font-sans min-w-0"><p class="text-[10px] text-blue-700 font-bold uppercase tracking-widest mb-1">IBAN:</p><p class="text-sm md:text-base font-bold text-brand-accent-blue break-all">PT50 0035 0284 0001 5872 4004 0</p></div>
+                                    <div class="payment-box mb-4 text-brand-accent-blue font-sans">
+                                        <p class="text-[10px] uppercase font-bold text-blue-800 opacity-70">IBAN:</p>
+                                        <p class="text-sm md:text-base font-bold break-all">PT50 0035 0284 0001 5872 4004 0</p>
                                     </div>
-                                    <div class="flex flex-col space-y-3 font-sans">
-                                        <div class="flex flex-wrap items-center gap-3">
-                                            <input type="file" id="proof-file-transfer" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('transfer')" />
-                                            <label for="proof-file-transfer" class="cursor-pointer bg-brand-accent-blue text-white py-3 px-6 rounded-lg font-bold text-xs md:text-sm hover:bg-brand-accent-red transition-all shadow-sm">
-                                                Anexar comprovativo *
-                                            </label>
-                                            <div id="file-display-transfer" class="hidden items-center space-x-2 bg-gray-100 px-3 py-2 rounded-md">
-                                                <span id="file-name-transfer" class="text-xs text-gray-600 truncate max-w-[150px] italic"></span>
-                                                <button onclick="removeFile('transfer')" class="text-red-500 hover:text-red-700 font-bold text-lg leading-none" title="Remover anexo">&times;</button>
-                                            </div>
+                                    <div class="flex items-center gap-3">
+                                        <input type="file" id="proof-file-transfer" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('transfer')" />
+                                        <label for="proof-file-transfer" class="cursor-pointer bg-brand-accent-blue text-white py-3 px-6 rounded-lg font-bold text-xs md:text-sm hover:bg-brand-accent-red transition-all shadow-sm">
+                                            Anexar comprovativo *
+                                        </label>
+                                        <div id="file-display-transfer" class="hidden items-center space-x-2 bg-gray-100 px-3 py-2 rounded-md border border-gray-200">
+                                            <span id="file-name-transfer" class="text-xs text-gray-600 truncate max-w-[150px] italic"></span>
+                                            <button onclick="removeFile('transfer')" class="text-red-500 hover:text-red-700 font-bold text-xl leading-none" title="Remover">&times;</button>
                                         </div>
                                     </div>
                                 </div>
@@ -296,7 +295,7 @@
 
     <script>
         const SHIPPING_MARGIN = 25; 
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwbmYL_ayZsCxsiezaitjTJEvsYVH2mBp40iBxAxMC6TT-h3uv7BOL3DgCyPdBZw_ZdZg/exec'; 
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby1e5Tv0Z3nL20q8EAVYeIdDxQ8ne66fes7Oc9PYdUnU79d4ORPV9bsH4aqV-MJs12TKw/exec'; 
 
         const bookData = [
             { id: 1, title: "Suma Teológica", price: 75.00, weight: 2400 },
@@ -308,14 +307,18 @@
 
         async function loadComponents() {
             try {
-                const navResp = await fetch('menu.html');
-                if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
-                const footResp = await fetch('rodape.html');
-                if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                const nav = await fetch('menu.html'); if(nav.ok) document.getElementById('nav-placeholder').innerHTML = await nav.text();
+                const foot = await fetch('rodape.html'); if(foot.ok) document.getElementById('footer-placeholder').innerHTML = await foot.text();
                 loadCartSummary(); 
-                updateUI();
-            } catch (e) { console.warn("Componentes não carregados localmente."); }
+            } catch(e) { console.warn("Componentes não carregados."); }
         }
+
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
 
         function formatPrice(p) { return `€ ${p.toFixed(2).replace('.', ',')}`; }
 
@@ -325,24 +328,16 @@
             const billingFields = document.querySelectorAll('.billing-field');
             if (!choiceInput) return;
             billingContainer.classList.remove('hidden');
-            const choice = choiceInput.value;
-            if (choice === 'sim') {
+            if (choiceInput.value === 'sim') {
                 syncBillingAddress();
-                billingFields.forEach(f => {
-                    f.setAttribute('readonly', 'true');
-                    f.classList.add('bg-gray-100', 'text-gray-500');
-                });
+                billingFields.forEach(f => { f.setAttribute('readonly', 'true'); f.classList.add('bg-gray-100', 'text-gray-500'); });
             } else {
-                billingFields.forEach(f => {
-                    f.removeAttribute('readonly');
-                    f.classList.remove('bg-gray-100', 'text-gray-500');
-                });
+                billingFields.forEach(f => { f.removeAttribute('readonly'); f.classList.remove('bg-gray-100', 'text-gray-500'); });
             }
         }
 
         function syncBillingAddress() {
-            const choice = document.querySelector('input[name="billing-choice"]:checked')?.value;
-            if (choice === 'sim') {
+            if (document.querySelector('input[name="billing-choice"]:checked')?.value === 'sim') {
                 document.getElementById('morada-fat').value = document.getElementById('morada').value;
                 document.getElementById('cod-postal-fat').value = document.getElementById('cod-postal').value;
                 document.getElementById('cidade-fat').value = document.getElementById('cidade').value;
@@ -356,23 +351,18 @@
             const nameSpan = document.getElementById(`file-name-${type}`);
             if (input.files.length > 0) {
                 nameSpan.textContent = input.files[0].name;
-                display.classList.remove('hidden');
-                display.classList.add('flex');
-            } else {
-                display.classList.add('hidden');
-                display.classList.remove('flex');
-            }
+                display.classList.remove('hidden'); display.classList.add('flex');
+            } else { display.classList.add('hidden'); }
             validateFinalButton();
         }
 
         function removeFile(type) {
-            const input = document.getElementById(`proof-file-${type}`);
-            input.value = ""; 
+            document.getElementById(`proof-file-${type}`).value = ""; 
             updateFileName(type);
         }
 
         function updatePaymentDetails() {
-            const method = document.querySelector('input[name="payment-method"]:checked')?.value;
+            const method = document.querySelector('input[name="payment-method"]:checked').value;
             document.getElementById('transfer-details').classList.toggle('hidden', method !== 'bank-transfer');
             document.getElementById('mbway-details').classList.toggle('hidden', method !== 'mbway');
             validateFinalButton();
@@ -381,18 +371,43 @@
         function validateFinalButton() {
             const btn = document.getElementById('place-order-button');
             const method = document.querySelector('input[name="payment-method"]:checked')?.value;
-            const fileInput = method === 'bank-transfer' ? document.getElementById('proof-file-transfer') : document.getElementById('proof-file-mbway');
-            const hasFile = fileInput && fileInput.files.length > 0;
-            const cartEmpty = JSON.parse(localStorage.getItem('cartItems') || '[]').length === 0;
-            
-            btn.disabled = !hasFile || cartEmpty;
+            const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
+            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            btn.disabled = fileInput.files.length === 0 || cartItems.length === 0;
         }
 
         function obterTarifa(peso, destino) {
             if (destino === 'PT') return peso <= 500 ? (0.139 + (peso/1000 * 2.684)) : (1.509 + (peso/1000 * 0.623));
             if (destino === 'ES') return peso <= 500 ? (0.45 + (peso/1000 * 7.50)) : (1.20 + (peso/1000 * 6.80));
-            if (destino === 'BR') return peso <= 500 ? (0.60 + (peso/1000 * 12.00)) : (2.00 + (peso/1000 * 10.50));
             return peso <= 500 ? (0.70 + (peso/1000 * 13.50)) : (2.50 + (peso/1000 * 11.80));
+        }
+
+        function changeQuantity(id, delta) {
+            let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const idx = items.findIndex(i => i.id === id);
+            if (idx > -1) {
+                items[idx].quantity += delta;
+                if (items[idx].quantity < 1) items[idx].quantity = 1;
+                localStorage.setItem('cartItems', JSON.stringify(items));
+                loadCartSummary();
+                updateGlobalCartUI();
+            }
+        }
+
+        function removeItem(id) {
+            let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            items = items.filter(i => i.id !== id);
+            localStorage.setItem('cartItems', JSON.stringify(items));
+            loadCartSummary(); 
+            updateGlobalCartUI();
+        }
+
+        function updateGlobalCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const totalQtd = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if(el) { el.textContent = totalQtd; el.classList.toggle('opacity-0', totalQtd === 0); }
+            });
         }
 
         function loadCartSummary() {
@@ -409,17 +424,30 @@
                     subtotal += lineTotal;
                     const book = bookData.find(b => b.id === item.id);
                     pesoTotal += ((book ? book.weight : 350) * item.quantity);
+                    
                     html += `
-                    <div class="flex justify-between items-start border-b border-white/10 pb-4 mb-4 last:border-0 last:pb-0">
-                        <div class="pr-4 flex-grow font-sans min-w-0">
-                            <span class="font-serif text-base text-white leading-tight block font-bold italic truncate">${item.title}</span>
-                            <span class="text-[11px] opacity-60">Qtd: ${item.quantity}</span>
-                        </div>
-                        <div class="flex flex-col items-end flex-shrink-0 ml-2">
-                            <span class="font-sans font-bold text-brand-gold text-sm">${formatPrice(lineTotal)}</span>
-                            <button onclick="removeItem(${item.id})" class="text-[9px] text-white/40 hover:text-red-400 mt-1 font-bold uppercase">Remover</button>
-                        </div>
-                    </div>`;
+                        <div class="flex flex-col border-b border-white/10 pb-4 mb-4 last:border-0 last:pb-0">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="font-serif text-base text-white leading-tight font-bold italic truncate flex-grow mr-2">${item.title}</span>
+                                <span class="font-sans font-bold text-brand-gold text-sm">${formatPrice(lineTotal)}</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <!-- Controlos de Quantidade Discretos -->
+                                <div class="flex items-center space-x-3 bg-white/5 rounded-lg px-2 py-1 border border-white/10">
+                                    <button onclick="changeQuantity(${item.id}, -1)" class="text-gray-400 hover:text-white transition-colors" title="Diminuir">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                    </button>
+                                    <span class="text-white text-xs font-bold w-4 text-center">${item.quantity}</span>
+                                    <button onclick="changeQuantity(${item.id}, 1)" class="text-gray-400 hover:text-white transition-colors" title="Aumentar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                    </button>
+                                </div>
+                                <!-- Ícone de Lixo Discreto -->
+                                <button onclick="removeItem(${item.id})" class="text-gray-500 hover:text-red-400 transition-colors" title="Remover item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                </button>
+                            </div>
+                        </div>`;
                 });
             }
             
@@ -431,18 +459,11 @@
                 document.getElementById('otimizacao-badge').innerHTML = numPacotes > 1 ? `<span class="bg-green-600 text-white text-[9px] px-2 py-1 rounded-full font-bold uppercase">Otimizado em ${numPacotes} volumes</span>` : '';
             }
             
-            if (list) list.innerHTML = html;
+            list.innerHTML = html;
             document.getElementById('summary-subtotal').textContent = formatPrice(subtotal);
             document.getElementById('summary-shipping').textContent = formatPrice(custoPortes);
             document.getElementById('summary-total').textContent = formatPrice(subtotal + custoPortes);
             validateFinalButton();
-        }
-
-        function removeItem(id) {
-             let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-             items = items.filter(i => i.id !== id);
-             localStorage.setItem('cartItems', JSON.stringify(items));
-             loadCartSummary(); updateUI();
         }
 
         async function placeOrder(event) {
@@ -451,11 +472,15 @@
             if (!form.checkValidity()) { form.reportValidity(); return; }
             
             const btn = document.getElementById('place-order-button');
+            const originalText = btn.textContent;
             btn.disabled = true; btn.textContent = "A PROCESSAR...";
             
+            const method = document.querySelector('input[name="payment-method"]:checked').value;
+            const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
+            const file = fileInput.files[0];
+
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-            const destinoId = document.getElementById('pais').value;
             const paisTexto = document.getElementById('pais').options[document.getElementById('pais').selectedIndex].text;
             
             let pesoTotal = 0;
@@ -464,14 +489,31 @@
             if (pesoTotal > 0) {
                 const pesoFinal = pesoTotal + SHIPPING_MARGIN;
                 let numPacotes = Math.ceil(pesoFinal / 2000), pesoPorPacote = pesoFinal / numPacotes;
-                for (let i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, destinoId);
+                for (let i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, document.getElementById('pais').value);
             }
 
             const orderData = {
                 type: 'order',
                 cliente: { nome: document.getElementById('nome').value, email: document.getElementById('email').value, nif: document.getElementById('nif').value },
-                envio: { morada: document.getElementById('morada').value, nr_andar: document.getElementById('nr-andar').value, cod_postal: document.getElementById('cod-postal').value, cidade: document.getElementById('cidade').value, pais: paisTexto },
-                pagamento: { metodo: document.querySelector('input[name="payment-method"]:checked').value, total: (subtotal + custoPortes).toFixed(2), portes: custoPortes.toFixed(2) },
+                envio: { 
+                    morada: document.getElementById('morada').value, 
+                    nr_andar: document.getElementById('nr-andar').value, 
+                    cod_postal: document.getElementById('cod-postal').value, 
+                    cidade: document.getElementById('cidade').value, 
+                    pais: paisTexto,
+                    morada_fat: document.getElementById('morada-fat').value,
+                    cod_postal_fat: document.getElementById('cod-postal-fat').value,
+                    cidade_fat: document.getElementById('cidade-fat').value,
+                    pais_fat: document.getElementById('pais-fat').options[document.getElementById('pais-fat').selectedIndex]?.text
+                },
+                pagamento: { 
+                    metodo: method, 
+                    total: (subtotal + custoPortes).toFixed(2) + "€", 
+                    portes: custoPortes.toFixed(2),
+                    fileName: file.name,
+                    fileMimeType: file.type,
+                    fileBase64: await toBase64(file)
+                },
                 itens: cartItems.map(item => ({ titulo: item.title, qtd: item.quantity, preco_unit: item.price }))
             };
 
@@ -479,15 +521,7 @@
                 await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(orderData) });
                 localStorage.removeItem('cartItems');
                 document.getElementById('success-modal').classList.remove('hidden');
-            } catch (error) { btn.disabled = false; btn.textContent = "Erro - Tente de Novo"; }
-        }
-
-        function updateUI() {
-            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const count = items.reduce((s, i) => s + i.quantity, 0); 
-            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
-                if (el) { el.textContent = count; el.classList.toggle('opacity-0', count === 0); }
-            });
+            } catch (error) { btn.disabled = false; btn.textContent = originalText; }
         }
 
         document.querySelectorAll('.sync-field').forEach(field => { field.addEventListener('input', syncBillingAddress); });
