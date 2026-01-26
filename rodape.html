@@ -1,15 +1,13 @@
 <footer class="bg-gray-900 text-gray-300 py-12 md:py-16 px-6 border-t-8 border-brand-accent-red font-sans">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+
     <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         <div class="space-y-4 text-center sm:text-left">
             <div class="flex items-center justify-center sm:justify-start space-x-2">
                 <img src="Imagens/Logo J Dourado.png" alt="Logo" class="h-7 w-auto" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
                 <span class="font-serif text-xl font-bold text-white">Jerónimo Editora</span>
             </div>
-            <p class="text-xs text-gray-400 leading-relaxed">
-                Rigor teológico, fidelidade às fontes e excelência editorial. A Jerónimo Editora dedica-se a enriquecer a cultura bíblica Católica em Portugal.
-            </p>
+            <p class="text-xs text-gray-400 leading-relaxed">Rigor teológico, fidelidade às fontes e excelência editorial. A Jerónimo Editora dedica-se a enriquecer a cultura bíblica Católica em Portugal.</p>
         </div>
 
         <div class="text-center sm:text-left">
@@ -17,7 +15,7 @@
             <ul class="space-y-2 text-xs">
                 <li><a href="index.html" class="hover:text-white transition">Início</a></li>
                 <li><a href="catalogo-completo.html" class="hover:text-white transition">Catálogo</a></li>
-                <li><a href="rodape.html" class="hover:text-white transition">Contacto</a></li>
+                <li><a href="produtos.html" class="hover:text-white transition">Produtos</a></li>
             </ul>
         </div>
 
@@ -27,21 +25,20 @@
             <p class="text-xs text-gray-500 italic mb-4">Braga, Portugal</p>
             
             <div class="flex justify-center sm:justify-start space-x-4 text-gray-400">
-                <a href="#" class="hover:text-brand-gold transition text-lg"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="hover:text-brand-gold transition text-lg"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-brand-gold transition text-lg" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-brand-gold transition text-lg" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
 
         <div class="text-center sm:text-left">
             <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm">Newsletter</h4>
-            <form class="flex flex-col space-y-2">
-                <input type="email" placeholder="O seu email" class="p-2 rounded bg-gray-800 border border-gray-700 text-white text-xs outline-none focus:border-brand-gold">
-                <button type="submit" class="bg-brand-gold text-brand-accent-blue font-bold py-2 rounded text-[10px] uppercase tracking-tighter hover:bg-yellow-600 transition-colors">Subscrever</button>
+            <form onsubmit="handleSubscribe(event)" class="flex flex-col space-y-2">
+                <input type="email" id="newsletter-email" placeholder="O seu email" required class="p-2 rounded bg-gray-800 border border-gray-700 text-white text-xs outline-none focus:border-brand-gold">
+                <button type="submit" id="news-btn" class="bg-brand-gold text-brand-accent-blue font-bold py-2 rounded text-[10px] uppercase tracking-tighter hover:bg-yellow-600 transition-colors">Subscrever</button>
             </form>
+            <p id="news-msg" class="text-[10px] mt-2 hidden text-green-500 font-bold uppercase">Subscrição concluída!</p>
         </div>
     </div>
     
     <div class="max-w-6xl mx-auto text-center pt-8 mt-10 border-t border-gray-800">
-        <p class="text-[9px] text-gray-600 uppercase tracking-[0.3em]">© 2026 Jerónimo Editora</p>
-    </div>
-</footer>
+        <p class="
