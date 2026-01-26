@@ -1,7 +1,7 @@
 <footer class="bg-gray-900 text-gray-300 py-12 md:py-16 px-6 border-t-8 border-brand-accent-red font-sans">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
         <div class="space-y-4 text-center sm:text-left">
             <div class="flex items-center justify-center sm:justify-start space-x-2">
                 <img src="Imagens/Logo J Dourado.png" alt="Logo" class="h-8 w-auto" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
@@ -31,15 +31,6 @@
                 <a href="#" class="hover:text-brand-gold transition text-xl" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
-
-        <div class="text-center sm:text-left">
-            <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm">Newsletter</h4>
-            <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="flex flex-col space-y-2">
-                <input type="email" name="email" id="newsletter-email" placeholder="O seu email" required class="p-3 rounded bg-gray-800 border border-gray-700 text-white text-sm outline-none focus:border-brand-gold">
-                <button type="submit" id="news-btn" class="bg-brand-gold text-brand-accent-blue font-bold py-3 rounded text-xs uppercase tracking-widest hover:bg-yellow-600 transition-colors">Subscrever</button>
-            </form>
-            <p id="news-msg" class="text-xs mt-3 hidden text-green-500 font-bold uppercase tracking-tight">Subscrição concluída!</p>
-        </div>
     </div>
     
     <div class="max-w-6xl mx-auto text-center pt-8 mt-10 border-t border-gray-800">
@@ -47,37 +38,4 @@
             © 2026 Jerónimo Editora. Todos os direitos reservados.
         </p>
     </div>
-
-    <script>
-        async function handleNewsletterSubmit(event) {
-            event.preventDefault();
-            const btn = document.getElementById('news-btn');
-            const msg = document.getElementById('news-msg');
-            const emailInput = document.getElementById('newsletter-email');
-            const scriptURL = 'https://script.google.com/macros/s/AKfycby1e5Tv0Z3nL20q8EAVYeIdDxQ8ne66fes7Oc9PYdUnU79d4ORPV9bsH4aqV-MJs12TKw/exec';
-
-            btn.disabled = true;
-            btn.textContent = 'A ENVIAR...';
-
-            try {
-                await fetch(scriptURL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: JSON.stringify({
-                        type: 'newsletter_subscription',
-                        email: emailInput.value,
-                        date: new Date().toISOString()
-                    })
-                });
-                
-                emailInput.value = '';
-                btn.classList.add('hidden');
-                msg.classList.remove('hidden');
-            } catch (error) {
-                console.error('Erro na subscrição:', error);
-                btn.disabled = false;
-                btn.textContent = 'TENTAR NOVAMENTE';
-            }
-        }
-    </script>
 </footer>
