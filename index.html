@@ -98,6 +98,13 @@
             white-space: nowrap;
             font-size: clamp(1.4rem, 5.5vw, 4.2rem);
         }
+        
+        /* Garantia de transparência para PNGs */
+        .transparent-png {
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
@@ -124,8 +131,6 @@
 
                     <h3 class="font-serif text-xl md:text-2xl text-brand-gold-dark italic mb-6 md:mb-8">por Peter Kreeft</h3>
                     
-                    
-                    
                     <!-- Botões -->
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start font-sans">
                         <a href="detalhes.html" class="bg-brand-accent-red text-white px-10 py-4 font-bold rounded-xl uppercase tracking-widest shadow-xl hover:bg-red-900 transition-all text-sm text-center">
@@ -143,7 +148,8 @@
                         <div class="absolute -top-4 -right-2 md:-top-6 md:-right-4 bg-brand-gold text-brand-accent-blue px-4 md:px-6 py-2 rounded-xl font-black text-[10px] md:text-xs z-20 floating-tag uppercase shadow-lg font-sans">
                             Novidade 2025
                         </div>
-                        <img src="Imagens/Kreeft2.png" alt="Capa do Livro Peter Kreeft" class="w-48 sm:w-60 md:w-80 lg:w-96 book-shadow rounded-sm" onerror="this.src='https://placehold.co/400x600?text=BÍBLIA';">
+                        <!-- Adicionado estilo para forçar transparência -->
+                        <img src="Imagens/Kreeft2.png" alt="Capa do Livro Peter Kreeft" class="w-48 sm:w-60 md:w-80 lg:w-96 book-shadow rounded-sm block" style="background-color: transparent !important; border: none !important;" onerror="this.src='https://placehold.co/400x600?text=BÍBLIA';">
                     </div>
                 </div>
             </div>
@@ -173,31 +179,27 @@
 
         <!-- Secção Novidades -->
         <section id="novidades" class="py-16 md:py-24 bg-brand-bg border-b-8 border-gray-100/50">
-           
-                
-                <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center">
+                <!-- Livro de Peter Kreeft -->
+                <div class="bg-white p-6 md:p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all group max-w-md w-full">
+                    <a href="detalhes.html">
+                        <!-- Removido o 'bg-gray-50' que criava o fundo cinza atrás da transparência -->
+                        <div class="overflow-hidden rounded-lg mb-6 flex justify-center py-8">
+                            <img src="Imagens/Kreeft2.png" alt="Tu podes compreender a Bíblia" class="h-56 md:h-72 object-contain group-hover:scale-110 transition-transform duration-500" style="background-color: transparent !important;" onerror="this.src='https://placehold.co/150x200?text=Kreeft';">
+                        </div>
+                        <h4 class="font-serif text-xl md:text-2xl mb-1 text-brand-accent-blue font-bold tracking-tight">Tu podes compreender a Bíblia</h4>
+                        
+                        <p class="font-serif text-sm md:text-base text-brand-gold-dark italic mb-3">Um guia prático para cada livro da Bíblia</p>
+                        
+                        <p class="text-brand-accent-red font-black text-xl italic font-classic">15,00€</p>
+                    </a>
+                </div>
 
-                    <!-- Livro de Peter Kreeft -->
-                    <div class="bg-white p-6 md:p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all group max-w-md w-full">
-                        <a href="detalhes.html">
-                            <div class="overflow-hidden rounded-lg mb-6 flex justify-center py-8 bg-gray-50">
-                                <img src="Imagens/Kreeft2.png" alt="Tu podes compreender a Bíblia" class="h-56 md:h-72 object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/150x200?text=Kreeft';">
-                            </div>
-                            <h4 class="font-serif text-xl md:text-2xl mb-1 text-brand-accent-blue font-bold tracking-tight">Tu podes compreender a Bíblia</h4>
-                            
-                            <!-- Subtítulo acrescentado também aqui para consistência -->
-                            <p class="font-serif text-sm md:text-base text-brand-gold-dark italic mb-3">Um guia prático para cada livro da Bíblia</p>
-                            
-                            <p class="text-brand-accent-red font-black text-xl italic font-classic">15,00€</p>
-                        </a>
-                    </div>
-
-                    <!-- Botão Catálogo -->
-                    <div class="mt-12 md:mt-16">
-                        <a href="catalogo-completo.html" class="border-2 border-brand-accent-blue text-brand-accent-blue px-12 py-4 font-bold rounded-xl uppercase tracking-widest hover:bg-brand-accent-blue hover:text-white transition-all text-sm inline-block shadow-md font-sans">
-                            Explorar Catálogo
-                        </a>
-                    </div>
+                <!-- Botão Catálogo -->
+                <div class="mt-12 md:mt-16">
+                    <a href="catalogo-completo.html" class="border-2 border-brand-accent-blue text-brand-accent-blue px-12 py-4 font-bold rounded-xl uppercase tracking-widest hover:bg-brand-accent-blue hover:text-white transition-all text-sm inline-block shadow-md font-sans">
+                        Explorar Catálogo
+                    </a>
                 </div>
             </div>
         </section>
