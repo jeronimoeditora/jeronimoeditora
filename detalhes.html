@@ -1,4 +1,4 @@
-<html lang="pt-PT">
+~<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +37,8 @@
 
     <style>
         .book-shadow {
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            /* Sombra suave apenas para dar profundidade ao livro, sem criar bordas rígidas */
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.2));
         }
         .fade-in {
             animation: fadeIn 0.8s ease-out forwards;
@@ -70,14 +71,13 @@
             width: 100%;
         }
 
-        input, select, textarea {
-            font-size: 16px !important;
-        }
-
-        /* Garantia de transparência para o PNG */
-        .transparent-png {
+        /* Garantia absoluta de fundo transparente */
+        .force-transparent {
             background-color: transparent !important;
+            background-image: none !important;
             border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
         }
     </style>
 </head>
@@ -103,13 +103,23 @@
                 
                 <!-- Coluna de Imagens -->
                 <div class="md:col-span-2 space-y-8 flex flex-col items-center">
-                    <!-- Removido o 'bg-white' e 'border' que criavam a moldura branca ao redor do livro -->
-                    <div class="flex justify-center w-full py-4">
-                        <img id="main-image" src="Imagens/Kreeft2.png" alt="Capa do livro" class="w-48 md:w-full max-w-sm h-auto object-contain book-shadow rounded-sm transparent-png" onerror="this.src='https://placehold.co/400x600?text=LIVRO';">
+                    <!-- Contentor principal da imagem sem fundos ou bordas -->
+                    <div class="flex justify-center w-full py-4 force-transparent">
+                        <img id="main-image" src="Imagens/Kreeft2.png" alt="Capa do livro" 
+                             class="w-48 md:w-full max-w-sm h-auto object-contain book-shadow force-transparent" 
+                             style="background: transparent !important;"
+                             onerror="this.src='https://placehold.co/400x600?text=LIVRO';">
                     </div>
-                    <div class="flex justify-center space-x-4">
-                        <img src="Imagens/Kreeft2.png" alt="Miniatura 1" class="w-12 h-12 md:w-16 md:h-16 object-cover rounded border-2 border-brand-accent-red cursor-pointer transition shadow-sm bg-transparent" onclick="updateImage(this)">
-                        <img src="Imagens/Logo J.png" alt="Miniatura 2" class="w-12 h-12 md:w-16 md:h-16 object-contain p-2 rounded border border-gray-200 cursor-pointer hover:border-brand-accent-red transition" onclick="updateImage(this)">
+                    <!-- Miniaturas -->
+                    <div class="flex justify-center space-x-4 force-transparent">
+                        <img src="Imagens/Kreeft2.png" alt="Miniatura 1" 
+                             class="w-12 h-12 md:w-16 md:h-16 object-cover rounded border-2 border-brand-accent-red cursor-pointer transition shadow-sm" 
+                             style="background: transparent !important;"
+                             onclick="updateImage(this)">
+                        <img src="Imagens/Logo J.png" alt="Miniatura 2" 
+                             class="w-12 h-12 md:w-16 md:h-16 object-contain p-2 rounded border border-gray-200 cursor-pointer hover:border-brand-accent-red transition" 
+                             style="background: transparent !important;"
+                             onclick="updateImage(this)">
                     </div>
                 </div>
 
@@ -219,16 +229,21 @@
 
         async function loadComponents() {
             try {
-                const navResponse = await fetch(getSafePath('menu.html'));
+                // Adicionada cache-busting para garantir que carrega versões novas de menu/rodape
+                const navResponse = await fetch(getSafePath('menu.html?v=' + Date.now()));
                 if (navResponse.ok) document.getElementById('nav-placeholder').innerHTML = await navResponse.text();
-                const footerResponse = await fetch(getSafePath('rodape.html'));
+                const footerResponse = await fetch(getSafePath('rodape.html?v=' + Date.now()));
                 if (footerResponse.ok) document.getElementById('footer-placeholder').innerHTML = await footerResponse.text();
                 updateCartUI();
             } catch (e) { console.warn("Ambiente local: componentes não carregados via fetch."); }
         }
 
         function updateImage(el) {
-            document.getElementById('main-image').src = el.src;
+            const mainImg = document.getElementById('main-image');
+            mainImg.src = el.src;
+            // Forçar estilo transparente na troca
+            mainImg.style.background = "transparent";
+            
             document.querySelectorAll('.md\\:col-span-2 img').forEach(img => {
                 img.classList.remove('border-brand-accent-red', 'border-2');
                 img.classList.add('border-gray-200', 'border');
@@ -285,7 +300,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             loadComponents();
-            showTab('autor'); // Abrir uma aba por defeito
+            showTab('autor'); 
         });
     </script>
 </body>
