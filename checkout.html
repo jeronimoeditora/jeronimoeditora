@@ -7,10 +7,11 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,1400;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Lora:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,700;1,1400;1,900&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <script>
         tailwind.config = {
@@ -19,6 +20,7 @@
                     fontFamily: {
                         serif: ['"Playfair Display"', 'serif'],
                         sans: ['"Roboto"', 'sans-serif'],
+                        lora: ['"Lora"', 'serif'],
                         classic: ['"Crimson Text"', 'serif'], 
                     },
                     colors: {
@@ -36,10 +38,9 @@
     <style>
         body { font-family: 'Roboto', sans-serif; color: #333333; }
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        .font-lora { font-family: 'Lora', serif; }
 
-        input, select, textarea {
-            font-size: 16px !important; 
-        }
+        input, select, textarea { font-size: 16px !important; }
 
         input:focus, select:focus, textarea:focus {
             border-color: #800000 !important; 
@@ -62,7 +63,6 @@
             cursor: pointer;
         }
 
-        /* Scrollbar discreta para o resumo */
         #summary-list::-webkit-scrollbar { width: 4px; }
         #summary-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
         #summary-list::-webkit-scrollbar-thumb { background: rgba(207,175,92,0.3); border-radius: 10px; }
@@ -77,12 +77,22 @@
             <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 italic">Encomenda recebida!</h3>
             <p class="text-gray-600 mb-2 font-sans text-sm">Obrigado pela sua preferência.</p>
             <p class="text-gray-600 mb-6 font-sans text-sm">Enviámos um e-mail de confirmação para o seu endereço.</p>
-            <a href="index.html" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg">Voltar à Página inicial</a>
+            <a href="#" onclick="location.reload()" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg">Nova Simulação</a>
         </div>
     </div>
 
-    <!-- CONTENTOR DO MENU -->
-    <div id="nav-placeholder"></div>
+    <!-- Navegação -->
+    <nav class="fixed top-0 w-full bg-white shadow-md z-50 h-16 flex items-center px-6">
+        <div class="max-w-6xl mx-auto w-full flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-brand-accent-blue rounded flex items-center justify-center text-brand-gold font-bold">J</div>
+                <span class="font-serif font-bold text-brand-accent-blue text-xl">Jerónimo Editora</span>
+            </div>
+            <div class="text-sm font-medium text-gray-500 hover:text-brand-accent-red cursor-pointer">
+                <i class="fas fa-chevron-left mr-1"></i> Continuar a comprar
+            </div>
+        </div>
+    </nav>
 
     <main class="flex-grow pt-24 pb-12">
         <div class="max-w-6xl mx-auto px-4 md:px-6 fade-in">
@@ -109,7 +119,7 @@
                                     <span>Portes de Envio:</span>
                                     <span id="summary-shipping" class="font-medium text-brand-gold">€ 0,00</span>
                                 </div>
-                                <div id="otimizacao-badge" class="mt-1"></div>
+                                <div id="otimizacao-badge" class="mt-2"></div>
                             </div>
                         </div>
 
@@ -126,23 +136,19 @@
                         >
                             Confirmar e Pagar
                         </button>
-                        <p id="upload-status" class="text-[10px] text-center mt-2 text-white/50 hidden">A converter comprovativo...</p>
                     </section>
                 </div>
 
                 <!-- FORMULÁRIOS -->
                 <div class="lg:w-7/12 order-2 lg:order-2">
-                    
-                    <!-- 2. DETALHES DE ENVIO -->
                     <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg mb-8 border border-gray-100">
-                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">2. Detalhes de Envio e Facturação</h2>
-                        <p class="text-[10px] md:text-xs text-gray-500 mb-6 font-sans italic">* Campos obrigatórios para finalizar encomenda</p>
+                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">2. Detalhes de Envio</h2>
                         
-                        <form id="shipping-form" class="space-y-5">
+                        <form id="shipping-form" class="space-y-5 mt-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nome completo *</label>
-                                    <input type="text" id="nome" name="nome" required class="block w-full p-3 border border-gray-300 rounded-lg sync-field font-sans bg-gray-50/50" data-target="nome-fat">
+                                    <input type="text" id="nome" name="nome" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Email *</label>
@@ -150,18 +156,10 @@
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">NIF (Opcional)</label>
-                                    <input type="text" id="nif" name="nif" class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50">
-                                    <p class="mt-1 text-[10px] text-gray-400 font-medium font-sans italic">A fatura será enviada por e-mail.</p>
-                                </div>
-                            </div>
-                            
                             <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
                                 <div class="md:col-span-3">
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Morada completa de Envio *</label>
-                                    <input type="text" id="morada" name="morada" required class="block w-full p-3 border border-gray-300 rounded-lg sync-field font-sans bg-gray-50/50" data-target="morada-fat">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Morada completa *</label>
+                                    <input type="text" id="morada" name="morada" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50">
                                 </div>
                                 <div class="md:col-span-1">
                                     <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nº / Andar *</label>
@@ -170,61 +168,31 @@
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
-                                <div class="sm:col-span-3">
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Código Postal *</label>
-                                    <input type="text" id="cod-postal" name="cod_postal" required class="block w-full p-3 border border-gray-300 rounded-lg sync-field font-sans bg-gray-50/50" data-target="cod-postal-fat" placeholder="XXXX-XXX">
-                                </div>
                                 <div class="sm:col-span-4">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Código Postal *</label>
+                                    <input type="text" id="cod-postal" name="cod_postal" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50" placeholder="XXXX-XXX">
+                                </div>
+                                <div class="sm:col-span-8">
                                     <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Cidade *</label>
-                                    <input type="text" id="cidade" name="cidade" required class="block w-full p-3 border border-gray-300 rounded-lg sync-field font-sans bg-gray-50/50" data-target="cidade-fat">
-                                </div>
-                                <div class="sm:col-span-5">
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">País *</label>
-                                    <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white sync-field font-sans" data-target="pais-fat" onchange="loadCartSummary()">
-                                        <option value="PT">Portugal (Continente e Ilhas)</option>
-                                        <option value="ES">Espanha</option>
-                                        <option value="Resto">Resto do Mundo</option>
-                                    </select>
+                                    <input type="text" id="cidade" name="cidade" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50">
                                 </div>
                             </div>
 
-                            <div class="py-6 border-t border-gray-100 mt-4 flex flex-col sm:flex-row sm:items-center">
-                                <span class="block text-sm font-medium text-gray-700 font-sans mb-3 sm:mb-0">A morada de facturação é igual à de envio?</span>
-                                <div class="flex items-center space-x-8 sm:ml-6">
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="radio" name="billing-choice" value="sim" class="radio-small text-brand-accent-red focus:ring-brand-accent-red" onchange="handleBillingChoice()">
-                                        <span class="text-sm text-gray-700 font-medium font-sans">Sim</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="radio" name="billing-choice" value="nao" class="radio-small text-brand-accent-red focus:ring-brand-accent-red" onchange="handleBillingChoice()">
-                                        <span class="text-sm text-gray-700 font-medium font-sans">Não</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div id="billing-address-container" class="hidden space-y-5 pt-4 border-t border-gray-100 mt-2 fade-in">
-                                <h3 class="text-lg font-bold text-brand-text mb-2 italic font-serif">Morada de Facturação</h3>
+                            <div class="grid grid-cols-1 gap-5">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Morada de facturação *</label>
-                                    <input type="text" id="morada-fat" name="morada_fat" class="block w-full p-3 border border-gray-300 rounded-lg billing-field font-sans bg-gray-50/50">
-                                </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
-                                    <div class="sm:col-span-3">
-                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Código Postal *</label>
-                                        <input type="text" id="cod-postal-fat" name="cod_postal_fat" class="block w-full p-3 border border-gray-300 rounded-lg billing-field font-sans bg-gray-50/50">
-                                    </div>
-                                    <div class="sm:col-span-4">
-                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Cidade *</label>
-                                        <input type="text" id="cidade-fat" name="cidade_fat" class="block w-full p-3 border border-gray-300 rounded-lg billing-field font-sans bg-gray-50/50">
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">País *</label>
-                                        <select id="pais-fat" name="pais_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field font-sans">
-                                            <option value="PT">Portugal (Continente e Ilhas)</option>
-                                            <option value="ES">Espanha</option>
-                                            <option value="BR">Brasil</option>
-                                            <option value="Resto">Resto do Mundo</option>
-                                        </select>
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">País *</label>
+                                    <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white font-sans" onchange="loadCartSummary()">
+                                        <option value="PT">Portugal (Continente e Ilhas)</option>
+                                        <option value="EU_Normal">Europa (Entrega Normal)</option>
+                                        <option value="EU_Econ">Europa (Entrega Económica)</option>
+                                    </select>
+                                    <!-- Link CTT Discreto -->
+                                    <div id="ctt-europe-link" class="hidden mt-2">
+                                        <a href="https://www.ctt.pt/empresas/solucoes-de-gestao-e-setoriais/solucoes-setoriais/editores-e-livreiros/correio-editorial-internacional#fndtn-tab1" 
+                                           target="_blank" 
+                                           class="text-[10px] text-gray-400 hover:text-brand-accent-red underline transition-colors">
+                                            Ver mais em: ctt.pt/editorial-internacional
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -233,53 +201,41 @@
 
                     <!-- 3. MÉTODO DE PAGAMENTO -->
                     <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg border border-gray-100">
-                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">3. Método de Pagamento</h2>
-                        <p class="text-[10px] md:text-xs text-gray-400 mb-6 font-sans italic">Efectue o pagamento através de um dos seguintes meios:</p>
+                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">3. Pagamento</h2>
                         
-                        <div class="space-y-4">
-                            <!-- MB WAY -->
+                        <div class="space-y-4 mt-6">
                             <div>
                                 <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors font-sans">
                                     <input type="radio" name="payment-method" id="payment-mbway" value="mbway" checked class="radio-small text-brand-accent-red" onchange="updatePaymentDetails()">
-                                    <span class="text-gray-800 font-medium text-sm md:text-base">MB WAY (Pagamento Imediato)</span>
+                                    <span class="text-gray-800 font-medium">MB WAY (917 304 286)</span>
                                 </label>
-                                <div id="mbway-details" class="mt-3 p-4 md:p-5 border-t border-gray-200 bg-gray-50 rounded-b-lg">
-                                    <div class="payment-box flex items-center space-x-4 mb-4 p-3 md:p-4 text-brand-accent-blue font-sans">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                                        <div><p class="text-[10px] uppercase font-bold text-blue-800 opacity-70">Contacto:</p><p class="text-lg font-bold">917 304 286</p></div>
-                                    </div>
-                                    <div class="flex items-center gap-3">
+                                <div id="mbway-details" class="mt-3 p-4 border-t border-gray-200 bg-gray-50 rounded-b-lg">
+                                    <div class="flex flex-col items-center">
                                         <input type="file" id="proof-file-mbway" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('mbway')" />
-                                        <label for="proof-file-mbway" class="cursor-pointer bg-brand-accent-blue text-white py-3 px-6 rounded-lg font-bold text-xs md:text-sm hover:bg-brand-accent-red transition-all shadow-sm">
-                                            Anexar comprovativo *
+                                        <label for="proof-file-mbway" class="cursor-pointer bg-brand-accent-blue text-white py-3 px-6 rounded-lg font-bold text-sm hover:bg-brand-accent-red transition-all shadow-sm">
+                                            <i class="fas fa-upload mr-2"></i> Anexar Comprovativo *
                                         </label>
-                                        <div id="file-display-mbway" class="hidden items-center space-x-2 bg-gray-100 px-3 py-2 rounded-md border border-gray-200">
-                                            <span id="file-name-mbway" class="text-xs text-gray-600 truncate max-w-[150px] italic"></span>
-                                            <button onclick="removeFile('mbway')" class="text-red-500 hover:text-red-700 font-bold text-xl leading-none" title="Remover">&times;</button>
+                                        <div id="file-display-mbway" class="hidden mt-2 text-xs text-green-600 font-medium items-center">
+                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway"></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Transferência Bancária -->
                             <div>
                                 <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors font-sans">
                                     <input type="radio" name="payment-method" id="payment-transfer" value="bank-transfer" class="radio-small text-brand-accent-red" onchange="updatePaymentDetails()">
-                                    <span class="text-gray-800 font-medium text-sm md:text-base">Transferência Bancária</span>
+                                    <span class="text-gray-800 font-medium">Transferência Bancária</span>
                                 </label>
-                                <div id="transfer-details" class="mt-3 p-4 md:p-5 border-t border-gray-200 bg-gray-50 rounded-b-lg hidden">
-                                    <div class="payment-box mb-4 text-brand-accent-blue font-sans">
-                                        <p class="text-[10px] uppercase font-bold text-blue-800 opacity-70">IBAN:</p>
-                                        <p class="text-sm md:text-base font-bold break-all">PT50 0035 0284 0001 5872 4004 0</p>
-                                    </div>
-                                    <div class="flex items-center gap-3">
+                                <div id="transfer-details" class="mt-3 p-4 border-t border-gray-200 bg-gray-50 rounded-b-lg hidden text-center">
+                                    <p class="text-sm font-bold text-brand-accent-blue mb-4">PT50 0035 0284 0001 5872 4004 0</p>
+                                    <div class="flex flex-col items-center">
                                         <input type="file" id="proof-file-transfer" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('transfer')" />
-                                        <label for="proof-file-transfer" class="cursor-pointer bg-brand-accent-blue text-white py-3 px-6 rounded-lg font-bold text-xs md:text-sm hover:bg-brand-accent-red transition-all shadow-sm">
-                                            Anexar comprovativo *
+                                        <label for="proof-file-transfer" class="cursor-pointer bg-brand-accent-blue text-white py-3 px-6 rounded-lg font-bold text-sm hover:bg-brand-accent-red transition-all shadow-sm">
+                                            <i class="fas fa-upload mr-2"></i> Anexar Comprovativo *
                                         </label>
-                                        <div id="file-display-transfer" class="hidden items-center space-x-2 bg-gray-100 px-3 py-2 rounded-md border border-gray-200">
-                                            <span id="file-name-transfer" class="text-xs text-gray-600 truncate max-w-[150px] italic"></span>
-                                            <button onclick="removeFile('transfer')" class="text-red-500 hover:text-red-700 font-bold text-xl leading-none" title="Remover">&times;</button>
+                                        <div id="file-display-transfer" class="hidden mt-2 text-xs text-green-600 font-medium items-center">
+                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -291,124 +247,65 @@
         </div>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ -->
-    <div id="footer-placeholder"></div>
-
     <script>
         const SHIPPING_MARGIN = 25; 
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby1e5Tv0Z3nL20q8EAVYeIdDxQ8ne66fes7Oc9PYdUnU79d4ORPV9bsH4aqV-MJs12TKw/exec'; 
-
         const bookData = [
             { id: 1, title: "Suma Teológica", price: 75.00, weight: 2400 },
             { id: 2, title: "Jesus e o Jubileu", price: 22.00, weight: 420 },
-            { id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 350 },
+            { id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
             { id: 4, title: "Convite aos Salmos", price: 28.50, weight: 380 },
             { id: 7, title: "Duras Palavras", price: 0.00, weight: 350 }
         ];
 
-        async function loadComponents() {
-            try {
-                const nav = await fetch('menu.html'); if(nav.ok) document.getElementById('nav-placeholder').innerHTML = await nav.text();
-                const foot = await fetch('rodape.html'); if(foot.ok) document.getElementById('footer-placeholder').innerHTML = await foot.text();
-                loadCartSummary(); 
-            } catch(e) { console.warn("Componentes não carregados."); }
-        }
-
-        const toBase64 = file => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-        });
-
-        function formatPrice(p) { return `€ ${p.toFixed(2).replace('.', ',')}`; }
-
-        function handleBillingChoice() {
-            const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
-            const billingContainer = document.getElementById('billing-address-container');
-            const billingFields = document.querySelectorAll('.billing-field');
-            if (!choiceInput) return;
-            billingContainer.classList.remove('hidden');
-            if (choiceInput.value === 'sim') {
-                syncBillingAddress();
-                billingFields.forEach(f => { f.setAttribute('readonly', 'true'); f.classList.add('bg-gray-100', 'text-gray-500'); });
-            } else {
-                billingFields.forEach(f => { f.removeAttribute('readonly'); f.classList.remove('bg-gray-100', 'text-gray-500'); });
-            }
-        }
-
-        function syncBillingAddress() {
-            if (document.querySelector('input[name="billing-choice"]:checked')?.value === 'sim') {
-                document.getElementById('morada-fat').value = document.getElementById('morada').value;
-                document.getElementById('cod-postal-fat').value = document.getElementById('cod-postal').value;
-                document.getElementById('cidade-fat').value = document.getElementById('cidade').value;
-                document.getElementById('pais-fat').value = document.getElementById('pais').value;
-            }
-        }
-
-        function updateFileName(type) {
-            const input = document.getElementById(`proof-file-${type}`);
-            const display = document.getElementById(`file-display-${type}`);
-            const nameSpan = document.getElementById(`file-name-${type}`);
-            if (input.files.length > 0) {
-                nameSpan.textContent = input.files[0].name;
-                display.classList.remove('hidden'); display.classList.add('flex');
-            } else { display.classList.add('hidden'); }
-            validateFinalButton();
-        }
-
-        function removeFile(type) {
-            document.getElementById(`proof-file-${type}`).value = ""; 
-            updateFileName(type);
-        }
-
-        function updatePaymentDetails() {
-            const method = document.querySelector('input[name="payment-method"]:checked').value;
-            document.getElementById('transfer-details').classList.toggle('hidden', method !== 'bank-transfer');
-            document.getElementById('mbway-details').classList.toggle('hidden', method !== 'mbway');
-            validateFinalButton();
-        }
-
-        function validateFinalButton() {
-            const btn = document.getElementById('place-order-button');
-            const method = document.querySelector('input[name="payment-method"]:checked')?.value;
-            const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
-            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            btn.disabled = fileInput.files.length === 0 || cartItems.length === 0;
-        }
-
         function obterTarifa(peso, destino) {
-            if (destino === 'PT') return peso <= 500 ? (0.139 + (peso/1000 * 2.684)) : (1.509 + (peso/1000 * 0.623));
-            if (destino === 'ES') return peso <= 500 ? (0.45 + (peso/1000 * 7.50)) : (1.20 + (peso/1000 * 6.80));
-            return peso <= 500 ? (0.70 + (peso/1000 * 13.50)) : (2.50 + (peso/1000 * 11.80));
-        }
-
-        function changeQuantity(id, delta) {
-            let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const idx = items.findIndex(i => i.id === id);
-            if (idx > -1) {
-                items[idx].quantity += delta;
-                if (items[idx].quantity < 1) items[idx].quantity = 1;
-                localStorage.setItem('cartItems', JSON.stringify(items));
-                loadCartSummary();
-                updateGlobalCartUI();
+            const pesoKg = peso / 1000;
+            
+            if (destino === 'PT') {
+                if (peso <= 100) return 0.312 + (pesoKg * 1.175);
+                if (peso <= 250) return 0.201 + (pesoKg * 2.250);
+                if (peso <= 500) return 0.147 + (pesoKg * 2.830);
+                if (peso <= 2000) return 1.590 + (pesoKg * 0.660);
+                if (peso <= 5000) {
+                    const base2kg = 1.590 + (2 * 0.660);
+                    const totalSemIva = base2kg + ((pesoKg - 2) * 0.660);
+                    return totalSemIva * 1.23; 
+                }
+                return 1.590 + (pesoKg * 0.660);
             }
-        }
 
-        function removeItem(id) {
-            let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            items = items.filter(i => i.id !== id);
-            localStorage.setItem('cartItems', JSON.stringify(items));
-            loadCartSummary(); 
-            updateGlobalCartUI();
-        }
+            // EUROPA NORMAL
+            if (destino === 'EU_Normal') {
+                if (peso <= 20) return 0.720;
+                if (peso <= 100) return 1.475 + (pesoKg * 0.859);
+                if (peso <= 250) return 1.300 + (pesoKg * 7.596);
+                if (peso <= 500) return 2.520 + (pesoKg * 4.940);
+                if (peso <= 2000) return 5.210 + (pesoKg * 3.785);
+                // Saco Multipostal Europa Normal (> 2kg a 5kg)
+                if (peso <= 5000) {
+                    const base2kg = 5.210 + (2 * 3.785);
+                    const totalSemIva = base2kg + ((pesoKg - 2) * 3.785);
+                    return totalSemIva * 1.23;
+                }
+                return 5.210 + (pesoKg * 3.785);
+            }
 
-        function updateGlobalCartUI() {
-            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const totalQtd = items.reduce((s, i) => s + i.quantity, 0);
-            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
-                if(el) { el.textContent = totalQtd; el.classList.toggle('opacity-0', totalQtd === 0); }
-            });
+            // EUROPA ECONÓMICA
+            if (destino === 'EU_Econ') {
+                if (peso <= 20) return 0.630;
+                if (peso <= 100) return 1.068 + (pesoKg * 0.627);
+                if (peso <= 250) return 0.940 + (pesoKg * 5.516);
+                if (peso <= 500) return 1.836 + (pesoKg * 3.592);
+                if (peso <= 2000) return 3.785 + (pesoKg * 2.755);
+                // Saco Multipostal Europa Económica (> 2kg a 5kg)
+                if (peso <= 5000) {
+                    const base2kg = 3.785 + (2 * 2.755);
+                    const totalSemIva = base2kg + ((pesoKg - 2) * 2.755);
+                    return totalSemIva * 1.23;
+                }
+                return 3.785 + (pesoKg * 2.755);
+            }
+
+            return 0;
         }
 
         function loadCartSummary() {
@@ -417,134 +314,128 @@
             const destino = document.getElementById('pais').value;
             let subtotal = 0, pesoTotal = 0, html = '';
             
-            if (items.length === 0) {
-                html = '<p class="text-center text-gray-300 italic py-8">O carrinho está vazio.</p>';
+            // Toggle Link CTT Europa
+            const europeLink = document.getElementById('ctt-europe-link');
+            if (destino === 'EU_Normal' || destino === 'EU_Econ') {
+                europeLink.classList.remove('hidden');
             } else {
-                items.forEach(item => {
-                    const lineTotal = item.price * item.quantity;
-                    subtotal += lineTotal;
-                    const book = bookData.find(b => b.id === item.id);
-                    pesoTotal += ((book ? book.weight : 350) * item.quantity);
-                    
-                    html += `
-                        <div class="flex flex-col border-b border-white/10 pb-4 mb-4 last:border-0 last:pb-0">
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="font-serif text-base text-white leading-tight font-bold italic truncate flex-grow mr-2">${item.title}</span>
-                                <span class="font-sans font-bold text-brand-gold text-sm">${formatPrice(lineTotal)}</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <!-- Controlos de Quantidade Discretos -->
-                                <div class="flex items-center space-x-3 bg-white/5 rounded-lg px-2 py-1 border border-white/10">
-                                    <button onclick="changeQuantity(${item.id}, -1)" class="text-gray-400 hover:text-white transition-colors" title="Diminuir">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                    </button>
-                                    <span class="text-white text-xs font-bold w-4 text-center">${item.quantity}</span>
-                                    <button onclick="changeQuantity(${item.id}, 1)" class="text-gray-400 hover:text-white transition-colors" title="Aumentar">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                    </button>
-                                </div>
-                                <!-- Ícone de Lixo Discreto -->
-                                <button onclick="removeItem(${item.id})" class="text-gray-500 hover:text-red-400 transition-colors" title="Remover item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                europeLink.classList.add('hidden');
+            }
+
+            items.forEach(item => {
+                const lineTotal = item.price * item.quantity;
+                subtotal += lineTotal;
+                const book = bookData.find(b => b.id === item.id);
+                pesoTotal += ((book ? book.weight : 350) * item.quantity);
+                
+                html += `
+                    <div class="flex flex-col border-b border-white/10 pb-4 mb-4 last:border-0 last:pb-0">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="font-lora text-xl text-white leading-tight font-semibold truncate flex-grow mr-2">${item.title}</span>
+                            <span class="font-sans font-bold text-brand-gold text-sm">${formatPrice(lineTotal)}</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3 bg-white/5 rounded-lg px-2 py-1 border border-white/10">
+                                <button onclick="changeQuantity(${item.id}, -1)" class="text-gray-400 hover:text-white transition-colors">
+                                    <i class="fas fa-minus text-[10px]"></i>
+                                </button>
+                                <span class="text-white text-xs font-bold w-4 text-center">${item.quantity}</span>
+                                <button onclick="changeQuantity(${item.id}, 1)" class="text-gray-400 hover:text-white transition-colors">
+                                    <i class="fas fa-plus text-[10px]"></i>
                                 </button>
                             </div>
-                        </div>`;
-                });
-            }
+                            <button onclick="removeItem(${item.id})" class="text-gray-500 hover:text-red-400 transition-colors">
+                                <i class="fas fa-trash-alt text-xs"></i>
+                            </button>
+                        </div>
+                    </div>`;
+            });
             
             let custoPortes = 0;
             if (pesoTotal > 0) {
                 const pesoFinal = pesoTotal + SHIPPING_MARGIN;
-                let numPacotes = Math.ceil(pesoFinal / 2000), pesoPorPacote = pesoFinal / numPacotes;
+                let numPacotes = Math.ceil(pesoFinal / 5000), pesoPorPacote = pesoFinal / numPacotes;
                 for (let i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, destino);
-                document.getElementById('otimizacao-badge').innerHTML = numPacotes > 1 ? `<span class="bg-green-600 text-white text-[9px] px-2 py-1 rounded-full font-bold uppercase">Otimizado em ${numPacotes} volumes</span>` : '';
+                
+                let label = "";
+                if (destino === 'PT') {
+                    label = pesoFinal > 2025 ? 'Saco Multipostal + IVA CTT' : 'Envio Editorial CTT';
+                } else if (destino === 'EU_Normal') {
+                    label = pesoFinal > 2025 ? 'Saco Multipostal + IVA CTT' : 'Europa (Normal) CTT';
+                } else if (destino === 'EU_Econ') {
+                    label = pesoFinal > 2025 ? 'Saco Multipostal + IVA CTT' : 'Europa (Económica) CTT';
+                }
+                
+                if (numPacotes > 1) label = `${numPacotes} volumes`;
+                
+                document.getElementById('otimizacao-badge').innerHTML = `
+                    <span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide">
+                        ${label}
+                    </span>`;
             }
             
-            list.innerHTML = html;
+            list.innerHTML = html || '<p class="text-center italic opacity-50 py-4">Carrinho vazio</p>';
             document.getElementById('summary-subtotal').textContent = formatPrice(subtotal);
             document.getElementById('summary-shipping').textContent = formatPrice(custoPortes);
             document.getElementById('summary-total').textContent = formatPrice(subtotal + custoPortes);
             validateFinalButton();
         }
 
-        async function placeOrder(event) {
-            event.preventDefault();
-            const form = document.getElementById('shipping-form');
-            if (!form.checkValidity()) { form.reportValidity(); return; }
-            
-            const btn = document.getElementById('place-order-button');
-            const status = document.getElementById('upload-status');
-            const originalText = btn.textContent;
-            
-            btn.disabled = true; 
-            btn.textContent = "A PROCESSAR...";
-            status.classList.remove('hidden');
-            
-            const method = document.querySelector('input[name="payment-method"]:checked').value;
-            const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
-            const file = fileInput.files[0];
-
-            // Conversão segura do ficheiro
-            let base64 = "";
-            try {
-                base64 = await toBase64(file);
-            } catch (err) {
-                console.error("Erro no anexo:", err);
-                btn.disabled = false; btn.textContent = "Erro no anexo";
-                status.classList.add('hidden');
-                return;
-            }
-
-            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-            const paisTexto = document.getElementById('pais').options[document.getElementById('pais').selectedIndex].text;
-            
-            let pesoTotal = 0;
-            cartItems.forEach(item => { pesoTotal += ((bookData.find(b => b.id === item.id)?.weight || 350) * item.quantity); });
-            let custoPortes = 0;
-            if (pesoTotal > 0) {
-                const pesoFinal = pesoTotal + SHIPPING_MARGIN;
-                let numPacotes = Math.ceil(pesoFinal / 2000), pesoPorPacote = pesoFinal / numPacotes;
-                for (let i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, document.getElementById('pais').value);
-            }
-
-            const orderData = {
-                type: 'order',
-                cliente: { nome: document.getElementById('nome').value, email: document.getElementById('email').value, nif: document.getElementById('nif').value },
-                envio: { 
-                    morada: document.getElementById('morada').value, 
-                    nr_andar: document.getElementById('nr-andar').value, 
-                    cod_postal: document.getElementById('cod-postal').value, 
-                    cidade: document.getElementById('cidade').value, 
-                    pais: paisTexto,
-                    morada_fat: document.getElementById('morada-fat').value,
-                    cod_postal_fat: document.getElementById('cod-postal-fat').value,
-                    cidade_fat: document.getElementById('cidade-fat').value,
-                    pais_fat: document.getElementById('pais-fat').options[document.getElementById('pais-fat').selectedIndex]?.text
-                },
-                pagamento: { 
-                    metodo: method, 
-                    total: (subtotal + custoPortes).toFixed(2), // Enviado apenas como número para o Script
-                    portes: custoPortes.toFixed(2),
-                    fileName: file.name,
-                    fileMimeType: file.type,
-                    fileBase64: base64
-                },
-                itens: cartItems.map(item => ({ titulo: item.title, qtd: item.quantity, preco_unit: item.price }))
-            };
-
-            try {
-                await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(orderData) });
-                localStorage.removeItem('cartItems');
-                document.getElementById('success-modal').classList.remove('hidden');
-            } catch (error) { 
-                btn.disabled = false; btn.textContent = "Erro - Tente de novo"; 
-                status.classList.add('hidden');
+        function formatPrice(p) { return `€ ${p.toFixed(2).replace('.', ',')}`; }
+        
+        function changeQuantity(id, delta) {
+            let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const idx = items.findIndex(i => i.id === id);
+            if (idx > -1) {
+                items[idx].quantity += delta;
+                if (items[idx].quantity < 1) items[idx].quantity = 1;
+                localStorage.setItem('cartItems', JSON.stringify(items));
+                loadCartSummary();
             }
         }
 
-        document.querySelectorAll('.sync-field').forEach(field => { field.addEventListener('input', syncBillingAddress); });
-        window.onload = loadComponents;
+        function removeItem(id) {
+            let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            items = items.filter(i => i.id !== id);
+            localStorage.setItem('cartItems', JSON.stringify(items));
+            loadCartSummary();
+        }
+
+        function updatePaymentDetails() {
+            const method = document.querySelector('input[name="payment-method"]:checked').value;
+            document.getElementById('transfer-details').classList.toggle('hidden', method !== 'bank-transfer');
+            document.getElementById('mbway-details').classList.toggle('hidden', method !== 'mbway');
+        }
+
+        function updateFileName(type) {
+            const input = document.getElementById(`proof-file-${type}`);
+            const nameSpan = document.getElementById(`file-name-${type}`);
+            if (input.files.length > 0) {
+                nameSpan.textContent = input.files[0].name;
+                document.getElementById(`file-display-${type}`).classList.remove('hidden');
+            }
+            validateFinalButton();
+        }
+
+        function validateFinalButton() {
+            const method = document.querySelector('input[name="payment-method"]:checked')?.value;
+            const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
+            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            document.getElementById('place-order-button').disabled = fileInput.files.length === 0 || cartItems.length === 0;
+        }
+
+        function placeOrder(e) {
+            e.preventDefault();
+            document.getElementById('success-modal').classList.remove('hidden');
+            localStorage.removeItem('cartItems');
+        }
+
+        window.onload = () => {
+            if (!localStorage.getItem('cartItems')) {
+                localStorage.setItem('cartItems', JSON.stringify([{ id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, quantity: 1 }]));
+            }
+            loadCartSummary();
+        };
     </script>
 </body>
 </html>
