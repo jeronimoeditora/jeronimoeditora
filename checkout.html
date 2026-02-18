@@ -4,12 +4,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finalizar Compra | Jerónimo Editora</title>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Apenas pesos normais, sem itálicos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Lora:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,700;1,1400;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto:wght@300;400;500;700;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS -->'https://script.google.com/macros/s/AKfycby1e5Tv0Z3nL20q8EAVYeIdDxQ8ne66fes7Oc9PYdUnU79d4ORPV9bsH4aqV-MJs12TKw/exec
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -21,7 +21,6 @@
                         serif: ['"Playfair Display"', 'serif'],
                         sans: ['"Roboto"', 'sans-serif'],
                         lora: ['"Lora"', 'serif'],
-                        classic: ['"Crimson Text"', 'serif'], 
                     },
                     colors: {
                         'brand-bg': '#F8F8F8', 
@@ -36,11 +35,14 @@
     </script>
 
     <style>
+        /* Remoção total de itálicos em todo o documento */
+        * { font-style: normal !important; }
+        
         body { font-family: 'Roboto', sans-serif; color: #333333; }
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
         .font-lora { font-family: 'Lora', serif; }
 
-        input, select, textarea { font-size: 16px !important; }
+        input, select, textarea { font-size: 16px !important; font-family: 'Roboto', sans-serif; }
 
         input:focus, select:focus, textarea:focus {
             border-color: #800000 !important; 
@@ -50,72 +52,304 @@
         .fade-in { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .payment-box {
+        .payment-info-box {
             background-color: #f0f7ff;
             border: 1px solid #e0efff;
             border-radius: 0.75rem;
             padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
         
         .radio-small {
-            width: 1.1rem;
-            height: 1.1rem;
+            width: 1.2rem;
+            height: 1.2rem;
             cursor: pointer;
+        }
+
+        .btn-attach {
+            background-color: #001f3f;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-attach:hover {
+            background-color: #800000; /* Bordeaux */
         }
 
         #summary-list::-webkit-scrollbar { width: 4px; }
         #summary-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
         #summary-list::-webkit-scrollbar-thumb { background: rgba(207,175,92,0.3); border-radius: 10px; }
+
+        @media (max-width: 1024px) {
+            .sticky-summary { position: static !important; }
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- Modal de Confirmação de Sucesso -->
-    <div id="success-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden">
-        <div class="bg-white p-8 rounded-xl shadow-2xl max-w-lg w-full mx-4 text-center">
+    <!-- Modal Sucesso -->
+    <div id="success-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full text-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-green-600 mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 italic">Encomenda recebida!</h3>
-            <p class="text-gray-600 mb-2 font-sans text-sm">Obrigado pela sua preferência.</p>
-            <p class="text-gray-600 mb-6 font-sans text-sm">Enviámos um e-mail de confirmação para o seu endereço.</p>
-            <a href="#" onclick="location.reload()" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg">Nova Simulação</a>
+            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center">Encomenda recebida!</h3>
+            <p class="text-gray-600 mb-6 font-sans text-sm text-center">Obrigado pela sua preferência. Enviámos um e-mail de confirmação para o seu endereço.</p>
+            <a href="index.html" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg text-center">Voltar à Página inicial</a>
         </div>
     </div>
 
-    <!-- Navegação -->
-    <nav class="fixed top-0 w-full bg-white shadow-md z-50 h-16 flex items-center px-6">
-        <div class="max-w-6xl mx-auto w-full flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 bg-brand-accent-blue rounded flex items-center justify-center text-brand-gold font-bold">J</div>
-                <span class="font-serif font-bold text-brand-accent-blue text-xl">Jerónimo Editora</span>
+    <!-- Modal de Erro de Envio -->
+    <div id="error-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-red-600 mb-4"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <h3 class="text-2xl font-bold font-serif text-brand-accent-red mb-2 text-center">Erro no envio</h3>
+            <p class="text-gray-600 mb-6 font-sans text-sm text-center" id="error-message">Ocorreu um problema ao processar a sua encomenda. Por favor, tente novamente.</p>
+            <button onclick="document.getElementById('error-modal').classList.add('hidden')" class="w-full bg-brand-accent-blue text-white py-3 rounded-lg font-bold hover:bg-black transition-colors">Tentar novamente</button>
+        </div>
+    </div>
+
+    <!-- MENU INTEGRADO -->
+    <nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 z-50 font-sans">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <img src="Imagens/Logo J.png" alt="Logo" class="h-8 md:h-10 w-auto" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
+                <span class="font-serif text-xl md:text-2xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors hidden sm:inline">Jerónimo Editora</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700">
+                <a href="index.html" class="hover:text-brand-accent-red transition-colors">Início</a>
+                <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
+                <a href="produtos.html" class="hover:text-brand-accent-red transition-colors">Produtos</a>
+                <a href="index.html#sobre" class="hover:text-brand-accent-red transition-colors">Sobre</a>
+                <a href="contacto.html" class="hover:text-brand-accent-red transition-colors">Contacto</a>
+                <div class="pl-6 border-l border-gray-200">
+                    <a href="checkout.html" class="relative text-gray-800 hover:text-brand-accent-red transition-colors">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-accent-red text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full opacity-0 font-sans font-black">0</span>
+                    </a>
+                </div>
             </div>
-            <div class="text-sm font-medium text-gray-500 hover:text-brand-accent-red cursor-pointer">
-                <i class="fas fa-chevron-left mr-1"></i> Continuar a comprar
+            <div class="flex items-center md:hidden space-x-6">
+                <a href="checkout.html" class="relative text-gray-800">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span id="cart-count-mobile" class="absolute -top-2 -right-2 bg-brand-accent-red text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full opacity-0 font-sans font-black">0</span>
+                </a>
+                <button class="text-3xl text-brand-text focus:outline-none" onclick="toggleMenu()">&#9776;</button>
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow pt-24 pb-12">
-        <div class="max-w-6xl mx-auto px-4 md:px-6 fade-in">
+    <!-- MENU MOBILE OVERLAY -->
+    <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-screen bg-white z-[60] flex flex-col items-center justify-center text-center">
+        <button class="absolute top-6 right-6 text-4xl text-brand-accent-blue font-light" onclick="toggleMenu()">&times;</button>
+        <div class="flex flex-col items-center space-y-8 w-full px-12 animate-menu-open">
+            <img src="Imagens/Logo J.png" class="h-12 w-auto mb-6 opacity-40" alt="Logo">
+            <a href="index.html" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Início</a>
+            <a href="catalogo-completo.html" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Catálogo</a>
+            <a href="produtos.html" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Produtos</a>
+            <a href="index.html#sobre" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Sobre Nós</a>
+            <a href="contacto.html" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red w-full" onclick="toggleMenu()">Contacto</a>
+        </div>
+    </div>
+
+    <main class="flex-grow pt-28 pb-12">
+        <div class="max-w-6xl mx-auto px-4 md:px-6">
             <h1 class="font-serif text-3xl md:text-4xl text-brand-accent-blue mb-8 text-center font-bold">Finalizar Compra</h1>
 
             <div class="flex flex-col lg:flex-row gap-8">
                 
-                <!-- 1. RESUMO DA ENCOMENDA -->
-                <div class="lg:w-5/12 lg:sticky lg:top-24 order-1 lg:order-1 h-fit">
-                    <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10">
-                        <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2">1. Carrinho de Compras</h2>
+                <!-- COLUNA FORMULÁRIOS (Esquerda no Desktop) -->
+                <div class="lg:w-7/12 order-2 lg:order-1">
+                    
+                    <!-- 1. DETALHES DE ENVIO -->
+                    <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg mb-8 border border-gray-100">
+                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">1. Detalhes de Envio</h2>
                         
-                        <div id="summary-list" class="space-y-5 mb-6 max-h-[45vh] overflow-y-auto pr-2">
-                            <!-- JS popula isto -->
+                        <form id="shipping-form" class="space-y-5 mt-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-left">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nome completo *</label>
+                                    <input type="text" id="nome" name="nome" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50 shipping-input">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Email *</label>
+                                    <input type="email" id="email" name="email" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-5 text-left">
+                                <div class="md:col-span-3">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Morada completa *</label>
+                                    <input type="text" id="morada" name="morada" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50 shipping-input">
+                                </div>
+                                <div class="md:col-span-1">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nº / Andar *</label>
+                                    <input type="text" id="nr-andar" name="nr_andar" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50 shipping-input">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 text-left">
+                                <div class="sm:col-span-4">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Código Postal *</label>
+                                    <input type="text" id="cod-postal" name="cod_postal" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50 shipping-input" placeholder="XXXX-XXX">
+                                </div>
+                                <div class="sm:col-span-8">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Cidade *</label>
+                                    <input type="text" id="cidade" name="cidade" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50 shipping-input">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-5 text-left">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">País *</label>
+                                    <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white font-sans shipping-input" onchange="loadCartSummary()">
+                                        <option value="PT">Portugal (Continente e Ilhas)</option>
+                                        <option value="EU_Normal">Europa (Entrega Normal)</option>
+                                        <option value="EU_Econ">Europa (Entrega Económica)</option>
+                                    </select>
+                                    <div id="ctt-europe-link" class="hidden mt-2 text-left">
+                                        <a href="https://www.ctt.pt/empresas/solucoes-de-gestao-e-setoriais/solucoes-setoriais/editores-e-livreiros/correio-editorial-internacional#fndtn-tab1" target="_blank" class="text-[10px] text-gray-400 hover:text-brand-accent-red underline font-sans">Ver mais em: ctt.pt/editorial-internacional</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-6 border-t border-gray-100 mt-4 text-left">
+                                <span class="block text-sm font-medium text-gray-700 font-sans mb-3">A morada de facturação é igual à de envio?</span>
+                                <div class="flex items-center space-x-8">
+                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                        <input type="radio" name="billing-choice" value="sim" class="radio-small text-brand-accent-red" onchange="handleBillingChoice()">
+                                        <span class="text-sm text-gray-700 font-medium font-sans">Sim</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                        <input type="radio" name="billing-choice" value="nao" class="radio-small text-brand-accent-red" onchange="handleBillingChoice()">
+                                        <span class="text-sm text-gray-700 font-medium font-sans">Não</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Bloco Faturação -->
+                            <div id="billing-address-container" class="hidden space-y-5 pt-6 border-t border-gray-100 mt-4 fade-in bg-gray-50/50 p-4 rounded-lg text-brand-text text-left">
+                                <h3 class="text-lg font-bold text-brand-text mb-4 underline font-sans">Morada de Facturação</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-5 text-left">
+                                    <div class="md:col-span-3">
+                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Morada *</label>
+                                        <input type="text" id="morada-fat" name="morada_fat" class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-white billing-field">
+                                    </div>
+                                    <div class="md:col-span-1">
+                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nº / Andar *</label>
+                                        <input type="text" id="nr-andar-fat" name="nr_andar_fat" class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-white billing-field">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 text-left">
+                                    <div class="sm:col-span-4">
+                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Cód. Postal *</label>
+                                        <input type="text" id="cod-postal-fat" name="cod_postal_fat" class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-white billing-field">
+                                    </div>
+                                    <div class="sm:col-span-8">
+                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Cidade *</label>
+                                        <input type="text" id="cidade-fat" name="cidade_fat" class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-white billing-field">
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">País *</label>
+                                    <select id="pais-fat" name="pais_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white font-sans billing-field">
+                                        <option value="PT">Portugal</option>
+                                        <option value="EU">Europa</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- 2. MÉTODO DE PAGAMENTO -->
+                    <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg border border-gray-100 text-left">
+                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2 text-[#800000]">2. Método de Pagamento</h2>
+                        <p class="text-xs text-gray-400 mb-6 font-sans">Efectue o pagamento através de um dos seguintes meios:</p>
+                        
+                        <div class="space-y-4">
+                            <!-- MB WAY -->
+                            <div class="border rounded-lg overflow-hidden shadow-sm">
+                                <label class="flex items-center space-x-3 p-4 cursor-pointer hover:bg-gray-50 font-sans">
+                                    <input type="radio" name="payment-method" id="payment-mbway" value="mbway" checked class="radio-small text-brand-accent-red" onchange="updatePaymentDetails()">
+                                    <span class="text-gray-800 font-medium text-base">MB WAY</span>
+                                </label>
+                                
+                                <div id="mbway-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white">
+                                    <div class="payment-info-box mb-4">
+                                        <i class="fas fa-phone-alt text-[#00c04b] text-xl"></i>
+                                        <div class="text-left">
+                                            <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1">Contacto:</p>
+                                            <p class="text-xl font-bold text-brand-accent-blue leading-none">917 304 286</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-start w-full">
+                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight text-left font-sans">Anexe o comprovativo após envio via MB WAY:</p>
+                                        <input type="file" id="proof-file-mbway" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('mbway')" />
+                                        <label for="proof-file-mbway" class="btn-attach font-sans">
+                                            <i class="fas fa-upload mr-2"></i> Anexar comprovativo *
+                                        </label>
+                                        <div id="file-display-mbway" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
+                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway" class="truncate max-w-[200px]"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Transferência Bancária -->
+                            <div class="border rounded-lg overflow-hidden shadow-sm">
+                                <label class="flex items-center space-x-3 p-4 cursor-pointer hover:bg-gray-50 font-sans">
+                                    <input type="radio" name="payment-method" id="payment-transfer" value="bank-transfer" class="radio-small text-brand-accent-red" onchange="updatePaymentDetails()">
+                                    <span class="text-gray-800 font-medium text-base">Transferência Bancária</span>
+                                </label>
+                                
+                                <div id="transfer-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white hidden">
+                                    <div class="payment-info-box mb-4">
+                                        <i class="fas fa-university text-brand-accent-blue opacity-80 text-xl"></i>
+                                        <div class="text-left">
+                                            <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1">IBAN para Transferência:</p>
+                                            <p class="text-base font-bold text-brand-accent-blue select-all leading-none">PT50 0035 0284 0001 5872 4004 0</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-start w-full text-left">
+                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight text-left font-sans">Anexe o comprovativo da transferência:</p>
+                                        <input type="file" id="proof-file-transfer" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('transfer')" />
+                                        <label for="proof-file-transfer" class="btn-attach font-sans">
+                                            <i class="fas fa-upload mr-2"></i> Anexar comprovativo *
+                                        </label>
+                                        <div id="file-display-transfer" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
+                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer" class="truncate max-w-[200px]"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 3. CARRINHO DE COMPRAS (Direita no Desktop, Topo no Mobile) -->
+                <div class="lg:w-5/12 order-1 lg:order-2 h-fit lg:sticky lg:top-24 sticky-summary">
+                    <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10">
+                        <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2 text-center md:text-left text-white">3. Carrinho de Compras</h2>
+                        
+                        <div id="summary-list" class="space-y-5 mb-6 max-h-[50vh] overflow-y-auto pr-2">
+                            <!-- JS popula -->
                         </div>
 
-                        <div class="space-y-2 pt-4 border-t border-white/20">
-                            <div class="flex justify-between text-sm font-sans opacity-80">
+                        <div class="space-y-2 pt-4 border-t border-white/20 text-sm">
+                            <div class="flex justify-between opacity-80 font-sans">
                                 <span>Subtotal (Produtos):</span>
                                 <span id="summary-subtotal">€ 0,00</span>
                             </div>
                             <div class="flex flex-col items-end">
-                                <div class="flex justify-between w-full text-sm font-sans opacity-80">
+                                <div class="flex justify-between w-full opacity-80 font-sans">
                                     <span>Portes de Envio:</span>
                                     <span id="summary-shipping" class="font-medium text-brand-gold">€ 0,00</span>
                                 </div>
@@ -128,126 +362,55 @@
                             <span id="summary-total" class="font-sans text-2xl md:text-3xl font-extrabold text-brand-gold">€ 0,00</span>
                         </div>
 
-                        <button 
-                            id="place-order-button"
-                            onclick="placeOrder(event)"
-                            class="w-full bg-brand-gold text-brand-accent-blue font-bold py-5 mt-6 rounded-lg hover:bg-yellow-600 transition-all shadow-xl text-lg md:text-xl disabled:bg-gray-500 disabled:cursor-not-allowed font-sans"
-                            disabled
-                        >
+                        <button id="place-order-button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-all shadow-xl text-lg md:text-xl disabled:bg-gray-500 disabled:cursor-not-allowed font-sans" disabled>
                             Confirmar e Pagar
                         </button>
                     </section>
                 </div>
 
-                <!-- FORMULÁRIOS -->
-                <div class="lg:w-7/12 order-2 lg:order-2">
-                    <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg mb-8 border border-gray-100">
-                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">2. Detalhes de Envio</h2>
-                        
-                        <form id="shipping-form" class="space-y-5 mt-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nome completo *</label>
-                                    <input type="text" id="nome" name="nome" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Email *</label>
-                                    <input type="email" id="email" name="email" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-                                <div class="md:col-span-3">
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Morada completa *</label>
-                                    <input type="text" id="morada" name="morada" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50">
-                                </div>
-                                <div class="md:col-span-1">
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nº / Andar *</label>
-                                    <input type="text" id="nr-andar" name="nr_andar" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
-                                <div class="sm:col-span-4">
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Código Postal *</label>
-                                    <input type="text" id="cod-postal" name="cod_postal" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50" placeholder="XXXX-XXX">
-                                </div>
-                                <div class="sm:col-span-8">
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Cidade *</label>
-                                    <input type="text" id="cidade" name="cidade" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 gap-5">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">País *</label>
-                                    <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white font-sans" onchange="loadCartSummary()">
-                                        <option value="PT">Portugal (Continente e Ilhas)</option>
-                                        <option value="EU_Normal">Europa (Entrega Normal)</option>
-                                        <option value="EU_Econ">Europa (Entrega Económica)</option>
-                                    </select>
-                                    <!-- Link CTT Discreto -->
-                                    <div id="ctt-europe-link" class="hidden mt-2">
-                                        <a href="https://www.ctt.pt/empresas/solucoes-de-gestao-e-setoriais/solucoes-setoriais/editores-e-livreiros/correio-editorial-internacional#fndtn-tab1" 
-                                           target="_blank" 
-                                           class="text-[10px] text-gray-400 hover:text-brand-accent-red underline transition-colors">
-                                            Ver mais em: ctt.pt/editorial-internacional
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </section>
-
-                    <!-- 3. MÉTODO DE PAGAMENTO -->
-                    <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg border border-gray-100">
-                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">3. Pagamento</h2>
-                        
-                        <div class="space-y-4 mt-6">
-                            <div>
-                                <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors font-sans">
-                                    <input type="radio" name="payment-method" id="payment-mbway" value="mbway" checked class="radio-small text-brand-accent-red" onchange="updatePaymentDetails()">
-                                    <span class="text-gray-800 font-medium">MB WAY (917 304 286)</span>
-                                </label>
-                                <div id="mbway-details" class="mt-3 p-4 border-t border-gray-200 bg-gray-50 rounded-b-lg">
-                                    <div class="flex flex-col items-center">
-                                        <input type="file" id="proof-file-mbway" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('mbway')" />
-                                        <label for="proof-file-mbway" class="cursor-pointer bg-brand-accent-blue text-white py-3 px-6 rounded-lg font-bold text-sm hover:bg-brand-accent-red transition-all shadow-sm">
-                                            <i class="fas fa-upload mr-2"></i> Anexar Comprovativo *
-                                        </label>
-                                        <div id="file-display-mbway" class="hidden mt-2 text-xs text-green-600 font-medium items-center">
-                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors font-sans">
-                                    <input type="radio" name="payment-method" id="payment-transfer" value="bank-transfer" class="radio-small text-brand-accent-red" onchange="updatePaymentDetails()">
-                                    <span class="text-gray-800 font-medium">Transferência Bancária</span>
-                                </label>
-                                <div id="transfer-details" class="mt-3 p-4 border-t border-gray-200 bg-gray-50 rounded-b-lg hidden text-center">
-                                    <p class="text-sm font-bold text-brand-accent-blue mb-4">PT50 0035 0284 0001 5872 4004 0</p>
-                                    <div class="flex flex-col items-center">
-                                        <input type="file" id="proof-file-transfer" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('transfer')" />
-                                        <label for="proof-file-transfer" class="cursor-pointer bg-brand-accent-blue text-white py-3 px-6 rounded-lg font-bold text-sm hover:bg-brand-accent-red transition-all shadow-sm">
-                                            <i class="fas fa-upload mr-2"></i> Anexar Comprovativo *
-                                        </label>
-                                        <div id="file-display-transfer" class="hidden mt-2 text-xs text-green-600 font-medium items-center">
-                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
             </div>
         </div>
     </main>
 
+    <!-- RODAPÉ INTEGRADO -->
+    <footer class="bg-gray-900 text-gray-300 py-12 px-6 border-t-8 border-brand-accent-red font-sans mt-auto">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4 items-start">
+                <div class="flex flex-col items-center space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <img src="Imagens/Logo J Dourado.png" alt="Logo" class="h-8 w-auto" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
+                        <span class="font-serif text-2xl font-bold text-white leading-tight">Jerónimo Editora</span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed max-w-[250px]">Rigor teológico e excelência editorial. Dedicada a enriquecer a cultura bíblica em Portugal.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans">Navegação</h4>
+                    <ul class="space-y-2 text-sm font-sans">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Início</a></li>
+                        <li><a href="catalogo-completo.html" class="hover:text-white transition-colors">Catálogo</a></li>
+                        <li><a href="produtos.html" class="hover:text-white transition-colors">Produtos</a></li>
+                        <li><a href="index.html#sobre" class="hover:text-white transition-colors">Sobre</a></li>
+                    </ul>
+                </div>
+                <div class="flex flex-col items-center">
+                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans">Contacto</h4>
+                    <p class="text-sm font-sans">editorajeronimo@gmail.com</p>
+                    <p class="text-sm font-sans text-gray-500">Braga, Portugal</p>
+                    <div class="flex justify-center space-x-5 mt-5 text-gray-400">
+                        <a href="https://www.facebook.com/jeronimoeditora" target="_blank" class="hover:text-brand-gold transition-transform text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/editorajeronimo/" target="_blank" class="hover:text-brand-gold transition-transform text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/jer%C3%B3nimo-editora/" target="_blank" class="hover:text-brand-gold transition-transform text-xl"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center pt-8 mt-10 border-t border-gray-800 text-[11px] text-gray-500 tracking-widest uppercase font-sans">© 2026 Jerónimo Editora. Todos os direitos reservados.</div>
+        </div>
+    </footer>
+
     <script>
+        // --- CONFIGURAÇÃO GOOGLE SHEETS ---
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1e5Tv0Z3nL20q8EAVYeIdDxQ8ne66fes7Oc9PYdUnU79d4ORPV9bsH4aqV-MJs12TKw/exec"; 
+
         const SHIPPING_MARGIN = 25; 
         const bookData = [
             { id: 1, title: "Suma Teológica", price: 75.00, weight: 2400 },
@@ -257,54 +420,77 @@
             { id: 7, title: "Duras Palavras", price: 0.00, weight: 350 }
         ];
 
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function handleBillingChoice() {
+            const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
+            const container = document.getElementById('billing-address-container');
+            const fields = document.querySelectorAll('.billing-field');
+            if (!choiceInput) return;
+            
+            container.classList.remove('hidden');
+            if (choiceInput.value === 'sim') {
+                syncBillingAddress();
+                fields.forEach(f => {
+                    f.setAttribute('readonly', 'true');
+                    f.classList.add('bg-gray-100', 'text-gray-500');
+                });
+            } else {
+                fields.forEach(f => {
+                    f.removeAttribute('readonly');
+                    f.classList.remove('bg-gray-100', 'text-gray-500');
+                    f.value = "";
+                });
+            }
+        }
+
+        function syncBillingAddress() {
+            const choice = document.querySelector('input[name="billing-choice"]:checked')?.value;
+            if (choice === 'sim') {
+                document.getElementById('morada-fat').value = document.getElementById('morada').value;
+                document.getElementById('nr-andar-fat').value = document.getElementById('nr-andar').value;
+                document.getElementById('cod-postal-fat').value = document.getElementById('cod-postal').value;
+                document.getElementById('cidade-fat').value = document.getElementById('cidade').value;
+                const shipPais = document.getElementById('pais').value;
+                document.getElementById('pais-fat').value = shipPais.startsWith('EU') ? 'EU' : 'PT';
+            }
+        }
+
+        document.querySelectorAll('.shipping-input').forEach(input => {
+            input.addEventListener('input', syncBillingAddress);
+        });
+
         function obterTarifa(peso, destino) {
             const pesoKg = peso / 1000;
-            
             if (destino === 'PT') {
                 if (peso <= 100) return 0.312 + (pesoKg * 1.175);
                 if (peso <= 250) return 0.201 + (pesoKg * 2.250);
                 if (peso <= 500) return 0.147 + (pesoKg * 2.830);
                 if (peso <= 2000) return 1.590 + (pesoKg * 0.660);
-                if (peso <= 5000) {
-                    const base2kg = 1.590 + (2 * 0.660);
-                    const totalSemIva = base2kg + ((pesoKg - 2) * 0.660);
-                    return totalSemIva * 1.23; 
-                }
+                if (peso <= 5000) return (1.590 + (2 * 0.660) + ((pesoKg - 2) * 0.660)) * 1.23;
                 return 1.590 + (pesoKg * 0.660);
             }
-
-            // EUROPA NORMAL
             if (destino === 'EU_Normal') {
                 if (peso <= 20) return 0.720;
                 if (peso <= 100) return 1.475 + (pesoKg * 0.859);
                 if (peso <= 250) return 1.300 + (pesoKg * 7.596);
                 if (peso <= 500) return 2.520 + (pesoKg * 4.940);
                 if (peso <= 2000) return 5.210 + (pesoKg * 3.785);
-                // Saco Multipostal Europa Normal (> 2kg a 5kg)
-                if (peso <= 5000) {
-                    const base2kg = 5.210 + (2 * 3.785);
-                    const totalSemIva = base2kg + ((pesoKg - 2) * 3.785);
-                    return totalSemIva * 1.23;
-                }
+                if (peso <= 5000) return (5.210 + (2 * 3.785) + ((pesoKg - 2) * 3.785)) * 1.23;
                 return 5.210 + (pesoKg * 3.785);
             }
-
-            // EUROPA ECONÓMICA
             if (destino === 'EU_Econ') {
                 if (peso <= 20) return 0.630;
                 if (peso <= 100) return 1.068 + (pesoKg * 0.627);
                 if (peso <= 250) return 0.940 + (pesoKg * 5.516);
                 if (peso <= 500) return 1.836 + (pesoKg * 3.592);
                 if (peso <= 2000) return 3.785 + (pesoKg * 2.755);
-                // Saco Multipostal Europa Económica (> 2kg a 5kg)
-                if (peso <= 5000) {
-                    const base2kg = 3.785 + (2 * 2.755);
-                    const totalSemIva = base2kg + ((pesoKg - 2) * 2.755);
-                    return totalSemIva * 1.23;
-                }
+                if (peso <= 5000) return (3.785 + (2 * 2.755) + ((pesoKg - 2) * 2.755)) * 1.23;
                 return 3.785 + (pesoKg * 2.755);
             }
-
             return 0;
         }
 
@@ -314,13 +500,8 @@
             const destino = document.getElementById('pais').value;
             let subtotal = 0, pesoTotal = 0, html = '';
             
-            // Toggle Link CTT Europa
             const europeLink = document.getElementById('ctt-europe-link');
-            if (destino === 'EU_Normal' || destino === 'EU_Econ') {
-                europeLink.classList.remove('hidden');
-            } else {
-                europeLink.classList.add('hidden');
-            }
+            if (europeLink) europeLink.classList.toggle('hidden', !destino.startsWith('EU'));
 
             items.forEach(item => {
                 const lineTotal = item.price * item.quantity;
@@ -329,24 +510,22 @@
                 pesoTotal += ((book ? book.weight : 350) * item.quantity);
                 
                 html += `
-                    <div class="flex flex-col border-b border-white/10 pb-4 mb-4 last:border-0 last:pb-0">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="font-lora text-xl text-white leading-tight font-semibold truncate flex-grow mr-2">${item.title}</span>
-                            <span class="font-sans font-bold text-brand-gold text-sm">${formatPrice(lineTotal)}</span>
+                    <div class="flex flex-col border-b border-white/10 pb-4 last:border-0">
+                        <div class="flex justify-between items-start mb-2 gap-3 text-left">
+                            <span class="font-lora text-sm md:text-base text-brand-gold leading-tight flex-grow font-semibold">
+                                ${item.title}
+                            </span>
+                            <span class="font-sans font-bold text-white text-sm whitespace-nowrap">
+                                ${formatPrice(lineTotal)}
+                            </span>
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-3 bg-white/5 rounded-lg px-2 py-1 border border-white/10">
-                                <button onclick="changeQuantity(${item.id}, -1)" class="text-gray-400 hover:text-white transition-colors">
-                                    <i class="fas fa-minus text-[10px]"></i>
-                                </button>
+                                <button onclick="changeQuantity(${item.id}, -1)" class="text-gray-400 hover:text-white transition-colors"><i class="fas fa-minus text-[10px]"></i></button>
                                 <span class="text-white text-xs font-bold w-4 text-center">${item.quantity}</span>
-                                <button onclick="changeQuantity(${item.id}, 1)" class="text-gray-400 hover:text-white transition-colors">
-                                    <i class="fas fa-plus text-[10px]"></i>
-                                </button>
+                                <button onclick="changeQuantity(${item.id}, 1)" class="text-gray-400 hover:text-white transition-colors"><i class="fas fa-plus text-[10px]"></i></button>
                             </div>
-                            <button onclick="removeItem(${item.id})" class="text-gray-500 hover:text-red-400 transition-colors">
-                                <i class="fas fa-trash-alt text-xs"></i>
-                            </button>
+                            <button onclick="removeItem(${item.id})" class="text-gray-500 hover:text-red-400 transition-colors"><i class="fas fa-trash-alt text-xs"></i></button>
                         </div>
                     </div>`;
             });
@@ -357,27 +536,18 @@
                 let numPacotes = Math.ceil(pesoFinal / 5000), pesoPorPacote = pesoFinal / numPacotes;
                 for (let i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, destino);
                 
-                let label = "";
-                if (destino === 'PT') {
-                    label = pesoFinal > 2025 ? 'Saco Multipostal + IVA CTT' : 'Envio Editorial CTT';
-                } else if (destino === 'EU_Normal') {
-                    label = pesoFinal > 2025 ? 'Saco Multipostal + IVA CTT' : 'Europa (Normal) CTT';
-                } else if (destino === 'EU_Econ') {
-                    label = pesoFinal > 2025 ? 'Saco Multipostal + IVA CTT' : 'Europa (Económica) CTT';
-                }
-                
-                if (numPacotes > 1) label = `${numPacotes} volumes`;
-                
+                let label = numPacotes > 1 ? `${numPacotes} volumes` : (pesoFinal > 2025 ? 'Saco Multipostal + IVA CTT' : 'Envio Editorial CTT');
                 document.getElementById('otimizacao-badge').innerHTML = `
-                    <span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide">
+                    <span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide font-sans">
                         ${label}
                     </span>`;
             }
             
-            list.innerHTML = html || '<p class="text-center italic opacity-50 py-4">Carrinho vazio</p>';
+            list.innerHTML = html || '<p class="text-center py-4 font-lora opacity-50 text-white">O seu carrinho está vazio</p>';
             document.getElementById('summary-subtotal').textContent = formatPrice(subtotal);
             document.getElementById('summary-shipping').textContent = formatPrice(custoPortes);
             document.getElementById('summary-total').textContent = formatPrice(subtotal + custoPortes);
+            updateGlobalCartUI();
             validateFinalButton();
         }
 
@@ -401,18 +571,39 @@
             loadCartSummary();
         }
 
+        function updateGlobalCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const totalQtd = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if(el) { el.textContent = totalQtd; el.classList.toggle('opacity-0', totalQtd === 0); }
+            });
+        }
+
         function updatePaymentDetails() {
             const method = document.querySelector('input[name="payment-method"]:checked').value;
             document.getElementById('transfer-details').classList.toggle('hidden', method !== 'bank-transfer');
             document.getElementById('mbway-details').classList.toggle('hidden', method !== 'mbway');
+            validateFinalButton();
+        }
+
+        async function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = error => reject(error);
+            });
         }
 
         function updateFileName(type) {
             const input = document.getElementById(`proof-file-${type}`);
-            const nameSpan = document.getElementById(`file-name-${type}`);
-            if (input.files.length > 0) {
+            const display = document.getElementById(`file-display-${type}`);
+            const nameSpan = document.getElementById(`file-name-${type === 'mbway' ? 'mbway' : 'transfer'}`);
+            if (input && input.files.length > 0) {
                 nameSpan.textContent = input.files[0].name;
-                document.getElementById(`file-display-${type}`).classList.remove('hidden');
+                display.classList.remove('hidden'); display.classList.add('flex');
+            } else {
+                display.classList.add('hidden');
             }
             validateFinalButton();
         }
@@ -421,13 +612,78 @@
             const method = document.querySelector('input[name="payment-method"]:checked')?.value;
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            document.getElementById('place-order-button').disabled = fileInput.files.length === 0 || cartItems.length === 0;
+            const btn = document.getElementById('place-order-button');
+            const hasFile = fileInput && fileInput.files.length > 0;
+            const hasItems = cartItems.length > 0;
+            btn.disabled = !hasFile || !hasItems;
         }
 
-        function placeOrder(e) {
+        async function placeOrder(e) {
             e.preventDefault();
-            document.getElementById('success-modal').classList.remove('hidden');
-            localStorage.removeItem('cartItems');
+            
+            const formFields = ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'];
+            let isValid = true;
+            formFields.forEach(id => {
+                const el = document.getElementById(id);
+                if(!el.value) isValid = false;
+            });
+
+            if(!isValid) {
+                document.getElementById('error-message').textContent = "Por favor, preencha todos os campos obrigatórios nos Detalhes de Envio.";
+                document.getElementById('error-modal').classList.remove('hidden');
+                return;
+            }
+
+            const btn = document.getElementById('place-order-button');
+            btn.disabled = true;
+            btn.textContent = "A processar...";
+
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const method = document.querySelector('input[name="payment-method"]:checked').value;
+            const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
+            
+            let base64File = "";
+            if (fileInput.files.length > 0) {
+                base64File = await fileToBase64(fileInput.files[0]);
+            }
+
+            const orderData = {
+                data: new Date().toLocaleString('pt-PT'),
+                nome: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                morada: document.getElementById('morada').value,
+                nr: document.getElementById('nr-andar').value,
+                cp: document.getElementById('cod-postal').value,
+                cidade: document.getElementById('cidade').value,
+                pais: document.getElementById('pais').value,
+                faturacao: document.querySelector('input[name="billing-choice"]:checked')?.value || "sim",
+                metodo: method,
+                total: document.getElementById('summary-total').textContent,
+                itens: items.map(i => `${i.quantity}x ${i.title}`).join(', '),
+                ficheiro: base64File,
+                nomeFicheiro: fileInput.files[0].name
+            };
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // O Google Apps Script muitas vezes exige no-cors para POST simples
+                    body: JSON.stringify(orderData),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                // Como usamos no-cors, não conseguimos ler o corpo da resposta, 
+                // mas assumimos sucesso se não houver erro de rede.
+                document.getElementById('success-modal').classList.remove('hidden');
+                localStorage.removeItem('cartItems');
+                updateGlobalCartUI();
+
+            } catch (error) {
+                btn.disabled = false;
+                btn.textContent = "Confirmar e Pagar";
+                document.getElementById('error-message').textContent = "Não foi possível enviar a encomenda. Verifique o seu URL ou ligação.";
+                document.getElementById('error-modal').classList.remove('hidden');
+            }
         }
 
         window.onload = () => {
