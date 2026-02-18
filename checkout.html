@@ -4,12 +4,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finalizar Compra | Jerónimo Editora</title>
     
-    <!-- Google Fonts: Apenas pesos normais, sem itálicos -->
+    <!-- Google Fonts: Playfair Display para títulos, Roboto para campos, Lora para livros -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto:wght@300;400;500;700;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->'https://script.google.com/macros/s/AKfycby1e5Tv0Z3nL20q8EAVYeIdDxQ8ne66fes7Oc9PYdUnU79d4ORPV9bsH4aqV-MJs12TKw/exec
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -35,7 +35,7 @@
     </script>
 
     <style>
-        /* Remoção total de itálicos em todo o documento */
+        /* Remoção absoluta de itálicos em todo o site */
         * { font-style: normal !important; }
         
         body { font-family: 'Roboto', sans-serif; color: #333333; }
@@ -52,6 +52,7 @@
         .fade-in { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Estilo uniforme para caixas de pagamento */
         .payment-info-box {
             background-color: #f0f7ff;
             border: 1px solid #e0efff;
@@ -68,6 +69,7 @@
             cursor: pointer;
         }
 
+        /* Botão de anexo: Azul -> Bordeaux */
         .btn-attach {
             background-color: #001f3f;
             color: white;
@@ -83,7 +85,7 @@
         }
 
         .btn-attach:hover {
-            background-color: #800000; /* Bordeaux */
+            background-color: #800000;
         }
 
         #summary-list::-webkit-scrollbar { width: 4px; }
@@ -93,31 +95,38 @@
         @media (max-width: 1024px) {
             .sticky-summary { position: static !important; }
         }
+
+        /* Animação do Menu Mobile */
+        @keyframes fadeInMenu {
+            from { opacity: 0; transform: scale(1.05); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .animate-menu-open { animation: fadeInMenu 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
     <!-- Modal Sucesso -->
-    <div id="success-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4">
-        <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full text-center">
+    <div id="success-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4 text-center">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-green-600 mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center">Encomenda recebida!</h3>
-            <p class="text-gray-600 mb-6 font-sans text-sm text-center">Obrigado pela sua preferência. Enviámos um e-mail de confirmação para o seu endereço.</p>
-            <a href="index.html" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg text-center">Voltar à Página inicial</a>
+            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2">Encomenda recebida!</h3>
+            <p class="text-gray-600 mb-6 font-sans text-sm">Obrigado pela sua preferência. Enviámos um e-mail de confirmação para o seu endereço.</p>
+            <a href="index.html" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg">Voltar à Página inicial</a>
         </div>
     </div>
 
-    <!-- Modal de Erro de Envio -->
-    <div id="error-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4">
-        <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full text-center">
+    <!-- Modal Erro -->
+    <div id="error-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4 text-center">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-red-600 mb-4"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-            <h3 class="text-2xl font-bold font-serif text-brand-accent-red mb-2 text-center">Erro no envio</h3>
-            <p class="text-gray-600 mb-6 font-sans text-sm text-center" id="error-message">Ocorreu um problema ao processar a sua encomenda. Por favor, tente novamente.</p>
-            <button onclick="document.getElementById('error-modal').classList.add('hidden')" class="w-full bg-brand-accent-blue text-white py-3 rounded-lg font-bold hover:bg-black transition-colors">Tentar novamente</button>
+            <h3 class="text-2xl font-bold font-serif text-brand-accent-red mb-2">Erro no envio</h3>
+            <p class="text-gray-600 mb-6 font-sans text-sm" id="error-message">Ocorreu um problema ao processar a sua encomenda. Verifique a sua ligação.</p>
+            <button onclick="document.getElementById('error-modal').classList.add('hidden')" class="w-full bg-brand-accent-blue text-white py-3 rounded-lg font-bold hover:bg-black transition-colors font-sans">Tentar novamente</button>
         </div>
     </div>
 
-    <!-- MENU INTEGRADO -->
+    <!-- MENU (menu.html integrado) -->
     <nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 z-50 font-sans">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <a href="index.html" class="flex items-center space-x-2">
@@ -150,7 +159,7 @@
     <!-- MENU MOBILE OVERLAY -->
     <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-screen bg-white z-[60] flex flex-col items-center justify-center text-center">
         <button class="absolute top-6 right-6 text-4xl text-brand-accent-blue font-light" onclick="toggleMenu()">&times;</button>
-        <div class="flex flex-col items-center space-y-8 w-full px-12 animate-menu-open">
+        <div class="flex flex-col items-center space-y-8 w-full px-12 animate-menu-open font-sans">
             <img src="Imagens/Logo J.png" class="h-12 w-auto mb-6 opacity-40" alt="Logo">
             <a href="index.html" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Início</a>
             <a href="catalogo-completo.html" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Catálogo</a>
@@ -166,7 +175,7 @@
 
             <div class="flex flex-col lg:flex-row gap-8">
                 
-                <!-- COLUNA FORMULÁRIOS (Esquerda no Desktop) -->
+                <!-- COLUNA ESQUERDA: FORMULÁRIOS -->
                 <div class="lg:w-7/12 order-2 lg:order-1">
                     
                     <!-- 1. DETALHES DE ENVIO -->
@@ -174,93 +183,93 @@
                         <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">1. Detalhes de Envio</h2>
                         
                         <form id="shipping-form" class="space-y-5 mt-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-left">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-left font-sans">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nome completo *</label>
-                                    <input type="text" id="nome" name="nome" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50 shipping-input">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Nome completo *</label>
+                                    <input type="text" id="nome" name="nome" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Email *</label>
-                                    <input type="email" id="email" name="email" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                                    <input type="email" id="email" name="email" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50">
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-5 text-left">
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-5 text-left font-sans">
                                 <div class="md:col-span-3">
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Morada completa *</label>
-                                    <input type="text" id="morada" name="morada" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50 shipping-input">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Morada completa *</label>
+                                    <input type="text" id="morada" name="morada" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
                                 </div>
                                 <div class="md:col-span-1">
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nº / Andar *</label>
-                                    <input type="text" id="nr-andar" name="nr_andar" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50 shipping-input">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Nº / Andar *</label>
+                                    <input type="text" id="nr-andar" name="nr_andar" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 text-left">
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 text-left font-sans">
                                 <div class="sm:col-span-4">
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Código Postal *</label>
-                                    <input type="text" id="cod-postal" name="cod_postal" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50 shipping-input" placeholder="XXXX-XXX">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Código Postal *</label>
+                                    <input type="text" id="cod-postal" name="cod_postal" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input" placeholder="XXXX-XXX">
                                 </div>
                                 <div class="sm:col-span-8">
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Cidade *</label>
-                                    <input type="text" id="cidade" name="cidade" required class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-gray-50/50 shipping-input">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Cidade *</label>
+                                    <input type="text" id="cidade" name="cidade" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 gap-5 text-left">
+                            <div class="grid grid-cols-1 gap-5 text-left font-sans">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">País *</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">País *</label>
                                     <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white font-sans shipping-input" onchange="loadCartSummary()">
                                         <option value="PT">Portugal (Continente e Ilhas)</option>
                                         <option value="EU_Normal">Europa (Entrega Normal)</option>
                                         <option value="EU_Econ">Europa (Entrega Económica)</option>
                                     </select>
-                                    <div id="ctt-europe-link" class="hidden mt-2 text-left">
+                                    <div id="ctt-europe-link" class="hidden mt-2">
                                         <a href="https://www.ctt.pt/empresas/solucoes-de-gestao-e-setoriais/solucoes-setoriais/editores-e-livreiros/correio-editorial-internacional#fndtn-tab1" target="_blank" class="text-[10px] text-gray-400 hover:text-brand-accent-red underline font-sans">Ver mais em: ctt.pt/editorial-internacional</a>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="pt-6 border-t border-gray-100 mt-4 text-left">
-                                <span class="block text-sm font-medium text-gray-700 font-sans mb-3">A morada de facturação é igual à de envio?</span>
+                            <div class="pt-6 border-t border-gray-100 mt-4 text-left font-sans">
+                                <span class="block text-sm font-medium text-gray-700 mb-3">A morada de facturação é igual à de envio?</span>
                                 <div class="flex items-center space-x-8">
                                     <label class="flex items-center space-x-2 cursor-pointer">
                                         <input type="radio" name="billing-choice" value="sim" class="radio-small text-brand-accent-red" onchange="handleBillingChoice()">
-                                        <span class="text-sm text-gray-700 font-medium font-sans">Sim</span>
+                                        <span class="text-sm text-gray-700 font-medium">Sim</span>
                                     </label>
                                     <label class="flex items-center space-x-2 cursor-pointer">
                                         <input type="radio" name="billing-choice" value="nao" class="radio-small text-brand-accent-red" onchange="handleBillingChoice()">
-                                        <span class="text-sm text-gray-700 font-medium font-sans">Não</span>
+                                        <span class="text-sm text-gray-700 font-medium">Não</span>
                                     </label>
                                 </div>
                             </div>
 
                             <!-- Bloco Faturação -->
-                            <div id="billing-address-container" class="hidden space-y-5 pt-6 border-t border-gray-100 mt-4 fade-in bg-gray-50/50 p-4 rounded-lg text-brand-text text-left">
-                                <h3 class="text-lg font-bold text-brand-text mb-4 underline font-sans">Morada de Facturação</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-4 gap-5 text-left">
+                            <div id="billing-address-container" class="hidden space-y-5 pt-6 border-t border-gray-100 mt-4 fade-in bg-gray-50/50 p-4 rounded-lg text-brand-text text-left font-sans">
+                                <h3 class="text-lg font-bold text-brand-text mb-4 underline font-sans font-serif">Morada de Facturação</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-5 text-left font-sans">
                                     <div class="md:col-span-3">
-                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Morada *</label>
-                                        <input type="text" id="morada-fat" name="morada_fat" class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-white billing-field">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Morada *</label>
+                                        <input type="text" id="morada-fat" name="morada_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field font-sans">
                                     </div>
                                     <div class="md:col-span-1">
-                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nº / Andar *</label>
-                                        <input type="text" id="nr-andar-fat" name="nr_andar_fat" class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-white billing-field">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Nº / Andar *</label>
+                                        <input type="text" id="nr-andar-fat" name="nr_andar_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field font-sans">
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 text-left">
+                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 text-left font-sans">
                                     <div class="sm:col-span-4">
-                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Cód. Postal *</label>
-                                        <input type="text" id="cod-postal-fat" name="cod_postal_fat" class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-white billing-field">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Cód. Postal *</label>
+                                        <input type="text" id="cod-postal-fat" name="cod_postal_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field font-sans">
                                     </div>
                                     <div class="sm:col-span-8">
-                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Cidade *</label>
-                                        <input type="text" id="cidade-fat" name="cidade_fat" class="block w-full p-3 border border-gray-300 rounded-lg font-sans bg-white billing-field">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Cidade *</label>
+                                        <input type="text" id="cidade-fat" name="cidade_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field font-sans">
                                     </div>
                                 </div>
-                                <div class="text-left">
-                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">País *</label>
-                                    <select id="pais-fat" name="pais_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white font-sans billing-field">
+                                <div class="text-left font-sans">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">País *</label>
+                                    <select id="pais-fat" name="pais_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field font-sans">
                                         <option value="PT">Portugal</option>
                                         <option value="EU">Europa</option>
                                     </select>
@@ -279,15 +288,15 @@
                             <div class="border rounded-lg overflow-hidden shadow-sm">
                                 <label class="flex items-center space-x-3 p-4 cursor-pointer hover:bg-gray-50 font-sans">
                                     <input type="radio" name="payment-method" id="payment-mbway" value="mbway" checked class="radio-small text-brand-accent-red" onchange="updatePaymentDetails()">
-                                    <span class="text-gray-800 font-medium text-base">MB WAY</span>
+                                    <span class="text-gray-800 font-medium text-base font-sans">MB WAY</span>
                                 </label>
                                 
                                 <div id="mbway-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white">
                                     <div class="payment-info-box mb-4">
                                         <i class="fas fa-phone-alt text-[#00c04b] text-xl"></i>
                                         <div class="text-left">
-                                            <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1">Contacto:</p>
-                                            <p class="text-xl font-bold text-brand-accent-blue leading-none">917 304 286</p>
+                                            <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1 font-sans">Contacto:</p>
+                                            <p class="text-xl font-bold text-brand-accent-blue leading-none font-sans">917 304 286</p>
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-start w-full">
@@ -297,7 +306,7 @@
                                             <i class="fas fa-upload mr-2"></i> Anexar comprovativo *
                                         </label>
                                         <div id="file-display-mbway" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
-                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway" class="truncate max-w-[200px]"></span>
+                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway" class="truncate max-w-[200px] font-sans"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -307,25 +316,25 @@
                             <div class="border rounded-lg overflow-hidden shadow-sm">
                                 <label class="flex items-center space-x-3 p-4 cursor-pointer hover:bg-gray-50 font-sans">
                                     <input type="radio" name="payment-method" id="payment-transfer" value="bank-transfer" class="radio-small text-brand-accent-red" onchange="updatePaymentDetails()">
-                                    <span class="text-gray-800 font-medium text-base">Transferência Bancária</span>
+                                    <span class="text-gray-800 font-medium text-base font-sans">Transferência Bancária</span>
                                 </label>
                                 
                                 <div id="transfer-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white hidden">
                                     <div class="payment-info-box mb-4">
                                         <i class="fas fa-university text-brand-accent-blue opacity-80 text-xl"></i>
-                                        <div class="text-left">
-                                            <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1">IBAN para Transferência:</p>
-                                            <p class="text-base font-bold text-brand-accent-blue select-all leading-none">PT50 0035 0284 0001 5872 4004 0</p>
+                                        <div class="text-left font-sans">
+                                            <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1 font-sans">IBAN para Transferência:</p>
+                                            <p class="text-base font-bold text-brand-accent-blue select-all leading-none font-sans">PT50 0035 0284 0001 5872 4004 0</p>
                                         </div>
                                     </div>
-                                    <div class="flex flex-col items-start w-full text-left">
+                                    <div class="flex flex-col items-start w-full text-left font-sans">
                                         <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight text-left font-sans">Anexe o comprovativo da transferência:</p>
                                         <input type="file" id="proof-file-transfer" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('transfer')" />
                                         <label for="proof-file-transfer" class="btn-attach font-sans">
                                             <i class="fas fa-upload mr-2"></i> Anexar comprovativo *
                                         </label>
                                         <div id="file-display-transfer" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
-                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer" class="truncate max-w-[200px]"></span>
+                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer" class="truncate max-w-[200px] font-sans"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -334,22 +343,22 @@
                     </section>
                 </div>
 
-                <!-- 3. CARRINHO DE COMPRAS (Direita no Desktop, Topo no Mobile) -->
+                <!-- COLUNA DIREITA: CARRINHO (3.) -->
                 <div class="lg:w-5/12 order-1 lg:order-2 h-fit lg:sticky lg:top-24 sticky-summary">
-                    <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10">
-                        <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2 text-center md:text-left text-white">3. Carrinho de Compras</h2>
+                    <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10 text-center md:text-left">
+                        <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2 text-white">3. Carrinho de Compras</h2>
                         
-                        <div id="summary-list" class="space-y-5 mb-6 max-h-[50vh] overflow-y-auto pr-2">
+                        <div id="summary-list" class="space-y-5 mb-6 max-h-[50vh] overflow-y-auto pr-2 font-sans">
                             <!-- JS popula -->
                         </div>
 
-                        <div class="space-y-2 pt-4 border-t border-white/20 text-sm">
+                        <div class="space-y-2 pt-4 border-t border-white/20 text-sm font-sans">
                             <div class="flex justify-between opacity-80 font-sans">
                                 <span>Subtotal (Produtos):</span>
                                 <span id="summary-subtotal">€ 0,00</span>
                             </div>
                             <div class="flex flex-col items-end">
-                                <div class="flex justify-between w-full opacity-80 font-sans">
+                                <div class="flex justify-between w-full opacity-80">
                                     <span>Portes de Envio:</span>
                                     <span id="summary-shipping" class="font-medium text-brand-gold">€ 0,00</span>
                                 </div>
@@ -357,8 +366,8 @@
                             </div>
                         </div>
 
-                        <div class="flex justify-between items-center mt-5 pt-3 border-t border-brand-gold">
-                            <span class="font-serif text-xl font-bold text-brand-gold">Total:</span>
+                        <div class="flex justify-between items-center mt-5 pt-3 border-t border-brand-gold font-sans">
+                            <span class="font-serif text-xl font-bold text-white">Total:</span>
                             <span id="summary-total" class="font-sans text-2xl md:text-3xl font-extrabold text-brand-gold">€ 0,00</span>
                         </div>
 
@@ -372,9 +381,9 @@
         </div>
     </main>
 
-    <!-- RODAPÉ INTEGRADO -->
+    <!-- RODAPÉ (rodape.html integrado) -->
     <footer class="bg-gray-900 text-gray-300 py-12 px-6 border-t-8 border-brand-accent-red font-sans mt-auto">
-        <div class="max-w-5xl mx-auto text-center">
+        <div class="max-w-5xl mx-auto text-center font-sans">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4 items-start">
                 <div class="flex flex-col items-center space-y-4">
                     <div class="flex items-center space-x-2">
@@ -384,26 +393,25 @@
                     <p class="text-sm text-gray-400 leading-relaxed max-w-[250px]">Rigor teológico e excelência editorial. Dedicada a enriquecer a cultura bíblica em Portugal.</p>
                 </div>
                 <div class="flex flex-col items-center">
-                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans">Navegação</h4>
-                    <ul class="space-y-2 text-sm font-sans">
+                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm">Navegação</h4>
+                    <ul class="space-y-2 text-sm">
                         <li><a href="index.html" class="hover:text-white transition-colors">Início</a></li>
                         <li><a href="catalogo-completo.html" class="hover:text-white transition-colors">Catálogo</a></li>
                         <li><a href="produtos.html" class="hover:text-white transition-colors">Produtos</a></li>
                         <li><a href="index.html#sobre" class="hover:text-white transition-colors">Sobre</a></li>
+                        <li><a href="contacto.html" class="hover:text-white transition-colors">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="flex flex-col items-center">
-                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans">Contacto</h4>
-                    <p class="text-sm font-sans">editorajeronimo@gmail.com</p>
-                    <p class="text-sm font-sans text-gray-500">Braga, Portugal</p>
-                    <div class="flex justify-center space-x-5 mt-5 text-gray-400">
+                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans">Redes Sociais</h4>
+                    <div class="flex justify-center space-x-5 mt-2 text-gray-400">
                         <a href="https://www.facebook.com/jeronimoeditora" target="_blank" class="hover:text-brand-gold transition-transform text-xl"><i class="fab fa-facebook"></i></a>
                         <a href="https://www.instagram.com/editorajeronimo/" target="_blank" class="hover:text-brand-gold transition-transform text-xl"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.linkedin.com/company/jer%C3%B3nimo-editora/" target="_blank" class="hover:text-brand-gold transition-transform text-xl"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="text-center pt-8 mt-10 border-t border-gray-800 text-[11px] text-gray-500 tracking-widest uppercase font-sans">© 2026 Jerónimo Editora. Todos os direitos reservados.</div>
+            <div class="text-center pt-8 mt-10 border-t border-gray-800 text-[11px] text-gray-500 tracking-widest uppercase">© 2026 Jerónimo Editora. Todos os direitos reservados.</div>
         </div>
     </footer>
 
@@ -465,14 +473,16 @@
 
         function obterTarifa(peso, destino) {
             const pesoKg = peso / 1000;
+            // PORTUGAL
             if (destino === 'PT') {
                 if (peso <= 100) return 0.312 + (pesoKg * 1.175);
                 if (peso <= 250) return 0.201 + (pesoKg * 2.250);
                 if (peso <= 500) return 0.147 + (pesoKg * 2.830);
                 if (peso <= 2000) return 1.590 + (pesoKg * 0.660);
-                if (peso <= 5000) return (1.590 + (2 * 0.660) + ((pesoKg - 2) * 0.660)) * 1.23;
+                if (peso <= 5000) return (1.590 + (2 * 0.660) + ((pesoKg - 2) * 0.660)) * 1.23; 
                 return 1.590 + (pesoKg * 0.660);
             }
+            // EUROPA NORMAL (Tabela imagem_f35d27.png)
             if (destino === 'EU_Normal') {
                 if (peso <= 20) return 0.720;
                 if (peso <= 100) return 1.475 + (pesoKg * 0.859);
@@ -482,6 +492,7 @@
                 if (peso <= 5000) return (5.210 + (2 * 3.785) + ((pesoKg - 2) * 3.785)) * 1.23;
                 return 5.210 + (pesoKg * 3.785);
             }
+            // EUROPA ECONÓMICA (Tabela imagem_f35d27.png)
             if (destino === 'EU_Econ') {
                 if (peso <= 20) return 0.630;
                 if (peso <= 100) return 1.068 + (pesoKg * 0.627);
@@ -501,7 +512,7 @@
             let subtotal = 0, pesoTotal = 0, html = '';
             
             const europeLink = document.getElementById('ctt-europe-link');
-            if (europeLink) europeLink.classList.toggle('hidden', !destino.startsWith('EU'));
+            if (europeLink) europeLink.classList.toggle('hidden', destino === 'PT');
 
             items.forEach(item => {
                 const lineTotal = item.price * item.quantity;
@@ -665,15 +676,14 @@
             };
 
             try {
+                // Envio real para o Google Script
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // O Google Apps Script muitas vezes exige no-cors para POST simples
+                    mode: 'no-cors',
                     body: JSON.stringify(orderData),
                     headers: { 'Content-Type': 'application/json' }
                 });
                 
-                // Como usamos no-cors, não conseguimos ler o corpo da resposta, 
-                // mas assumimos sucesso se não houver erro de rede.
                 document.getElementById('success-modal').classList.remove('hidden');
                 localStorage.removeItem('cartItems');
                 updateGlobalCartUI();
@@ -681,7 +691,7 @@
             } catch (error) {
                 btn.disabled = false;
                 btn.textContent = "Confirmar e Pagar";
-                document.getElementById('error-message').textContent = "Não foi possível enviar a encomenda. Verifique o seu URL ou ligação.";
+                document.getElementById('error-message').textContent = "Não foi possível enviar a encomenda. Verifique a sua ligação.";
                 document.getElementById('error-modal').classList.remove('hidden');
             }
         }
