@@ -32,6 +32,9 @@
     </script>
 
     <style>
+        /* Remoção de itálicos desnecessários */
+        * { font-style: normal !important; }
+
         body { font-family: 'Roboto', sans-serif; color: #333333; }
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
         
@@ -69,13 +72,13 @@
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
 
+    <!-- Modal de Sucesso Atualizado -->
     <div id="message-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden" onclick="this.classList.add('hidden')">
         <div class="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full mx-4 text-center" onclick="event.stopPropagation()">
             <div class="text-green-500 mb-4 flex justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
             </div>
-            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2">Mensagem enviada</h3>
-            <p class="text-gray-600 mb-6">Entraremos em contacto brevemente.</p>
+            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-6">Obrigada pela sua mensagem.</h3>
             <button onclick="document.getElementById('message-modal').classList.add('hidden')" class="w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors font-sans">Fechar</button>
         </div>
     </div>
@@ -83,7 +86,7 @@
     <div id="nav-placeholder"></div>
 
     <main class="flex-grow pt-24 md:pt-32 pb-16"> 
-        <div class="max-w-6xl mx-auto px-6 fade-in">
+        <div class="max-w-6xl mx-auto px-6 fade-in text-center">
             <h1 class="font-serif text-4xl sm:text-5xl text-brand-accent-red mb-12 border-b pb-4 text-center font-bold">Fale Connosco</h1>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch mb-20">
@@ -91,13 +94,13 @@
                     <div class="contact-box line-r line-b">
                         <span class="text-sm sm:text-base font-bold text-brand-text mb-4 font-sans">Redes sociais</span>
                         <div class="flex space-x-2 sm:space-x-4">
-                            <a href="#" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-                            <a href="#" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                            <a href="https://www.facebook.com/jeronimoeditora" target="_blank" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                            <a href="https://www.instagram.com/editorajeronimo/" target="_blank" class="text-brand-accent-blue hover:text-brand-accent-red transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
                         </div>
                     </div>
                     <div class="contact-box line-b">
                         <span class="text-sm sm:text-base font-bold text-brand-text mb-3 font-sans">E-mail</span>
-                        <a href="mailto:editorajeronimo@gmail.com" class="text-[10px] xs:text-xs sm:text-base lg:text-lg font-normal text-brand-accent-red hover:underline italic font-sans leading-tight">editorajeronimo@gmail.com</a>
+                        <a href="mailto:editorajeronimo@gmail.com" class="text-[10px] xs:text-xs sm:text-base lg:text-lg font-normal text-brand-accent-red hover:underline font-sans leading-tight">editorajeronimo@gmail.com</a>
                     </div>
                     <div class="contact-box line-r">
                         <span class="text-sm sm:text-base font-bold text-brand-text mb-3 font-sans">Telefone</span>
@@ -121,7 +124,8 @@
                 <h2 class="font-serif text-3xl font-bold text-brand-accent-red mb-8 border-b border-brand-accent-red/10 pb-4">Deixe a sua mensagem</h2>
                 <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-6">
                     <div class="grid md:grid-cols-2 gap-6">
-                        <input type="text" name="nome" placeholder="Nome completo" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
+                        <!-- Nome não obrigatório -->
+                        <input type="text" name="nome" placeholder="Nome completo" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
                         <input type="email" name="email" placeholder="E-mail *" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
                     </div>
                     <textarea name="mensagem" placeholder="Mensagem *" rows="5" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none resize-none font-sans"></textarea>
@@ -157,7 +161,7 @@
                     mode: 'no-cors',
                     body: JSON.stringify({
                         type: 'contact_message',
-                        nome: formData.get('nome'),
+                        nome: formData.get('nome') || "Não preenchido",
                         email: formData.get('email'),
                         mensagem: formData.get('mensagem')
                     })
