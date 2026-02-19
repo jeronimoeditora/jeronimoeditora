@@ -91,6 +91,17 @@
         #summary-list::-webkit-scrollbar-track { background: #f1f1f1; }
         #summary-list::-webkit-scrollbar-thumb { background: #cfaf5c; border-radius: 10px; }
 
+        /* Loader Spinner */
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #800000;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         @media (max-width: 1024px) {
             .sticky-summary { position: static !important; }
         }
@@ -103,6 +114,13 @@
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <!-- Overlay de Carregamento (Loading) -->
+    <div id="loading-overlay" class="fixed inset-0 z-[110] bg-white bg-opacity-90 flex flex-col items-center justify-center hidden">
+        <div class="loader mb-4"></div>
+        <p id="loading-text" class="text-brand-accent-blue font-bold font-sans animate-pulse">A processar a encomenda...</p>
+        <p class="text-xs text-gray-400 mt-2">Isto poderá demorar alguns segundos</p>
+    </div>
 
     <!-- Modal Sucesso -->
     <div id="success-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4 text-center">
@@ -300,7 +318,7 @@
                                             <i class="fas fa-upload mr-2"></i> Anexar comprovativo
                                         </label>
                                         <div id="file-display-mbway" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
-                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway" class="truncate max-w-[200px]"></span>
+                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway" class="truncate max-w-[200px] font-sans"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -329,7 +347,7 @@
                                             <i class="fas fa-upload mr-2"></i> Anexar comprovativo
                                         </label>
                                         <div id="file-display-transfer" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
-                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer" class="truncate max-w-[200px]"></span>
+                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer" class="truncate max-w-[200px] font-sans"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -640,9 +658,11 @@
                 return;
             }
 
-            const btn = document.getElementById('place-order-button');
-            if(btn) { btn.disabled = true; btn.textContent = "A processar..."; }
-
+            // Ativa o overlay de carregamento
+            const overlay = document.getElementById('loading-overlay');
+            const loadingText = document.getElementById('loading-text');
+            overlay.classList.remove('hidden');
+            
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const method = document.querySelector('input[name="payment-method"]:checked')?.value;
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
@@ -651,46 +671,54 @@
             let mimeType = "application/octet-stream";
             let fileName = "comprovativo";
 
-            if (fileInput && fileInput.files.length > 0) {
-                base64File = await fileToBase64(fileInput.files[0]);
-                mimeType = fileInput.files[0].type;
-                fileName = fileInput.files[0].name;
-            }
-
-            const payload = {
-                type: 'order',
-                cliente: {
-                    nome: document.getElementById('nome').value,
-                    email: document.getElementById('email').value,
-                    nif: document.getElementById('nif')?.value || "N/A"
-                },
-                envio: {
-                    morada: document.getElementById('morada').value,
-                    nr_andar: document.getElementById('nr-andar').value,
-                    cod_postal: document.getElementById('cod-postal').value,
-                    cidade: document.getElementById('cidade').value,
-                    pais: document.getElementById('pais').value,
-                    morada_fat: document.getElementById('morada-fat')?.value || null,
-                    cod_postal_fat: document.getElementById('cod-postal-fat')?.value || null,
-                    cidade_fat: document.getElementById('cidade-fat')?.value || null,
-                    pais_fat: document.getElementById('pais-fat')?.value || null
-                },
-                pagamento: {
-                    metodo: method,
-                    total: document.getElementById('summary-total')?.textContent.replace('€ ', '') || "0,00",
-                    portes: document.getElementById('summary-shipping')?.textContent.replace('€ ', '') || "0,00",
-                    fileBase64: base64File,
-                    fileMimeType: mimeType,
-                    fileName: fileName
-                },
-                itens: cartItems.map(i => ({
-                    titulo: i.title,
-                    qtd: i.quantity,
-                    preco_unit: i.price
-                }))
-            };
-
             try {
+                loadingText.textContent = "A processar ficheiro...";
+                if (fileInput && fileInput.files.length > 0) {
+                    base64File = await fileToBase64(fileInput.files[0]);
+                    mimeType = fileInput.files[0].type;
+                    fileName = fileInput.files[0].name;
+                }
+
+                const payload = {
+                    type: 'order',
+                    cliente: {
+                        nome: document.getElementById('nome').value,
+                        email: document.getElementById('email').value,
+                        nif: document.getElementById('nif')?.value || "N/A"
+                    },
+                    envio: {
+                        morada: document.getElementById('morada').value,
+                        nr_andar: document.getElementById('nr-andar').value,
+                        cod_postal: document.getElementById('cod-postal').value,
+                        cidade: document.getElementById('cidade').value,
+                        pais: document.getElementById('pais').value,
+                        morada_fat: document.getElementById('morada-fat')?.value || null,
+                        cod_postal_fat: document.getElementById('cod-postal-fat')?.value || null,
+                        cidade_fat: document.getElementById('cidade-fat')?.value || null,
+                        pais_fat: document.getElementById('pais-fat')?.value || null
+                    },
+                    pagamento: {
+                        metodo: method,
+                        total: document.getElementById('summary-total')?.textContent.replace('€ ', '') || "0,00",
+                        portes: document.getElementById('summary-shipping')?.textContent.replace('€ ', '') || "0,00",
+                        fileBase64: base64File,
+                        fileMimeType: mimeType,
+                        fileName: fileName
+                    },
+                    itens: cartItems.map(i => ({
+                        titulo: i.title,
+                        qtd: i.quantity,
+                        preco_unit: i.price
+                    }))
+                };
+
+                loadingText.textContent = "A enviar dados e emails...";
+                
+                // Intervalo para mudar o texto e dar feedback dinâmico
+                const feedbackInterval = setTimeout(() => {
+                    loadingText.textContent = "Quase pronto... A gerar e-mails de confirmação.";
+                }, 7000);
+
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -698,11 +726,13 @@
                     headers: { 'Content-Type': 'application/json' }
                 });
                 
-                const successModal = document.getElementById('success-modal');
-                if(successModal) successModal.classList.remove('hidden');
+                clearTimeout(feedbackInterval);
+                overlay.classList.add('hidden');
+                document.getElementById('success-modal').classList.remove('hidden');
                 localStorage.removeItem('cartItems');
+
             } catch (error) {
-                if(btn) { btn.disabled = false; btn.textContent = "Confirmar e Pagar"; }
+                overlay.classList.add('hidden');
                 const errorModal = document.getElementById('error-modal');
                 if(errorModal) errorModal.classList.remove('hidden');
             }
