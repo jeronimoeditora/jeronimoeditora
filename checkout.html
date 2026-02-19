@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Evita que o browser no mobile destaque o IBAN como link ou telefone, eliminando sombras e mudas de cor -->
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
     <title>Finalizar Compra | Jerónimo Editora</title>
     
     <!-- Google Fonts: Playfair Display, Roboto e Lora -->
@@ -91,7 +93,7 @@
         #summary-list::-webkit-scrollbar-track { background: #f1f1f1; }
         #summary-list::-webkit-scrollbar-thumb { background: #cfaf5c; border-radius: 10px; }
 
-        /* Loader Spinner */
+        /* Estilo do Loader Spinner */
         .loader {
             border: 3px solid #f3f3f3;
             border-top: 3px solid #800000;
@@ -115,18 +117,18 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- Overlay de Carregamento (Loading) -->
-    <div id="loading-overlay" class="fixed inset-0 z-[110] bg-white bg-opacity-90 flex flex-col items-center justify-center hidden">
+    <!-- Overlay de Carregamento Profissional -->
+    <div id="loading-overlay" class="fixed inset-0 z-[110] bg-white bg-opacity-95 flex flex-col items-center justify-center hidden">
         <div class="loader mb-4"></div>
-        <p id="loading-text" class="text-brand-accent-blue font-bold font-sans animate-pulse">A processar a encomenda...</p>
-        <p class="text-xs text-gray-400 mt-2">Isto poderá demorar alguns segundos</p>
+        <p id="loading-text" class="text-brand-accent-blue font-bold font-sans animate-pulse text-lg text-center px-6">A processar a encomenda...</p>
+        <p id="loading-subtext" class="text-xs text-gray-400 mt-2">Isto poderá demorar cerca de 20 segundos.</p>
     </div>
 
     <!-- Modal Sucesso -->
     <div id="success-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4 text-center">
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-green-600 mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center">Encomenda recebida!</h3>
+            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center font-bold">Encomenda recebida!</h3>
             <p class="text-gray-600 mb-6 font-sans text-sm text-center">Obrigado pela sua preferência. Enviámos um e-mail de confirmação para o seu endereço.</p>
             <a href="index.html" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg text-center font-sans">Voltar à Página inicial</a>
         </div>
@@ -142,7 +144,7 @@
         </div>
     </div>
 
-    <!-- MENU INTEGRADO -->
+    <!-- Navegação -->
     <nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 z-50 font-sans">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <a href="index.html" class="flex items-center space-x-2">
@@ -162,7 +164,7 @@
         </div>
     </nav>
 
-    <!-- MENU MOBILE OVERLAY -->
+    <!-- Menu Mobile -->
     <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-screen bg-white z-[60] flex flex-col items-center justify-center text-center">
         <button class="absolute top-6 right-6 text-4xl text-brand-accent-blue font-light" onclick="toggleMenu()">&times;</button>
         <div class="flex flex-col items-center space-y-8 w-full px-12 animate-menu-open">
@@ -236,14 +238,14 @@
                                     <option value="EU_Normal">Europa (Entrega Normal)</option>
                                     <option value="EU_Econ">Europa (Entrega Económica)</option>
                                 </select>
-                                <!-- Link discreto CTT por baixo do País -->
+                                <!-- Link CTT adaptado por baixo do País -->
                                 <div id="ctt-shipping-info" class="hidden mt-1 text-left">
-                                    <a href="https://www.ctt.pt/empresas/solucoes-de-gestao-e-setoriais/solucoes-setoriais/editores-e-livreiros/correio-editorial-internacional#fndtn-tab1" target="_blank" class="text-[10px] text-gray-400 hover:text-brand-accent-red underline transition-colors">mais info em ctt</a>
+                                    <a href="https://www.ctt.pt/empresas/solucoes-de-gestao-e-setoriais/solucoes-setoriais/editores-e-livreiros/correio-editorial-internacional#fndtn-tab1" target="_blank" class="text-[10px] text-gray-400 hover:text-brand-accent-red underline transition-colors font-sans">mais info em ctt</a>
                                 </div>
                             </div>
 
                             <div class="pt-6 border-t border-gray-100 mt-4 text-left">
-                                <span class="block text-sm font-medium text-gray-700 font-sans mb-3 font-sans">A morada de facturação é igual à de envio?</span>
+                                <span class="block text-sm font-medium text-gray-700 font-sans mb-3">A morada de facturação é igual à de envio?</span>
                                 <div class="flex items-center space-x-8">
                                     <label class="flex items-center space-x-2 cursor-pointer font-sans">
                                         <input type="radio" name="billing-choice" id="choice-sim" value="sim" class="radio-small text-brand-accent-red" onchange="handleBillingChoice()">
@@ -256,7 +258,7 @@
                                 </div>
                             </div>
 
-                            <!-- Bloco Faturação -->
+                            <!-- Bloco Faturação (Oculto até escolha) -->
                             <div id="billing-address-container" class="hidden space-y-5 pt-6 border-t border-gray-100 mt-4 fade-in bg-gray-50/50 p-4 rounded-lg text-brand-text font-sans">
                                 <h3 class="text-lg font-bold text-brand-text mb-4 underline font-serif">Morada de Facturação</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
@@ -304,21 +306,21 @@
                                 </label>
                                 
                                 <div id="mbway-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white">
-                                    <div class="payment-info-box mb-4">
+                                    <div class="payment-info-box mb-4 font-sans">
                                         <i class="fas fa-phone-alt text-[#00c04b] text-xl"></i>
-                                        <div class="text-left font-sans font-bold">
-                                            <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1 font-sans">Contacto:</p>
-                                            <p class="text-xl font-bold text-brand-accent-blue leading-none font-sans">917 304 286</p>
+                                        <div class="text-left font-bold">
+                                            <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1">Contacto:</p>
+                                            <p class="text-xl font-bold text-brand-accent-blue leading-none">917 304 286</p>
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-start w-full">
-                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight text-left">Anexe o comprovativo após envio via MB WAY *:</p>
+                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight text-left font-sans">Anexe o comprovativo após envio via MB WAY *:</p>
                                         <input type="file" id="proof-file-mbway" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('mbway')" />
                                         <label for="proof-file-mbway" class="btn-attach font-sans">
                                             <i class="fas fa-upload mr-2"></i> Anexar comprovativo
                                         </label>
                                         <div id="file-display-mbway" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
-                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway" class="truncate max-w-[200px] font-sans"></span>
+                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway" class="truncate max-w-[200px]"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -332,22 +334,22 @@
                                 </label>
                                 
                                 <div id="transfer-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white hidden">
-                                    <div class="payment-info-box mb-4 font-sans font-bold">
+                                    <div class="payment-info-box mb-4 font-sans">
                                         <i class="fas fa-university text-brand-accent-blue opacity-80 text-xl"></i>
-                                        <div class="text-left font-sans font-bold w-full">
-                                            <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1 font-sans">IBAN para Transferência:</p>
-                                            <!-- Texto do IBAN reduzido para mobile -->
-                                            <p class="text-[13px] sm:text-base font-bold text-brand-accent-blue select-all leading-none font-sans whitespace-nowrap overflow-x-auto">PT50 0035 0284 0001 5872 4004 0</p>
+                                        <div class="text-left font-bold w-full overflow-hidden">
+                                            <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1">IBAN para Transferência:</p>
+                                            <!-- Texto do IBAN adaptado para mobile sem quebras nem sombras de scroll -->
+                                            <p class="text-[11px] min-[375px]:text-[12px] sm:text-base font-bold text-brand-accent-blue select-all leading-none whitespace-nowrap tracking-tighter sm:tracking-normal">PT50 0035 0284 0001 5872 4004 0</p>
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-start w-full text-left font-sans">
-                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight text-left font-sans">Anexe o comprovativo da transferência *:</p>
+                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight text-left">Anexe o comprovativo da transferência *:</p>
                                         <input type="file" id="proof-file-transfer" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('transfer')" />
                                         <label for="proof-file-transfer" class="btn-attach font-sans">
                                             <i class="fas fa-upload mr-2"></i> Anexar comprovativo
                                         </label>
                                         <div id="file-display-transfer" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
-                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer" class="truncate max-w-[200px] font-sans"></span>
+                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer" class="truncate max-w-[200px]"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -359,7 +361,6 @@
                 <!-- COLUNA DIREITA: CARRINHO -->
                 <div class="lg:w-5/12 order-1 lg:order-2 h-fit lg:sticky lg:top-24 sticky-summary">
                     <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10 text-center md:text-left">
-                        <!-- Título simplificado -->
                         <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2 text-white font-serif font-bold">Carrinho de Compras</h2>
                         
                         <div id="summary-list" class="space-y-5 mb-6 max-h-[50vh] overflow-y-auto pr-2 font-sans">
@@ -367,22 +368,22 @@
                         </div>
 
                         <div class="space-y-2 pt-4 border-t border-white/20 text-sm font-sans">
-                            <div class="flex justify-between opacity-80 font-sans">
-                                <span class="font-sans">Subtotal (Produtos):</span>
-                                <span id="summary-subtotal" class="font-sans">€ 0,00</span>
+                            <div class="flex justify-between opacity-80">
+                                <span>Subtotal (Produtos):</span>
+                                <span id="summary-subtotal">€ 0,00</span>
                             </div>
-                            <div class="flex flex-col items-end font-sans">
-                                <div class="flex justify-between w-full opacity-80 font-sans">
-                                    <span class="font-sans">Portes de Envio:</span>
-                                    <span id="summary-shipping" class="font-medium text-brand-gold font-sans font-bold">€ 0,00</span>
+                            <div class="flex flex-col items-end">
+                                <div class="flex justify-between w-full opacity-80">
+                                    <span>Portes de Envio:</span>
+                                    <span id="summary-shipping" class="font-medium text-brand-gold font-bold">€ 0,00</span>
                                 </div>
                                 <div id="otimizacao-badge" class="mt-2 font-sans"></div>
                             </div>
                         </div>
 
                         <div class="flex justify-between items-center mt-5 pt-3 border-t border-brand-gold font-sans">
-                            <span class="font-serif text-xl font-bold text-white font-serif font-bold">Total:</span>
-                            <span id="summary-total" class="font-sans text-2xl md:text-3xl font-extrabold text-brand-gold font-sans font-bold">€ 0,00</span>
+                            <span class="font-serif text-xl font-bold text-white">Total:</span>
+                            <span id="summary-total" class="font-sans text-2xl md:text-3xl font-extrabold text-brand-gold">€ 0,00</span>
                         </div>
 
                         <button id="place-order-button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-all shadow-xl text-lg md:text-xl disabled:bg-gray-500 disabled:cursor-not-allowed font-sans font-bold" disabled>
@@ -395,42 +396,42 @@
         </div>
     </main>
 
-    <!-- RODAPÉ INTEGRADO -->
+    <!-- Rodapé -->
     <footer class="bg-gray-900 text-gray-300 py-12 px-6 border-t-8 border-brand-accent-red font-sans mt-auto">
         <div class="max-w-5xl mx-auto text-center font-sans">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4 items-start font-sans">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4 items-start">
                 <div class="flex flex-col items-center space-y-4 font-sans">
                     <div class="flex items-center space-x-2 font-sans">
-                        <img src="Imagens/Logo J Dourado.png" alt="Logo" class="h-8 w-auto font-sans" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
+                        <img src="Imagens/Logo J Dourado.png" alt="Logo" class="h-8 w-auto" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
                         <span class="font-serif text-2xl font-bold text-white leading-tight font-serif">Jerónimo Editora</span>
                     </div>
-                    <p class="text-sm text-gray-400 leading-relaxed max-w-[250px] font-sans">Rigor teológico e excelência editorial. Dedicada a enriquecer a cultura bíblica em Portugal.</p>
+                    <p class="text-sm text-gray-400 leading-relaxed max-w-[250px]">Rigor teológico e excelência editorial. Dedicada a enriquecer a cultura bíblica em Portugal.</p>
                 </div>
                 <div class="flex flex-col items-center font-sans">
-                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans font-bold">Navegação</h4>
+                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans">Navegação</h4>
                     <ul class="space-y-2 text-sm font-sans">
-                        <li><a href="index.html" class="hover:text-white transition-colors font-sans font-bold">Início</a></li>
-                        <li><a href="catalogo-completo.html" class="hover:text-white transition-colors font-sans font-bold">Catálogo</a></li>
-                        <li><a href="produtos.html" class="hover:text-white transition-colors font-sans font-bold">Produtos</a></li>
-                        <li><a href="index.html#sobre" class="hover:text-white transition-colors font-sans font-bold">Sobre</a></li>
-                        <li><a href="contacto.html" class="hover:text-white transition-colors font-sans font-bold">Contacto</a></li>
+                        <li><a href="index.html" class="hover:text-white transition-colors">Início</a></li>
+                        <li><a href="catalogo-completo.html" class="hover:text-white transition-colors">Catálogo</a></li>
+                        <li><a href="produtos.html" class="hover:text-white transition-colors">Produtos</a></li>
+                        <li><a href="index.html#sobre" class="hover:text-white transition-colors font-sans">Sobre</a></li>
+                        <li><a href="contacto.html" class="hover:text-white transition-colors font-sans">Contacto</a></li>
                     </ul>
                 </div>
-                <div class="flex flex-col items-center font-sans font-bold">
-                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans font-bold">Redes Sociais</h4>
-                    <div class="flex justify-center space-x-5 mt-5 text-gray-400 font-sans text-xl">
+                <div class="flex flex-col items-center font-sans">
+                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans">Redes Sociais</h4>
+                    <div class="flex justify-center space-x-5 mt-5 text-gray-400 text-xl font-sans">
                         <a href="https://www.facebook.com/jeronimoeditora" target="_blank" class="hover:text-brand-gold transition-transform"><i class="fab fa-facebook"></i></a>
                         <a href="https://www.instagram.com/editorajeronimo/" target="_blank" class="hover:text-brand-gold transition-transform"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.linkedin.com/company/jer%C3%B3nimo-editora/" target="_blank" class="hover:text-brand-gold transition-transform"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="text-center pt-8 mt-10 border-t border-gray-800 text-[11px] text-gray-500 tracking-widest uppercase font-sans font-sans font-bold">© 2026 Jerónimo Editora. Todos os direitos reservados.</div>
+            <div class="text-center pt-8 mt-10 border-t border-gray-800 text-[11px] text-gray-500 tracking-widest uppercase font-sans">© 2026 Jerónimo Editora. Todos os direitos reservados.</div>
         </div>
     </footer>
 
     <script>
-        // --- CONFIGURAÇÃO GOOGLE SHEETS ACTUALIZADO ---
+        // URL da implementação do Google Script
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxWI62Xgm7Lz3k9yuUFaAkZZN6S4xcSqEmh62yhbRrOLYhgAQBem2LZWrGcwxjijGe7/exec"; 
 
         const SHIPPING_MARGIN = 25; 
@@ -451,10 +452,8 @@
             const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
             const container = document.getElementById('billing-address-container');
             if (!choiceInput || !container) return;
-            
             const choice = choiceInput.value;
             container.classList.remove('hidden'); 
-            
             const fields = document.querySelectorAll('.billing-field');
             if (choice === 'sim') {
                 syncBillingAddress();
@@ -478,7 +477,6 @@
                 const codPostal = document.getElementById('cod-postal')?.value || "";
                 const cidade = document.getElementById('cidade')?.value || "";
                 const pais = document.getElementById('pais')?.value || "";
-
                 if(document.getElementById('morada-fat')) document.getElementById('morada-fat').value = morada;
                 if(document.getElementById('nr-andar-fat')) document.getElementById('nr-andar-fat').value = nrAndar;
                 if(document.getElementById('cod-postal-fat')) document.getElementById('cod-postal-fat').value = codPostal;
@@ -523,45 +521,30 @@
             const list = document.getElementById('summary-list');
             const paisEl = document.getElementById('pais');
             if (!list || !paisEl) return;
-
             const destino = paisEl.value;
             let subtotal = 0, pesoTotal = 0, html = '';
             
-            // Mostrar/Ocultar link CTT por baixo do campo País
             const cttShippingInfo = document.getElementById('ctt-shipping-info');
-            if (cttShippingInfo) {
-                cttShippingInfo.classList.toggle('hidden', destino === 'PT');
-            }
+            if (cttShippingInfo) cttShippingInfo.classList.toggle('hidden', destino === 'PT');
 
             items.forEach(item => {
                 const lineTotal = item.price * item.quantity;
                 subtotal += lineTotal;
                 const book = bookData.find(b => b.id === item.id);
                 pesoTotal += ((book ? book.weight : 350) * item.quantity);
-                
                 html += `
                     <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
-                            <span class="font-lora text-sm md:text-base text-brand-gold leading-tight flex-grow font-bold">
-                                ${item.title}
-                            </span>
-                            <span class="font-sans font-bold text-white text-sm whitespace-nowrap">
-                                € ${lineTotal.toFixed(2).replace('.', ',')}
-                            </span>
+                            <span class="font-lora text-sm md:text-base text-brand-gold leading-tight flex-grow font-bold">${item.title}</span>
+                            <span class="font-sans font-bold text-white text-sm whitespace-nowrap">€ ${lineTotal.toFixed(2).replace('.', ',')}</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-3 bg-white/10 rounded-lg px-2 py-1 border border-white/20 font-sans">
-                                <button onclick="changeQuantity(${item.id}, -1)" class="text-white hover:text-brand-gold transition-colors p-1">
-                                    <i class="fas fa-minus text-xs"></i>
-                                </button>
+                                <button onclick="changeQuantity(${item.id}, -1)" class="text-white hover:text-brand-gold transition-colors p-1"><i class="fas fa-minus text-xs"></i></button>
                                 <span class="text-white text-sm font-bold w-4 text-center font-bold">${item.quantity}</span>
-                                <button onclick="changeQuantity(${item.id}, 1)" class="text-white hover:text-brand-gold transition-colors p-1">
-                                    <i class="fas fa-plus text-xs"></i>
-                                </button>
+                                <button onclick="changeQuantity(${item.id}, 1)" class="text-white hover:text-brand-gold transition-colors p-1"><i class="fas fa-plus text-xs"></i></button>
                             </div>
-                            <button onclick="removeItem(${item.id})" class="text-gray-400 hover:text-white transition-colors p-2">
-                                <i class="fas fa-trash-alt text-base"></i>
-                            </button>
+                            <button onclick="removeItem(${item.id})" class="text-gray-400 hover:text-white transition-colors p-2"><i class="fas fa-trash-alt text-base"></i></button>
                         </div>
                     </div>`;
             });
@@ -571,7 +554,6 @@
                 const pesoFinal = pesoTotal + SHIPPING_MARGIN;
                 let numPacotes = Math.ceil(pesoFinal / 5000), pesoPorPacote = pesoFinal / numPacotes;
                 for (let i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, destino);
-                
                 let label = numPacotes > 1 ? `${numPacotes} volumes` : (pesoFinal > 2025 ? 'Saco Multipostal + IVA CTT' : 'Envio Editorial CTT');
                 const badge = document.getElementById('otimizacao-badge');
                 if (badge) badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide font-sans font-bold">${label}</span>`;
@@ -644,23 +626,15 @@
 
         async function placeOrder(e) {
             e.preventDefault();
-            
             const reqFields = ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'];
             let isValid = true;
-            reqFields.forEach(id => { 
-                const el = document.getElementById(id);
-                if (el && !el.value) isValid = false; 
-            });
+            reqFields.forEach(id => { const el = document.getElementById(id); if (el && !el.value) isValid = false; });
+            if (!isValid) { document.getElementById('error-modal').classList.remove('hidden'); return; }
 
-            if (!isValid) {
-                const errorModal = document.getElementById('error-modal');
-                if(errorModal) errorModal.classList.remove('hidden');
-                return;
-            }
-
-            // Ativa o overlay de carregamento
+            // Ativação do ecrã de carregamento profissional
             const overlay = document.getElementById('loading-overlay');
             const loadingText = document.getElementById('loading-text');
+            const loadingSubtext = document.getElementById('loading-subtext');
             overlay.classList.remove('hidden');
             
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
@@ -672,7 +646,7 @@
             let fileName = "comprovativo";
 
             try {
-                loadingText.textContent = "A processar ficheiro...";
+                loadingText.textContent = "A processar o comprovativo...";
                 if (fileInput && fileInput.files.length > 0) {
                     base64File = await fileToBase64(fileInput.files[0]);
                     mimeType = fileInput.files[0].type;
@@ -705,19 +679,16 @@
                         fileMimeType: mimeType,
                         fileName: fileName
                     },
-                    itens: cartItems.map(i => ({
-                        titulo: i.title,
-                        qtd: i.quantity,
-                        preco_unit: i.price
-                    }))
+                    itens: cartItems.map(i => ({ titulo: i.title, qtd: i.quantity, preco_unit: i.price }))
                 };
 
-                loadingText.textContent = "A enviar dados e emails...";
+                loadingText.textContent = "A enviar dados para a Editora...";
+                loadingSubtext.textContent = "A gravar na folha de cálculo e a carregar no Drive.";
                 
-                // Intervalo para mudar o texto e dar feedback dinâmico
                 const feedbackInterval = setTimeout(() => {
-                    loadingText.textContent = "Quase pronto... A gerar e-mails de confirmação.";
-                }, 7000);
+                    loadingText.textContent = "A gerar e-mails de confirmação...";
+                    loadingSubtext.textContent = "Obrigado pela sua paciência.";
+                }, 8000);
 
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
@@ -730,11 +701,9 @@
                 overlay.classList.add('hidden');
                 document.getElementById('success-modal').classList.remove('hidden');
                 localStorage.removeItem('cartItems');
-
             } catch (error) {
                 overlay.classList.add('hidden');
-                const errorModal = document.getElementById('error-modal');
-                if(errorModal) errorModal.classList.remove('hidden');
+                document.getElementById('error-modal').classList.remove('hidden');
             }
         }
 
@@ -746,13 +715,11 @@
                     if (choiceInput && choiceInput.value === 'sim') syncBillingAddress();
                 });
             });
-
             if (!localStorage.getItem('cartItems')) {
                 localStorage.setItem('cartItems', JSON.stringify([{ id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, quantity: 1 }]));
             }
             loadCartSummary();
         });
-
         window.onload = () => { loadCartSummary(); };
     </script>
 </body>
