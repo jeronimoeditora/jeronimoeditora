@@ -108,9 +108,9 @@
     <div id="success-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4 text-center">
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-green-600 mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2">Encomenda recebida!</h3>
-            <p class="text-gray-600 mb-6 font-sans text-sm">Obrigado pela sua preferência. Enviámos um e-mail de confirmação para o seu endereço.</p>
-            <a href="index.html" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg">Voltar à Página inicial</a>
+            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center">Encomenda recebida!</h3>
+            <p class="text-gray-600 mb-6 font-sans text-sm text-center">Obrigado pela sua preferência. Enviámos um e-mail de confirmação para o seu endereço.</p>
+            <a href="index.html" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg text-center font-sans">Voltar à Página inicial</a>
         </div>
     </div>
 
@@ -118,9 +118,9 @@
     <div id="error-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4 text-center">
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-red-600 mb-4"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-            <h3 class="text-2xl font-bold font-serif text-brand-accent-red mb-2">Erro no envio</h3>
-            <p class="text-gray-600 mb-6 font-sans text-sm" id="error-message">Ocorreu um problema ao processar a sua encomenda. Verifique a sua ligação.</p>
-            <button onclick="document.getElementById('error-modal').classList.add('hidden')" class="w-full bg-brand-accent-blue text-white py-3 rounded-lg font-bold hover:bg-black transition-colors font-sans">Tentar novamente</button>
+            <h3 class="text-2xl font-bold font-serif text-brand-accent-red mb-2 text-center font-serif">Erro no envio</h3>
+            <p class="text-gray-600 mb-6 font-sans text-sm text-center" id="error-message">Ocorreu um problema ao processar a sua encomenda. Verifique a sua ligação.</p>
+            <button onclick="document.getElementById('error-modal').classList.add('hidden')" class="w-full bg-brand-accent-blue text-white py-3 rounded-lg font-bold hover:bg-black transition-colors font-sans font-bold">Tentar novamente</button>
         </div>
     </div>
 
@@ -132,11 +132,11 @@
                 <span class="font-serif text-xl md:text-2xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors hidden sm:inline">Jerónimo Editora</span>
             </a>
             <div class="hidden md:flex items-center space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700">
-                <a href="index.html" class="hover:text-brand-accent-red transition-colors">Início</a>
-                <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
-                <a href="produtos.html" class="hover:text-brand-accent-red transition-colors">Produtos</a>
-                <a href="index.html#sobre" class="hover:text-brand-accent-red transition-colors">Sobre</a>
-                <a href="contacto.html" class="hover:text-brand-accent-red transition-colors">Contacto</a>
+                <a href="index.html" class="hover:text-brand-accent-red transition-colors font-sans font-bold">Início</a>
+                <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors font-sans font-bold">Catálogo</a> 
+                <a href="produtos.html" class="hover:text-brand-accent-red transition-colors font-sans font-bold">Produtos</a>
+                <a href="index.html#sobre" class="hover:text-brand-accent-red transition-colors font-sans font-bold">Sobre</a>
+                <a href="contacto.html" class="hover:text-brand-accent-red transition-colors font-sans font-bold">Contacto</a>
             </div>
             <div class="flex items-center md:hidden">
                 <button class="text-3xl text-brand-text focus:outline-none" onclick="toggleMenu()">&#9776;</button>
@@ -147,7 +147,7 @@
     <!-- MENU MOBILE OVERLAY -->
     <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-screen bg-white z-[60] flex flex-col items-center justify-center text-center">
         <button class="absolute top-6 right-6 text-4xl text-brand-accent-blue font-light" onclick="toggleMenu()">&times;</button>
-        <div class="flex flex-col items-center space-y-8 w-full px-12 animate-menu-open font-sans">
+        <div class="flex flex-col items-center space-y-8 w-full px-12 animate-menu-open">
             <img src="Imagens/Logo J.png" class="h-12 w-auto mb-6 opacity-40" alt="Logo">
             <a href="index.html" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Início</a>
             <a href="catalogo-completo.html" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Catálogo</a>
@@ -224,17 +224,17 @@
                                 <span class="block text-sm font-medium text-gray-700 font-sans mb-3 font-sans">A morada de facturação é igual à de envio?</span>
                                 <div class="flex items-center space-x-8">
                                     <label class="flex items-center space-x-2 cursor-pointer font-sans">
-                                        <input type="radio" name="billing-choice" value="sim" class="radio-small text-brand-accent-red" onchange="handleBillingChoice()" checked>
+                                        <input type="radio" name="billing-choice" id="choice-sim" value="sim" class="radio-small text-brand-accent-red" onchange="handleBillingChoice()">
                                         <span class="text-sm text-gray-700 font-medium font-sans">Sim</span>
                                     </label>
                                     <label class="flex items-center space-x-2 cursor-pointer font-sans">
-                                        <input type="radio" name="billing-choice" value="nao" class="radio-small text-brand-accent-red" onchange="handleBillingChoice()">
+                                        <input type="radio" name="billing-choice" id="choice-nao" value="nao" class="radio-small text-brand-accent-red" onchange="handleBillingChoice()">
                                         <span class="text-sm text-gray-700 font-medium font-sans">Não</span>
                                     </label>
                                 </div>
                             </div>
 
-                            <!-- Bloco Faturação -->
+                            <!-- Bloco Faturação (Oculto por defeito) -->
                             <div id="billing-address-container" class="hidden space-y-5 pt-6 border-t border-gray-100 mt-4 fade-in bg-gray-50/50 p-4 rounded-lg text-brand-text font-sans">
                                 <h3 class="text-lg font-bold text-brand-text mb-4 underline font-serif">Morada de Facturação</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
@@ -271,14 +271,14 @@
                     <!-- 2. MÉTODO DE PAGAMENTO -->
                     <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg border border-gray-100 text-left">
                         <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2 text-[#800000]">2. Método de Pagamento</h2>
-                        <p class="text-xs text-gray-400 mb-6 font-sans">Efectue o pagamento através de um dos seguintes meios:</p>
+                        <p class="text-xs text-gray-400 mb-6 font-sans text-left">Efectue o pagamento através de um dos seguintes meios:</p>
                         
                         <div class="space-y-4">
                             <!-- MB WAY -->
                             <div class="border rounded-lg overflow-hidden shadow-sm">
                                 <label class="flex items-center space-x-3 p-4 cursor-pointer hover:bg-gray-50 font-sans">
                                     <input type="radio" name="payment-method" id="payment-mbway" value="mbway" checked class="radio-small text-brand-accent-red" onchange="updatePaymentDetails()">
-                                    <span class="text-gray-800 font-medium text-base font-sans">MB WAY</span>
+                                    <span class="text-gray-800 font-medium text-base font-sans font-bold">MB WAY</span>
                                 </label>
                                 
                                 <div id="mbway-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white">
@@ -290,13 +290,13 @@
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-start w-full">
-                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight text-left font-sans">Anexe o comprovativo após envio via MB WAY:</p>
+                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight text-left">Anexe o comprovativo após envio via MB WAY *:</p>
                                         <input type="file" id="proof-file-mbway" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('mbway')" />
                                         <label for="proof-file-mbway" class="btn-attach font-sans">
-                                            <i class="fas fa-upload mr-2"></i> Anexar comprovativo *
+                                            <i class="fas fa-upload mr-2"></i> Anexar comprovativo
                                         </label>
                                         <div id="file-display-mbway" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
-                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway" class="truncate max-w-[200px] font-sans"></span>
+                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway" class="truncate max-w-[200px]"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -306,7 +306,7 @@
                             <div class="border rounded-lg overflow-hidden shadow-sm">
                                 <label class="flex items-center space-x-3 p-4 cursor-pointer hover:bg-gray-50 font-sans">
                                     <input type="radio" name="payment-method" id="payment-transfer" value="bank-transfer" class="radio-small text-brand-accent-red" onchange="updatePaymentDetails()">
-                                    <span class="text-gray-800 font-medium text-base font-sans">Transferência Bancária</span>
+                                    <span class="text-gray-800 font-medium text-base font-sans font-bold">Transferência Bancária</span>
                                 </label>
                                 
                                 <div id="transfer-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white hidden">
@@ -318,13 +318,13 @@
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-start w-full text-left font-sans">
-                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight text-left font-sans">Anexe o comprovativo da transferência:</p>
+                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight text-left font-sans">Anexe o comprovativo da transferência *:</p>
                                         <input type="file" id="proof-file-transfer" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('transfer')" />
                                         <label for="proof-file-transfer" class="btn-attach font-sans">
-                                            <i class="fas fa-upload mr-2"></i> Anexar comprovativo *
+                                            <i class="fas fa-upload mr-2"></i> Anexar comprovativo
                                         </label>
                                         <div id="file-display-transfer" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
-                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer" class="truncate max-w-[200px] font-sans"></span>
+                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer" class="truncate max-w-[200px]"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -333,7 +333,7 @@
                     </section>
                 </div>
 
-                <!-- COLUNA DIREITA: CARRINHO (3.) -->
+                <!-- COLUNA DIREITA: CARRINHO -->
                 <div class="lg:w-5/12 order-1 lg:order-2 h-fit lg:sticky lg:top-24 sticky-summary">
                     <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10 text-center md:text-left">
                         <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2 text-white font-serif font-bold">3. Carrinho de Compras</h2>
@@ -344,21 +344,21 @@
 
                         <div class="space-y-2 pt-4 border-t border-white/20 text-sm font-sans">
                             <div class="flex justify-between opacity-80 font-sans">
-                                <span>Subtotal (Produtos):</span>
-                                <span id="summary-subtotal">€ 0,00</span>
+                                <span class="font-sans">Subtotal (Produtos):</span>
+                                <span id="summary-subtotal" class="font-sans">€ 0,00</span>
                             </div>
-                            <div class="flex flex-col items-end">
+                            <div class="flex flex-col items-end font-sans">
                                 <div class="flex justify-between w-full opacity-80 font-sans">
-                                    <span>Portes de Envio:</span>
-                                    <span id="summary-shipping" class="font-medium text-brand-gold font-sans">€ 0,00</span>
+                                    <span class="font-sans">Portes de Envio:</span>
+                                    <span id="summary-shipping" class="font-medium text-brand-gold font-sans font-bold">€ 0,00</span>
                                 </div>
                                 <div id="otimizacao-badge" class="mt-2 font-sans"></div>
                             </div>
                         </div>
 
                         <div class="flex justify-between items-center mt-5 pt-3 border-t border-brand-gold font-sans">
-                            <span class="font-serif text-xl font-bold text-white font-serif">Total:</span>
-                            <span id="summary-total" class="font-sans text-2xl md:text-3xl font-extrabold text-brand-gold font-sans">€ 0,00</span>
+                            <span class="font-serif text-xl font-bold text-white font-serif font-bold">Total:</span>
+                            <span id="summary-total" class="font-sans text-2xl md:text-3xl font-extrabold text-brand-gold font-sans font-bold">€ 0,00</span>
                         </div>
 
                         <button id="place-order-button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-all shadow-xl text-lg md:text-xl disabled:bg-gray-500 disabled:cursor-not-allowed font-sans font-bold" disabled>
@@ -371,7 +371,7 @@
         </div>
     </main>
 
-    <!-- RODAPÉ -->
+    <!-- RODAPÉ INTEGRADO -->
     <footer class="bg-gray-900 text-gray-300 py-12 px-6 border-t-8 border-brand-accent-red font-sans mt-auto">
         <div class="max-w-5xl mx-auto text-center font-sans">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4 items-start font-sans">
@@ -385,13 +385,13 @@
                 <div class="flex flex-col items-center font-sans">
                     <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans font-bold">Navegação</h4>
                     <ul class="space-y-2 text-sm font-sans">
-                        <li><a href="index.html" class="hover:text-white transition-colors font-sans">Início</a></li>
-                        <li><a href="catalogo-completo.html" class="hover:text-white transition-colors font-sans">Catálogo</a></li>
-                        <li><a href="produtos.html" class="hover:text-white transition-colors font-sans">Produtos</a></li>
-                        <li><a href="index.html#sobre" class="hover:text-white transition-colors font-sans">Sobre</a></li>
+                        <li><a href="index.html" class="hover:text-white transition-colors font-sans font-bold">Início</a></li>
+                        <li><a href="catalogo-completo.html" class="hover:text-white transition-colors font-sans font-bold">Catálogo</a></li>
+                        <li><a href="produtos.html" class="hover:text-white transition-colors font-sans font-bold">Produtos</a></li>
+                        <li><a href="index.html#sobre" class="hover:text-white transition-colors font-sans font-bold">Sobre</a></li>
                     </ul>
                 </div>
-                <div class="flex flex-col items-center font-sans">
+                <div class="flex flex-col items-center font-sans font-bold">
                     <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans font-bold">Redes Sociais</h4>
                     <div class="flex justify-center space-x-5 mt-5 text-gray-400 font-sans text-xl">
                         <a href="https://www.facebook.com/jeronimoeditora" target="_blank" class="hover:text-brand-gold transition-transform"><i class="fab fa-facebook"></i></a>
@@ -400,7 +400,7 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center pt-8 mt-10 border-t border-gray-800 text-[11px] text-gray-500 tracking-widest uppercase font-sans font-sans">© 2026 Jerónimo Editora. Todos os direitos reservados.</div>
+            <div class="text-center pt-8 mt-10 border-t border-gray-800 text-[11px] text-gray-500 tracking-widest uppercase font-sans font-sans font-bold">© 2026 Jerónimo Editora. Todos os direitos reservados.</div>
         </div>
     </footer>
 
@@ -422,14 +422,31 @@
             if (menu) menu.classList.toggle('hidden');
         }
 
+        // Corrigido: O bloco apenas abre após clicar em "Sim" ou "Não"
         function handleBillingChoice() {
             const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
             const container = document.getElementById('billing-address-container');
             if (!choiceInput || !container) return;
             
             const choice = choiceInput.value;
-            container.classList.toggle('hidden', choice === 'sim');
-            if (choice === 'sim') syncBillingAddress();
+            
+            // Sempre que há uma escolha, o bloco torna-se visível
+            container.classList.remove('hidden'); 
+            
+            const fields = document.querySelectorAll('.billing-field');
+            if (choice === 'sim') {
+                syncBillingAddress();
+                fields.forEach(f => {
+                    f.setAttribute('readonly', 'true');
+                    f.classList.add('bg-gray-100', 'text-gray-500');
+                });
+            } else {
+                fields.forEach(f => {
+                    f.removeAttribute('readonly');
+                    f.classList.remove('bg-gray-100', 'text-gray-500');
+                    // Opcional: f.value = ""; // Limpa os campos se escolher "Não"
+                });
+            }
         }
 
         function syncBillingAddress() {
@@ -451,7 +468,6 @@
 
         function obterTarifa(peso, destino) {
             const pesoKg = peso / 1000;
-            // PORTUGAL
             if (destino === 'PT') {
                 if (peso <= 100) return 0.312 + (pesoKg * 1.175);
                 if (peso <= 250) return 0.201 + (pesoKg * 2.250);
@@ -460,7 +476,6 @@
                 if (peso <= 5000) return (1.590 + (2 * 0.660) + ((pesoKg - 2) * 0.660)) * 1.23; 
                 return 1.590 + (pesoKg * 0.660);
             }
-            // EUROPA NORMAL
             if (destino === 'EU_Normal') {
                 if (peso <= 20) return 0.720;
                 if (peso <= 100) return 1.475 + (pesoKg * 0.859);
@@ -470,7 +485,6 @@
                 if (peso <= 5000) return (5.210 + (2 * 3.785) + ((pesoKg - 2) * 3.785)) * 1.23;
                 return 5.210 + (pesoKg * 3.785);
             }
-            // EUROPA ECONÓMICA
             if (destino === 'EU_Econ') {
                 if (peso <= 20) return 0.630;
                 if (peso <= 100) return 1.068 + (pesoKg * 0.627);
@@ -501,7 +515,7 @@
                 html += `
                     <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
-                            <span class="font-lora text-sm md:text-base text-brand-gold leading-tight flex-grow font-semibold font-bold">
+                            <span class="font-lora text-sm md:text-base text-brand-gold leading-tight flex-grow font-bold">
                                 ${item.title}
                             </span>
                             <span class="font-sans font-bold text-white text-sm whitespace-nowrap">
@@ -509,12 +523,19 @@
                             </span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3 bg-white/5 rounded-lg px-2 py-1 border border-white/10 font-sans">
-                                <button onclick="changeQuantity(${item.id}, -1)" class="text-gray-400 hover:text-white transition-colors font-sans"><i class="fas fa-minus text-[10px] font-sans"></i></button>
-                                <span class="text-white text-xs font-bold w-4 text-center font-sans font-bold">${item.quantity}</span>
-                                <button onclick="changeQuantity(${item.id}, 1)" class="text-gray-400 hover:text-white transition-colors font-sans"><i class="fas fa-plus text-[10px] font-sans"></i></button>
+                            <div class="flex items-center space-x-3 bg-white/10 rounded-lg px-2 py-1 border border-white/20 font-sans">
+                                <button onclick="changeQuantity(${item.id}, -1)" class="text-white hover:text-brand-gold transition-colors p-1">
+                                    <i class="fas fa-minus text-xs"></i>
+                                </button>
+                                <span class="text-white text-sm font-bold w-4 text-center font-bold">${item.quantity}</span>
+                                <button onclick="changeQuantity(${item.id}, 1)" class="text-white hover:text-brand-gold transition-colors p-1">
+                                    <i class="fas fa-plus text-sm"></i>
+                                </button>
                             </div>
-                            <button onclick="removeItem(${item.id})" class="text-gray-500 hover:text-red-400 transition-colors font-sans"><i class="fas fa-trash-alt text-xs font-sans"></i></button>
+                            <!-- Caixote cinzento -->
+                            <button onclick="removeItem(${item.id})" class="text-gray-400 hover:text-white transition-colors p-2">
+                                <i class="fas fa-trash-alt text-base"></i>
+                            </button>
                         </div>
                     </div>`;
             });
@@ -530,7 +551,7 @@
                 if (badge) badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide font-sans font-bold">${label}</span>`;
             }
             
-            list.innerHTML = html || '<p class="text-center py-4 font-lora opacity-50 text-white font-sans">O seu carrinho está vazio</p>';
+            list.innerHTML = html || '<p class="text-center py-4 font-lora opacity-50 text-white font-sans font-bold">O seu carrinho está vazio</p>';
             if(document.getElementById('summary-subtotal')) document.getElementById('summary-subtotal').textContent = `€ ${subtotal.toFixed(2).replace('.', ',')}`;
             if(document.getElementById('summary-shipping')) document.getElementById('summary-shipping').textContent = `€ ${custoPortes.toFixed(2).replace('.', ',')}`;
             if(document.getElementById('summary-total')) document.getElementById('summary-total').textContent = `€ ${(subtotal + custoPortes).toFixed(2).replace('.', ',')}`;
@@ -607,8 +628,6 @@
 
             if (!isValid) {
                 const errorModal = document.getElementById('error-modal');
-                const errorMsg = document.getElementById('error-message');
-                if(errorMsg) errorMsg.textContent = "Por favor, preencha todos os campos obrigatórios.";
                 if(errorModal) errorModal.classList.remove('hidden');
                 return;
             }
@@ -630,7 +649,6 @@
                 fileName = fileInput.files[0].name;
             }
 
-            // Estrutura de dados para o script.gs
             const payload = {
                 type: 'order',
                 cliente: {
@@ -678,8 +696,6 @@
             } catch (error) {
                 if(btn) { btn.disabled = false; btn.textContent = "Confirmar e Pagar"; }
                 const errorModal = document.getElementById('error-modal');
-                const errorMsg = document.getElementById('error-message');
-                if(errorMsg) errorMsg.textContent = "Ocorreu um erro no envio. Verifique a sua ligação.";
                 if(errorModal) errorModal.classList.remove('hidden');
             }
         }
@@ -697,6 +713,7 @@
                 localStorage.setItem('cartItems', JSON.stringify([{ id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, quantity: 1 }]));
             }
             loadCartSummary();
+            // Removido o handleBillingChoice() automático para manter o bloco oculto até ao clique
         });
 
         window.onload = () => { loadCartSummary(); };
