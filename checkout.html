@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finalizar Compra | Jerónimo Editora</title>
     
-    <!-- Google Fonts: Playfair Display para títulos, Roboto para campos, Lora para livros -->
+    <!-- Google Fonts: Playfair Display, Roboto e Lora -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto:wght@300;400;500;700;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -35,7 +36,7 @@
     </script>
 
     <style>
-        /* Remoção absoluta de itálicos em todo o site */
+        /* Remoção absoluta de itálicos em todo o documento */
         * { font-style: normal !important; }
         
         body { font-family: 'Roboto', sans-serif; color: #333333; }
@@ -52,7 +53,6 @@
         .fade-in { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Estilo uniforme para caixas de pagamento */
         .payment-info-box {
             background-color: #f0f7ff;
             border: 1px solid #e0efff;
@@ -69,7 +69,6 @@
             cursor: pointer;
         }
 
-        /* Botão de anexo: Azul -> Bordeaux */
         .btn-attach {
             background-color: #001f3f;
             color: white;
@@ -96,7 +95,6 @@
             .sticky-summary { position: static !important; }
         }
 
-        /* Animação do Menu Mobile */
         @keyframes fadeInMenu {
             from { opacity: 0; transform: scale(1.05); }
             to { opacity: 1; transform: scale(1); }
@@ -126,7 +124,7 @@
         </div>
     </div>
 
-    <!-- MENU (menu.html integrado) -->
+    <!-- MENU INTEGRADO -->
     <nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 z-50 font-sans">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <a href="index.html" class="flex items-center space-x-2">
@@ -139,18 +137,8 @@
                 <a href="produtos.html" class="hover:text-brand-accent-red transition-colors">Produtos</a>
                 <a href="index.html#sobre" class="hover:text-brand-accent-red transition-colors">Sobre</a>
                 <a href="contacto.html" class="hover:text-brand-accent-red transition-colors">Contacto</a>
-                <div class="pl-6 border-l border-gray-200">
-                    <a href="checkout.html" class="relative text-gray-800 hover:text-brand-accent-red transition-colors">
-                        <i class="fas fa-shopping-cart text-xl"></i>
-                        <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-accent-red text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full opacity-0 font-sans font-black">0</span>
-                    </a>
-                </div>
             </div>
-            <div class="flex items-center md:hidden space-x-6">
-                <a href="checkout.html" class="relative text-gray-800">
-                    <i class="fas fa-shopping-cart text-xl"></i>
-                    <span id="cart-count-mobile" class="absolute -top-2 -right-2 bg-brand-accent-red text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full opacity-0 font-sans font-black">0</span>
-                </a>
+            <div class="flex items-center md:hidden">
                 <button class="text-3xl text-brand-text focus:outline-none" onclick="toggleMenu()">&#9776;</button>
             </div>
         </div>
@@ -173,102 +161,104 @@
         <div class="max-w-6xl mx-auto px-4 md:px-6">
             <h1 class="font-serif text-3xl md:text-4xl text-brand-accent-blue mb-8 text-center font-bold">Finalizar Compra</h1>
 
-            <div class="flex flex-col lg:flex-row gap-8">
+            <div class="flex flex-col lg:flex-row gap-8 text-left">
                 
                 <!-- COLUNA ESQUERDA: FORMULÁRIOS -->
                 <div class="lg:w-7/12 order-2 lg:order-1">
                     
                     <!-- 1. DETALHES DE ENVIO -->
                     <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg mb-8 border border-gray-100">
-                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">1. Detalhes de Envio</h2>
+                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2 text-[#800000]">1. Detalhes de Envio</h2>
                         
                         <form id="shipping-form" class="space-y-5 mt-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-left font-sans">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Nome completo *</label>
-                                    <input type="text" id="nome" name="nome" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nome completo *</label>
+                                    <input type="text" id="nome" name="nome" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input font-sans">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                                    <input type="email" id="email" name="email" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Email *</label>
+                                    <input type="email" id="email" name="email" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 font-sans">
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-5 text-left font-sans">
+                            <div class="grid grid-cols-1 gap-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">NIF (Opcional)</label>
+                                    <input type="text" id="nif" name="nif" class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 font-sans">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
                                 <div class="md:col-span-3">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Morada completa *</label>
-                                    <input type="text" id="morada" name="morada" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Morada completa *</label>
+                                    <input type="text" id="morada" name="morada" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input font-sans">
                                 </div>
                                 <div class="md:col-span-1">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Nº / Andar *</label>
-                                    <input type="text" id="nr-andar" name="nr_andar" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nº / Andar *</label>
+                                    <input type="text" id="nr-andar" name="nr_andar" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input font-sans">
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 text-left font-sans">
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
                                 <div class="sm:col-span-4">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Código Postal *</label>
-                                    <input type="text" id="cod-postal" name="cod_postal" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input" placeholder="XXXX-XXX">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Código Postal *</label>
+                                    <input type="text" id="cod-postal" name="cod_postal" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input font-sans" placeholder="XXXX-XXX">
                                 </div>
                                 <div class="sm:col-span-8">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Cidade *</label>
-                                    <input type="text" id="cidade" name="cidade" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Cidade *</label>
+                                    <input type="text" id="cidade" name="cidade" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input font-sans">
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 gap-5 text-left font-sans">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">País *</label>
-                                    <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white font-sans shipping-input" onchange="loadCartSummary()">
-                                        <option value="PT">Portugal (Continente e Ilhas)</option>
-                                        <option value="EU_Normal">Europa (Entrega Normal)</option>
-                                        <option value="EU_Econ">Europa (Entrega Económica)</option>
-                                    </select>
-                                    <div id="ctt-europe-link" class="hidden mt-2">
-                                        <a href="https://www.ctt.pt/empresas/solucoes-de-gestao-e-setoriais/solucoes-setoriais/editores-e-livreiros/correio-editorial-internacional#fndtn-tab1" target="_blank" class="text-[10px] text-gray-400 hover:text-brand-accent-red underline font-sans">Ver mais em: ctt.pt/editorial-internacional</a>
-                                    </div>
-                                </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 font-sans mb-1 font-sans">País *</label>
+                                <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white font-sans shipping-input font-sans" onchange="loadCartSummary()">
+                                    <option value="PT">Portugal (Continente e Ilhas)</option>
+                                    <option value="EU_Normal">Europa (Entrega Normal)</option>
+                                    <option value="EU_Econ">Europa (Entrega Económica)</option>
+                                </select>
                             </div>
 
-                            <div class="pt-6 border-t border-gray-100 mt-4 text-left font-sans">
-                                <span class="block text-sm font-medium text-gray-700 mb-3">A morada de facturação é igual à de envio?</span>
+                            <div class="pt-6 border-t border-gray-100 mt-4 text-left">
+                                <span class="block text-sm font-medium text-gray-700 font-sans mb-3 font-sans">A morada de facturação é igual à de envio?</span>
                                 <div class="flex items-center space-x-8">
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="radio" name="billing-choice" value="sim" class="radio-small text-brand-accent-red" onchange="handleBillingChoice()">
-                                        <span class="text-sm text-gray-700 font-medium">Sim</span>
+                                    <label class="flex items-center space-x-2 cursor-pointer font-sans">
+                                        <input type="radio" name="billing-choice" value="sim" class="radio-small text-brand-accent-red" onchange="handleBillingChoice()" checked>
+                                        <span class="text-sm text-gray-700 font-medium font-sans">Sim</span>
                                     </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                    <label class="flex items-center space-x-2 cursor-pointer font-sans">
                                         <input type="radio" name="billing-choice" value="nao" class="radio-small text-brand-accent-red" onchange="handleBillingChoice()">
-                                        <span class="text-sm text-gray-700 font-medium">Não</span>
+                                        <span class="text-sm text-gray-700 font-medium font-sans">Não</span>
                                     </label>
                                 </div>
                             </div>
 
                             <!-- Bloco Faturação -->
-                            <div id="billing-address-container" class="hidden space-y-5 pt-6 border-t border-gray-100 mt-4 fade-in bg-gray-50/50 p-4 rounded-lg text-brand-text text-left font-sans">
-                                <h3 class="text-lg font-bold text-brand-text mb-4 underline font-sans font-serif">Morada de Facturação</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-4 gap-5 text-left font-sans">
+                            <div id="billing-address-container" class="hidden space-y-5 pt-6 border-t border-gray-100 mt-4 fade-in bg-gray-50/50 p-4 rounded-lg text-brand-text font-sans">
+                                <h3 class="text-lg font-bold text-brand-text mb-4 underline font-serif">Morada de Facturação</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
                                     <div class="md:col-span-3">
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Morada *</label>
+                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Morada *</label>
                                         <input type="text" id="morada-fat" name="morada_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field font-sans">
                                     </div>
                                     <div class="md:col-span-1">
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Nº / Andar *</label>
+                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Nº / Andar *</label>
                                         <input type="text" id="nr-andar-fat" name="nr_andar_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field font-sans">
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 text-left font-sans">
+                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 font-sans">
                                     <div class="sm:col-span-4">
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Cód. Postal *</label>
+                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Cód. Postal *</label>
                                         <input type="text" id="cod-postal-fat" name="cod_postal_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field font-sans">
                                     </div>
                                     <div class="sm:col-span-8">
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Cidade *</label>
+                                        <label class="block text-sm font-medium text-gray-700 font-sans mb-1">Cidade *</label>
                                         <input type="text" id="cidade-fat" name="cidade_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field font-sans">
                                     </div>
                                 </div>
-                                <div class="text-left font-sans">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">País *</label>
+                                <div class="font-sans">
+                                    <label class="block text-sm font-medium text-gray-700 font-sans mb-1">País *</label>
                                     <select id="pais-fat" name="pais_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field font-sans">
                                         <option value="PT">Portugal</option>
                                         <option value="EU">Europa</option>
@@ -294,7 +284,7 @@
                                 <div id="mbway-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white">
                                     <div class="payment-info-box mb-4">
                                         <i class="fas fa-phone-alt text-[#00c04b] text-xl"></i>
-                                        <div class="text-left">
+                                        <div class="text-left font-sans font-bold">
                                             <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1 font-sans">Contacto:</p>
                                             <p class="text-xl font-bold text-brand-accent-blue leading-none font-sans">917 304 286</p>
                                         </div>
@@ -320,9 +310,9 @@
                                 </label>
                                 
                                 <div id="transfer-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white hidden">
-                                    <div class="payment-info-box mb-4">
+                                    <div class="payment-info-box mb-4 font-sans font-bold">
                                         <i class="fas fa-university text-brand-accent-blue opacity-80 text-xl"></i>
-                                        <div class="text-left font-sans">
+                                        <div class="text-left font-sans font-bold">
                                             <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1 font-sans">IBAN para Transferência:</p>
                                             <p class="text-base font-bold text-brand-accent-blue select-all leading-none font-sans">PT50 0035 0284 0001 5872 4004 0</p>
                                         </div>
@@ -346,7 +336,7 @@
                 <!-- COLUNA DIREITA: CARRINHO (3.) -->
                 <div class="lg:w-5/12 order-1 lg:order-2 h-fit lg:sticky lg:top-24 sticky-summary">
                     <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10 text-center md:text-left">
-                        <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2 text-white">3. Carrinho de Compras</h2>
+                        <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2 text-white font-serif font-bold">3. Carrinho de Compras</h2>
                         
                         <div id="summary-list" class="space-y-5 mb-6 max-h-[50vh] overflow-y-auto pr-2 font-sans">
                             <!-- JS popula -->
@@ -358,20 +348,20 @@
                                 <span id="summary-subtotal">€ 0,00</span>
                             </div>
                             <div class="flex flex-col items-end">
-                                <div class="flex justify-between w-full opacity-80">
+                                <div class="flex justify-between w-full opacity-80 font-sans">
                                     <span>Portes de Envio:</span>
-                                    <span id="summary-shipping" class="font-medium text-brand-gold">€ 0,00</span>
+                                    <span id="summary-shipping" class="font-medium text-brand-gold font-sans">€ 0,00</span>
                                 </div>
-                                <div id="otimizacao-badge" class="mt-2"></div>
+                                <div id="otimizacao-badge" class="mt-2 font-sans"></div>
                             </div>
                         </div>
 
                         <div class="flex justify-between items-center mt-5 pt-3 border-t border-brand-gold font-sans">
-                            <span class="font-serif text-xl font-bold text-white">Total:</span>
-                            <span id="summary-total" class="font-sans text-2xl md:text-3xl font-extrabold text-brand-gold">€ 0,00</span>
+                            <span class="font-serif text-xl font-bold text-white font-serif">Total:</span>
+                            <span id="summary-total" class="font-sans text-2xl md:text-3xl font-extrabold text-brand-gold font-sans">€ 0,00</span>
                         </div>
 
-                        <button id="place-order-button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-all shadow-xl text-lg md:text-xl disabled:bg-gray-500 disabled:cursor-not-allowed font-sans" disabled>
+                        <button id="place-order-button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-all shadow-xl text-lg md:text-xl disabled:bg-gray-500 disabled:cursor-not-allowed font-sans font-bold" disabled>
                             Confirmar e Pagar
                         </button>
                     </section>
@@ -381,95 +371,83 @@
         </div>
     </main>
 
-    <!-- RODAPÉ (rodape.html integrado) -->
+    <!-- RODAPÉ -->
     <footer class="bg-gray-900 text-gray-300 py-12 px-6 border-t-8 border-brand-accent-red font-sans mt-auto">
         <div class="max-w-5xl mx-auto text-center font-sans">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4 items-start">
-                <div class="flex flex-col items-center space-y-4">
-                    <div class="flex items-center space-x-2">
-                        <img src="Imagens/Logo J Dourado.png" alt="Logo" class="h-8 w-auto" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
-                        <span class="font-serif text-2xl font-bold text-white leading-tight">Jerónimo Editora</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4 items-start font-sans">
+                <div class="flex flex-col items-center space-y-4 font-sans">
+                    <div class="flex items-center space-x-2 font-sans">
+                        <img src="Imagens/Logo J Dourado.png" alt="Logo" class="h-8 w-auto font-sans" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
+                        <span class="font-serif text-2xl font-bold text-white leading-tight font-serif">Jerónimo Editora</span>
                     </div>
-                    <p class="text-sm text-gray-400 leading-relaxed max-w-[250px]">Rigor teológico e excelência editorial. Dedicada a enriquecer a cultura bíblica em Portugal.</p>
+                    <p class="text-sm text-gray-400 leading-relaxed max-w-[250px] font-sans">Rigor teológico e excelência editorial. Dedicada a enriquecer a cultura bíblica em Portugal.</p>
                 </div>
-                <div class="flex flex-col items-center">
-                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm">Navegação</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="index.html" class="hover:text-white transition-colors">Início</a></li>
-                        <li><a href="catalogo-completo.html" class="hover:text-white transition-colors">Catálogo</a></li>
-                        <li><a href="produtos.html" class="hover:text-white transition-colors">Produtos</a></li>
-                        <li><a href="index.html#sobre" class="hover:text-white transition-colors">Sobre</a></li>
-                        <li><a href="contacto.html" class="hover:text-white transition-colors">Contacto</a></li>
+                <div class="flex flex-col items-center font-sans">
+                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans font-bold">Navegação</h4>
+                    <ul class="space-y-2 text-sm font-sans">
+                        <li><a href="index.html" class="hover:text-white transition-colors font-sans">Início</a></li>
+                        <li><a href="catalogo-completo.html" class="hover:text-white transition-colors font-sans">Catálogo</a></li>
+                        <li><a href="produtos.html" class="hover:text-white transition-colors font-sans">Produtos</a></li>
+                        <li><a href="index.html#sobre" class="hover:text-white transition-colors font-sans">Sobre</a></li>
                     </ul>
                 </div>
-                <div class="flex flex-col items-center">
-                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans">Redes Sociais</h4>
-                    <div class="flex justify-center space-x-5 mt-2 text-gray-400">
-                        <a href="https://www.facebook.com/jeronimoeditora" target="_blank" class="hover:text-brand-gold transition-transform text-xl"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/editorajeronimo/" target="_blank" class="hover:text-brand-gold transition-transform text-xl"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/company/jer%C3%B3nimo-editora/" target="_blank" class="hover:text-brand-gold transition-transform text-xl"><i class="fab fa-linkedin"></i></a>
+                <div class="flex flex-col items-center font-sans">
+                    <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm font-sans font-bold">Redes Sociais</h4>
+                    <div class="flex justify-center space-x-5 mt-5 text-gray-400 font-sans text-xl">
+                        <a href="https://www.facebook.com/jeronimoeditora" target="_blank" class="hover:text-brand-gold transition-transform"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/editorajeronimo/" target="_blank" class="hover:text-brand-gold transition-transform"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/jer%C3%B3nimo-editora/" target="_blank" class="hover:text-brand-gold transition-transform"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="text-center pt-8 mt-10 border-t border-gray-800 text-[11px] text-gray-500 tracking-widest uppercase">© 2026 Jerónimo Editora. Todos os direitos reservados.</div>
+            <div class="text-center pt-8 mt-10 border-t border-gray-800 text-[11px] text-gray-500 tracking-widest uppercase font-sans font-sans">© 2026 Jerónimo Editora. Todos os direitos reservados.</div>
         </div>
     </footer>
 
     <script>
         // --- CONFIGURAÇÃO GOOGLE SHEETS ---
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1e5Tv0Z3nL20q8EAVYeIdDxQ8ne66fes7Oc9PYdUnU79d4ORPV9bsH4aqV-MJs12TKw/exec"; 
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx3k7vqspI4iDTV0bOZLuCxzEtGvZIRI5OnfFLqQzypRPmPxRzsx6kGGGKnqwIV0JPLfg/exec"; 
 
         const SHIPPING_MARGIN = 25; 
         const bookData = [
             { id: 1, title: "Suma Teológica", price: 75.00, weight: 2400 },
             { id: 2, title: "Jesus e o Jubileu", price: 22.00, weight: 420 },
-            { id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
+            { id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, quantity: 1, weight: 510 },
             { id: 4, title: "Convite aos Salmos", price: 28.50, weight: 380 },
             { id: 7, title: "Duras Palavras", price: 0.00, weight: 350 }
         ];
 
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+            if (menu) menu.classList.toggle('hidden');
         }
 
         function handleBillingChoice() {
             const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
             const container = document.getElementById('billing-address-container');
-            const fields = document.querySelectorAll('.billing-field');
-            if (!choiceInput) return;
+            if (!choiceInput || !container) return;
             
-            container.classList.remove('hidden');
-            if (choiceInput.value === 'sim') {
-                syncBillingAddress();
-                fields.forEach(f => {
-                    f.setAttribute('readonly', 'true');
-                    f.classList.add('bg-gray-100', 'text-gray-500');
-                });
-            } else {
-                fields.forEach(f => {
-                    f.removeAttribute('readonly');
-                    f.classList.remove('bg-gray-100', 'text-gray-500');
-                    f.value = "";
-                });
-            }
+            const choice = choiceInput.value;
+            container.classList.toggle('hidden', choice === 'sim');
+            if (choice === 'sim') syncBillingAddress();
         }
 
         function syncBillingAddress() {
-            const choice = document.querySelector('input[name="billing-choice"]:checked')?.value;
-            if (choice === 'sim') {
-                document.getElementById('morada-fat').value = document.getElementById('morada').value;
-                document.getElementById('nr-andar-fat').value = document.getElementById('nr-andar').value;
-                document.getElementById('cod-postal-fat').value = document.getElementById('cod-postal').value;
-                document.getElementById('cidade-fat').value = document.getElementById('cidade').value;
-                const shipPais = document.getElementById('pais').value;
-                document.getElementById('pais-fat').value = shipPais.startsWith('EU') ? 'EU' : 'PT';
+            const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
+            if (choiceInput && choiceInput.value === 'sim') {
+                const morada = document.getElementById('morada')?.value || "";
+                const nrAndar = document.getElementById('nr-andar')?.value || "";
+                const codPostal = document.getElementById('cod-postal')?.value || "";
+                const cidade = document.getElementById('cidade')?.value || "";
+                const pais = document.getElementById('pais')?.value || "";
+
+                if(document.getElementById('morada-fat')) document.getElementById('morada-fat').value = morada;
+                if(document.getElementById('nr-andar-fat')) document.getElementById('nr-andar-fat').value = nrAndar;
+                if(document.getElementById('cod-postal-fat')) document.getElementById('cod-postal-fat').value = codPostal;
+                if(document.getElementById('cidade-fat')) document.getElementById('cidade-fat').value = cidade;
+                if(document.getElementById('pais-fat')) document.getElementById('pais-fat').value = pais === 'PT' ? 'PT' : 'EU';
             }
         }
-
-        document.querySelectorAll('.shipping-input').forEach(input => {
-            input.addEventListener('input', syncBillingAddress);
-        });
 
         function obterTarifa(peso, destino) {
             const pesoKg = peso / 1000;
@@ -482,7 +460,7 @@
                 if (peso <= 5000) return (1.590 + (2 * 0.660) + ((pesoKg - 2) * 0.660)) * 1.23; 
                 return 1.590 + (pesoKg * 0.660);
             }
-            // EUROPA NORMAL (Tabela imagem_f35d27.png)
+            // EUROPA NORMAL
             if (destino === 'EU_Normal') {
                 if (peso <= 20) return 0.720;
                 if (peso <= 100) return 1.475 + (pesoKg * 0.859);
@@ -492,7 +470,7 @@
                 if (peso <= 5000) return (5.210 + (2 * 3.785) + ((pesoKg - 2) * 3.785)) * 1.23;
                 return 5.210 + (pesoKg * 3.785);
             }
-            // EUROPA ECONÓMICA (Tabela imagem_f35d27.png)
+            // EUROPA ECONÓMICA
             if (destino === 'EU_Econ') {
                 if (peso <= 20) return 0.630;
                 if (peso <= 100) return 1.068 + (pesoKg * 0.627);
@@ -508,12 +486,12 @@
         function loadCartSummary() {
             const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const list = document.getElementById('summary-list');
-            const destino = document.getElementById('pais').value;
+            const paisEl = document.getElementById('pais');
+            if (!list || !paisEl) return;
+
+            const destino = paisEl.value;
             let subtotal = 0, pesoTotal = 0, html = '';
             
-            const europeLink = document.getElementById('ctt-europe-link');
-            if (europeLink) europeLink.classList.toggle('hidden', destino === 'PT');
-
             items.forEach(item => {
                 const lineTotal = item.price * item.quantity;
                 subtotal += lineTotal;
@@ -521,22 +499,22 @@
                 pesoTotal += ((book ? book.weight : 350) * item.quantity);
                 
                 html += `
-                    <div class="flex flex-col border-b border-white/10 pb-4 last:border-0">
+                    <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
-                            <span class="font-lora text-sm md:text-base text-brand-gold leading-tight flex-grow font-semibold">
+                            <span class="font-lora text-sm md:text-base text-brand-gold leading-tight flex-grow font-semibold font-bold">
                                 ${item.title}
                             </span>
                             <span class="font-sans font-bold text-white text-sm whitespace-nowrap">
-                                ${formatPrice(lineTotal)}
+                                € ${lineTotal.toFixed(2).replace('.', ',')}
                             </span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3 bg-white/5 rounded-lg px-2 py-1 border border-white/10">
-                                <button onclick="changeQuantity(${item.id}, -1)" class="text-gray-400 hover:text-white transition-colors"><i class="fas fa-minus text-[10px]"></i></button>
-                                <span class="text-white text-xs font-bold w-4 text-center">${item.quantity}</span>
-                                <button onclick="changeQuantity(${item.id}, 1)" class="text-gray-400 hover:text-white transition-colors"><i class="fas fa-plus text-[10px]"></i></button>
+                            <div class="flex items-center space-x-3 bg-white/5 rounded-lg px-2 py-1 border border-white/10 font-sans">
+                                <button onclick="changeQuantity(${item.id}, -1)" class="text-gray-400 hover:text-white transition-colors font-sans"><i class="fas fa-minus text-[10px] font-sans"></i></button>
+                                <span class="text-white text-xs font-bold w-4 text-center font-sans font-bold">${item.quantity}</span>
+                                <button onclick="changeQuantity(${item.id}, 1)" class="text-gray-400 hover:text-white transition-colors font-sans"><i class="fas fa-plus text-[10px] font-sans"></i></button>
                             </div>
-                            <button onclick="removeItem(${item.id})" class="text-gray-500 hover:text-red-400 transition-colors"><i class="fas fa-trash-alt text-xs"></i></button>
+                            <button onclick="removeItem(${item.id})" class="text-gray-500 hover:text-red-400 transition-colors font-sans"><i class="fas fa-trash-alt text-xs font-sans"></i></button>
                         </div>
                     </div>`;
             });
@@ -548,22 +526,17 @@
                 for (let i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, destino);
                 
                 let label = numPacotes > 1 ? `${numPacotes} volumes` : (pesoFinal > 2025 ? 'Saco Multipostal + IVA CTT' : 'Envio Editorial CTT');
-                document.getElementById('otimizacao-badge').innerHTML = `
-                    <span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide font-sans">
-                        ${label}
-                    </span>`;
+                const badge = document.getElementById('otimizacao-badge');
+                if (badge) badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide font-sans font-bold">${label}</span>`;
             }
             
-            list.innerHTML = html || '<p class="text-center py-4 font-lora opacity-50 text-white">O seu carrinho está vazio</p>';
-            document.getElementById('summary-subtotal').textContent = formatPrice(subtotal);
-            document.getElementById('summary-shipping').textContent = formatPrice(custoPortes);
-            document.getElementById('summary-total').textContent = formatPrice(subtotal + custoPortes);
-            updateGlobalCartUI();
+            list.innerHTML = html || '<p class="text-center py-4 font-lora opacity-50 text-white font-sans">O seu carrinho está vazio</p>';
+            if(document.getElementById('summary-subtotal')) document.getElementById('summary-subtotal').textContent = `€ ${subtotal.toFixed(2).replace('.', ',')}`;
+            if(document.getElementById('summary-shipping')) document.getElementById('summary-shipping').textContent = `€ ${custoPortes.toFixed(2).replace('.', ',')}`;
+            if(document.getElementById('summary-total')) document.getElementById('summary-total').textContent = `€ ${(subtotal + custoPortes).toFixed(2).replace('.', ',')}`;
             validateFinalButton();
         }
 
-        function formatPrice(p) { return `€ ${p.toFixed(2).replace('.', ',')}`; }
-        
         function changeQuantity(id, delta) {
             let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const idx = items.findIndex(i => i.id === id);
@@ -582,18 +555,13 @@
             loadCartSummary();
         }
 
-        function updateGlobalCartUI() {
-            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const totalQtd = items.reduce((s, i) => s + i.quantity, 0);
-            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
-                if(el) { el.textContent = totalQtd; el.classList.toggle('opacity-0', totalQtd === 0); }
-            });
-        }
-
         function updatePaymentDetails() {
-            const method = document.querySelector('input[name="payment-method"]:checked').value;
-            document.getElementById('transfer-details').classList.toggle('hidden', method !== 'bank-transfer');
-            document.getElementById('mbway-details').classList.toggle('hidden', method !== 'mbway');
+            const method = document.querySelector('input[name="payment-method"]:checked')?.value;
+            if(!method) return;
+            const transfer = document.getElementById('transfer-details');
+            const mbway = document.getElementById('mbway-details');
+            if (transfer) transfer.classList.toggle('hidden', method !== 'bank-transfer');
+            if (mbway) mbway.classList.toggle('hidden', method !== 'mbway');
             validateFinalButton();
         }
 
@@ -601,7 +569,7 @@
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onload = () => resolve(reader.result);
                 reader.onerror = error => reject(error);
             });
         }
@@ -609,12 +577,12 @@
         function updateFileName(type) {
             const input = document.getElementById(`proof-file-${type}`);
             const display = document.getElementById(`file-display-${type}`);
-            const nameSpan = document.getElementById(`file-name-${type === 'mbway' ? 'mbway' : 'transfer'}`);
+            const nameSpan = document.getElementById(`file-name-${type}`);
             if (input && input.files.length > 0) {
-                nameSpan.textContent = input.files[0].name;
-                display.classList.remove('hidden'); display.classList.add('flex');
+                if(nameSpan) nameSpan.textContent = input.files[0].name;
+                if(display) { display.classList.remove('hidden'); display.classList.add('flex'); }
             } else {
-                display.classList.add('hidden');
+                if(display) display.classList.add('hidden');
             }
             validateFinalButton();
         }
@@ -624,84 +592,114 @@
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const btn = document.getElementById('place-order-button');
-            const hasFile = fileInput && fileInput.files.length > 0;
-            const hasItems = cartItems.length > 0;
-            btn.disabled = !hasFile || !hasItems;
+            if(btn) btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0;
         }
 
         async function placeOrder(e) {
             e.preventDefault();
             
-            const formFields = ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'];
+            const reqFields = ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'];
             let isValid = true;
-            formFields.forEach(id => {
+            reqFields.forEach(id => { 
                 const el = document.getElementById(id);
-                if(!el.value) isValid = false;
+                if (el && !el.value) isValid = false; 
             });
 
-            if(!isValid) {
-                document.getElementById('error-message').textContent = "Por favor, preencha todos os campos obrigatórios nos Detalhes de Envio.";
-                document.getElementById('error-modal').classList.remove('hidden');
+            if (!isValid) {
+                const errorModal = document.getElementById('error-modal');
+                const errorMsg = document.getElementById('error-message');
+                if(errorMsg) errorMsg.textContent = "Por favor, preencha todos os campos obrigatórios.";
+                if(errorModal) errorModal.classList.remove('hidden');
                 return;
             }
 
             const btn = document.getElementById('place-order-button');
-            btn.disabled = true;
-            btn.textContent = "A processar...";
+            if(btn) { btn.disabled = true; btn.textContent = "A processar..."; }
 
-            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const method = document.querySelector('input[name="payment-method"]:checked').value;
+            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const method = document.querySelector('input[name="payment-method"]:checked')?.value;
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             
             let base64File = "";
-            if (fileInput.files.length > 0) {
+            let mimeType = "application/octet-stream";
+            let fileName = "comprovativo";
+
+            if (fileInput && fileInput.files.length > 0) {
                 base64File = await fileToBase64(fileInput.files[0]);
+                mimeType = fileInput.files[0].type;
+                fileName = fileInput.files[0].name;
             }
 
-            const orderData = {
-                data: new Date().toLocaleString('pt-PT'),
-                nome: document.getElementById('nome').value,
-                email: document.getElementById('email').value,
-                morada: document.getElementById('morada').value,
-                nr: document.getElementById('nr-andar').value,
-                cp: document.getElementById('cod-postal').value,
-                cidade: document.getElementById('cidade').value,
-                pais: document.getElementById('pais').value,
-                faturacao: document.querySelector('input[name="billing-choice"]:checked')?.value || "sim",
-                metodo: method,
-                total: document.getElementById('summary-total').textContent,
-                itens: items.map(i => `${i.quantity}x ${i.title}`).join(', '),
-                ficheiro: base64File,
-                nomeFicheiro: fileInput.files[0].name
+            // Estrutura de dados para o script.gs
+            const payload = {
+                type: 'order',
+                cliente: {
+                    nome: document.getElementById('nome').value,
+                    email: document.getElementById('email').value,
+                    nif: document.getElementById('nif')?.value || "N/A"
+                },
+                envio: {
+                    morada: document.getElementById('morada').value,
+                    nr_andar: document.getElementById('nr-andar').value,
+                    cod_postal: document.getElementById('cod-postal').value,
+                    cidade: document.getElementById('cidade').value,
+                    pais: document.getElementById('pais').value,
+                    morada_fat: document.getElementById('morada-fat')?.value || null,
+                    cod_postal_fat: document.getElementById('cod-postal-fat')?.value || null,
+                    cidade_fat: document.getElementById('cidade-fat')?.value || null,
+                    pais_fat: document.getElementById('pais-fat')?.value || null
+                },
+                pagamento: {
+                    metodo: method,
+                    total: document.getElementById('summary-total')?.textContent.replace('€ ', '') || "0,00",
+                    portes: document.getElementById('summary-shipping')?.textContent.replace('€ ', '') || "0,00",
+                    fileBase64: base64File,
+                    fileMimeType: mimeType,
+                    fileName: fileName
+                },
+                itens: cartItems.map(i => ({
+                    titulo: i.title,
+                    qtd: i.quantity,
+                    preco_unit: i.price
+                }))
             };
 
             try {
-                // Envio real para o Google Script
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    body: JSON.stringify(orderData),
+                    body: JSON.stringify(payload),
                     headers: { 'Content-Type': 'application/json' }
                 });
                 
-                document.getElementById('success-modal').classList.remove('hidden');
+                const successModal = document.getElementById('success-modal');
+                if(successModal) successModal.classList.remove('hidden');
                 localStorage.removeItem('cartItems');
-                updateGlobalCartUI();
-
             } catch (error) {
-                btn.disabled = false;
-                btn.textContent = "Confirmar e Pagar";
-                document.getElementById('error-message').textContent = "Não foi possível enviar a encomenda. Verifique a sua ligação.";
-                document.getElementById('error-modal').classList.remove('hidden');
+                if(btn) { btn.disabled = false; btn.textContent = "Confirmar e Pagar"; }
+                const errorModal = document.getElementById('error-modal');
+                const errorMsg = document.getElementById('error-message');
+                if(errorMsg) errorMsg.textContent = "Ocorreu um erro no envio. Verifique a sua ligação.";
+                if(errorModal) errorModal.classList.remove('hidden');
             }
         }
 
-        window.onload = () => {
+        document.addEventListener('DOMContentLoaded', () => {
+            const shippingInputs = document.querySelectorAll('.shipping-input');
+            shippingInputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
+                    if (choiceInput && choiceInput.value === 'sim') syncBillingAddress();
+                });
+            });
+
             if (!localStorage.getItem('cartItems')) {
                 localStorage.setItem('cartItems', JSON.stringify([{ id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, quantity: 1 }]));
             }
             loadCartSummary();
-        };
+        });
+
+        window.onload = () => { loadCartSummary(); };
     </script>
 </body>
 </html>
