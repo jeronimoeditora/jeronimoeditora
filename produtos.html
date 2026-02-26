@@ -101,9 +101,9 @@
 
         async function loadComponents() {
             try {
-                const navResp = await fetch(getSafePath('menu.html'));
+                const navResp = await fetch(getSafePath('menu'));
                 if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
-                const footResp = await fetch(getSafePath('rodape.html'));
+                const footResp = await fetch(getSafePath('rodape'));
                 if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 updateCartUI();
             } catch (e) { console.warn("Ambiente local: menu/rodapé não carregados via fetch."); }

@@ -143,8 +143,8 @@
 
         async function loadComponents() {
             try {
-                const nav = await fetch('menu.html'); if(nav.ok) document.getElementById('nav-placeholder').innerHTML = await nav.text();
-                const foot = await fetch('rodape.html'); if(foot.ok) document.getElementById('footer-placeholder').innerHTML = await foot.text();
+                const nav = await fetch('menu'); if(nav.ok) document.getElementById('nav-placeholder').innerHTML = await nav.text();
+                const foot = await fetch('rodape'); if(foot.ok) document.getElementById('footer-placeholder').innerHTML = await foot.text();
                 updateCartUI();
             } catch (e) {}
         }
