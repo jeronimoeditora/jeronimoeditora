@@ -68,6 +68,13 @@
             border: 1px solid #e5e7eb;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
+	.custom-italic {
+       		font-style: italic !important;
+  	}
+	.not-italic {
+       		font-style: normal !important;
+       		display: inline-block;
+    	}
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
@@ -115,10 +122,14 @@
                     </div>
                 </div>
 
-                <div class="photo-frame flex items-center justify-center p-2 bg-white">
-                    <img src="Imagens/bacelos.png" alt="Sede" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://placehold.co/600x400/800000/cfaf5c?text=JERÓNIMO+EDITORA';">
-                </div>
-            </div>
+             <figure class="photo-frame flex flex-col bg-white overflow-hidden h-full">
+    <div class="flex-grow flex items-center justify-center p-2">
+        <img src="Imagens/bacelos.png" alt="Sede" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://placehold.co/600x400/800000/cfaf5c?text=JERÓNIMO+EDITORA';">
+    </div>
+    <figcaption class="pb-6 pt-2 text-center font-serif text-xl md:text-2xl text-brand-accent-blue custom-italic">
+        Cristiana Bacelo <span class="not-italic inline-block mx-1">.</span> Hugo Bacelo
+    </figcaption>
+</figure>            </div>
             
             <section class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100 max-w-4xl mx-auto">
                 <h2 class="font-serif text-3xl font-bold text-brand-accent-red mb-8 border-b border-brand-accent-red/10 pb-4">Deixe a sua mensagem</h2>
