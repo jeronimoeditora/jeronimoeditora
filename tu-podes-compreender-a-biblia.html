@@ -1,4 +1,4 @@
-~<html lang="pt-PT">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,8 +37,8 @@
 
     <style>
         .book-shadow {
-            /* Sombra suave apenas para dar profundidade ao livro, sem criar bordas rígidas */
             filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.2));
+            transition: transform 0.3s ease;
         }
         .fade-in {
             animation: fadeIn 0.8s ease-out forwards;
@@ -71,13 +71,26 @@
             width: 100%;
         }
 
-        /* Garantia absoluta de fundo transparente */
         .force-transparent {
             background-color: transparent !important;
             background-image: none !important;
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
+        }
+
+        /* Estilo para miniaturas selecionadas */
+        .thumb-active {
+            border-color: #800000 !important;
+            border-width: 2px !important;
+            opacity: 1 !important;
+        }
+        .thumb-inactive {
+            border-color: transparent;
+            opacity: 0.6;
+        }
+        .thumb-inactive:hover {
+            opacity: 1;
         }
     </style>
 </head>
@@ -103,22 +116,45 @@
                 
                 <!-- Coluna de Imagens -->
                 <div class="md:col-span-2 space-y-8 flex flex-col items-center">
-                    <!-- Contentor principal da imagem sem fundos ou bordas -->
-                    <div class="flex justify-center w-full py-4 force-transparent">
-                        <img id="main-image" src="Imagens/Kreeft2.png" alt="Capa do livro" 
-                             class="w-48 md:w-full max-w-sm h-auto object-contain book-shadow force-transparent" 
-                             style="background: transparent !important;"
+                    <!-- Imagem Principal -->
+                    <div class="flex justify-center w-full py-4 force-transparent overflow-hidden rounded-lg">
+                        <img id="main-image" src="Imagens/tpcbcapa.jpg" alt="Capa do livro" 
+                             class="w-64 md:w-full max-w-sm h-auto object-contain book-shadow" 
                              onerror="this.src='https://placehold.co/400x600?text=LIVRO';">
                     </div>
-                    <!-- Miniaturas -->
-                    <div class="flex justify-center space-x-4 force-transparent">
-                        <img src="Imagens/Kreeft2.png" alt="Miniatura 1" 
-                             class="w-12 h-12 md:w-16 md:h-16 object-cover rounded border-2 border-brand-accent-red cursor-pointer transition shadow-sm" 
-                             style="background: transparent !important;"
+                    
+                    <!-- Galeria de Miniaturas (Grelha 4x2) -->
+                    <div class="grid grid-cols-4 gap-3 w-full max-w-sm">
+                        <img src="Imagens/tpcbcapa.jpg" alt="Capa" 
+                             class="thumb-btn thumb-active w-full aspect-[2/3] object-cover rounded cursor-pointer transition border-2" 
                              onclick="updateImage(this)">
-                        <img src="Imagens/Logo J.png" alt="Miniatura 2" 
-                             class="w-12 h-12 md:w-16 md:h-16 object-contain p-2 rounded border border-gray-200 cursor-pointer hover:border-brand-accent-red transition" 
-                             style="background: transparent !important;"
+                        
+                        <img src="Imagens/tpcb1.png" alt="Página 1" 
+                             class="thumb-btn thumb-inactive w-full aspect-[2/3] object-cover rounded cursor-pointer transition border-2" 
+                             onclick="updateImage(this)">
+                        
+                        <img src="Imagens/tpcb2.png" alt="Página 2" 
+                             class="thumb-btn thumb-inactive w-full aspect-[2/3] object-cover rounded cursor-pointer transition border-2" 
+                             onclick="updateImage(this)">
+                        
+                        <img src="Imagens/tpcb3.png" alt="Página 3" 
+                             class="thumb-btn thumb-inactive w-full aspect-[2/3] object-cover rounded cursor-pointer transition border-2" 
+                             onclick="updateImage(this)">
+                        
+                        <img src="Imagens/tpcb4.png" alt="Página 4" 
+                             class="thumb-btn thumb-inactive w-full aspect-[2/3] object-cover rounded cursor-pointer transition border-2" 
+                             onclick="updateImage(this)">
+                        
+                        <img src="Imagens/tpcb5.png" alt="Página 5" 
+                             class="thumb-btn thumb-inactive w-full aspect-[2/3] object-cover rounded cursor-pointer transition border-2" 
+                             onclick="updateImage(this)">
+                        
+                        <img src="Imagens/tpcb6.png" alt="Página 6" 
+                             class="thumb-btn thumb-inactive w-full aspect-[2/3] object-cover rounded cursor-pointer transition border-2" 
+                             onclick="updateImage(this)">
+                        
+                        <img src="Imagens/tpcbcontracapa.jpg" alt="Contracapa" 
+                             class="thumb-btn thumb-inactive w-full aspect-[2/3] object-cover rounded cursor-pointer transition border-2" 
                              onclick="updateImage(this)">
                     </div>
                 </div>
@@ -126,7 +162,7 @@
                 <!-- Coluna de Informação Principal -->
                 <div class="md:col-span-3 space-y-8">
                     <div class="text-center md:text-left">
-                        <div class="mb-4 text-[10px] md:text-base font-bold text-green-700 tracking-[0.2em] uppercase">DISPONÍVEL EM BREVE</div>
+                        <div class="mb-4 text-[10px] md:text-base font-bold text-green-700 tracking-[0.2em] uppercase">Disponível</div>
                         
                         <h1 class="font-serif text-2xl md:text-4xl text-brand-accent-blue font-black leading-tight uppercase tracking-tight">Tu podes compreender a Bíblia</h1>
                         
@@ -137,7 +173,7 @@
 
                     <!-- Resumo Curto -->
                     <p class="text-base md:text-xl italic text-gray-700 mb-8 border-y border-gray-100 py-6 leading-relaxed font-classic">
-                       Muitas pessoas sentem-se frequentemente, e de forma compreensível, intimidadas ou sobrecarregadas pela própria dimensão e complexidade da Bíblia. Mas agora, o popular autor e professor universitário, Peter Kreeft, escreveu um roteiro claro da Bíblia, focando a sua aguda perspicácia e o seu humor cativante na mensagem central de cada livro. Não levará muito tempo até que compreendas por que razão o seu guia das Escrituras se tornou um best-seller! Radiante de inteligência e com o humor característico de Kreeft, Tu Podes Compreender a Bíblia transformará o estudo aborrecido em aventuras espiritualmente gratificantes na Palavra de Deus. Independentemente da forma como te aproximaste - ou não te aproximaste - da Bíblia anteriormente, sairás com uma nova apreciação da sua profundidade e do seu significado. <br><br> Kreeft fornece também orientações práticas para rezar as Escrituras todos os dias, permitindo ao leitor aprofundar as mensagens bíblicas de uma maneira que irá surpreender, deleitar e recompensar.
+                       Muitas pessoas sentem-se frequentemente intimidadas pela dimensão e complexidade da Bíblia. Mas agora, o popular autor e professor universitário Peter Kreeft escreveu um roteiro claro, focando a sua aguda perspicácia e o seu humor cativante na mensagem central de cada livro. <br><br> Tu Podes Compreender a Bíblia transformará o estudo em aventuras espiritualmente gratificantes. Independentemente da forma como te aproximaste das Escrituras anteriormente, sairás com uma nova apreciação da sua profundidade. Kreeft fornece também orientações práticas para rezar a Palavra de Deus todos os dias.
                     </p>
 
                     <!-- Preço e Botão -->
@@ -229,7 +265,6 @@
 
         async function loadComponents() {
             try {
-                // Adicionada cache-busting para garantir que carrega versões novas de menu/rodape
                 const navResponse = await fetch(getSafePath('menu?v=' + Date.now()));
                 if (navResponse.ok) document.getElementById('nav-placeholder').innerHTML = await navResponse.text();
                 const footerResponse = await fetch(getSafePath('rodape?v=' + Date.now()));
@@ -240,16 +275,21 @@
 
         function updateImage(el) {
             const mainImg = document.getElementById('main-image');
-            mainImg.src = el.src;
-            // Forçar estilo transparente na troca
-            mainImg.style.background = "transparent";
             
-            document.querySelectorAll('.md\\:col-span-2 img').forEach(img => {
-                img.classList.remove('border-brand-accent-red', 'border-2');
-                img.classList.add('border-gray-200', 'border');
+            // Efeito suave de troca
+            mainImg.style.opacity = '0';
+            setTimeout(() => {
+                mainImg.src = el.src;
+                mainImg.style.opacity = '1';
+            }, 150);
+            
+            // Atualizar classes das miniaturas
+            document.querySelectorAll('.thumb-btn').forEach(img => {
+                img.classList.remove('thumb-active');
+                img.classList.add('thumb-inactive');
             });
-            el.classList.add('border-brand-accent-red', 'border-2');
-            el.classList.remove('border-gray-200', 'border');
+            el.classList.add('thumb-active');
+            el.classList.remove('thumb-inactive');
         }
 
         function showTab(tabId) {
@@ -274,7 +314,8 @@
 
         function addToCart(title, price) {
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            cartItems.push({ id: 3, title, price, quantity: 1, image: 'Imagens/Kreeft2.png', author: 'Peter Kreeft' });
+            // Usamos a imagem da capa para o carrinho
+            cartItems.push({ id: 3, title, price, quantity: 1, image: 'Imagens/tpcbcapa.jpg', author: 'Peter Kreeft' });
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             updateCartUI();
             
