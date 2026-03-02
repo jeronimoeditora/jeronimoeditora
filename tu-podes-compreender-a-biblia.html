@@ -118,14 +118,14 @@
                 <div class="md:col-span-2 space-y-8 flex flex-col items-center">
                     <!-- Imagem Principal -->
                     <div class="flex justify-center w-full py-4 force-transparent overflow-hidden rounded-lg">
-                        <img id="main-image" src="Imagens/tpcbcapa.jpg" alt="Capa do livro" 
+                        <img id="main-image" src="Imagens/tpcbcapa.png" alt="Capa do livro" 
                              class="w-64 md:w-full max-w-sm h-auto object-contain book-shadow" 
                              onerror="this.src='https://placehold.co/400x600?text=LIVRO';">
                     </div>
                     
                     <!-- Galeria de Miniaturas (Grelha 4x2) -->
                     <div class="grid grid-cols-4 gap-3 w-full max-w-sm">
-                        <img src="Imagens/tpcbcapa.jpg" alt="Capa" 
+                        <img src="Imagens/tpcbcapa.png" alt="Capa" 
                              class="thumb-btn thumb-active w-full aspect-[2/3] object-cover rounded cursor-pointer transition border-2" 
                              onclick="updateImage(this)">
                         
@@ -153,7 +153,7 @@
                              class="thumb-btn thumb-inactive w-full aspect-[2/3] object-cover rounded cursor-pointer transition border-2" 
                              onclick="updateImage(this)">
                         
-                        <img src="Imagens/tpcbcontracapa.jpg" alt="Contracapa" 
+                        <img src="Imagens/tpcbcontracapa.png" alt="Contracapa" 
                              class="thumb-btn thumb-inactive w-full aspect-[2/3] object-cover rounded cursor-pointer transition border-2" 
                              onclick="updateImage(this)">
                     </div>
@@ -315,7 +315,7 @@
         function addToCart(title, price) {
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             // Usamos a imagem da capa para o carrinho
-            cartItems.push({ id: 3, title, price, quantity: 1, image: 'Imagens/tpcbcapa.jpg', author: 'Peter Kreeft' });
+            cartItems.push({ id: 3, title, price, quantity: 1, image: 'Imagens/tpcbcapa.png', author: 'Peter Kreeft' });
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             updateCartUI();
             
