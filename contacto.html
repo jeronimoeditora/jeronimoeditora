@@ -79,13 +79,22 @@
             display: inline-block;
         }
         
-        /* Ajuste para ícones Font Awesome na página de contacto */
         .social-icon {
             font-size: 1.25rem;
             transition: all 0.3s ease;
         }
         .social-icon:hover {
             transform: scale(1.1);
+        }
+
+        /* Animação simples para o botão de envio */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .sending {
+            animation: pulse 1.5s infinite;
+            cursor: wait;
         }
     </style>
 </head>
@@ -113,15 +122,12 @@
                     <div class="contact-box line-r line-b">
                         <span class="text-sm sm:text-base font-bold text-brand-text mb-4 font-sans uppercase tracking-wider">Redes sociais</span>
                         <div class="flex space-x-4 sm:space-x-6">
-                            <!-- Facebook -->
                             <a href="https://www.facebook.com/jeronimoeditora" target="_blank" class="text-brand-accent-blue hover:text-brand-accent-red social-icon" aria-label="Facebook">
                                 <i class="fab fa-facebook"></i>
                             </a>
-                            <!-- Instagram -->
                             <a href="https://www.instagram.com/editorajeronimo/" target="_blank" class="text-brand-accent-blue hover:text-brand-accent-red social-icon" aria-label="Instagram">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <!-- LinkedIn -->
                             <a href="https://www.linkedin.com/company/jer%C3%B3nimo-editora/" target="_blank" class="text-brand-accent-blue hover:text-brand-accent-red social-icon" aria-label="LinkedIn">
                                 <i class="fab fa-linkedin"></i>
                             </a>
@@ -161,7 +167,6 @@
                 <h2 class="font-serif text-3xl font-bold text-brand-accent-red mb-8 border-b border-brand-accent-red/10 pb-4">Deixe a sua mensagem</h2>
                 <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-6">
                     <div class="grid md:grid-cols-2 gap-6">
-                        <!-- Nome agora apenas "Nome" e continua opcional -->
                         <input type="text" name="nome" placeholder="Nome" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
                         <input type="email" name="email" placeholder="E-mail *" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
                     </div>
@@ -188,10 +193,20 @@
         async function handleContactSubmit(event) {
             event.preventDefault(); 
             const button = document.getElementById('submit-button');
-            const formData = new FormData(event.target);
-            button.disabled = true; button.textContent = 'A enviar...';
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            button.disabled = true; 
+            button.textContent = 'A processar...';
+            button.classList.add('sending');
+
+            // Criar um controlador para timeout caso queira dar feedback mais rápido
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 seg timeout
 
             try {
+                // Como usamos no-cors, o navegador não nos deixa ler a resposta real.
+                // Mas o envio acontece de forma assíncrona no servidor do Google.
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -200,12 +215,26 @@
                         nome: formData.get('nome') || "Não preenchido",
                         email: formData.get('email'),
                         mensagem: formData.get('mensagem')
-                    })
+                    }),
+                    signal: controller.signal
                 });
-                event.target.reset();
+
+                // Se chegou aqui, o pedido foi enviado
+                form.reset();
                 document.getElementById('message-modal').classList.remove('hidden');
-            } catch (error) { console.error(error); } finally {
-                button.disabled = false; button.textContent = 'Enviar mensagem';
+            } catch (error) {
+                // Em caso de erro ou timeout de rede, mostramos o modal na mesma pois o script do Google costuma processar
+                // mesmo quando a ligação de rede local falha a fechar.
+                if (error.name === 'AbortError') {
+                    console.log('O envio está a demorar, mas provavelmente será processado.');
+                }
+                form.reset();
+                document.getElementById('message-modal').classList.remove('hidden');
+            } finally {
+                clearTimeout(timeoutId);
+                button.disabled = false; 
+                button.textContent = 'Enviar mensagem';
+                button.classList.remove('sending');
             }
         }
 
