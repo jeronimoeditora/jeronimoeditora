@@ -79,7 +79,7 @@
             opacity: 0.6;
         }
 
-        /* Setas de Navegação (Geral) */
+        /* Setas de Navegação */
         .nav-arrow {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 50%;
@@ -99,7 +99,7 @@
             transform: scale(1.1);
         }
 
-        /* Lupa */
+        /* Lupa (Sempre Visível) */
         .lupa-btn {
             position: absolute;
             bottom: 25px;
@@ -112,6 +112,7 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             color: #800000;
+            opacity: 0.95;
         }
         .lupa-btn:hover {
             transform: scale(1.2);
@@ -119,7 +120,7 @@
             color: white;
         }
 
-        /* Modal Lightbox Melhorado */
+        /* Modal Lightbox */
         #lightbox-modal {
             display: none;
             position: fixed;
@@ -128,6 +129,7 @@
             z-index: 9999;
             align-items: center;
             justify-content: center;
+            touch-action: none; /* Previne scroll nativo durante swipe */
         }
         #lightbox-img {
             max-width: 85%;
@@ -135,6 +137,7 @@
             object-fit: contain;
             box-shadow: 0 0 60px rgba(0,0,0,0.8);
             transition: opacity 0.3s ease;
+            user-select: none;
         }
         .lightbox-nav {
             position: absolute;
@@ -149,11 +152,21 @@
             cursor: pointer;
             transition: all 0.3s;
             border: 1px solid rgba(255,255,255,0.2);
+            z-index: 50;
         }
         .lightbox-nav:hover {
             background: #800000;
             border-color: #800000;
             transform: scale(1.1);
+        }
+        
+        /* Ajuste para evitar que as setas cubram o conteúdo em ecrãs muito pequenos */
+        @media (max-width: 640px) {
+            .lightbox-nav {
+                width: 44px;
+                height: 44px;
+                background: rgba(255,255,255,0.2);
+            }
         }
     </style>
 </head>
@@ -177,34 +190,35 @@
                 <!-- Coluna de Imagens -->
                 <div class="md:col-span-2 space-y-8 flex flex-col items-center">
                     
-                    <div class="relative w-full max-w-sm group bg-white rounded-2xl p-4 shadow-inner overflow-hidden">
+                    <div id="main-image-container" class="relative w-full max-w-sm group bg-white rounded-2xl p-4 shadow-inner overflow-hidden touch-pan-y">
                         
                         <!-- Setas na Imagem Principal -->
-                        <button onclick="changeImage(-1)" class="nav-arrow absolute left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-20" aria-label="Anterior">
+                        <button onclick="changeImage(-1)" class="nav-arrow absolute left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-20 transition-opacity hidden md:flex" aria-label="Anterior">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                         </button>
-                        <button onclick="changeImage(1)" class="nav-arrow absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-20" aria-label="Próximo">
+                        <button onclick="changeImage(1)" class="nav-arrow absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-20 transition-opacity hidden md:flex" aria-label="Próximo">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                         </button>
 
-                        <div onclick="openLightbox()" class="lupa-btn opacity-0 group-hover:opacity-100 transition-opacity" title="Ampliar Imagem">
+                        <!-- Botão da Lupa (Sempre visível) -->
+                        <div onclick="openLightbox()" class="lupa-btn" title="Ampliar Imagem">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                         </div>
 
                         <div class="flex justify-center w-full min-h-[350px] items-center cursor-pointer" onclick="openLightbox()">
                             <img id="main-image" src="Imagens/tpcbcapa.png" alt="Capa do livro" 
-                                 class="w-full h-auto object-contain book-shadow" 
+                                 class="w-full h-auto object-contain book-shadow pointer-events-none" 
                                  onerror="this.src='https://placehold.co/400x600?text=LIVRO';">
                         </div>
                     </div>
                     
-                    <!-- Miniaturas: Sempre visíveis -->
+                    <!-- Miniaturas -->
                     <div id="thumb-grid" class="grid grid-cols-4 gap-3 w-full max-w-sm">
                         <!-- Gerado via JS -->
                     </div>
                 </div>
 
-                <!-- Coluna de Informação -->
+                <!-- Informação -->
                 <div class="md:col-span-3 space-y-8">
                     <div class="text-center md:text-left">
                         <div class="mb-4 text-[10px] md:text-base font-bold text-green-700 tracking-[0.2em] uppercase">Disponível</div>
@@ -230,7 +244,7 @@
                 </div>
             </div>
 
-            <!-- Tabs de Informação Extra -->
+            <!-- Tabs -->
             <div class="mt-24">
                 <div class="flex flex-col sm:flex-row justify-center sm:space-x-16 border-b-2 border-gray-100 mb-12 text-center">
                     <button onclick="showTab('autor')" id="tab-autor" class="tab-btn py-5 text-lg md:text-2xl font-bold text-gray-400 hover:text-brand-accent-red transition-all">Sobre o Autor</button>
@@ -265,10 +279,10 @@
         </div>
     </main>
 
-    <!-- LIGHTBOX MODAL COM NAVEGAÇÃO -->
-    <div id="lightbox-modal" onclick="closeLightbox()">
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox-modal">
         <!-- Botão Fechar -->
-        <button class="absolute top-6 right-6 text-white hover:text-brand-gold transition-colors z-50" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-white hover:text-brand-gold transition-colors z-[100]" onclick="closeLightbox()">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
 
@@ -301,6 +315,8 @@
             "Imagens/tpcbcontracapa.png"
         ];
         let currentIndex = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
 
         function renderThumbs() {
             const grid = document.getElementById('thumb-grid');
@@ -319,7 +335,7 @@
             const counter = document.getElementById('lightbox-counter');
             
             // Atualizar imagem principal
-            mainImg.style.opacity = '0';
+            mainImg.style.opacity = '0.3';
             setTimeout(() => {
                 mainImg.src = galleryImages[currentIndex];
                 mainImg.style.opacity = '1';
@@ -328,7 +344,7 @@
 
             // Atualizar imagem no lightbox se estiver aberto
             if (document.getElementById('lightbox-modal').style.display === 'flex') {
-                lightboxImg.style.opacity = '0';
+                lightboxImg.style.opacity = '0.3';
                 setTimeout(() => {
                     lightboxImg.src = galleryImages[currentIndex];
                     lightboxImg.style.opacity = '1';
@@ -357,6 +373,41 @@
         function closeLightbox() {
             document.getElementById('lightbox-modal').style.display = 'none';
             document.body.style.overflow = 'auto';
+            // Garante que ao sair da ampliação, a imagem principal volta a ser a capa
+            updateImage(0); 
+        }
+
+        // Lógica de Swipe (Arrastar com dedos)
+        function handleSwipe() {
+            const swipeDistance = touchEndX - touchStartX;
+            const threshold = 50; // pixels mínimos para considerar swipe
+            if (swipeDistance > threshold) {
+                changeImage(-1); // Swipe para a direita -> anterior
+            } else if (swipeDistance < -threshold) {
+                changeImage(1);  // Swipe para a esquerda -> próximo
+            }
+        }
+
+        function initGestures() {
+            const containers = [
+                document.getElementById('main-image-container'),
+                document.getElementById('lightbox-modal')
+            ];
+
+            containers.forEach(el => {
+                if (!el) return;
+                el.addEventListener('touchstart', e => {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+
+                el.addEventListener('touchend', e => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                }, { passive: true });
+            });
+            
+            // Permitir fechar lightbox clicando no fundo
+            document.getElementById('lightbox-modal').addEventListener('click', closeLightbox);
         }
 
         async function loadComponents() {
@@ -366,20 +417,31 @@
                 const foot = await fetch('rodape?v=' + Date.now());
                 if (foot.ok) document.getElementById('footer-placeholder').innerHTML = await foot.text();
                 updateCartUI();
-                renderThumbs(); // Garante que as miniaturas aparecem logo
+                renderThumbs();
+                initGestures();
             } catch (e) { 
-                renderThumbs(); // Fallback para renderizar as miniaturas mesmo sem fetch
+                renderThumbs();
+                initGestures();
             }
         }
 
         function showTab(tabId) {
             ['autor', 'ficha'].forEach(id => {
-                document.getElementById('content-' + id).classList.add('hidden');
-                document.getElementById('tab-' + id).classList.remove('tab-active');
-                document.getElementById('tab-' + id).classList.add('text-gray-400');
+                const content = document.getElementById('content-' + id);
+                const button = document.getElementById('tab-' + id);
+                if (content) content.classList.add('hidden');
+                if (button) {
+                    button.classList.remove('tab-active');
+                    button.classList.add('text-gray-400');
+                }
             });
-            document.getElementById('content-' + tabId).classList.remove('hidden');
-            document.getElementById('tab-' + tabId).classList.add('tab-active');
+            const activeContent = document.getElementById('content-' + tabId);
+            const activeButton = document.getElementById('tab-' + tabId);
+            if (activeContent) activeContent.classList.remove('hidden');
+            if (activeButton) {
+                activeButton.classList.add('tab-active');
+                activeButton.classList.remove('text-gray-400');
+            }
         }
 
         function addToCart(title, price) {
@@ -388,8 +450,10 @@
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             updateCartUI();
             const alert = document.getElementById('cart-alert');
-            alert.classList.remove('hidden');
-            setTimeout(() => alert.classList.add('hidden'), 3000);
+            if (alert) {
+                alert.classList.remove('hidden');
+                setTimeout(() => alert.classList.add('hidden'), 3000);
+            }
         }
 
         function updateCartUI() {
