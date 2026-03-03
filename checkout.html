@@ -359,8 +359,8 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
                 <div class="flex flex-col items-center space-y-4">
                     <div class="flex items-center space-x-2">
-                        <img src="Imagens/Logo J Dourado.png" alt="Logo" class="h-8 w-auto">
-                        <span class="font-serif text-2xl font-bold text-white">Jerónimo Editora</span>
+                        <img src="Imagens/Logo J.png" alt="Logo" class="h-8 md:h-10 w-auto">
+                        <span class="font-serif text-xl md:text-2xl font-extrabold text-brand-text hidden sm:inline">Jerónimo Editora</span>
                     </div>
                     <p class="text-sm text-gray-400 leading-relaxed max-w-[250px]">Rigor teológico e excelência editorial. Dedicada a enriquecer a cultura bíblica em Portugal.</p>
                 </div>
@@ -411,20 +411,27 @@
             const choice = choiceInput.value;
             
             const fields = document.querySelectorAll('.billing-field');
+            
+            // A caixa abre sempre que uma opção é seleccionada
+            container.classList.remove('hidden');
+
             if (choice === 'sim') {
-                container.classList.add('hidden');
                 syncBillingAddress();
                 fields.forEach(f => {
                     f.setAttribute('readonly', 'true');
-                    f.classList.add('bg-gray-100', 'text-gray-500');
+                    f.classList.add('bg-gray-100', 'text-gray-400', 'cursor-not-allowed');
+                    f.classList.remove('bg-white');
                 });
             } else {
-                container.classList.remove('hidden');
+                // Se clicar em Não, a caixa aparece vazia para editar
                 fields.forEach(f => {
+                    f.value = ''; 
                     f.removeAttribute('readonly');
-                    f.classList.remove('bg-gray-100', 'text-gray-500');
+                    f.classList.remove('bg-gray-100', 'text-gray-400', 'cursor-not-allowed');
+                    f.classList.add('bg-white');
                 });
             }
+            validateFinalButton();
         }
 
         function syncBillingAddress() {
@@ -437,12 +444,21 @@
             }
         }
 
-        // Adicionar Listeners para sincronizar em tempo real se a opção "Sim" estiver activa
+        // Listeners para sincronizar em tempo real se a opção "Sim" estiver activa
         ['morada', 'nr-andar', 'cod-postal', 'cidade'].forEach(id => {
-            document.getElementById(id).addEventListener('input', () => {
-                const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
-                if (choiceInput && choiceInput.value === 'sim') syncBillingAddress();
-            });
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', () => {
+                    const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
+                    if (choiceInput && choiceInput.value === 'sim') syncBillingAddress();
+                    validateFinalButton();
+                });
+            }
+        });
+
+        // Monitorar campos de facturação manuais para validar botão
+        document.querySelectorAll('.billing-field').forEach(field => {
+            field.addEventListener('input', validateFinalButton);
         });
 
         function obterTarifa(peso, destino) {
@@ -580,11 +596,30 @@
             const method = document.querySelector('input[name="payment-method"]:checked')?.value;
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const requiredInputs = document.querySelectorAll('#shipping-form [required]');
-            let formValid = true;
-            requiredInputs.forEach(input => { if (!input.value.trim()) formValid = false; });
             
-            document.getElementById('place-order-button').disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !formValid;
+            // Campos obrigatórios do envio
+            const requiredEnvio = ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'];
+            let envioValid = true;
+            requiredEnvio.forEach(id => { 
+                const el = document.getElementById(id);
+                if (el && !el.value.trim()) envioValid = false; 
+            });
+
+            // Campos obrigatórios da facturação (apenas se 'Não' estiver seleccionado)
+            const isDifferentBilling = document.getElementById('choice-nao').checked;
+            let billingValid = true;
+            if (isDifferentBilling) {
+                const requiredBilling = ['morada-fat', 'nr-andar-fat', 'cod-postal-fat', 'cidade-fat'];
+                requiredBilling.forEach(id => { 
+                    const el = document.getElementById(id);
+                    if (el && !el.value.trim()) billingValid = false; 
+                });
+            }
+            
+            const btn = document.getElementById('place-order-button');
+            if (btn) {
+                btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !envioValid || !billingValid;
+            }
         }
 
         async function placeOrder(e) {
@@ -601,10 +636,6 @@
             const method = document.querySelector('input[name="payment-method"]:checked')?.value;
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             
-            // Garantir sincronização da morada antes do envio se forem iguais
-            const isSameAddress = document.querySelector('input[name="billing-choice"]:checked')?.value === 'sim';
-            if (isSameAddress) syncBillingAddress();
-
             try {
                 let base64File = "";
                 if (fileInput && fileInput.files.length > 0) {
