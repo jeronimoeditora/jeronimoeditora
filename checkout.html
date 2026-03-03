@@ -87,7 +87,6 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Barra de progresso simulada */
         .progress-bar-container {
             width: 200px;
             height: 4px;
@@ -135,7 +134,7 @@
         </div>
     </div>
 
-    <!-- Navegação (Links Atualizados) -->
+    <!-- Navegação -->
     <nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 z-50 font-sans">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <a href="/" class="flex items-center space-x-2">
@@ -224,7 +223,7 @@
                                 <span class="block text-sm font-medium text-gray-700 mb-3">A morada de facturação é igual à de envio?</span>
                                 <div class="flex items-center space-x-8">
                                     <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="radio" name="billing-choice" id="choice-sim" value="sim" class="radio-small" onchange="handleBillingChoice()">
+                                        <input type="radio" name="billing-choice" id="choice-sim" value="sim" class="radio-small" onchange="handleBillingChoice()" checked>
                                         <span class="text-sm text-gray-700 font-medium">Sim</span>
                                     </label>
                                     <label class="flex items-center space-x-2 cursor-pointer">
@@ -234,6 +233,7 @@
                                 </div>
                             </div>
 
+                            <!-- Morada de Facturação -->
                             <div id="billing-address-container" class="hidden space-y-5 pt-6 border-t border-gray-100 mt-4 fade-in bg-gray-50/50 p-4 rounded-lg">
                                 <h3 class="text-lg font-bold text-brand-text mb-4 underline font-serif">Morada de Facturação</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
@@ -388,9 +388,7 @@
     </footer>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 
-"https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec"; 
-
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec"; 
 
         const SHIPPING_MARGIN = 25; 
         const bookData = [
@@ -411,15 +409,17 @@
             const container = document.getElementById('billing-address-container');
             if (!choiceInput || !container) return;
             const choice = choiceInput.value;
-            container.classList.remove('hidden'); 
+            
             const fields = document.querySelectorAll('.billing-field');
             if (choice === 'sim') {
+                container.classList.add('hidden');
                 syncBillingAddress();
                 fields.forEach(f => {
                     f.setAttribute('readonly', 'true');
                     f.classList.add('bg-gray-100', 'text-gray-500');
                 });
             } else {
+                container.classList.remove('hidden');
                 fields.forEach(f => {
                     f.removeAttribute('readonly');
                     f.classList.remove('bg-gray-100', 'text-gray-500');
@@ -436,6 +436,14 @@
                 document.getElementById('cidade-fat').value = document.getElementById('cidade').value;
             }
         }
+
+        // Adicionar Listeners para sincronizar em tempo real se a opção "Sim" estiver activa
+        ['morada', 'nr-andar', 'cod-postal', 'cidade'].forEach(id => {
+            document.getElementById(id).addEventListener('input', () => {
+                const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
+                if (choiceInput && choiceInput.value === 'sim') syncBillingAddress();
+            });
+        });
 
         function obterTarifa(peso, destino) {
             const pesoKg = peso / 1000;
@@ -535,32 +543,22 @@
             validateFinalButton();
         }
 
-        // NOVO: Função para comprimir imagem antes do envio (Aumenta rapidez drasticamente)
         async function fileToBase64(file) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onload = (event) => {
-                    // Se for PDF, não comprimimos
                     if (file.type === 'application/pdf') { resolve(event.target.result); return; }
-                    
                     const img = new Image();
                     img.src = event.target.result;
                     img.onload = () => {
                         const canvas = document.createElement('canvas');
-                        const MAX_WIDTH = 1200; // Suficiente para ver detalhes de um talão
-                        let width = img.width;
-                        let height = img.height;
-
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
-                        }
-                        canvas.width = width;
-                        canvas.height = height;
+                        const MAX_WIDTH = 1200;
+                        let width = img.width, height = img.height;
+                        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+                        canvas.width = width; canvas.height = height;
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, width, height);
-                        // Comprime para JPEG (mais leve que PNG) com 70% de qualidade
                         resolve(canvas.toDataURL('image/jpeg', 0.7)); 
                     };
                 };
@@ -574,9 +572,7 @@
             if (input && input.files.length > 0) {
                 nameSpan.textContent = input.files[0].name;
                 display.classList.remove('hidden'); display.classList.add('flex');
-            } else {
-                display.classList.add('hidden');
-            }
+            } else { display.classList.add('hidden'); }
             validateFinalButton();
         }
 
@@ -584,7 +580,11 @@
             const method = document.querySelector('input[name="payment-method"]:checked')?.value;
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            document.getElementById('place-order-button').disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0;
+            const requiredInputs = document.querySelectorAll('#shipping-form [required]');
+            let formValid = true;
+            requiredInputs.forEach(input => { if (!input.value.trim()) formValid = false; });
+            
+            document.getElementById('place-order-button').disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !formValid;
         }
 
         async function placeOrder(e) {
@@ -601,6 +601,10 @@
             const method = document.querySelector('input[name="payment-method"]:checked')?.value;
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             
+            // Garantir sincronização da morada antes do envio se forem iguais
+            const isSameAddress = document.querySelector('input[name="billing-choice"]:checked')?.value === 'sim';
+            if (isSameAddress) syncBillingAddress();
+
             try {
                 let base64File = "";
                 if (fileInput && fileInput.files.length > 0) {
@@ -622,6 +626,12 @@
                         cod_postal: document.getElementById('cod-postal').value,
                         cidade: document.getElementById('cidade').value,
                         pais: document.getElementById('pais').value
+                    },
+                    faturacao: {
+                        morada: document.getElementById('morada-fat').value,
+                        nr_andar: document.getElementById('nr-andar-fat').value,
+                        cod_postal: document.getElementById('cod-postal-fat').value,
+                        cidade: document.getElementById('cidade-fat').value
                     },
                     pagamento: {
                         metodo: method,
@@ -656,7 +666,10 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadCartSummary);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCartSummary();
+            handleBillingChoice();
+        });
     </script>
 </body>
 </html>
