@@ -80,21 +80,28 @@
             filter: grayscale(100%);
         }
 
-        /* Hero Split Styles */
+        /* Hero Split Styles - Aumentados para Impacto */
         .hero-split-side {
             transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: visible; /* Permitir que o livro saia da caixa */
         }
+        
         @media (min-width: 1024px) {
             .hero-split-side:hover {
-                flex-grow: 1.2;
+                flex-grow: 1.3;
             }
         }
+        
         .book-3d-hero {
-            filter: drop-shadow(15px 15px 30px rgba(0,0,0,0.25));
-            transition: transform 0.5s ease;
+            filter: drop-shadow(25px 25px 50px rgba(0,0,0,0.35));
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            max-width: none; /* Ignorar limites de largura padrão para impacto */
         }
+        
         .hero-split-side:hover .book-3d-hero {
-            transform: scale(1.08) translateY(-10px) rotate(-2deg);
+            transform: scale(1.12) translateY(-20px) rotate(-3deg);
+            filter: drop-shadow(40px 40px 70px rgba(0,0,0,0.45));
         }
     </style>
 </head>
@@ -104,38 +111,40 @@
 
     <main class="flex-grow pt-16 md:pt-20">
 
-        <!-- HERO SECTION: SPLIT HERO COM BOTÕES IGUAIS -->
-        <section id="hero" class="w-full flex flex-col lg:flex-row min-h-[85vh] bg-white overflow-hidden">
+        <!-- HERO SECTION: IMPACTO MÁXIMO COM LIVROS GRANDES -->
+        <section id="hero" class="w-full flex flex-col lg:flex-row min-h-[90vh] bg-white overflow-hidden">
             
             <!-- Lado Esquerdo: Joe Heschmeyer -->
-            <div class="hero-split-side relative flex-1 flex flex-col lg:flex-row items-center justify-center p-8 md:p-16 bg-brand-gold-light/30 border-b lg:border-b-0 lg:border-r border-gray-100 group">
-                <div class="max-w-md text-center lg:text-left z-10 space-y-6">
-                    <span class="text-brand-accent-red font-sans text-[10px] font-black uppercase tracking-[0.4em]">Novo Lançamento</span>
-                    <h2 class="font-serif text-3xl md:text-5xl text-brand-accent-blue font-bold leading-tight">A Eucaristia é mesmo Jesus</h2>
-                    <p class="font-classic text-xl md:text-2xl text-gray-500 font-bold uppercase tracking-widest">Joe Heschmeyer</p>
-                    <div class="pt-4">
-                        <a href="a-eucaristia-e-mesmo-jesus" class="inline-block bg-brand-accent-blue text-white px-10 py-3.5 font-bold rounded-lg uppercase tracking-widest text-xs hover:bg-brand-accent-red transition-all shadow-md">Ver Detalhes</a>
+            <div class="hero-split-side relative flex-1 flex flex-col lg:flex-row items-center justify-center p-8 md:p-20 bg-brand-gold-light/30 border-b lg:border-b-0 lg:border-r border-gray-100 group">
+                <div class="max-w-md text-center lg:text-left z-30 space-y-6">
+                    <span class="text-brand-accent-red font-sans text-[10px] md:text-xs font-black uppercase tracking-[0.5em]">Novo Lançamento</span>
+                    <h2 class="font-serif text-4xl md:text-6xl text-brand-accent-blue font-bold leading-tight tracking-tight">A Eucaristia é mesmo Jesus</h2>
+                    <p class="font-classic text-xl md:text-3xl text-gray-500 font-bold uppercase tracking-widest opacity-80">Joe Heschmeyer</p>
+                    <div class="pt-6">
+                        <a href="a-eucaristia-e-mesmo-jesus" class="inline-block bg-brand-accent-blue text-white px-12 py-4 font-bold rounded-xl uppercase tracking-[0.2em] text-xs hover:bg-brand-accent-red transition-all shadow-xl hover:-translate-y-1">Ver Detalhes</a>
                     </div>
                 </div>
-                <div class="mt-8 lg:mt-0 lg:absolute lg:right-[-5%] xl:right-[-10%] lg:top-1/2 lg:-translate-y-1/2 z-20">
-                    <!-- Atualizado para .png -->
-                    <img src="AEMJ3.png" alt="Livro Joe" class="w-48 md:w-64 lg:w-80 book-3d-hero">
+                
+                <!-- Imagem do Livro Joe: Grande e com Sangramento -->
+                <div class="mt-12 lg:mt-0 lg:absolute lg:-right-24 xl:-right-32 lg:top-1/2 lg:-translate-y-1/2 z-20 pointer-events-none">
+                    <img src="AEMJ3.png" alt="Livro Joe" class="w-72 md:w-96 lg:w-[480px] xl:w-[560px] book-3d-hero">
                 </div>
             </div>
 
             <!-- Lado Direito: Peter Kreeft -->
-            <div class="hero-split-side relative flex-1 flex flex-col lg:flex-row items-center justify-center p-8 md:p-16 bg-white group">
-                <div class="max-w-md text-center lg:text-right z-10 space-y-6">
-                    <span class="text-brand-gold-dark font-sans text-[10px] font-black uppercase tracking-[0.4em]">Obra Essencial</span>
-                    <h2 class="font-serif text-3xl md:text-5xl text-brand-accent-blue font-bold leading-tight">Tu podes compreender a Bíblia</h2>
-                    <p class="font-classic text-xl md:text-2xl text-gray-500 font-bold uppercase tracking-widest">Peter Kreeft</p>
-                    <div class="pt-4">
-                        <a href="tu-podes-compreender-a-biblia" class="inline-block bg-brand-accent-blue text-white px-10 py-3.5 font-bold rounded-lg uppercase tracking-widest text-xs hover:bg-brand-accent-red transition-all shadow-md">Ver Detalhes</a>
+            <div class="hero-split-side relative flex-1 flex flex-col lg:flex-row items-center justify-center p-8 md:p-20 bg-white group">
+                <div class="max-w-md text-center lg:text-right z-30 space-y-6">
+                    <span class="text-brand-gold-dark font-sans text-[10px] md:text-xs font-black uppercase tracking-[0.5em]">Obra Essencial</span>
+                    <h2 class="font-serif text-4xl md:text-6xl text-brand-accent-blue font-bold leading-tight tracking-tight">Tu podes compreender a Bíblia</h2>
+                    <p class="font-classic text-xl md:text-3xl text-gray-500 font-bold uppercase tracking-widest opacity-80">Peter Kreeft</p>
+                    <div class="pt-6">
+                        <a href="tu-podes-compreender-a-biblia" class="inline-block bg-brand-accent-blue text-white px-12 py-4 font-bold rounded-xl uppercase tracking-[0.2em] text-xs hover:bg-brand-accent-red transition-all shadow-xl hover:-translate-y-1">Ver Detalhes</a>
                     </div>
                 </div>
-                <div class="mt-8 lg:mt-0 lg:absolute lg:left-[-5%] xl:left-[-10%] lg:top-1/2 lg:-translate-y-1/2 z-20">
-                    <!-- Atualizado para .png -->
-                    <img src="TPCB2.png" alt="Livro Kreeft" class="w-48 md:w-64 lg:w-80 book-3d-hero">
+                
+                <!-- Imagem do Livro Kreeft: Grande e com Sangramento -->
+                <div class="mt-12 lg:mt-0 lg:absolute lg:-left-24 xl:-left-32 lg:top-1/2 lg:-translate-y-1/2 z-20 pointer-events-none">
+                    <img src="TPCB2.png" alt="Livro Kreeft" class="w-72 md:w-96 lg:w-[480px] xl:w-[560px] book-3d-hero">
                 </div>
             </div>
 
@@ -210,10 +219,9 @@
             </div>
         </section>
 
-        <!-- Secção Sobre Nós: Identidade, Missão e Valores -->
+        <!-- Secção Sobre Nós -->
         <section id="sobre" class="w-full bg-white py-20 md:py-32 relative overflow-hidden">
             
-            <!-- Marca de Água (Watermark) Integrada -->
             <img src="Imagens/Logo J.png" alt="Logo Watermark" class="logo-watermark">
 
             <div class="max-w-6xl mx-auto px-6 relative z-10">
@@ -234,7 +242,6 @@
                         <div class="text-lg text-gray-700 leading-relaxed font-classic dropcap">
                             A Jerónimo Editora nasce com o propósito de enriquecer o panorama editorial português, especializando-se em obras de formação bíblica Católica que primam pela profundidade teológica e fidelidade às fontes. O nosso nome é uma homenagem a São Jerónimo, presbítero e Doutor da Igreja, padroeiro dos estudiosos da Sagrada Escritura, que nos recorda:
                         </div>
-                        <!-- Citação com Destaque -->
                         <p class="text-xl md:text-2xl text-brand-accent-blue italic font-classic mt-4">
                             <strong>«Ignorar as Escrituras é ignorar Cristo».</strong>
                         </p>
