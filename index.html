@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS para Responsividade -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -35,7 +34,6 @@
     </script>
 
     <style>
-        /* Efeito de Parallax para a imagem central */
         .art-viewport {
             background-image: url('Imagens/Jeronimo.jpg');
             background-attachment: fixed;
@@ -56,7 +54,6 @@
         .text-glow-white { text-shadow: 0 2px 15px rgba(0, 0, 0, 1); }
         .single-line-title { white-space: nowrap; font-size: clamp(1.4rem, 5.5vw, 4.2rem); }
         
-        /* Dropcap Clássica */
         .dropcap::first-letter {
             font-family: 'Playfair Display', serif;
             float: left;
@@ -67,7 +64,6 @@
             font-weight: bold;
         }
 
-        /* Marca de Água Ajustada: Inclinada e Escurecida */
         .logo-watermark {
             position: absolute;
             top: 50%;
@@ -81,33 +77,33 @@
             filter: grayscale(100%);
         }
 
-        /* Hero Layout - Otimizado para Impacto sem Cortes */
+        /* Hero Layout - Blocos Dinâmicos que se mexem */
         .hero-split-side {
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.3, 1);
             position: relative;
             z-index: 10;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding: 3rem 2rem;
+            justify-content: flex-start; /* Sobe o conteúdo */
+            overflow: visible; /* Garante que sombras não cortem */
+            padding-top: 2rem;
         }
         
         @media (min-width: 1024px) {
             .hero-split-side {
                 flex-direction: row;
                 align-items: center;
-                padding: 0 3rem;
-                min-height: 85vh;
+                min-height: 95vh;
+                padding-top: 0;
             }
-            .hero-split-side:hover {
-                flex-grow: 1.6;
-                z-index: 45;
-            }
+            /* Efeito de expansão lateral ao passar o rato */
+            section:hover .hero-split-side { flex-grow: 0.6; }
+            section .hero-split-side:hover { flex-grow: 1.4; z-index: 45; }
         }
         
         .book-3d-hero {
-            filter: drop-shadow(10px 20px 40px rgba(0,0,0,0.25));
-            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            filter: drop-shadow(20px 40px 60px rgba(0,0,0,0.4));
+            transition: all 0.7s ease-in-out;
             max-width: 100%;
             height: auto;
             object-fit: contain;
@@ -115,14 +111,14 @@
         
         @media (min-width: 1024px) {
             .book-3d-hero {
-                height: 55vh; 
+                height: 80vh; /* IMPACTO MONUMENTAL: Ocupa quase o ecrã todo */
                 width: auto;
+                max-width: none;
             }
         }
         
         .hero-split-side:hover .book-3d-hero {
-            transform: scale(1.06) rotate(-1deg);
-            filter: drop-shadow(20px 30px 50px rgba(0,0,0,0.35));
+            transform: scale(1.05) rotate(-1.5deg);
         }
 
         .floating {
@@ -130,75 +126,81 @@
         }
         @keyframes floating {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-20px); }
         }
 
+        /* Estabilidade Total dos Títulos */
         .hero-content-wrapper {
             position: relative;
             z-index: 40;
             width: 100%;
+            padding: 1.5rem;
+            min-width: 300px;
         }
 
         @media (min-width: 1024px) {
             .hero-content-wrapper {
-                width: 55%; 
+                width: 480px; /* Largura fixa impede o texto de saltar de linha */
+                flex-shrink: 0;
+                padding: 0 4rem;
             }
             .hero-image-wrapper {
-                width: 45%; 
+                flex-grow: 1;
                 display: flex;
                 justify-content: center;
+                align-items: center;
+                height: 100%;
             }
         }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- Navbar -->
     <div id="nav-placeholder"></div>
 
-    <main class="flex-grow pt-16 md:pt-20">
+    <!-- pt-0 no main para colar o Hero ao topo/navbar e remover branco -->
+    <main class="flex-grow pt-0">
 
-        <!-- HERO SECTION: IMPACTO SEM SOBREPOSIÇÃO -->
-        <section id="hero" class="w-full flex flex-col lg:flex-row min-h-screen lg:min-h-[85vh] bg-white overflow-hidden">
+        <!-- HERO SECTION: IMPACTO MÁXIMO -->
+        <section id="hero" class="w-full flex flex-col lg:flex-row min-h-screen bg-white overflow-hidden pt-16 md:pt-20">
             
-            <!-- Bloco 1: Joe Heschmeyer (Lançamento) -->
+            <!-- Lado Joe (Lançamento) -->
             <div class="hero-split-side flex-1 bg-[#fdfaf2] border-b lg:border-b-0 lg:border-r border-gray-100 group">
-                <div class="hero-content-wrapper text-center lg:text-left space-y-4 lg:pr-6">
-                    <span class="text-brand-accent-red font-sans text-[10px] font-black uppercase tracking-[0.4em] block mb-1">Lançamento</span>
+                <div class="hero-content-wrapper text-center lg:text-left space-y-4">
+                    <span class="text-brand-accent-red font-sans text-[10px] font-black uppercase tracking-[0.5em] block mb-1">Lançamento</span>
                     <h2 class="font-serif text-3xl md:text-5xl xl:text-6xl text-brand-accent-blue font-black leading-tight tracking-tight">A Eucaristia é mesmo Jesus</h2>
                     <p class="font-classic text-lg md:text-xl text-brand-gold-dark font-bold uppercase tracking-widest">Joe Heschmeyer</p>
-                    <div class="pt-2 pb-8 lg:pb-0">
-                        <!-- Corrigido: whitespace-nowrap garante uma linha só -->
-                        <a href="a-eucaristia-e-mesmo-jesus" class="inline-block bg-brand-accent-blue text-white px-8 py-3 font-bold rounded-lg uppercase tracking-widest text-[10px] hover:bg-brand-accent-red transition-all shadow-md hover:-translate-y-1 whitespace-nowrap">Ver Detalhes</a>
+                    <div class="pt-2 mb-4 lg:mb-0">
+                        <a href="a-eucaristia-e-mesmo-jesus" class="inline-block bg-brand-accent-blue text-white px-10 py-4 font-bold rounded-lg uppercase tracking-widest text-[10px] hover:bg-brand-accent-red transition-all shadow-md hover:-translate-y-1 whitespace-nowrap">Ver Detalhes</a>
                     </div>
                 </div>
                 
-                <!-- Imagem do Livro Joe -->
-                <div class="hero-image-wrapper floating">
-                    <img src="AEMJ3.png" alt="Livro Joe" class="book-3d-hero w-60 md:w-80 lg:w-auto">
+                <!-- Livro Joe: Grande e centralizado -->
+                <div class="hero-image-wrapper floating w-full flex justify-center pb-8 lg:pb-0">
+                    <img src="AEMJ3.png" alt="Livro Joe" class="book-3d-hero w-80 md:w-[480px] lg:w-auto">
                 </div>
             </div>
 
-            <!-- Bloco 2: Peter Kreeft (Essencial) -->
+            <!-- Lado Kreeft (Essencial) -->
             <div class="hero-split-side flex-1 bg-white group lg:flex-row-reverse">
-                <div class="hero-content-wrapper text-center lg:text-right space-y-4 lg:pl-6">
+                <div class="hero-content-wrapper text-center lg:text-right space-y-4">
                     <span class="text-brand-gold-dark font-sans text-[10px] font-black uppercase tracking-[0.4em] block mb-1">Essencial</span>
                     <h2 class="font-serif text-3xl md:text-5xl xl:text-6xl text-brand-accent-blue font-black leading-tight tracking-tight">Tu podes compreender a Bíblia</h2>
                     <p class="font-classic text-lg md:text-xl text-brand-accent-red font-bold uppercase tracking-widest">Peter Kreeft</p>
-                    <div class="pt-2 pb-8 lg:pb-0">
-                        <a href="tu-podes-compreender-a-biblia" class="inline-block bg-brand-accent-blue text-white px-8 py-3 font-bold rounded-lg uppercase tracking-widest text-[10px] hover:bg-brand-accent-red transition-all shadow-md hover:-translate-y-1 whitespace-nowrap">Ver Detalhes</a>
+                    <div class="pt-2 mb-4 lg:mb-0">
+                        <a href="tu-podes-compreender-a-biblia" class="inline-block bg-brand-accent-blue text-white px-10 py-4 font-bold rounded-lg uppercase tracking-widest text-[10px] hover:bg-brand-accent-red transition-all shadow-md hover:-translate-y-1 whitespace-nowrap">Ver Detalhes</a>
                     </div>
                 </div>
                 
-                <!-- Imagem do Livro Kreeft -->
-                <div class="hero-image-wrapper floating" style="animation-delay: -4s;">
-                    <img src="TPCB2.png" alt="Livro Kreeft" class="book-3d-hero w-60 md:w-80 lg:w-auto">
+                <!-- Livro Kreeft: Grande e centralizado -->
+                <div class="hero-image-wrapper floating w-full flex justify-center pb-8 lg:pb-0" style="animation-delay: -4s;">
+                    <img src="TPCB2.png" alt="Livro Kreeft" class="book-3d-hero w-80 md:w-[480px] lg:w-auto">
                 </div>
             </div>
 
         </section>
 
-        <!-- SECÇÃO EM DESTAQUE: SÃO JERÓNIMO -->
+        <!-- SECÇÃO SÃO JERÓNIMO -->
         <section class="art-viewport relative w-full h-[60vh] md:h-[80vh] flex items-end justify-center overflow-hidden pb-20">
             <div class="absolute inset-0 art-overlay-gradient"></div>
             <div class="relative z-10 text-center px-6">
@@ -214,7 +216,6 @@
             <div class="max-w-6xl mx-auto px-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-stretch">
                     
-                    <!-- Joe -->
                     <div class="book-card flex flex-col sm:flex-row md:flex-col lg:flex-row gap-8 items-center md:items-start lg:items-center bg-brand-gold-light p-8 md:p-10 rounded-[2rem] border border-brand-gold/20 shadow-sm relative overflow-hidden h-full">
                         <div class="absolute top-0 right-0 bg-brand-accent-red text-white px-6 py-2 rounded-bl-2xl font-sans text-[10px] font-black uppercase tracking-[0.2em]">Lançamento</div>
                         <div class="w-40 md:w-48 lg:w-56 flex-shrink-0">
@@ -235,7 +236,6 @@
                         </div>
                     </div>
 
-                    <!-- Kreeft -->
                     <div class="book-card flex flex-col sm:flex-row md:flex-col lg:flex-row gap-8 items-center md:items-start lg:items-center p-8 md:p-10 border-2 border-brand-gold/30 rounded-[2rem] h-full bg-transparent">
                         <div class="w-40 md:w-48 lg:w-56 flex-shrink-0">
                             <a href="tu-podes-compreender-a-biblia">
@@ -255,11 +255,8 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="mt-20 text-center">
-                    <a href="catalogo-completo" class="bg-brand-accent-blue text-white px-12 py-4 font-bold rounded-xl uppercase tracking-widest hover:bg-brand-accent-red transition-all text-xs inline-block shadow-md">
-                        Explorar Todo o Catálogo
-                    </a>
+                    <a href="catalogo-completo" class="bg-brand-accent-blue text-white px-12 py-4 font-bold rounded-xl uppercase tracking-widest hover:bg-brand-accent-red transition-all text-xs inline-block shadow-md">Explorar Todo o Catálogo</a>
                 </div>
             </div>
         </section>
@@ -273,7 +270,6 @@
                     <div class="w-24 h-1 bg-brand-accent-red mx-auto"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-stretch">
-                    <!-- Missão -->
                     <div class="space-y-6 border-2 border-brand-gold/30 rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-center bg-white/50 backdrop-blur-sm">
                         <h3 class="font-serif text-2xl md:text-3xl text-brand-accent-red font-bold flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold-dark"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
@@ -286,7 +282,6 @@
                             <strong>«Ignorar as Escrituras é ignorar Cristo».</strong>
                         </p>
                     </div>
-                    <!-- Valores -->
                     <div class="space-y-6 border-2 border-brand-gold/30 rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-center bg-white/50 backdrop-blur-sm">
                         <h3 class="font-serif text-2xl md:text-3xl text-brand-accent-red font-bold flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold-dark"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
