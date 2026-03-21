@@ -77,32 +77,32 @@
             filter: grayscale(100%);
         }
 
-        /* Hero Layout - Blocos Dinâmicos que se mexem */
+        /* Hero Layout - Dinâmico e Monumental */
         .hero-split-side {
             transition: all 0.8s cubic-bezier(0.25, 1, 0.3, 1);
             position: relative;
             z-index: 10;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Sobe o conteúdo */
-            overflow: visible; /* Garante que sombras não cortem */
-            padding-top: 2rem;
+            justify-content: center;
+            overflow: hidden;
+            padding: 3rem 1rem;
         }
         
         @media (min-width: 1024px) {
             .hero-split-side {
                 flex-direction: row;
                 align-items: center;
-                min-height: 95vh;
-                padding-top: 0;
+                min-height: 90vh;
+                padding: 0 2rem;
             }
-            /* Efeito de expansão lateral ao passar o rato */
-            section:hover .hero-split-side { flex-grow: 0.6; }
-            section .hero-split-side:hover { flex-grow: 1.4; z-index: 45; }
+            /* Efeito de expansão lateral Sugestão 2 */
+            section:hover .hero-split-side { flex-basis: 40%; }
+            section .hero-split-side:hover { flex-basis: 60%; z-index: 45; }
         }
         
         .book-3d-hero {
-            filter: drop-shadow(20px 40px 60px rgba(0,0,0,0.4));
+            filter: drop-shadow(20px 40px 60px rgba(0,0,0,0.35));
             transition: all 0.7s ease-in-out;
             max-width: 100%;
             height: auto;
@@ -111,14 +111,14 @@
         
         @media (min-width: 1024px) {
             .book-3d-hero {
-                height: 80vh; /* IMPACTO MONUMENTAL: Ocupa quase o ecrã todo */
+                height: 75vh; /* Monumental e imponente */
                 width: auto;
                 max-width: none;
             }
         }
         
         .hero-split-side:hover .book-3d-hero {
-            transform: scale(1.05) rotate(-1.5deg);
+            transform: scale(1.05) rotate(-1deg);
         }
 
         .floating {
@@ -129,27 +129,27 @@
             50% { transform: translateY(-20px); }
         }
 
-        /* Estabilidade Total dos Títulos */
+        /* Content Wrapper para estabilidade dos títulos */
         .hero-content-wrapper {
             position: relative;
             z-index: 40;
             width: 100%;
             padding: 1.5rem;
-            min-width: 300px;
         }
 
         @media (min-width: 1024px) {
             .hero-content-wrapper {
-                width: 480px; /* Largura fixa impede o texto de saltar de linha */
+                flex-basis: 45%; /* Garante espaço para o texto sem empurrar a imagem */
                 flex-shrink: 0;
-                padding: 0 4rem;
+                padding: 0 3rem;
             }
             .hero-image-wrapper {
-                flex-grow: 1;
+                flex-basis: 55%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 height: 100%;
+                min-width: 300px; /* Garante que a imagem nunca desapareça */
             }
         }
     </style>
@@ -158,43 +158,40 @@
 
     <div id="nav-placeholder"></div>
 
-    <!-- pt-0 no main para colar o Hero ao topo/navbar e remover branco -->
     <main class="flex-grow pt-0">
 
-        <!-- HERO SECTION: IMPACTO MÁXIMO -->
+        <!-- HERO SECTION: IMPACTO MÁXIMO NAS DUAS OBRAS -->
         <section id="hero" class="w-full flex flex-col lg:flex-row min-h-screen bg-white overflow-hidden pt-16 md:pt-20">
             
-            <!-- Lado Joe (Lançamento) -->
+            <!-- Bloco 1: Joe Heschmeyer (Lançamento) -->
             <div class="hero-split-side flex-1 bg-[#fdfaf2] border-b lg:border-b-0 lg:border-r border-gray-100 group">
                 <div class="hero-content-wrapper text-center lg:text-left space-y-4">
                     <span class="text-brand-accent-red font-sans text-[10px] font-black uppercase tracking-[0.5em] block mb-1">Lançamento</span>
                     <h2 class="font-serif text-3xl md:text-5xl xl:text-6xl text-brand-accent-blue font-black leading-tight tracking-tight">A Eucaristia é mesmo Jesus</h2>
                     <p class="font-classic text-lg md:text-xl text-brand-gold-dark font-bold uppercase tracking-widest">Joe Heschmeyer</p>
-                    <div class="pt-2 mb-4 lg:mb-0">
+                    <div class="pt-2 mb-8 lg:mb-0">
                         <a href="a-eucaristia-e-mesmo-jesus" class="inline-block bg-brand-accent-blue text-white px-10 py-4 font-bold rounded-lg uppercase tracking-widest text-[10px] hover:bg-brand-accent-red transition-all shadow-md hover:-translate-y-1 whitespace-nowrap">Ver Detalhes</a>
                     </div>
                 </div>
                 
-                <!-- Livro Joe: Grande e centralizado -->
-                <div class="hero-image-wrapper floating w-full flex justify-center pb-8 lg:pb-0">
-                    <img src="AEMJ3.png" alt="Livro Joe" class="book-3d-hero w-80 md:w-[480px] lg:w-auto">
+                <div class="hero-image-wrapper floating w-full flex justify-center lg:justify-start">
+                    <img src="AEMJ3.png" alt="Livro Joe" class="book-3d-hero w-80 md:w-[450px] lg:w-auto">
                 </div>
             </div>
 
-            <!-- Lado Kreeft (Essencial) -->
+            <!-- Bloco 2: Peter Kreeft (Essencial) -->
             <div class="hero-split-side flex-1 bg-white group lg:flex-row-reverse">
                 <div class="hero-content-wrapper text-center lg:text-right space-y-4">
                     <span class="text-brand-gold-dark font-sans text-[10px] font-black uppercase tracking-[0.4em] block mb-1">Essencial</span>
                     <h2 class="font-serif text-3xl md:text-5xl xl:text-6xl text-brand-accent-blue font-black leading-tight tracking-tight">Tu podes compreender a Bíblia</h2>
                     <p class="font-classic text-lg md:text-xl text-brand-accent-red font-bold uppercase tracking-widest">Peter Kreeft</p>
-                    <div class="pt-2 mb-4 lg:mb-0">
+                    <div class="pt-2 mb-8 lg:mb-0">
                         <a href="tu-podes-compreender-a-biblia" class="inline-block bg-brand-accent-blue text-white px-10 py-4 font-bold rounded-lg uppercase tracking-widest text-[10px] hover:bg-brand-accent-red transition-all shadow-md hover:-translate-y-1 whitespace-nowrap">Ver Detalhes</a>
                     </div>
                 </div>
                 
-                <!-- Livro Kreeft: Grande e centralizado -->
-                <div class="hero-image-wrapper floating w-full flex justify-center pb-8 lg:pb-0" style="animation-delay: -4s;">
-                    <img src="TPCB2.png" alt="Livro Kreeft" class="book-3d-hero w-80 md:w-[480px] lg:w-auto">
+                <div class="hero-image-wrapper floating w-full flex justify-center lg:justify-end" style="animation-delay: -4s;">
+                    <img src="TPCB2.png" alt="Livro Kreeft" class="book-3d-hero w-80 md:w-[450px] lg:w-auto">
                 </div>
             </div>
 
