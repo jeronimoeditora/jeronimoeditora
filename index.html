@@ -56,7 +56,7 @@
         .text-glow-white { text-shadow: 0 2px 15px rgba(0, 0, 0, 1); }
         .single-line-title { white-space: nowrap; font-size: clamp(1.4rem, 5.5vw, 4.2rem); }
         
-        /* Dropcap Clássica (Capitulares) */
+        /* Dropcap Clássica */
         .dropcap::first-letter {
             font-family: 'Playfair Display', serif;
             float: left;
@@ -80,28 +80,38 @@
             filter: grayscale(100%);
         }
 
-        /* Hero Split Styles - Aumentados para Impacto */
+        /* Hero IMPACTO MÁXIMO */
         .hero-split-side {
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
             position: relative;
-            overflow: visible; /* Permitir que o livro saia da caixa */
+            z-index: 10;
         }
         
         @media (min-width: 1024px) {
             .hero-split-side:hover {
-                flex-grow: 1.3;
+                flex-grow: 1.5;
+                z-index: 50;
             }
         }
         
         .book-3d-hero {
-            filter: drop-shadow(25px 25px 50px rgba(0,0,0,0.35));
-            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-            max-width: none; /* Ignorar limites de largura padrão para impacto */
+            filter: drop-shadow(40px 40px 80px rgba(0,0,0,0.4));
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translateZ(0);
         }
         
         .hero-split-side:hover .book-3d-hero {
-            transform: scale(1.12) translateY(-20px) rotate(-3deg);
-            filter: drop-shadow(40px 40px 70px rgba(0,0,0,0.45));
+            transform: scale(1.1) rotate(-2deg);
+            filter: drop-shadow(60px 60px 100px rgba(0,0,0,0.5));
+        }
+
+        /* Animação de Flutuação */
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
     </style>
 </head>
@@ -111,40 +121,47 @@
 
     <main class="flex-grow pt-16 md:pt-20">
 
-        <!-- HERO SECTION: IMPACTO MÁXIMO COM LIVROS GRANDES -->
-        <section id="hero" class="w-full flex flex-col lg:flex-row min-h-[90vh] bg-white overflow-hidden">
+        <!-- HERO SECTION: IMPACTO CINEMATOGRÁFICO -->
+        <section id="hero" class="w-full flex flex-col lg:flex-row min-h-screen bg-white overflow-hidden lg:h-screen">
             
             <!-- Lado Esquerdo: Joe Heschmeyer -->
-            <div class="hero-split-side relative flex-1 flex flex-col lg:flex-row items-center justify-center p-8 md:p-20 bg-brand-gold-light/30 border-b lg:border-b-0 lg:border-r border-gray-100 group">
-                <div class="max-w-md text-center lg:text-left z-30 space-y-6">
-                    <span class="text-brand-accent-red font-sans text-[10px] md:text-xs font-black uppercase tracking-[0.5em]">Novo Lançamento</span>
-                    <h2 class="font-serif text-4xl md:text-6xl text-brand-accent-blue font-bold leading-tight tracking-tight">A Eucaristia é mesmo Jesus</h2>
-                    <p class="font-classic text-xl md:text-3xl text-gray-500 font-bold uppercase tracking-widest opacity-80">Joe Heschmeyer</p>
-                    <div class="pt-6">
-                        <a href="a-eucaristia-e-mesmo-jesus" class="inline-block bg-brand-accent-blue text-white px-12 py-4 font-bold rounded-xl uppercase tracking-[0.2em] text-xs hover:bg-brand-accent-red transition-all shadow-xl hover:-translate-y-1">Ver Detalhes</a>
+            <div class="hero-split-side relative flex-1 flex flex-col items-center justify-center p-12 lg:p-24 bg-[#fdfaf2] border-b lg:border-b-0 lg:border-r border-gray-100 group cursor-pointer">
+                <div class="max-w-xl text-center lg:text-left z-30 space-y-8 relative">
+                    <div class="overflow-hidden">
+                        <!-- Texto alterado para apenas Lançamento -->
+                        <span class="text-brand-accent-red font-sans text-xs md:text-sm font-black uppercase tracking-[0.6em] block transform translate-y-0 transition-transform">Lançamento</span>
+                    </div>
+                    <h2 class="font-serif text-5xl md:text-7xl xl:text-8xl text-brand-accent-blue font-black leading-[0.9] tracking-tighter">A Eucaristia é mesmo Jesus</h2>
+                    <p class="font-classic text-2xl md:text-3xl text-brand-gold-dark font-bold uppercase tracking-widest">Joe Heschmeyer</p>
+                    <div class="pt-8">
+                        <a href="a-eucaristia-e-mesmo-jesus" class="inline-block bg-brand-accent-blue text-white px-16 py-5 font-bold rounded-xl uppercase tracking-widest text-sm hover:bg-brand-accent-red transition-all shadow-2xl hover:-translate-y-2">Ver Detalhes</a>
                     </div>
                 </div>
                 
-                <!-- Imagem do Livro Joe: Grande e com Sangramento -->
-                <div class="mt-12 lg:mt-0 lg:absolute lg:-right-24 xl:-right-32 lg:top-1/2 lg:-translate-y-1/2 z-20 pointer-events-none">
-                    <img src="AEMJ3.png" alt="Livro Joe" class="w-72 md:w-96 lg:w-[480px] xl:w-[560px] book-3d-hero">
+                <!-- Livro Joe: Gigante (PNG) -->
+                <div class="mt-16 lg:mt-0 lg:absolute lg:-right-48 xl:-right-64 lg:top-1/2 lg:-translate-y-1/2 z-20 pointer-events-none floating">
+                    <img src="AEMJ3.png" alt="Livro Joe" class="w-80 md:w-[500px] lg:w-[650px] xl:w-[850px] book-3d-hero">
                 </div>
             </div>
 
             <!-- Lado Direito: Peter Kreeft -->
-            <div class="hero-split-side relative flex-1 flex flex-col lg:flex-row items-center justify-center p-8 md:p-20 bg-white group">
-                <div class="max-w-md text-center lg:text-right z-30 space-y-6">
-                    <span class="text-brand-gold-dark font-sans text-[10px] md:text-xs font-black uppercase tracking-[0.5em]">Obra Essencial</span>
-                    <h2 class="font-serif text-4xl md:text-6xl text-brand-accent-blue font-bold leading-tight tracking-tight">Tu podes compreender a Bíblia</h2>
-                    <p class="font-classic text-xl md:text-3xl text-gray-500 font-bold uppercase tracking-widest opacity-80">Peter Kreeft</p>
-                    <div class="pt-6">
-                        <a href="tu-podes-compreender-a-biblia" class="inline-block bg-brand-accent-blue text-white px-12 py-4 font-bold rounded-xl uppercase tracking-[0.2em] text-xs hover:bg-brand-accent-red transition-all shadow-xl hover:-translate-y-1">Ver Detalhes</a>
+            <div class="hero-split-side relative flex-1 flex flex-col items-center justify-center p-12 lg:p-24 bg-white group cursor-pointer">
+                <div class="max-w-xl text-center lg:text-right z-30 space-y-8 relative">
+                    <div class="overflow-hidden">
+                        <!-- Texto alterado para Essencial -->
+                        <span class="text-brand-gold-dark font-sans text-xs md:text-sm font-black uppercase tracking-[0.6em] block transform translate-y-0 transition-transform">Essencial</span>
+                    </div>
+                    <h2 class="font-serif text-5xl md:text-7xl xl:text-8xl text-brand-accent-blue font-black leading-[0.9] tracking-tighter">Tu podes compreender a Bíblia</h2>
+                    <p class="font-classic text-2xl md:text-3xl text-brand-accent-red font-bold uppercase tracking-widest">Peter Kreeft</p>
+                    <div class="pt-8">
+                        <!-- Botão uniforme -->
+                        <a href="tu-podes-compreender-a-biblia" class="inline-block bg-brand-accent-blue text-white px-16 py-5 font-bold rounded-xl uppercase tracking-widest text-sm hover:bg-brand-accent-red transition-all shadow-2xl hover:-translate-y-2">Ver Detalhes</a>
                     </div>
                 </div>
                 
-                <!-- Imagem do Livro Kreeft: Grande e com Sangramento -->
-                <div class="mt-12 lg:mt-0 lg:absolute lg:-left-24 xl:-left-32 lg:top-1/2 lg:-translate-y-1/2 z-20 pointer-events-none">
-                    <img src="TPCB2.png" alt="Livro Kreeft" class="w-72 md:w-96 lg:w-[480px] xl:w-[560px] book-3d-hero">
+                <!-- Livro Kreeft: Gigante (PNG) -->
+                <div class="mt-16 lg:mt-0 lg:absolute lg:-left-48 xl:-left-64 lg:top-1/2 lg:-translate-y-1/2 z-20 pointer-events-none floating" style="animation-delay: -3s;">
+                    <img src="TPCB2.png" alt="Livro Kreeft" class="w-80 md:w-[500px] lg:w-[650px] xl:w-[850px] book-3d-hero">
                 </div>
             </div>
 
