@@ -147,9 +147,8 @@
                     </div>
                     <select id="category-filter" class="h-10 px-3 border border-gray-200 rounded-lg bg-white text-sm cursor-pointer outline-none focus:border-brand-gold" onchange="filterAndSortBooks()">
                         <option value="all">Todas as Categorias</option>
-                        <option value="Estudos Bíblicos">Estudos Bíblicos</option>
-                        <option value="Apologética">Apologética</option>
-                        <option value="Teologia">Teologia</option>
+                        <option value="Formação Bíblica">Formação Bíblica</option>
+                        <option value="Teologia Católica">Teologia Católica</option>
                     </select>
                     <select id="sort-order" class="h-10 px-3 border border-gray-200 rounded-lg bg-white text-sm cursor-pointer outline-none focus:border-brand-gold" onchange="filterAndSortBooks()">
                         <option value="default">Ordenar Por...</option>
@@ -174,9 +173,9 @@
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxWI62Xgm7Lz3k9yuUFaAkZZN6S4xcSqEmh62yhbRrOLYhgAQBem2LZWrGcwxjijGe7/exec'; 
         
         const bookData = [
-            { id: 3, title: "Tu podes compreender a Bíblia", author: "Peter Kreeft", price: 15.00, category: "Estudos Bíblicos", image: "Imagens/Kreeft2.png", summary: "Um guia prático para cada livro da Bíblia", techDetails: { pages: 321, isbn: "978-989-36716-0-3", binding: "Capa Mole", weight: "0,510 kg" }, visible: true, detailsUrl: "tu-podes-compreender-a-biblia" },
-            { id: 8, title: "A Eucaristia é mesmo Jesus", author: "Joe Heschmeyer", price: 13.50, category: "Apologética", image: "Imagens/aemjcapa.png", summary: "Como o Corpo e o Sangue de Cristo são a Chave para Tudo que Cremos", techDetails: { pages: 164, isbn: "978-989-36716-1-0", binding: "Capa Mole", weight: "0,245 kg" }, visible: true, detailsUrl: "a-eucaristia-e-mesmo-jesus" },
-            { id: 7, title: "Duras Palavras", author: "Trent Horn", price: 0.00, category: "Apologética", image: "https://placehold.co/400x600/f3f4f6/333333?text=Brevemente", summary: "Uma exploração profunda sobre os ensinamentos difíceis da fé.", techDetails: { pages: 0, isbn: "A definir", binding: "A definir", weight: "A definir" }, visible: true, isComingSoon: true },
+            { id: 3, title: "Tu podes compreender a Bíblia", author: "Peter Kreeft", price: 15.00, category: "Formação Bíblica", image: "Imagens/Kreeft2.png", summary: "Um guia prático para cada livro da Bíblia", techDetails: { pages: 321, isbn: "978-989-36716-0-3", binding: "Capa Mole", weight: "0,510 kg" }, visible: true, detailsUrl: "tu-podes-compreender-a-biblia" },
+            { id: 8, title: "A Eucaristia é mesmo Jesus", author: "Joe Heschmeyer", price: 13.50, category: "Teologia Católica", image: "Imagens/aemjcapa.png", summary: "Como o Corpo e o Sangue de Cristo são a Chave para Tudo que Cremos", techDetails: { pages: 164, isbn: "978-989-36716-1-0", binding: "Capa Mole", weight: "0,245 kg" }, visible: true, isComingSoon: true, detailsUrl: "a-eucaristia-e-mesmo-jesus" },
+            { id: 7, title: "Duras Palavras", author: "Trent Horn", price: 0.00, category: "Formação Bíblica", image: "https://placehold.co/400x600/f3f4f6/333333?text=Brevemente", summary: "Uma exploração profunda sobre os ensinamentos difíceis da fé.", techDetails: { pages: 0, isbn: "A definir", binding: "A definir", weight: "A definir" }, visible: true, isComingSoon: true },
             { id: 2, title: "Jesus e o Jubileu", author: "John S. Bergsma", price: 22.00, category: "Estudos Bíblicos", image: "Imagens/Bergsma.png", summary: "O livro explora a conexão entre o ministério de Jesus e a lei do Jubileu.", techDetails: { pages: 280, isbn: "978-989-98218-2-2", binding: "Capa Mole", weight: "0,420 kg" }, visible: false, detailsUrl: "detalhes-bergsma" },
             { id: 1, title: "Suma Teológica", author: "São Tomás de Aquino", price: 75.00, category: "Teologia", image: "Imagens/suma_teologica.png", visible: false },
             { id: 4, title: "Convite aos Salmos", author: "Rolf A. Jacobson & Karl N. Jacobson", price: 28.50, category: "Teologia", image: "Imagens/Jacobson.png", visible: false }
@@ -211,7 +210,7 @@
             if (!book || book.isComingSoon) return;
             const existing = cartItems.findIndex(item => item.id === bookId);
             if (existing > -1) { cartItems[existing].quantity += 1; } 
-            else { cartItems.push({ id: bookId, title: bookTitle, price: book.price, quantity: 1, image: book.image, author: book.author }); }
+            else { cartItems.push({ id: bookId, title: bookTitle, price: book.price, quantity: 1, image: book.image, author: book.author, weight: parseFloat(book.techDetails.weight.replace(',', '.')) }); }
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             updateCartUI();
             document.getElementById('cart-confirmation-details').innerHTML = `<img src="${book.image}" class="w-12 h-16 object-contain" /><div><h4 class="font-bold text-sm">${book.title}</h4><p class="text-brand-accent-red font-bold text-sm">${formatPrice(book.price)}</p></div>`;
@@ -220,13 +219,13 @@
 
         function openInfoModal(bookId) {
             const book = bookData.find(b => b.id === bookId);
-            if (!book || book.isComingSoon) return;
+            if (!book) return;
             
             document.getElementById('info-modal-title').textContent = book.title;
             document.getElementById('info-modal-title-mobile').textContent = book.title;
             document.getElementById('info-modal-image').src = book.image;
             document.getElementById('info-modal-summary').textContent = book.summary;
-            document.getElementById('info-modal-price').textContent = formatPrice(book.price);
+            document.getElementById('info-modal-price').textContent = book.isComingSoon && book.price === 0 ? 'Brevemente' : formatPrice(book.price);
             document.getElementById('info-modal-author').textContent = `Autor: ${book.author}`;
             document.getElementById('info-modal-isbn').textContent = `ISBN: ${book.techDetails.isbn}`;
             document.getElementById('info-modal-pages').textContent = `Páginas: ${book.techDetails.pages}`;
@@ -236,6 +235,20 @@
             const detailsLink = document.getElementById('info-modal-details-link');
             detailsLink.href = book.detailsUrl || '#';
             
+            // Gerir visibilidade do botão de adicionar no modal
+            const addBtn = document.getElementById('info-modal-add-to-cart');
+            if (book.isComingSoon) {
+                addBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+                addBtn.classList.remove('bg-brand-accent-red', 'hover:bg-red-900');
+                addBtn.textContent = 'BREVEMENTE DISPONÍVEL';
+                addBtn.disabled = true;
+            } else {
+                addBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                addBtn.classList.add('bg-brand-accent-red', 'hover:bg-red-900');
+                addBtn.textContent = 'ADICIONAR AO CARRINHO';
+                addBtn.disabled = false;
+            }
+
             document.getElementById('info-modal').dataset.activeBookId = bookId;
             document.getElementById('info-modal').classList.remove('hidden');
         }
@@ -271,12 +284,29 @@
             const cartIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="mr-0 md:mr-1"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>`;
             
             books.forEach(b => {
-                const priceDisplay = b.isComingSoon ? 'Brevemente' : formatPrice(b.price);
-                const btnClass = b.isComingSoon ? 'bg-gray-300 cursor-not-allowed text-gray-500' : 'bg-brand-accent-blue text-white hover:bg-brand-accent-red shadow-sm';
-                const infoBtnClass = b.isComingSoon ? 'text-gray-400 border-gray-400 cursor-not-allowed' : 'text-brand-accent-blue border-2 border-brand-accent-blue hover:bg-gray-50 shadow-sm';
+                const isJoeInPrintery = b.id === 8 && b.isComingSoon;
+                const priceDisplay = b.isComingSoon && b.price === 0 ? 'Brevemente' : formatPrice(b.price);
+                
+                // Botão de Info agora é SEMPRE ativo, independentemente de ser isComingSoon
+                let infoBtnClass = 'text-brand-accent-blue border-2 border-brand-accent-blue hover:bg-gray-50 shadow-sm';
+                
+                // Botão de Comprar mantém lógica de cinzento para itens em breve
+                let btnClass = b.isComingSoon ? 'bg-gray-300 cursor-not-allowed text-gray-500' : 'bg-brand-accent-blue text-white hover:bg-brand-accent-red shadow-sm';
+                
+                // Conteúdo do botão de compra (com efeito de hover para o Joe)
+                let buyBtnContent = `${cartIcon} <span class="hidden md:inline ml-1 text-sm">Comprar</span>`;
+                
+                if (isJoeInPrintery) {
+                    buyBtnContent = `
+                        ${cartIcon} 
+                        <span class="hidden md:inline ml-1 text-sm group-hover/buy:hidden">Comprar</span>
+                        <span class="hidden group-hover/buy:inline ml-1 text-sm">Em breve</span>
+                    `;
+                    btnClass += " group/buy";
+                }
                 
                 container.innerHTML += `
-                    <div class="text-center group book-shadow bg-white rounded-xl p-4 md:p-6 flex flex-col justify-between cursor-pointer" onclick="${b.isComingSoon ? '' : `openInfoModal(${b.id})`}">
+                    <div class="text-center group book-shadow bg-white rounded-xl p-4 md:p-6 flex flex-col justify-between cursor-pointer" onclick="openInfoModal(${b.id})">
                         <div class="flex-grow">
                             <div class="overflow-hidden rounded-lg mb-4 md:mb-6 flex justify-center py-4 md:py-6 bg-gray-50">
                                 <img src="${b.image}" class="w-24 h-36 md:w-36 md:h-52 object-contain transition-transform duration-500 group-hover:scale-105" />
@@ -286,11 +316,11 @@
                             <span class="text-lg md:text-xl font-classic font-extrabold ${b.isComingSoon ? 'text-gray-400' : 'text-brand-accent-red'} mt-3 block">${priceDisplay}</span>
                         </div>
                         <div class="flex items-center justify-center mt-5 md:mt-6 border-t pt-4 space-x-2 md:space-x-3">
-                            <button class="${infoBtnClass} transition-all font-bold py-2 px-2 md:px-5 rounded-lg flex items-center justify-center h-10 md:h-11" onclick="${b.isComingSoon ? '' : `openInfoModal(${b.id})`}; event.stopPropagation();">
+                            <button class="${infoBtnClass} transition-all font-bold py-2 px-2 md:px-5 rounded-lg flex items-center justify-center h-10 md:h-11" onclick="openInfoModal(${b.id}); event.stopPropagation();">
                                 ${infoIcon} <span class="hidden md:inline ml-1 text-sm">Info</span>
                             </button>
                             <button class="${btnClass} py-2 px-2 md:px-5 rounded-lg flex items-center justify-center h-10 md:h-11 transition-all font-bold" onclick="${b.isComingSoon ? '' : `addToCart(${b.id}, '${b.title}')`}; event.stopPropagation();">
-                                ${cartIcon} <span class="hidden md:inline ml-1 text-sm">Comprar</span>
+                                ${buyBtnContent}
                             </button>
                         </div>
                     </div>`;
