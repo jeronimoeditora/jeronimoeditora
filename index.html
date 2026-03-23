@@ -43,14 +43,14 @@
     </script>
 
     <style>
-        /* --- ESTILOS DO HERO EDITORIAL --- */
+        /* --- ESTILOS DO HERO --- */
         .hero-section {
             position: relative;
-            min-height: 85vh; 
+            min-height: 70vh; /* Altura reduzida para mostrar conteúdo inferior */
             display: flex;
             align-items: center;
             overflow: hidden;
-            padding-top: 60px;
+            padding-top: 20px;
             background-color: #fff;
         }
 
@@ -62,12 +62,14 @@
             height: 100%;
             background: linear-gradient(135deg, #fdfaf2 0%, #f4f1ea 100%);
             z-index: 1;
-            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
         }
 
         @media (max-width: 1024px) {
-            .hero-bg-accent { width: 100%; clip-path: none; height: 40%; top: 0; }
-            .hero-section { flex-direction: column-reverse; padding-top: 80px; text-align: center; }
+            .hero-bg-accent { width: 100%; clip-path: none; height: 35%; top: 0; }
+            .hero-section { flex-direction: column; padding-top: 100px; text-align: center; min-height: auto; }
+            .hero-book-container { order: -1; margin-bottom: 2rem; }
+            .hero-book-img { max-width: 280px !important; }
         }
 
         .hero-book-container {
@@ -77,31 +79,31 @@
         }
 
         .hero-book-img {
-            max-width: 520px; 
+            max-width: 440px; 
             width: 100%;
             height: auto;
-            filter: drop-shadow(40px 60px 80px rgba(0,0,0,0.15));
-            transform: rotateY(-8deg) rotateX(4deg);
+            filter: drop-shadow(30px 50px 70px rgba(0,0,0,0.12));
+            transform: rotateY(-6deg) rotateX(2deg);
             transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         .hero-title {
-            font-size: clamp(2.4rem, 5.5vw, 5rem);
-            line-height: 1.05;
+            font-size: clamp(2rem, 5vw, 4.2rem);
+            line-height: 1.1;
             letter-spacing: -0.02em;
         }
 
         .hero-badge-pill {
             display: inline-block;
-            padding: 0.5rem 2rem;
+            padding: 0.4rem 1.5rem;
             background: #cfaf5c;
             color: #002147;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             border-radius: 9999px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             box-shadow: 0 4px 15px rgba(207, 175, 92, 0.2);
             font-family: 'Roboto', sans-serif;
         }
@@ -110,12 +112,12 @@
         .btn-modern-red {
             background: #800000;
             color: white;
-            padding: 1rem 3rem;
+            padding: 0.8rem 2.5rem;
             border-radius: 12px;
             font-weight: 800;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: all 0.3s ease;
         }
         .btn-modern-red:hover { background: #600000; transform: translateY(-2px); }
@@ -123,23 +125,23 @@
         .btn-modern-outline {
             background: white;
             color: #002147;
-            padding: 1rem 3rem;
+            padding: 0.8rem 2.5rem;
             border-radius: 12px;
             font-weight: 800;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             border: 2px solid #002147;
             transition: all 0.3s ease;
         }
         .btn-modern-outline:hover { background: #002147; color: white; transform: translateY(-2px); }
 
         .floating-element { animation: floatingHero 8s ease-in-out infinite; }
-        @keyframes floatingHero { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes floatingHero { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* --- CORREÇÃO DO CAMINHO DA IMAGEM DE FUNDO --- */
+        /* --- PARALLAX BACKGROUND --- */
         .art-viewport {
-            background-image: url('Imagens/Jeronimo.png');
+            background-image: url('Imagens/Jeronimo.jpg');
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
@@ -147,20 +149,23 @@
             box-shadow: inset 0 60px 80px -20px rgba(0,0,0,0.7), inset 0 -60px 80px -20px rgba(0,0,0,0.7);
         }
         @media (max-width: 1024px) { .art-viewport { background-attachment: scroll; } }
+        
         .art-overlay-gradient {
             background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.85) 100%);
         }
         .text-glow-white { text-shadow: 0 2px 15px rgba(0, 0, 0, 1); }
         .single-line-title { white-space: nowrap; font-size: clamp(1.4rem, 5.5vw, 4.2rem); }
+        
         .dropcap::first-letter {
             font-family: 'Playfair Display', serif;
             float: left;
             font-size: 4rem;
-            line-height: 3rem;
-            padding-right: 0.5rem;
+            line-height: 3.2rem;
+            padding-right: 0.6rem;
             color: #800000;
             font-weight: bold;
         }
+
         .logo-watermark {
             position: absolute;
             top: 50%;
@@ -173,7 +178,7 @@
             z-index: 0;
             filter: grayscale(100%);
         }
-        .book-shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .book-shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
@@ -182,60 +187,62 @@
 
     <main class="flex-grow">
 
+        <!-- HERO SECTION COMPACTO -->
         <section class="hero-section">
             <div class="hero-bg-accent"></div>
             
-            <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-center">
                 
-                <div class="lg:col-span-7 z-20 text-center lg:text-left py-8">
+                <!-- Coluna de Texto -->
+                <div class="lg:col-span-7 z-20 py-4 lg:py-8">
                     <div class="hero-badge-pill animate-pulse-subtle">Novo Lançamento</div>
                     
-                    <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-6">
+                    <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-4">
                         A Eucaristia é <br> <span class="text-brand-accent-red italic">mesmo</span> Jesus
                     </h1>
                     
-                    <div class="mb-6 flex justify-center lg:justify-start">
-                        <p class="font-classic text-lg md:text-xl text-gray-500 italic leading-relaxed max-w-lg">
-                            Como o Corpo e o Sangue de Cristo são a Chave para Tudo que Cremos
-                        </p>
-                    </div>
+                    <p class="font-classic text-lg md:text-xl text-gray-500 italic mb-6 max-w-lg mx-auto lg:mx-0">
+                        Como o Corpo e o Sangue de Cristo são a Chave para Tudo que Cremos
+                    </p>
 
-                    <a href="a-eucaristia-e-mesmo-jesus.html" class="inline-flex items-center justify-center lg:justify-start gap-5 mb-10 group transition-all">
-                        <div class="w-16 h-16 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-brand-gold shadow-lg group-hover:border-brand-accent-red transition-all">
+                    <!-- Autor -->
+                    <a href="a-eucaristia-e-mesmo-jesus.html" class="inline-flex items-center gap-4 mb-8 group transition-all">
+                        <div class="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-brand-gold shadow-md group-hover:border-brand-accent-red transition-all">
                             <img src="Imagens/JoeHeschmeyer.png" alt="Joe Heschmeyer" class="w-full h-full object-cover">
                         </div>
-                        <p class="font-classic text-2xl md:text-4xl text-brand-gold italic group-hover:text-brand-accent-red transition-colors">
+                        <p class="font-classic text-xl md:text-2xl text-brand-gold italic group-hover:text-brand-accent-red transition-colors">
                             por <span class="font-bold text-brand-gold-dark non-italic">Joe Heschmeyer</span>
                         </p>
                     </a>
                     
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-10">
                         <a href="a-eucaristia-e-mesmo-jesus.html" class="btn-modern-red">Ver Detalhes</a>
                         <a href="catalogo-completo.html" class="btn-modern-outline">Catálogo</a>
                     </div>
 
-                    <div class="mt-8 pt-8 border-t border-gray-200/60 hidden lg:block">
-                        <div class="flex gap-20">
+                    <!-- Mini Galeria: VISÍVEL SEM SCROLL -->
+                    <div class="pt-6 border-t border-gray-200/60 hidden lg:block">
+                        <div class="flex gap-16">
                             <div class="flex flex-col">
-                                <p class="font-sans text-[11px] uppercase tracking-[0.4em] font-black text-gray-600 mb-6">Também disponível</p>
-                                <a href="tu-podes-compreender-a-biblia.html" class="flex items-center gap-6 group">
-                                    <img src="Imagens/capaTPCB2.png" alt="Livro Kreeft" class="w-20 h-auto shadow-xl group-hover:-translate-y-2 transition-all">
+                                <p class="font-sans text-[10px] uppercase tracking-[0.4em] font-black text-gray-400 mb-4">Também disponível</p>
+                                <a href="tu-podes-compreender-a-biblia.html" class="flex items-center gap-4 group">
+                                    <img src="Imagens/capaTPCB2.png" alt="Peter Kreeft" class="w-14 h-auto shadow-lg group-hover:-translate-y-1 transition-all object-contain">
                                     <div>
-                                        <p class="text-sm font-black text-brand-accent-blue leading-tight mb-1 uppercase">Peter Kreeft</p>
-                                        <p class="text-xs text-gray-500 uppercase tracking-tighter italic">Tu podes compreender a Bíblia</p>
+                                        <p class="text-xs font-black text-brand-accent-blue uppercase mb-0.5">Peter Kreeft</p>
+                                        <p class="text-[10px] text-gray-500 uppercase italic">Tu podes compreender a Bíblia</p>
                                     </div>
                                 </a>
                             </div>
 
                             <div class="flex flex-col">
-                                <p class="font-sans text-[11px] uppercase tracking-[0.4em] font-black text-gray-600 mb-6">Brevemente</p>
-                                <div class="flex items-center gap-6 opacity-80">
-                                    <div class="w-20 h-28 bg-gray-100 flex items-center justify-center rounded shadow-inner border border-gray-200">
-                                        <p class="text-[9px] font-black text-gray-300 uppercase tracking-widest">Breve</p>
+                                <p class="font-sans text-[10px] uppercase tracking-[0.4em] font-black text-gray-400 mb-4">Brevemente</p>
+                                <div class="flex items-center gap-4 opacity-70">
+                                    <div class="w-14 h-20 bg-gray-100 flex items-center justify-center rounded shadow-inner border border-gray-200">
+                                        <p class="text-[8px] font-black text-gray-300 uppercase tracking-widest">Breve</p>
                                     </div>
                                     <div>
-                                        <p class="text-sm font-black text-brand-accent-blue leading-tight mb-1 uppercase">Trent Horn</p>
-                                        <p class="text-xs text-gray-500 uppercase tracking-tighter italic">Duras Palavras</p>
+                                        <p class="text-xs font-black text-brand-accent-blue uppercase mb-0.5">Trent Horn</p>
+                                        <p class="text-[10px] text-gray-500 uppercase italic">Duras Palavras</p>
                                     </div>
                                 </div>
                             </div>
@@ -243,15 +250,17 @@
                     </div>
                 </div>
 
-                <div class="lg:col-span-5 flex justify-center lg:justify-end hero-book-container pb-8">
-                    <a href="a-eucaristia-e-mesmo-jesus.html" class="block transition-transform hover:scale-[1.03]">
+                <!-- Coluna da Imagem do Livro -->
+                <div class="lg:col-span-5 flex justify-center lg:justify-end hero-book-container">
+                    <a href="a-eucaristia-e-mesmo-jesus.html" class="block transition-transform hover:scale-[1.02]">
                         <img src="Imagens/capaAEMJ3.png" alt="A Eucaristia é mesmo Jesus" class="hero-book-img floating-element">
                     </a>
                 </div>
             </div>
         </section>
 
-        <section class="art-viewport relative w-full h-[60vh] md:h-[80vh] flex items-end justify-center overflow-hidden pb-20">
+        <!-- SECÇÃO SÃO JERÓNIMO (PARALLAX CORRIGIDO PARA .JPG) -->
+        <section class="art-viewport relative w-full h-[50vh] md:h-[75vh] flex items-end justify-center overflow-hidden pb-16">
             <div class="absolute inset-0 art-overlay-gradient"></div>
             <div class="relative z-10 text-center px-6">
                 <h2 class="font-serif single-line-title text-white mb-2 italic font-bold text-glow-white">São Jerónimo a Escrever</h2>
@@ -261,83 +270,85 @@
             </div>
         </section>
 
-        <section id="novidades" class="py-20 md:py-32 bg-brand-bg">
+        <!-- SECÇÃO ÚLTIMAS PUBLICAÇÕES -->
+        <section id="novidades" class="py-20 bg-brand-bg">
             <div class="max-w-6xl mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-stretch">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
                     
-                    <div class="book-card flex flex-col sm:flex-row md:flex-col lg:flex-row gap-8 items-center md:items-start lg:items-center bg-brand-gold-light p-8 md:p-10 rounded-[2rem] border border-brand-gold/20 shadow-sm relative overflow-hidden h-full">
-                        <div class="absolute top-0 right-0 bg-brand-accent-red text-white px-6 py-2 rounded-bl-2xl font-sans text-[10px] font-black uppercase tracking-[0.2em]">Lançamento</div>
-                        <div class="w-40 md:w-48 lg:w-56 flex-shrink-0">
+                    <!-- Card Livro Joe -->
+                    <div class="book-card flex flex-col sm:flex-row gap-6 p-8 bg-brand-gold-light rounded-[2rem] border border-brand-gold/20 shadow-sm relative overflow-hidden h-full">
+                        <div class="absolute top-0 right-0 bg-brand-accent-red text-white px-5 py-1.5 rounded-bl-2xl font-sans text-[9px] font-black uppercase tracking-[0.2em]">Lançamento</div>
+                        <div class="w-32 sm:w-44 flex-shrink-0">
                             <a href="a-eucaristia-e-mesmo-jesus.html">
                                 <img src="Imagens/aemjcapa.png" alt="Livro Joe" class="w-full h-auto book-shadow">
                             </a>
                         </div>
-                        <div class="flex flex-col text-center sm:text-left md:text-center lg:text-left">
-                            <span class="text-brand-gold-dark font-sans text-xs font-bold uppercase tracking-[0.3em] mb-3">Destaque do Mês</span>
+                        <div class="flex flex-col justify-center">
+                            <span class="text-brand-gold-dark font-sans text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Destaque</span>
                             <a href="a-eucaristia-e-mesmo-jesus.html">
-                                <h3 class="font-serif text-2xl md:text-3xl text-brand-accent-blue font-bold leading-tight mb-3 hover:text-brand-accent-red transition-colors">A Eucaristia é mesmo Jesus</h3>
+                                <h3 class="font-serif text-xl md:text-2xl text-brand-accent-blue font-bold leading-tight mb-2 hover:text-brand-accent-red transition-colors">A Eucaristia é mesmo Jesus</h3>
                             </a>
-                            <p class="font-serif text-sm md:text-base text-gray-500 italic mb-6 leading-relaxed">Joe Heschmeyer</p>
-                            <div class="flex items-center justify-center sm:justify-start md:justify-center lg:justify-start gap-4">
-                                <span class="font-classic text-2xl font-bold text-brand-accent-red">13,50€</span>
-                                <a href="a-eucaristia-e-mesmo-jesus.html" class="text-xs font-sans font-bold uppercase tracking-widest text-brand-accent-blue border-b-2 border-brand-accent-blue hover:text-brand-accent-red hover:border-brand-accent-red transition-all pb-1 whitespace-nowrap">Ver Detalhes</a>
+                            <p class="font-serif text-sm text-gray-500 italic mb-4">Joe Heschmeyer</p>
+                            <div class="flex items-center gap-4">
+                                <span class="font-classic text-xl font-bold text-brand-accent-red">13,50€</span>
+                                <a href="a-eucaristia-e-mesmo-jesus.html" class="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-accent-blue border-b border-brand-accent-blue hover:text-brand-accent-red hover:border-brand-accent-red transition-all pb-1">Detalhes</a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="book-card flex flex-col sm:flex-row md:flex-col lg:flex-row gap-8 items-center md:items-start lg:items-center p-8 md:p-10 border-2 border-brand-gold/30 rounded-[2rem] h-full bg-transparent">
-                        <div class="w-40 md:w-48 lg:w-56 flex-shrink-0">
+                    <!-- Card Livro Kreeft -->
+                    <div class="book-card flex flex-col sm:flex-row gap-6 p-8 border-2 border-brand-gold/30 rounded-[2rem] h-full bg-white/40">
+                        <div class="w-32 sm:w-44 flex-shrink-0">
                             <a href="tu-podes-compreender-a-biblia.html">
                                 <img src="Imagens/tpcbcapa.png" alt="Livro Kreeft" class="w-full h-auto book-shadow">
                             </a>
                         </div>
-                        <div class="flex flex-col text-center sm:text-left md:text-center lg:text-left">
-                            <span class="text-gray-400 font-sans text-xs font-bold uppercase tracking-[0.3em] mb-3 opacity-0">Espaçador</span>
+                        <div class="flex flex-col justify-center">
+                            <span class="text-gray-400 font-sans text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Formação Bíblica</span>
                             <a href="tu-podes-compreender-a-biblia.html">
-                                <h3 class="font-serif text-2xl md:text-3xl text-brand-accent-blue font-bold leading-tight mb-3 hover:text-brand-accent-red transition-colors">Tu podes compreender a Bíblia</h3>
+                                <h3 class="font-serif text-xl md:text-2xl text-brand-accent-blue font-bold leading-tight mb-2 hover:text-brand-accent-red transition-colors">Tu podes compreender a Bíblia</h3>
                             </a>
-                            <p class="font-serif text-sm md:text-base text-gray-500 italic mb-6 leading-relaxed">Peter Kreeft</p>
-                            <div class="flex items-center justify-center sm:justify-start md:justify-center lg:justify-start gap-4">
-                                <span class="font-classic text-2xl font-bold text-brand-accent-red">15,00€</span>
-                                <a href="tu-podes-compreender-a-biblia.html" class="text-xs font-sans font-bold uppercase tracking-widest text-brand-accent-blue border-b-2 border-brand-accent-blue hover:text-brand-accent-red hover:border-brand-accent-red transition-all pb-1 whitespace-nowrap">Ver Detalhes</a>
+                            <p class="font-serif text-sm text-gray-500 italic mb-4">Peter Kreeft</p>
+                            <div class="flex items-center gap-4">
+                                <span class="font-classic text-xl font-bold text-brand-accent-red">15,00€</span>
+                                <a href="tu-podes-compreender-a-biblia.html" class="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-accent-blue border-b border-brand-accent-blue hover:text-brand-accent-red hover:border-brand-accent-red transition-all pb-1">Detalhes</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="mt-20 text-center">
-                    <a href="catalogo-completo.html" class="bg-brand-accent-blue text-white px-12 py-4 font-bold rounded-xl uppercase tracking-widest hover:bg-brand-accent-red transition-all text-xs inline-block shadow-md">Explorar Todo o Catálogo</a>
-                </div>
             </div>
         </section>
 
-        <section id="sobre" class="w-full bg-white py-20 md:py-32 relative overflow-hidden">
+        <!-- SECÇÃO SOBRE A JERÓNIMO EDITORIA -->
+        <section id="sobre" class="w-full bg-white py-20 relative overflow-hidden">
             <img src="Imagens/Logo J.png" alt="Logo Watermark" class="logo-watermark">
             <div class="max-w-6xl mx-auto px-6 relative z-10">
-                <div class="text-center mb-20">
-                    <h2 class="font-serif text-4xl md:text-5xl text-brand-accent-blue font-bold mb-4">Sobre a Jerónimo Editora</h2>
-                    <div class="w-24 h-1 bg-brand-accent-red mx-auto"></div>
+                <div class="text-center mb-16">
+                    <h2 class="font-serif text-3xl md:text-4xl text-brand-accent-blue font-bold mb-3">A Jerónimo Editora</h2>
+                    <div class="w-20 h-1 bg-brand-accent-red mx-auto"></div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-stretch">
-                    <div class="space-y-6 border-2 border-brand-gold/30 rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-center bg-white/50 backdrop-blur-sm">
-                        <h3 class="font-serif text-2xl md:text-3xl text-brand-accent-red font-bold flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold-dark"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
-                            Missão
-                        </h3>
-                        <div class="text-lg text-gray-700 leading-relaxed font-classic dropcap">
-                            A Jerónimo Editora nasce com o propósito de enriquecer o panorama editorial português, especializando-se em obras de formação bíblica Católica que primam pela profundidade teológica e fidelidade às fontes...
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
+                    <!-- Missão Completa -->
+                    <div class="space-y-4 border border-brand-gold/20 rounded-[2rem] p-8 md:p-10 bg-white/60 backdrop-blur-sm">
+                        <h3 class="font-serif text-2xl text-brand-accent-red font-bold flex items-center gap-3">Missão</h3>
+                        <div class="text-base text-gray-700 leading-relaxed font-classic dropcap">
+                            A Jerónimo Editora nasce com o propósito de enriquecer o panorama editorial português, especializando-se em obras de formação bíblica Católica que primam pela profundidade teológica e fidelidade às fontes. O seu nome é uma homenagem a São Jerónimo, presbítero e Doutor da Igreja, padroeiro dos estudiosos da Sagrada Escritura, que nos recorda:
                         </div>
-                        <p class="text-xl md:text-2xl text-brand-accent-blue italic font-classic mt-4">
-                            <strong>«Ignorar as Escrituras é ignorar Cristo».</strong>
+                        <p class="text-lg text-brand-accent-blue italic font-classic pt-2 border-t border-brand-gold/10">
+                            «Ignorar as Escrituras é ignorar Cristo».
                         </p>
                     </div>
-                    <div class="space-y-6 border-2 border-brand-gold/30 rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-center bg-white/50 backdrop-blur-sm">
-                        <h3 class="font-serif text-2xl md:text-3xl text-brand-accent-red font-bold flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold-dark"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
-                            Valores
-                        </h3>
-                        <p class="text-lg text-gray-700 leading-relaxed font-classic dropcap">
-                            Guiamo-nos pela <strong>Fé</strong>, pela <strong>Verdade</strong> e pelo compromisso tanto pela <strong>ortodoxia</strong> como pela <strong>ortopraxia</strong>...
+                    <!-- Valores Completos -->
+                    <div class="space-y-4 border border-brand-gold/20 rounded-[2rem] p-8 md:p-10 bg-white/60 backdrop-blur-sm">
+                        <h3 class="font-serif text-2xl text-brand-accent-red font-bold flex items-center gap-3">Valores</h3>
+                        <p class="text-base text-gray-700 leading-relaxed font-classic dropcap">
+                            Guiamo-nos pela <strong>Fé</strong>, pela <strong>Verdade</strong> e pelo compromisso tanto pela <strong>ortodoxia</strong> como pela <strong>ortopraxia</strong>. Em cada projecto, aliamos o <strong>rigor</strong> editorial à <strong>excelência</strong> gráfica, crentes de que a <strong>Beleza</strong> de um livro é o primeiro convite à leitura que eleva a alma.
                         </p>
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <span class="text-[10px] font-sans font-black uppercase tracking-widest text-brand-gold-dark border border-brand-gold/30 px-3 py-1 rounded">Fé & Verdade</span>
+                            <span class="text-[10px] font-sans font-black uppercase tracking-widest text-brand-gold-dark border border-brand-gold/30 px-3 py-1 rounded">Rigor Editorial</span>
+                            <span class="text-[10px] font-sans font-black uppercase tracking-widest text-brand-gold-dark border border-brand-gold/30 px-3 py-1 rounded">Excelência Gráfica</span>
+                        </div>
                     </div>
                 </div>
             </div>
