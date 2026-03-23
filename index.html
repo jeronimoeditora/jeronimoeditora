@@ -78,12 +78,13 @@
             filter: grayscale(100%);
         }
 
-        /* --- HERO DESIGN REVISITADO --- */
+        /* --- HERO DESIGN PROFISSIONAL (RE-IMAGINADO) --- */
         .hero-container {
             display: flex;
             flex-direction: column;
-            min-height: calc(100vh - 80px);
+            min-height: 95vh;
             overflow: hidden;
+            background-color: #000;
         }
 
         @media (min-width: 1024px) {
@@ -97,89 +98,117 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 4rem 2rem;
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
+            padding: 2rem;
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            z-index: 10;
         }
 
-        /* Lado Joe - Dark & Golden */
+        /* Painel Joe - Profundidade e Mistério */
         .panel-joe {
-            background: radial-gradient(circle at 70% 50%, #1a1a1a 0%, #050505 100%);
-            border-bottom: 1px solid rgba(207, 175, 92, 0.1);
+            background: linear-gradient(135deg, #0a0a0a 0%, #151515 100%);
         }
-        @media (min-width: 1024px) { 
-            .panel-joe { border-bottom: none; border-right: 1px solid rgba(207, 175, 92, 0.1); }
-        }
-
-        /* Lado Kreeft - Light & Classic */
+        
+        /* Painel Kreeft - Claridade e Sabedoria */
         .panel-kreeft {
-            background: radial-gradient(circle at 30% 50%, #ffffff 0%, #f4f1ea 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f7f3eb 100%);
         }
 
-        /* Interação de Painéis Desktop */
         @media (min-width: 1024px) {
-            .hero-container:hover .hero-panel { opacity: 0.4; filter: grayscale(20%); scale: 0.98; }
-            .hero-container .hero-panel:hover { opacity: 1; filter: grayscale(0%); scale: 1; flex: 1.3; z-index: 20; }
+            .hero-container:hover .hero-panel { flex: 0.7; opacity: 0.6; filter: blur(2px); }
+            .hero-container .hero-panel:hover { flex: 1.3; opacity: 1; filter: blur(0); z-index: 20; }
         }
 
-        /* Spotlight Effect */
-        .spotlight {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-            z-index: 1;
-        }
-        .panel-joe:hover .spotlight {
-            background: radial-gradient(circle, rgba(207, 175, 92, 0.15) 0%, rgba(0,0,0,0) 70%);
-            opacity: 1;
-        }
-        .panel-kreeft:hover .spotlight {
-            background: radial-gradient(circle, rgba(128, 0, 0, 0.05) 0%, rgba(0,0,0,0) 70%);
-            opacity: 1;
-        }
-
-        /* Books Styling */
+        /* Books Styling - MAIORES E MAIS IMPACTANTES */
         .book-wrapper {
             position: relative;
-            z-index: 10;
-            perspective: 1000px;
-            margin-bottom: 2rem;
+            z-index: 30;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
         }
 
         .book-img {
             height: auto;
-            max-width: 280px;
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
-            transition: transform 0.6s ease-out, filter 0.6s ease;
+            width: 75%; /* Aumentado significativamente */
+            max-width: 480px; /* Limite generoso para desktop */
+            filter: drop-shadow(20px 40px 60px rgba(0,0,0,0.6));
+            transition: all 0.6s ease;
         }
 
-        @media (min-width: 768px) { .book-img { max-width: 380px; } }
-        @media (min-width: 1280px) { .book-img { max-width: 440px; } }
+        .panel-kreeft .book-img {
+            filter: drop-shadow(15px 30px 50px rgba(0,0,0,0.25));
+        }
 
         .hero-panel:hover .book-img {
-            transform: translateY(-15px) rotateY(-5deg) scale(1.03);
-            filter: drop-shadow(0 35px 60px rgba(0,0,0,0.5));
+            transform: scale(1.08) translateY(-20px);
+            filter: drop-shadow(30px 60px 80px rgba(0,0,0,0.7));
         }
 
-        .floating-subtle {
-            animation: floatingSubtle 6s ease-in-out infinite;
+        .panel-kreeft:hover .book-img {
+            filter: drop-shadow(25px 50px 70px rgba(0,0,0,0.35));
         }
-        @keyframes floatingSubtle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+
+        /* Tipografia de Alta Qualidade */
+        .hero-title {
+            font-size: clamp(1.8rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
         }
 
         .hero-tag {
-            font-size: 0.65rem;
-            letter-spacing: 0.4em;
+            font-size: 0.7rem;
+            letter-spacing: 0.5em;
             text-transform: uppercase;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            display: block;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .hero-tag::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.5;
+        }
+
+        /* Botões Premium */
+        .btn-premium {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-premium:hover::before {
+            left: 100%;
+        }
+
+        /* Animação de Flutuação */
+        .floating {
+            animation: floatingHero 8s ease-in-out infinite;
+        }
+        @keyframes floatingHero {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-25px); }
         }
     </style>
 </head>
@@ -189,44 +218,40 @@
 
     <main class="flex-grow">
 
-        <!-- NOVO HERO SECTION ATUALIZADO -->
-        <section id="hero" class="hero-container bg-black">
+        <!-- HERO SECTION: IMPACTO PROFISSIONAL MAXIMIZADO -->
+        <section id="hero" class="hero-container">
             
-            <!-- Painel: Joe Heschmeyer -->
+            <!-- Painel: Joe Heschmeyer (Lançamento) -->
             <div class="hero-panel panel-joe group">
-                <div class="spotlight"></div>
-                
-                <div class="book-wrapper floating-subtle">
+                <div class="book-wrapper floating">
                     <img src="AEMJ3.png" alt="A Eucaristia é mesmo Jesus" class="book-img">
                 </div>
 
-                <div class="relative z-10 text-center px-4">
+                <div class="relative z-40 text-center px-6 max-w-xl">
                     <span class="hero-tag text-brand-gold">Novo Lançamento</span>
-                    <h2 class="font-serif text-3xl md:text-5xl text-white font-bold leading-tight mb-2">A Eucaristia é mesmo Jesus</h2>
-                    <p class="font-classic text-lg text-brand-gold-dark italic mb-8">Joe Heschmeyer</p>
-                    <a href="a-eucaristia-e-mesmo-jesus" class="inline-block border-2 border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-black px-10 py-3.5 font-bold rounded-full uppercase tracking-widest text-[10px] transition-all">Ver Detalhes</a>
+                    <h2 class="font-serif hero-title text-white font-bold">A Eucaristia é mesmo Jesus</h2>
+                    <p class="font-classic text-xl text-brand-gold-dark italic mb-8 opacity-80">Joe Heschmeyer</p>
+                    <a href="a-eucaristia-e-mesmo-jesus" class="btn-premium inline-block border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-black px-12 py-4 font-bold rounded-sm uppercase tracking-widest text-[10px] transition-all">Ver Detalhes</a>
                 </div>
             </div>
 
-            <!-- Painel: Peter Kreeft -->
+            <!-- Painel: Peter Kreeft (Essenciais) -->
             <div class="hero-panel panel-kreeft group">
-                <div class="spotlight"></div>
-
-                <div class="book-wrapper floating-subtle" style="animation-delay: -3s;">
+                <div class="book-wrapper floating" style="animation-delay: -4s;">
                     <img src="TPCB2.png" alt="Tu podes compreender a Bíblia" class="book-img">
                 </div>
 
-                <div class="relative z-10 text-center px-4">
-                    <span class="hero-tag text-brand-accent-red opacity-60">Essenciais</span>
-                    <h2 class="font-serif text-3xl md:text-5xl text-brand-accent-blue font-bold leading-tight mb-2">Tu podes compreender a Bíblia</h2>
-                    <p class="font-classic text-lg text-brand-accent-red italic mb-8">Peter Kreeft</p>
-                    <a href="tu-podes-compreender-a-biblia" class="inline-block bg-brand-accent-blue text-white hover:bg-brand-accent-red px-10 py-3.5 font-bold rounded-full uppercase tracking-widest text-[10px] transition-all shadow-lg">Ver Detalhes</a>
+                <div class="relative z-40 text-center px-6 max-w-xl">
+                    <span class="hero-tag text-brand-accent-red">Essenciais</span>
+                    <h2 class="font-serif hero-title text-brand-accent-blue font-bold">Tu podes compreender a Bíblia</h2>
+                    <p class="font-classic text-xl text-brand-accent-red italic mb-8 opacity-70">Peter Kreeft</p>
+                    <a href="tu-podes-compreender-a-biblia" class="btn-premium inline-block bg-brand-accent-blue text-white hover:bg-brand-accent-red px-12 py-4 font-bold rounded-sm uppercase tracking-widest text-[10px] transition-all shadow-xl">Ver Detalhes</a>
                 </div>
             </div>
 
         </section>
 
-        <!-- SECÇÃO SÃO JERÓNIMO -->
+        <!-- SECÇÃO SÃO JERÓNIMO (MANTIDA) -->
         <section class="art-viewport relative w-full h-[60vh] md:h-[80vh] flex items-end justify-center overflow-hidden pb-20">
             <div class="absolute inset-0 art-overlay-gradient"></div>
             <div class="relative z-10 text-center px-6">
@@ -237,7 +262,7 @@
             </div>
         </section>
 
-        <!-- Secção Novidades -->
+        <!-- Secção Novidades (MANTIDA COM PNGS) -->
         <section id="novidades" class="py-20 md:py-32 bg-brand-bg">
             <div class="max-w-6xl mx-auto px-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-stretch">
@@ -246,7 +271,7 @@
                         <div class="absolute top-0 right-0 bg-brand-accent-red text-white px-6 py-2 rounded-bl-2xl font-sans text-[10px] font-black uppercase tracking-[0.2em]">Novo Lançamento</div>
                         <div class="w-40 md:w-48 lg:w-56 flex-shrink-0">
                             <a href="a-eucaristia-e-mesmo-jesus">
-                                <img src="AEMJ3.png" alt="Livro Joe" class="w-full h-auto drop-shadow-xl">
+                                <img src="AEMJ3.png" alt="Livro Joe" class="w-full h-auto drop-shadow-2xl">
                             </a>
                         </div>
                         <div class="flex flex-col text-center sm:text-left md:text-center lg:text-left">
@@ -265,7 +290,7 @@
                     <div class="book-card flex flex-col sm:flex-row md:flex-col lg:flex-row gap-8 items-center md:items-start lg:items-center p-8 md:p-10 border-2 border-brand-gold/30 rounded-[2rem] h-full bg-transparent">
                         <div class="w-40 md:w-48 lg:w-56 flex-shrink-0">
                             <a href="tu-podes-compreender-a-biblia">
-                                <img src="TPCB2.png" alt="Livro Kreeft" class="w-full h-auto drop-shadow-xl">
+                                <img src="TPCB2.png" alt="Livro Kreeft" class="w-full h-auto drop-shadow-2xl">
                             </a>
                         </div>
                         <div class="flex flex-col text-center sm:text-left md:text-center lg:text-left">
@@ -281,13 +306,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-20 text-center">
-                    <a href="catalogo-completo" class="bg-brand-accent-blue text-white px-12 py-4 font-bold rounded-xl uppercase tracking-widest hover:bg-brand-accent-red transition-all text-xs inline-block shadow-md">Explorar Todo o Catálogo</a>
-                </div>
             </div>
         </section>
 
-        <!-- Secção Sobre Nós -->
+        <!-- Secção Sobre Nós (MANTIDA) -->
         <section id="sobre" class="w-full bg-white py-20 md:py-32 relative overflow-hidden">
             <img src="Logo J.png" alt="Logo Watermark" class="logo-watermark">
             <div class="max-w-6xl mx-auto px-6 relative z-10">
@@ -316,20 +338,6 @@
                         <p class="text-lg text-gray-700 leading-relaxed font-classic dropcap">
                             Guiamo-nos pela <strong>Fé</strong>, pela <strong>Verdade</strong> e pelo compromisso tanto pela <strong>ortodoxia</strong> como pela <strong>ortopraxia</strong>. Em cada projeto, aliamos o <strong>rigor</strong> editorial à <strong>excelência</strong> gráfica, crentes de que a <strong>Beleza</strong> de um livro é o primeiro convite à leitura que eleva a alma.
                         </p>
-                        <div class="grid grid-cols-2 gap-4 pt-6">
-                            <div class="flex items-center gap-2 text-sm font-sans font-bold uppercase tracking-widest text-brand-gold-dark">
-                                <span class="w-1.5 h-1.5 bg-brand-accent-red rounded-full"></span> Fé & Verdade
-                            </div>
-                            <div class="flex items-center gap-2 text-sm font-sans font-bold uppercase tracking-widest text-brand-gold-dark">
-                                <span class="w-1.5 h-1.5 bg-brand-accent-red rounded-full"></span> Rigor Editorial
-                            </div>
-                            <div class="flex items-center gap-2 text-sm font-sans font-bold uppercase tracking-widest text-brand-gold-dark">
-                                <span class="w-1.5 h-1.5 bg-brand-accent-red rounded-full"></span> Excelência Gráfica
-                            </div>
-                            <div class="flex items-center gap-2 text-sm font-sans font-bold uppercase tracking-widest text-brand-gold-dark">
-                                <span class="w-1.5 h-1.5 bg-brand-accent-red rounded-full"></span> Beleza que Eleva
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
