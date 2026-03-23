@@ -50,7 +50,7 @@
             display: flex;
             align-items: center;
             overflow: hidden;
-            padding-top: 20px;
+            padding-top: 40px; /* Aumentado para dar margem ao topo */
             background-color: #fff;
         }
 
@@ -69,7 +69,7 @@
             .hero-bg-accent { width: 100%; clip-path: none; height: 35%; top: 0; }
             .hero-section { flex-direction: column; padding-top: 100px; text-align: center; min-height: auto; }
             .hero-book-container { order: -1; margin-bottom: 2rem; }
-            .hero-book-img { max-width: 280px !important; }
+            .hero-book-img { max-width: 260px !important; }
         }
 
         .hero-book-container {
@@ -79,7 +79,7 @@
         }
 
         .hero-book-img {
-            max-width: 440px; 
+            max-width: 380px; /* Reduzido para não cortar no topo */
             width: 100%;
             height: auto;
             filter: drop-shadow(30px 50px 70px rgba(0,0,0,0.12));
@@ -159,9 +159,9 @@
         .dropcap::first-letter {
             font-family: 'Playfair Display', serif;
             float: left;
-            font-size: 4rem;
-            line-height: 3.2rem;
-            padding-right: 0.6rem;
+            font-size: 4.5rem; /* Ligeiramente maior */
+            line-height: 3.5rem;
+            padding-right: 0.8rem;
             color: #800000;
             font-weight: bold;
         }
@@ -250,7 +250,7 @@
                     </div>
                 </div>
 
-                <!-- Coluna da Imagem do Livro -->
+                <!-- Coluna da Imagem do Livro - Ajustada para não cortar -->
                 <div class="lg:col-span-5 flex justify-center lg:justify-end hero-book-container">
                     <a href="a-eucaristia-e-mesmo-jesus.html" class="block transition-transform hover:scale-[1.02]">
                         <img src="Imagens/capaAEMJ3.png" alt="A Eucaristia é mesmo Jesus" class="hero-book-img floating-element">
@@ -259,7 +259,7 @@
             </div>
         </section>
 
-        <!-- SECÇÃO SÃO JERÓNIMO (PARALLAX CORRIGIDO PARA .JPG) -->
+        <!-- SECÇÃO SÃO JERÓNIMO -->
         <section class="art-viewport relative w-full h-[50vh] md:h-[75vh] flex items-end justify-center overflow-hidden pb-16">
             <div class="absolute inset-0 art-overlay-gradient"></div>
             <div class="relative z-10 text-center px-6">
@@ -328,20 +328,20 @@
                     <div class="w-20 h-1 bg-brand-accent-red mx-auto"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
-                    <!-- Missão Completa -->
+                    <!-- Missão Completa com Letra Maior -->
                     <div class="space-y-4 border border-brand-gold/20 rounded-[2rem] p-8 md:p-10 bg-white/60 backdrop-blur-sm">
                         <h3 class="font-serif text-2xl text-brand-accent-red font-bold flex items-center gap-3">Missão</h3>
-                        <div class="text-base text-gray-700 leading-relaxed font-classic dropcap">
+                        <div class="text-lg md:text-xl text-gray-700 leading-relaxed font-classic dropcap">
                             A Jerónimo Editora nasce com o propósito de enriquecer o panorama editorial português, especializando-se em obras de formação bíblica Católica que primam pela profundidade teológica e fidelidade às fontes. O seu nome é uma homenagem a São Jerónimo, presbítero e Doutor da Igreja, padroeiro dos estudiosos da Sagrada Escritura, que nos recorda:
                         </div>
-                        <p class="text-lg text-brand-accent-blue italic font-classic pt-2 border-t border-brand-gold/10">
-                            «Ignorar as Escrituras é ignorar Cristo».
+                        <p class="text-xl md:text-2xl text-brand-accent-blue italic font-classic pt-2 border-t border-brand-gold/10">
+                            <strong class="font-bold">«Ignorar as Escrituras é ignorar Cristo».</strong>
                         </p>
                     </div>
-                    <!-- Valores Completos -->
+                    <!-- Valores Completos com Letra Maior -->
                     <div class="space-y-4 border border-brand-gold/20 rounded-[2rem] p-8 md:p-10 bg-white/60 backdrop-blur-sm">
                         <h3 class="font-serif text-2xl text-brand-accent-red font-bold flex items-center gap-3">Valores</h3>
-                        <p class="text-base text-gray-700 leading-relaxed font-classic dropcap">
+                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-classic dropcap">
                             Guiamo-nos pela <strong>Fé</strong>, pela <strong>Verdade</strong> e pelo compromisso tanto pela <strong>ortodoxia</strong> como pela <strong>ortopraxia</strong>. Em cada projecto, aliamos o <strong>rigor</strong> editorial à <strong>excelência</strong> gráfica, crentes de que a <strong>Beleza</strong> de um livro é o primeiro convite à leitura que eleva a alma.
                         </p>
                         <div class="flex flex-wrap gap-4 pt-4">
