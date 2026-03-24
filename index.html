@@ -58,7 +58,6 @@
             background-color: #fff;
         }
 
-        /* FUNDO BEGE (Z-INDEX: 0) */
         .hero-bg-accent {
             position: absolute;
             top: 0; right: 0; width: 45%; height: 100%;
@@ -72,11 +71,7 @@
             .hero-section { min-height: auto; padding-bottom: 40px; padding-top: 80px; }
         }
 
-        /* CONTEÚDO HERO */
-        .hero-content-wrapper {
-            position: relative;
-            z-index: 20; 
-        }
+        .hero-content-wrapper { position: relative; z-index: 20; }
 
         .hero-book-container {
             position: relative;
@@ -119,11 +114,7 @@
             50% { transform: translateY(-12px) rotateY(-6deg) rotateX(2deg); } 
         }
 
-        .hero-title { 
-            font-size: clamp(1.6rem, 7vw, 5.2rem); 
-            line-height: 1.1; 
-            letter-spacing: -0.02em;
-        }
+        .hero-title { font-size: clamp(1.6rem, 7vw, 5.2rem); line-height: 1.1; letter-spacing: -0.02em; }
 
         .hero-badge-pill {
             display: inline-block;
@@ -161,24 +152,15 @@
         .feature-panel.horn-border { border: 2px solid #e5e7eb; }
 
         @media (max-width: 640px) {
-            .feature-panel { 
-                padding: 1rem 1.25rem; 
-                gap: 0.5rem; 
-                min-height: 100px;
-                justify-content: space-around;
-            }
+            .feature-panel { padding: 1rem 1.25rem; gap: 0.5rem; min-height: 100px; justify-content: space-around; }
         }
-
-        @media (min-width: 1024px) {
-            .feature-panel { gap: 3.5rem; padding: 2.5rem 4.5rem; min-height: 250px; }
-        }
+        @media (min-width: 1024px) { .feature-panel { gap: 3.5rem; padding: 2.5rem 4.5rem; min-height: 250px; } }
 
         .author-photo-circle {
             aspect-ratio: 1 / 1 !important;
             width: 70px !important;
             height: 70px !important;
-            min-width: 70px; 
-            min-height: 70px;
+            min-width: 70px; min-height: 70px;
             border-radius: 999px !important;
             border: 3.5px solid white;
             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
@@ -189,13 +171,8 @@
             transform: translateZ(0);
             backface-visibility: hidden;
         }
-        
-        @media (max-width: 640px) {
-            .author-photo-circle { width: 65px !important; height: 65px !important; min-width: 65px; min-height: 65px; border-width: 2.5px; }
-        }
-        @media (min-width: 1024px) { 
-            .author-photo-circle { width: 175px !important; height: 175px !important; min-width: 175px; min-height: 175px; } 
-        }
+        @media (max-width: 640px) { .author-photo-circle { width: 65px !important; height: 65px !important; min-width: 65px; min-height: 65px; border-width: 2.5px; } }
+        @media (min-width: 1024px) { .author-photo-circle { width: 175px !important; height: 175px !important; min-width: 175px; min-height: 175px; } }
 
         .book-thumb {
             width: 60px; height: auto;
@@ -208,80 +185,105 @@
 
         /* --- SECÇÃO SÃO JERÓNIMO (PARALLAX) --- */
         .art-viewport {
-            position: relative;
-            width: 100%;
-            height: 70vh;
-            overflow: hidden;
-            background-color: #000;
+            position: relative; width: 100%; height: 70vh; overflow: hidden; background-color: #000;
         }
         @media (min-width: 768px) { .art-viewport { height: 90vh; } }
 
         .art-bg-fixed {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('Imagens/Jeronimo.jpg');
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            z-index: 1;
+            background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; z-index: 1;
         }
         @media (max-width: 1024px) { .art-bg-fixed { background-attachment: scroll; } }
 
         .art-overlay-gradient {
-            position: absolute;
-            inset: 0;
+            position: absolute; inset: 0;
             background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.92) 100%);
-            z-index: 5;
-            pointer-events: none;
+            z-index: 5; pointer-events: none;
         }
 
         .text-glow-white { text-shadow: 0 4px 20px rgba(0, 0, 0, 1); }
 
-        /* --- SEPARADOR SOBRE --- */
-        .logo-separator-about {
-            width: 110px;
-            height: auto; 
-            opacity: 0.65; 
-            filter: contrast(1.1); 
-            display: block;
-            transform: rotate(-12deg);
-            margin: 2rem auto;
-            flex-shrink: 0;
+        /* --- MARCA DE ÁGUA DESKTOP --- */
+        .desktop-logo-watermark {
+            position: absolute;
+            top: 55%; left: 45%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            width: 700px;
+            opacity: 0.07;
+            pointer-events: none;
+            z-index: 0;
+            display: none;
+        }
+        @media (min-width: 1024px) { .desktop-logo-watermark { display: block; } }
+
+        /* --- DESIGN EDITORIAL SOBRE --- */
+        .about-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border-left: 5px solid #cfaf5c; /* Lombada dourada */
+            position: relative;
             transition: transform 0.3s ease;
         }
-        @media (min-width: 768px) {
-            .logo-separator-about { width: 150px; margin: 0 3rem; }
+        @media (min-width: 1024px) {
+            .about-card { padding: 3rem; border-left: 6px solid #cfaf5c; }
+        }
+        .about-card:hover { transform: translateY(-5px); }
+
+        .logo-seal-desktop {
+            width: 160px;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+            transform: rotate(-8deg);
+            z-index: 10;
+            display: none;
+        }
+        @media (min-width: 768px) { .logo-seal-desktop { display: block; margin: 0 2rem; } }
+
+        /* SEPARADOR MOBILE REFINADO (DIVIDER) */
+        .mobile-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+        @media (min-width: 768px) { .mobile-divider { display: none; } }
+
+        .mobile-divider-line {
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(207, 175, 92, 0.3), transparent);
+        }
+
+        .logo-separator-mobile {
+            width: 85px;
+            height: auto; 
+            opacity: 0.7; 
+            filter: contrast(1.1); 
+            display: block;
+            transform: rotate(-10deg);
+            margin: 0 1rem;
         }
 
         /* --- BOTÕES --- */
         .btn-modern-red { 
-            background: #800000; color: white; 
-            padding: 0.75rem 1.4rem;
-            border-radius: 10px; font-weight: 800; text-transform: uppercase; 
-            transition: all 0.3s ease; text-align: center; font-size: 10px;
-            display: inline-flex; align-items: center; justify-content: center;
+            background: #800000; color: white; padding: 0.75rem 1.4rem; border-radius: 10px; font-weight: 800; text-transform: uppercase; 
+            transition: all 0.3s ease; text-align: center; font-size: 10px; display: inline-flex; align-items: center; justify-content: center;
         }
         @media (min-width: 640px) { .btn-modern-red { padding: 1rem 2.5rem; font-size: 14px; border-radius: 12px; } }
         .btn-modern-red:hover { background: #600000; transform: translateY(-2px); }
 
         .btn-modern-outline { 
-            background: white; color: #002147; 
-            padding: 0.75rem 1.4rem;
-            border-radius: 10px; font-weight: 800; text-transform: uppercase; 
-            border: 2px solid #002147; transition: all 0.3s ease; text-align: center; font-size: 10px;
-            display: inline-flex; align-items: center; justify-content: center;
+            background: white; color: #002147; padding: 0.75rem 1.4rem; border-radius: 10px; font-weight: 800; text-transform: uppercase; 
+            border: 2px solid #002147; transition: all 0.3s ease; text-align: center; font-size: 10px; display: inline-flex; align-items: center; justify-content: center;
         }
         @media (min-width: 640px) { .btn-modern-outline { padding: 1rem 2.5rem; font-size: 14px; border-radius: 12px; } }
 
-        .coming-soon-card {
-            width: 65px; height: 95px; background: #fff; border: 1px solid rgba(229, 231, 235, 1); 
-            display: flex; align-items: center; justify-content: center; text-align: center; padding: 4px; border-radius: 6px;
-        }
-        @media (min-width: 1024px) { .coming-soon-card { width: 160px; height: 240px; padding: 15px; } }
-
         .dropcap::first-letter {
-            font-family: 'Playfair Display', serif; float: left; font-size: 4rem; line-height: 3.2rem; padding-right: 0.6rem; color: #800000; font-weight: bold;
+            font-family: 'Playfair Display', serif; float: left; font-size: 3.5rem; line-height: 2.8rem; padding-right: 0.5rem; color: #800000; font-weight: bold;
         }
         @media (min-width: 1024px) { .dropcap::first-letter { font-size: 4.5rem; line-height: 3.5rem; padding-right: 0.8rem; } }
     </style>
@@ -337,7 +339,7 @@
                     </div>
                 </div>
 
-                <!-- LINHA HORIZONTAL (PRECISÃO DESKTOP PARA TERMINAR ANTES DO POLÍGONO) -->
+                <!-- LINHA HORIZONTAL (PRECISÃO DESKTOP / TOTAL MOBILE) -->
                 <div class="w-full lg:w-[54%] h-px bg-brand-accent-blue/30 mb-8 lg:mb-12"></div>
 
                 <!-- GRELHA INFERIOR (DESTAQUES) -->
@@ -355,7 +357,7 @@
                             <div class="flex flex-col flex-1 min-w-0">
                                 <span class="font-sans text-[8px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Brevemente</span>
                                 <div class="feature-panel horn-border group">
-                                    <div class="coming-soon-card group-hover:scale-105 transition-transform">
+                                    <div class="coming-soon-card group-hover:scale-105 transition-transform" style="width: 65px; height: 95px; background: #fff; border: 1px solid rgba(229, 231, 235, 1); display: flex; align-items: center; justify-content: center; text-align: center; padding: 4px; border-radius: 6px;">
                                         <p class="text-[6px] sm:text-[16px] font-black text-brand-accent-blue uppercase leading-tight font-sans">Duras<br>Palavras</p>
                                     </div>
                                     <img src="Imagens/TrentHorn.jpg" alt="Trent Horn" class="author-photo-circle">
@@ -385,6 +387,7 @@
         <section id="novidades" class="py-12 sm:py-20 bg-brand-bg">
             <div class="max-w-6xl mx-auto px-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch">
+                    <!-- Livro Destaque -->
                     <div class="book-card flex flex-col sm:flex-row gap-6 p-6 sm:p-8 bg-brand-gold-light rounded-[2rem] border border-brand-gold/20 shadow-sm relative overflow-hidden h-full">
                         <div class="absolute top-0 right-0 bg-brand-accent-red text-white px-5 sm:px-6 py-2 rounded-bl-2xl font-sans text-[10px] sm:text-[12px] font-black uppercase tracking-[0.2em]">Lançamento</div>
                         <div class="w-28 sm:w-44 flex-shrink-0 flex items-center justify-center">
@@ -394,9 +397,7 @@
                         </div>
                         <div class="flex flex-col justify-center">
                             <span class="text-brand-gold-dark font-sans text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Destaque</span>
-                            <a href="a-eucaristia-e-mesmo-jesus.html">
-                                <h3 class="font-serif text-xl md:text-2xl text-brand-accent-blue font-bold leading-tight mb-1 md:mb-2 hover:text-brand-accent-red transition-colors">A Eucaristia é mesmo Jesus</h3>
-                            </a>
+                            <h3 class="font-serif text-xl md:text-2xl text-brand-accent-blue font-bold leading-tight mb-1 md:mb-2">A Eucaristia é mesmo Jesus</h3>
                             <p class="font-serif text-sm text-gray-500 italic mb-4">Joe Heschmeyer</p>
                             <div class="flex items-center gap-4">
                                 <span class="font-classic text-xl font-bold text-brand-accent-red">13,50€</span>
@@ -405,17 +406,16 @@
                         </div>
                     </div>
 
+                    <!-- Outro Livro -->
                     <div class="book-card flex flex-col sm:flex-row gap-6 p-6 sm:p-8 border-2 border-brand-gold/30 rounded-[2rem] h-full bg-white/40">
                         <div class="w-28 sm:w-44 flex-shrink-0 flex items-center justify-center">
-                            <a href="tu-podes-compreender-a-biblia.html">
+                            <a href="tu-podes-compreendeer-a-biblia.html">
                                 <img src="Imagens/tpcbcapa.png" alt="Livro Kreeft" class="w-full h-auto shadow-xl rounded transition-transform duration-500 hover:scale-105">
                             </a>
                         </div>
                         <div class="flex flex-col justify-center">
                             <span class="text-gray-400 font-sans text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Formação Bíblica</span>
-                            <a href="tu-podes-compreender-a-biblia.html">
-                                <h3 class="font-serif text-xl md:text-2xl text-brand-accent-blue font-bold leading-tight mb-1 md:mb-2 hover:text-brand-accent-red transition-colors">Tu podes compreender a Bíblia</h3>
-                            </a>
+                            <h3 class="font-serif text-xl md:text-2xl text-brand-accent-blue font-bold leading-tight mb-1 md:mb-2">Tu podes compreender a Bíblia</h3>
                             <p class="font-serif text-sm text-gray-500 italic mb-4">Peter Kreeft</p>
                             <div class="flex items-center gap-4">
                                 <span class="font-classic text-xl font-bold text-brand-accent-red">15,00€</span>
@@ -427,41 +427,64 @@
             </div>
         </section>
 
-        <!-- SOBRE -->
-        <section id="sobre" class="w-full bg-white py-16 sm:py-20 relative overflow-hidden">
-            <div class="max-w-6xl mx-auto px-6 relative z-10">
+        <!-- SOBRE (DESIGN EDITORIAL PREMIUM) -->
+        <section id="sobre" class="w-full bg-brand-bg py-16 sm:py-24 relative overflow-hidden">
+            <!-- J Monumental Watermark (Desktop) -->
+            <img src="Imagens/Logo J.png" alt="J Watermark" class="desktop-logo-watermark">
+            
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
                 <div class="text-center mb-12 sm:mb-16">
-                    <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl text-brand-accent-blue font-bold mb-3">Sobre a Jerónimo Editora</h2>
-                    <div class="w-20 h-1 bg-brand-accent-red mx-auto"></div>
+                    <h2 class="font-serif text-3xl md:text-5xl text-brand-accent-blue font-bold mb-4">Sobre a Jerónimo Editora</h2>
+                    <div class="w-24 h-1 bg-brand-accent-red mx-auto rounded-full"></div>
                 </div>
                 
-                <div class="flex flex-col md:flex-row gap-4 lg:gap-0 items-center md:items-stretch">
-                    <!-- Missão -->
-                    <div class="flex-1 flex flex-col border border-brand-gold/20 rounded-[2rem] p-8 md:p-10 bg-white/60 backdrop-blur-sm shadow-sm h-full">
-                        <h3 class="font-serif text-2xl text-brand-accent-red font-bold mb-4 flex items-center gap-3">Missão</h3>
-                        <div class="text-lg md:text-xl text-gray-700 leading-relaxed font-classic dropcap flex-grow">
-                            A Jerónimo Editora nasce com o propósito de enriquecer o panorama editorial português, especializando-se em obras de formação bíblica Católica que primam pela profundidade teológica e fidelidade às fontes. O seu nome é uma homenagem a São Jerónimo, presbítero e Doutor da Igreja, padroeiro dos estudiosos da Sagrada Escritura, que nos recorda:
+                <div class="flex flex-col md:flex-row gap-0 items-center md:items-stretch justify-center">
+                    
+                    <!-- Missão (Editorial Card) -->
+                    <div class="flex-1 w-full md:w-auto about-card group">
+                        <div class="flex flex-col h-full space-y-6">
+                            <h3 class="font-serif text-2xl md:text-3xl text-brand-accent-red font-bold flex items-center gap-3">
+                                <span class="w-8 h-px bg-brand-accent-red/30"></span> Missão
+                            </h3>
+                            <div class="text-lg md:text-xl text-gray-700 leading-relaxed font-classic dropcap flex-grow italic md:not-italic">
+                                A Jerónimo Editora nasce com o propósito de enriquecer o panorama editorial português, especializando-se em obras de formação bíblica Católica que primam pela profundidade teológica e fidelidade às fontes. O seu nome é uma homenagem a São Jerónimo, presbítero e Doutor da Igreja, padroeiro dos estudiosos da Sagrada Escritura, que nos recorda:
+                            </div>
+                            <div class="pt-6 border-t border-brand-gold/20">
+                                <p class="text-xl md:text-2xl text-brand-accent-blue italic font-classic leading-tight">
+                                    <strong class="font-bold">«Ignorar as Escrituras é ignorar Cristo».</strong>
+                                </p>
+                            </div>
                         </div>
-                        <p class="text-lg md:text-2xl text-brand-accent-blue italic font-classic pt-6 border-t border-brand-gold/10 mt-6">
-                            <strong class="font-bold">«Ignorar as Escrituras é ignorar Cristo».</strong>
-                        </p>
                     </div>
 
-                    <!-- Logotipo Separador Único (Desktop e Mobile) -->
-                    <div class="flex justify-center py-4 md:py-0 items-center">
-                        <img src="Imagens/Logo J.png" alt="Logo Separator" class="logo-separator-about">
+                    <!-- SEPARADOR MOBILE REFINADO (Com linhas para não parecer solto) -->
+                    <div class="mobile-divider">
+                        <div class="mobile-divider-line"></div>
+                        <img src="Imagens/Logo J.png" alt="Mobile Separator" class="logo-separator-mobile">
+                        <div class="mobile-divider-line"></div>
                     </div>
 
-                    <!-- Valores -->
-                    <div class="flex-1 flex flex-col border border-brand-gold/20 rounded-[2rem] p-8 md:p-10 bg-white/60 backdrop-blur-sm shadow-sm h-full">
-                        <h3 class="font-serif text-2xl text-brand-accent-red font-bold mb-4 flex items-center gap-3">Valores</h3>
-                        <div class="text-lg md:text-xl text-gray-700 leading-relaxed font-classic dropcap flex-grow">
-                            Guiamo-nos pela <strong>Fé</strong>, pela <strong>Verdade</strong> e pelo compromisso tanto pela <strong>ortodoxia</strong> como pela <strong>ortopraxia</strong>. Em cada projecto, aliamos o <strong>rigor</strong> editorial à <strong>excelência</strong> gráfica, crentes de que a <strong>Beleza</strong> de um livro é o primeiro convite à leitura que eleva a alma.
-                        </div>
-                        <div class="flex flex-wrap gap-3 pt-6 mt-6 border-t border-brand-gold/10">
-                            <span class="text-[9px] font-sans font-black uppercase tracking-widest text-brand-gold-dark border border-brand-gold/30 px-3 py-1 rounded">Fé & Verdade</span>
-                            <span class="text-[9px] font-sans font-black uppercase tracking-widest text-brand-gold-dark border border-brand-gold/30 px-3 py-1 rounded">Rigor Editorial</span>
-                            <span class="text-[9px] font-sans font-black uppercase tracking-widest text-brand-gold-dark border border-brand-gold/30 px-3 py-1 rounded">Excelência Gráfica</span>
+                    <!-- Logotipo Selo Central (Desktop Only) -->
+                    <div class="hidden md:flex justify-center items-center">
+                        <img src="Imagens/Logo J.png" alt="Editorial Seal" class="logo-seal-desktop">
+                    </div>
+
+                    <!-- Valores (Editorial Card) -->
+                    <div class="flex-1 w-full md:w-auto about-card group" style="border-left: 0; border-right: 6px solid #cfaf5c;">
+                        <div class="flex flex-col h-full space-y-6 text-right md:text-left">
+                            <h3 class="font-serif text-2xl md:text-3xl text-brand-accent-red font-bold flex items-center justify-end md:justify-start gap-3">
+                                Valores <span class="w-8 h-px bg-brand-accent-red/30"></span>
+                            </h3>
+                            <div class="text-lg md:text-xl text-gray-700 leading-relaxed font-classic dropcap flex-grow">
+                                Guiamo-nos pela <strong>Fé</strong>, pela <strong>Verdade</strong> e pelo compromisso tanto pela <strong>ortodoxia</strong> como pela <strong>ortopraxia</strong>. Em cada projecto, aliamos o <strong>rigor</strong> editorial à <strong>excelência</strong> gráfica, crentes de que a <strong>Beleza</strong> de um livro é o primeiro convite à leitura que eleva a alma.
+                            </div>
+                            <div class="pt-6 border-t border-brand-gold/20">
+                                <div class="flex flex-wrap justify-end md:justify-start gap-3">
+                                    <span class="text-[10px] font-sans font-black uppercase tracking-widest text-brand-gold-dark bg-brand-gold-light px-4 py-2 rounded-lg border border-brand-gold/20">Fé & Verdade</span>
+                                    <span class="text-[10px] font-sans font-black uppercase tracking-widest text-brand-gold-dark bg-brand-gold-light px-4 py-2 rounded-lg border border-brand-gold/20">Rigor Editorial</span>
+                                    <span class="text-[10px] font-sans font-black uppercase tracking-widest text-brand-gold-dark bg-brand-gold-light px-4 py-2 rounded-lg border border-brand-gold/20">Excelência Gráfica</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
