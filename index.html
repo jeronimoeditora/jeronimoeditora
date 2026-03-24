@@ -68,6 +68,7 @@
         @media (max-width: 1024px) {
             .hero-bg-accent { width: 100%; clip-path: none; height: 100%; opacity: 0.3; }
             .hero-section { min-height: auto; padding-bottom: 40px; }
+            .logo-watermark { opacity: 0.1 !important; width: 90% !important; } 
         }
 
         .hero-book-container {
@@ -83,7 +84,7 @@
             transform: rotateY(-6deg) rotateX(2deg);
             transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
             
-            /* Correção de desfoque (Anti-aliasing) */
+            /* Correção de desfoque (Renderização de Hardware) */
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
             transform-style: preserve-3d;
@@ -92,7 +93,7 @@
         }
 
         .hero-title {
-            font-size: clamp(1.8rem, 6.5vw, 5.2rem);
+            font-size: clamp(1.4rem, 6vw, 5.2rem);
             line-height: 1;
             letter-spacing: -0.02em;
         }
@@ -105,7 +106,7 @@
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            font-size: clamp(0.75rem, 2vw, 0.9rem);
+            font-size: clamp(0.65rem, 2vw, 0.9rem);
             border-radius: 9999px;
             margin-bottom: 1.5rem;
             box-shadow: 0 4px 15px rgba(207, 175, 92, 0.2);
@@ -126,7 +127,7 @@
             border-radius: 12px;
             font-weight: 800;
             text-transform: uppercase;
-            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-size: clamp(0.75rem, 2vw, 1rem);
             transition: all 0.3s ease;
             text-align: center;
         }
@@ -139,7 +140,7 @@
             border-radius: 12px;
             font-weight: 800;
             text-transform: uppercase;
-            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-size: clamp(0.75rem, 2vw, 1rem);
             border: 2px solid #002147;
             transition: all 0.3s ease;
             text-align: center;
@@ -156,9 +157,9 @@
         .feature-panel {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-            padding: 1.5rem;
-            border-radius: 1.5rem;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 1.25rem;
             background: #fff;
             box-shadow: 0 10px 25px rgba(0,0,0,0.04);
             border: 1px solid #f3f4f6;
@@ -173,43 +174,54 @@
 
         .label-text {
             font-family: 'Roboto', sans-serif;
-            font-size: 14px;
+            font-size: clamp(10px, 1.5vw, 14px);
             text-transform: uppercase;
             letter-spacing: 0.05em;
             font-weight: 900;
             color: #4B5563; 
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             display: block;
         }
 
         .author-photo {
-            width: 65px;
-            height: 65px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             border: 3px solid white;
             box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             object-fit: cover;
             flex-shrink: 0;
         }
+        @media (min-width: 640px) {
+            .author-photo { width: 65px; height: 65px; }
+            .feature-panel { gap: 1.5rem; padding: 1.5rem; }
+            .label-text { margin-bottom: 1.5rem; }
+        }
 
         .book-thumb {
-            width: 100px;
+            width: 60px;
             height: auto;
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
             object-fit: contain;
         }
+        @media (min-width: 640px) {
+            .book-thumb { width: 100px; }
+        }
 
         .coming-soon-card {
-            width: 100px;
-            height: 145px;
+            width: 60px;
+            height: 85px;
             background: linear-gradient(135deg, #fff 0%, #f9fafb 100%);
             border: 1px solid #e5e7eb;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 10px;
-            border-radius: 6px;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        @media (min-width: 640px) {
+            .coming-soon-card { width: 100px; height: 145px; padding: 10px; }
         }
 
         /* Parallax Background */
@@ -265,47 +277,49 @@
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full grid grid-cols-12 gap-2 lg:gap-8 items-center relative">
                 
-                <!-- Coluna de Texto -->
-                <div class="col-span-7 lg:col-span-7 z-20 py-8 text-left">
+                <!-- Coluna de Texto (Grelha 7/12 sempre lado a lado) -->
+                <div class="col-span-7 lg:col-span-7 z-20 py-4 lg:py-8 text-left">
                     <div class="hero-badge-pill animate-pulse-subtle">Novo Lançamento</div>
                     
-                    <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-3 sm:mb-4 leading-tight">
+                    <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-2 lg:mb-4 leading-tight">
                         A Eucaristia é <br> <span class="text-brand-accent-red italic">mesmo</span> Jesus
                     </h1>
                     
-                    <!-- Subtítulo refinado numa linha no desktop -->
-                    <p class="font-classic text-sm sm:text-lg lg:text-2xl text-gray-500 italic mb-4 sm:mb-10 max-w-2xl leading-snug lg:whitespace-nowrap opacity-90">
+                    <!-- Subtítulo refinado numa linha (Ajustado para mobile) -->
+                    <p class="font-classic text-[10px] sm:text-lg lg:text-2xl text-gray-500 italic mb-4 lg:mb-10 max-w-2xl leading-snug lg:whitespace-nowrap opacity-90">
                         Como o Corpo e o Sangue de Cristo são a Chave para Tudo que Cremos
                     </p>
 
-                    <!-- Autor Joe (AJUSTADO: Imagem maior, Nome menor) -->
-                    <a href="a-eucaristia-e-mesmo-jesus.html" class="inline-flex items-center gap-3 sm:gap-5 mb-8 sm:mb-12 group transition-all">
-                        <div class="w-14 h-14 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-brand-gold shadow-md group-hover:border-brand-accent-red transition-all flex-shrink-0">
+                    <!-- Autor Joe (Foto maior, Nome menor) -->
+                    <a href="a-eucaristia-e-mesmo-jesus.html" class="inline-flex items-center gap-2 sm:gap-5 mb-6 lg:mb-12 group transition-all">
+                        <div class="w-10 h-10 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-brand-gold shadow-md group-hover:border-brand-accent-red transition-all flex-shrink-0">
                             <img src="Imagens/JoeHeschmeyer.png" alt="Joe Heschmeyer" class="w-full h-full object-cover">
                         </div>
-                        <p class="font-classic text-base sm:text-xl lg:text-3xl text-brand-gold italic group-hover:text-brand-accent-red transition-colors leading-tight">
-                            por <span class="font-bold text-brand-gold-dark non-italic">Joe Heschmeyer</span>
-                        </p>
+                        <div class="flex flex-col">
+                            <p class="font-classic text-xs sm:text-2xl lg:text-3xl text-brand-gold italic group-hover:text-brand-accent-red transition-colors leading-tight">
+                                por <span class="font-bold text-brand-gold-dark non-italic">Joe Heschmeyer</span>
+                            </p>
+                        </div>
                     </a>
                     
-                    <div class="flex flex-row gap-2 sm:gap-4 justify-start mb-12 sm:mb-20">
-                        <a href="a-eucaristia-e-mesmo-jesus.html" class="btn-modern-red px-4 sm:px-12">Ver Detalhes</a>
-                        <a href="catalogo-completo.html" class="btn-modern-outline px-4 sm:px-12 hidden sm:block">Catálogo</a>
+                    <div class="flex flex-row gap-2 sm:gap-4 justify-start mb-10 lg:mb-20">
+                        <a href="a-eucaristia-e-mesmo-jesus.html" class="btn-modern-red px-3 sm:px-12">Ver Detalhes</a>
+                        <a href="catalogo-completo.html" class="btn-modern-outline px-3 sm:px-12">Catálogo</a>
                     </div>
 
                     <!-- LINHA HORIZONTAL AZUL ESCURA FINA -->
-                    <div class="w-full h-px bg-brand-accent-blue/30 mb-10"></div>
+                    <div class="w-full h-px bg-brand-accent-blue/30 mb-8 lg:mb-10"></div>
 
-                    <!-- Secção Destaques (Lado a lado, alturas iguais) -->
+                    <!-- Secção Destaques (Lado a lado sempre no Mobile) -->
                     <div class="w-full">
-                        <div class="flex flex-col sm:flex-row gap-6 lg:gap-12 items-stretch">
+                        <div class="flex flex-row gap-3 lg:gap-12 items-stretch">
                             
                             <!-- Também disponível (Peter Kreeft) -->
                             <div class="flex flex-col flex-1">
                                 <span class="label-text">Também disponível</span>
                                 <a href="tu-podes-compreender-a-biblia.html" class="feature-panel group">
-                                    <img src="capaTPCB2.jpg" alt="Capa Peter Kreeft" class="book-thumb group-hover:scale-105 transition-transform">
-                                    <img src="PeterKreeft.jpg" alt="Peter Kreeft" class="author-photo">
+                                    <img src="Imagens/capaTPCB2.png" alt="Capa Peter Kreeft" class="book-thumb group-hover:scale-105 transition-transform">
+                                    <img src="Imagens/PeterKreeft.png" alt="Peter Kreeft" class="author-photo">
                                 </a>
                             </div>
 
@@ -314,9 +328,9 @@
                                 <span class="label-text">Brevemente</span>
                                 <div class="feature-panel opacity-80 group">
                                     <div class="coming-soon-card group-hover:scale-105 transition-transform">
-                                        <p class="text-[8px] sm:text-[12px] font-black text-brand-accent-blue uppercase leading-tight font-sans">Duras<br>Palavras</p>
+                                        <p class="text-[6px] sm:text-[12px] font-black text-brand-accent-blue uppercase leading-tight font-sans">Duras<br>Palavras</p>
                                     </div>
-                                    <img src="TrentHorn.jpg" alt="Trent Horn" class="author-photo">
+                                    <img src="Imagens/TrentHorn.jpg" alt="Trent Horn" class="author-photo">
                                 </div>
                             </div>
 
@@ -324,7 +338,7 @@
                     </div>
                 </div>
 
-                <!-- Coluna da Imagem Joe -->
+                <!-- Coluna da Imagem Joe (Lado a lado mantido no telemóvel) -->
                 <div class="col-span-5 lg:col-span-5 flex justify-end items-center hero-book-container">
                     <a href="a-eucaristia-e-mesmo-jesus.html" class="block transition-transform hover:scale-[1.02] w-full flex justify-end lg:pr-8">
                         <img src="Imagens/capaAEMJ3.png" alt="A Eucaristia é mesmo Jesus" class="hero-book-img floating-element">
@@ -333,7 +347,7 @@
             </div>
         </section>
 
-        <!-- SECÇÃO SÃO JERÓNIMO (Igual) -->
+        <!-- SECÇÃO SÃO JERÓNIMO -->
         <section class="art-viewport relative w-full h-[50vh] md:h-[75vh] flex items-end justify-center overflow-hidden pb-16">
             <div class="absolute inset-0 art-overlay-gradient"></div>
             <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
@@ -344,7 +358,7 @@
             </div>
         </section>
 
-        <!-- SECÇÃO ÚLTIMAS PUBLICAÇÕES (Igual) -->
+        <!-- SECÇÃO ÚLTIMAS PUBLICAÇÕES -->
         <section id="novidades" class="py-20 bg-brand-bg">
             <div class="max-w-6xl mx-auto px-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
