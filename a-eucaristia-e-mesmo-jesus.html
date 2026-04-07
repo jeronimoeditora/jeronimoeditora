@@ -466,8 +466,22 @@
 
         function addToCart(title, price) {
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            // Adicionando com ID 8 (Joe Heschmeyer)
-            cartItems.push({ id: 8, title, price, quantity: 1, image: 'Imagens/aemjcapa.png', author: 'Joe Heschmeyer' });
+            const bookId = 8; // ID do Joe Heschmeyer
+            const existingIndex = cartItems.findIndex(item => item.id === bookId);
+
+            if (existingIndex > -1) {
+                cartItems[existingIndex].quantity += 1;
+            } else {
+                cartItems.push({ 
+                    id: bookId, 
+                    title: title, 
+                    price: price, 
+                    quantity: 1, 
+                    image: 'Imagens/aemjcapa.png', 
+                    author: 'Joe Heschmeyer',
+                    weight: 0.254 // Peso correto conforme ficha técnica
+                });
+            }
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             updateCartUI();
             const alert = document.getElementById('cart-alert');

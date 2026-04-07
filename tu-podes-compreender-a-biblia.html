@@ -196,7 +196,7 @@
                         
                         <!-- Setas na Imagem Principal -->
                         <button onclick="changeImage(-1)" class="nav-arrow absolute left-5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 hidden md:flex transition-all" aria-label="Anterior">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin=\"round\"><path d="m15 18-6-6 6-6"/></svg>
                         </button>
                         <button onclick="changeImage(1)" class="nav-arrow absolute right-5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 hidden md:flex transition-all" aria-label="Próximo">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -459,7 +459,22 @@
 
         function addToCart(title, price) {
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            cartItems.push({ id: 3, title, price, quantity: 1, image: 'Imagens/tpcbcapa.png', author: 'Peter Kreeft' });
+            const bookId = 3; // ID do Peter Kreeft
+            const existingIndex = cartItems.findIndex(item => item.id === bookId);
+
+            if (existingIndex > -1) {
+                cartItems[existingIndex].quantity += 1;
+            } else {
+                cartItems.push({ 
+                    id: bookId, 
+                    title: title, 
+                    price: price, 
+                    quantity: 1, 
+                    image: 'Imagens/tpcbcapa.png', 
+                    author: 'Peter Kreeft',
+                    weight: 0.510 // Peso correto conforme ficha técnica
+                });
+            }
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             updateCartUI();
             const alert = document.getElementById('cart-alert');

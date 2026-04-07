@@ -208,9 +208,22 @@
             let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const book = bookData.find(b => b.id === bookId);
             if (!book || book.isComingSoon) return;
-            const existing = cartItems.findIndex(item => item.id === bookId);
-            if (existing > -1) { cartItems[existing].quantity += 1; } 
-            else { cartItems.push({ id: bookId, title: bookTitle, price: book.price, quantity: 1, image: book.image, author: book.author, weight: parseFloat(book.techDetails.weight.replace(',', '.')) }); }
+            
+            const existingIndex = cartItems.findIndex(item => item.id === bookId);
+            if (existingIndex > -1) { 
+                cartItems[existingIndex].quantity += 1; 
+            } else { 
+                cartItems.push({ 
+                    id: bookId, 
+                    title: bookTitle, 
+                    price: book.price, 
+                    quantity: 1, 
+                    image: book.image, 
+                    author: book.author, 
+                    weight: parseFloat(book.techDetails.weight.replace(',', '.')) 
+                }); 
+            }
+            
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             updateCartUI();
             document.getElementById('cart-confirmation-details').innerHTML = `<img src="${book.image}" class="w-12 h-16 object-contain" /><div><h4 class="font-bold text-sm">${book.title}</h4><p class="text-brand-accent-red font-bold text-sm">${formatPrice(book.price)}</p></div>`;
@@ -233,7 +246,7 @@
             document.getElementById('info-modal-format').textContent = `Formato: ${book.techDetails.binding}`;
             
             const detailsLink = document.getElementById('info-modal-details-link');
-            detailsLink.href = book.detailsUrl || '#';
+            detailsLink.href = b.detailsUrl || '#';
             
             // Gerir visibilidade do botão de adicionar no modal
             const addBtn = document.getElementById('info-modal-add-to-cart');
