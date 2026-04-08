@@ -246,7 +246,8 @@
             document.getElementById('info-modal-format').textContent = `Formato: ${book.techDetails.binding}`;
             
             const detailsLink = document.getElementById('info-modal-details-link');
-            detailsLink.href = b.detailsUrl || '#';
+            // FIX: Alterado 'b.detailsUrl' para 'book.detailsUrl' para evitar erro de referência
+            detailsLink.href = book.detailsUrl || '#';
             
             // Gerir visibilidade do botão de adicionar no modal
             const addBtn = document.getElementById('info-modal-add-to-cart');
