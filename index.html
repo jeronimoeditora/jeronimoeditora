@@ -142,37 +142,38 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1.5rem 2.5rem;
-            border-radius: 1.5rem;
+            padding: 0.75rem 0.5rem;
+            border-radius: 1.25rem;
             background: #fff;
             box-shadow: 0 10px 25px rgba(0,0,0,0.04);
             transition: all 0.4s ease;
             flex: 1;
-            min-height: 120px;
+            min-height: 90px;
             overflow: visible;
+            gap: 0.25rem;
         }
 
         .feature-panel.kreeft-border { border: 2px solid #cfaf5c; }
-        .feature-panel.horn-border { border: 2px solid #e5e7eb; }
+        .feature-panel.standard-border { border: 2px solid #e5e7eb; }
 
-        @media (max-width: 640px) {
+        @media (min-width: 640px) {
             .feature-panel { 
-                padding: 1.25rem 1.25rem; 
-                gap: 0.5rem; 
-                min-height: 100px;
-                justify-content: space-around;
+                padding: 1.5rem 2.5rem; 
+                gap: 1rem; 
+                min-height: 120px;
+                border-radius: 1.5rem;
             }
         }
         @media (min-width: 1024px) { .feature-panel { gap: 3.5rem; padding: 2.5rem 3.5rem; min-height: 250px; } }
 
         .author-photo-circle {
             aspect-ratio: 1 / 1 !important;
-            width: 70px !important;
-            height: 70px !important;
-            min-width: 70px; min-height: 70px;
+            width: 48px !important;
+            height: 48px !important;
+            min-width: 48px; min-height: 48px;
             border-radius: 999px !important;
-            border: 3.5px solid white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            border: 2px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
             object-fit: cover;
             flex-shrink: 0; 
             z-index: 10;
@@ -181,28 +182,29 @@
             backface-visibility: hidden;
         }
         
-        @media (max-width: 640px) {
-            .author-photo-circle { width: 65px !important; height: 65px !important; min-width: 65px; min-height: 65px; border-width: 2.5px; }
+        @media (min-width: 640px) {
+            .author-photo-circle { width: 80px !important; height: 80px !important; min-width: 80px; min-height: 80px; border-width: 3.5px; }
         }
         @media (min-width: 1024px) { 
             .author-photo-circle { width: 160px !important; height: 160px !important; min-width: 160px; min-height: 160px; } 
         }
 
         .book-thumb {
-            width: 60px; height: auto;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+            width: 42px; height: auto;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));
             object-fit: contain;
             flex-shrink: 0;
             transition: transform 0.4s ease;
         }
+        @media (min-width: 640px) { .book-thumb { width: 70px; } }
         @media (min-width: 1024px) { .book-thumb { width: 155px; } }
 
-        /* Contentor para alinhar o vetor exatamente como a imagem */
         .vector-book-thumb {
-            width: 60px; height: auto;
+            width: 42px; height: auto;
             flex-shrink: 0;
             transition: transform 0.4s ease;
         }
+        @media (min-width: 640px) { .vector-book-thumb { width: 70px; } }
         @media (min-width: 1024px) { .vector-book-thumb { width: 155px; } }
 
         /* --- SECÇÃO SÃO JERÓNIMO (PARALLAX) --- */
@@ -254,25 +256,6 @@
             .about-card { padding: 3rem; border-left: 6px solid #cfaf5c; }
         }
         .about-card:hover { transform: translateY(-5px); }
-
-        .mobile-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            margin: 1.5rem 0;
-        }
-        @media (min-width: 768px) { .mobile-divider { display: none; } }
-
-        .mobile-divider-line {
-            flex-grow: 1;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(207, 175, 92, 0.3), transparent);
-        }
-
-        .logo-separator-mobile {
-            width: 85px; height: auto; opacity: 0.7; filter: contrast(1.1); display: block; transform: rotate(-10deg); margin: 0 1rem;
-        }
 
         /* --- BOTÕES --- */
         .btn-modern-red { 
@@ -345,44 +328,73 @@
                     </div>
                 </div>
 
-                <!-- LINHA HORIZONTAL (PRECISÃO DESKTOP / TOTAL MOBILE) -->
+                <!-- LINHA HORIZONTAL -->
                 <div class="w-full lg:w-[54%] h-px bg-brand-accent-blue/30 mb-8 lg:mb-12"></div>
 
-                <!-- GRELHA INFERIOR -->
-                <div class="grid grid-cols-12 mb-12 sm:mb-16 lg:mb-24">
-                    <div class="col-span-12 lg:col-span-11">
-                        <div class="flex flex-row gap-3 sm:gap-4 lg:gap-16 items-stretch">
-                            <!-- Também disponível (Peter Kreeft) -->
-                            <div class="flex flex-col flex-1 min-w-0">
-                                <span class="font-sans text-[8px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Também disponível</span>
-                                <a href="tu-podes-compreender-a-biblia.html" class="feature-panel kreeft-border group">
-                                    <img src="Imagens/capaTPCB2.png" alt="Capa Peter Kreeft" class="book-thumb group-hover:scale-105 transition-transform">
-                                    <div class="flex flex-col items-center gap-4 lg:gap-6">
-                                        <img src="Imagens/PeterKreeft.png" alt="Peter Kreeft" class="author-photo-circle">
-                                        <span class="font-sans text-[8px] sm:text-sm font-black text-brand-gold-dark uppercase tracking-wider">Peter Kreeft</span>
-                                    </div>
-                                </a>
+                <!-- GRELHA 2x2 (Também disponível, Em Produção, Em Preparação, Brevemente) -->
+                <div class="grid grid-cols-2 gap-3 sm:gap-6 lg:gap-12 mb-12 sm:mb-16 lg:mb-24">
+                    
+                    <!-- Quadro 1: Peter Kreeft -->
+                    <div class="flex flex-col flex-1 min-w-0">
+                        <span class="font-sans text-[7px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Também disponível</span>
+                        <a href="tu-podes-compreender-a-biblia.html" class="feature-panel kreeft-border group">
+                            <img src="Imagens/capaTPCB2.png" alt="Capa Peter Kreeft" class="book-thumb group-hover:scale-105 transition-transform">
+                            <div class="flex flex-col items-center gap-3 sm:gap-4 lg:gap-6">
+                                <img src="Imagens/PeterKreeft.png" alt="Peter Kreeft" class="author-photo-circle">
+                                <span class="font-sans text-[7px] sm:text-sm font-black text-brand-gold-dark uppercase tracking-wider text-center">Peter Kreeft</span>
                             </div>
+                        </a>
+                    </div>
 
-                            <!-- Brevemente (Trent Horn) - VETOR MINIMALISTA AJUSTADO -->
-                            <div class="flex flex-col flex-1 min-w-0">
-                                <span class="font-sans text-[8px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Brevemente</span>
-                                <div class="feature-panel horn-border group">
-                                    <div class="vector-book-thumb group-hover:scale-105 transition-transform flex items-center justify-center">
-                                        <!-- SVG BOOK VECTOR: Linha fina, Cinza claro, Mesmo tamanho -->
-                                        <svg viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto max-h-[140px] lg:max-h-[210px]">
-                                            <path d="M25 15H80V125H30C27.2386 125 25 127.239 25 130V15Z" stroke="#D1D5DB" stroke-width="0.8" stroke-linejoin="round"/>
-                                            <path d="M25 130C25 132.761 27.2386 135 30 135H80" stroke="#D1D5DB" stroke-width="0.8" stroke-linecap="round"/>
-                                            <line x1="33" y1="15" x2="33" y2="125" stroke="#D1D5DB" stroke-width="0.5" stroke-dasharray="1 2"/>
-                                            <text x="55" y="65" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="7" letter-spacing="0.05em">DURAS</text>
-                                            <text x="55" y="76" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="7" letter-spacing="0.05em">PALAVRAS</text>
-                                        </svg>
-                                    </div>
-                                    <div class="flex flex-col items-center gap-4 lg:gap-6">
-                                        <img src="Imagens/TrentHorn.jpg" alt="Trent Horn" class="author-photo-circle">
-                                        <span class="font-sans text-[8px] sm:text-sm font-black text-gray-400 uppercase tracking-wider">Trent Horn</span>
-                                    </div>
-                                </div>
+                    <!-- Quadro 2: Tim Staples -->
+                    <div class="flex flex-col flex-1 min-w-0">
+                        <span class="font-sans text-[7px] sm:text-sm font-black text-brand-accent-red uppercase tracking-wider mb-2 sm:mb-4">Em produção</span>
+                        <div class="feature-panel standard-border group">
+                            <img src="Imagens/capaETM2.png" alt="Eis a Tua Mãe" class="book-thumb group-hover:scale-105 transition-transform">
+                            <div class="flex flex-col items-center gap-3 sm:gap-4 lg:gap-6">
+                                <img src="Imagens/TimStaples.png" alt="Tim Staples" class="author-photo-circle">
+                                <span class="font-sans text-[7px] sm:text-sm font-black text-gray-400 uppercase tracking-wider text-center">Tim Staples</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quadro 3: Jimmy Akin -->
+                    <div class="flex flex-col flex-1 min-w-0">
+                        <span class="font-sans text-[7px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Em preparação</span>
+                        <div class="feature-panel standard-border group">
+                            <div class="vector-book-thumb group-hover:scale-105 transition-transform flex items-center justify-center">
+                                <svg viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto max-h-[140px] lg:max-h-[210px]">
+                                    <path d="M25 15H80V125H30C27.2386 125 25 127.239 25 130V15Z" stroke="#D1D5DB" stroke-width="0.8" stroke-linejoin="round"/>
+                                    <path d="M25 130C25 132.761 27.2386 135 30 135H80" stroke="#D1D5DB" stroke-width="0.8" stroke-linecap="round"/>
+                                    <line x1="33" y1="15" x2="33" y2="125" stroke="#D1D5DB" stroke-width="0.5" stroke-dasharray="1 2"/>
+                                    <text x="55" y="60" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="6.5" letter-spacing="0.02em">A BÍBLIA É</text>
+                                    <text x="55" y="69" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="6.5" letter-spacing="0.02em">UM LIVRO</text>
+                                    <text x="55" y="78" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="6.5" letter-spacing="0.02em">CATÓLICO</text>
+                                </svg>
+                            </div>
+                            <div class="flex flex-col items-center gap-3 sm:gap-4 lg:gap-6">
+                                <img src="Imagens/Jimmy Akin.png" alt="Jimmy Akin" class="author-photo-circle">
+                                <span class="font-sans text-[7px] sm:text-sm font-black text-gray-400 uppercase tracking-wider text-center">Jimmy Akin</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quadro 4: Trent Horn -->
+                    <div class="flex flex-col flex-1 min-w-0">
+                        <span class="font-sans text-[7px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Brevemente</span>
+                        <div class="feature-panel standard-border group">
+                            <div class="vector-book-thumb group-hover:scale-105 transition-transform flex items-center justify-center">
+                                <svg viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto max-h-[140px] lg:max-h-[210px]">
+                                    <path d="M25 15H80V125H30C27.2386 125 25 127.239 25 130V15Z" stroke="#D1D5DB" stroke-width="0.8" stroke-linejoin="round"/>
+                                    <path d="M25 130C25 132.761 27.2386 135 30 135H80" stroke="#D1D5DB" stroke-width="0.8" stroke-linecap="round"/>
+                                    <line x1="33" y1="15" x2="33" y2="125" stroke="#D1D5DB" stroke-width="0.5" stroke-dasharray="1 2"/>
+                                    <text x="55" y="65" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="7" letter-spacing="0.05em">DURAS</text>
+                                    <text x="55" y="76" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="7" letter-spacing="0.05em">PALAVRAS</text>
+                                </svg>
+                            </div>
+                            <div class="flex flex-col items-center gap-3 sm:gap-4 lg:gap-6">
+                                <img src="Imagens/TrentHorn.jpg" alt="Trent Horn" class="author-photo-circle">
+                                <span class="font-sans text-[7px] sm:text-sm font-black text-gray-400 uppercase tracking-wider text-center">Trent Horn</span>
                             </div>
                         </div>
                     </div>
@@ -412,7 +424,7 @@
                         <div class="absolute top-0 right-0 bg-brand-accent-red text-white px-5 sm:px-6 py-2 rounded-bl-2xl font-sans text-[10px] sm:text-[12px] font-black uppercase tracking-[0.2em]">Lançamento</div>
                         <div class="w-28 sm:w-44 flex-shrink-0 flex items-center justify-center">
                             <a href="a-eucaristia-e-mesmo-jesus.html">
-                                <img src="Imagens/aemjcapa.png" alt="Livro Joe" class="w-full h-auto shadow-xl rounded transition-transform duration-500 hover:scale-105">
+                                <img src="Imagens/aemjcapa.png" alt="Livro Joe" class="w-full h-auto shadow-lg rounded transition-transform duration-500 hover:scale-105">
                             </a>
                         </div>
                         <div class="flex flex-col justify-center">
@@ -429,7 +441,7 @@
                     <div class="book-card flex flex-col sm:flex-row gap-6 p-6 sm:p-8 border-2 border-brand-gold/30 rounded-[2rem] h-full bg-white/40">
                         <div class="w-28 sm:w-44 flex-shrink-0 flex items-center justify-center">
                             <a href="tu-podes-compreender-a-biblia.html">
-                                <img src="Imagens/tpcbcapa.png" alt="Livro Kreeft" class="w-full h-auto shadow-xl rounded transition-transform duration-500 hover:scale-105">
+                                <img src="Imagens/tpcbcapa.png" alt="Livro Kreeft" class="w-full h-auto shadow-lg rounded transition-transform duration-500 hover:scale-105">
                             </a>
                         </div>
                         <div class="flex flex-col justify-center">
@@ -448,7 +460,6 @@
 
         <!-- SOBRE -->
         <section id="sobre" class="w-full bg-brand-bg py-16 sm:py-24 relative overflow-hidden">
-            <!-- J Monumental Watermark (Desktop) -->
             <img src="Imagens/Logo J.png" alt="J Watermark" class="desktop-logo-watermark">
             
             <div class="max-w-7xl mx-auto px-6 relative z-10">
@@ -473,13 +484,6 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- SEPARADOR MOBILE -->
-                    <div class="mobile-divider">
-                        <div class="mobile-divider-line"></div>
-                        <img src="Imagens/Logo J.png" alt="Mobile Separator" class="logo-separator-mobile">
-                        <div class="mobile-divider-line"></div>
                     </div>
 
                     <!-- Valores (Editorial Card) -->
