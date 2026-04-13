@@ -148,7 +148,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.04);
             transition: all 0.4s ease;
             flex: 1;
-            min-height: 200px; /* Aumentado para acomodar ícones maiores */
+            min-height: 160px; /* Ajustado para mobile */
             overflow: visible;
             gap: 0.5rem; 
         }
@@ -174,9 +174,9 @@
 
         .author-photo-circle {
             aspect-ratio: 1 / 1 !important;
-            width: 85px !important; /* Aumentado para escala mobile */
-            height: 85px !important;
-            min-width: 85px; min-height: 85px;
+            width: 64px !important; /* Reduzido 25% face ao anterior */
+            height: 64px !important;
+            min-width: 64px; min-height: 64px;
             border-radius: 999px !important;
             border: 2px solid white;
             box-shadow: 0 4px 10px rgba(0,0,0,0.12);
@@ -196,7 +196,7 @@
         }
 
         .book-thumb {
-            width: 116px; height: auto; /* DOBRO do tamanho no mobile */
+            width: 87px; height: auto; /* Reduzido 25% face ao anterior */
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));
             object-fit: contain;
             flex-shrink: 0;
@@ -206,7 +206,7 @@
         @media (min-width: 1024px) { .book-thumb { width: 155px; } }
 
         .vector-book-thumb {
-            width: 116px; height: auto; /* DOBRO do tamanho no mobile */
+            width: 87px; height: auto; /* Reduzido 25% face ao anterior */
             flex-shrink: 0;
             transition: transform 0.4s ease;
         }
@@ -373,9 +373,9 @@
                                     <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#D1D5DB" stroke-width="0.8" stroke-linejoin="round"/>
                                     <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#D1D5DB" stroke-width="0.8" stroke-linecap="round"/>
                                     <line x1="28" y1="15" x2="28" y2="125" stroke="#D1D5DB" stroke-width="0.5" stroke-dasharray="1 2"/>
-                                    <text x="79" y="58" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="14" letter-spacing="0.01em">A BÍBLIA É</text>
-                                    <text x="79" y="73" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="14" letter-spacing="0.01em">UM LIVRO</text>
-                                    <text x="79" y="88" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="14" letter-spacing="0.01em">CATÓLICO</text>
+                                    <text x="79" y="58" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="11" letter-spacing="0.01em">A BÍBLIA É</text>
+                                    <text x="79" y="72" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="11" letter-spacing="0.01em">UM LIVRO</text>
+                                    <text x="79" y="86" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="11" letter-spacing="0.01em">CATÓLICO</text>
                                 </svg>
                             </div>
                             <div class="flex flex-col items-center gap-2 sm:gap-4 lg:gap-6">
@@ -394,8 +394,8 @@
                                     <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#D1D5DB" stroke-width="0.8" stroke-linejoin="round"/>
                                     <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#D1D5DB" stroke-width="0.8" stroke-linecap="round"/>
                                     <line x1="28" y1="15" x2="28" y2="125" stroke="#D1D5DB" stroke-width="0.5" stroke-dasharray="1 2"/>
-                                    <text x="79" y="65" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="16" letter-spacing="0.04em">DURAS</text>
-                                    <text x="79" y="85" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="16" letter-spacing="0.04em">PALAVRAS</text>
+                                    <text x="79" y="62" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">DURAS</text>
+                                    <text x="79" y="80" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">PALAVRAS</text>
                                 </svg>
                             </div>
                             <div class="flex flex-col items-center gap-2 sm:gap-4 lg:gap-6">
@@ -430,7 +430,6 @@
                         <div class="absolute top-0 right-0 bg-brand-accent-red text-white px-5 sm:px-6 py-2 rounded-bl-2xl font-sans text-[10px] sm:text-[12px] font-black uppercase tracking-[0.2em]">Lançamento</div>
                         <div class="w-28 sm:w-44 flex-shrink-0 flex items-center justify-center">
                             <a href="a-eucaristia-e-mesmo-jesus.html">
-                                <!-- Borda atualizada: mais grossa e escura -->
                                 <img src="Imagens/aemjcapa.png" alt="Livro Joe" class="w-full h-auto border-2 border-gray-300 rounded transition-transform duration-500 hover:scale-105">
                             </a>
                         </div>
@@ -448,7 +447,6 @@
                     <div class="book-card flex flex-col sm:flex-row gap-6 p-6 sm:p-8 border-2 border-brand-gold/30 rounded-[2rem] h-full bg-white/40">
                         <div class="w-28 sm:w-44 flex-shrink-0 flex items-center justify-center">
                             <a href="tu-podes-compreender-a-biblia.html">
-                                <!-- Borda atualizada: mais grossa e escura -->
                                 <img src="Imagens/tpcbcapa.png" alt="Livro Kreeft" class="w-full h-auto border-2 border-gray-300 rounded transition-transform duration-500 hover:scale-105">
                             </a>
                         </div>
