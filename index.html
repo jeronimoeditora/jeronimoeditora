@@ -148,9 +148,9 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.04);
             transition: all 0.4s ease;
             flex: 1;
-            min-height: 140px; /* Aumentado em 50% para mobile */
+            min-height: 140px; 
             overflow: visible;
-            gap: 0.75rem; /* Espaço controlado entre foto e livro */
+            gap: 0.75rem; 
         }
 
         .feature-panel.kreeft-border { border: 2px solid #cfaf5c; }
@@ -166,7 +166,7 @@
         }
         @media (min-width: 1024px) { 
             .feature-panel { 
-                gap: 2.5rem; /* Aproxima mais no desktop do que o original */
+                gap: 2.5rem; 
                 padding: 2.5rem 3rem; 
                 min-height: 250px; 
             } 
@@ -174,9 +174,9 @@
 
         .author-photo-circle {
             aspect-ratio: 1 / 1 !important;
-            width: 52px !important; /* Ligeiramente maior para melhor leitura */
-            height: 52px !important;
-            min-width: 52px; min-height: 52px;
+            width: 65px !important; /* Aumentado em 125% para mobile */
+            height: 65px !important;
+            min-width: 65px; min-height: 65px;
             border-radius: 999px !important;
             border: 2px solid white;
             box-shadow: 0 4px 10px rgba(0,0,0,0.12);
@@ -196,7 +196,7 @@
         }
 
         .book-thumb {
-            width: 46px; height: auto; /* Ligeiramente maior para mobile */
+            width: 58px; height: auto; /* Aumentado em 125% para mobile */
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));
             object-fit: contain;
             flex-shrink: 0;
@@ -206,11 +206,11 @@
         @media (min-width: 1024px) { .book-thumb { width: 155px; } }
 
         .vector-book-thumb {
-            width: 46px; height: auto;
+            width: 58px; height: auto; /* Aumentado em 125% para mobile */
             flex-shrink: 0;
             transition: transform 0.4s ease;
         }
-        @media (min-width: 640px) { .vector-book-thumb { width: 85px; } } /* Ligeiramente maior no desktop para compensar largura */
+        @media (min-width: 640px) { .vector-book-thumb { width: 85px; } } 
         @media (min-width: 1024px) { .vector-book-thumb { width: 180px; } }
 
         /* --- SECÇÃO SÃO JERÓNIMO (PARALLAX) --- */
@@ -369,7 +369,6 @@
                         <span class="font-sans text-[7px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Em preparação</span>
                         <div class="feature-panel standard-border group">
                             <div class="vector-book-thumb group-hover:scale-105 transition-transform flex items-center justify-center">
-                                <!-- SVG Ajustado: Texto aumentado substancialmente e centralizado -->
                                 <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
                                     <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#D1D5DB" stroke-width="0.8" stroke-linejoin="round"/>
                                     <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#D1D5DB" stroke-width="0.8" stroke-linecap="round"/>
@@ -391,7 +390,6 @@
                         <span class="font-sans text-[7px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Brevemente</span>
                         <div class="feature-panel standard-border group">
                             <div class="vector-book-thumb group-hover:scale-105 transition-transform flex items-center justify-center">
-                                <!-- SVG Ajustado: Texto aumentado substancialmente e centralizado -->
                                 <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
                                     <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#D1D5DB" stroke-width="0.8" stroke-linejoin="round"/>
                                     <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#D1D5DB" stroke-width="0.8" stroke-linecap="round"/>
@@ -432,7 +430,8 @@
                         <div class="absolute top-0 right-0 bg-brand-accent-red text-white px-5 sm:px-6 py-2 rounded-bl-2xl font-sans text-[10px] sm:text-[12px] font-black uppercase tracking-[0.2em]">Lançamento</div>
                         <div class="w-28 sm:w-44 flex-shrink-0 flex items-center justify-center">
                             <a href="a-eucaristia-e-mesmo-jesus.html">
-                                <img src="Imagens/aemjcapa.png" alt="Livro Joe" class="w-full h-auto border border-gray-200 rounded transition-transform duration-500 hover:scale-105">
+                                <!-- Borda atualizada: border-2 border-gray-300 para ser mais visível e ligeiramente mais grossa -->
+                                <img src="Imagens/aemjcapa.png" alt="Livro Joe" class="w-full h-auto border-2 border-gray-300 rounded transition-transform duration-500 hover:scale-105">
                             </a>
                         </div>
                         <div class="flex flex-col justify-center">
@@ -449,7 +448,8 @@
                     <div class="book-card flex flex-col sm:flex-row gap-6 p-6 sm:p-8 border-2 border-brand-gold/30 rounded-[2rem] h-full bg-white/40">
                         <div class="w-28 sm:w-44 flex-shrink-0 flex items-center justify-center">
                             <a href="tu-podes-compreender-a-biblia.html">
-                                <img src="Imagens/tpcbcapa.png" alt="Livro Kreeft" class="w-full h-auto border border-gray-200 rounded transition-transform duration-500 hover:scale-105">
+                                <!-- Borda atualizada: border-2 border-gray-300 para ser mais visível e ligeiramente mais grossa -->
+                                <img src="Imagens/tpcbcapa.png" alt="Livro Kreeft" class="w-full h-auto border-2 border-gray-300 rounded transition-transform duration-500 hover:scale-105">
                             </a>
                         </div>
                         <div class="flex flex-col justify-center">
