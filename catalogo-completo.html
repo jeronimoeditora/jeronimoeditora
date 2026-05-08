@@ -44,7 +44,7 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
-        /* Otimização Mobile para evitar zoom automático no iOS */
+        /* Mobile Zoom Optimization */
         input, select, textarea {
             font-size: 16px !important;
         }
@@ -83,7 +83,6 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             
-            <!-- Título Desktop -->
             <h3 id="info-modal-title" class="hidden sm:block text-xl md:text-2xl font-bold font-serif text-brand-accent-blue mb-4 border-b pb-3 text-center pr-8 tracking-wide"></h3>
             
             <div class="flex flex-col sm:flex-row gap-6 overflow-y-auto custom-scrollbar pr-1">
@@ -91,14 +90,10 @@
                     <img id="info-modal-image" src="" alt="Capa" class="w-32 h-48 md:w-40 md:h-56 object-contain rounded-lg shadow-md mb-3" />
                 </div>
                 <div class="sm:w-3/5 space-y-4">
-                    <!-- Título Mobile -->
                     <h3 id="info-modal-title-mobile" class="sm:hidden text-xl font-bold font-serif text-brand-accent-blue text-center mb-1 leading-tight"></h3>
-                    
-                    <!-- Resumo maior -->
                     <p id="info-modal-summary" class="text-gray-700 italic leading-relaxed text-base md:text-lg font-classic"></p>
                     
                     <div class="pt-2 border-t border-gray-100 font-sans text-sm">
-                        <!-- Linha de Preço + Botão Detalhes -->
                         <div class="flex items-center justify-between mb-4">
                             <p class="font-bold text-brand-accent-red text-xl md:text-2xl font-classic" id="info-modal-price"></p>
                             <a id="info-modal-details-link" href="#" class="inline-flex items-center justify-center bg-brand-accent-blue text-white px-4 md:px-7 py-2 rounded-lg font-bold text-sm hover:bg-brand-accent-red transition-all shadow-md">
@@ -129,17 +124,14 @@
         </div>
     </div>
 
-    <!-- CONTENTOR DO MENU -->
     <div id="nav-placeholder"></div>
 
     <main class="flex-grow pt-24 md:pt-32 pb-12"> 
         <div class="max-w-6xl mx-auto px-4 md:px-6 text-center fade-in">
-            <!-- Título -->
             <h1 class="font-serif text-4xl sm:text-5xl text-brand-accent-blue mb-4 border-b pb-3 text-center border-brand-accent-blue/30 font-normal">
                 Catálogo Completo
             </h1>
             
-            <!-- Barra de Pesquisa e Filtros -->
             <div class="mt-2 mb-12 flex flex-col bg-white p-4 rounded-xl shadow-md border border-gray-100 text-left max-w-5xl mx-auto font-sans">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 items-center w-full">
                     <div class="border border-gray-200 rounded-lg overflow-hidden h-10 flex items-center">
@@ -147,6 +139,7 @@
                     </div>
                     <select id="category-filter" class="h-10 px-3 border border-gray-200 rounded-lg bg-white text-sm cursor-pointer outline-none focus:border-brand-gold" onchange="filterAndSortBooks()">
                         <option value="all">Todas as Categorias</option>
+                        <option value="Mariologia">Mariologia</option>
                         <option value="Formação Bíblica">Formação Bíblica</option>
                         <option value="Teologia Católica">Teologia Católica</option>
                     </select>
@@ -166,19 +159,19 @@
         </div>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ -->
     <div id="footer-placeholder"></div>
 
     <script>
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxWI62Xgm7Lz3k9yuUFaAkZZN6S4xcSqEmh62yhbRrOLYhgAQBem2LZWrGcwxjijGe7/exec'; 
         
         const bookData = [
-            { id: 3, title: "Tu podes compreender a Bíblia", author: "Peter Kreeft", price: 15.00, category: "Formação Bíblica", image: "Imagens/Kreeft2.png", summary: "Um guia prático para cada livro da Bíblia", techDetails: { pages: 321, isbn: "978-989-36716-0-3", binding: "Capa Mole", weight: "0,510 kg" }, visible: true, detailsUrl: "tu-podes-compreender-a-biblia" },
-            { id: 8, title: "A Eucaristia é mesmo Jesus", author: "Joe Heschmeyer", price: 13.50, category: "Teologia Católica", image: "Imagens/aemjcapa.png", summary: "Como o Corpo e o Sangue de Cristo são a Chave para Tudo que Cremos", techDetails: { pages: 164, isbn: "978-989-36716-1-0", binding: "Capa Mole", weight: "0,254 kg" }, visible: true, isComingSoon: false, detailsUrl: "a-eucaristia-e-mesmo-jesus" },
-            { id: 7, title: "Duras Palavras", author: "Trent Horn", price: 0.00, category: "Formação Bíblica", image: "https://placehold.co/400x600/f3f4f6/333333?text=Brevemente", summary: "Uma exploração profunda sobre os ensinamentos difíceis da fé.", techDetails: { pages: 0, isbn: "A definir", binding: "A definir", weight: "A definir" }, visible: true, isComingSoon: true },
-            { id: 2, title: "Jesus e o Jubileu", author: "John S. Bergsma", price: 22.00, category: "Estudos Bíblicos", image: "Imagens/Bergsma.png", summary: "O livro explora a conexão entre o ministério de Jesus e a lei do Jubileu.", techDetails: { pages: 280, isbn: "978-989-98218-2-2", binding: "Capa Mole", weight: "0,420 kg" }, visible: false, detailsUrl: "detalhes-bergsma" },
-            { id: 1, title: "Suma Teológica", author: "São Tomás de Aquino", price: 75.00, category: "Teologia", image: "Imagens/suma_teologica.png", visible: false },
-            { id: 4, title: "Convite aos Salmos", author: "Rolf A. Jacobson & Karl N. Jacobson", price: 28.50, category: "Teologia", image: "Imagens/Jacobson.png", visible: false }
+            { id: 3, title: "Tu podes compreender a Bíblia", author: "Peter Kreeft", price: 15.00, category: "Formação Bíblica", image: "Imagens/Kreeft2.png", summary: "Um guia prático para cada livro da Bíblia", techDetails: { pages: 321, isbn: "978-989-36716-0-3", binding: "Capa Mole", weight: "0,510 kg" }, visible: true, detailsUrl: "tu-podes-compreender-a-biblia.html" },
+            { id: 8, title: "A Eucaristia é mesmo Jesus", author: "Joe Heschmeyer", price: 13.50, category: "Teologia Católica", image: "Imagens/aemjcapa.png", summary: "Como o Corpo e o Sangue de Cristo são a Chave para Tudo que Cremos", techDetails: { pages: 164, isbn: "978-989-36716-1-0", binding: "Capa Mole", weight: "0,254 kg" }, visible: true, isComingSoon: false, detailsUrl: "a-eucaristia-e-mesmo-jesus.html" },
+            { id: 9, title: "Eis a Tua Mãe", author: "Tim Staples", price: 19.50, category: "Mariologia", image: "Imagens/etmcapa.png", summary: "Uma Defesa Bíblica e Histórica das Doutrinas Marianas", techDetails: { pages: 364, isbn: "978-989-36716-2-7", binding: "Capa Mole", weight: "0,534 kg" }, visible: true, detailsUrl: "eis-a-tua-mae.html" },
+            { id: 10, title: "A Bíblia é um Livro Católico", author: "Jimmy Akin", price: 0.00, category: "Geral", image: "https://placehold.co/400x600/f3f4f6/333333?text=Brevemente", summary: "Como a Igreja Católica nos deu a Bíblia.", techDetails: { pages: 0, isbn: "A definir", binding: "A definir", weight: "A definir" }, visible: true, isComingSoon: true },
+            { id: 7, title: "Duras Palavras", author: "Trent Horn", price: 0.00, category: "Geral", image: "https://placehold.co/400x600/f3f4f6/333333?text=Brevemente", summary: "Uma exploração profunda sobre os ensinamentos difíceis da fé.", techDetails: { pages: 0, isbn: "A definir", binding: "A definir", weight: "A definir" }, visible: true, isComingSoon: true },
+            { id: 1, title: "Suma Teológica", author: "São Tomás de Aquino", price: 75.00, category: "Teologia Católica", image: "Imagens/suma_teologica.png", visible: false },
+            { id: 4, title: "Convite aos Salmos", author: "Rolf A. Jacobson & Karl N. Jacobson", price: 28.50, category: "Teologia Católica", image: "Imagens/Jacobson.png", visible: false }
         ];
 
         function getSafePath(file) {
@@ -197,7 +190,7 @@
                 const footResp = await fetch(getSafePath('rodape'));
                 if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 updateCartUI();
-            } catch (e) { console.warn("Ambiente local detectado."); }
+            } catch (e) { console.warn("Modo offline."); }
         }
 
         function formatPrice(p) { return `€ ${p.toFixed(2).replace('.', ',')}`; }
@@ -246,10 +239,8 @@
             document.getElementById('info-modal-format').textContent = `Formato: ${book.techDetails.binding}`;
             
             const detailsLink = document.getElementById('info-modal-details-link');
-            // FIX: Alterado 'b.detailsUrl' para 'book.detailsUrl' para evitar erro de referência
             detailsLink.href = book.detailsUrl || '#';
             
-            // Gerir visibilidade do botão de adicionar no modal
             const addBtn = document.getElementById('info-modal-add-to-cart');
             if (book.isComingSoon) {
                 addBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
@@ -299,10 +290,8 @@
             
             books.forEach(b => {
                 const priceDisplay = b.isComingSoon && b.price === 0 ? 'Brevemente' : formatPrice(b.price);
-                
                 let infoBtnClass = 'text-brand-accent-blue border-2 border-brand-accent-blue hover:bg-gray-50 shadow-sm';
                 let btnClass = b.isComingSoon ? 'bg-gray-300 cursor-not-allowed text-gray-500' : 'bg-brand-accent-blue text-white hover:bg-brand-accent-red shadow-sm';
-                
                 let buyBtnContent = `${cartIcon} <span class="hidden md:inline ml-1 text-sm">${b.isComingSoon ? 'Em breve' : 'Comprar'}</span>`;
                 
                 container.innerHTML += `
@@ -343,11 +332,6 @@
                     el.classList.toggle('opacity-0', total === 0);
                 }
             });
-        }
-
-        function toggleMenu() { 
-            const menu = document.getElementById('mobile-menu');
-            if (menu) menu.classList.toggle('hidden'); 
         }
 
         window.onload = () => { 

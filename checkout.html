@@ -393,11 +393,11 @@
         const SHIPPING_MARGIN = 19; 
         const bookData = [
             { id: 1, title: "Suma Teológica", price: 75.00, weight: 2400 },
-            { id: 2, title: "Jesus e o Jubileu", price: 22.00, weight: 420 },
             { id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
             { id: 4, title: "Convite aos Salmos", price: 28.50, weight: 380 },
             { id: 7, title: "Duras Palavras", price: 0.00, weight: 350 },
-            { id: 8, title: "A eucaristia é mesmo Jesus", price: 12.00, weight: 254 }
+            { id: 8, title: "A eucaristia é mesmo Jesus", price: 13.50, weight: 254 },
+            { id: 9, title: "Eis a tua Mãe", price: 19.50, weight: 534 }
         ];
 
         function toggleMenu() {
@@ -413,7 +413,6 @@
             
             const fields = document.querySelectorAll('.billing-field');
             
-            // A caixa abre sempre que uma opção é seleccionada
             container.classList.remove('hidden');
 
             if (choice === 'sim') {
@@ -424,7 +423,6 @@
                     f.classList.remove('bg-white');
                 });
             } else {
-                // Se clicar em Não, a caixa aparece vazia para editar
                 fields.forEach(f => {
                     f.value = ''; 
                     f.removeAttribute('readonly');
@@ -445,7 +443,6 @@
             }
         }
 
-        // Listeners para sincronizar em tempo real e validar o botão imediatamente
         ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'].forEach(id => {
             const el = document.getElementById(id);
             if (el) {
@@ -457,7 +454,6 @@
             }
         });
 
-        // Monitorar campos de facturação manuais para validar botão
         document.querySelectorAll('.billing-field').forEach(field => {
             field.addEventListener('input', validateFinalButton);
         });
@@ -598,7 +594,6 @@
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             
-            // Campos obrigatórios do envio (Nome e Email incluídos como prioritários)
             const requiredEnvio = ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'];
             let envioValid = true;
             requiredEnvio.forEach(id => { 
@@ -606,7 +601,6 @@
                 if (el && !el.value.trim()) envioValid = false; 
             });
 
-            // Campos obrigatórios da facturação (apenas se 'Não' estiver seleccionado)
             const isDifferentBilling = document.getElementById('choice-nao').checked;
             let billingValid = true;
             if (isDifferentBilling) {
