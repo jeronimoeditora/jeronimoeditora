@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Eucaristia é mesmo Jesus | Jerónimo Editora</title>
+    <title>Eis a Tua Mãe | Jerónimo Editora</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,7 +87,7 @@
             opacity: 0.5;
         }
 
-        /* Setas de Navegação - Estabilizadas */
+        /* Setas de Navegação */
         .nav-arrow {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 50%;
@@ -148,28 +148,6 @@
             transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             user-select: none;
         }
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 65px;
-            height: 65px;
-            background: rgba(255,255,255,0.05);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.4s;
-            border: 1px solid rgba(255,255,255,0.15);
-            z-index: 100;
-        }
-        .lightbox-nav:hover {
-            background: #800000;
-            border-color: #800000;
-            transform: translateY(-50%) scale(1.1);
-        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
@@ -180,9 +158,9 @@
         <div class="max-w-6xl mx-auto px-6 fade-in">
             
             <nav class="text-[10px] md:text-base text-gray-400 mb-8 uppercase tracking-[0.2em]">
-                <a href="/" class="hover:text-brand-accent-red transition">Início</a> 
+                <a href="index.html" class="hover:text-brand-accent-red transition">Início</a> 
                 <span class="mx-1 md:mx-2">/</span> 
-                <a href="catalogo-completo" class="hover:text-brand-accent-red transition">Catálogo</a> 
+                <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition">Catálogo</a> 
                 <span class="mx-1 md:mx-2">/</span> 
                 <span class="text-brand-text font-bold">Detalhes</span>
             </nav>
@@ -207,16 +185,14 @@
                         </div>
 
                         <div class="flex justify-center w-full min-h-[400px] items-center cursor-pointer" onclick="openLightbox()">
-                            <img id="main-image" src="Imagens/etmcapa.png" alt="Capa do livro" 
+                            <img id="main-image" src="Imagens/etmcapa.png" alt="Capa Eis a Tua Mãe" 
                                  class="w-full h-auto object-contain book-shadow pointer-events-none" 
                                  onerror="this.src='https://placehold.co/400x600?text=LIVRO';">
                         </div>
                     </div>
                     
                     <!-- Miniaturas -->
-                    <div id="thumb-grid" class="grid grid-cols-4 gap-4 w-full max-w-sm">
-                        <!-- Gerado via JS -->
-                    </div>
+                    <div id="thumb-grid" class="grid grid-cols-4 gap-4 w-full max-w-sm"></div>
                 </div>
 
                 <!-- Informação -->
@@ -224,7 +200,7 @@
                     <div class="text-center md:text-left">
                         <div class="mb-4 text-[10px] md:text-base font-bold text-green-700 tracking-[0.2em] uppercase">Disponível</div>
                         <h1 class="font-serif text-2xl md:text-4xl text-brand-accent-blue font-black leading-tight uppercase tracking-tight">Eis a Tua Mãe</h1>
-                        <h2 class="font-serif text-base md:text-2xl text-brand-gold-dark italic mt-2">Uma Defesa Bíblica e Histórica das Doutrinas Marianas</br></h2>
+                        <h2 class="font-serif text-base md:text-2xl text-brand-gold-dark italic mt-2">Uma Defesa Bíblica e Histórica das Doutrinas Marianas</h2>
                         <p class="font-sans text-xs md:text-lg text-gray-500 font-bold uppercase tracking-widest mt-6">Tim Staples</p>
                     </div>
 
@@ -234,7 +210,7 @@
 
                     <div class="flex flex-col items-center md:items-start gap-6">
                         <span class="font-classic text-4xl md:text-5xl font-extrabold text-brand-accent-red">19,50€</span>
-                        <button onclick="addToCart('A Eucaristia é mesmo Jesus', 13.50)" class="w-full md:w-auto bg-brand-accent-red text-white py-4 px-12 rounded-xl font-bold uppercase tracking-widest hover:bg-red-900 transition-all shadow-2xl active:scale-95 text-base">
+                        <button onclick="addToCart('Eis a Tua Mãe', 19.50)" class="w-full md:w-auto bg-brand-accent-red text-white py-4 px-12 rounded-xl font-bold uppercase tracking-widest hover:bg-red-900 transition-all shadow-2xl active:scale-95 text-base">
                             Adicionar ao Carrinho
                         </button>
                     </div>
@@ -255,7 +231,7 @@
                 <div id="content-autor" class="hidden space-y-8 fade-in">
                     <div class="flex flex-col md:flex-row items-center gap-10 bg-white p-8 md:p-14 rounded-2xl shadow-sm border border-gray-50">
                         <div class="w-32 h-32 md:w-56 md:h-56 flex-shrink-0">
-                            <img src="Imagens/TimStaples.png" alt="Tim Staples" class="w-full h-full object-cover rounded-full shadow-lg border-4 border-brand-gold-light" onerror="this.src='https://placehold.co/200x200/002147/cfaf5c?text=TS';">
+                            <img src="Imagens/TimStaples.png" alt="Tim Staples" class="w-full h-full object-cover rounded-full shadow-lg border-4 border-brand-gold-light">
                         </div>
                         <div class="text-center md:text-left">
                             <h3 class="font-serif text-2xl md:text-3xl text-brand-accent-blue mb-4 font-bold">Tim Staples</h3>
@@ -268,7 +244,7 @@
 
                 <div id="content-ficha" class="hidden fade-in">
                     <div class="bg-white overflow-hidden rounded-2xl shadow-sm border border-gray-100 p-8">
-                        <table class="w-full text-sm md:text-xl">
+                        <table class="w-full text-sm md:text-xl text-left">
                             <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 w-1/3 px-6">ISBN</td><td class="py-6 px-6">978-989-36716-2-7</td></tr>
                             <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 px-6">Páginas</td><td class="py-6 px-6">364</td></tr>
                             <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 px-6">Formato</td><td class="py-6 px-6">Capa Mole (14 x 21 cm)</td></tr>
@@ -282,22 +258,11 @@
     </main>
 
     <!-- LIGHTBOX MODAL -->
-    <div id="lightbox-modal">
+    <div id="lightbox-modal" onclick="closeLightbox()">
         <button class="absolute top-8 right-8 text-white hover:text-brand-gold transition-colors z-[110]" onclick="closeLightbox()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
-
-        <div class="lightbox-nav left-8 md:left-16" onclick="event.stopPropagation(); changeImage(-1)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        </div>
-        
         <img id="lightbox-img" src="" alt="Ampliação" onclick="event.stopPropagation()">
-
-        <div class="lightbox-nav right-8 md:right-16" onclick="event.stopPropagation(); changeImage(1)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-        </div>
-
-        <div id="lightbox-counter" class="absolute bottom-12 text-white font-sans text-xs tracking-[0.3em] uppercase opacity-50"></div>
     </div>
 
     <div id="footer-placeholder"></div>
@@ -315,7 +280,6 @@
         ];
         let currentIndex = 0;
         let touchStartX = 0;
-        let touchEndX = 0;
 
         function renderThumbs() {
             const grid = document.getElementById('thumb-grid');
@@ -330,123 +294,37 @@
         function updateImage(index) {
             currentIndex = index;
             const mainImg = document.getElementById('main-image');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const counter = document.getElementById('lightbox-counter');
-            
             mainImg.style.opacity = '0';
-            mainImg.style.transform = 'scale(0.98)';
-            
             setTimeout(() => {
-                const newSrc = galleryImages[currentIndex];
-                const tempImg = new Image();
-                tempImg.src = newSrc;
-                tempImg.onload = () => {
-                    mainImg.src = newSrc;
-                    mainImg.style.opacity = '1';
-                    mainImg.style.transform = 'scale(1)';
-                    renderThumbs();
-
-                    if (document.getElementById('lightbox-modal').style.display === 'flex') {
-                        lightboxImg.style.opacity = '0';
-                        lightboxImg.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            lightboxImg.src = newSrc;
-                            lightboxImg.style.opacity = '1';
-                            lightboxImg.style.transform = 'scale(1)';
-                            counter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
-                        }, 50);
-                    }
-                };
-            }, 300); 
+                mainImg.src = galleryImages[currentIndex];
+                mainImg.style.opacity = '1';
+                renderThumbs();
+            }, 250);
         }
 
         function changeImage(step) {
-            let nextIndex = currentIndex + step;
-            if (nextIndex >= galleryImages.length) nextIndex = 0;
-            if (nextIndex < 0) nextIndex = galleryImages.length - 1;
-            updateImage(nextIndex);
+            currentIndex = (currentIndex + step + galleryImages.length) % galleryImages.length;
+            updateImage(currentIndex);
         }
 
         function openLightbox() {
             const modal = document.getElementById('lightbox-modal');
             const lImg = document.getElementById('lightbox-img');
-            const counter = document.getElementById('lightbox-counter');
             lImg.src = galleryImages[currentIndex];
-            counter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
-            
-            lImg.style.opacity = '0';
-            lImg.style.transform = 'scale(0.9)';
-            setTimeout(() => {
-                lImg.style.opacity = '1';
-                lImg.style.transform = 'scale(1)';
-            }, 50);
         }
 
         function closeLightbox() {
-            const lImg = document.getElementById('lightbox-img');
-            lImg.style.opacity = '0';
-            lImg.style.transform = 'scale(0.9)';
-            
-            setTimeout(() => {
-                document.getElementById('lightbox-modal').style.display = 'none';
-                document.body.style.overflow = 'auto';
-                updateImage(0); 
-            }, 300);
-        }
-
-        function handleSwipe() {
-            const swipeDistance = touchEndX - touchStartX;
-            const threshold = 60;
-            if (swipeDistance > threshold) changeImage(-1);
-            else if (swipeDistance < -threshold) changeImage(1);
-        }
-
-        function initGestures() {
-            const containers = [
-                document.getElementById('main-image-container'),
-                document.getElementById('lightbox-modal')
-            ];
-
-            containers.forEach(el => {
-                if (!el) return;
-                el.addEventListener('touchstart', e => {
-                    touchStartX = e.changedTouches[0].screenX;
-                }, { passive: true });
-
-                el.addEventListener('touchend', e => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    handleSwipe();
-                }, { passive: true });
-            });
-            
-            document.getElementById('lightbox-modal').addEventListener('click', (e) => {
-                if (e.target.id === 'lightbox-modal') closeLightbox();
-            });
-        }
-
-        async function loadComponents() {
-            try {
-                const nav = await fetch('menu?v=' + Date.now());
-                if (nav.ok) document.getElementById('nav-placeholder').innerHTML = await nav.text();
-                const foot = await fetch('rodape?v=' + Date.now());
-                if (foot.ok) document.getElementById('footer-placeholder').innerHTML = await foot.text();
-                updateCartUI();
-                renderThumbs();
-                initGestures();
-            } catch (e) { 
-                renderThumbs();
-                initGestures();
-            }
+            document.getElementById('lightbox-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         function showTab(tabId) {
             ['autor', 'ficha'].forEach(id => {
-                const c = document.getElementById('content-' + id);
-                const b = document.getElementById('tab-' + id);
-                if (c) c.classList.add('hidden');
-                if (b) { b.classList.remove('tab-active'); b.classList.add('text-gray-400'); }
+                document.getElementById('content-' + id).classList.add('hidden');
+                document.getElementById('tab-' + id).classList.remove('tab-active');
+                document.getElementById('tab-' + id).classList.add('text-gray-400');
             });
             document.getElementById('content-' + tabId).classList.remove('hidden');
             document.getElementById('tab-' + tabId).classList.add('tab-active');
@@ -454,12 +332,14 @@
 
         function addToCart(title, price) {
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const bookId = 8; // ID do Tim Staples
+            const bookId = 9; // ID Eis a Tua Mãe
             const existingIndex = cartItems.findIndex(item => item.id === bookId);
 
             if (existingIndex > -1) {
+                // SOMA A QUANTIDADE SE JÁ EXISTIR NO CARRINHO
                 cartItems[existingIndex].quantity += 1;
             } else {
+                // ADICIONA COMO NOVO ITEM
                 cartItems.push({ 
                     id: bookId, 
                     title: title, 
@@ -467,11 +347,12 @@
                     quantity: 1, 
                     image: 'Imagens/etmcapa.png', 
                     author: 'Tim Staples',
-                    weight: 0.534 // Peso correto conforme ficha técnica
+                    weight: 0.534
                 });
             }
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             updateCartUI();
+            
             const alert = document.getElementById('cart-alert');
             if (alert) {
                 alert.classList.remove('hidden');
@@ -486,16 +367,36 @@
             });
         }
 
+        async function loadComponents() {
+            try {
+                const navResp = await fetch('menu?v=' + Date.now());
+                if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                const footResp = await fetch('rodape?v=' + Date.now());
+                if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                updateCartUI();
+            } catch (e) { }
+        }
+
+        // Swipe Gestures
+        const container = document.getElementById('main-image-container');
+        container.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX, {passive: true});
+        container.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) changeImage(1);
+            if (touchStartX - touchEndX < -50) changeImage(-1);
+        }, {passive: true});
+
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeLightbox();
             if (e.key === 'ArrowRight') changeImage(1);
             if (e.key === 'ArrowLeft') changeImage(-1);
         });
 
-        window.addEventListener('DOMContentLoaded', () => {
+        window.onload = () => {
             loadComponents();
+            renderThumbs();
             showTab('autor');
-        });
+        };
     </script>
 </body>
 </html>
