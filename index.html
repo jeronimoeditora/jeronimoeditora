@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -148,12 +149,12 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.04);
             transition: all 0.4s ease;
             flex: 1;
-            min-height: 160px; /* Ajustado para mobile */
+            min-height: 160px;
             overflow: visible;
             gap: 0.5rem; 
         }
 
-        .feature-panel.kreeft-border { border: 2px solid #cfaf5c; }
+        .feature-panel.highlight-border { border: 2px solid #cfaf5c; }
         .feature-panel.standard-border { border: 2px solid #e5e7eb; }
 
         @media (min-width: 640px) {
@@ -277,6 +278,14 @@
         }
         @media (min-width: 640px) { .btn-modern-outline { padding: 1rem 2.5rem; font-size: 14px; border-radius: 12px; } }
 
+        /* Botão para catálogo: Azul base -> Dourado Escuro no hover */
+        .btn-catalog-main {
+            background: #002147; color: white; padding: 1rem 2.5rem; border-radius: 12px; font-weight: 800; text-transform: uppercase;
+            transition: all 0.3s ease; text-align: center; font-size: 14px; display: inline-flex; align-items: center; justify-content: center;
+            letter-spacing: 0.1em; box-shadow: 0 4px 15px rgba(0, 33, 71, 0.2);
+        }
+        .btn-catalog-main:hover { background: #b38e4a; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(179, 142, 74, 0.3); }
+
         .dropcap::first-letter {
             font-family: 'Playfair Display', serif; float: left; font-size: 3.5rem; line-height: 2.8rem; padding-right: 0.5rem; color: #800000; font-weight: bold;
         }
@@ -301,35 +310,35 @@
                         <div class="hero-badge-pill animate-pulse-subtle">Novo Lançamento</div>
                         
                         <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-2 sm:mb-4 leading-tight">
-                            A Eucaristia é <br> <span class="text-brand-accent-red italic">mesmo</span> Jesus
+                            Eis a <br> <span class="text-brand-accent-red italic">Tua</span> Mãe
                         </h1>
                         
                         <p class="font-classic text-[10px] sm:text-lg lg:text-2xl text-gray-500 italic mb-6 lg:mb-12 max-w-2xl leading-snug lg:whitespace-nowrap opacity-90">
-                            Como o Corpo e o Sangue de Cristo são a Chave para Tudo que Cremos
+                            Uma Defesa Bíblica e Histórica das Doutrinas Marianas
                         </p>
 
-                        <a href="a-eucaristia-e-mesmo-jesus.html" class="inline-flex items-center gap-2 sm:gap-6 mb-6 sm:mb-8 lg:mb-16 group transition-all">
+                        <a href="eis-a-tua-mae.html" class="inline-flex items-center gap-2 sm:gap-6 mb-6 sm:mb-8 lg:mb-16 group transition-all">
                             <div class="rounded-full overflow-hidden border-2 border-brand-gold shadow-md group-hover:border-brand-accent-red transition-all flex-shrink-0 author-photo-circle">
-                                <img src="Imagens/JoeHeschmeyer.png" alt="Joe Heschmeyer" class="w-full h-full object-cover">
+                                <img src="Imagens/TimStaples.png" alt="Tim Staples" class="w-full h-full object-cover">
                             </div>
                             <div class="flex flex-col">
                                 <p class="font-classic text-xs sm:text-2xl lg:text-4xl text-brand-gold italic group-hover:text-brand-accent-red transition-colors leading-tight">
-                                    por <span class="font-bold text-brand-gold-dark non-italic">Joe Heschmeyer</span>
+                                    por <span class="font-bold text-brand-gold-dark non-italic">Tim Staples</span>
                                 </p>
                             </div>
                         </a>
                         
                         <div class="flex flex-row gap-2 sm:gap-4 justify-start">
-                            <a href="a-eucaristia-e-mesmo-jesus.html" class="btn-modern-red">Ver Detalhes</a>
+                            <a href="eis-a-tua-mae.html" class="btn-modern-red">Ver Detalhes</a>
                             <a href="catalogo-completo.html" class="btn-modern-outline">Catálogo</a>
                         </div>
                     </div>
 
                     <div class="col-span-5 lg:col-span-5 hero-book-container pt-10 sm:pt-8 lg:pt-20">
                         <div class="book-glow" style="position: absolute; width: 120%; height: 120%; background: radial-gradient(circle, rgba(207, 175, 92, 0.15) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; pointer-events: none; filter: blur(40px);"></div>
-                        <a href="a-eucaristia-e-mesmo-jesus.html" class="relative block transition-transform hover:scale-[1.02] w-full flex justify-end">
-                            <img src="Imagens/capaAEMJ2.png" alt="Contracapa" class="hero-book-back hidden lg:block">
-                            <img src="Imagens/capaAEMJ3.png" alt="A Eucaristia é mesmo Jesus" class="hero-book-img floating-element">
+                        <a href="eis-a-tua-mae.html" class="relative block transition-transform hover:scale-[1.02] w-full flex justify-end">
+                            <img src="Imagens/capaETM2.png" alt="Contracapa" class="hero-book-back hidden lg:block">
+                            <img src="Imagens/capaETM3.png" alt="Eis a Tua Mãe" class="hero-book-img floating-element">
                         </a>
                     </div>
                 </div>
@@ -340,33 +349,33 @@
                 <!-- GRELHA 2x2 -->
                 <div class="grid grid-cols-2 gap-3 sm:gap-6 lg:gap-10 mb-12 sm:mb-16 lg:mb-24 lg:max-w-5xl">
                     
-                    <!-- Quadro 1: Peter Kreeft -->
+                    <!-- Quadro 1: Peter Kreeft (COM LINHA DOURADA) -->
                     <div class="flex flex-col flex-1 min-w-0 lg:max-w-[440px]">
-                        <span class="font-sans text-[7px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Também disponível</span>
-                        <a href="tu-podes-compreender-a-biblia.html" class="feature-panel kreeft-border group">
+                        <span class="font-sans text-[9px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Também disponível</span>
+                        <a href="tu-podes-compreender-a-biblia.html" class="feature-panel highlight-border group">
                             <img src="Imagens/capaTPCB2.png" alt="Capa Peter Kreeft" class="book-thumb group-hover:scale-105 transition-transform">
                             <div class="flex flex-col items-center gap-2 sm:gap-4 lg:gap-6">
                                 <img src="Imagens/PeterKreeft.png" alt="Peter Kreeft" class="author-photo-circle">
-                                <span class="font-sans text-[7px] sm:text-sm font-black text-brand-gold-dark uppercase tracking-wider text-center">Peter Kreeft</span>
+                                <span class="font-sans text-[9px] sm:text-sm font-black text-brand-gold-dark uppercase tracking-wider text-center">Peter Kreeft</span>
                             </div>
                         </a>
                     </div>
 
-                    <!-- Quadro 2: Tim Staples -->
+                    <!-- Quadro 2: Joe Heschmeyer (COM LINHA DOURADA) -->
                     <div class="flex flex-col flex-1 min-w-0 lg:max-w-[440px]">
-                        <span class="font-sans text-[7px] sm:text-sm font-black text-brand-accent-red uppercase tracking-wider mb-2 sm:mb-4">Em produção</span>
-                        <div class="feature-panel standard-border group">
-                            <img src="Imagens/capaETM2.png" alt="Eis a Tua Mãe" class="book-thumb group-hover:scale-105 transition-transform">
+                        <span class="font-sans text-[9px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Também disponível</span>
+                        <a href="a-eucaristia-e-mesmo-jesus.html" class="feature-panel highlight-border group">
+                            <img src="Imagens/capaEMJ2.png" alt="A Eucaristia é mesmo Jesus" class="book-thumb group-hover:scale-105 transition-transform">
                             <div class="flex flex-col items-center gap-2 sm:gap-4 lg:gap-6">
-                                <img src="Imagens/TimStaples.png" alt="Tim Staples" class="author-photo-circle">
-                                <span class="font-sans text-[7px] sm:text-sm font-black text-gray-400 uppercase tracking-wider text-center">Tim Staples</span>
+                                <img src="Imagens/JoeHeschmeyer.png" alt="Joe Heschmeyer" class="author-photo-circle">
+                                <span class="font-sans text-[9px] sm:text-sm font-black text-brand-gold-dark uppercase tracking-wider text-center">Joe Heschmeyer</span>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
                     <!-- Quadro 3: Jimmy Akin -->
                     <div class="flex flex-col flex-1 min-w-0 lg:max-w-[440px]">
-                        <span class="font-sans text-[7px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Em preparação</span>
+                        <span class="font-sans text-[9px] sm:text-sm font-black text-brand-accent-red uppercase tracking-wider mb-2 sm:mb-4">Em produção</span>
                         <div class="feature-panel standard-border group">
                             <div class="vector-book-thumb group-hover:scale-105 transition-transform flex items-center justify-center">
                                 <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
@@ -380,14 +389,14 @@
                             </div>
                             <div class="flex flex-col items-center gap-2 sm:gap-4 lg:gap-6">
                                 <img src="Imagens/Jimmy Akin.png" alt="Jimmy Akin" class="author-photo-circle">
-                                <span class="font-sans text-[7px] sm:text-sm font-black text-gray-400 uppercase tracking-wider text-center">Jimmy Akin</span>
+                                <span class="font-sans text-[9px] sm:text-sm font-black text-gray-400 uppercase tracking-wider text-center">Jimmy Akin</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Quadro 4: Trent Horn -->
                     <div class="flex flex-col flex-1 min-w-0 lg:max-w-[440px]">
-                        <span class="font-sans text-[7px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Brevemente</span>
+                        <span class="font-sans text-[9px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Brevemente</span>
                         <div class="feature-panel standard-border group">
                             <div class="vector-book-thumb group-hover:scale-105 transition-transform flex items-center justify-center">
                                 <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
@@ -400,7 +409,7 @@
                             </div>
                             <div class="flex flex-col items-center gap-2 sm:gap-4 lg:gap-6">
                                 <img src="Imagens/TrentHorn.jpg" alt="Trent Horn" class="author-photo-circle">
-                                <span class="font-sans text-[7px] sm:text-sm font-black text-gray-400 uppercase tracking-wider text-center">Trent Horn</span>
+                                <span class="font-sans text-[9px] sm:text-sm font-black text-gray-400 uppercase tracking-wider text-center">Trent Horn</span>
                             </div>
                         </div>
                     </div>
@@ -425,30 +434,30 @@
         <!-- ÚLTIMAS PUBLICAÇÕES -->
         <section id="novidades" class="py-12 sm:py-20 bg-brand-bg">
             <div class="max-w-6xl mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch mb-10 md:mb-16">
+                    <!-- Destaque: Tim Staples -->
                     <div class="book-card flex flex-col sm:flex-row gap-6 p-6 sm:p-8 bg-brand-gold-light rounded-[2rem] border border-brand-gold/20 shadow-sm relative overflow-hidden h-full">
                         <div class="absolute top-0 right-0 bg-brand-accent-red text-white px-5 sm:px-6 py-2 rounded-bl-2xl font-sans text-[10px] sm:text-[12px] font-black uppercase tracking-[0.2em]">Lançamento</div>
                         <div class="w-28 sm:w-44 flex-shrink-0 flex items-center justify-center">
-                            <a href="a-eucaristia-e-mesmo-jesus.html">
-                                <!-- Design Atualizado: Sombra Soft + Borda Subtil para definir o contorno contra o fundo branco -->
-                                <img src="Imagens/aemjcapa.png" alt="Livro Joe" class="w-full h-auto shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-black/5 rounded transition-transform duration-500 hover:scale-105">
+                            <a href="eis-a-tua-mae.html">
+                                <img src="Imagens/etmcapa.png" alt="Livro Tim Staples" class="w-full h-auto shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-black/5 rounded transition-transform duration-500 hover:scale-105">
                             </a>
                         </div>
                         <div class="flex flex-col justify-center">
                             <span class="text-brand-gold-dark font-sans text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Destaque</span>
-                            <h3 class="font-serif text-xl md:text-2xl text-brand-accent-blue font-bold leading-tight mb-1 md:mb-2">A Eucaristia é mesmo Jesus</h3>
-                            <p class="font-serif text-sm text-gray-500 italic mb-4">Joe Heschmeyer</p>
+                            <h3 class="font-serif text-xl md:text-2xl text-brand-accent-blue font-bold leading-tight mb-1 md:mb-2">Eis a Tua Mãe</h3>
+                            <p class="font-serif text-sm text-gray-500 italic mb-4">Tim Staples</p>
                             <div class="flex items-center gap-4">
-                                <span class="font-classic text-xl font-bold text-brand-accent-red">13,50€</span>
-                                <a href="a-eucaristia-e-mesmo-jesus.html" class="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-accent-blue border-b border-brand-accent-blue transition-all pb-1">Detalhes</a>
+                                <span class="font-classic text-xl font-bold text-brand-accent-red">19,50€</span>
+                                <a href="eis-a-tua-mae.html" class="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-accent-blue border-b border-brand-accent-blue transition-all pb-1">Detalhes</a>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Destaque: Peter Kreeft -->
                     <div class="book-card flex flex-col sm:flex-row gap-6 p-6 sm:p-8 border-2 border-brand-gold/30 rounded-[2rem] h-full bg-white/40">
                         <div class="w-28 sm:w-44 flex-shrink-0 flex items-center justify-center">
                             <a href="tu-podes-compreender-a-biblia.html">
-                                <!-- Design Atualizado: Sombra Soft + Borda Subtil para definir o contorno contra o fundo branco -->
                                 <img src="Imagens/tpcbcapa.png" alt="Livro Kreeft" class="w-full h-auto shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-black/5 rounded transition-transform duration-500 hover:scale-105">
                             </a>
                         </div>
@@ -462,6 +471,13 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Botão de Catálogo Completo: Azul -> Dourado no hover -->
+                <div class="flex justify-center">
+                    <a href="catalogo-completo.html" class="btn-catalog-main">
+                        Ver Catálogo Completo
+                    </a>
                 </div>
             </div>
         </section>
@@ -482,7 +498,7 @@
                                 <span class="w-8 h-px bg-brand-accent-red/30"></span> Missão
                             </h3>
                             <div class="text-lg md:text-xl text-gray-700 leading-relaxed font-classic dropcap flex-grow italic md:not-italic">
-                                A Jerónimo Editora nasce com o propósito de enriquecer o panorama editorial português, especializando-se em obras de formação bíblica Católica que primam pela profundidade teológica e fidelidade às fontes. O seu nome é uma homenagem a São Jerónimo, presbítero e Doutor da Igreja, padroeiro dos estudiosos da Sagrada Escritura, que nos recorda:
+                                A Jerónimo Editora nasce com o propósito de enriquecer o panorama editorial português, especializando-se em obras de formation bíblica Católica que primam pela profundidade teológica e fidelidade às fontes. O seu nome é uma homenagem a São Jerónimo, presbítero e Doutor da Igreja, padroeiro dos estudiosos da Sagrada Escritura, que nos recorda:
                             </div>
                             <div class="pt-6 border-t border-brand-gold/20">
                                 <p class="text-xl md:text-2xl text-brand-accent-blue italic font-classic leading-tight">
