@@ -28,9 +28,6 @@
                         'brand-accent-blue': '#002147', 
                         'brand-gold': '#cfaf5c', 
                         'brand-gold-dark': '#b38e4a', 
-                        'brand-product-highlight': '#b38e4a', 
-                        'brand-product-dark': '#4e342e',
-                        'coming-soon-dark': '#7a5d29', 
                     }
                 }
             }
@@ -38,58 +35,140 @@
     </script>
 
     <style>
-        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        .product-shadow {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        @media (min-width: 768px) {
+            .product-shadow:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        .modal-overlay { cursor: pointer; }
+        .modal-content { cursor: default; }
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cfaf5c; border-radius: 10px; }
+
+        .img-enlarge-bg {
+            background-color: #fcfcfc;
+            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+            background-size: 10px 10px;
+        }
+
+        /* Evita zoom automático em inputs no iOS */
+        input, select { font-size: 16px !important; }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- CONTENTOR DO MENU (Carregado via JS) -->
+    <!-- Modal Confirmação Carrinho -->
+    <div id="add-to-cart-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-60 flex items-center justify-center hidden modal-overlay" onclick="closeCartConfirmation()">
+        <div class="bg-white p-6 rounded-lg shadow-2xl max-w-md w-[90%] mx-4 modal-content relative" onclick="event.stopPropagation()">
+            <button onclick="closeCartConfirmation()" class="absolute top-4 right-4 text-gray-400 hover:text-brand-accent-red">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" x2="6" x2="18" y2="18"></line></svg>
+            </button>
+            <h3 class="text-xl md:text-2xl font-bold font-serif text-brand-accent-blue mb-5 text-center italic">Item Adicionado!</h3>
+            <div id="cart-confirmation-details" class="flex items-center space-x-4 p-3 border border-gray-100 rounded-lg bg-gray-50 mb-6"></div>
+            <div class="flex flex-col space-y-3 font-sans">
+                <button onclick="closeCartConfirmation()" class="w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-md">Continuar a Comprar</button>
+                <button onclick="window.location.href='checkout'" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-3 rounded-lg hover:bg-yellow-600 transition-colors shadow-md">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detalhes do Produto -->
+    <div id="info-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center hidden modal-overlay p-4" onclick="closeInfoModal()">
+        <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[95vh] overflow-hidden flex flex-col md:flex-row modal-content relative" onclick="event.stopPropagation()">
+            <button onclick="closeInfoModal()" class="absolute top-3 right-3 z-20 bg-white/90 rounded-full p-2 text-gray-500 hover:text-brand-accent-red shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            
+            <!-- Imagem -->
+            <div class="w-full md:w-3/5 bg-gray-100 flex items-center justify-center p-6 img-enlarge-bg min-h-[250px] md:min-h-0">
+                <img id="info-modal-image" src="" alt="Produto" class="max-w-full max-h-[40vh] md:max-h-[70vh] object-contain shadow-xl border-2 border-white" />
+            </div>
+
+            <!-- Informações -->
+            <div class="w-full md:w-2/5 p-5 md:p-8 flex flex-col justify-between bg-white overflow-y-auto custom-scrollbar">
+                <div>
+                    <span id="info-modal-category" class="text-[9px] font-black uppercase tracking-[0.2em] text-brand-gold-dark mb-1 block">Postal</span>
+                    <h3 id="info-modal-title" class="text-xl md:text-2xl font-bold font-serif text-brand-accent-blue mb-3 leading-tight"></h3>
+                    
+                    <div class="w-10 h-0.5 bg-brand-accent-red mb-4"></div>
+                    
+                    <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-2">Detalhes</p>
+                    <p id="info-modal-summary" class="text-gray-700 leading-relaxed text-sm md:text-base font-classic italic mb-6"></p>
+                    
+                    <div class="mb-6">
+                        <span id="info-modal-price" class="text-2xl md:text-3xl font-extrabold text-brand-accent-red font-classic"></span>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <button id="info-modal-add-to-cart" onclick="modalAddToCart()" class="w-full bg-brand-accent-red text-white py-3 md:py-4 rounded-lg font-bold uppercase tracking-widest hover:bg-red-900 transition-all shadow-md active:scale-95">
+                        ADICIONAR AO CARRINHO
+                    </button>
+                    <p class="text-[9px] text-gray-400 text-center font-medium uppercase tracking-tight">Papel de alta gramagem • A Cores - 1 Postal Frente e Verso</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="nav-placeholder"></div>
 
-    <main class="flex-grow pt-24 md:pt-32 pb-24"> 
-        <div class="max-w-6xl mx-auto px-6 fade-in">
-            <!-- Título restaurado para o estilo original (idêntico ao ficheiro inicial) -->
-            <h1 class="font-serif text-4xl sm:text-5xl text-brand-gold-dark mb-4 border-b pb-3 text-center border-brand-gold/50">
+    <main class="flex-grow pt-20 md:pt-32 pb-16"> 
+        <div class="max-w-6xl mx-auto px-4 md:px-6 text-center fade-in">
+            <h1 class="font-serif text-3xl md:text-5xl text-brand-gold-dark mb-4 border-b pb-3 text-center border-brand-gold/50 font-normal">
                 Produtos e Artigos Religiosos
             </h1>
             
-            <!-- Barra de Pesquisa e Filtros restaurada para o estilo original -->
-            <div class="mb-10 flex flex-col gap-3 md:gap-4 bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 items-center w-full text-left">
-                    <div class="md:col-span-1 border border-gray-300 rounded-lg focus-within:ring-brand-gold focus-within:ring-2">
-                        <input type="text" id="search-input" placeholder="Pesquisar..." class="w-full py-2 px-3 text-sm outline-none bg-transparent" disabled>
+            <!-- Barra de Pesquisa e Filtros (Otimizada para Mobile) -->
+            <div class="mb-8 flex flex-col bg-white p-3 md:p-4 rounded-xl shadow-sm border border-gray-100 text-left max-w-5xl mx-auto font-sans">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="border border-gray-200 rounded-lg overflow-hidden h-11 flex items-center bg-gray-50/30">
+                        <input type="text" id="search-input" placeholder="Pesquisar..." class="w-full h-full px-3 text-sm outline-none bg-transparent" onkeyup="filterProducts()">
                     </div>
-                    <select id="category-filter" class="w-full py-2 px-3 border border-gray-300 rounded-lg text-sm bg-gray-50 cursor-not-allowed" disabled>
-                        <option value="all">Todas as Categorias</option>
-                    </select>
-                    <select id="sort-order" class="w-full py-2 px-3 border border-gray-300 rounded-lg text-sm bg-gray-50 cursor-not-allowed" disabled>
-                        <option value="default">Ordenar Por...</option>
-                    </select>
-                    <!-- Botão corrigido: Casing igual ao original (sem uppercase forçado) -->
-                    <button class="w-full py-2 px-3 bg-brand-gold-dark text-white font-bold rounded-lg opacity-50 shadow-md text-sm">
-                        Limpar Filtros
+                    <div class="grid grid-cols-2 sm:contents gap-2">
+                        <select id="category-filter" class="h-11 px-2 border border-gray-200 rounded-lg bg-white text-xs md:text-sm outline-none" onchange="filterProducts()">
+                            <option value="all">Categorias</option>
+                            <option value="Postais">Postais</option>
+                        </select>
+                        <select id="sort-order" class="h-11 px-2 border border-gray-200 rounded-lg bg-white text-xs md:text-sm outline-none" onchange="filterProducts()">
+                            <option value="default">Ordenar</option>
+                            <option value="az">A-Z</option>
+                            <option value="price-asc">Preço</option>
+                        </select>
+                    </div>
+                    <button onclick="clearFilters()" class="h-11 bg-brand-gold-dark text-white font-bold rounded-lg hover:bg-brand-accent-red transition-all text-xs uppercase tracking-wider shadow-sm">
+                        Limpar
                     </button>
                 </div>
             </div>
 
-            <!-- Informação Brevemente: Mais sofisticada e pequena -->
-            <div class="py-24 text-center">
-                <p class="font-serif italic text-base md:text-lg text-coming-soon-dark tracking-[0.2em]">
-                    Brevemente
-                </p>
-            </div>
-
-            <!-- Contentor de Lista (Escondido) -->
-            <div id="product-list-container" class="hidden grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+            <p id="no-results" class="col-span-full text-center text-lg text-gray-400 hidden py-20 font-serif italic">Nenhum artigo encontrado.</p>
+            
+            <!-- Grelha de Produtos (2 colunas no mobile) -->
+            <div id="product-list-container" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 justify-center"></div>
         </div>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ (Carregado via JS) -->
     <div id="footer-placeholder"></div>
 
     <script>
-        // --- SISTEMA MODULAR (Menu e Rodapé) ---
+        const productData = [
+            { id: 101, title: "São Jerónimo Escrevendo", price: 3.00, category: "Postais", image: "postal1.jpg", summary: "Pintura: Michelangelo Merisi da Caravaggio (1571–1610). Data: c. 1605–1606.", visible: true },
+            { id: 102, title: "São Jerónimo 1", price: 3.00, category: "Postais", image: "postal2.jpg", summary: "Gravura: Pieter de Jode I (Antuérpia, 1570–1634). Epigrama: atríbuido a Cornelis Schonaeus (1540–1611); tradução livre.", visible: true },
+            { id: 103, title: "São Jerónimo 2", price: 3.00, category: "Postais", image: "postal3.jpg", summary: "Gravura: Jan Sadeler I, segundo composição original de Bartholomeus Spranger. Data: c. 1568–1600. Epigrama: Atribuído a Cornelis Schonaeus (1540–1611).", visible: true },
+            { id: 104, title: "São Jerónimo a Ler", price: 3.00, category: "Postais", image: "postal4.jpg", summary: "Gravura: Jusepe de Ribera (conhecido como Lo Spagnoletto, 1591–1652). Data: c. 1624.", visible: true },
+            { id: 105, title: "A Virgem e o Menino com São Jerónimo", price: 3.00, category: "Postais", image: "postal5.jpg", summary: "Gravura: Francesco Bartolozzi (1728–1815) e Henri-Charles Müller (1784–1846), segundo Correggio. Data: 1822.", visible: true }
+        ];
+
         function getSafePath(file) {
             const currentUrl = window.location.href;
             if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
@@ -106,7 +185,109 @@
                 const footResp = await fetch(getSafePath('rodape'));
                 if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 updateCartUI();
-            } catch (e) { console.warn("Ambiente local: menu/rodapé não carregados via fetch."); }
+            } catch (e) { console.warn("Modo offline."); }
+        }
+
+        function formatPrice(p) { return `€ ${p.toFixed(2).replace('.', ',')}`; }
+        function closeCartConfirmation() { document.getElementById('add-to-cart-modal').classList.add('hidden'); }
+        function closeInfoModal() { document.getElementById('info-modal').classList.add('hidden'); }
+        
+        function addToCart(productId, productTitle) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const product = productData.find(p => p.id === productId);
+            if (!product) return;
+            
+            const existingIndex = cartItems.findIndex(item => item.id === productId);
+            if (existingIndex > -1) { 
+                cartItems[existingIndex].quantity += 1; 
+            } else { 
+                cartItems.push({ id: productId, title: productTitle, price: product.price, quantity: 1, image: product.image, author: "Jerónimo Editora", weight: 0.05 }); 
+            }
+            
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartUI();
+            document.getElementById('cart-confirmation-details').innerHTML = `<img src="${product.image}" class="w-12 h-10 object-cover rounded shadow-sm" /><div><h4 class="font-bold text-xs leading-tight">${product.title}</h4><p class="text-brand-accent-red font-bold text-xs">${formatPrice(product.price)}</p></div>`;
+            document.getElementById('add-to-cart-modal').classList.remove('hidden');
+        }
+
+        function openInfoModal(productId) {
+            const product = productData.find(p => p.id === productId);
+            if (!product) return;
+            
+            document.getElementById('info-modal-title').textContent = product.title;
+            document.getElementById('info-modal-image').src = product.image;
+            document.getElementById('info-modal-summary').textContent = product.summary;
+            document.getElementById('info-modal-price').textContent = formatPrice(product.price);
+            
+            // Etiqueta singular no modal
+            const displayLabel = product.category === 'Postais' ? 'Postal' : product.category;
+            document.getElementById('info-modal-category').textContent = displayLabel;
+
+            document.getElementById('info-modal').dataset.activeProductId = productId;
+            document.getElementById('info-modal').classList.remove('hidden');
+        }
+
+        function modalAddToCart() {
+             const productId = parseInt(document.getElementById('info-modal').dataset.activeProductId);
+             const product = productData.find(p => p.id === productId);
+             if (product) { addToCart(productId, product.title); closeInfoModal(); }
+        }
+
+        function filterProducts() {
+            const term = document.getElementById('search-input').value.toLowerCase().trim();
+            const category = document.getElementById('category-filter').value;
+            const sort = document.getElementById('sort-order').value;
+            
+            let filtered = productData.filter(p => {
+                const matchesSearch = p.title.toLowerCase().includes(term);
+                const matchesCategory = category === 'all' || p.category === category;
+                return p.visible && matchesSearch && matchesCategory;
+            });
+
+            if (sort === 'az') filtered.sort((a, b) => a.title.localeCompare(b.title));
+            else if (sort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+            renderProducts(filtered);
+        }
+
+        function renderProducts(products) {
+            const container = document.getElementById('product-list-container');
+            container.innerHTML = '';
+            document.getElementById('no-results').classList.toggle('hidden', products.length > 0);
+            
+            const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`;
+            const cartIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>`;
+            
+            products.forEach(p => {
+                // Lógica para etiqueta singular nos cartões
+                const cardLabel = p.category === 'Postais' ? 'Postal' : p.category;
+
+                container.innerHTML += `
+                    <div class="text-center group product-shadow bg-white rounded-xl p-3 md:p-6 flex flex-col justify-between cursor-pointer" onclick="openInfoModal(${p.id})">
+                        <div class="flex-grow">
+                            <div class="overflow-hidden rounded-lg mb-3 md:mb-6 flex justify-center py-3 bg-gray-50/50 aspect-square items-center">
+                                <img src="${p.image}" class="max-w-[90%] max-h-[90%] object-contain shadow-sm border border-gray-100" />
+                            </div>
+                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-[0.1em] text-brand-gold-dark mb-1 block">${cardLabel}</span>
+                            <h4 class="font-serif text-sm md:text-lg text-brand-text font-bold group-hover:text-brand-accent-red transition-colors duration-200 leading-tight h-10 md:h-12 overflow-hidden flex items-center justify-center">${p.title}</h4>
+                            <span class="text-base md:text-2xl font-classic font-extrabold text-brand-accent-red mt-1 md:mt-2 block">${formatPrice(p.price)}</span>
+                        </div>
+                        <div class="flex items-center justify-center mt-4 md:mt-6 border-t pt-3 space-x-1 md:space-x-2">
+                            <button class="text-brand-accent-blue border border-brand-accent-blue hover:bg-gray-50 p-2 md:px-5 rounded-lg flex items-center justify-center h-9 md:h-11" onclick="openInfoModal(${p.id}); event.stopPropagation();" title="Informação">
+                                ${infoIcon} <span class="hidden md:inline ml-1 text-sm font-bold">Informação</span>
+                            </button>
+                            <button class="bg-brand-accent-blue text-white hover:bg-brand-accent-red p-2 md:px-5 rounded-lg flex items-center justify-center h-9 md:h-11 shadow-sm transition-all" onclick="addToCart(${p.id}, '${p.title}'); event.stopPropagation();" title="Comprar">
+                                ${cartIcon} <span class="hidden md:inline ml-1 text-sm font-bold">Comprar</span>
+                            </button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function clearFilters() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('category-filter').value = 'all';
+            document.getElementById('sort-order').value = 'default';
+            filterProducts();
         }
 
         function updateCartUI() {
@@ -125,7 +306,10 @@
             if (menu) menu.classList.toggle('hidden'); 
         }
 
-        window.onload = loadComponents;
+        window.onload = () => { 
+            loadComponents();
+            renderProducts(productData); 
+        };
     </script>
 </body>
 </html>
