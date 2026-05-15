@@ -506,7 +506,6 @@
                 const lineTotal = item.price * item.quantity;
                 subtotal += lineTotal;
                 const book = bookData.find(b => b.id === item.id);
-                // Se for um item novo não listado, assume 350g, caso contrário usa o peso real
                 pesoTotal += ((book ? book.weight : 350) * item.quantity);
                 html += `
                     <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
