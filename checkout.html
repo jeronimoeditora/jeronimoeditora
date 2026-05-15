@@ -105,7 +105,7 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- Overlay de Carregamento Melhorado -->
+    <!-- Overlay de Carregamento -->
     <div id="loading-overlay" class="fixed inset-0 z-[110] bg-white bg-opacity-95 flex flex-col items-center justify-center hidden">
         <div class="loader mb-4"></div>
         <p id="loading-text" class="text-brand-accent-blue font-bold font-sans text-lg text-center px-6">A iniciar...</p>
@@ -144,7 +144,7 @@
             <div class="hidden md:flex items-center space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700">
                 <a href="/" class="hover:text-brand-accent-red transition-colors">Início</a>
                 <a href="catalogo-completo" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
-                <a href="produtos" class="hover:text-brand-accent-red transition-colors">Produtos</a>
+                <a href="produtos" class="hover:text-brand-accent-red transition-colors text-brand-accent-red">Produtos</a>
                 <a href="/#sobre" class="hover:text-brand-accent-red transition-colors">Sobre</a>
                 <a href="contacto" class="hover:text-brand-accent-red transition-colors">Contacto</a>
             </div>
@@ -391,13 +391,20 @@
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec"; 
 
         const SHIPPING_MARGIN = 19; 
+        // Dados mestre dos produtos (Livros e Postais) para cálculo de peso
         const bookData = [
             { id: 1, title: "Suma Teológica", price: 75.00, weight: 2400 },
             { id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
             { id: 4, title: "Convite aos Salmos", price: 28.50, weight: 380 },
             { id: 7, title: "Duras Palavras", price: 0.00, weight: 350 },
             { id: 8, title: "A eucaristia é mesmo Jesus", price: 13.50, weight: 254 },
-            { id: 9, title: "Eis a tua Mãe", price: 19.50, weight: 534 }
+            { id: 9, title: "Eis a tua Mãe", price: 19.50, weight: 534 },
+            // Novos Postais (IDs 101-105)
+            { id: 101, title: "São Jerónimo Escrevendo", price: 3.00, weight: 50 },
+            { id: 102, title: "São Jerónimo 1", price: 3.00, weight: 50 },
+            { id: 103, title: "São Jerónimo 2", price: 3.00, weight: 50 },
+            { id: 104, title: "São Jerónimo a Ler", price: 3.00, weight: 50 },
+            { id: 105, title: "A Virgem e o Menino com São Jerónimo", price: 3.00, weight: 50 }
         ];
 
         function toggleMenu() {
@@ -499,6 +506,7 @@
                 const lineTotal = item.price * item.quantity;
                 subtotal += lineTotal;
                 const book = bookData.find(b => b.id === item.id);
+                // Se for um item novo não listado, assume 350g, caso contrário usa o peso real
                 pesoTotal += ((book ? book.weight : 350) * item.quantity);
                 html += `
                     <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
