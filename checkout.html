@@ -101,9 +101,32 @@
             width: 0%;
             transition: width 0.4s ease;
         }
+
+        .suggestions-scroll::-webkit-scrollbar { height: 4px; }
+        .suggestions-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+        .suggestions-scroll::-webkit-scrollbar-thumb { background: #cfaf5c; border-radius: 10px; }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+        .suggestion-card {
+            transition: all 0.3s ease;
+        }
+        .suggestion-card:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <!-- Modal Vista Rápida (Apenas Imagem) -->
+    <div id="quickview-modal" class="fixed inset-0 z-[120] bg-black bg-opacity-95 hidden items-center justify-center p-4 cursor-pointer" onclick="closeQuickView()">
+        <button onclick="closeQuickView()" class="absolute top-6 right-6 z-30 text-white hover:text-brand-gold transition-colors">
+            <i class="fas fa-times text-3xl"></i>
+        </button>
+        <img id="qv-image" src="" alt="Produto" class="max-w-full max-h-[90vh] object-contain shadow-2xl">
+    </div>
 
     <!-- Overlay de Carregamento -->
     <div id="loading-overlay" class="fixed inset-0 z-[110] bg-white bg-opacity-95 flex flex-col items-center justify-center hidden">
@@ -144,7 +167,7 @@
             <div class="hidden md:flex items-center space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700">
                 <a href="/" class="hover:text-brand-accent-red transition-colors">Início</a>
                 <a href="catalogo-completo" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
-                <a href="produtos" class="hover:text-brand-accent-red transition-colors text-brand-accent-red">Produtos</a>
+                <a href="produtos" class="hover:text-brand-accent-red transition-colors">Produtos</a>
                 <a href="/#sobre" class="hover:text-brand-accent-red transition-colors">Sobre</a>
                 <a href="contacto" class="hover:text-brand-accent-red transition-colors">Contacto</a>
             </div>
@@ -324,7 +347,18 @@
                 <div class="lg:w-5/12 order-1 lg:order-2 h-fit lg:sticky lg:top-24">
                     <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10">
                         <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2">Carrinho de Compras</h2>
-                        <div id="summary-list" class="space-y-5 mb-6 max-h-[50vh] overflow-y-auto pr-2"></div>
+                        
+                        <div id="summary-list" class="space-y-5 mb-6 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar"></div>
+
+                        <!-- Secção de Sugestões de Artigos -->
+                        <div id="suggestions-container" class="mt-4 pt-4 border-t border-white/10 hidden">
+                            <h3 class="text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-3 flex items-center">
+                                <i class="fas fa-plus-circle mr-2"></i> Complete a sua encomenda
+                            </h3>
+                            <div id="suggestions-list" class="flex gap-4 overflow-x-auto pb-4 suggestions-scroll">
+                                <!-- Preenchido via JS -->
+                            </div>
+                        </div>
 
                         <div class="space-y-2 pt-4 border-t border-white/20 text-sm">
                             <div class="flex justify-between opacity-80">
@@ -391,7 +425,7 @@
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec"; 
 
         const SHIPPING_MARGIN = 19; 
-        // Dados mestre dos produtos (Livros e Postais) para cálculo de peso
+        
         const bookData = [
             { id: 1, title: "Suma Teológica", price: 75.00, weight: 2400 },
             { id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
@@ -399,17 +433,32 @@
             { id: 7, title: "Duras Palavras", price: 0.00, weight: 350 },
             { id: 8, title: "A eucaristia é mesmo Jesus", price: 13.50, weight: 254 },
             { id: 9, title: "Eis a tua Mãe", price: 19.50, weight: 534 },
-            // Novos Postais (IDs 101-105)
-            { id: 101, title: "São Jerónimo Escrevendo", price: 3.00, weight: 50 },
-            { id: 102, title: "São Jerónimo 1", price: 3.00, weight: 50 },
-            { id: 103, title: "São Jerónimo 2", price: 3.00, weight: 50 },
-            { id: 104, title: "São Jerónimo a Ler", price: 3.00, weight: 50 },
-            { id: 105, title: "A Virgem e o Menino com São Jerónimo", price: 3.00, weight: 50 }
+            { id: 101, title: "São Jerónimo a Escrever", price: 3.90, weight: 50, image: "Imagens/postal1.png" },
+            { id: 102, title: "São Jerónimo 1", price: 3.90, weight: 50, image: "Imagens/postal2.png" },
+            { id: 103, title: "São Jerónimo 2", price: 3.90, weight: 50, image: "Imagens/postal3.png" },
+            { id: 104, title: "São Jerónimo a Ler", price: 3.90, weight: 50, image: "Imagens/postal4.png" },
+            { id: 105, title: "A Virgem e o Menino com São Jerónimo", price: 3.90, weight: 50, image: "Imagens/postal5.png" }
         ];
 
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             if (menu) menu.classList.toggle('hidden');
+        }
+
+        function openQuickView(id) {
+            const product = bookData.find(b => b.id === id);
+            if (!product) return;
+            
+            document.getElementById('qv-image').src = product.image;
+            document.getElementById('quickview-modal').classList.remove('hidden');
+            document.getElementById('quickview-modal').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQuickView() {
+            document.getElementById('quickview-modal').classList.add('hidden');
+            document.getElementById('quickview-modal').classList.remove('flex');
+            document.body.style.overflow = 'auto';
         }
 
         function handleBillingChoice() {
@@ -419,7 +468,6 @@
             const choice = choiceInput.value;
             
             const fields = document.querySelectorAll('.billing-field');
-            
             container.classList.remove('hidden');
 
             if (choice === 'sim') {
@@ -537,7 +585,73 @@
             document.getElementById('summary-subtotal').textContent = `€ ${subtotal.toFixed(2).replace('.', ',')}`;
             document.getElementById('summary-shipping').textContent = `€ ${custoPortes.toFixed(2).replace('.', ',')}`;
             document.getElementById('summary-total').textContent = `€ ${(subtotal + custoPortes).toFixed(2).replace('.', ',')}`;
+            
+            renderSuggestions(items);
             validateFinalButton();
+        }
+
+        function renderSuggestions(currentItems) {
+            const container = document.getElementById('suggestions-container');
+            const list = document.getElementById('suggestions-list');
+            
+            // Apenas IDs específicos (101 e 103) que não estejam já no carrinho
+            const suggestions = bookData.filter(b => [101, 103].includes(b.id) && !currentItems.some(item => item.id === b.id));
+            
+            if (suggestions.length === 0) {
+                container.classList.add('hidden');
+                return;
+            }
+            
+            container.classList.remove('hidden');
+            let html = '';
+            
+            suggestions.forEach(s => {
+                html += `
+                    <div class="flex-shrink-0 w-40 bg-white/5 rounded-xl p-3 border border-white/10 flex flex-col items-center text-center suggestion-card">
+                        <div class="relative group cursor-pointer" onclick="openQuickView(${s.id})">
+                            <img src="${s.image}" class="w-28 h-24 object-cover rounded-lg shadow-lg mb-2 border border-white/20 transition-transform group-hover:scale-105">
+                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
+                                <i class="fas fa-search-plus text-white text-lg"></i>
+                            </div>
+                        </div>
+                        <p class="text-[10px] font-bold text-white leading-tight h-8 overflow-hidden mb-2">Postal: ${s.title}</p>
+                        <div class="flex items-center justify-between w-full mt-auto">
+                            <span class="text-[11px] text-brand-gold font-bold">€ ${s.price.toFixed(2).replace('.', ',')}</span>
+                            <button onclick="quickAdd(${s.id})" class="bg-brand-gold text-brand-accent-blue rounded-full w-7 h-7 flex items-center justify-center hover:bg-yellow-500 transition-colors shadow-sm">
+                                <i class="fas fa-plus text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Cartão "Ver mais"
+            html += `
+                <a href="produtos" class="flex-shrink-0 w-32 bg-brand-gold/10 rounded-xl p-3 border border-brand-gold/30 flex flex-col items-center justify-center text-center suggestion-card hover:bg-brand-gold/20">
+                    <div class="w-10 h-10 bg-brand-gold/20 rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-arrow-right text-brand-gold"></i>
+                    </div>
+                    <p class="text-[9px] font-bold text-brand-gold uppercase tracking-wider">Ver mais em Produtos</p>
+                </a>
+            `;
+            
+            list.innerHTML = html;
+        }
+
+        function quickAdd(productId) {
+            const product = bookData.find(b => b.id === productId);
+            if (!product) return;
+            
+            let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            items.push({ 
+                id: product.id, 
+                title: product.title, 
+                price: product.price, 
+                quantity: 1 
+            });
+            
+            localStorage.setItem('cartItems', JSON.stringify(items));
+            loadCartSummary();
         }
 
         function changeQuantity(id, delta) {

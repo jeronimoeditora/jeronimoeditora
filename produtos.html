@@ -61,17 +61,15 @@
             background-size: 10px 10px;
         }
 
-        /* Evita zoom automático em inputs no iOS */
         input, select { font-size: 16px !important; }
 
-        /* Estilo para o cursor de zoom */
         .cursor-zoom-in { cursor: zoom-in; }
         .cursor-zoom-out { cursor: zoom-out; }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- Lightbox Overlay (Para ampliar a imagem ao máximo) -->
+    <!-- Lightbox Overlay -->
     <div id="lightbox-overlay" class="fixed inset-0 z-[120] bg-black bg-opacity-95 hidden items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()">
         <button class="absolute top-6 right-6 text-white text-4xl hover:text-brand-gold transition-colors">&times;</button>
         <img id="lightbox-image" src="" alt="Ampliação" class="max-w-full max-h-full object-contain shadow-2xl transition-transform duration-300">
@@ -99,7 +97,6 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             
-            <!-- Imagem com funcionalidade de Ampliar -->
             <div class="w-full md:w-3/5 bg-gray-100 flex flex-col items-center justify-center p-6 img-enlarge-bg min-h-[250px] md:min-h-0 relative group">
                 <img id="info-modal-image" src="" alt="Produto" onclick="openLightbox()" class="max-w-full max-h-[40vh] md:max-h-[70vh] object-contain shadow-xl border-2 border-white cursor-zoom-in transition-transform duration-500 hover:scale-[1.02]" />
                 <button onclick="openLightbox()" class="mt-4 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-brand-accent-blue transition-colors">
@@ -108,7 +105,6 @@
                 </button>
             </div>
 
-            <!-- Informações -->
             <div class="w-full md:w-2/5 p-5 md:p-8 flex flex-col justify-between bg-white overflow-y-auto custom-scrollbar">
                 <div>
                     <span id="info-modal-category" class="text-[9px] font-black uppercase tracking-[0.2em] text-brand-gold-dark mb-1 block">Postal</span>
@@ -116,10 +112,11 @@
                     
                     <div class="w-10 h-0.5 bg-brand-accent-red mb-4"></div>
                     
-                    <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-2">Detalhes / Ficha Técnica</p>
-                    <p id="info-modal-summary" class="text-gray-700 leading-relaxed text-sm md:text-base font-classic italic mb-6"></p>
+                    <div id="info-modal-content" class="space-y-6">
+                        <!-- Conteúdo dinâmico (Ficha Técnica e Detalhes) via JS -->
+                    </div>
                     
-                    <div class="mb-6">
+                    <div class="mt-6 mb-6">
                         <span id="info-modal-price" class="text-2xl md:text-3xl font-extrabold text-brand-accent-red font-classic"></span>
                     </div>
                 </div>
@@ -128,7 +125,6 @@
                     <button id="info-modal-add-to-cart" onclick="modalAddToCart()" class="w-full bg-brand-accent-red text-white py-3 md:py-4 rounded-lg font-bold uppercase tracking-widest hover:bg-red-900 transition-all shadow-md active:scale-95">
                         ADICIONAR AO CARRINHO
                     </button>
-                    <p class="text-[9px] text-gray-400 text-center font-medium uppercase tracking-tight">Papel de alta gramagem • A Cores - 1 Postal Frente e Verso</p>
                 </div>
             </div>
         </div>
@@ -142,7 +138,6 @@
                 Produtos e Artigos Religiosos
             </h1>
             
-            <!-- Barra de Pesquisa e Filtros -->
             <div class="mb-8 flex flex-col bg-white p-3 md:p-4 rounded-xl shadow-sm border border-gray-100 text-left max-w-5xl mx-auto font-sans">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                     <div class="border border-gray-200 rounded-lg overflow-hidden h-11 flex items-center bg-gray-50/30">
@@ -167,7 +162,6 @@
 
             <p id="no-results" class="col-span-full text-center text-lg text-gray-400 hidden py-20 font-serif italic">Nenhum artigo encontrado.</p>
             
-            <!-- Grelha de Produtos -->
             <div id="product-list-container" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 justify-center"></div>
         </div>
     </main>
@@ -176,11 +170,56 @@
 
     <script>
         const productData = [
-            { id: 101, title: "São Jerónimo Escrevendo", price: 3.00, category: "Postais", image: "Imagens/postal1.png", summary: "Pintura: Michelangelo Merisi da Caravaggio (1571–1610). Data: c. 1605–1606.", visible: true },
-            { id: 102, title: "São Jerónimo 1", price: 3.00, category: "Postais", image: "Imagens/postal2.png", summary: "Gravura: Pieter de Jode I (Antuérpia, 1570–1634). Epigrama: atríbuido a Cornelis Schonaeus (1540–1611); tradução livre.", visible: true },
-            { id: 103, title: "São Jerónimo 2", price: 3.00, category: "Postais", image: "Imagens/postal3.png", summary: "Gravura: Jan Sadeler I, segundo composição original de Bartholomeus Spranger. Data: c. 1568–1600. Epigrama: Atribuído a Cornelis Schonaeus (1540–1611).", visible: true },
-            { id: 104, title: "São Jerónimo a Ler", price: 3.00, category: "Postais", image: "Imagens/postal4.png", summary: "Gravura: Jusepe de Ribera (conhecido como Lo Spagnoletto, 1591–1652). Data: c. 1624.", visible: true },
-            { id: 105, title: "A Virgem e o Menino com São Jerónimo", price: 3.00, category: "Postais", image: "Imagens/postal5.png", summary: "Gravura: Francesco Bartolozzi (1728–1815) e Henri-Charles Müller (1784–1846), segundo Correggio. Data: 1822.", visible: true }
+            { 
+                id: 101, 
+                title: "São Jerónimo a Escrever", 
+                price: 3.90, 
+                category: "Postais", 
+                image: "Imagens/postal1.png", 
+                painting: "Pintura: Michelangelo Merisi da Caravaggio (1571–1610). Data: c. 1605–1606.",
+                orientation: "H",
+                visible: true 
+            },
+            { 
+                id: 102, 
+                title: "São Jerónimo 1", 
+                price: 3.90, 
+                category: "Postais", 
+                image: "Imagens/postal2.png", 
+                painting: "Gravura: Pieter de Jode I (Antuérpia, 1570–1634). Epigrama: atríbuido a Cornelis Schonaeus (1540–1611); tradução livre.",
+                orientation: "V",
+                visible: true 
+            },
+            { 
+                id: 103, 
+                title: "São Jerónimo 2", 
+                price: 3.90, 
+                category: "Postais", 
+                image: "Imagens/postal3.png", 
+                painting: "Gravura: Jan Sadeler I, segundo composição original de Bartholomeus Spranger. Data: c. 1568–1600. Epigrama: Atribuído a Cornelis Schonaeus (1540–1611).",
+                orientation: "V",
+                visible: true 
+            },
+            { 
+                id: 104, 
+                title: "São Jerónimo a Ler", 
+                price: 3.90, 
+                category: "Postais", 
+                image: "Imagens/postal4.png", 
+                painting: "Gravura: Jusepe de Ribera (conhecido como Lo Spagnoletto, 1591–1652). Data: c. 1624.",
+                orientation: "V",
+                visible: true 
+            },
+            { 
+                id: 105, 
+                title: "A Virgem e o Menino com São Jerónimo", 
+                price: 3.90, 
+                category: "Postais", 
+                image: "Imagens/postal5.png", 
+                painting: "Gravura: Francesco Bartolozzi (1728–1815) e Henri-Charles Müller (1784–1846), segundo Correggio. Data: 1822.",
+                orientation: "H",
+                visible: true 
+            }
         ];
 
         function getSafePath(file) {
@@ -214,14 +253,14 @@
                 img.src = src;
                 overlay.classList.remove('hidden');
                 overlay.classList.add('flex');
-                document.body.style.overflow = 'hidden'; // Impede scroll
+                document.body.style.overflow = 'hidden';
             }
         }
 
         function closeLightbox() {
             document.getElementById('lightbox-overlay').classList.add('hidden');
             document.getElementById('lightbox-overlay').classList.remove('flex');
-            document.body.style.overflow = 'auto'; // Restaura scroll
+            document.body.style.overflow = 'auto';
         }
 
         function addToCart(productId, productTitle) {
@@ -248,11 +287,29 @@
             
             document.getElementById('info-modal-title').textContent = product.title;
             document.getElementById('info-modal-image').src = product.image;
-            document.getElementById('info-modal-summary').textContent = product.summary;
             document.getElementById('info-modal-price').textContent = formatPrice(product.price);
             
             const displayLabel = product.category === 'Postais' ? 'Postal' : product.category;
             document.getElementById('info-modal-category').textContent = displayLabel;
+
+            const measures = product.orientation === 'V' ? '11.5cm x 16.5 cm' : '16.5cm x 11.5 cm';
+            
+            const contentEl = document.getElementById('info-modal-content');
+            contentEl.innerHTML = `
+                <div>
+                    <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-2">FICHA TÉCNICA</p>
+                    <p class="text-gray-700 leading-relaxed text-sm md:text-base font-classic italic">${product.painting}</p>
+                </div>
+                <div>
+                    <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-2">DETALHES</p>
+                    <ul class="list-none space-y-1 text-gray-700 text-sm md:text-base font-sans">
+                        <li class="flex items-start"><span class="mr-2 text-brand-gold-dark">•</span> 1 Postal Frente e Verso</li>
+                        <li class="flex items-start"><span class="mr-2 text-brand-gold-dark">•</span> Papel de alta gramagem</li>
+                        <li class="flex items-start"><span class="mr-2 text-brand-gold-dark">•</span> A Cores</li>
+                        <li class="flex items-start"><span class="mr-2 text-brand-gold-dark">•</span> Medidas ${measures}</li>
+                    </ul>
+                </div>
+            `;
 
             document.getElementById('info-modal').dataset.activeProductId = productId;
             document.getElementById('info-modal').classList.remove('hidden');
@@ -303,7 +360,7 @@
                         </div>
                         <div class="flex items-center justify-center mt-4 md:mt-6 border-t pt-3 space-x-1 md:space-x-2">
                             <button class="text-brand-accent-blue border border-brand-accent-blue hover:bg-gray-50 p-2 md:px-5 rounded-lg flex items-center justify-center h-9 md:h-11" onclick="openInfoModal(${p.id}); event.stopPropagation();" title="Informação">
-                                ${infoIcon} <span class="hidden md:inline ml-1 text-sm font-bold">Informação</span>
+                                ${infoIcon} <span class="hidden md:inline ml-1 text-sm font-bold">Info</span>
                             </button>
                             <button class="bg-brand-accent-blue text-white hover:bg-brand-accent-red p-2 md:px-5 rounded-lg flex items-center justify-center h-9 md:h-11 shadow-sm transition-all" onclick="addToCart(${p.id}, '${p.title}'); event.stopPropagation();" title="Comprar">
                                 ${cartIcon} <span class="hidden md:inline ml-1 text-sm font-bold">Comprar</span>
