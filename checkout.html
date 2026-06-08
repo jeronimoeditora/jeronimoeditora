@@ -87,21 +87,6 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .progress-bar-container {
-            width: 200px;
-            height: 4px;
-            background: #e5e7eb;
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 1rem;
-        }
-        .progress-bar-fill {
-            height: 100%;
-            background: #800000;
-            width: 0%;
-            transition: width 0.4s ease;
-        }
-
         .suggestions-scroll::-webkit-scrollbar { height: 4px; }
         .suggestions-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
         .suggestions-scroll::-webkit-scrollbar-thumb { background: #cfaf5c; border-radius: 10px; }
@@ -431,7 +416,7 @@
             { id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
             { id: 8, title: "A Eucaristia é mesmo Jesus", price: 13.50, weight: 254 },
             { id: 9, title: "Eis a Tua Mãe", price: 19.50, weight: 534 },
-            { id: 10, title: "A Bíblia é um Livro Católico", price: 17.50, weight: 250 },
+            { id: 10, title: "A Bíblia é um Livro Católico", price: 17.50, weight: 272 }, // Peso atualizado para 272g (0,272 kg)
             { id: 7, title: "Duras Palavras", price: 0.00, weight: 350 },
             { id: 11, title: "Vai para o Céu", price: 0.00, weight: 350 },
             { id: 101, title: "São Jerónimo a Escrever", price: 3.90, weight: 50, image: "Imagens/postal1.png" },
@@ -554,7 +539,7 @@
                 const lineTotal = item.price * item.quantity;
                 subtotal += lineTotal;
                 const book = bookData.find(b => b.id === item.id);
-                pesoTotal += ((book ? book.weight : 350) * item.quantity);
+                pesoTotal += ((book ? book.weight : 272) * item.quantity); // Padrão atualizado com base no novo peso
                 html += `
                     <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
