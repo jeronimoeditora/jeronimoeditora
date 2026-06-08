@@ -51,25 +51,27 @@
 
         .hero-section {
             position: relative;
-            min-height: 95vh;
+            min-height: 85vh;
             display: flex;
             align-items: center;
             overflow: hidden;
-            padding-top: 60px; 
+            padding-top: 80px; 
+            padding-bottom: 60px;
             background-color: #fff;
+            user-select: none; /* Evita seleção acidental ao arrastar no telemóvel */
         }
 
         .hero-bg-accent {
             position: absolute;
-            top: 0; right: 0; width: 45%; height: 100%;
+            top: 0; right: 0; width: 42%; height: 100%;
             background: linear-gradient(135deg, #f9f6f0 0%, #f2eee4 100%);
             z-index: 0; 
-            clip-path: polygon(28% 0, 100% 0, 100% 100%, 0% 100%);
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
         }
 
         @media (max-width: 1024px) {
-            .hero-bg-accent { width: 100%; clip-path: none; height: 100%; opacity: 0.3; }
-            .hero-section { min-height: auto; padding-bottom: 40px; padding-top: 80px; }
+            .hero-bg-accent { width: 100%; clip-path: none; height: 100%; opacity: 0.25; }
+            .hero-section { min-height: auto; padding-top: 100px; padding-bottom: 50px; }
         }
 
         .hero-content-wrapper { position: relative; z-index: 20; }
@@ -79,16 +81,20 @@
             z-index: 30; 
             perspective: 2500px;
             display: flex;
-            justify-content: flex-end;
-            align-items: flex-start;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-book-container { justify-content: flex-end; }
         }
 
         .hero-book-img {
-            max-width: 420px;
-            width: 100%;
+            max-width: 280px;
+            width: 80%;
             height: auto;
-            filter: drop-shadow(15px 20px 40px rgba(0,0,0,0.15));
-            transform: rotateY(-6deg) rotateX(2deg);
+            filter: drop-shadow(15px 25px 45px rgba(0,0,0,0.18));
+            transform: rotateY(-8deg) rotateX(3deg);
             transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
             backface-visibility: hidden;
             transform-style: preserve-3d;
@@ -96,152 +102,50 @@
             image-rendering: -webkit-optimize-contrast;
         }
 
-        .hero-book-back {
-            position: absolute;
-            width: 78%;
-            height: auto;
-            right: -15%;
-            bottom: -22%;
-            filter: drop-shadow(10px 15px 30px rgba(0,0,0,0.1));
-            transform: rotateY(18deg) rotateZ(4deg);
-            z-index: 1;
-            opacity: 0.75;
-            pointer-events: none;
+        @media (min-width: 640px) {
+            .hero-book-img { max-width: 320px; }
         }
 
-        .floating-element { animation: floatingHero 8s ease-in-out infinite; }
+        .floating-element { animation: floatingHero 7s ease-in-out infinite; }
         @keyframes floatingHero { 
-            0%, 100% { transform: translateY(0) rotateY(-6deg) rotateX(2deg); } 
-            50% { transform: translateY(-12px) rotateY(-6deg) rotateX(2deg); } 
+            0%, 100% { transform: translateY(0) rotateY(-8deg) rotateX(3deg); } 
+            50% { transform: translateY(-12px) rotateY(-8deg) rotateX(3deg); } 
         }
 
         .hero-title { 
-            font-size: clamp(1.6rem, 7vw, 5.2rem); 
-            line-height: 1.1; 
-            letter-spacing: -0.02em;
+            font-size: clamp(1.8rem, 5.5vw, 3.8rem); 
+            line-height: 1.15; 
+            letter-spacing: -0.01em;
         }
 
-        .hero-badge-pill {
-            display: inline-block;
-            padding: 0.5rem 1.2rem;
-            background: #cfaf5c;
-            color: #002147;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-size: clamp(0.6rem, 2.5vw, 0.85rem);
-            border-radius: 9999px;
-            margin-bottom: 1rem;
-            z-index: 50;
-            position: relative;
-            transform: translateZ(0);
-            -webkit-font-smoothing: subpixel-antialiased;
-        }
-
-        /* --- QUADROS DESTAQUE --- */
-        .feature-panel {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.75rem 0.5rem;
-            border-radius: 1.25rem;
-            background: #fff;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
-            transition: all 0.4s ease;
-            flex: 1;
-            min-height: 160px;
-            overflow: visible;
-            gap: 0.5rem; 
-        }
-
-        .feature-panel.highlight-border { border: 2px solid #cfaf5c; }
-        .feature-panel.standard-border { border: 2px solid #e5e7eb; }
-
-        @media (min-width: 640px) {
-            .feature-panel { 
-                padding: 1.5rem 1.5rem; 
-                gap: 1.5rem; 
-                min-height: 120px;
-                border-radius: 1.5rem;
-            }
-        }
-        @media (min-width: 1024px) { 
-            .feature-panel { 
-                gap: 2.5rem; 
-                padding: 2.5rem 3rem; 
-                min-height: 250px; 
-            } 
-        }
-
-        .author-photo-circle {
-            aspect-ratio: 1 / 1 !important;
-            width: 64px !important; 
-            height: 64px !important;
-            min-width: 64px; min-height: 64px;
-            border-radius: 999px !important;
-            border: 2px solid white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-            object-fit: cover;
-            flex-shrink: 0; 
-            z-index: 10;
-            image-rendering: -webkit-optimize-contrast;
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        
-        @media (min-width: 640px) {
-            .author-photo-circle { width: 80px !important; height: 80px !important; min-width: 80px; min-height: 80px; border-width: 3.5px; }
-        }
-        @media (min-width: 1024px) { 
-            .author-photo-circle { width: 160px !important; height: 160px !important; min-width: 160px; min-height: 160px; } 
-        }
-
-        .book-thumb {
-            width: 87px; height: auto; 
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));
-            object-fit: contain;
-            flex-shrink: 0;
-            transition: transform 0.4s ease;
-        }
-        @media (min-width: 640px) { .book-thumb { width: 70px; } }
-        @media (min-width: 1024px) { .book-thumb { width: 155px; } }
-
-        .vector-book-thumb {
-            width: 87px; height: auto; 
-            flex-shrink: 0;
-            transition: transform 0.4s ease;
-        }
-        @media (min-width: 640px) { .vector-book-thumb { width: 85px; } } 
-        @media (min-width: 1024px) { .vector-book-thumb { width: 180px; } }
-
-        /* --- SECÇÃO SÃO JERÓNIMO (PARALLAX) --- */
+        /* --- SÃO JERÓNIMO PARALLAX --- */
         .art-viewport {
-            position: relative; width: 100%; height: 70vh; overflow: hidden; background-color: #000;
+            position: relative; width: 100%; height: 60vh; overflow: hidden; background-color: #000;
         }
-        @media (min-width: 768px) { .art-viewport { height: 90vh; } }
+        @media (min-width: 768px) { .art-viewport { height: 75vh; } }
 
         .art-bg-fixed {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('Imagens/Jeronimo.jpg');
+            background-image: url('Imagens/Jeronimo.png');
             background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; z-index: 1;
         }
         @media (max-width: 1024px) { .art-bg-fixed { background-attachment: scroll; } }
 
         .art-overlay-gradient {
             position: absolute; inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.92) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.95) 100%);
             z-index: 5; pointer-events: none;
         }
 
-        .text-glow-white { text-shadow: 0 4px 20px rgba(0, 0, 0, 1); }
+        .text-glow-white { text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9); }
 
-        /* --- MARCA DE ÁGUA DESKTOP --- */
+        /* --- MARCA DE ÁGUA --- */
         .desktop-logo-watermark {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-12deg);
-            width: 850px;
-            opacity: 0.07;
+            width: 800px;
+            opacity: 0.05;
             pointer-events: none;
             z-index: 0;
             display: none;
@@ -253,7 +157,7 @@
             background: white;
             border-radius: 1.5rem;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
             border-left: 5px solid #cfaf5c; 
             position: relative;
             transition: transform 0.3s ease;
@@ -262,34 +166,42 @@
         @media (min-width: 1024px) {
             .about-card { padding: 3rem; border-left: 6px solid #cfaf5c; }
         }
-        .about-card:hover { transform: translateY(-5px); }
+        .about-card:hover { transform: translateY(-3px); }
 
-        /* --- BOTÕES --- */
-        .btn-modern-red { 
-            background: #800000; color: white; padding: 0.75rem 1.4rem; border-radius: 10px; font-weight: 800; text-transform: uppercase; 
-            transition: all 0.3s ease; text-align: center; font-size: 10px; display: inline-flex; align-items: center; justify-content: center;
+        /* --- BOTÕES PREMIUM COM LETRA AMPLIADA --- */
+        .btn-premium-red { 
+            background: #800000; color: white; padding: 0.9rem 1.8rem; border-radius: 12px; font-weight: 800; text-transform: uppercase; 
+            transition: all 0.3s ease; text-align: center; font-size: 13px; display: inline-flex; align-items: center; justify-content: center;
+            letter-spacing: 0.05em; box-shadow: 0 4px 15px rgba(128, 0, 0, 0.2);
         }
-        @media (min-width: 640px) { .btn-modern-red { padding: 1rem 2.5rem; font-size: 14px; border-radius: 12px; } }
-        .btn-modern-red:hover { background: #600000; transform: translateY(-2px); }
+        @media (min-width: 640px) { .btn-premium-red { padding: 1rem 2.4rem; font-size: 15px; } }
+        .btn-premium-red:hover { background: #600000; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(128, 0, 0, 0.3); }
 
-        .btn-modern-outline { 
-            background: white; color: #002147; padding: 0.75rem 1.4rem; border-radius: 10px; font-weight: 800; text-transform: uppercase; 
-            border: 2px solid #002147; transition: all 0.3s ease; text-align: center; font-size: 10px; display: inline-flex; align-items: center; justify-content: center;
+        .btn-premium-outline { 
+            background: transparent; color: #002147; padding: 0.9rem 1.8rem; border-radius: 12px; font-weight: 800; text-transform: uppercase; 
+            border: 2px solid #002147; transition: all 0.3s ease; text-align: center; font-size: 11px; display: inline-flex; align-items: center; justify-content: center;
+            letter-spacing: 0.05em;
         }
-        @media (min-width: 640px) { .btn-modern-outline { padding: 1rem 2.5rem; font-size: 14px; border-radius: 12px; } }
+        @media (min-width: 640px) { .btn-premium-outline { padding: 1rem 2.4rem; font-size: 15px; border-width: 2.5px; } }
+        .btn-premium-outline:hover { background: #002147; color: white; transform: translateY(-2px); }
 
-        /* Botão para catálogo: Azul base -> Dourado Escuro no hover */
-        .btn-catalog-main {
-            background: #002147; color: white; padding: 1rem 2.5rem; border-radius: 12px; font-weight: 800; text-transform: uppercase;
-            transition: all 0.3s ease; text-align: center; font-size: 14px; display: inline-flex; align-items: center; justify-content: center;
-            letter-spacing: 0.1em; box-shadow: 0 4px 15px rgba(0, 33, 71, 0.2);
+        /* Botão comprar rápido nos cartões */
+        .btn-buy-now {
+            background: #800000; color: white; width: 100%; py: 0.8rem; border-radius: 10px; font-weight: 800; text-transform: uppercase;
+            transition: all 0.2s ease; text-align: center; font-size: 13px; display: inline-flex; align-items: center; justify-content: center;
+            letter-spacing: 0.05em; gap: 0.5rem; height: 46px;
         }
-        .btn-catalog-main:hover { background: #b38e4a; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(179, 142, 74, 0.3); }
+        .btn-buy-now:hover { background: #600000; transform: translateY(-1px); }
 
         .dropcap::first-letter {
             font-family: 'Playfair Display', serif; float: left; font-size: 3.5rem; line-height: 2.8rem; padding-right: 0.5rem; color: #800000; font-weight: bold;
         }
         @media (min-width: 1024px) { .dropcap::first-letter { font-size: 4.5rem; line-height: 3.5rem; padding-right: 0.8rem; } }
+
+        /* Efeito de sombra do livro */
+        .book-shadow {
+            box-shadow: 5px 12px 28px rgba(0,0,0,0.15), 1px 3px 8px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
@@ -298,126 +210,310 @@
 
     <main class="flex-grow">
 
-        <!-- HERO SECTION -->
-        <section class="hero-section">
+        <!-- HERO SECTION COM CARROSSEL DE LIVROS EM STOCK -->
+        <section class="hero-section relative select-none">
             <div class="hero-bg-accent"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full relative hero-content-wrapper">
                 
-                <div class="grid grid-cols-12 gap-3 sm:gap-4 lg:gap-12 items-start mb-8 sm:mb-12">
+                <!-- Contentor de Slides do Carrossel -->
+                <div class="relative min-h-[640px] lg:min-h-[550px] flex items-center">
                     
-                    <div class="col-span-7 lg:col-span-7 z-20 py-2 sm:py-4 lg:py-16 text-left">
-                        <div class="hero-badge-pill animate-pulse-subtle">Novo Lançamento</div>
-                        
-                        <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-2 sm:mb-4 leading-tight">
-                            Eis a <br> <span class="text-brand-accent-red italic">Tua</span> Mãe
-                        </h1>
-                        
-                        <p class="font-classic text-[10px] sm:text-lg lg:text-2xl text-gray-500 italic mb-6 lg:mb-12 max-w-2xl leading-snug lg:whitespace-nowrap opacity-90">
-                            Uma Defesa Bíblica e Histórica das Doutrinas Marianas
-                        </p>
+                    <!-- SLIDE 1: JIMMY AKIN (NOVO LANÇAMENTO - ORDEM 1º) -->
+                    <div class="hero-slide transition-all duration-700 transform opacity-100 translate-x-0 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" id="slide-0">
+                        <div class="lg:col-span-7 text-center lg:text-left">
+                            <span class="inline-block px-4 py-1.5 bg-brand-gold text-brand-accent-blue text-[11px] font-black uppercase tracking-widest rounded-full mb-5 animate-pulse-subtle">Novo Lançamento</span>
+                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-4 leading-tight">
+                                A Bíblia é um <br> Livro <span class="text-brand-accent-red italic">Católico</span>
+                            </h1>
+                            <p class="font-classic text-sm sm:text-lg lg:text-xl text-gray-600 italic mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                                Descubra como a Igreja Católica recebeu, preservou e definiu as Sagradas Escrituras ao longo dos séculos.
+                            </p>
+                            
+                            <!-- Foto do Autor (Clicável - Premium Group Hover) -->
+                            <a href="a-biblia-é-um livro-catolico.html" class="flex items-center justify-center lg:justify-start gap-4 mb-6 group hover:opacity-90 transition-all inline-flex">
+                                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md group-hover:border-brand-accent-red transition-colors">
+                                    <img src="Imagens/Jimmy Akin.png" alt="Jimmy Akin" class="w-full h-full object-cover" onerror="this.src='Imagens/jimmy.png';">
+                                </div>
+                                <div class="text-left">
+                                    <span class="block text-[10px] text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                    <span class="font-serif text-lg font-bold text-brand-accent-blue group-hover:text-brand-accent-red transition-colors">Jimmy Akin</span>
+                                </div>
+                                <span class="text-gray-300">|</span>
+                                <span class="font-sans font-bold text-2xl sm:text-3xl text-brand-accent-red">17,50€</span>
+                            </a>
 
-                        <a href="eis-a-tua-mae.html" class="inline-flex items-center gap-2 sm:gap-6 mb-6 sm:mb-8 lg:mb-16 group transition-all">
-                            <div class="rounded-full overflow-hidden border-2 border-brand-gold shadow-md group-hover:border-brand-accent-red transition-all flex-shrink-0 author-photo-circle">
-                                <img src="Imagens/TimStaples.png" alt="Tim Staples" class="w-full h-full object-cover">
+                            <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start max-w-md mx-auto lg:mx-0">
+                                <button onclick="addToCart('a-biblia-e-um-livro-catolico', 'A Bíblia é um Livro Católico', 17.50, 'Imagens/capablc1.png', 'a-biblia-é-um livro-catolico.html')" class="btn-premium-red flex-1 gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                    Comprar
+                                </button>
+                                <a href="a-biblia-é-um livro-catolico.html" class="btn-premium-outline flex-1">Detalhes</a>
                             </div>
-                            <div class="flex flex-col">
-                                <p class="font-classic text-xs sm:text-2xl lg:text-4xl text-brand-gold italic group-hover:text-brand-accent-red transition-colors leading-tight">
-                                    por <span class="font-bold text-brand-gold-dark non-italic">Tim Staples</span>
-                                </p>
-                            </div>
-                        </a>
-                        
-                        <div class="flex flex-row gap-2 sm:gap-4 justify-start">
-                            <a href="eis-a-tua-mae.html" class="btn-modern-red">Ver Detalhes</a>
-                            <a href="catalogo-completo.html" class="btn-modern-outline">Catálogo</a>
+                        </div>
+                        <!-- Capa de Livro Clicável -->
+                        <div class="lg:col-span-5 hero-book-container">
+                            <a href="a-biblia-é-um livro-catolico.html" class="block transition-transform duration-300 hover:scale-105">
+                                <img src="Imagens/capablc1.png" alt="A Bíblia é um Livro Católico" class="hero-book-img floating-element book-shadow mx-auto">
+                            </a>
                         </div>
                     </div>
 
-                    <div class="col-span-5 lg:col-span-5 hero-book-container pt-10 sm:pt-8 lg:pt-20">
-                        <div class="book-glow" style="position: absolute; width: 120%; height: 120%; background: radial-gradient(circle, rgba(207, 175, 92, 0.15) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; pointer-events: none; filter: blur(40px);"></div>
-                        <a href="eis-a-tua-mae.html" class="relative block transition-transform hover:scale-[1.02] w-full flex justify-end">
-                            <img src="Imagens/capaETM2.png" alt="Contracapa" class="hero-book-back hidden lg:block">
-                            <img src="Imagens/capaETM3.png" alt="Eis a Tua Mãe" class="hero-book-img floating-element">
-                        </a>
+                    <!-- SLIDE 2: TIM STAPLES (ORDEM 2º) -->
+                    <div class="hero-slide transition-all duration-700 transform opacity-0 translate-x-8 hidden w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" id="slide-1">
+                        <div class="lg:col-span-7 text-center lg:text-left">
+                            <span class="inline-block px-4 py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[11px] font-black uppercase tracking-widest rounded-full mb-5">Apologética Mariana</span>
+                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-4 leading-tight">
+                                Eis a <span class="text-brand-accent-red italic">Tua</span> Mãe
+                            </h1>
+                            <p class="font-classic text-sm sm:text-lg lg:text-xl text-gray-600 italic mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                                Uma defesa bíblica e histórica formidável das doutrinas marianas que esclarece as principais objeções.
+                            </p>
+                            
+                            <!-- Foto do Autor (Clicável - Premium Group Hover) -->
+                            <a href="eis-a-tua-mae.html" class="flex items-center justify-center lg:justify-start gap-4 mb-6 group hover:opacity-90 transition-all inline-flex">
+                                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md group-hover:border-brand-accent-red transition-colors">
+                                    <img src="Imagens/TimStaples.png" alt="Tim Staples" class="w-full h-full object-cover" onerror="this.src='Imagens/tim.png';">
+                                </div>
+                                <div class="text-left">
+                                    <span class="block text-[10px] text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                    <span class="font-serif text-lg font-bold text-brand-accent-blue group-hover:text-brand-accent-red transition-colors">Tim Staples</span>
+                                </div>
+                                <span class="text-gray-300">|</span>
+                                <span class="font-sans font-bold text-2xl sm:text-3xl text-brand-accent-red">19,50€</span>
+                            </a>
+
+                            <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start max-w-md mx-auto lg:mx-0">
+                                <button onclick="addToCart('eis-a-tua-mae', 'Eis a Tua Mãe', 19.50, 'Imagens/etmcapa.png', 'eis-a-tua-mae.html')" class="btn-premium-red flex-1 gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                    Comprar
+                                </button>
+                                <a href="eis-a-tua-mae.html" class="btn-premium-outline flex-1">Detalhes</a>
+                            </div>
+                        </div>
+                        <!-- Capa de Livro Clicável -->
+                        <div class="lg:col-span-5 hero-book-container">
+                            <a href="eis-a-tua-mae.html" class="block transition-transform duration-300 hover:scale-105">
+                                <img src="Imagens/capaETM3.png" alt="Eis a Tua Mãe" class="hero-book-img floating-element book-shadow mx-auto">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 3: JOE HESCHMEYER (ORDEM 3º) -->
+                    <div class="hero-slide transition-all duration-700 transform opacity-0 translate-x-8 hidden w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" id="slide-2">
+                        <div class="lg:col-span-7 text-center lg:text-left">
+                            <span class="inline-block px-4 py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[11px] font-black uppercase tracking-widest rounded-full mb-5">Teologia & Eucaristia</span>
+                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-4 leading-tight">
+                                A Eucaristia é <br> <span class="text-brand-accent-red italic">mesmo</span> Jesus
+                            </h1>
+                            <p class="font-classic text-sm sm:text-lg lg:text-xl text-gray-600 italic mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                                Uma fundamentação bíblica, histórica e patrística irrebatível sobre a presença real de Cristo no Santíssimo Sacramento.
+                            </p>
+                            
+                            <!-- Foto do Autor (Clicável - Premium Group Hover) -->
+                            <a href="a-eucaristia-e-mesmo-jesus.html" class="flex items-center justify-center lg:justify-start gap-4 mb-6 group hover:opacity-90 transition-all inline-flex">
+                                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md group-hover:border-brand-accent-red transition-colors">
+                                    <img src="Imagens/JoeHeschmeyer.png" alt="Joe Heschmeyer" class="w-full h-full object-cover" onerror="this.src='Imagens/joe.png';">
+                                </div>
+                                <div class="text-left">
+                                    <span class="block text-[10px] text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                    <span class="font-serif text-lg font-bold text-brand-accent-blue group-hover:text-brand-accent-red transition-colors">Joe Heschmeyer</span>
+                                </div>
+                                <span class="text-gray-300">|</span>
+                                <span class="font-sans font-bold text-2xl sm:text-3xl text-brand-accent-red">15,00€</span>
+                            </a>
+
+                            <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start max-w-md mx-auto lg:mx-0">
+                                <button onclick="addToCart('a-eucaristia-e-mesmo-jesus', 'A Eucaristia é mesmo Jesus', 15.00, 'Imagens/capaAEMJ1.png', 'a-eucaristia-e-mesmo-jesus.html')" class="btn-premium-red flex-1 gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                    Comprar
+                                </button>
+                                <a href="a-eucaristia-e-mesmo-jesus.html" class="btn-premium-outline flex-1">Detalhes</a>
+                            </div>
+                        </div>
+                        <!-- Capa de Livro Clicável -->
+                        <div class="lg:col-span-5 hero-book-container">
+                            <a href="a-eucaristia-e-mesmo-jesus.html" class="block transition-transform duration-300 hover:scale-105">
+                                <img src="Imagens/capaAEMJ1.png" alt="A Eucaristia é mesmo Jesus" class="hero-book-img floating-element book-shadow mx-auto">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 4: PETER KREEFT (ORDEM 4º) -->
+                    <div class="hero-slide transition-all duration-700 transform opacity-0 translate-x-8 hidden w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" id="slide-3">
+                        <div class="lg:col-span-7 text-center lg:text-left">
+                            <span class="inline-block px-4 py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[11px] font-black uppercase tracking-widest rounded-full mb-5">Formação Bíblica</span>
+                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-4 leading-tight">
+                                Tu Podes <br> Compreender a <span class="text-brand-accent-red italic">Bíblia</span>
+                            </h1>
+                            <p class="font-classic text-sm sm:text-lg lg:text-xl text-gray-600 italic mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                                Um guia indispensável e prático para desvendar os mistérios e as riquezas das Sagradas Escrituras.
+                            </p>
+                            
+                            <!-- Foto do Autor (Clicável - Premium Group Hover) -->
+                            <a href="tu-podes-compreender-a-biblia.html" class="flex items-center justify-center lg:justify-start gap-4 mb-6 group hover:opacity-90 transition-all inline-flex">
+                                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md group-hover:border-brand-accent-red transition-colors">
+                                    <img src="Imagens/PeterKreeft.png" alt="Peter Kreeft" class="w-full h-full object-cover" onerror="this.src='Imagens/kreeft.png';">
+                                </div>
+                                <div class="text-left">
+                                    <span class="block text-[10px] text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                    <span class="font-serif text-lg font-bold text-brand-accent-blue group-hover:text-brand-accent-red transition-colors">Peter Kreeft</span>
+                                </div>
+                                <span class="text-gray-300">|</span>
+                                <span class="font-sans font-bold text-2xl sm:text-3xl text-brand-accent-red">15,00€</span>
+                            </a>
+
+                            <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start max-w-md mx-auto lg:mx-0">
+                                <button onclick="addToCart('tu-podes-compreender-a-biblia', 'Tu podes compreender a Bíblia', 15.00, 'Imagens/tpcbcapa.png', 'tu-podes-compreender-a-biblia.html')" class="btn-premium-red flex-1 gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                    Comprar
+                                </button>
+                                <a href="tu-podes-compreender-a-biblia.html" class="btn-premium-outline flex-1">Detalhes</a>
+                            </div>
+                        </div>
+                        <!-- Capa de Livro Clicável -->
+                        <div class="lg:col-span-5 hero-book-container">
+                            <a href="tu-podes-compreender-a-biblia.html" class="block transition-transform duration-300 hover:scale-105">
+                                <img src="Imagens/tpcbcapa.png" alt="Tu Podes Compreender a Bíblia" class="hero-book-img floating-element book-shadow mx-auto">
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Controladores do Carrossel -->
+                <div class="flex items-center justify-between mt-8">
+                    <!-- Dots -->
+                    <div class="flex gap-2">
+                        <button class="w-3 h-3 rounded-full bg-brand-accent-blue transition-all duration-300" onclick="setSlide(0)" id="dot-0"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-300" onclick="setSlide(1)" id="dot-1"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-300" onclick="setSlide(2)" id="dot-2"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-300" onclick="setSlide(3)" id="dot-3"></button>
+                    </div>
+                    
+                    <!-- Setas e Botão de Pausa (Proporcionalidade Ajustada) -->
+                    <div class="flex gap-2 items-center">
+                        <!-- Seta Anterior -->
+                        <button onclick="prevSlide()" class="p-3 rounded-xl border border-gray-200 hover:bg-brand-accent-blue hover:text-white transition-all text-brand-accent-blue" aria-label="Slide anterior">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                        </button>
+                        
+                        <!-- Botão Pausa / Play (Traço de Pausa Ampliado do Mesmo Tamanho das Setas) -->
+                        <button id="play-pause-btn" onclick="togglePlayPause()" class="p-3 rounded-xl border border-gray-200 hover:bg-brand-accent-blue hover:text-white transition-all text-brand-accent-blue flex items-center justify-center" aria-label="Pausar carrossel">
+                            <!-- Ícone Pausa (Traços perfeitamente dimensionados de y=6 a y=18) -->
+                            <svg id="pause-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 6v12m6-12v12"></path></svg>
+                            <!-- Ícone Play (Consistente com traço outline correspondente) -->
+                            <svg id="play-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 5v14l11-7z"></path></svg>
+                        </button>
+                        
+                        <!-- Seta Seguinte -->
+                        <button onclick="nextSlide()" class="p-3 rounded-xl border border-gray-200 hover:bg-brand-accent-blue hover:text-white transition-all text-brand-accent-blue" aria-label="Próximo slide">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
                     </div>
                 </div>
 
-                <!-- LINHA HORIZONTAL -->
-                <div class="w-full lg:w-[54%] h-px bg-brand-accent-blue/30 mb-8 lg:mb-12"></div>
-
-                <!-- GRELHA 2x2 -->
-                <div class="grid grid-cols-2 gap-3 sm:gap-6 lg:gap-10 mb-12 sm:mb-16 lg:mb-24 lg:max-w-5xl">
-                    
-                    <!-- Quadro 1: Peter Kreeft (COM LINHA DOURADA) -->
-                    <div class="flex flex-col flex-1 min-w-0 lg:max-w-[440px]">
-                        <span class="font-sans text-[9px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Também disponível</span>
-                        <a href="tu-podes-compreender-a-biblia.html" class="feature-panel highlight-border group">
-                            <img src="Imagens/capaTPCB2.png" alt="Capa Peter Kreeft" class="book-thumb group-hover:scale-105 transition-transform">
-                            <div class="flex flex-col items-center gap-2 sm:gap-4 lg:gap-6">
-                                <img src="Imagens/PeterKreeft.png" alt="Peter Kreeft" class="author-photo-circle">
-                                <span class="font-sans text-[9px] sm:text-sm font-black text-brand-gold-dark uppercase tracking-wider text-center">Peter Kreeft</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Quadro 2: Joe Heschmeyer (COM LINHA DOURADA) -->
-                    <div class="flex flex-col flex-1 min-w-0 lg:max-w-[440px]">
-                        <span class="font-sans text-[9px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Também disponível</span>
-                        <a href="a-eucaristia-e-mesmo-jesus.html" class="feature-panel highlight-border group">
-                            <img src="Imagens/capaAEMJ1.png" alt="A Eucaristia é mesmo Jesus" class="book-thumb group-hover:scale-105 transition-transform">
-                            <div class="flex flex-col items-center gap-2 sm:gap-4 lg:gap-6">
-                                <img src="Imagens/JoeHeschmeyer.png" alt="Joe Heschmeyer" class="author-photo-circle">
-                                <span class="font-sans text-[9px] sm:text-sm font-black text-brand-gold-dark uppercase tracking-wider text-center">Joe Heschmeyer</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Quadro 3: Jimmy Akin -->
-                    <div class="flex flex-col flex-1 min-w-0 lg:max-w-[440px]">
-                        <span class="font-sans text-[9px] sm:text-sm font-black text-brand-accent-red uppercase tracking-wider mb-2 sm:mb-4">Em produção</span>
-                        <div class="feature-panel standard-border group">
-                            <div class="vector-book-thumb group-hover:scale-105 transition-transform flex items-center justify-center">
-                                <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
-                                    <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#D1D5DB" stroke-width="0.8" stroke-linejoin="round"/>
-                                    <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#D1D5DB" stroke-width="0.8" stroke-linecap="round"/>
-                                    <line x1="28" y1="15" x2="28" y2="125" stroke="#D1D5DB" stroke-width="0.5" stroke-dasharray="1 2"/>
-                                    <text x="79" y="58" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="11" letter-spacing="0.01em">A BÍBLIA É</text>
-                                    <text x="79" y="72" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="11" letter-spacing="0.01em">UM LIVRO</text>
-                                    <text x="79" y="86" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="11" letter-spacing="0.01em">CATÓLICO</text>
-                                </svg>
-                            </div>
-                            <div class="flex flex-col items-center gap-2 sm:gap-4 lg:gap-6">
-                                <img src="Imagens/Jimmy Akin.png" alt="Jimmy Akin" class="author-photo-circle">
-                                <span class="font-sans text-[9px] sm:text-sm font-black text-gray-400 uppercase tracking-wider text-center">Jimmy Akin</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quadro 4: Trent Horn -->
-                    <div class="flex flex-col flex-1 min-w-0 lg:max-w-[440px]">
-                        <span class="font-sans text-[9px] sm:text-sm font-black text-gray-500 uppercase tracking-wider mb-2 sm:mb-4">Brevemente</span>
-                        <div class="feature-panel standard-border group">
-                            <div class="vector-book-thumb group-hover:scale-105 transition-transform flex items-center justify-center">
-                                <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
-                                    <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#D1D5DB" stroke-width="0.8" stroke-linejoin="round"/>
-                                    <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#D1D5DB" stroke-width="0.8" stroke-linecap="round"/>
-                                    <line x1="28" y1="15" x2="28" y2="125" stroke="#D1D5DB" stroke-width="0.5" stroke-dasharray="1 2"/>
-                                    <text x="79" y="62" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">DURAS</text>
-                                    <text x="79" y="80" text-anchor="middle" fill="#9CA3AF" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">PALAVRAS</text>
-                                </svg>
-                            </div>
-                            <div class="flex flex-col items-center gap-2 sm:gap-4 lg:gap-6">
-                                <img src="Imagens/TrentHorn.jpg" alt="Trent Horn" class="author-photo-circle">
-                                <span class="font-sans text-[9px] sm:text-sm font-black text-gray-400 uppercase tracking-wider text-center">Trent Horn</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <!-- SECÇÃO SÃO JERÓNIMO -->
+        <!-- TRUST BAR / PROVÉRBIO EDITORIAL (ORGANIZAÇÃO EDITORIAL PREMIUM) -->
+        <div class="bg-brand-accent-blue py-5 text-white">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center text-xs sm:text-sm font-semibold tracking-wider uppercase">
+                <div class="flex flex-wrap justify-center gap-6 sm:gap-10">
+                    <div class="flex items-center gap-2">
+                        <span>📚 Rigor Teológico Católico</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span>✨ Excelência Editorial</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span>Em Stock</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-auto border-t md:border-t-0 border-white/20 pt-3 md:pt-0">
+                    <a href="catalogo-completo.html" class="inline-flex items-center gap-2 text-brand-gold hover:text-white transition-colors group">
+                        <span>Ver Catálogo Completo</span>
+                        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRÓXIMOS LANÇAMENTOS (EM PRODUÇÃO VS BREVEMENTE - DUAS COLUNAS MAIS AMPLAS E EDITORIAIS) -->
+        <section class="py-16 sm:py-24 bg-white border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+                    
+                    <!-- COLUNA 1: EM PRODUÇÃO -->
+                    <div class="space-y-6">
+                        <div class="border-b-2 border-brand-gold/30 pb-3">
+                            <span class="text-brand-gold-dark font-sans text-xs font-bold uppercase tracking-[0.2em] block">Planeamento Editorial</span>
+                            <h2 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold">Em Produção</h2>
+                        </div>
+                        
+                        <!-- Livro: Trent Horn com foto do Autor (Grelha com Altura e Respiro Ampliados) -->
+                        <div class="flex flex-col sm:flex-row gap-6 p-6 sm:p-8 bg-brand-bg rounded-3xl border border-gray-200/70 relative overflow-hidden group items-center min-h-[260px] sm:min-h-[290px] lg:min-h-[320px] shadow-sm hover:shadow-md transition-shadow">
+                            <!-- Vetor do Livro (Redimensionado e em Dourado Escuro) -->
+                            <div class="w-28 sm:w-32 md:w-36 flex-shrink-0 flex items-center justify-center">
+                                <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto max-h-[140px] drop-shadow-md group-hover:scale-105 transition-transform duration-300">
+                                    <!-- Capa em Dourado Escuro com Moldura e Textos em Azul Escuro -->
+                                    <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#b38e4a" stroke-width="1.2" stroke-linejoin="round" fill="#cfaf5c"/>
+                                    <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#b38e4a" stroke-width="1.2" stroke-linecap="round"/>
+                                    <line x1="28" y1="15" x2="28" y2="125" stroke="#b38e4a" stroke-width="0.5" stroke-dasharray="1 2"/>
+                                    <text x="79" y="62" text-anchor="middle" fill="#002147" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">DURAS</text>
+                                    <text x="79" y="80" text-anchor="middle" fill="#002147" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">PALAVRAS</text>
+                                </svg>
+                            </div>
+                            <div class="flex-grow flex flex-col sm:flex-row gap-5 items-center sm:items-center text-center sm:text-left">
+                                <img src="Imagens/TrentHorn.png" alt="Trent Horn" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold object-cover shadow-sm flex-shrink-0" onerror="this.src='Imagens/trent.png';">
+                                <div class="flex flex-col">
+                                    <span class="text-brand-gold-dark font-sans text-sm sm:text-base font-bold uppercase tracking-wider mb-1">Trent Horn</span>
+                                    <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold mb-2">Duras Palavras</h3>
+                                    <p class="text-base sm:text-lg text-gray-700 font-classic italic leading-relaxed">Uma obra esclarecedora sobre as passagens difíceis e desafiadoras da Sagrada Escritura.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COLUNA 2: BREVEMENTE -->
+                    <div class="space-y-6">
+                        <div class="border-b-2 border-brand-accent-red/30 pb-3">
+                            <span class="text-brand-accent-red font-sans text-xs font-bold uppercase tracking-[0.2em] block">Futuros Lançamentos</span>
+                            <h2 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold">Brevemente</h2>
+                        </div>
+                        
+                        <!-- Livro: Fulton J. Sheen com foto Sheen.png (Grelha com Altura e Respiro Ampliados) -->
+                        <div class="flex flex-col sm:flex-row gap-6 p-6 sm:p-8 bg-brand-bg rounded-3xl border border-gray-200/70 relative overflow-hidden group items-center min-h-[260px] sm:min-h-[290px] lg:min-h-[320px] shadow-sm hover:shadow-md transition-shadow">
+                            <!-- Vetor do Livro (Redimensionado e em Azul/Dourado) -->
+                            <div class="w-28 sm:w-32 md:w-36 flex-shrink-0 flex items-center justify-center">
+                                <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto max-h-[140px] drop-shadow-md group-hover:scale-105 transition-transform duration-300">
+                                    <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#cfaf5c" stroke-width="1.2" stroke-linejoin="round" fill="#002147"/>
+                                    <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#cfaf5c" stroke-width="1.2" stroke-linecap="round"/>
+                                    <line x1="28" y1="15" x2="28" y2="125" stroke="#cfaf5c" stroke-width="0.5" stroke-dasharray="1 2"/>
+                                    <text x="79" y="55" text-anchor="middle" fill="#cfaf5c" font-family="Playfair Display" font-weight="700" font-size="12" letter-spacing="0.02em">VAI PARA</text>
+                                    <text x="79" y="72" text-anchor="middle" fill="#cfaf5c" font-family="Playfair Display" font-weight="700" font-size="12" letter-spacing="0.02em">O CÉU</text>
+                                    <text x="79" y="94" text-anchor="middle" fill="#ffffff" font-family="Roboto" font-weight="500" font-size="8" letter-spacing="0.05em">FULTON SHEEN</text>
+                                </svg>
+                            </div>
+                            <div class="flex-grow flex flex-col sm:flex-row gap-5 items-center sm:items-center text-center sm:text-left">
+                                <img src="Imagens/Sheen.png" alt="Fulton J. Sheen" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold object-cover shadow-sm flex-shrink-0" onerror="this.src='Imagens/fulton.png';">
+                                <div class="flex flex-col">
+                                    <span class="text-brand-gold-dark font-sans text-sm sm:text-base font-bold uppercase tracking-wider mb-1">Fulton J. Sheen</span>
+                                    <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold mb-2">Vai para o Céu</h3>
+                                    <p class="text-base sm:text-lg text-gray-700 font-classic italic leading-relaxed">O guia indispensável do Venerável Arcebispo Sheen sobre a salvação cristã.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECÇÃO SÃO JERÓNIMO (PARALLAX ORIGINAL) -->
         <section class="art-viewport">
             <div class="art-bg-fixed"></div>
             <div class="art-overlay-gradient"></div>
@@ -431,58 +527,7 @@
             </div>
         </section>
 
-        <!-- ÚLTIMAS PUBLICAÇÕES -->
-        <section id="novidades" class="py-12 sm:py-20 bg-brand-bg">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch mb-10 md:mb-16">
-                    <!-- Destaque: Tim Staples -->
-                    <div class="book-card flex flex-col sm:flex-row gap-6 p-6 sm:p-8 bg-brand-gold-light rounded-[2rem] border border-brand-gold/20 shadow-sm relative overflow-hidden h-full">
-                        <div class="absolute top-0 right-0 bg-brand-accent-red text-white px-5 sm:px-6 py-2 rounded-bl-2xl font-sans text-[10px] sm:text-[12px] font-black uppercase tracking-[0.2em]">Lançamento</div>
-                        <div class="w-28 sm:w-44 flex-shrink-0 flex items-center justify-center">
-                            <a href="eis-a-tua-mae.html">
-                                <img src="Imagens/etmcapa.png" alt="Livro Tim Staples" class="w-full h-auto shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-black/5 rounded transition-transform duration-500 hover:scale-105">
-                            </a>
-                        </div>
-                        <div class="flex flex-col justify-center">
-                            <span class="text-brand-gold-dark font-sans text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Destaque</span>
-                            <h3 class="font-serif text-xl md:text-2xl text-brand-accent-blue font-bold leading-tight mb-1 md:mb-2">Eis a Tua Mãe</h3>
-                            <p class="font-serif text-sm text-gray-500 italic mb-4">Tim Staples</p>
-                            <div class="flex items-center gap-4">
-                                <span class="font-classic text-xl font-bold text-brand-accent-red">19,50€</span>
-                                <a href="eis-a-tua-mae.html" class="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-accent-blue border-b border-brand-accent-blue transition-all pb-1">Detalhes</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Destaque: Peter Kreeft -->
-                    <div class="book-card flex flex-col sm:flex-row gap-6 p-6 sm:p-8 border-2 border-brand-gold/30 rounded-[2rem] h-full bg-white/40">
-                        <div class="w-28 sm:w-44 flex-shrink-0 flex items-center justify-center">
-                            <a href="tu-podes-compreender-a-biblia.html">
-                                <img src="Imagens/tpcbcapa.png" alt="Livro Kreeft" class="w-full h-auto shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-black/5 rounded transition-transform duration-500 hover:scale-105">
-                            </a>
-                        </div>
-                        <div class="flex flex-col justify-center">
-                            <span class="text-gray-400 font-sans text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Formação Bíblica</span>
-                            <h3 class="font-serif text-xl md:text-2xl text-brand-accent-blue font-bold leading-tight mb-1 md:mb-2">Tu podes compreender a Bíblia</h3>
-                            <p class="font-serif text-sm text-gray-500 italic mb-4">Peter Kreeft</p>
-                            <div class="flex items-center gap-4">
-                                <span class="font-classic text-xl font-bold text-brand-accent-red">15,00€</span>
-                                <a href="tu-podes-compreender-a-biblia.html" class="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-accent-blue border-b border-brand-accent-blue transition-all pb-1">Detalhes</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Botão de Catálogo Completo: Azul -> Dourado no hover -->
-                <div class="flex justify-center">
-                    <a href="catalogo-completo.html" class="btn-catalog-main">
-                        Ver Catálogo Completo
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- SOBRE -->
+        <!-- SOBRE (ORIGINAL) -->
         <section id="sobre" class="w-full bg-brand-bg py-16 sm:py-24 relative overflow-hidden">
             <img src="Imagens/Logo J.png" alt="J Watermark" class="desktop-logo-watermark">
             <div class="max-w-7xl mx-auto px-6 relative z-10">
@@ -497,7 +542,8 @@
                             <h3 class="font-serif text-2xl md:text-3xl text-brand-accent-red font-bold flex items-center gap-3">
                                 <span class="w-8 h-px bg-brand-accent-red/30"></span> Missão
                             </h3>
-                            <div class="text-lg md:text-xl text-gray-700 leading-relaxed font-classic dropcap flex-grow">                                A Jerónimo Editora nasce com o propósito de enriquecer o panorama editorial português, especializando-se em obras de formação bíblica Católica que primam pela profundidade teológica e fidelidade às fontes. O seu nome é uma homenagem a São Jerónimo, presbítero e Doutor da Igreja, padroeiro dos estudiosos da Sagrada Escritura, que nos recorda:
+                            <div class="text-lg md:text-xl text-gray-700 leading-relaxed font-classic dropcap flex-grow">
+                                A Jerónimo Editora nasce com o propósito de enriquecer o panorama editorial português, especializando-se em obras de formation bíblica Católica que primam pela profundidade teológica e fidelidade às fontes. O seu nome é uma homenagem a São Jerónimo, presbítero e Doutor da Igreja, padroeiro dos estudiosos da Sagrada Escritura, que nos recorda:
                             </div>
                             <div class="pt-6 border-t border-brand-gold/20">
                                 <p class="text-xl md:text-2xl text-brand-accent-blue italic font-classic leading-tight">
@@ -529,9 +575,134 @@
         </section>
     </main>
 
+    <!-- TOAST DE CONFIRMAÇÃO DO CARRINHO (ALTAMENTE PREMIUM) -->
+    <div id="toast-cart" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-500 ease-out max-w-sm w-[90%] sm:w-full bg-white rounded-2xl shadow-2xl border border-brand-gold/30 p-4">
+        <div class="flex items-center gap-4">
+            <img id="toast-img" src="" alt="Capa" class="w-12 h-auto rounded shadow-sm object-cover">
+            <div class="flex-1">
+                <p class="text-[10px] text-brand-gold-dark font-bold uppercase tracking-wider">Adicionado com Sucesso!</p>
+                <p id="toast-title" class="font-serif font-bold text-sm text-brand-accent-blue line-clamp-1"></p>
+            </div>
+            <button onclick="closeToast()" class="text-gray-400 hover:text-gray-600 p-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div class="mt-4 flex gap-2">
+            <a href="produtos.html" class="flex-1 bg-brand-accent-blue hover:bg-brand-accent-red text-white text-center text-xs py-2.5 rounded-lg font-bold transition-colors">Ver Carrinho</a>
+            <button onclick="closeToast()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-brand-text text-xs py-2.5 rounded-lg font-bold transition-colors">Continuar</button>
+        </div>
+    </div>
+
     <div id="footer-placeholder"></div>
 
     <script>
+        /* --- LOGICA DO CARROSSEL HERO --- */
+        let currentSlideIdx = 0;
+        const totalSlides = 4;
+        let slideInterval;
+        let isPaused = false;
+
+        function showSlide(index) {
+            // Garantir que fica dentro dos limites
+            if (index >= totalSlides) currentSlideIdx = 0;
+            else if (index < 0) currentSlideIdx = totalSlides - 1;
+            else currentSlideIdx = index;
+
+            for (let i = 0; i < totalSlides; i++) {
+                const slide = document.getElementById(`slide-${i}`);
+                const dot = document.getElementById(`dot-${i}`);
+                
+                if (i === currentSlideIdx) {
+                    slide.classList.remove('opacity-0', 'translate-x-8', 'hidden');
+                    slide.classList.add('opacity-100', 'translate-x-0');
+                    dot.classList.remove('bg-gray-300');
+                    dot.classList.add('bg-brand-accent-blue', 'w-6');
+                } else {
+                    slide.classList.add('opacity-0', 'translate-x-8', 'hidden');
+                    slide.classList.remove('opacity-100', 'translate-x-0');
+                    dot.classList.remove('bg-brand-accent-blue', 'w-6');
+                    dot.classList.add('bg-gray-300');
+                }
+            }
+        }
+
+        function nextSlide() {
+            showSlide(currentSlideIdx + 1);
+            if (!isPaused) resetAutoplay();
+        }
+
+        function prevSlide() {
+            showSlide(currentSlideIdx - 1);
+            if (!isPaused) resetAutoplay();
+        }
+
+        function setSlide(index) {
+            showSlide(index);
+            if (!isPaused) resetAutoplay();
+        }
+
+        function startAutoplay() {
+            if (isPaused) return;
+            slideInterval = setInterval(() => {
+                showSlide(currentSlideIdx + 1);
+            }, 8000); // Roda a cada 8 segundos
+        }
+
+        function resetAutoplay() {
+            clearInterval(slideInterval);
+            startAutoplay();
+        }
+
+        /* ALTERNAR ESTADO DE PAUSA/PLAY */
+        function togglePlayPause() {
+            isPaused = !isPaused;
+            const playIcon = document.getElementById('play-icon');
+            const pauseIcon = document.getElementById('pause-icon');
+            const btn = document.getElementById('play-pause-btn');
+
+            if (isPaused) {
+                clearInterval(slideInterval);
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                btn.setAttribute('aria-label', 'Iniciar carrossel');
+                btn.classList.add('bg-brand-accent-blue', 'text-white');
+            } else {
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                btn.setAttribute('aria-label', 'Pausar carrossel');
+                btn.classList.remove('bg-brand-accent-blue', 'text-white');
+                startAutoplay();
+            }
+        }
+
+        /* SUPORTE A GESTOS DESLIZAR (SWIPE) NO TELEMÓVEL */
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function setupSwipeGestures() {
+            const heroWrapper = document.querySelector('.hero-section');
+            if (!heroWrapper) return;
+
+            heroWrapper.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            heroWrapper.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+        }
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Margem de movimento tátil mínima em píxeis
+            if (touchStartX - touchEndX > swipeThreshold) {
+                nextSlide(); // Arrasto para a esquerda -> Próximo slide
+            } else if (touchEndX - touchStartX > swipeThreshold) {
+                prevSlide(); // Arrasto para a direita -> Slide anterior
+            }
+        }
+
+        /* --- COMPONENTES & CARRINHO --- */
         async function loadComponent(id, file) {
             try {
                 const response = await fetch(file + '?v=' + new Date().getTime());
@@ -551,6 +722,9 @@
         window.addEventListener('DOMContentLoaded', () => {
             loadComponent('nav-placeholder', 'menu');
             loadComponent('footer-placeholder', 'rodape');
+            startAutoplay();
+            showSlide(0); // Forçar slide inicial ativo
+            setupSwipeGestures(); // Configurar deteção de arrastar de dedos
         });
 
         function updateCartUI() {
@@ -563,6 +737,54 @@
                     el.classList.toggle('opacity-0', count === 0);
                 }
             });
+        }
+
+        /* FUNÇÃO ADICIONAR AO CARRINHO DIRETO DA HOME */
+        function addToCart(id, title, price, image, url) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const existingIndex = cartItems.findIndex(item => item.id === id);
+            
+            if (existingIndex > -1) {
+                cartItems[existingIndex].quantity += 1;
+            } else {
+                cartItems.push({
+                    id: id,
+                    title: title,
+                    price: parseFloat(price),
+                    image: image,
+                    quantity: 1,
+                    url: url
+                });
+            }
+            
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartUI();
+            showToast(title, image);
+        }
+
+        /* TOAST ANIMADO DE FEEDBACK */
+        function showToast(title, image) {
+            const toast = document.getElementById('toast-cart');
+            const toastImg = document.getElementById('toast-img');
+            const toastTitle = document.getElementById('toast-title');
+            
+            toastImg.src = image;
+            toastTitle.textContent = title;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            // Auto hide após 5 segundos
+            clearTimeout(window.toastTimeout);
+            window.toastTimeout = setTimeout(() => {
+                closeToast();
+            }, 5000);
+        }
+        
+        function closeToast() {
+            const toast = document.getElementById('toast-cart');
+            toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.remove('translate-y-0', 'opacity-100');
         }
     </script>
 <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
