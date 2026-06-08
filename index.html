@@ -88,7 +88,7 @@
             }
         }
 
-        .hero-content-wrapper { position: relative; z-index: 20; }
+        .hero-content-wrapper { relative: relative; z-index: 20; }
 
         .hero-book-container {
             position: relative;
@@ -196,19 +196,6 @@
         }
         .about-card:hover { transform: translateY(-3px); }
 
-        /* Botão comprar rápido nos cartões */
-        .btn-buy-now {
-            background: #800000; color: white; width: 100%; py: 0.8rem; border-radius: 10px; font-weight: 800; text-transform: uppercase;
-            transition: all 0.2s ease; text-align: center; font-size: 13px; display: inline-flex; align-items: center; justify-content: center;
-            letter-spacing: 0.05em; gap: 0.5rem; height: 46px;
-        }
-        .btn-buy-now:hover { background: #600000; transform: translateY(-1px); }
-
-        .dropcap::first-letter {
-            font-family: 'Playfair Display', serif; float: left; font-size: 3.5rem; line-height: 2.8rem; padding-right: 0.5rem; color: #800000; font-weight: bold;
-        }
-        @media (min-width: 1024px) { .dropcap::first-letter { font-size: 4.5rem; line-height: 3.5rem; padding-right: 0.8rem; } }
-
         /* Sombra natural do livro para grelhas */
         .book-shadow {
             box-shadow: 5px 12px 28px rgba(0,0,0,0.15), 1px 3px 8px rgba(0,0,0,0.1);
@@ -228,7 +215,7 @@
             <div class="max-w-5xl lg:max-w-6xl mx-auto px-4 sm:px-6 w-full relative hero-content-wrapper">
                 
                 <!-- Contentor de Slides do Carrossel (Alturas de contentor e slides unificadas de forma absoluta e rigorosamente simétrica) -->
-                <div class="relative h-[430px] xs:h-[450px] sm:h-[520px] md:h-[580px] lg:h-[430px] xl:h-[415px] w-full">
+                <div class="relative h-[460px] xs:h-[480px] sm:h-[560px] md:h-[620px] lg:h-[480px] xl:h-[465px] w-full">
                     
                     <!-- SLIDE 1: JIMMY AKIN -->
                     <div class="hero-slide absolute inset-0 w-full grid grid-cols-12 gap-3 xs:gap-4 md:gap-8 items-center transition-all duration-700 transform opacity-100 translate-x-0" id="slide-0">
@@ -238,8 +225,8 @@
                                 <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold text-brand-accent-blue text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full animate-pulse-subtle">Novo Lançamento</span>
                             </div>
                             
-                            <!-- Caixa de Título com Altura Fixa -->
-                            <div class="h-[55px] xs:h-[65px] sm:h-[90px] lg:h-[110px] overflow-hidden mb-2 lg:mb-3 flex items-center">
+                            <!-- Caixa de Título com Altura Fixa de Segurança para impedir cortes inferiores -->
+                            <div class="h-[75px] xs:h-[85px] sm:h-[115px] lg:h-[135px] overflow-hidden mb-2 lg:mb-3 flex items-start pt-1">
                                 <h1 class="font-serif hero-title text-brand-accent-blue font-bold leading-tight">
                                     A Bíblia é um <br> Livro <span class="text-brand-accent-red italic">Católico</span>
                                 </h1>
@@ -276,14 +263,14 @@
                             </div>
                         </div>
                         
-                        <!-- Capa de Livro na Lateral Direita (Grelha 5-colunas sem quebras) -->
+                        <!-- Capa de Livro na Lateral Direita (Tornada Clicável para os Detalhes) -->
                         <div class="col-span-5 lg:col-span-5 hero-book-container mt-2 lg:mt-4">
-                            <div class="relative w-full max-w-[200px] xs:max-w-[240px] sm:max-w-[290px] lg:max-w-[340px] h-[180px] xs:h-[220px] sm:h-[280px] lg:h-[350px] flex items-center justify-center">
-                                <!-- Contracapa -->
-                                <img src="Imagens/capablc2.png" alt="Contracapa" class="absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 filter drop-shadow-[5px_10px_20px_rgba(0,0,0,0.12)]">
-                                <!-- Capa -->
-                                <img src="Imagens/capablc1.png" alt="Capa" class="absolute right-0 w-[65%] h-auto object-contain z-20 filter drop-shadow-[12px_18px_30px_rgba(0,0,0,0.16)] floating-element">
-                            </div>
+                            <a href="a-biblia-é-um livro-catolico.html" class="relative w-full max-w-[200px] xs:max-w-[240px] sm:max-w-[290px] lg:max-w-[340px] h-[180px] xs:h-[220px] sm:h-[280px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                <!-- Contracapa de Alta Resolução -->
+                                <img src="Imagens/capaBLC4.png" alt="Contracapa" class="absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 filter drop-shadow-[5px_10px_20px_rgba(0,0,0,0.12)]">
+                                <!-- Capa com micro-escala ao passar o cursor -->
+                                <img src="Imagens/capablc1.png" alt="Capa" class="absolute right-0 w-[65%] h-auto object-contain z-20 filter drop-shadow-[12px_18px_30px_rgba(0,0,0,0.16)] floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                            </a>
                         </div>
                     </div>
 
@@ -295,8 +282,8 @@
                                 <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Apologética Mariana</span>
                             </div>
                             
-                            <!-- Caixa de Título com Altura Fixa -->
-                            <div class="h-[55px] xs:h-[65px] sm:h-[90px] lg:h-[110px] overflow-hidden mb-2 lg:mb-3 flex items-center">
+                            <!-- Caixa de Título com Altura Fixa de Segurança para impedir cortes inferiores -->
+                            <div class="h-[75px] xs:h-[85px] sm:h-[115px] lg:h-[135px] overflow-hidden mb-2 lg:mb-3 flex items-start pt-1">
                                 <h1 class="font-serif hero-title text-brand-accent-blue font-bold leading-tight">
                                     Eis a <br> <span class="text-brand-accent-red italic">Tua</span> Mãe
                                 </h1>
@@ -333,13 +320,14 @@
                             </div>
                         </div>
                         
+                        <!-- Capa de Livro na Lateral Direita (Tornada Clicável para os Detalhes) -->
                         <div class="col-span-5 lg:col-span-5 hero-book-container mt-2 lg:mt-4">
-                            <div class="relative w-full max-w-[200px] xs:max-w-[240px] sm:max-w-[290px] lg:max-w-[340px] h-[180px] xs:h-[220px] sm:h-[280px] lg:h-[350px] flex items-center justify-center">
-                                <!-- Contracapa -->
-                                <img src="Imagens/capaETM2.png" alt="Contracapa" class="absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 filter drop-shadow-[5px_10px_20px_rgba(0,0,0,0.12)]">
-                                <!-- Capa -->
-                                <img src="Imagens/capaETM1.png" alt="Capa" class="absolute right-0 w-[65%] h-auto object-contain z-20 filter drop-shadow-[12px_18px_30px_rgba(0,0,0,0.16)] floating-element">
-                            </div>
+                            <a href="eis-a-tua-mae.html" class="relative w-full max-w-[200px] xs:max-w-[240px] sm:max-w-[290px] lg:max-w-[340px] h-[180px] xs:h-[220px] sm:h-[280px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                <!-- Contracapa de Alta Resolução -->
+                                <img src="Imagens/capaETM4.png" alt="Contracapa" class="absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 filter drop-shadow-[5px_10px_20px_rgba(0,0,0,0.12)]">
+                                <!-- Capa com micro-escala ao passar o cursor -->
+                                <img src="Imagens/capaETM1.png" alt="Capa" class="absolute right-0 w-[65%] h-auto object-contain z-20 filter drop-shadow-[12px_18px_30px_rgba(0,0,0,0.16)] floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                            </a>
                         </div>
                     </div>
 
@@ -351,8 +339,8 @@
                                 <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Teologia & Eucaristia</span>
                             </div>
                             
-                            <!-- Caixa de Título com Altura Fixa -->
-                            <div class="h-[55px] xs:h-[65px] sm:h-[90px] lg:h-[110px] overflow-hidden mb-2 lg:mb-3 flex items-center">
+                            <!-- Caixa de Título com Altura Fixa de Segurança para impedir cortes inferiores -->
+                            <div class="h-[75px] xs:h-[85px] sm:h-[115px] lg:h-[135px] overflow-hidden mb-2 lg:mb-3 flex items-start pt-1">
                                 <h1 class="font-serif hero-title text-brand-accent-blue font-bold leading-tight">
                                     A Eucaristia é <br> <span class="text-brand-accent-red italic">mesmo</span> Jesus
                                 </h1>
@@ -389,13 +377,14 @@
                             </div>
                         </div>
                         
+                        <!-- Capa de Livro na Lateral Direita (Tornada Clicável para os Detalhes) -->
                         <div class="col-span-5 lg:col-span-5 hero-book-container mt-2 lg:mt-4">
-                            <div class="relative w-full max-w-[200px] xs:max-w-[240px] sm:max-w-[290px] lg:max-w-[340px] h-[180px] xs:h-[220px] sm:h-[280px] lg:h-[350px] flex items-center justify-center">
-                                <!-- Contracapa -->
-                                <img src="Imagens/capaAEMJ2.png" alt="Contracapa" class="absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 filter drop-shadow-[5px_10px_20px_rgba(0,0,0,0.12)]">
-                                <!-- Capa -->
-                                <img src="Imagens/capaAEMJ1.png" alt="Capa" class="absolute right-0 w-[65%] h-auto object-contain z-20 filter drop-shadow-[12px_18px_30px_rgba(0,0,0,0.16)] floating-element">
-                            </div>
+                            <a href="a-eucaristia-e-mesmo-jesus.html" class="relative w-full max-w-[200px] xs:max-w-[240px] sm:max-w-[290px] lg:max-w-[340px] h-[180px] xs:h-[220px] sm:h-[280px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                <!-- Contracapa de Alta Resolução -->
+                                <img src="Imagens/capaAEMJ4.png" alt="Contracapa" class="absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 filter drop-shadow-[5px_10px_20px_rgba(0,0,0,0.12)]">
+                                <!-- Capa com micro-escala ao passar o cursor -->
+                                <img src="Imagens/capaAEMJ1.png" alt="Capa" class="absolute right-0 w-[65%] h-auto object-contain z-20 filter drop-shadow-[12px_18px_30px_rgba(0,0,0,0.16)] floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                            </a>
                         </div>
                     </div>
 
@@ -407,8 +396,8 @@
                                 <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Formação Bíblica</span>
                             </div>
                             
-                            <!-- Caixa de Título com Altura Fixa -->
-                            <div class="h-[55px] xs:h-[65px] sm:h-[90px] lg:h-[110px] overflow-hidden mb-2 lg:mb-3 flex items-center">
+                            <!-- Caixa de Título com Altura Fixa de Segurança para impedir cortes inferiores -->
+                            <div class="h-[75px] xs:h-[85px] sm:h-[115px] lg:h-[135px] overflow-hidden mb-2 lg:mb-3 flex items-start pt-1">
                                 <h1 class="font-serif hero-title text-brand-accent-blue font-bold leading-tight">
                                     Tu Podes <br> Compreender a <span class="text-brand-accent-red italic">Bíblia</span>
                                 </h1>
@@ -445,13 +434,14 @@
                             </div>
                         </div>
                         
+                        <!-- Capa de Livro na Lateral Direita (Tornada Clicável para os Detalhes) -->
                         <div class="col-span-5 lg:col-span-5 hero-book-container mt-2 lg:mt-4">
-                            <div class="relative w-full max-w-[200px] xs:max-w-[240px] sm:max-w-[290px] lg:max-w-[340px] h-[180px] xs:h-[220px] sm:h-[280px] lg:h-[350px] flex items-center justify-center">
-                                <!-- Contracapa -->
-                                <img src="Imagens/capaTPCB3.png" alt="Contracapa" class="absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 filter drop-shadow-[5px_10px_20px_rgba(0,0,0,0.12)]">
-                                <!-- Capa -->
-                                <img src="Imagens/capaTPCB2.png" alt="Capa" class="absolute right-0 w-[65%] h-auto object-contain z-20 filter drop-shadow-[12px_18px_30px_rgba(0,0,0,0.16)] floating-element">
-                            </div>
+                            <a href="tu-podes-compreender-a-biblia.html" class="relative w-full max-w-[200px] xs:max-w-[240px] sm:max-w-[290px] lg:max-w-[340px] h-[180px] xs:h-[220px] sm:h-[280px] lg:h-[350px] flex items-center justify-center group/cover block font-sans">
+                                <!-- Contracapa de Alta Resolução -->
+                                <img src="Imagens/capaTPCB4.png" alt="Contracapa" class="absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 filter drop-shadow-[5px_10px_20px_rgba(0,0,0,0.12)]">
+                                <!-- Capa com micro-escala ao passar o cursor -->
+                                <img src="Imagens/capaTPCB2.png" alt="Capa" class="absolute right-0 w-[65%] h-auto object-contain z-20 filter drop-shadow-[12px_18px_30px_rgba(0,0,0,0.16)] floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                            </a>
                         </div>
                     </div>
 
