@@ -164,12 +164,12 @@
                 <img src="Imagens/Logo J.png" alt="Logo" class="h-8 md:h-10 w-auto">
                 <span class="font-serif text-xl md:text-2xl font-extrabold text-brand-text hidden sm:inline">Jerónimo Editora</span>
             </a>
-            <div class="hidden md:flex items-center space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700">
+            <div class="hidden md:flex items-center space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700 font-sans">
                 <a href="/" class="hover:text-brand-accent-red transition-colors">Início</a>
-                <a href="catalogo-completo" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
-                <a href="produtos" class="hover:text-brand-accent-red transition-colors">Produtos</a>
+                <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
+                <a href="produtos.html" class="hover:text-brand-accent-red transition-colors">Produtos</a>
                 <a href="/#sobre" class="hover:text-brand-accent-red transition-colors">Sobre</a>
-                <a href="contacto" class="hover:text-brand-accent-red transition-colors">Contacto</a>
+                <a href="contacto.html" class="hover:text-brand-accent-red transition-colors">Contacto</a>
             </div>
             <button class="md:hidden text-3xl text-brand-text focus:outline-none" onclick="toggleMenu()">&#9776;</button>
         </div>
@@ -178,12 +178,12 @@
     <!-- Menu Mobile -->
     <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-screen bg-white z-[60] flex flex-col items-center justify-center text-center">
         <button class="absolute top-6 right-6 text-4xl text-brand-accent-blue font-light" onclick="toggleMenu()">&times;</button>
-        <div class="flex flex-col items-center space-y-8 w-full px-12">
+        <div class="flex flex-col items-center space-y-8 w-full px-12 animate-menu-open">
             <a href="/" class="font-serif text-2xl text-brand-accent-blue border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Início</a>
-            <a href="catalogo-completo" class="font-serif text-2xl text-brand-accent-blue border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Catálogo</a>
-            <a href="produtos" class="font-serif text-2xl text-brand-accent-blue border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Produtos</a>
+            <a href="catalogo-completo.html" class="font-serif text-2xl text-brand-accent-blue border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Catálogo</a>
+            <a href="produtos.html" class="font-serif text-2xl text-brand-accent-blue border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Produtos</a>
             <a href="/#sobre" class="font-serif text-2xl text-brand-accent-blue border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Sobre Nós</a>
-            <a href="contacto" class="font-serif text-2xl text-brand-accent-blue w-full" onclick="toggleMenu()">Contacto</a>
+            <a href="contacto.html" class="font-serif text-2xl text-brand-accent-blue w-full" onclick="toggleMenu()">Contacto</a>
         </div>
     </div>
 
@@ -400,12 +400,12 @@
                 </div>
                 <div class="flex flex-col items-center">
                     <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm">Navegação</h4>
-                    <ul class="space-y-2 text-sm">
+                    <ul class="space-y-2 text-sm font-sans">
                         <li><a href="/" class="hover:text-white">Início</a></li>
-                        <li><a href="catalogo-completo" class="hover:text-white">Catálogo</a></li>
-                        <li><a href="produtos" class="hover:text-white">Produtos</a></li>
+                        <li><a href="catalogo-completo.html" class="hover:text-white">Catálogo</a></li>
+                        <li><a href="produtos.html" class="hover:text-white">Produtos</a></li>
                         <li><a href="/#sobre" class="hover:text-white">Sobre</a></li>
-                        <li><a href="contacto" class="hover:text-white">Contacto</a></li>
+                        <li><a href="contacto.html" class="hover:text-white">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="flex flex-col items-center">
@@ -429,7 +429,7 @@
         // Base de dados de livros perfeitamente sincronizada com o catálogo
         const bookData = [
             { id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
-            { id: 8, title: "A Eucaristia é mesmo Jesus", price: 15.00, weight: 254 },
+            { id: 8, title: "A Eucaristia é mesmo Jesus", price: 13.50, weight: 254 },
             { id: 9, title: "Eis a Tua Mãe", price: 19.50, weight: 534 },
             { id: 10, title: "A Bíblia é um Livro Católico", price: 17.50, weight: 250 },
             { id: 7, title: "Duras Palavras", price: 0.00, weight: 350 },
@@ -532,12 +532,14 @@
             }
             if (destino === 'EU_Econ') {
                 if (peso <= 20) return 0.630;
-                if (peso <= 100) return 1.068 + (pesoKg * 0.627);
-                if (peso <= 250) return 0.940 + (pesoKg * 5.516);
-                if (peso <= 500) return 1.836 + (pesoKg * 3.592);
-                if (peso <= 2000) return 3.785 + (pesoKg * 2.755);
-                if (peso <= 5000) return (3.785 + (2 * 2.755) + ((pesoKg - 2) * 2.755)) * 1.23;
-                return 3.785 + (pesoKg * 2.755);
+                if (destino === 'EU_Econ') {
+                    if (peso <= 100) return 1.068 + (pesoKg * 0.627);
+                    if (peso <= 250) return 0.940 + (pesoKg * 5.516);
+                    if (peso <= 500) return 1.836 + (pesoKg * 3.592);
+                    if (peso <= 2000) return 3.785 + (pesoKg * 2.755);
+                    if (peso <= 5000) return (3.785 + (2 * 2.755) + ((pesoKg - 2) * 2.755)) * 1.23;
+                    return 3.785 + (pesoKg * 2.755);
+                }
             }
             return 0;
         }
@@ -623,7 +625,7 @@
             });
             
             html += `
-                <a href="produtos" class="flex-shrink-0 w-32 bg-brand-gold/10 rounded-xl p-3 border border-brand-gold/30 flex flex-col items-center justify-center text-center suggestion-card hover:bg-brand-gold/20">
+                <a href="produtos.html" class="flex-shrink-0 w-32 bg-brand-gold/10 rounded-xl p-3 border border-brand-gold/30 flex flex-col items-center justify-center text-center suggestion-card hover:bg-brand-gold/20">
                     <div class="w-10 h-10 bg-brand-gold/20 rounded-full flex items-center justify-center mb-3">
                         <i class="fas fa-arrow-right text-brand-gold"></i>
                     </div>
@@ -786,7 +788,19 @@
             }
         }
 
+        async function loadComponents() {
+            try {
+                // Altera para versão de cache estática ?v=1.0.2 e corrige links internos .html
+                const navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
+                if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                const footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                updateCartUI();
+            } catch (e) { console.warn("Modo offline."); }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
             loadCartSummary();
             handleBillingChoice();
         });
