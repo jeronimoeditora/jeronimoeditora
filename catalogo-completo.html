@@ -76,7 +76,7 @@
             <div id="cart-confirmation-details" class="flex items-center space-x-4 p-3 border border-gray-100 rounded-lg bg-gray-50 mb-6"></div>
             <div class="flex flex-col space-y-3 font-sans">
                 <button onclick="closeCartConfirmation()" class="w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-md">Continuar a Comprar</button>
-                <button onclick="window.location.href='checkout'" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-3 rounded-lg hover:bg-yellow-600 transition-colors shadow-md">Finalizar Compra</button>
+                <button onclick="window.location.href='checkout.html'" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-3 rounded-lg hover:bg-yellow-600 transition-colors shadow-md">Finalizar Compra</button>
             </div>
         </div>
     </div>
@@ -92,8 +92,11 @@
             <h3 id="info-modal-title" class="hidden sm:block text-xl md:text-2xl font-bold font-serif text-brand-accent-blue mb-4 border-b pb-3 text-center pr-8 tracking-wide"></h3>
             
             <div class="flex flex-col sm:flex-row gap-6 overflow-y-auto custom-scrollbar pr-1">
-                <div class="sm:w-2/5 flex flex-col items-center">
+                <div class="sm:w-2/5 flex flex-col items-center justify-center">
+                    <!-- Capa Físico (Ocultada se for Brevemente) -->
                     <img id="info-modal-image" src="" alt="Capa" class="w-32 h-48 md:w-40 md:h-56 object-contain rounded-lg shadow-md mb-3" onerror="this.onerror=null; this.src='https://placehold.co/400x600/f3f4f6/333333?text=Livro';" />
+                    <!-- Placeholder SVG Vectorial (Ativo para os livros em Brevemente) -->
+                    <div id="info-modal-svg-placeholder" class="w-32 h-48 md:w-40 md:h-56 hidden items-center justify-center mb-3"></div>
                 </div>
                 <div class="sm:w-3/5 space-y-4">
                     <!-- Título Mobile -->
@@ -176,9 +179,9 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxWI62Xgm7Lz3k9yuUFaAkZZN6S4xcSqEmh62yhbRrOLYhgAQBem2LZWrGcwxjijGe7/exec'; 
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec'; 
         
-        // Base de dados das obras literárias organizada exatamente na ordem: Kreeft -> Joe -> Tim -> Jimmy -> Horn -> Sheen
+        // Base de dados das obras literárias perfeitamente organizada por ordem e com preços sincronizados!
         const bookData = [
             { 
                 id: 3, 
@@ -186,7 +189,7 @@
                 author: "Peter Kreeft", 
                 price: 15.00, 
                 category: "Formação Bíblica", 
-                image: "Imagens/tpcbcapa.png", 
+                image: "Imagens/capaTPCB2.png", 
                 summary: "Um guia prático, profundo e estimulante para cada livro da Bíblia.", 
                 techDetails: { pages: 321, isbn: "978-989-36716-0-3", binding: "Capa Mole", weight: "0,510 kg" }, 
                 visible: true, 
@@ -196,7 +199,7 @@
                 id: 8, 
                 title: "A Eucaristia é mesmo Jesus", 
                 author: "Joe Heschmeyer", 
-                price: 15.00, 
+                price: 13.50, 
                 category: "Teologia Católica", 
                 image: "Imagens/capaAEMJ1.png", 
                 summary: "Uma fundamentação bíblica, histórica e patrística irrebatível sobre a presença real de Cristo no Santíssimo Sacramento.", 
@@ -211,7 +214,7 @@
                 author: "Tim Staples", 
                 price: 19.50, 
                 category: "Mariologia", 
-                image: "Imagens/etmcapa.png", 
+                image: "Imagens/capaETM1.png", 
                 summary: "Uma Defesa Bíblica e Histórica das Doutrinas Marianas que esclarece as principais objeções.", 
                 techDetails: { pages: 364, isbn: "978-989-36716-2-7", binding: "Capa Mole", weight: "0,534 kg" }, 
                 visible: true, 
@@ -223,7 +226,7 @@
                 author: "Jimmy Akin", 
                 price: 17.50, 
                 category: "Formação Bíblica", 
-                image: "Imagens/blccapa.png", 
+                image: "Imagens/capablc1.png", 
                 summary: "Descubra como a Igreja Católica recebeu, preservou e definiu as Sagradas Escrituras ao longo dos séculos.", 
                 techDetails: { pages: 184, isbn: "978-989-36716-3-4", binding: "Capa Mole", weight: "0,250 kg" }, 
                 visible: true, 
@@ -236,7 +239,7 @@
                 author: "Trent Horn", 
                 price: 0.00, 
                 category: "Formação Bíblica", 
-                image: "Imagens/trent.png", 
+                image: "SVG_Trent_Horn", // Identificador interno para carregar vetor dinâmico sem foto
                 summary: "Uma obra esclarecedora sobre as passagens difíceis e desafiadoras da Sagrada Escritura.", 
                 techDetails: { pages: 0, isbn: "A definir", binding: "A definir", weight: "A definir" }, 
                 visible: true, 
@@ -248,7 +251,7 @@
                 author: "Fulton J. Sheen", 
                 price: 0.00, 
                 category: "Teologia Católica", 
-                image: "Imagens/Sheen.png", 
+                image: "SVG_Fulton_Sheen", // Identificador interno para carregar vetor dinâmico sem foto (sem fulton.png)
                 summary: "O guia indispensável do Venerável Arcebispo Sheen sobre a salvação e a vida cristã.", 
                 techDetails: { pages: 0, isbn: "A definir", binding: "A definir", weight: "A definir" }, 
                 visible: true, 
@@ -295,7 +298,7 @@
                     quantity: 1, 
                     image: book.image, 
                     author: book.author, 
-                    weight: book.techDetails.weight !== "A definir" ? parseFloat(book.techDetails.weight.replace(',', '.')) : 0.35
+                    weight: book.techDetails.weight !== "A definir" ? parseFloat(book.techDetails.weight.replace(',', '.')) : 0.250
                 }); 
             }
             
@@ -311,7 +314,43 @@
             
             document.getElementById('info-modal-title').textContent = book.title;
             document.getElementById('info-modal-title-mobile').textContent = book.title;
-            document.getElementById('info-modal-image').src = book.image;
+            
+            // Lógica de substituição de imagens/SVGs para livros em produção
+            const imgEl = document.getElementById('info-modal-image');
+            const svgPlaceholder = document.getElementById('info-modal-svg-placeholder');
+            
+            if (book.isComingSoon) {
+                imgEl.classList.add('hidden');
+                svgPlaceholder.classList.remove('hidden');
+                svgPlaceholder.classList.add('flex');
+                
+                if (book.id === 7) {
+                    svgPlaceholder.innerHTML = `
+                        <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-md">
+                            <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#b38e4a" stroke-width="1.2" stroke-linejoin="round" fill="#cfaf5c"/>
+                            <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#b38e4a" stroke-width="1.2" stroke-linecap="round"/>
+                            <line x1="28" y1="15" x2="28" y2="125" stroke="#b38e4a" stroke-width="0.5" stroke-dasharray="1 2"/>
+                            <text x="79" y="62" text-anchor="middle" fill="#002147" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">DURAS</text>
+                            <text x="79" y="80" text-anchor="middle" fill="#002147" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">PALAVRAS</text>
+                        </svg>`;
+                } else if (book.id === 11) {
+                    svgPlaceholder.innerHTML = `
+                        <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-md">
+                            <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#cfaf5c" stroke-width="1.2" stroke-linejoin="round" fill="#002147"/>
+                            <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#cfaf5c" stroke-width="1.2" stroke-linecap="round"/>
+                            <line x1="28" y1="15" x2="28" y2="125" stroke="#cfaf5c" stroke-width="0.5" stroke-dasharray="1 2"/>
+                            <text x="79" y="55" text-anchor="middle" fill="#cfaf5c" font-family="Playfair Display" font-weight="700" font-size="12" letter-spacing="0.02em">VAI PARA</text>
+                            <text x="79" y="72" text-anchor="middle" fill="#cfaf5c" font-family="Playfair Display" font-weight="700" font-size="12" letter-spacing="0.02em">O CÉU</text>
+                            <text x="79" y="94" text-anchor="middle" fill="#ffffff" font-family="Roboto" font-weight="500" font-size="8" letter-spacing="0.05em">FULTON SHEEN</text>
+                        </svg>`;
+                }
+            } else {
+                imgEl.classList.remove('hidden');
+                imgEl.src = book.image;
+                svgPlaceholder.classList.add('hidden');
+                svgPlaceholder.classList.remove('flex');
+            }
+
             document.getElementById('info-modal-summary').textContent = book.summary;
             document.getElementById('info-modal-price').textContent = book.isComingSoon && book.price === 0 ? 'Brevemente' : formatPrice(book.price);
             document.getElementById('info-modal-author').textContent = `Autor: ${book.author}`;
@@ -375,8 +414,8 @@
             const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mr-0 md:mr-1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`;
             const cartIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="mr-0 md:mr-1"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>`;
             
-            // Lista de imagens que beneficiam de sombreado extra para contraste
-            const whiteCovers = ['tpcbcapa.png', 'etmcapa.png', 'capaAEMJ1.png', 'blccapa.png', 'trent.png', 'Sheen.png'];
+            // Lista de imagens para aplicar contraste premium
+            const whiteCovers = ['capaTPCB2.png', 'capaETM1.png', 'capaAEMJ1.png', 'capablc1.png'];
 
             books.forEach(b => {
                 const priceDisplay = b.isComingSoon && b.price === 0 ? 'Brevemente' : formatPrice(b.price);
@@ -384,15 +423,45 @@
                 const btnClass = b.isComingSoon ? 'bg-gray-300 cursor-not-allowed text-gray-500' : 'bg-brand-accent-blue text-white hover:bg-brand-accent-red shadow-sm';
                 const buyBtnContent = `${cartIcon} <span class="hidden md:inline ml-1 text-sm">${b.isComingSoon ? 'Em breve' : 'Comprar'}</span>`;
                 
-                const imageClass = whiteCovers.some(c => b.image.includes(c)) ? 'white-cover-shadow' : '';
+                let coverHtml = '';
+                if (b.isComingSoon) {
+                    if (b.id === 7) {
+                        coverHtml = `
+                            <div class="w-24 h-36 md:w-36 md:h-52 flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
+                                <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-md">
+                                    <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#b38e4a" stroke-width="1.2" stroke-linejoin="round" fill="#cfaf5c"/>
+                                    <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#b38e4a" stroke-width="1.2" stroke-linecap="round"/>
+                                    <line x1="28" y1="15" x2="28" y2="125" stroke="#b38e4a" stroke-width="0.5" stroke-dasharray="1 2"/>
+                                    <text x="79" y="62" text-anchor="middle" fill="#002147" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">DURAS</text>
+                                    <text x="79" y="80" text-anchor="middle" fill="#002147" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">PALAVRAS</text>
+                                </svg>
+                            </div>`;
+                    } else if (b.id === 11) {
+                        coverHtml = `
+                            <div class="w-24 h-36 md:w-36 md:h-52 flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
+                                <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-md">
+                                    <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#cfaf5c" stroke-width="1.2" stroke-linejoin="round" fill="#002147"/>
+                                    <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#cfaf5c" stroke-width="1.2" stroke-linecap="round"/>
+                                    <line x1="28" y1="15" x2="28" y2="125" stroke="#cfaf5c" stroke-width="0.5" stroke-dasharray="1 2"/>
+                                    <text x="79" y="55" text-anchor="middle" fill="#cfaf5c" font-family="Playfair Display" font-weight="700" font-size="12" letter-spacing="0.02em">VAI PARA</text>
+                                    <text x="79" y="72" text-anchor="middle" fill="#cfaf5c" font-family="Playfair Display" font-weight="700" font-size="12" letter-spacing="0.02em">O CÉU</text>
+                                    <text x="79" y="94" text-anchor="middle" fill="#ffffff" font-family="Roboto" font-weight="500" font-size="8" letter-spacing="0.05em">FULTON SHEEN</text>
+                                </svg>
+                            </div>`;
+                    }
+                } else {
+                    const imageClass = whiteCovers.some(c => b.image.includes(c)) ? 'white-cover-shadow' : '';
+                    coverHtml = `<img src="${b.image}" class="w-24 h-36 md:w-36 md:h-52 object-contain transition-transform duration-500 group-hover:scale-105 ${imageClass}" onerror="this.onerror=null; this.src='https://placehold.co/400x600/f3f4f6/333333?text=${encodeURIComponent(b.title)}';" />`;
+                }
 
                 container.innerHTML += `
                     <div class="text-center group book-shadow bg-white rounded-xl p-4 md:p-6 flex flex-col justify-between cursor-pointer" onclick="openInfoModal(${b.id})">
                         <div class="flex-grow">
                             <div class="overflow-hidden rounded-lg mb-4 md:mb-6 flex justify-center py-4 md:py-6 bg-gray-50">
-                                <img src="${b.image}" class="w-24 h-36 md:w-36 md:h-52 object-contain transition-transform duration-500 group-hover:scale-105 ${imageClass}" onerror="this.onerror=null; this.src='https://placehold.co/400x600/f3f4f6/333333?text=${encodeURIComponent(b.title)}';" />
+                                ${coverHtml}
                             </div>
-                            <h4 class="font-serif text-base md:text-lg text-brand-text font-bold group-hover:text-brand-accent-red transition-colors duration-200 leading-tight">${b.title}</h4>
+                            <!-- Removido o hover vermelho do título a pedido do utilizador -->
+                            <h4 class="font-serif text-base md:text-lg text-brand-text font-bold transition-colors duration-200 leading-tight">${b.title}</h4>
                             <p class="text-[11px] md:text-sm text-gray-500 italic mt-2">${b.author}</p>
                             <span class="text-lg md:text-xl font-classic font-extrabold ${b.isComingSoon ? 'text-gray-400' : 'text-brand-accent-red'} mt-3 block">${priceDisplay}</span>
                         </div>
