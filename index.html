@@ -58,8 +58,8 @@
             display: flex;
             align-items: center;
             overflow: hidden;
-            padding-top: 80px; 
-            padding-bottom: 50px;
+            padding-top: 95px; /* Aumentado no telemóvel para afastar da navbar */
+            padding-bottom: 40px;
             background-color: #fff;
             user-select: none; /* Evita seleção acidental ao arrastar no telemóvel */
         }
@@ -74,17 +74,17 @@
 
         @media (max-width: 1024px) {
             .hero-bg-accent { width: 100%; clip-path: none; height: 100%; opacity: 0.25; }
-            .hero-section { min-height: auto; padding-top: 75px; padding-bottom: 35px; } 
+            .hero-section { min-height: auto; padding-top: 95px; padding-bottom: 35px; } 
         }
 
         /* Altura calculada e limite máximo rígido para portáteis (UX sem scrolling) */
         @media (min-width: 1024px) {
             .hero-section {
                 height: calc(100vh - 80px); /* Preenche o ecrã exatamente a contar com a navbar */
-                min-height: 540px;
-                max-height: 660px; /* Teto rígido para evitar barra de scroll em portáteis de 768p/900p */
-                padding-top: 15px;
-                padding-bottom: 15px;
+                min-height: 520px;
+                max-height: 640px; /* Teto rígido para evitar barra de scroll em portáteis de 768p/900p */
+                padding-top: 110px; /* Excelente margem de segurança contra cortes de cabeçalho */
+                padding-bottom: 30px;
             }
         }
 
@@ -94,23 +94,25 @@
             position: relative;
             z-index: 30; 
             display: flex;
-            justify-content: center; /* Desloca o livro para o centro no mobile */
+            justify-content: center; /* Centralização perfeita no mobile */
             align-items: center;
         }
 
         @media (min-width: 1024px) {
-            /* Puxa o livro ligeiramente para a esquerda para preencher o círculo de vazio e aproximar do texto */
+            /* Puxa o livro ligeiramente para a esquerda, aproximando-o do texto e eliminando o círculo vazio */
             .hero-book-container { 
-                justify-content: flex-start; 
-                transform: translateX(-40px);
+                justify-content: flex-start;
+                padding-left: 20px;
             } 
         }
 
         .hero-book-img {
-            max-width: 160px; /* Ampliado significativamente no telemóvel para não parecer apertado */
+            max-width: 145px; /* Tamanho do livro no telemóvel otimizado */
             width: 100%;
             height: auto;
-            /* Sombra suave sem caixas pretas */
+            /* Limite de altura estrito para nunca transbordar nem cortar na navbar */
+            max-height: 180px; 
+            object-contain: fill;
             filter: drop-shadow(10px 15px 25px rgba(0,0,0,0.15));
             transition: all 0.3s ease;
             z-index: 5;
@@ -118,20 +120,20 @@
         }
 
         @media (min-width: 400px) {
-            .hero-book-img { max-width: 190px; }
+            .hero-book-img { max-width: 180px; max-height: 220px; }
         }
         @media (min-width: 640px) {
-            .hero-book-img { max-width: 250px; }
+            .hero-book-img { max-width: 240px; max-height: 280px; }
         }
         @media (min-width: 1024px) {
-            .hero-book-img { max-width: 290px; } /* Proporção ideal para Laptop */
+            .hero-book-img { max-width: 280px; max-height: 350px; } /* Proporção ideal para Laptop de 13/15 polegadas */
         }
 
-        /* Animação de flutuação ajustada: flutua ligeiramente para baixo para evitar de todo o contacto com a navbar */
+        /* Animação suave que flutua subtilmente para baixo de forma segura */
         .floating-element { animation: floatingHero 7s ease-in-out infinite; }
         @keyframes floatingHero { 
-            0%, 100% { transform: translateY(0) rotateY(-8deg) rotateX(3deg); } 
-            50% { transform: translateY(10px) rotateY(-8deg) rotateX(3deg); } 
+            0%, 100% { transform: translateY(0) rotate(-1.5deg); } 
+            50% { transform: translateY(6px) rotate(-1.5deg); } 
         }
 
         /* Tipografia de título adaptativa e elegante (UX amigável) */
@@ -239,7 +241,7 @@
         <section class="hero-section relative select-none">
             <div class="hero-bg-accent"></div>
             
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full relative hero-content-wrapper">
+            <div class="max-w-5xl lg:max-w-6xl mx-auto px-4 sm:px-6 w-full relative hero-content-wrapper">
                 
                 <!-- Contentor de Slides do Carrossel (Altura de 380px otimizada para portáteis, prevenindo overflows) -->
                 <div class="relative min-h-[350px] xs:min-h-[390px] sm:min-h-[480px] lg:min-h-[380px] flex items-center">
@@ -275,33 +277,33 @@
                                 <a href="a-biblia-é-um livro-catolico.html" class="btn-premium-outline flex-1">Detalhes</a>
                             </div>
                         </div>
-                        <!-- Capa de Livro na Lateral Direita (Deslocada para baixo e ligeiramente para a esquerda para perfeita centralização) -->
-                        <div class="col-span-5 lg:col-span-5 hero-book-container translate-y-8 lg:translate-y-12">
+                        <!-- Capa de Livro na Lateral Direita (col-span-5 constante no mobile e desktop) -->
+                        <div class="col-span-5 lg:col-span-5 hero-book-container mt-2 lg:mt-4">
                             <a href="a-biblia-é-um livro-catolico.html" class="block transition-transform duration-300 hover:scale-105">
                                 <img src="Imagens/capablc1.png" alt="A Bíblia é um Livro Católico" class="hero-book-img floating-element mx-auto">
                             </a>
                         </div>
                     </div>
 
-                    <!-- SLIDE 2: TIM STAPLES (ORDEM 2º - 19,50€) -->
+                    <!-- SLIDE 2: TIM STAPLES (ORDEM 2º - 19,50€ - SIMETRIA TOTAL 7/5 COLUNAS NO MOBILE) -->
                     <div class="hero-slide transition-all duration-700 transform opacity-0 translate-x-8 hidden w-full grid grid-cols-12 gap-3 xs:gap-4 md:gap-8 items-center" id="slide-1">
                         <div class="col-span-7 lg:col-span-7 text-left">
-                            <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full mb-5">Apologética Mariana</span>
-                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-4 leading-tight">
+                            <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full mb-3 lg:mb-3">Apologética Mariana</span>
+                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-2 lg:mb-3 leading-tight">
                                 Eis a <span class="text-brand-accent-red italic">Tua</span> Mãe
                             </h1>
-                            <p class="font-classic text-xs sm:text-lg lg:text-xl text-gray-600 italic mb-4 lg:mb-4 max-w-xl leading-relaxed">
+                            <p class="font-classic text-[11px] xs:text-xs sm:text-lg lg:text-xl text-gray-600 italic mb-4 lg:mb-4 max-w-xl leading-relaxed">
                                 Uma defesa bíblica e histórica formidável das doutrinas marianas que esclarece as principais objeções.
                             </p>
                             
                             <!-- Foto do Autor (Clicável - Tamanho Unificado de Horn w-14 h-14 sm:w-28 sm:h-28) -->
                             <a href="eis-a-tua-mae.html" class="flex items-center gap-3 sm:gap-5 mb-4 lg:mb-4 group hover:opacity-90 transition-all inline-flex text-left">
-                                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
+                                <div class="w-14 h-14 xs:w-16 xs:h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
                                     <img src="Imagens/TimStaples.png" alt="Tim Staples" class="w-full h-full object-cover" onerror="this.src='Imagens/tim.png';">
                                 </div>
                                 <div class="text-left">
                                     <span class="block text-[8px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                    <span class="font-serif text-lg sm:text-2xl lg:text-3xl font-bold text-brand-accent-blue">Tim Staples</span>
+                                    <span class="font-serif text-xs sm:text-2xl lg:text-3xl font-bold text-brand-accent-blue">Tim Staples</span>
                                     <span class="block font-sans font-bold text-xs sm:text-2xl text-brand-accent-red mt-0.5">19,50€</span>
                                 </div>
                             </a>
@@ -315,33 +317,33 @@
                             </div>
                         </div>
                         <!-- Capa de Livro Clicável na Lateral (capaETM1.png) -->
-                        <div class="col-span-5 lg:col-span-5 hero-book-container translate-y-8 lg:translate-y-12">
+                        <div class="col-span-5 lg:col-span-5 hero-book-container mt-2 lg:mt-4">
                             <a href="eis-a-tua-mae.html" class="block transition-transform duration-300 hover:scale-105">
                                 <img src="Imagens/capaETM1.png" alt="Eis a Tua Mãe" class="hero-book-img floating-element mx-auto">
                             </a>
                         </div>
                     </div>
 
-                    <!-- SLIDE 3: JOE HESCHMEYER (ORDEM 3º - 13,50€) -->
+                    <!-- SLIDE 3: JOE HESCHMEYER (ORDEM 3º - 13,50€ - SIMETRIA TOTAL 7/5 COLUNAS NO MOBILE) -->
                     <div class="hero-slide transition-all duration-700 transform opacity-0 translate-x-8 hidden w-full grid grid-cols-12 gap-3 xs:gap-4 md:gap-8 items-center" id="slide-2">
-                        <div class="col-span-8 lg:col-span-7 text-left">
-                            <span class="inline-block px-4 py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[11px] font-black uppercase tracking-widest rounded-full mb-5 animate-pulse-subtle">Teologia & Eucaristia</span>
-                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-4 leading-tight">
+                        <div class="col-span-7 lg:col-span-7 text-left">
+                            <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full mb-3 lg:mb-3">Teologia & Eucaristia</span>
+                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-2 lg:mb-3 leading-tight">
                                 A Eucaristia é <br> <span class="text-brand-accent-red italic">mesmo</span> Jesus
                             </h1>
-                            <p class="font-classic text-xs sm:text-lg lg:text-xl text-gray-600 italic mb-4 lg:mb-4 max-w-xl leading-relaxed">
+                            <p class="font-classic text-[11px] xs:text-xs sm:text-lg lg:text-xl text-gray-600 italic mb-4 lg:mb-4 max-w-xl leading-relaxed">
                                 Uma fundamentação bíblica, histórica e patrística irrebatível sobre a presença real de Cristo no Santíssimo Sacramento.
                             </p>
                             
                             <!-- Foto do Autor (Clicável - Tamanho Unificado de Horn w-14 h-14 sm:w-28 sm:h-28) -->
                             <a href="a-eucaristia-e-mesmo-jesus.html" class="flex items-center gap-3 sm:gap-5 mb-4 lg:mb-4 group hover:opacity-90 transition-all inline-flex text-left">
-                                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
+                                <div class="w-14 h-14 xs:w-16 xs:h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
                                     <img src="Imagens/JoeHeschmeyer.png" alt="Joe Heschmeyer" class="w-full h-full object-cover" onerror="this.src='Imagens/joe.png';">
                                 </div>
                                 <div class="text-left">
-                                    <span class="block text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                    <span class="font-serif text-lg sm:text-2xl lg:text-3xl font-bold text-brand-accent-blue">Joe Heschmeyer</span>
-                                    <span class="block font-sans font-bold text-lg sm:text-2xl text-brand-accent-red mt-0.5">13,50€</span>
+                                    <span class="block text-[8px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                    <span class="font-serif text-xs sm:text-2xl lg:text-3xl font-bold text-brand-accent-blue">Joe Heschmeyer</span>
+                                    <span class="block font-sans font-bold text-xs sm:text-2xl text-brand-accent-red mt-0.5">13,50€</span>
                                 </div>
                             </a>
 
@@ -354,27 +356,27 @@
                             </div>
                         </div>
                         <!-- Capa de Livro Clicável na Lateral (capaAEMJ1.png) -->
-                        <div class="col-span-5 lg:col-span-5 hero-book-container translate-y-8 lg:translate-y-12">
+                        <div class="col-span-5 lg:col-span-5 hero-book-container mt-2 lg:mt-4">
                             <a href="a-eucaristia-e-mesmo-jesus.html" class="block transition-transform duration-300 hover:scale-105">
                                 <img src="Imagens/capaAEMJ1.png" alt="A Eucaristia é mesmo Jesus" class="hero-book-img floating-element mx-auto">
                             </a>
                         </div>
                     </div>
 
-                    <!-- SLIDE 4: PETER KREEFT (ORDEM 4º - 15,00€) -->
+                    <!-- SLIDE 4: PETER KREEFT (ORDEM 4º - 15,00€ - SIMETRIA TOTAL 7/5 COLUNAS NO MOBILE) -->
                     <div class="hero-slide transition-all duration-700 transform opacity-0 translate-x-8 hidden w-full grid grid-cols-12 gap-3 xs:gap-4 md:gap-8 items-center" id="slide-3">
-                        <div class="col-span-8 lg:col-span-7 text-left">
-                            <span class="inline-block px-4 py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[11px] font-black uppercase tracking-widest rounded-full mb-5 animate-pulse-subtle">Formação Bíblica</span>
-                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-4 leading-tight">
+                        <div class="col-span-7 lg:col-span-7 text-left">
+                            <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full mb-3 lg:mb-3">Formação Bíblica</span>
+                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-2 lg:mb-3 leading-tight">
                                 Tu Podes <br> Compreender a <span class="text-brand-accent-red italic">Bíblia</span>
                             </h1>
-                            <p class="font-classic text-xs sm:text-lg lg:text-xl text-gray-600 italic mb-4 lg:mb-4 max-w-xl leading-relaxed">
+                            <p class="font-classic text-[11px] xs:text-xs sm:text-lg lg:text-xl text-gray-600 italic mb-4 lg:mb-4 max-w-xl leading-relaxed">
                                 Um guia indispensável e prático para desvendar os mistérios e as riquezas das Sagradas Escrituras.
                             </p>
                             
                             <!-- Foto do Autor (Clicável - Tamanho Unificado w-24 h-24 sm:w-28 sm:h-28) -->
                             <a href="tu-podes-compreender-a-biblia.html" class="flex items-center gap-3 sm:gap-5 mb-4 lg:mb-4 group hover:opacity-90 transition-all inline-flex text-left">
-                                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
+                                <div class="w-14 h-14 xs:w-16 xs:h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
                                     <img src="Imagens/PeterKreeft.png" alt="Peter Kreeft" class="w-full h-full object-cover" onerror="this.src='Imagens/kreeft.png';">
                                 </div>
                                 <div class="text-left">
@@ -393,9 +395,9 @@
                             </div>
                         </div>
                         <!-- Capa de Livro Clicável na Lateral (capaTPCB2.png) -->
-                        <div class="col-span-5 lg:col-span-5 hero-book-container translate-y-8 lg:translate-y-12">
+                        <div class="col-span-5 lg:col-span-5 hero-book-container mt-2 lg:mt-4">
                             <a href="tu-podes-compreender-a-biblia.html" class="block transition-transform duration-300 hover:scale-105">
-                                <img src="Imagens/capaTPCB2.png" alt="Tu Podes Compreender a Bíblia" class="hero-book-img mx-auto">
+                                <img src="Imagens/capaTPCB2.png" alt="Tu Podes Compreender a Bíblia" class="hero-book-img floating-element mx-auto">
                             </a>
                         </div>
                     </div>
