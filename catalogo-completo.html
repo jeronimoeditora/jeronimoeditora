@@ -36,7 +36,7 @@
 
     <style>
         .book-shadow {
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 0 5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 25 rgba(0, 0, 0, 0.08), 0 0 5px rgba(0, 0, 0, 0.04);
             transition: all 0.3s ease;
         }
         .book-shadow:hover {
@@ -228,7 +228,7 @@
                 category: "Formação Bíblica", 
                 image: "Imagens/blccapa.png", 
                 summary: "Descubra como a Igreja Católica recebeu, preservou e definiu as Sagradas Escrituras ao longo dos séculos.", 
-                techDetails: { pages: 184, isbn: "978-989-36716-3-4", binding: "Capa Mole", weight: "0,250 kg" }, 
+                techDetails: { pages: 184, isbn: "978-989-36716-3-4", binding: "Capa Mole", weight: "0,272 kg" }, // Peso atualizado para 0,272 kg
                 visible: true, 
                 isComingSoon: false, 
                 detailsUrl: "a-biblia-é-um livro-catolico.html" 
@@ -298,7 +298,7 @@
                     quantity: 1, 
                     image: book.image, 
                     author: book.author, 
-                    weight: book.techDetails.weight !== "A definir" ? parseFloat(book.techDetails.weight.replace(',', '.')) : 0.250
+                    weight: book.techDetails.weight !== "A definir" ? parseFloat(book.techDetails.weight.replace(',', '.')) : 0.272
                 }); 
             }
             
