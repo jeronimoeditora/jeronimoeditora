@@ -29,6 +29,9 @@
                         'brand-gold-light': '#fdfaf2',
                         'brand-gold-dark': '#b38e4a',
                     },
+                    screens: {
+                        'xs': '400px',
+                    },
                     animation: {
                         'pulse-subtle': 'pulseScale 4s ease-in-out infinite',
                     },
@@ -51,12 +54,12 @@
 
         .hero-section {
             position: relative;
-            min-height: 85vh;
+            min-height: 80vh;
             display: flex;
             align-items: center;
             overflow: hidden;
             padding-top: 80px; 
-            padding-bottom: 60px;
+            padding-bottom: 50px;
             background-color: #fff;
             user-select: none; /* Evita seleção acidental ao arrastar no telemóvel */
         }
@@ -71,7 +74,7 @@
 
         @media (max-width: 1024px) {
             .hero-bg-accent { width: 100%; clip-path: none; height: 100%; opacity: 0.25; }
-            .hero-section { min-height: auto; padding-top: 100px; padding-bottom: 50px; }
+            .hero-section { min-height: auto; padding-top: 100px; padding-bottom: 40px; }
         }
 
         .hero-content-wrapper { position: relative; z-index: 20; }
@@ -81,19 +84,15 @@
             z-index: 30; 
             perspective: 2500px;
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
         }
 
-        @media (min-width: 1024px) {
-            .hero-book-container { justify-content: flex-end; }
-        }
-
         .hero-book-img {
-            max-width: 280px;
-            width: 80%;
+            max-width: 140px;
+            width: 100%;
             height: auto;
-            filter: drop-shadow(15px 25px 45px rgba(0,0,0,0.18));
+            filter: drop-shadow(8px 12px 20px rgba(0,0,0,0.18));
             transform: rotateY(-8deg) rotateX(3deg);
             transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
             backface-visibility: hidden;
@@ -102,18 +101,24 @@
             image-rendering: -webkit-optimize-contrast;
         }
 
+        @media (min-width: 480px) {
+            .hero-book-img { max-width: 180px; }
+        }
         @media (min-width: 640px) {
-            .hero-book-img { max-width: 320px; }
+            .hero-book-img { max-width: 240px; filter: drop-shadow(12px 18px 30px rgba(0,0,0,0.18)); }
+        }
+        @media (min-width: 1024px) {
+            .hero-book-img { max-width: 310px; filter: drop-shadow(15px 25px 45px rgba(0,0,0,0.18)); }
         }
 
         .floating-element { animation: floatingHero 7s ease-in-out infinite; }
         @keyframes floatingHero { 
             0%, 100% { transform: translateY(0) rotateY(-8deg) rotateX(3deg); } 
-            50% { transform: translateY(-12px) rotateY(-8deg) rotateX(3deg); } 
+            50% { transform: translateY(-10px) rotateY(-8deg) rotateX(3deg); } 
         }
 
         .hero-title { 
-            font-size: clamp(1.8rem, 5.5vw, 3.8rem); 
+            font-size: clamp(1.2rem, 4.5vw, 3.8rem); 
             line-height: 1.15; 
             letter-spacing: -0.01em;
         }
@@ -170,18 +175,20 @@
 
         /* --- BOTÕES PREMIUM COM LETRA AMPLIADA --- */
         .btn-premium-red { 
-            background: #800000; color: white; padding: 0.9rem 1.8rem; border-radius: 12px; font-weight: 800; text-transform: uppercase; 
-            transition: all 0.3s ease; text-align: center; font-size: 13px; display: inline-flex; align-items: center; justify-content: center;
+            background: #800000; color: white; padding: 0.8rem 1.4rem; border-radius: 12px; font-weight: 800; text-transform: uppercase; 
+            transition: all 0.3s ease; text-align: center; font-size: 11px; display: inline-flex; align-items: center; justify-content: center;
             letter-spacing: 0.05em; box-shadow: 0 4px 15px rgba(128, 0, 0, 0.2);
         }
+        @media (min-width: 480px) { .btn-premium-red { padding: 0.9rem 1.8rem; font-size: 13px; } }
         @media (min-width: 640px) { .btn-premium-red { padding: 1rem 2.4rem; font-size: 15px; } }
         .btn-premium-red:hover { background: #600000; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(128, 0, 0, 0.3); }
 
         .btn-premium-outline { 
-            background: transparent; color: #002147; padding: 0.9rem 1.8rem; border-radius: 12px; font-weight: 800; text-transform: uppercase; 
+            background: transparent; color: #002147; padding: 0.8rem 1.4rem; border-radius: 12px; font-weight: 800; text-transform: uppercase; 
             border: 2px solid #002147; transition: all 0.3s ease; text-align: center; font-size: 11px; display: inline-flex; align-items: center; justify-content: center;
             letter-spacing: 0.05em;
         }
+        @media (min-width: 480px) { .btn-premium-outline { padding: 0.9rem 1.8rem; font-size: 13px; } }
         @media (min-width: 640px) { .btn-premium-outline { padding: 1rem 2.4rem; font-size: 15px; border-width: 2.5px; } }
         .btn-premium-outline:hover { background: #002147; color: white; transform: translateY(-2px); }
 
@@ -210,40 +217,39 @@
 
     <main class="flex-grow">
 
-        <!-- HERO SECTION COM CARROSSEL DE LIVROS EM STOCK -->
+        <!-- HERO SECTION COM CARROSSEL DE LIVROS EM STOCK (MOBILE SIDE-BY-SIDE) -->
         <section class="hero-section relative select-none">
             <div class="hero-bg-accent"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full relative hero-content-wrapper">
                 
                 <!-- Contentor de Slides do Carrossel -->
-                <div class="relative min-h-[640px] lg:min-h-[550px] flex items-center">
+                <div class="relative min-h-[500px] xs:min-h-[530px] sm:min-h-[580px] lg:min-h-[550px] flex items-center">
                     
-                    <!-- SLIDE 1: JIMMY AKIN (NOVO LANÇAMENTO - ORDEM 1º) -->
-                    <div class="hero-slide transition-all duration-700 transform opacity-100 translate-x-0 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" id="slide-0">
-                        <div class="lg:col-span-7 text-center lg:text-left">
-                            <span class="inline-block px-4 py-1.5 bg-brand-gold text-brand-accent-blue text-[11px] font-black uppercase tracking-widest rounded-full mb-5 animate-pulse-subtle">Novo Lançamento</span>
-                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-4 leading-tight">
+                    <!-- SLIDE 1: JIMMY AKIN (NOVO LANÇAMENTO) -->
+                    <div class="hero-slide transition-all duration-700 transform opacity-100 translate-x-0 w-full grid grid-cols-12 gap-3 xs:gap-4 md:gap-8 items-center" id="slide-0">
+                        <div class="col-span-8 lg:col-span-7 text-left">
+                            <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold text-brand-accent-blue text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full mb-3 sm:mb-5 animate-pulse-subtle">Novo Lançamento</span>
+                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-2 sm:mb-4 leading-tight">
                                 A Bíblia é um <br> Livro <span class="text-brand-accent-red italic">Católico</span>
                             </h1>
-                            <p class="font-classic text-sm sm:text-lg lg:text-xl text-gray-600 italic mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            <p class="font-classic text-xs sm:text-lg lg:text-2xl text-gray-600 italic mb-4 sm:mb-6 max-w-xl leading-relaxed">
                                 Descubra como a Igreja Católica recebeu, preservou e definiu as Sagradas Escrituras ao longo dos séculos.
                             </p>
                             
-                            <!-- Foto do Autor (Clicável - Premium Group Hover) -->
-                            <a href="a-biblia-é-um livro-catolico.html" class="flex items-center justify-center lg:justify-start gap-4 mb-6 group hover:opacity-90 transition-all inline-flex">
-                                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md group-hover:border-brand-accent-red transition-colors">
+                            <!-- Foto do Autor (Tamanho Super Ampliado) -->
+                            <a href="a-biblia-é-um livro-catolico.html" class="flex items-center gap-3 sm:gap-5 mb-4 sm:mb-6 group hover:opacity-90 transition-all inline-flex text-left">
+                                <div class="w-14 h-14 xs:w-16 xs:h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md group-hover:border-brand-accent-red transition-colors">
                                     <img src="Imagens/Jimmy Akin.png" alt="Jimmy Akin" class="w-full h-full object-cover" onerror="this.src='Imagens/jimmy.png';">
                                 </div>
                                 <div class="text-left">
-                                    <span class="block text-[10px] text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                    <span class="font-serif text-lg font-bold text-brand-accent-blue group-hover:text-brand-accent-red transition-colors">Jimmy Akin</span>
+                                    <span class="block text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                    <span class="font-serif text-base sm:text-2xl lg:text-3xl font-bold text-brand-accent-blue group-hover:text-brand-accent-red transition-colors">Jimmy Akin</span>
+                                    <span class="block font-sans font-bold text-lg sm:text-2xl text-brand-accent-red mt-0.5">17,50€</span>
                                 </div>
-                                <span class="text-gray-300">|</span>
-                                <span class="font-sans font-bold text-2xl sm:text-3xl text-brand-accent-red">17,50€</span>
                             </a>
 
-                            <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start max-w-md mx-auto lg:mx-0">
+                            <div class="flex flex-col xs:flex-row gap-2 sm:gap-3 max-w-md">
                                 <button onclick="addToCart('a-biblia-e-um-livro-catolico', 'A Bíblia é um Livro Católico', 17.50, 'Imagens/capablc1.png', 'a-biblia-é-um livro-catolico.html')" class="btn-premium-red flex-1 gap-2">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                     Comprar
@@ -251,39 +257,38 @@
                                 <a href="a-biblia-é-um livro-catolico.html" class="btn-premium-outline flex-1">Detalhes</a>
                             </div>
                         </div>
-                        <!-- Capa de Livro Clicável -->
-                        <div class="lg:col-span-5 hero-book-container">
+                        <!-- Capa de Livro na Lateral Direita no Mobile -->
+                        <div class="col-span-4 lg:col-span-5 hero-book-container">
                             <a href="a-biblia-é-um livro-catolico.html" class="block transition-transform duration-300 hover:scale-105">
                                 <img src="Imagens/capablc1.png" alt="A Bíblia é um Livro Católico" class="hero-book-img floating-element book-shadow mx-auto">
                             </a>
                         </div>
                     </div>
 
-                    <!-- SLIDE 2: TIM STAPLES (ORDEM 2º) -->
-                    <div class="hero-slide transition-all duration-700 transform opacity-0 translate-x-8 hidden w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" id="slide-1">
-                        <div class="lg:col-span-7 text-center lg:text-left">
-                            <span class="inline-block px-4 py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[11px] font-black uppercase tracking-widest rounded-full mb-5">Apologética Mariana</span>
-                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-4 leading-tight">
+                    <!-- SLIDE 2: TIM STAPLES -->
+                    <div class="hero-slide transition-all duration-700 transform opacity-0 translate-x-8 hidden w-full grid grid-cols-12 gap-3 xs:gap-4 md:gap-8 items-center" id="slide-1">
+                        <div class="col-span-8 lg:col-span-7 text-left">
+                            <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full mb-3 sm:mb-5">Apologética Mariana</span>
+                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-2 sm:mb-4 leading-tight">
                                 Eis a <span class="text-brand-accent-red italic">Tua</span> Mãe
                             </h1>
-                            <p class="font-classic text-sm sm:text-lg lg:text-xl text-gray-600 italic mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            <p class="font-classic text-xs sm:text-lg lg:text-2xl text-gray-600 italic mb-4 sm:mb-6 max-w-xl leading-relaxed">
                                 Uma defesa bíblica e histórica formidável das doutrinas marianas que esclarece as principais objeções.
                             </p>
                             
-                            <!-- Foto do Autor (Clicável - Premium Group Hover) -->
-                            <a href="eis-a-tua-mae.html" class="flex items-center justify-center lg:justify-start gap-4 mb-6 group hover:opacity-90 transition-all inline-flex">
-                                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md group-hover:border-brand-accent-red transition-colors">
+                            <!-- Foto do Autor (Tamanho Super Ampliado) -->
+                            <a href="eis-a-tua-mae.html" class="flex items-center gap-3 sm:gap-5 mb-4 sm:mb-6 group hover:opacity-90 transition-all inline-flex text-left">
+                                <div class="w-14 h-14 xs:w-16 xs:h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md group-hover:border-brand-accent-red transition-colors">
                                     <img src="Imagens/TimStaples.png" alt="Tim Staples" class="w-full h-full object-cover" onerror="this.src='Imagens/tim.png';">
                                 </div>
                                 <div class="text-left">
-                                    <span class="block text-[10px] text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                    <span class="font-serif text-lg font-bold text-brand-accent-blue group-hover:text-brand-accent-red transition-colors">Tim Staples</span>
+                                    <span class="block text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                    <span class="font-serif text-base sm:text-2xl lg:text-3xl font-bold text-brand-accent-blue group-hover:text-brand-accent-red transition-colors">Tim Staples</span>
+                                    <span class="block font-sans font-bold text-lg sm:text-2xl text-brand-accent-red mt-0.5">19,50€</span>
                                 </div>
-                                <span class="text-gray-300">|</span>
-                                <span class="font-sans font-bold text-2xl sm:text-3xl text-brand-accent-red">19,50€</span>
                             </a>
 
-                            <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start max-w-md mx-auto lg:mx-0">
+                            <div class="flex flex-col xs:flex-row gap-2 sm:gap-3 max-w-md">
                                 <button onclick="addToCart('eis-a-tua-mae', 'Eis a Tua Mãe', 19.50, 'Imagens/etmcapa.png', 'eis-a-tua-mae.html')" class="btn-premium-red flex-1 gap-2">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                     Comprar
@@ -291,39 +296,38 @@
                                 <a href="eis-a-tua-mae.html" class="btn-premium-outline flex-1">Detalhes</a>
                             </div>
                         </div>
-                        <!-- Capa de Livro Clicável -->
-                        <div class="lg:col-span-5 hero-book-container">
+                        <!-- Capa de Livro na Lateral Direita no Mobile -->
+                        <div class="col-span-4 lg:col-span-5 hero-book-container">
                             <a href="eis-a-tua-mae.html" class="block transition-transform duration-300 hover:scale-105">
                                 <img src="Imagens/capaETM3.png" alt="Eis a Tua Mãe" class="hero-book-img floating-element book-shadow mx-auto">
                             </a>
                         </div>
                     </div>
 
-                    <!-- SLIDE 3: JOE HESCHMEYER (ORDEM 3º) -->
-                    <div class="hero-slide transition-all duration-700 transform opacity-0 translate-x-8 hidden w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" id="slide-2">
-                        <div class="lg:col-span-7 text-center lg:text-left">
-                            <span class="inline-block px-4 py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[11px] font-black uppercase tracking-widest rounded-full mb-5">Teologia & Eucaristia</span>
-                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-4 leading-tight">
+                    <!-- SLIDE 3: JOE HESCHMEYER -->
+                    <div class="hero-slide transition-all duration-700 transform opacity-0 translate-x-8 hidden w-full grid grid-cols-12 gap-3 xs:gap-4 md:gap-8 items-center" id="slide-2">
+                        <div class="col-span-8 lg:col-span-7 text-left">
+                            <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full mb-3 sm:mb-5">Teologia & Eucaristia</span>
+                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-2 sm:mb-4 leading-tight">
                                 A Eucaristia é <br> <span class="text-brand-accent-red italic">mesmo</span> Jesus
                             </h1>
-                            <p class="font-classic text-sm sm:text-lg lg:text-xl text-gray-600 italic mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            <p class="font-classic text-xs sm:text-lg lg:text-2xl text-gray-600 italic mb-4 sm:mb-6 max-w-xl leading-relaxed">
                                 Uma fundamentação bíblica, histórica e patrística irrebatível sobre a presença real de Cristo no Santíssimo Sacramento.
                             </p>
                             
-                            <!-- Foto do Autor (Clicável - Premium Group Hover) -->
-                            <a href="a-eucaristia-e-mesmo-jesus.html" class="flex items-center justify-center lg:justify-start gap-4 mb-6 group hover:opacity-90 transition-all inline-flex">
-                                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md group-hover:border-brand-accent-red transition-colors">
+                            <!-- Foto do Autor (Tamanho Super Ampliado) -->
+                            <a href="a-eucaristia-e-mesmo-jesus.html" class="flex items-center gap-3 sm:gap-5 mb-4 sm:mb-6 group hover:opacity-90 transition-all inline-flex text-left">
+                                <div class="w-14 h-14 xs:w-16 xs:h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md group-hover:border-brand-accent-red transition-colors">
                                     <img src="Imagens/JoeHeschmeyer.png" alt="Joe Heschmeyer" class="w-full h-full object-cover" onerror="this.src='Imagens/joe.png';">
                                 </div>
                                 <div class="text-left">
-                                    <span class="block text-[10px] text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                    <span class="font-serif text-lg font-bold text-brand-accent-blue group-hover:text-brand-accent-red transition-colors">Joe Heschmeyer</span>
+                                    <span class="block text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                    <span class="font-serif text-base sm:text-2xl lg:text-3xl font-bold text-brand-accent-blue group-hover:text-brand-accent-red transition-colors">Joe Heschmeyer</span>
+                                    <span class="block font-sans font-bold text-lg sm:text-2xl text-brand-accent-red mt-0.5">15,00€</span>
                                 </div>
-                                <span class="text-gray-300">|</span>
-                                <span class="font-sans font-bold text-2xl sm:text-3xl text-brand-accent-red">15,00€</span>
                             </a>
 
-                            <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start max-w-md mx-auto lg:mx-0">
+                            <div class="flex flex-col xs:flex-row gap-2 sm:gap-3 max-w-md">
                                 <button onclick="addToCart('a-eucaristia-e-mesmo-jesus', 'A Eucaristia é mesmo Jesus', 15.00, 'Imagens/capaAEMJ1.png', 'a-eucaristia-e-mesmo-jesus.html')" class="btn-premium-red flex-1 gap-2">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                     Comprar
@@ -331,39 +335,38 @@
                                 <a href="a-eucaristia-e-mesmo-jesus.html" class="btn-premium-outline flex-1">Detalhes</a>
                             </div>
                         </div>
-                        <!-- Capa de Livro Clicável -->
-                        <div class="lg:col-span-5 hero-book-container">
+                        <!-- Capa de Livro na Lateral Direita no Mobile -->
+                        <div class="col-span-4 lg:col-span-5 hero-book-container">
                             <a href="a-eucaristia-e-mesmo-jesus.html" class="block transition-transform duration-300 hover:scale-105">
                                 <img src="Imagens/capaAEMJ1.png" alt="A Eucaristia é mesmo Jesus" class="hero-book-img floating-element book-shadow mx-auto">
                             </a>
                         </div>
                     </div>
 
-                    <!-- SLIDE 4: PETER KREEFT (ORDEM 4º) -->
-                    <div class="hero-slide transition-all duration-700 transform opacity-0 translate-x-8 hidden w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" id="slide-3">
-                        <div class="lg:col-span-7 text-center lg:text-left">
-                            <span class="inline-block px-4 py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[11px] font-black uppercase tracking-widest rounded-full mb-5">Formação Bíblica</span>
-                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-4 leading-tight">
+                    <!-- SLIDE 4: PETER KREEFT -->
+                    <div class="hero-slide transition-all duration-700 transform opacity-0 translate-x-8 hidden w-full grid grid-cols-12 gap-3 xs:gap-4 md:gap-8 items-center" id="slide-3">
+                        <div class="col-span-8 lg:col-span-7 text-left">
+                            <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full mb-3 sm:mb-5">Formação Bíblica</span>
+                            <h1 class="font-serif hero-title text-brand-accent-blue font-bold mb-2 sm:mb-4 leading-tight">
                                 Tu Podes <br> Compreender a <span class="text-brand-accent-red italic">Bíblia</span>
                             </h1>
-                            <p class="font-classic text-sm sm:text-lg lg:text-xl text-gray-600 italic mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            <p class="font-classic text-xs sm:text-lg lg:text-2xl text-gray-600 italic mb-4 sm:mb-6 max-w-xl leading-relaxed">
                                 Um guia indispensável e prático para desvendar os mistérios e as riquezas das Sagradas Escrituras.
                             </p>
                             
-                            <!-- Foto do Autor (Clicável - Premium Group Hover) -->
-                            <a href="tu-podes-compreender-a-biblia.html" class="flex items-center justify-center lg:justify-start gap-4 mb-6 group hover:opacity-90 transition-all inline-flex">
-                                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md group-hover:border-brand-accent-red transition-colors">
+                            <!-- Foto do Autor (Tamanho Super Ampliado) -->
+                            <a href="tu-podes-compreender-a-biblia.html" class="flex items-center gap-3 sm:gap-5 mb-4 sm:mb-6 group hover:opacity-90 transition-all inline-flex text-left">
+                                <div class="w-14 h-14 xs:w-16 xs:h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md group-hover:border-brand-accent-red transition-colors">
                                     <img src="Imagens/PeterKreeft.png" alt="Peter Kreeft" class="w-full h-full object-cover" onerror="this.src='Imagens/kreeft.png';">
                                 </div>
                                 <div class="text-left">
-                                    <span class="block text-[10px] text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                    <span class="font-serif text-lg font-bold text-brand-accent-blue group-hover:text-brand-accent-red transition-colors">Peter Kreeft</span>
+                                    <span class="block text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                    <span class="font-serif text-base sm:text-2xl lg:text-3xl font-bold text-brand-accent-blue group-hover:text-brand-accent-red transition-colors">Peter Kreeft</span>
+                                    <span class="block font-sans font-bold text-lg sm:text-2xl text-brand-accent-red mt-0.5">15,00€</span>
                                 </div>
-                                <span class="text-gray-300">|</span>
-                                <span class="font-sans font-bold text-2xl sm:text-3xl text-brand-accent-red">15,00€</span>
                             </a>
 
-                            <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start max-w-md mx-auto lg:mx-0">
+                            <div class="flex flex-col xs:flex-row gap-2 sm:gap-3 max-w-md">
                                 <button onclick="addToCart('tu-podes-compreender-a-biblia', 'Tu podes compreender a Bíblia', 15.00, 'Imagens/tpcbcapa.png', 'tu-podes-compreender-a-biblia.html')" class="btn-premium-red flex-1 gap-2">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                     Comprar
@@ -371,8 +374,8 @@
                                 <a href="tu-podes-compreender-a-biblia.html" class="btn-premium-outline flex-1">Detalhes</a>
                             </div>
                         </div>
-                        <!-- Capa de Livro Clicável -->
-                        <div class="lg:col-span-5 hero-book-container">
+                        <!-- Capa de Livro na Lateral Direita no Mobile -->
+                        <div class="col-span-4 lg:col-span-5 hero-book-container">
                             <a href="tu-podes-compreender-a-biblia.html" class="block transition-transform duration-300 hover:scale-105">
                                 <img src="Imagens/tpcbcapa.png" alt="Tu Podes Compreender a Bíblia" class="hero-book-img floating-element book-shadow mx-auto">
                             </a>
@@ -381,33 +384,33 @@
 
                 </div>
 
-                <!-- Controladores do Carrossel -->
-                <div class="flex items-center justify-between mt-8">
+                <!-- Controladores do Carrossel (Visibilidade Otimizada) -->
+                <div class="flex items-center justify-between mt-8 border-t border-gray-100 pt-4">
                     <!-- Dots -->
                     <div class="flex gap-2">
-                        <button class="w-3 h-3 rounded-full bg-brand-accent-blue transition-all duration-300" onclick="setSlide(0)" id="dot-0"></button>
-                        <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-300" onclick="setSlide(1)" id="dot-1"></button>
-                        <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-300" onclick="setSlide(2)" id="dot-2"></button>
-                        <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-300" onclick="setSlide(3)" id="dot-3"></button>
+                        <button class="w-3.5 h-3.5 rounded-full bg-brand-accent-blue transition-all duration-300" onclick="setSlide(0)" id="dot-0" aria-label="Slide 1"></button>
+                        <button class="w-3.5 h-3.5 rounded-full bg-gray-300 transition-all duration-300" onclick="setSlide(1)" id="dot-1" aria-label="Slide 2"></button>
+                        <button class="w-3.5 h-3.5 rounded-full bg-gray-300 transition-all duration-300" onclick="setSlide(2)" id="dot-2" aria-label="Slide 3"></button>
+                        <button class="w-3.5 h-3.5 rounded-full bg-gray-300 transition-all duration-300" onclick="setSlide(3)" id="dot-3" aria-label="Slide 4"></button>
                     </div>
                     
-                    <!-- Setas e Botão de Pausa (Proporcionalidade Ajustada) -->
+                    <!-- Setas e Botão de Pausa (Proporcionalidade Perfeita) -->
                     <div class="flex gap-2 items-center">
                         <!-- Seta Anterior -->
-                        <button onclick="prevSlide()" class="p-3 rounded-xl border border-gray-200 hover:bg-brand-accent-blue hover:text-white transition-all text-brand-accent-blue" aria-label="Slide anterior">
+                        <button onclick="prevSlide()" class="p-2.5 sm:p-3 rounded-xl border border-gray-200 hover:bg-brand-accent-blue hover:text-white transition-all text-brand-accent-blue" aria-label="Slide anterior">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
                         </button>
                         
-                        <!-- Botão Pausa / Play (Traço de Pausa Ampliado do Mesmo Tamanho das Setas) -->
-                        <button id="play-pause-btn" onclick="togglePlayPause()" class="p-3 rounded-xl border border-gray-200 hover:bg-brand-accent-blue hover:text-white transition-all text-brand-accent-blue flex items-center justify-center" aria-label="Pausar carrossel">
-                            <!-- Ícone Pausa (Traços perfeitamente dimensionados de y=6 a y=18) -->
+                        <!-- Botão Pausa / Play (Traços redimensionados proporcionalmente) -->
+                        <button id="play-pause-btn" onclick="togglePlayPause()" class="p-2.5 sm:p-3 rounded-xl border border-gray-200 hover:bg-brand-accent-blue hover:text-white transition-all text-brand-accent-blue flex items-center justify-center" aria-label="Pausar carrossel">
+                            <!-- Ícone Pausa -->
                             <svg id="pause-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 6v12m6-12v12"></path></svg>
-                            <!-- Ícone Play (Consistente com traço outline correspondente) -->
+                            <!-- Ícone Play -->
                             <svg id="play-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 5v14l11-7z"></path></svg>
                         </button>
                         
                         <!-- Seta Seguinte -->
-                        <button onclick="nextSlide()" class="p-3 rounded-xl border border-gray-200 hover:bg-brand-accent-blue hover:text-white transition-all text-brand-accent-blue" aria-label="Próximo slide">
+                        <button onclick="nextSlide()" class="p-2.5 sm:p-3 rounded-xl border border-gray-200 hover:bg-brand-accent-blue hover:text-white transition-all text-brand-accent-blue" aria-label="Próximo slide">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
                         </button>
                     </div>
@@ -588,7 +591,7 @@
             </button>
         </div>
         <div class="mt-4 flex gap-2">
-            <a href="produtos.html" class="flex-1 bg-brand-accent-blue hover:bg-brand-accent-red text-white text-center text-xs py-2.5 rounded-lg font-bold transition-colors">Ver Carrinho</a>
+            <a href="checkout.html" class="flex-1 bg-brand-accent-blue hover:bg-brand-accent-red text-white text-center text-xs py-2.5 rounded-lg font-bold transition-colors">Ver Carrinho</a>
             <button onclick="closeToast()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-brand-text text-xs py-2.5 rounded-lg font-bold transition-colors">Continuar</button>
         </div>
     </div>
@@ -705,7 +708,8 @@
         /* --- COMPONENTES & CARRINHO --- */
         async function loadComponent(id, file) {
             try {
-                const response = await fetch(file + '?v=' + new Date().getTime());
+                // Versão estática para cache de browser estável e sem limites de IP
+                const response = await fetch(file + '?v=1.0.2');
                 if (response.ok) {
                     const html = await response.text();
                     document.getElementById(id).innerHTML = html;
@@ -737,54 +741,6 @@
                     el.classList.toggle('opacity-0', count === 0);
                 }
             });
-        }
-
-        /* FUNÇÃO ADICIONAR AO CARRINHO DIRETO DA HOME */
-        function addToCart(id, title, price, image, url) {
-            let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const existingIndex = cartItems.findIndex(item => item.id === id);
-            
-            if (existingIndex > -1) {
-                cartItems[existingIndex].quantity += 1;
-            } else {
-                cartItems.push({
-                    id: id,
-                    title: title,
-                    price: parseFloat(price),
-                    image: image,
-                    quantity: 1,
-                    url: url
-                });
-            }
-            
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
-            updateCartUI();
-            showToast(title, image);
-        }
-
-        /* TOAST ANIMADO DE FEEDBACK */
-        function showToast(title, image) {
-            const toast = document.getElementById('toast-cart');
-            const toastImg = document.getElementById('toast-img');
-            const toastTitle = document.getElementById('toast-title');
-            
-            toastImg.src = image;
-            toastTitle.textContent = title;
-            
-            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-            toast.classList.add('translate-y-0', 'opacity-100');
-            
-            // Auto hide após 5 segundos
-            clearTimeout(window.toastTimeout);
-            window.toastTimeout = setTimeout(() => {
-                closeToast();
-            }, 5000);
-        }
-        
-        function closeToast() {
-            const toast = document.getElementById('toast-cart');
-            toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-            toast.classList.remove('translate-y-0', 'opacity-100');
         }
     </script>
 <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
