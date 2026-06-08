@@ -94,12 +94,16 @@
             position: relative;
             z-index: 30; 
             display: flex;
-            justify-content: center; /* Desloca o livro para a esquerda (preenchendo o círculo azul) no desktop */
+            justify-content: center; /* Desloca o livro para o centro no mobile */
             align-items: center;
         }
 
         @media (min-width: 1024px) {
-            .hero-book-container { justify-content: center; } /* Aproxima o livro em direção ao texto */
+            /* Puxa o livro ligeiramente para a esquerda para preencher o círculo de vazio e aproximar do texto */
+            .hero-book-container { 
+                justify-content: flex-start; 
+                transform: translateX(-40px);
+            } 
         }
 
         .hero-book-img {
@@ -123,11 +127,11 @@
             .hero-book-img { max-width: 290px; } /* Proporção ideal para Laptop */
         }
 
-        /* Animação de flutuação ajustada: flutua para baixo para evitar cortes superiores (zona vermelha) */
+        /* Animação de flutuação ajustada: flutua ligeiramente para baixo para evitar de todo o contacto com a navbar */
         .floating-element { animation: floatingHero 7s ease-in-out infinite; }
         @keyframes floatingHero { 
             0%, 100% { transform: translateY(0) rotateY(-8deg) rotateX(3deg); } 
-            50% { transform: translateY(8px) rotateY(-8deg) rotateX(3deg); } 
+            50% { transform: translateY(10px) rotateY(-8deg) rotateX(3deg); } 
         }
 
         /* Tipografia de título adaptativa e elegante (UX amigável) */
@@ -264,17 +268,17 @@
                             </a>
 
                             <div class="flex gap-2 sm:gap-3 max-w-md">
-                                <button onclick="addToCart('a-biblia-e-um-livro-catolico', 'A Bíblia é um Livro Católico', 17.50, 'Imagens/blccapa.png', 'a-biblia-é-um livro-catolico.html')" class="btn-premium-red flex-1 gap-1.5">
+                                <button onclick="addToCart('a-biblia-e-um-livro-catolico', 'A Bíblia é um Livro Católico', 17.50, 'Imagens/capablc1.png', 'a-biblia-é-um livro-catolico.html')" class="btn-premium-red flex-1 gap-1.5">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                     Comprar
                                 </button>
                                 <a href="a-biblia-é-um livro-catolico.html" class="btn-premium-outline flex-1">Detalhes</a>
                             </div>
                         </div>
-                        <!-- Capa de Livro na Lateral Direita (col-span-5 no mobile garante proeminência total) -->
-                        <div class="col-span-5 lg:col-span-5 hero-book-container translate-y-4 lg:translate-y-8">
+                        <!-- Capa de Livro na Lateral Direita (Deslocada para baixo e ligeiramente para a esquerda para perfeita centralização) -->
+                        <div class="col-span-5 lg:col-span-5 hero-book-container translate-y-8 lg:translate-y-12">
                             <a href="a-biblia-é-um livro-catolico.html" class="block transition-transform duration-300 hover:scale-105">
-                                <img src="Imagens/blccapa.png" alt="A Bíblia é um Livro Católico" class="hero-book-img floating-element mx-auto">
+                                <img src="Imagens/capablc1.png" alt="A Bíblia é um Livro Católico" class="hero-book-img floating-element mx-auto">
                             </a>
                         </div>
                     </div>
@@ -303,17 +307,17 @@
                             </a>
 
                             <div class="flex gap-2 sm:gap-3 max-w-md">
-                                <button onclick="addToCart('eis-a-tua-mae', 'Eis a Tua Mãe', 19.50, 'Imagens/etmcapa.png', 'eis-a-tua-mae.html')" class="btn-premium-red flex-1 gap-1.5">
+                                <button onclick="addToCart('eis-a-tua-mae', 'Eis a Tua Mãe', 19.50, 'Imagens/capaETM1.png', 'eis-a-tua-mae.html')" class="btn-premium-red flex-1 gap-1.5">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                     Comprar
                                 </button>
                                 <a href="eis-a-tua-mae.html" class="btn-premium-outline flex-1">Detalhes</a>
                             </div>
                         </div>
-                        <!-- Capa de Livro Clicável na Lateral (etmcapa.png) -->
-                        <div class="col-span-5 lg:col-span-5 hero-book-container translate-y-4 lg:translate-y-8">
+                        <!-- Capa de Livro Clicável na Lateral (capaETM1.png) -->
+                        <div class="col-span-5 lg:col-span-5 hero-book-container translate-y-8 lg:translate-y-12">
                             <a href="eis-a-tua-mae.html" class="block transition-transform duration-300 hover:scale-105">
-                                <img src="Imagens/etmcapa.png" alt="Eis a Tua Mãe" class="hero-book-img floating-element mx-auto">
+                                <img src="Imagens/capaETM1.png" alt="Eis a Tua Mãe" class="hero-book-img floating-element mx-auto">
                             </a>
                         </div>
                     </div>
@@ -342,17 +346,17 @@
                             </a>
 
                             <div class="flex gap-2 sm:gap-3 max-w-md">
-                                <button onclick="addToCart('a-eucaristia-e-mesmo-jesus', 'A Eucaristia é mesmo Jesus', 13.50, 'Imagens/aemjcapa.png', 'a-eucaristia-e-mesmo-jesus.html')" class="btn-premium-red flex-1 gap-1.5">
+                                <button onclick="addToCart('a-eucaristia-e-mesmo-jesus', 'A Eucaristia é mesmo Jesus', 13.50, 'Imagens/capaAEMJ1.png', 'a-eucaristia-e-mesmo-jesus.html')" class="btn-premium-red flex-1 gap-1.5">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                     Comprar
                                 </button>
                                 <a href="a-eucaristia-e-mesmo-jesus.html" class="btn-premium-outline flex-1">Detalhes</a>
                             </div>
                         </div>
-                        <!-- Capa de Livro Clicável na Lateral (aemjcapa.png) -->
-                        <div class="col-span-5 lg:col-span-5 hero-book-container translate-y-4 lg:translate-y-8">
+                        <!-- Capa de Livro Clicável na Lateral (capaAEMJ1.png) -->
+                        <div class="col-span-5 lg:col-span-5 hero-book-container translate-y-8 lg:translate-y-12">
                             <a href="a-eucaristia-e-mesmo-jesus.html" class="block transition-transform duration-300 hover:scale-105">
-                                <img src="Imagens/aemjcapa.png" alt="A Eucaristia é mesmo Jesus" class="hero-book-img floating-element mx-auto">
+                                <img src="Imagens/capaAEMJ1.png" alt="A Eucaristia é mesmo Jesus" class="hero-book-img floating-element mx-auto">
                             </a>
                         </div>
                     </div>
@@ -381,17 +385,17 @@
                             </a>
 
                             <div class="flex gap-2 sm:gap-3 max-w-md">
-                                <button onclick="addToCart('tu-podes-compreender-a-biblia', 'Tu podes compreender a Bíblia', 15.00, 'Imagens/tpcbcapa.png', 'tu-podes-compreender-a-biblia.html')" class="btn-premium-red flex-1 gap-1.5">
+                                <button onclick="addToCart('tu-podes-compreender-a-biblia', 'Tu podes compreender a Bíblia', 15.00, 'Imagens/capaTPCB2.png', 'tu-podes-compreender-a-biblia.html')" class="btn-premium-red flex-1 gap-1.5">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                     Comprar
                                 </button>
                                 <a href="tu-podes-compreender-a-biblia.html" class="btn-premium-outline flex-1">Detalhes</a>
                             </div>
                         </div>
-                        <!-- Capa de Livro Clicável na Lateral (tpcbcapa.png) -->
-                        <div class="col-span-5 lg:col-span-5 hero-book-container translate-y-4 lg:translate-y-8">
+                        <!-- Capa de Livro Clicável na Lateral (capaTPCB2.png) -->
+                        <div class="col-span-5 lg:col-span-5 hero-book-container translate-y-8 lg:translate-y-12">
                             <a href="tu-podes-compreender-a-biblia.html" class="block transition-transform duration-300 hover:scale-105">
-                                <img src="Imagens/tpcbcapa.png" alt="Tu Podes Compreender a Bíblia" class="hero-book-img mx-auto">
+                                <img src="Imagens/capaTPCB2.png" alt="Tu Podes Compreender a Bíblia" class="hero-book-img mx-auto">
                             </a>
                         </div>
                     </div>
