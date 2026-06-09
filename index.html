@@ -228,8 +228,8 @@
             
             <div class="max-w-5xl lg:max-w-6xl mx-auto px-4 sm:px-6 w-full relative hero-content-wrapper">
                 
-                <!-- Máscara de Recorte com Overflow-Hidden (Otimizado com alturas independentes para computador e telemóvel) -->
-                <div class="relative h-[290px] xs:h-[320px] sm:h-[440px] md:h-[480px] lg:h-[480px] xl:h-[480px] w-full overflow-hidden">
+                <!-- Máscara de Recorte com Overflow-Hidden (Otimizado com alturas independentes para computador e telemóvel - aumentados ligeiramente no mobile para evitar cortes) -->
+                <div class="relative h-[305px] xs:h-[335px] sm:h-[440px] md:h-[480px] lg:h-[480px] xl:h-[480px] w-full overflow-hidden">
                     
                     <!-- Esteira deslizante por hardware (GPU accelerated) que contém os slides lado a lado -->
                     <div id="carousel-track" class="flex w-full h-full transition-transform duration-700 ease-in-out" style="transform: translateX(0%);">
@@ -237,8 +237,8 @@
                         <!-- SLIDE 1: JIMMY AKIN -->
                         <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-0">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
-                                <!-- Caixa de Categoria (Ajustada sem perigo de cortes) -->
-                                <div class="h-auto py-1 pl-1 mb-1 sm:mb-2 flex items-center">
+                                <!-- Caixa de Categoria (Adicionado "mt-1.5 lg:mt-0" para dar um ligeiro respiro no topo em telemóveis) -->
+                                <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
                                     <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold text-brand-accent-blue text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full animate-pulse-subtle">Novo Lançamento</span>
                                 </div>
                                 
@@ -270,8 +270,8 @@
                                     </a>
                                 </div>
 
-                                <!-- Caixa de Botões -->
-                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[30px] xs:h-[36px] sm:h-[48px] lg:h-[46px]">
+                                <!-- Caixa de Botões (Aumentada ligeiramente a altura no mobile para evitar cortes) -->
+                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[32px] xs:h-[38px] sm:h-[48px] lg:h-[46px]">
                                     <button onclick="addToCart(10, 'A Bíblia é um Livro Católico', 17.50, 'Imagens/capablc1.png', 'a-biblia-é-um-livro-catolico.html')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
@@ -292,8 +292,8 @@
                         <!-- SLIDE 2: TIM STAPLES -->
                         <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-1">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
-                                <!-- Caixa de Categoria (Ajustada sem perigo de cortes) -->
-                                <div class="h-auto py-1 pl-1 mb-1 sm:mb-2 flex items-center">
+                                <!-- Caixa de Categoria (Adicionado "mt-1.5 lg:mt-0" para dar um ligeiro respiro no topo em telemóveis) -->
+                                <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
                                     <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Apologética Mariana</span>
                                 </div>
                                 
@@ -325,8 +325,8 @@
                                     </a>
                                 </div>
 
-                                <!-- Caixa de Botões -->
-                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[30px] xs:h-[36px] sm:h-[48px] lg:h-[46px]">
+                                <!-- Caixa de Botões (Aumentada ligeiramente a altura no mobile para evitar cortes) -->
+                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[32px] xs:h-[38px] sm:h-[48px] lg:h-[46px]">
                                     <button onclick="addToCart(9, 'Eis a Tua Mãe', 19.50, 'Imagens/capaETM1.png', 'eis-a-tua-mae.html')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
@@ -347,8 +347,8 @@
                         <!-- SLIDE 3: JOE HESCHMEYER -->
                         <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-2">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
-                                <!-- Caixa de Categoria (Ajustada sem perigo de cortes) -->
-                                <div class="h-auto py-1 pl-1 mb-1 sm:mb-2 flex items-center">
+                                <!-- Caixa de Categoria (Adicionado "mt-1.5 lg:mt-0" para dar um ligeiro respiro no topo em telemóveis) -->
+                                <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
                                     <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Teologia & Eucaristia</span>
                                 </div>
                                 
@@ -380,8 +380,8 @@
                                     </a>
                                 </div>
 
-                                <!-- Caixa de Botões -->
-                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[30px] xs:h-[36px] sm:h-[48px] lg:h-[46px]">
+                                <!-- Caixa de Botões (Aumentada ligeiramente a altura no mobile para evitar cortes) -->
+                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[32px] xs:h-[38px] sm:h-[48px] lg:h-[46px]">
                                     <button onclick="addToCart(8, 'A Eucaristia é mesmo Jesus', 13.50, 'Imagens/capaAEMJ1.png', 'a-eucaristia-e-mesmo-jesus.html')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
@@ -402,8 +402,8 @@
                         <!-- SLIDE 4: PETER KREEFT -->
                         <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-3">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
-                                <!-- Caixa de Categoria (Ajustada sem perigo de cortes) -->
-                                <div class="h-auto py-1 pl-1 mb-1 sm:mb-2 flex items-center">
+                                <!-- Caixa de Categoria (Adicionado "mt-1.5 lg:mt-0" para dar um ligeiro respiro no topo em telemóveis) -->
+                                <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
                                     <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Formação Bíblica</span>
                                 </div>
                                 
@@ -435,8 +435,8 @@
                                     </a>
                                 </div>
 
-                                <!-- Caixa de Botões -->
-                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[30px] xs:h-[36px] sm:h-[48px] lg:h-[46px]">
+                                <!-- Caixa de Botões (Aumentada ligeiramente a altura no mobile para evitar cortes) -->
+                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[32px] xs:h-[38px] sm:h-[48px] lg:h-[46px]">
                                     <button onclick="addToCart(3, 'Tu podes compreender a Bíblia', 15.00, 'Imagens/capaTPCB2.png', 'tu-podes-compreender-a-biblia.html')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
@@ -651,7 +651,7 @@
                                 Valores <span class="w-8 h-px bg-brand-accent-red/30"></span>
                             </h3>
                             <div class="text-lg md:text-xl text-gray-700 leading-relaxed font-classic dropcap flex-grow">
-                                Guiamo-nos pela <strong>Fé</strong>, pela <strong>Verdade</strong> e pelo compromisso tanto pela <strong>ortodoxia</strong> como pela <strong>ortopraxia</strong>. Em cada projecto, aliamos o <strong>rigor</strong> editorial à <strong>excelência</strong> gráfica, crentes de que a <strong>Beleza</strong> de um livro é o primeiro convite à leitura que eleva a alma.
+                                Valores de compromisso teológico e fidelidade que nos guiam em todas as decisões. Guiamo-nos pela <strong>Fé</strong>, pela <strong>Verdade</strong> e pelo compromisso tanto pela <strong>ortodoxia</strong> como pela <strong>ortopraxia</strong>. Em cada projecto, aliamos o <strong>rigor</strong> editorial à <strong>excelência</strong> gráfica, crentes de que a <strong>Beleza</strong> de um livro é o primeiro convite à leitura que eleva a alma.
                             </div>
                             <div class="pt-6 border-t border-brand-gold/20">
                                 <div class="flex flex-wrap justify-end md:justify-start gap-3">
@@ -706,7 +706,7 @@
                 track.style.transform = `translateX(-${currentSlideIdx * 100}%)`;
             }
 
-            // Atualiza os indicadores visuais (dots)
+            // Atualiza os indicators visuais (dots)
             for (let i = 0; i < totalSlides; i++) {
                 const dot = document.getElementById(`dot-${i}`);
                 if (dot) {
