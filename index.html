@@ -795,21 +795,31 @@
             // 1. Obter itens do carrinho existentes do localStorage
             let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             
-            // 2. Procurar se o item já existe
+            // 2. Base de dados auxiliar para sincronizar autor e peso em index1.html
+            const bookMeta = {
+                'a-biblia-e-um-livro-catolico': { author: 'Jimmy Akin', weight: 0.272, image: 'Imagens/blccapa.png' },
+                'eis-a-tua-mae': { author: 'Tim Staples', weight: 0.534, image: 'Imagens/etmcapa.png' },
+                'a-eucaristia-e-mesmo-jesus': { author: 'Joe Heschmeyer', weight: 0.254, image: 'Imagens/aemjcapa.png' },
+                'tu-podes-compreender-a-biblia': { author: 'Peter Kreeft', weight: 0.510, image: 'Imagens/tpcbcapa.png' }
+            };
+
+            const meta = bookMeta[id] || { author: 'Jerónimo Editora', weight: 0.300, image: img };
             const existingItemIdx = cartItems.findIndex(item => item.id === id);
             
             if (existingItemIdx > -1) {
                 // Se já existe, somar quantidade
                 cartItems[existingItemIdx].quantity += 1;
             } else {
-                // Se é novo, adicionar o item
+                // Se é novo, adicionar o item com TODAS as propriedades consistentes
                 cartItems.push({
                     id: id,
                     title: title,
                     price: parseFloat(price),
-                    img: img,
-                    link: link,
-                    quantity: 1
+                    quantity: 1,
+                    image: meta.image,
+                    author: meta.author,
+                    weight: meta.weight,
+                    link: link
                 });
             }
             
