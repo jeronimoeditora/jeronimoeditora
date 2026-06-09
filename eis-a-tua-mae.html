@@ -322,19 +322,22 @@
         }
 
         function showTab(tabId) {
-            ['autor', 'ficha'].forEach(id => {
-                document.getElementById('content-' + id).classList.add('hidden');
-                document.getElementById('tab-' + id).classList.remove('tab-active');
-                document.getElementById('tab-' + id).classList.add('text-gray-400');
-            });
+            document.getElementById('content-autor').classList.add('hidden');
+            document.getElementById('tab-autor').classList.remove('tab-active');
+            document.getElementById('tab-autor').classList.add('text-gray-400');
+            document.getElementById('content-ficha').classList.add('hidden');
+            document.getElementById('tab-ficha').classList.remove('tab-active');
+            document.getElementById('tab-ficha').classList.add('text-gray-400');
+            
             document.getElementById('content-' + tabId).classList.remove('hidden');
             document.getElementById('tab-' + tabId).classList.add('tab-active');
+            document.getElementById('tab-' + tabId).removeProperty ? document.getElementById('tab-' + tabId).removeProperty('text-gray-400') : document.getElementById('tab-' + tabId).classList.remove('text-gray-400');
         }
 
         function addToCart(title, price) {
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const bookId = 'eis-a-tua-mae'; // ID Unificado com a Página Inicial e o Catálogo
-            const existingIndex = cartItems.findIndex(item => item.id === bookId);
+            const bookId = 9; // ID Numérico Oficial Unificado com o Catálogo e Página Inicial
+            const existingIndex = cartItems.findIndex(item => String(item.id) === String(bookId));
 
             if (existingIndex > -1) {
                 // SOMA A QUANTIDADE SE JÁ EXISTIR NO CARRINHO

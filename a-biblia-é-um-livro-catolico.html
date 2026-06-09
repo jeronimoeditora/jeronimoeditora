@@ -240,7 +240,7 @@ A Bíblia é um Livro Católico assume-se como o recurso de referência no que t
                         <div class="text-center md:text-left">
                             <h3 class="font-serif text-2xl md:text-3xl text-brand-accent-blue mb-4 font-bold">Jimmy Akin</h3>
                             <p class="text-lg md:text-2xl text-gray-700 font-classic leading-relaxed">
-                                Jimmy Akin é um autor e conferencista conhecido internacionalmente. Como apologista sénior na Catholic Answers, conta com mais de vinte e cinco anos de experiência na defesa e explicação da Fé.
+                                Jimmy Akin é um autor e conferencista conhecido internacionalmente. Como apologista sénior na Catholic Answers, conta com mais de vinte e cinco anos de experiência na defense e explicação da Fé.
 Jimmy é um convertido à Fé e possui uma vasta formação em áreas como a Bíblia, teologia, os Padres da Igreja, filosofia, direito canónico e liturgia. Jimmy é convidado semanal no programa de rádio nacional Catholic Answers Live, colaborador regular da Catholic Answers Magazine, sendo também um popular autor de blogues e podcasts. Entre as suas obras incluem-se The Fathers Know Best [Os Padres da Igreja Sabem Melhor] e A Daily Defense [Uma Defesa Diária]. O seu sítio pessoal na Internet é JimmyAkin.com.
                             </p>
                         </div>
@@ -337,8 +337,8 @@ Jimmy é um convertido à Fé e possui uma vasta formação em áreas como a Bí
 
         function addToCart(title, price) {
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const bookId = 'a-biblia-e-um-livro-catolico'; // ID Unificado com a Página Inicial e o Catálogo
-            const existingIndex = cartItems.findIndex(item => item.id === bookId);
+            const bookId = 10; // ID Numérico Oficial Unificado com o Catálogo e Página Inicial
+            const existingIndex = cartItems.findIndex(item => String(item.id) === String(bookId));
 
             if (existingIndex > -1) {
                 // SOMA A QUANTIDADE SE JÁ EXISTIR NO CARRINHO
