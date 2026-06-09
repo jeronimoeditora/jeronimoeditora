@@ -44,7 +44,7 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
         }
 
-        /* Sombreado reforçado para capas claras para criar profundidade e destaque */
+        /* Sombreado reforzado para capas claras para crear profundidad y destaque */
         .white-cover-shadow {
             filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.15)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
         }
@@ -158,7 +158,7 @@
                         <option value="Apolegética Mariana">Apolegética Mariana</option>
                         <option value="Formação Bíblica">Formação Bíblica</option>
                         <option value="Teologia Católica">Teologia Católica</option>
-			<option value="Espiritualidade">Espiritualidade</option>
+			            <option value="Espiritualidade">Espiritualidade</option>
                     </select>
                     <select id="sort-order" class="h-10 px-3 border border-gray-200 rounded-lg bg-white text-sm cursor-pointer outline-none focus:border-brand-gold" onchange="filterAndSortBooks()">
                         <option value="default">Ordenar Por...</option>
@@ -182,10 +182,10 @@
     <script>
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec'; 
         
-        // Base de dados com os IDs unificados em formato String semântica para sincronização perfeita!
+        // Base de datos oficial con IDs Numéricos restaurados para una sincronización ideal con index.html y checkout.html
         const bookData = [
             { 
-                id: "tu-podes-compreender-a-biblia", 
+                id: 3, 
                 title: "Tu podes compreender a Bíblia", 
                 author: "Peter Kreeft", 
                 price: 15.00, 
@@ -197,7 +197,7 @@
                 detailsUrl: "tu-podes-compreender-a-biblia.html" 
             },
             { 
-                id: "a-eucaristia-e-mesmo-jesus", 
+                id: 8, 
                 title: "A Eucaristia é mesmo Jesus", 
                 author: "Joe Heschmeyer", 
                 price: 13.50, 
@@ -210,7 +210,7 @@
                 detailsUrl: "a-eucaristia-e-mesmo-jesus.html" 
             },
             { 
-                id: "eis-a-tua-mae", 
+                id: 9, 
                 title: "Eis a Tua Mãe", 
                 author: "Tim Staples", 
                 price: 19.50, 
@@ -222,7 +222,7 @@
                 detailsUrl: "eis-a-tua-mae.html" 
             },
             { 
-                id: "a-biblia-e-um-livro-catolico", 
+                id: 10, 
                 title: "A Bíblia é um Livro Católico", 
                 author: "Jimmy Akin", 
                 price: 17.50, 
@@ -235,7 +235,7 @@
                 detailsUrl: "a-biblia-é-um-livro-catolico.html" 
             },
             { 
-                id: "duras-palavras", 
+                id: 7, 
                 title: "Duras Palavras", 
                 author: "Trent Horn", 
                 price: 0.00, 
@@ -247,7 +247,7 @@
                 isComingSoon: true 
             },
             { 
-                id: "vai-para-o-ceu", 
+                id: 11, 
                 title: "Vai para o Céu", 
                 author: "Fulton J. Sheen", 
                 price: 0.00, 
@@ -310,7 +310,8 @@
         }
 
         function openInfoModal(bookId) {
-            const book = bookData.find(b => b.id === bookId);
+            // Busqueda flexible por comparación simple (coerción de string/número segura)
+            const book = bookData.find(b => b.id == bookId);
             if (!book) return;
             
             document.getElementById('info-modal-title').textContent = book.title;
@@ -365,12 +366,12 @@
                 addBtn.disabled = false;
             }
 
-            document.getElementById('info-modal').dataset.activeBookId = bookId;
+            document.getElementById('info-modal').dataset.activeBookId = book.id;
             document.getElementById('info-modal').classList.remove('hidden');
         }
 
         function modalAddToCart() {
-             const bookId = document.getElementById('info-modal').dataset.activeBookId;
+             const bookId = parseInt(document.getElementById('info-modal').dataset.activeBookId);
              const book = bookData.find(b => b.id === bookId);
              if (book && !book.isComingSoon) { addToCart(bookId, book.title); closeInfoModal(); }
         }
@@ -391,6 +392,7 @@
             renderBooks(filtered);
         }
 
+        // Renderiza las tarjetas del catálogo utilizando el ID numérico unificado sin generar errores de tipo
         function renderBooks(books) {
             const container = document.getElementById('book-list-container');
             container.innerHTML = '';
@@ -424,7 +426,7 @@
                 }
 
                 container.innerHTML += `
-                    <div class="text-center group book-shadow bg-white rounded-xl p-4 md:p-6 flex flex-col justify-between cursor-pointer min-h-[300px]" onclick="openInfoModal('${b.id}')">
+                    <div class="text-center group book-shadow bg-white rounded-xl p-4 md:p-6 flex flex-col justify-between cursor-pointer min-h-[300px]" onclick="openInfoModal(${b.id})">
                         <div class="flex-grow flex flex-col justify-between">
                             <div>
                                 ${coverHtml}
@@ -434,10 +436,10 @@
                             <span class="text-lg md:text-xl font-classic font-extrabold ${b.isComingSoon ? 'text-gray-400' : 'text-brand-accent-red'} mt-3 block">${priceDisplay}</span>
                         </div>
                         <div class="flex items-center justify-center mt-5 md:mt-6 border-t pt-4 space-x-2 md:space-x-3">
-                            <button class="${infoBtnClass} transition-all font-bold py-2 px-2 md:px-5 rounded-lg flex items-center justify-center h-10 md:h-11" onclick="openInfoModal('${b.id}'); event.stopPropagation();">
+                            <button class="${infoBtnClass} transition-all font-bold py-2 px-2 md:px-5 rounded-lg flex items-center justify-center h-10 md:h-11" onclick="openInfoModal(${b.id}); event.stopPropagation();">
                                 ${infoIcon} <span class="hidden md:inline ml-1 text-sm">Info</span>
                             </button>
-                            <button class="${btnClass} py-2 px-2 md:px-5 rounded-lg flex items-center justify-center h-10 md:h-11 transition-all font-bold" onclick="${b.isComingSoon ? '' : `addToCart('${b.id}', '${b.title}')`}; event.stopPropagation();">
+                            <button class="${btnClass} py-2 px-2 md:px-5 rounded-lg flex items-center justify-center h-10 md:h-11 transition-all font-bold" onclick="${b.isComingSoon ? '' : `addToCart(${b.id}, '${b.title}')`}; event.stopPropagation();">
                                 ${buyBtnContent}
                             </button>
                         </div>

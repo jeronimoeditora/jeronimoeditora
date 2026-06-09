@@ -128,7 +128,7 @@
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-green-600 mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
             <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center">Encomenda recebida!</h3>
-            <p class="text-gray-600 mb-6 font-sans text-sm text-center">Obrigado pela sua preferência. Enviámos um e-mail de confirmação para o seu endereço.</p>
+            <p class="text-gray-600 mb-6 font-sans text-sm text-center">Obrigado pela sua preferência. Enviaremos um e-mail de confirmação para o seu endereço.</p>
             <a href="/" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg text-center">Voltar ao Início</a>
         </div>
     </div>
@@ -416,7 +416,7 @@
             { id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
             { id: 8, title: "A Eucaristia é mesmo Jesus", price: 13.50, weight: 254 },
             { id: 9, title: "Eis a Tua Mãe", price: 19.50, weight: 534 },
-            { id: 10, title: "A Bíblia é um Livro Católico", price: 17.50, weight: 272 }, // Peso atualizado para 272g (0,272 kg)
+            { id: 10, title: "A Bíblia é um Livro Católico", price: 17.50, weight: 272 }, 
             { id: 7, title: "Duras Palavras", price: 0.00, weight: 350 },
             { id: 11, title: "Vai para o Céu", price: 0.00, weight: 350 },
             { id: 101, title: "São Jerónimo a Escrever", price: 3.90, weight: 50, image: "Imagens/postal1.png" },
@@ -426,13 +426,22 @@
             { id: 105, title: "A Virgem e o Menino com São Jerónimo", price: 3.90, weight: 50, image: "Imagens/postal5.png" }
         ];
 
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             if (menu) menu.classList.toggle('hidden');
         }
 
         function openQuickView(id) {
-            const product = bookData.find(b => b.id === id);
+            const product = bookData.find(b => String(b.id) === String(id));
             if (!product) return;
             document.getElementById('qv-image').src = product.image;
             document.getElementById('quickview-modal').classList.remove('hidden');
@@ -517,14 +526,12 @@
             }
             if (destino === 'EU_Econ') {
                 if (peso <= 20) return 0.630;
-                if (destino === 'EU_Econ') {
-                    if (peso <= 100) return 1.068 + (pesoKg * 0.627);
-                    if (peso <= 250) return 0.940 + (pesoKg * 5.516);
-                    if (peso <= 500) return 1.836 + (pesoKg * 3.592);
-                    if (peso <= 2000) return 3.785 + (pesoKg * 2.755);
-                    if (peso <= 5000) return (3.785 + (2 * 2.755) + ((pesoKg - 2) * 2.755)) * 1.23;
-                    return 3.785 + (pesoKg * 2.755);
-                }
+                if (peso <= 100) return 1.068 + (pesoKg * 0.627);
+                if (peso <= 250) return 0.940 + (pesoKg * 5.516);
+                if (peso <= 500) return 1.836 + (pesoKg * 3.592);
+                if (peso <= 2000) return 3.785 + (pesoKg * 2.755);
+                if (peso <= 5000) return (3.785 + (2 * 2.755) + ((pesoKg - 2) * 2.755)) * 1.23;
+                return 3.785 + (pesoKg * 2.755);
             }
             return 0;
         }
@@ -538,8 +545,18 @@
             items.forEach(item => {
                 const lineTotal = item.price * item.quantity;
                 subtotal += lineTotal;
-                const book = bookData.find(b => b.id === item.id);
-                pesoTotal += ((book ? book.weight : 272) * item.quantity); // Padrão atualizado com base no novo peso
+                
+                // Comparação string-safe de IDs para evitar colisões
+                const book = bookData.find(b => String(b.id) === String(item.id));
+                let itemWeight = 272; // Peso padrão de segurança (g)
+                if (book) {
+                    itemWeight = book.weight; 
+                } else if (item.weight) {
+                    // Conversão de segurança para pesos guardados noutros formatos
+                    itemWeight = item.weight < 5 ? parseFloat(item.weight) * 1000 : parseFloat(item.weight);
+                }
+                
+                pesoTotal += (itemWeight * item.quantity);
                 html += `
                     <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
@@ -548,11 +565,11 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-3 bg-white/10 rounded-lg px-2 py-1 border border-white/20">
-                                <button onclick="changeQuantity(${item.id}, -1)" class="text-white hover:text-brand-gold p-1"><i class="fas fa-minus text-xs"></i></button>
+                                <button onclick="changeQuantity('${item.id}', -1)" class="text-white hover:text-brand-gold p-1"><i class="fas fa-minus text-xs"></i></button>
                                 <span class="text-white text-sm font-bold w-4 text-center">${item.quantity}</span>
-                                <button onclick="changeQuantity(${item.id}, 1)" class="text-white hover:text-brand-gold p-1"><i class="fas fa-plus text-xs"></i></button>
+                                <button onclick="changeQuantity('${item.id}', 1)" class="text-white hover:text-brand-gold p-1"><i class="fas fa-plus text-xs"></i></button>
                             </div>
-                            <button onclick="removeItem(${item.id})" class="text-gray-400 hover:text-white p-2"><i class="fas fa-trash-alt"></i></button>
+                            <button onclick="removeItem('${item.id}')" class="text-gray-400 hover:text-white p-2"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>`;
             });
@@ -579,7 +596,7 @@
             const container = document.getElementById('suggestions-container');
             const list = document.getElementById('suggestions-list');
             
-            const suggestions = bookData.filter(b => [101, 103].includes(b.id) && !currentItems.some(item => item.id === b.id));
+            const suggestions = bookData.filter(b => [101, 103].includes(b.id) && !currentItems.some(item => String(item.id) === String(b.id)));
             
             if (suggestions.length === 0) {
                 container.classList.add('hidden');
@@ -592,7 +609,7 @@
             suggestions.forEach(s => {
                 html += `
                     <div class="flex-shrink-0 w-40 bg-white/5 rounded-xl p-3 border border-white/10 flex flex-col items-center text-center suggestion-card">
-                        <div class="relative group cursor-pointer" onclick="openQuickView(${s.id})">
+                        <div class="relative group cursor-pointer" onclick="openQuickView('${s.id}')">
                             <img src="${s.image}" class="w-28 h-24 object-cover rounded-lg shadow-lg mb-2 border border-white/20 transition-transform group-hover:scale-105">
                             <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
                                 <i class="fas fa-search-plus text-white text-lg"></i>
@@ -601,7 +618,7 @@
                         <p class="text-[9px] font-bold text-white uppercase tracking-wider leading-tight h-8 overflow-hidden mb-2">Postal: ${s.title}</p>
                         <div class="flex items-center justify-between w-full mt-auto">
                             <span class="text-[15px] text-brand-gold font-bold">€ ${s.price.toFixed(2).replace('.', ',')}</span>
-                            <button onclick="quickAdd(${s.id})" class="bg-brand-gold text-brand-accent-blue rounded-full w-7 h-7 flex items-center justify-center hover:bg-yellow-500 transition-colors shadow-sm">
+                            <button onclick="quickAdd('${s.id}')" class="bg-brand-gold text-brand-accent-blue rounded-full w-7 h-7 flex items-center justify-center hover:bg-yellow-500 transition-colors shadow-sm">
                                 <i class="fas fa-plus text-[10px]"></i>
                             </button>
                         </div>
@@ -622,17 +639,32 @@
         }
 
         function quickAdd(productId) {
-            const product = bookData.find(b => b.id === productId);
+            const product = bookData.find(b => String(b.id) === String(productId));
             if (!product) return;
             let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            items.push({ id: product.id, title: product.title, price: product.price, quantity: 1 });
+            
+            const existingIndex = items.findIndex(item => String(item.id) === String(product.id));
+            if (existingIndex > -1) {
+                items[existingIndex].quantity += 1;
+            } else {
+                items.push({ 
+                    id: product.id, 
+                    title: product.title, 
+                    price: product.price, 
+                    quantity: 1,
+                    image: product.image || "",
+                    author: product.author || "Jerónimo Editora",
+                    weight: product.weight ? parseFloat(product.weight) / 1000 : 0.050
+                });
+            }
+            
             localStorage.setItem('cartItems', JSON.stringify(items));
             loadCartSummary();
         }
 
         function changeQuantity(id, delta) {
             let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const idx = items.findIndex(i => i.id === id);
+            const idx = items.findIndex(i => String(i.id) === String(id));
             if (idx > -1) {
                 items[idx].quantity = Math.max(1, items[idx].quantity + delta);
                 localStorage.setItem('cartItems', JSON.stringify(items));
@@ -642,7 +674,7 @@
 
         function removeItem(id) {
             let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            localStorage.setItem('cartItems', JSON.stringify(items.filter(i => i.id !== id)));
+            localStorage.setItem('cartItems', JSON.stringify(items.filter(i => String(i.id) !== String(id))));
             loadCartSummary();
         }
 
@@ -773,9 +805,15 @@
             }
         }
 
+        function updateCartUI() {
+            const count = JSON.parse(localStorage.getItem('cartItems') || '[]').reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { el.textContent = count; el.classList.toggle('opacity-0', count === 0); }
+            });
+        }
+
         async function loadComponents() {
             try {
-                // Altera para versão de cache estática ?v=1.0.2 e corrige links internos .html
                 const navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
                 if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
                 const footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
