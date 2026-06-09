@@ -182,10 +182,10 @@
     <script>
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec'; 
         
-        // Base de dados das obras literárias organizada exatamente na ordem: Kreeft -> Joe -> Tim -> Jimmy -> Horn -> Sheen
+        // Base de dados com os IDs unificados em formato String semântica para sincronização perfeita!
         const bookData = [
             { 
-                id: 3, 
+                id: "tu-podes-compreender-a-biblia", 
                 title: "Tu podes compreender a Bíblia", 
                 author: "Peter Kreeft", 
                 price: 15.00, 
@@ -197,7 +197,7 @@
                 detailsUrl: "tu-podes-compreender-a-biblia.html" 
             },
             { 
-                id: 8, 
+                id: "a-eucaristia-e-mesmo-jesus", 
                 title: "A Eucaristia é mesmo Jesus", 
                 author: "Joe Heschmeyer", 
                 price: 13.50, 
@@ -210,7 +210,7 @@
                 detailsUrl: "a-eucaristia-e-mesmo-jesus.html" 
             },
             { 
-                id: 9, 
+                id: "eis-a-tua-mae", 
                 title: "Eis a Tua Mãe", 
                 author: "Tim Staples", 
                 price: 19.50, 
@@ -222,37 +222,37 @@
                 detailsUrl: "eis-a-tua-mae.html" 
             },
             { 
-                id: 10, 
+                id: "a-biblia-e-um-livro-catolico", 
                 title: "A Bíblia é um Livro Católico", 
                 author: "Jimmy Akin", 
                 price: 17.50, 
                 category: "Formação Bíblica", 
                 image: "Imagens/blccapa.png", 
                 summary: "Descubra como a Igreja Católica recebeu, preservou e definiu as Sagradas Escrituras ao longo dos séculos.", 
-                techDetails: { pages: 180, isbn: "978-989-36716-3-4", binding: "Capa Mole", weight: "0,272 kg" }, // Peso atualizado para 0,272 kg
+                techDetails: { pages: 180, isbn: "978-989-36716-3-4", binding: "Capa Mole", weight: "0,272 kg" }, 
                 visible: true, 
                 isComingSoon: false, 
                 detailsUrl: "a-biblia-é-um-livro-catolico.html" 
             },
             { 
-                id: 7, 
+                id: "duras-palavras", 
                 title: "Duras Palavras", 
                 author: "Trent Horn", 
                 price: 0.00, 
                 category: "Formação Bíblica", 
-                image: "", // Sem imagem física
+                image: "", 
                 summary: "Uma obra esclarecedora sobre as passagens difíceis e desafiadoras da Sagrada Escritura.", 
                 techDetails: { pages: 0, isbn: "A definir", binding: "A definir", weight: "A definir" }, 
                 visible: true, 
                 isComingSoon: true 
             },
             { 
-                id: 11, 
+                id: "vai-para-o-ceu", 
                 title: "Vai para o Céu", 
                 author: "Fulton J. Sheen", 
                 price: 0.00, 
                 category: "Espiritualidade", 
-                image: "", // Sem imagem física
+                image: "", 
                 summary: "O guia indispensável do Venerável Arcebispo Sheen sobre a salvação e a vida cristã.", 
                 techDetails: { pages: 0, isbn: "A definir", binding: "A definir", weight: "A definir" }, 
                 visible: true, 
@@ -319,7 +319,6 @@
             const imgEl = document.getElementById('info-modal-image');
             const svgPlaceholder = document.getElementById('info-modal-svg-placeholder');
             
-            // Lógica de visualização simplificada para pop-up (+Info) - apenas retângulo creme uniforme com título
             if (book.isComingSoon) {
                 imgEl.classList.add('hidden');
                 svgPlaceholder.classList.remove('hidden');
@@ -371,7 +370,7 @@
         }
 
         function modalAddToCart() {
-             const bookId = parseInt(document.getElementById('info-modal').dataset.activeBookId);
+             const bookId = document.getElementById('info-modal').dataset.activeBookId;
              const book = bookData.find(b => b.id === bookId);
              if (book && !book.isComingSoon) { addToCart(bookId, book.title); closeInfoModal(); }
         }
@@ -416,7 +415,6 @@
                             <img src="${b.image}" class="w-24 h-36 md:w-36 md:h-52 object-contain transition-transform duration-500 group-hover:scale-105 ${imageClass}" onerror="this.onerror=null; this.src='https://placehold.co/400x600/f3f4f6/333333?text=${encodeURIComponent(b.title)}';" />
                         </div>`;
                 } else {
-                    // Renderiza o retângulo clássico de mock-up simplificado (fundo creme idêntico para ambos com apenas o título)
                     coverHtml = `
                         <div class="overflow-hidden rounded-lg mb-4 md:mb-6 flex justify-center py-4 md:py-6 bg-gray-50">
                             <div class="w-24 h-36 md:w-36 md:h-52 bg-brand-gold-light border border-brand-gold/30 rounded-md shadow-inner p-3 flex items-center justify-center text-center transition-transform duration-500 group-hover:scale-105">
@@ -426,7 +424,7 @@
                 }
 
                 container.innerHTML += `
-                    <div class="text-center group book-shadow bg-white rounded-xl p-4 md:p-6 flex flex-col justify-between cursor-pointer min-h-[300px]" onclick="openInfoModal(${b.id})">
+                    <div class="text-center group book-shadow bg-white rounded-xl p-4 md:p-6 flex flex-col justify-between cursor-pointer min-h-[300px]" onclick="openInfoModal('${b.id}')">
                         <div class="flex-grow flex flex-col justify-between">
                             <div>
                                 ${coverHtml}
@@ -436,10 +434,10 @@
                             <span class="text-lg md:text-xl font-classic font-extrabold ${b.isComingSoon ? 'text-gray-400' : 'text-brand-accent-red'} mt-3 block">${priceDisplay}</span>
                         </div>
                         <div class="flex items-center justify-center mt-5 md:mt-6 border-t pt-4 space-x-2 md:space-x-3">
-                            <button class="${infoBtnClass} transition-all font-bold py-2 px-2 md:px-5 rounded-lg flex items-center justify-center h-10 md:h-11" onclick="openInfoModal(${b.id}); event.stopPropagation();">
+                            <button class="${infoBtnClass} transition-all font-bold py-2 px-2 md:px-5 rounded-lg flex items-center justify-center h-10 md:h-11" onclick="openInfoModal('${b.id}'); event.stopPropagation();">
                                 ${infoIcon} <span class="hidden md:inline ml-1 text-sm">Info</span>
                             </button>
-                            <button class="${btnClass} py-2 px-2 md:px-5 rounded-lg flex items-center justify-center h-10 md:h-11 transition-all font-bold" onclick="${b.isComingSoon ? '' : `addToCart(${b.id}, '${b.title}')`}; event.stopPropagation();">
+                            <button class="${btnClass} py-2 px-2 md:px-5 rounded-lg flex items-center justify-center h-10 md:h-11 transition-all font-bold" onclick="${b.isComingSoon ? '' : `addToCart('${b.id}', '${b.title}')`}; event.stopPropagation();">
                                 ${buyBtnContent}
                             </button>
                         </div>

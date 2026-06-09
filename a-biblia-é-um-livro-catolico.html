@@ -337,7 +337,7 @@ Jimmy é um convertido à Fé e possui uma vasta formação em áreas como a Bí
 
         function addToCart(title, price) {
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const bookId = 9; // ID A Bíblia é um Livro Católico
+            const bookId = 'a-biblia-e-um-livro-catolico'; // ID Unificado com a Página Inicial e o Catálogo
             const existingIndex = cartItems.findIndex(item => item.id === bookId);
 
             if (existingIndex > -1) {
@@ -352,7 +352,7 @@ Jimmy é um convertido à Fé e possui uma vasta formação em áreas como a Bí
                     quantity: 1, 
                     image: 'Imagens/blccapa.png', 
                     author: 'Jimmy Akin',
-                    weight: 0.250
+                    weight: 0.272
                 });
             }
             localStorage.setItem('cartItems', JSON.stringify(cartItems));

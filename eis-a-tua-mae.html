@@ -170,7 +170,7 @@
                 <!-- Coluna de Imagens -->
                 <div class="md:col-span-2 space-y-10 flex flex-col items-center">
                     
-                    <div id="main-image-container" class="relative w-full max-w-sm group bg-white rounded-3xl p-6 shadow-sm overflow-hidden touch-pan-y">
+                    <div id="main-image-container" class="relative w-full max-w-[320px] xs:max-w-sm group bg-white rounded-3xl p-6 shadow-sm overflow-hidden touch-pan-y">
                         
                         <!-- Setas na Imagem Principal -->
                         <button onclick="changeImage(-1)" class="nav-arrow absolute left-5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 hidden md:flex transition-all" aria-label="Anterior">
@@ -281,6 +281,7 @@
         let currentIndex = 0;
         let touchStartX = 0;
 
+        // Renderiza miniaturas
         function renderThumbs() {
             const grid = document.getElementById('thumb-grid');
             if (!grid) return;
@@ -332,7 +333,7 @@
 
         function addToCart(title, price) {
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const bookId = 9; // ID Eis a Tua Mãe
+            const bookId = 'eis-a-tua-mae'; // ID Unificado com a Página Inicial e o Catálogo
             const existingIndex = cartItems.findIndex(item => item.id === bookId);
 
             if (existingIndex > -1) {
