@@ -183,10 +183,16 @@
         const GOOGLE_SCRIPT_URL = 
 'https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec'; 
 
+        // Função de controlo de menu (hamburger) em falta
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
         async function loadComponents() {
             try {
-                const nav = await fetch('menu'); if(nav.ok) document.getElementById('nav-placeholder').innerHTML = await nav.text();
-                const foot = await fetch('rodape'); if(foot.ok) document.getElementById('footer-placeholder').innerHTML = await foot.text();
+                const nav = await fetch('menu?v=1.0.2'); if(nav.ok) document.getElementById('nav-placeholder').innerHTML = await nav.text();
+                const foot = await fetch('rodape?v=1.0.2'); if(foot.ok) document.getElementById('footer-placeholder').innerHTML = await foot.text();
                 updateCartUI();
             } catch (e) {}
         }
@@ -201,13 +207,10 @@
             button.textContent = 'A processar...';
             button.classList.add('sending');
 
-            // Criar um controlador para timeout caso queira dar feedback mais rápido
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 seg timeout
 
             try {
-                // Como usamos no-cors, o navegador não nos deixa ler a resposta real.
-                // Mas o envio acontece de forma assíncrona no servidor do Google.
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -220,12 +223,9 @@
                     signal: controller.signal
                 });
 
-                // Se chegou aqui, o pedido foi enviado
                 form.reset();
                 document.getElementById('message-modal').classList.remove('hidden');
             } catch (error) {
-                // Em caso de erro ou timeout de rede, mostramos o modal na mesma pois o script do Google costuma processar
-                // mesmo quando a ligação de rede local falha a fechar.
                 if (error.name === 'AbortError') {
                     console.log('O envio está a demorar, mas provavelmente será processado.');
                 }
