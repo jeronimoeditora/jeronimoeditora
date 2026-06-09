@@ -48,8 +48,12 @@
 
     <style>
         /* --- ESTABILIDADE E PERFORMANCE --- */
-        html { scroll-behavior: smooth; overflow-x: hidden; }
-        body { overflow-x: hidden; width: 100%; background-color: #F8F8F8; }
+        html, body { 
+            scroll-behavior: auto !important; /* Saltos puramente instantâneos para âncoras como #sobre */
+            overflow-x: hidden; 
+            width: 100%; 
+            background-color: #F8F8F8; 
+        }
         * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; box-sizing: border-box; }
 
         .hero-section {
@@ -121,7 +125,7 @@
 
         /* Tipografia de título adaptativa e elegante (UX amigável) */
         .hero-title { 
-            font-size: clamp(1.4rem, 4vw, 2.8rem); 
+            font-size: clamp(1.0rem, 3.8vw, 2.8rem); 
             line-height: 1.15; 
             letter-spacing: -0.01em;
         }
@@ -179,7 +183,7 @@
         }
         @media (min-width: 1024px) { .desktop-logo-watermark { display: block; } }
 
-        /* --- DESIGN EDITORIAL SOBRE --- */
+        /* --- DESIGN EDITORIAL SOBRE & DROP-CAPS CLÁSSICOS --- */
         .about-card {
             background: white;
             border-radius: 1.5rem;
@@ -199,6 +203,18 @@
         .book-shadow {
             box-shadow: 5px 12px 28px rgba(0,0,0,0.15), 1px 3px 8px rgba(0,0,0,0.1);
         }
+
+        /* Drop-cap editorial clássico e elegante (restaurada a fonte padrão Crimson Text do texto) */
+        .dropcap::first-letter {
+            float: left;
+            font-size: 3.8rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 2px;
+            color: #800000; /* brand-accent-red */
+            font-weight: bold;
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
@@ -213,228 +229,228 @@
             
             <div class="max-w-5xl lg:max-w-6xl mx-auto px-4 sm:px-6 w-full relative hero-content-wrapper">
                 
-                <!-- Máscara de Recorte com Overflow-Hidden -->
-                <div class="relative h-[490px] xs:h-[510px] sm:h-[590px] md:h-[630px] lg:h-[420px] xl:h-[420px] w-full overflow-hidden">
+                <!-- Máscara de Recorte com Overflow-Hidden (Otimizado para manter proporção lado a lado e evitar qualquer corte vertical) -->
+                <div class="relative h-[330px] xs:h-[360px] sm:h-[450px] md:h-[500px] lg:h-[420px] xl:h-[420px] w-full overflow-hidden">
                     
                     <!-- Esteira deslizante por hardware (GPU accelerated) que contém os slides lado a lado -->
                     <div id="carousel-track" class="flex w-full h-full transition-transform duration-700 ease-in-out" style="transform: translateX(0%);">
                         
                         <!-- SLIDE 1: JIMMY AKIN -->
-                        <div class="hero-slide w-full h-full flex-shrink-0 flex flex-col lg:grid lg:grid-cols-12 gap-5 lg:gap-8 items-center" id="slide-0">
-                            <div class="w-full lg:col-span-7 text-center lg:text-left flex flex-col items-center lg:items-start">
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-0">
+                            <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <!-- Caixa de Categoria -->
-                                <div class="h-6 sm:h-8 lg:h-6 mb-2 sm:mb-3 flex items-center justify-center lg:justify-start">
-                                    <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold text-brand-accent-blue text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full animate-pulse-subtle">Novo Lançamento</span>
+                                <div class="h-5 sm:h-8 lg:h-6 mb-1 sm:mb-3 flex items-center">
+                                    <span class="inline-block px-2 py-0.5 sm:px-4 sm:py-1.5 bg-brand-gold text-brand-accent-blue text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full animate-pulse-subtle">Novo Lançamento</span>
                                 </div>
                                 
                                 <!-- Caixa de Título Ajustada -->
-                                <div class="h-auto lg:h-[110px] overflow-hidden mb-2 lg:mb-3 flex items-center lg:items-start pt-1">
+                                <div class="h-[55px] xs:h-[65px] sm:h-[130px] lg:h-[110px] overflow-hidden mb-1 sm:mb-2 lg:mb-3 flex items-start pt-1">
                                     <h1 class="font-serif hero-title text-brand-accent-blue font-bold leading-tight">
-                                        A Bíblia é um <br class="hidden lg:block"> Livro <span class="text-brand-accent-red italic">Católico</span>
+                                        A Bíblia é um <br> Livro <span class="text-brand-accent-red italic">Católico</span>
                                     </h1>
                                 </div>
                                 
                                 <!-- Caixa de Resumo -->
-                                <div class="h-auto lg:h-[75px] overflow-hidden mb-3 lg:mb-4 flex items-center">
-                                    <p class="font-classic text-xs sm:text-lg lg:text-xl text-gray-600 italic leading-relaxed max-w-md lg:max-w-none">
+                                <div class="h-[45px] xs:h-[50px] sm:h-[90px] lg:h-[75px] overflow-hidden mb-2 lg:mb-4 flex items-center">
+                                    <p class="font-classic text-[9px] xs:text-[10px] sm:text-lg lg:text-xl text-gray-600 italic leading-relaxed">
                                         Descubra como a Igreja Católica recebeu, preservou e definiu as Sagradas Escrituras ao longo dos séculos.
                                     </p>
                                 </div>
                                 
-                                <!-- Caixa de Autor -->
-                                <div class="h-auto lg:h-[90px] flex items-center justify-center lg:justify-start mb-4 lg:mb-4">
-                                    <a href="a-biblia-é-um-livro-catolico.html" class="flex items-center gap-3 sm:gap-5 group hover:opacity-90 transition-all text-left">
-                                        <div class="w-12 h-12 xs:w-14 xs:h-14 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
+                                <!-- Caixa de Autor (Foto uniformizada w-24 h-24 sm:w-28 sm:h-28) -->
+                                <div class="h-auto min-h-[50px] sm:min-h-[100px] lg:h-[90px] flex items-center mb-2 lg:mb-4">
+                                    <a href="a-biblia-é-um-livro-catolico.html" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
+                                        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
                                             <img src="Imagens/Jimmy Akin.png" alt="Jimmy Akin" class="w-full h-full object-cover" onerror="this.src='Imagens/jimmy.png';">
                                         </div>
                                         <div class="text-left">
-                                            <span class="block text-[8px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                            <span class="font-serif text-sm sm:text-xl lg:text-3xl font-bold text-brand-accent-blue">Jimmy Akin</span>
-                                            <span class="block font-sans font-bold text-sm sm:text-xl text-brand-accent-red mt-0.5">17,50€</span>
+                                            <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none">Jimmy Akin</span>
+                                            <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5 leading-none">17,50€</span>
                                         </div>
                                     </a>
                                 </div>
 
                                 <!-- Caixa de Botões -->
-                                <div class="flex gap-2 sm:gap-3 w-full max-w-xs sm:max-w-md h-[40px] sm:h-[48px] lg:h-[46px]">
-                                    <button onclick="addToCart('a-biblia-e-um-livro-catolico', 'A Bíblia é um Livro Católico', 17.50, 'Imagens/capablc1.png', 'a-biblia-é-um-livro-catolico.html')" class="btn-premium-red flex-1 gap-1.5 text-xs sm:text-sm py-2 sm:py-3 rounded-xl">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[30px] xs:h-[36px] sm:h-[48px] lg:h-[46px]">
+                                    <button onclick="addToCart(10, 'A Bíblia é um Livro Católico', 17.50, 'Imagens/capablc1.png', 'a-biblia-é-um-livro-catolico.html')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
                                     </button>
-                                    <a href="a-biblia-é-um-livro-catolico.html" class="btn-premium-outline flex-1 text-xs sm:text-sm py-2 sm:py-3 rounded-xl">Detalhes</a>
+                                    <a href="a-biblia-é-um-livro-catolico.html" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
                                 </div>
                             </div>
                             
-                            <!-- Capa de Livro -->
-                            <div class="w-full lg:col-span-5 hero-book-container mt-4 lg:mt-0 flex justify-center">
-                                <a href="a-biblia-é-um-livro-catolico.html" class="relative w-full max-w-[160px] xs:max-w-[180px] sm:max-w-[240px] lg:max-w-[340px] h-[140px] xs:h-[160px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
-                                    <img src="Imagens/capaBLC4.png" alt="Contracapa" class="absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 filter drop-shadow-[5px_10px_20px_rgba(0,0,0,0.12)]">
-                                    <img src="Imagens/capablc1.png" alt="Capa" class="absolute right-0 w-[65%] h-auto object-contain z-20 filter drop-shadow-[12px_18px_30px_rgba(0,0,0,0.16)] floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                            <!-- Capa de Livro (Lado a lado, contracapa oculta no telemóvel, espaçamento dinâmico do ecrã para evitar corte vertical da sombra) -->
+                            <div class="col-span-5 sm:col-span-5 hero-book-container flex justify-center pr-6 sm:pr-8 lg:pr-12">
+                                <a href="a-biblia-é-um-livro-catolico.html" class="relative w-full max-w-[120px] xs:max-w-[140px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                    <img src="Imagens/capaBLC4.png" alt="Contracapa" class="hidden lg:block absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 shadow-md rounded-sm">
+                                    <img src="Imagens/capablc1.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 shadow-md lg:shadow-xl rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300">
                                 </a>
                             </div>
                         </div>
 
                         <!-- SLIDE 2: TIM STAPLES -->
-                        <div class="hero-slide w-full h-full flex-shrink-0 flex flex-col lg:grid lg:grid-cols-12 gap-5 lg:gap-8 items-center" id="slide-1">
-                            <div class="w-full lg:col-span-7 text-center lg:text-left flex flex-col items-center lg:items-start">
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-1">
+                            <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <!-- Caixa de Categoria -->
-                                <div class="h-6 sm:h-8 lg:h-6 mb-2 sm:mb-3 flex items-center justify-center lg:justify-start">
-                                    <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Apologética Mariana</span>
+                                <div class="h-5 sm:h-8 lg:h-6 mb-1 sm:mb-3 flex items-center">
+                                    <span class="inline-block px-2 py-0.5 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Apologética Mariana</span>
                                 </div>
                                 
                                 <!-- Caixa de Título Ajustada -->
-                                <div class="h-auto lg:h-[110px] overflow-hidden mb-2 lg:mb-3 flex items-center lg:items-start pt-1">
+                                <div class="h-[55px] xs:h-[65px] sm:h-[130px] lg:h-[110px] overflow-hidden mb-1 sm:mb-2 lg:mb-3 flex items-start pt-1">
                                     <h1 class="font-serif hero-title text-brand-accent-blue font-bold leading-tight">
-                                        Eis a <br class="hidden lg:block"> <span class="text-brand-accent-red italic">Tua</span> Mãe
+                                        Eis a <br> <span class="text-brand-accent-red italic">Tua</span> Mãe
                                     </h1>
                                 </div>
                                 
                                 <!-- Caixa de Resumo -->
-                                <div class="h-auto lg:h-[75px] overflow-hidden mb-3 lg:mb-4 flex items-center">
-                                    <p class="font-classic text-xs sm:text-lg lg:text-xl text-gray-600 italic leading-relaxed max-w-md lg:max-w-none">
+                                <div class="h-[45px] xs:h-[50px] sm:h-[90px] lg:h-[75px] overflow-hidden mb-2 lg:mb-4 flex items-center">
+                                    <p class="font-classic text-[9px] xs:text-[10px] sm:text-lg lg:text-xl text-gray-600 italic leading-relaxed">
                                         Uma defesa bíblica e histórica formidável das doutrinas marianas que esclarece as principais objeções.
                                     </p>
                                 </div>
                                 
-                                <!-- Caixa de Autor -->
-                                <div class="h-auto lg:h-[90px] flex items-center justify-center lg:justify-start mb-4 lg:mb-4">
-                                    <a href="eis-a-tua-mae.html" class="flex items-center gap-3 sm:gap-5 group hover:opacity-90 transition-all text-left">
-                                        <div class="w-12 h-12 xs:w-14 xs:h-14 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
+                                <!-- Caixa de Autor (Foto uniformizada w-24 h-24 sm:w-28 sm:h-28) -->
+                                <div class="h-auto min-h-[50px] sm:min-h-[100px] lg:h-[90px] flex items-center mb-2 lg:mb-4">
+                                    <a href="eis-a-tua-mae.html" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
+                                        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
                                             <img src="Imagens/TimStaples.png" alt="Tim Staples" class="w-full h-full object-cover" onerror="this.src='Imagens/tim.png';">
                                         </div>
                                         <div class="text-left">
-                                            <span class="block text-[8px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                            <span class="font-serif text-sm sm:text-xl lg:text-3xl font-bold text-brand-accent-blue">Tim Staples</span>
-                                            <span class="block font-sans font-bold text-sm sm:text-xl text-brand-accent-red mt-0.5">19,50€</span>
+                                            <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none">Tim Staples</span>
+                                            <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5">19,50€</span>
                                         </div>
                                     </a>
                                 </div>
 
                                 <!-- Caixa de Botões -->
-                                <div class="flex gap-2 sm:gap-3 w-full max-w-xs sm:max-w-md h-[40px] sm:h-[48px] lg:h-[46px]">
-                                    <button onclick="addToCart('eis-a-tua-mae', 'Eis a Tua Mãe', 19.50, 'Imagens/capaETM1.png', 'eis-a-tua-mae.html')" class="btn-premium-red flex-1 gap-1.5 text-xs sm:text-sm py-2 sm:py-3 rounded-xl">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[30px] xs:h-[36px] sm:h-[48px] lg:h-[46px]">
+                                    <button onclick="addToCart(9, 'Eis a Tua Mãe', 19.50, 'Imagens/capaETM1.png', 'eis-a-tua-mae.html')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
                                     </button>
-                                    <a href="eis-a-tua-mae.html" class="btn-premium-outline flex-1 text-xs sm:text-sm py-2 sm:py-3 rounded-xl">Detalhes</a>
+                                    <a href="eis-a-tua-mae.html" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
                                 </div>
                             </div>
                             
                             <!-- Capa de Livro -->
-                            <div class="w-full lg:col-span-5 hero-book-container mt-4 lg:mt-0 flex justify-center">
-                                <a href="eis-a-tua-mae.html" class="relative w-full max-w-[160px] xs:max-w-[180px] sm:max-w-[240px] lg:max-w-[340px] h-[140px] xs:h-[160px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
-                                    <img src="Imagens/capaETM4.png" alt="Contracapa" class="absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 filter drop-shadow-[5px_10px_20px_rgba(0,0,0,0.12)]">
-                                    <img src="Imagens/capaETM1.png" alt="Capa" class="absolute right-0 w-[65%] h-auto object-contain z-20 filter drop-shadow-[12px_18px_30px_rgba(0,0,0,0.16)] floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                            <div class="col-span-5 sm:col-span-5 hero-book-container flex justify-center pr-6 sm:pr-8 lg:pr-12">
+                                <a href="eis-a-tua-mae.html" class="relative w-full max-w-[120px] xs:max-w-[140px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                    <img src="Imagens/capaETM4.png" alt="Contracapa" class="hidden lg:block absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 shadow-md rounded-sm">
+                                    <img src="Imagens/capaETM1.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 shadow-md lg:shadow-xl rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300">
                                 </a>
                             </div>
                         </div>
 
                         <!-- SLIDE 3: JOE HESCHMEYER -->
-                        <div class="hero-slide w-full h-full flex-shrink-0 flex flex-col lg:grid lg:grid-cols-12 gap-5 lg:gap-8 items-center" id="slide-2">
-                            <div class="w-full lg:col-span-7 text-center lg:text-left flex flex-col items-center lg:items-start">
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-2">
+                            <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <!-- Caixa de Categoria -->
-                                <div class="h-6 sm:h-8 lg:h-6 mb-2 sm:mb-3 flex items-center justify-center lg:justify-start">
-                                    <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Teologia & Eucaristia</span>
+                                <div class="h-5 sm:h-8 lg:h-6 mb-1 sm:mb-3 flex items-center">
+                                    <span class="inline-block px-2 py-0.5 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Teologia & Eucaristia</span>
                                 </div>
                                 
                                 <!-- Caixa de Título Ajustada -->
-                                <div class="h-auto lg:h-[110px] overflow-hidden mb-2 lg:mb-3 flex items-center lg:items-start pt-1">
+                                <div class="h-[55px] xs:h-[65px] sm:h-[130px] lg:h-[110px] overflow-hidden mb-1 sm:mb-2 lg:mb-3 flex items-start pt-1">
                                     <h1 class="font-serif hero-title text-brand-accent-blue font-bold leading-tight">
-                                        A Eucaristia é <br class="hidden lg:block"> <span class="text-brand-accent-red italic">mesmo</span> Jesus
+                                        A Eucaristia é <br> <span class="text-brand-accent-red italic">mesmo</span> Jesus
                                     </h1>
                                 </div>
                                 
                                 <!-- Caixa de Resumo -->
-                                <div class="h-auto lg:h-[75px] overflow-hidden mb-3 lg:mb-4 flex items-center">
-                                    <p class="font-classic text-xs sm:text-lg lg:text-xl text-gray-600 italic leading-relaxed max-w-md lg:max-w-none">
+                                <div class="h-[45px] xs:h-[50px] sm:h-[90px] lg:h-[75px] overflow-hidden mb-2 lg:mb-4 flex items-center">
+                                    <p class="font-classic text-[9px] xs:text-[10px] sm:text-lg lg:text-xl text-gray-600 italic leading-relaxed">
                                         Uma fundamentação bíblica, histórica e patrística irrebatível sobre a presença real de Cristo no Santíssimo Sacramento.
                                     </p>
                                 </div>
                                 
-                                <!-- Caixa de Autor -->
-                                <div class="h-auto lg:h-[90px] flex items-center justify-center lg:justify-start mb-4 lg:mb-4">
-                                    <a href="a-eucaristia-e-mesmo-jesus.html" class="flex items-center gap-3 sm:gap-5 group hover:opacity-90 transition-all text-left">
-                                        <div class="w-12 h-12 xs:w-14 xs:h-14 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
+                                <!-- Caixa de Autor (Foto uniformizada w-24 h-24 sm:w-28 sm:h-28) -->
+                                <div class="h-auto min-h-[50px] sm:min-h-[100px] lg:h-[90px] flex items-center mb-2 lg:mb-4">
+                                    <a href="a-eucaristia-e-mesmo-jesus.html" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
+                                        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
                                             <img src="Imagens/JoeHeschmeyer.png" alt="Joe Heschmeyer" class="w-full h-full object-cover" onerror="this.src='Imagens/joe.png';">
                                         </div>
                                         <div class="text-left">
-                                            <span class="block text-[8px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                            <span class="font-serif text-sm sm:text-xl lg:text-3xl font-bold text-brand-accent-blue">Joe Heschmeyer</span>
-                                            <span class="block font-sans font-bold text-sm sm:text-xl text-brand-accent-red mt-0.5">13,50€</span>
+                                            <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none">Joe Heschmeyer</span>
+                                            <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5 leading-none">13,50€</span>
                                         </div>
                                     </a>
                                 </div>
 
                                 <!-- Caixa de Botões -->
-                                <div class="flex gap-2 sm:gap-3 w-full max-w-xs sm:max-w-md h-[40px] sm:h-[48px] lg:h-[46px]">
-                                    <button onclick="addToCart('a-eucaristia-e-mesmo-jesus', 'A Eucaristia é mesmo Jesus', 13.50, 'Imagens/capaAEMJ1.png', 'a-eucaristia-e-mesmo-jesus.html')" class="btn-premium-red flex-1 gap-1.5 text-xs sm:text-sm py-2 sm:py-3 rounded-xl">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[30px] xs:h-[36px] sm:h-[48px] lg:h-[46px]">
+                                    <button onclick="addToCart(8, 'A Eucaristia é mesmo Jesus', 13.50, 'Imagens/capaAEMJ1.png', 'a-eucaristia-e-mesmo-jesus.html')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
                                     </button>
-                                    <a href="a-eucaristia-e-mesmo-jesus.html" class="btn-premium-outline flex-1 text-xs sm:text-sm py-2 sm:py-3 rounded-xl">Detalhes</a>
+                                    <a href="a-eucaristia-e-mesmo-jesus.html" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
                                 </div>
                             </div>
                             
                             <!-- Capa de Livro -->
-                            <div class="w-full lg:col-span-5 hero-book-container mt-4 lg:mt-0 flex justify-center">
-                                <a href="a-eucaristia-e-mesmo-jesus.html" class="relative w-full max-w-[160px] xs:max-w-[180px] sm:max-w-[240px] lg:max-w-[340px] h-[140px] xs:h-[160px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
-                                    <img src="Imagens/capaAEMJ4.png" alt="Contracapa" class="absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 filter drop-shadow-[5px_10px_20px_rgba(0,0,0,0.12)]">
-                                    <img src="Imagens/capaAEMJ1.png" alt="Capa" class="absolute right-0 w-[65%] h-auto object-contain z-20 filter drop-shadow-[12px_18px_30px_rgba(0,0,0,0.16)] floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                            <div class="col-span-5 sm:col-span-5 hero-book-container flex justify-center pr-6 sm:pr-8 lg:pr-12">
+                                <a href="a-eucaristia-e-mesmo-jesus.html" class="relative w-full max-w-[120px] xs:max-w-[140px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                    <img src="Imagens/capaAEMJ4.png" alt="Contracapa" class="hidden lg:block absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 shadow-md rounded-sm">
+                                    <img src="Imagens/capaAEMJ1.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 shadow-md lg:shadow-xl rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300">
                                 </a>
                             </div>
                         </div>
 
                         <!-- SLIDE 4: PETER KREEFT -->
-                        <div class="hero-slide w-full h-full flex-shrink-0 flex flex-col lg:grid lg:grid-cols-12 gap-5 lg:gap-8 items-center" id="slide-3">
-                            <div class="w-full lg:col-span-7 text-center lg:text-left flex flex-col items-center lg:items-start">
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-3">
+                            <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <!-- Caixa de Categoria -->
-                                <div class="h-6 sm:h-8 lg:h-6 mb-2 sm:mb-3 flex items-center justify-center lg:justify-start">
-                                    <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[9px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Formação Bíblica</span>
+                                <div class="h-5 sm:h-8 lg:h-6 mb-1 sm:mb-3 flex items-center">
+                                    <span class="inline-block px-2 py-0.5 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Formação Bíblica</span>
                                 </div>
                                 
                                 <!-- Caixa de Título Ajustada -->
-                                <div class="h-auto lg:h-[110px] overflow-hidden mb-2 lg:mb-3 flex items-center lg:items-start pt-1">
+                                <div class="h-[55px] xs:h-[65px] sm:h-[130px] lg:h-[110px] overflow-hidden mb-1 sm:mb-2 lg:mb-3 flex items-start pt-1">
                                     <h1 class="font-serif hero-title text-brand-accent-blue font-bold leading-tight">
-                                        Tu Podes <br class="hidden lg:block"> Compreender a <span class="text-brand-accent-red italic">Bíblia</span>
+                                        Tu Podes <br> Compreender a <span class="text-brand-accent-red italic">Bíblia</span>
                                     </h1>
                                 </div>
                                 
                                 <!-- Caixa de Resumo -->
-                                <div class="h-auto lg:h-[75px] overflow-hidden mb-3 lg:mb-4 flex items-center">
-                                    <p class="font-classic text-xs sm:text-lg lg:text-xl text-gray-600 italic leading-relaxed max-w-md lg:max-w-none">
+                                <div class="h-[45px] xs:h-[50px] sm:h-[90px] lg:h-[75px] overflow-hidden mb-2 lg:mb-4 flex items-center">
+                                    <p class="font-classic text-[9px] xs:text-[10px] sm:text-lg lg:text-xl text-gray-600 italic leading-relaxed">
                                         Um guia indispensável e prático para desvendar os mistérios e as riquezas das Sagradas Escrituras.
                                     </p>
                                 </div>
                                 
-                                <!-- Caixa de Autor -->
-                                <div class="h-auto lg:h-[90px] flex items-center justify-center lg:justify-start mb-4 lg:mb-4">
-                                    <a href="tu-podes-compreender-a-biblia.html" class="flex items-center gap-3 sm:gap-5 group hover:opacity-90 transition-all text-left">
-                                        <div class="w-12 h-12 xs:w-14 xs:h-14 sm:w-20 sm:h-20 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
+                                <!-- Caixa de Autor (Foto uniformizada w-24 h-24 sm:w-28 sm:h-28) -->
+                                <div class="h-auto min-h-[50px] sm:min-h-[100px] lg:h-[90px] flex items-center mb-2 lg:mb-4">
+                                    <a href="tu-podes-compreender-a-biblia.html" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
+                                        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md">
                                             <img src="Imagens/PeterKreeft.png" alt="Peter Kreeft" class="w-full h-full object-cover" onerror="this.src='Imagens/kreeft.png';">
                                         </div>
                                         <div class="text-left">
-                                            <span class="block text-[8px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                            <span class="font-serif text-sm sm:text-xl lg:text-3xl font-bold text-brand-accent-blue">Peter Kreeft</span>
-                                            <span class="block font-sans font-bold text-sm sm:text-xl text-brand-accent-red mt-0.5">15,00€</span>
+                                            <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none">Peter Kreeft</span>
+                                            <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5">15,00€</span>
                                         </div>
                                     </a>
                                 </div>
 
                                 <!-- Caixa de Botões -->
-                                <div class="flex gap-2 sm:gap-3 w-full max-w-xs sm:max-w-md h-[40px] sm:h-[48px] lg:h-[46px]">
-                                    <button onclick="addToCart('tu-podes-compreender-a-biblia', 'Tu podes compreender a Bíblia', 15.00, 'Imagens/capaTPCB2.png', 'tu-podes-compreender-a-biblia.html')" class="btn-premium-red flex-1 gap-1.5 text-xs sm:text-sm py-2 sm:py-3 rounded-xl">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[30px] xs:h-[36px] sm:h-[48px] lg:h-[46px]">
+                                    <button onclick="addToCart(3, 'Tu podes compreender a Bíblia', 15.00, 'Imagens/capaTPCB2.png', 'tu-podes-compreender-a-biblia.html')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
                                     </button>
-                                    <a href="tu-podes-compreender-a-biblia.html" class="btn-premium-outline flex-1 text-xs sm:text-sm py-2 sm:py-3 rounded-xl">Detalhes</a>
+                                    <a href="tu-podes-compreender-a-biblia.html" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
                                 </div>
                             </div>
                             
                             <!-- Capa de Livro -->
-                            <div class="w-full lg:col-span-5 hero-book-container mt-4 lg:mt-0 flex justify-center">
-                                <a href="tu-podes-compreender-a-biblia.html" class="relative w-full max-w-[160px] xs:max-w-[180px] sm:max-w-[240px] lg:max-w-[340px] h-[140px] xs:h-[160px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
-                                    <img src="Imagens/capaTPCB4.png" alt="Contracapa" class="absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 filter drop-shadow-[5px_10px_20px_rgba(0,0,0,0.12)]">
-                                    <img src="Imagens/capaTPCB2.png" alt="Capa" class="absolute right-0 w-[65%] h-auto object-contain z-20 filter drop-shadow-[12px_18px_30px_rgba(0,0,0,0.16)] floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                            <div class="col-span-5 sm:col-span-5 hero-book-container flex justify-center pr-6 sm:pr-8 lg:pr-12">
+                                <a href="tu-podes-compreender-a-biblia.html" class="relative w-full max-w-[120px] xs:max-w-[140px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                    <img src="Imagens/capaTPCB4.png" alt="Contracapa" class="hidden lg:block absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 shadow-md rounded-sm">
+                                    <img src="Imagens/capaTPCB2.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 shadow-md lg:shadow-xl rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300">
                                 </a>
                             </div>
                         </div>
@@ -552,7 +568,7 @@
                     <!-- COLUNA 2: BREVEMENTE -->
                     <div class="flex flex-col space-y-6">
                         <div class="border-b-2 border-brand-accent-red/30 pb-3">
-                            <span class="text-brand-accent-red font-sans text-xs font-bold uppercase tracking-[0.2em] block">Espiritualidade</span> <!-- Sincronizado com o catálogo -->
+                            <span class="text-brand-accent-red font-sans text-xs font-bold uppercase tracking-[0.2em] block">Próximos Projectos</span> <!-- Sincronizado com o catálogo -->
                             <h2 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold">Brevemente</h2>
                         </div>
                         
@@ -572,7 +588,7 @@
                                     </svg>
                                 </div>
 
-                                <!-- Foto do Autor (Tamanho Horn Unificado: w-24 h-24 sm:w-28 sm:h-28) -->
+                                <!-- Foto do Autor (Tamanho Sheen Uniformizado com Trent Horn: w-24 h-24 sm:w-28 sm:h-28) -->
                                 <img src="Imagens/Sheen.png" alt="Fulton J. Sheen" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold object-cover shadow-sm flex-shrink-0" onerror="this.src='Imagens/fulton.png';">
                             </div>
                             
@@ -795,16 +811,17 @@
             // 1. Obter itens do carrinho existentes do localStorage
             let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             
-            // 2. Base de dados auxiliar para sincronizar autor e peso em index1.html
+            // 2. Base de dados auxiliar para sincronizar autor e peso em index.html
+            // Preservados os IDs numéricos oficiais para perfeita harmonia com catalogo-completo e checkout.html
             const bookMeta = {
-                'a-biblia-e-um-livro-catolico': { author: 'Jimmy Akin', weight: 0.272, image: 'Imagens/blccapa.png' },
-                'eis-a-tua-mae': { author: 'Tim Staples', weight: 0.534, image: 'Imagens/etmcapa.png' },
-                'a-eucaristia-e-mesmo-jesus': { author: 'Joe Heschmeyer', weight: 0.254, image: 'Imagens/aemjcapa.png' },
-                'tu-podes-compreender-a-biblia': { author: 'Peter Kreeft', weight: 0.510, image: 'Imagens/tpcbcapa.png' }
+                10: { author: 'Jimmy Akin', weight: 0.272, image: 'Imagens/blccapa.png' },
+                9: { author: 'Tim Staples', weight: 0.534, image: 'Imagens/etmcapa.png' },
+                8: { author: 'Joe Heschmeyer', weight: 0.254, image: 'Imagens/aemjcapa.png' },
+                3: { author: 'Peter Kreeft', weight: 0.510, image: 'Imagens/tpcbcapa.png' }
             };
 
             const meta = bookMeta[id] || { author: 'Jerónimo Editora', weight: 0.300, image: img };
-            const existingItemIdx = cartItems.findIndex(item => item.id === id);
+            const existingItemIdx = cartItems.findIndex(item => String(item.id) === String(id));
             
             if (existingItemIdx > -1) {
                 // Se já existe, somar quantidade
@@ -812,7 +829,7 @@
             } else {
                 // Se é novo, adicionar o item com TODAS as propriedades consistentes
                 cartItems.push({
-                    id: id,
+                    id: Number(id), // Guardado obrigatoriamente como número para coincidir com checkout.html
                     title: title,
                     price: parseFloat(price),
                     quantity: 1,
