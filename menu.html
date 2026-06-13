@@ -1,19 +1,8 @@
-<!-- Estilos para a animação do Menu Mobile -->
 <style>
-    @keyframes fadeInMenu {
-        from { 
-            opacity: 0; 
-            transform: scale(1.05); 
-        }
-        to { 
-            opacity: 1; 
-            transform: scale(1); 
-        }
-    }
-
-    .animate-menu-open {
-        animation: fadeInMenu 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
+    /* Custom scrollbar para o menu lateral se for muito longo */
+    .menu-drawer-scroll::-webkit-scrollbar { width: 3px; }
+    .menu-drawer-scroll::-webkit-scrollbar-track { background: transparent; }
+    .menu-drawer-scroll::-webkit-scrollbar-thumb { background: #cfaf5c; border-radius: 10px; }
 </style>
 
 <!-- Navbar Fixa -->
@@ -25,19 +14,61 @@
             <span class="font-serif text-xl md:text-2xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors duration-200 hidden sm:inline">Jerónimo Editora</span>
         </a>
         
-        <!-- Menu Desktop: Letras equilibradas (text-[14px]) -->
-        <div class="hidden md:flex items-center space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700 font-sans">
+        <!-- Menu Desktop -->
+        <div class="hidden md:flex items-center space-x-5 lg:space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700 font-sans">
             <a href="/" class="hover:text-brand-accent-red transition-colors">Início</a>
+            <a href="/#sobre" class="hover:text-brand-accent-red transition-colors">Editora</a>
             <a href="catalogo-completo" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
-            
-            <a href="infantil" class="hidden hover:text-brand-accent-red transition-colors">Infantil</a>
-            
             <a href="produtos" class="hover:text-brand-accent-red transition-colors">Produtos</a>
-            <a href="/#sobre" class="hover:text-brand-accent-red transition-colors">Sobre</a>
-            <a href="contacto" class="hover:text-brand-accent-red transition-colors">Contacto</a>
             
-            <!-- Carrinho Tradicional -->
-            <div class="pl-6 border-l border-gray-200">
+            <!-- Dropdown Hugo Bacelo -->
+            <div class="relative group h-full flex items-center py-4 -my-4">
+                <button class="hover:text-brand-accent-red transition-colors flex items-center gap-1 outline-none uppercase font-bold">
+                    Hugo Bacelo
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                
+                <div class="absolute left-0 top-full pt-1 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                    <div class="bg-white border border-gray-100 shadow-xl rounded-lg flex flex-col py-2 text-[13px] normal-case tracking-normal font-medium text-gray-700">
+                        <a href="#" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Sobre HB</a>
+                        
+                        <!-- Submenu Blog -->
+                        <div class="relative group/blog">
+                            <div class="px-5 py-3 hover:bg-gray-50 transition-colors cursor-pointer flex justify-between items-center hover:text-brand-accent-red">
+                                <span>Blog</span>
+                                <svg class="w-3 h-3 -rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="absolute left-full top-0 pl-1 w-48 opacity-0 invisible group-hover/blog:opacity-100 group-hover/blog:visible transition-all duration-300">
+                                <div class="bg-white border border-gray-100 shadow-xl rounded-lg flex flex-col py-2">
+                                    <a href="#" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Artigos</a>
+                                    <a href="#" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Ensaios</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submenu Formação -->
+                        <div class="relative group/formacao">
+                            <div class="px-5 py-3 hover:bg-gray-50 transition-colors cursor-pointer flex justify-between items-center hover:text-brand-accent-red">
+                                <span>Formação</span>
+                                <svg class="w-3 h-3 -rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="absolute left-full top-0 pl-1 w-64 opacity-0 invisible group-hover/formacao:opacity-100 group-hover/formacao:visible transition-all duration-300">
+                                <div class="bg-white border border-gray-100 shadow-xl rounded-lg flex flex-col py-2">
+                                    <a href="#" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Cursos</a>
+                                    <a href="#" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Palestras (Agendar presença)</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors border-t border-gray-50 mt-1">Comunidade: Aprendizes do Verbo</a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="contacto" class="hover:text-brand-accent-red transition-colors">Contactos</a>
+            
+            <!-- Carrinho -->
+            <div class="pl-4 lg:pl-6 border-l border-gray-200">
                 <a href="checkout" class="relative text-gray-800 hover:text-brand-accent-red transition-colors flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="9" cy="21" r="1"></circle>
@@ -64,29 +95,104 @@
     </div>
 </nav>
 
-<!-- Menu Mobile Overlay: Opaco, Clássico e com Animação -->
-<div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-screen bg-white z-[60] flex flex-col items-center justify-center">
-    <!-- Botão Fechar no Menu Mobile -->
-    <button class="absolute top-6 right-6 text-4xl text-brand-accent-blue font-light" onclick="toggleMenu()">&times;</button>
+<!-- Backdrop Escuro (Fundo semitransparente que escurece a página quando aberto) -->
+<div id="menu-backdrop" class="fixed inset-0 bg-black/40 z-[55] hidden opacity-0 transition-opacity duration-300 ease-in-out" onclick="toggleMenu()"></div>
+
+<!-- Drawer Lateral (Desliza suavemente a partir da direita) -->
+<div id="mobile-menu" class="fixed top-0 right-0 h-full w-[290px] xs:w-[340px] bg-white z-[60] shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between">
     
-    <div class="flex flex-col items-center space-y-8 w-full px-12 animate-menu-open">
-        <!-- Logo no Menu -->
-        <img src="Imagens/Logo J.png" class="h-12 w-auto mb-6 opacity-40" alt="Logo">
-        
-        <!-- Links com Serif e Estilo Clássico -->
-        <a href="/" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic border-b border-gray-100 w-full text-center pb-2" onclick="toggleMenu()">Início</a>
-        
-        <a href="catalogo-completo" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic border-b border-gray-100 w-full text-center pb-2" onclick="toggleMenu()">Catálogo</a>
-        
-        <a href="produtos" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic border-b border-gray-100 w-full text-center pb-2" onclick="toggleMenu()">Produtos</a>
-        
-        <a href="/#sobre" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic border-b border-gray-100 w-full text-center pb-2" onclick="toggleMenu()">Sobre Nós</a>
-        
-        <a href="contacto" class="font-serif text-2xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic w-full text-center" onclick="toggleMenu()">Contacto</a>
-        
-        <!-- Rodapé do Menu -->
-        <div class="pt-8 text-center">
-            <p class="text-[9px] uppercase tracking-[0.4em] text-gray-400">Jerónimo Editora</p>
+    <!-- Cabeçalho do Drawer -->
+    <div class="p-6 border-b border-gray-100 flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center space-x-2">
+            <img src="Imagens/Logo J.png" class="h-8 w-auto" alt="Logo">
+            <span class="font-serif text-lg font-bold text-brand-text">Jerónimo</span>
         </div>
+        <button class="text-3xl text-brand-accent-blue font-light focus:outline-none" onclick="toggleMenu()">&times;</button>
+    </div>
+    
+    <!-- Links de Navegação com Scroll Interno Seguro -->
+    <div class="flex-grow overflow-y-auto px-6 py-6 space-y-5 menu-drawer-scroll">
+        <a href="/" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Início</a>
+        
+        <a href="/#sobre" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Editora</a>
+        
+        <a href="catalogo-completo" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Catálogo</a>
+        
+        <a href="produtos" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Produtos</a>
+        
+        <!-- Accordion Mobile: Hugo Bacelo -->
+        <details class="w-full border-b border-gray-50 pb-2 group/hb [&::-webkit-details-marker]:hidden">
+            <summary class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic cursor-pointer list-none flex items-center justify-between outline-none">
+                <span>Hugo Bacelo</span>
+                <svg class="w-4 h-4 transition-transform group-open/hb:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </summary>
+            <div class="flex flex-col space-y-4 pl-3 mt-4 text-sm font-sans text-gray-700">
+                <a href="#" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()">Sobre HB</a>
+                
+                <!-- Sub Accordion: Blog -->
+                <details class="w-full group/blog [&::-webkit-details-marker]:hidden">
+                    <summary class="hover:text-brand-accent-red transition-colors cursor-pointer list-none flex items-center justify-between outline-none py-1">
+                        <span>Blog</span> 
+                        <svg class="w-3.5 h-3.5 transition-transform group-open/blog:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="flex flex-col space-y-3 pl-3 mt-2 text-xs text-gray-500 border-l border-gray-100">
+                        <a href="#" class="hover:text-brand-accent-red transition-colors block" onclick="toggleMenu()">Artigos</a>
+                        <a href="#" class="hover:text-brand-accent-red transition-colors block" onclick="toggleMenu()">Ensaios</a>
+                    </div>
+                </details>
+
+                <!-- Sub Accordion: Formação -->
+                <details class="w-full group/form [&::-webkit-details-marker]:hidden">
+                    <summary class="hover:text-brand-accent-red transition-colors cursor-pointer list-none flex items-center justify-between outline-none py-1">
+                        <span>Formação</span> 
+                        <svg class="w-3.5 h-3.5 transition-transform group-open/form:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="flex flex-col space-y-3 pl-3 mt-2 text-xs text-gray-500 border-l border-gray-100">
+                        <a href="#" class="hover:text-brand-accent-red transition-colors block" onclick="toggleMenu()">Cursos</a>
+                        <a href="#" class="hover:text-brand-accent-red transition-colors block" onclick="toggleMenu()">Palestras (Agendar presença)</a>
+                    </div>
+                </details>
+
+                <a href="#" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()">Comunidade: Aprendizes do Verbo</a>
+            </div>
+        </details>
+        
+        <a href="contacto" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block" onclick="toggleMenu()">Contactos</a>
+    </div>
+    
+    <!-- Rodapé do Drawer -->
+    <div class="p-6 border-t border-gray-50 text-center flex-shrink-0 bg-gray-50/50">
+        <p class="text-[9px] uppercase tracking-[0.4em] text-gray-400 font-sans font-bold">Jerónimo Editora</p>
     </div>
 </div>
+
+<!-- Lógica de Interceção e Sobrescrita para o Menu Slide-in (Off-canvas) -->
+<script>
+    window.toggleMenu = function() {
+        const menu = document.getElementById('mobile-menu');
+        const backdrop = document.getElementById('menu-backdrop');
+        if (!menu || !backdrop) return;
+        
+        if (menu.classList.contains('translate-x-full')) {
+            // ABRIR
+            backdrop.classList.remove('hidden');
+            // Pequeno delay para permitir a transição suave de opacidade
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                backdrop.classList.add('opacity-100');
+                menu.classList.remove('translate-x-full');
+            }, 20);
+            document.body.style.overflow = 'hidden'; // Tranca o scroll da página principal
+        } else {
+            // FECHAR
+            menu.classList.add('translate-x-full');
+            backdrop.classList.remove('opacity-100');
+            backdrop.classList.add('opacity-0');
+            // Oculta o backdrop de vez apenas após acabar a transição CSS de 300ms
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = ''; // Liberta o scroll da página principal
+        }
+    }
+</script>

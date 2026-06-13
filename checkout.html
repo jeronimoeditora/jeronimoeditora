@@ -101,6 +101,10 @@
         .suggestion-card:hover {
             background-color: rgba(255,255,255,0.1);
         }
+
+        .menu-drawer-scroll::-webkit-scrollbar { width: 3px; }
+        .menu-drawer-scroll::-webkit-scrollbar-track { background: transparent; }
+        .menu-drawer-scroll::-webkit-scrollbar-thumb { background: #cfaf5c; border-radius: 10px; }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
@@ -142,7 +146,10 @@
         </div>
     </div>
 
-    <!-- Navegação -->
+    <!-- CONTENTOR DO MENU -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Navegação Estática de Segurança (Fallback Offline) -->
     <nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 z-50 font-sans">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <a href="/" class="flex items-center space-x-2">
@@ -151,24 +158,38 @@
             </a>
             <div class="hidden md:flex items-center space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700 font-sans">
                 <a href="/" class="hover:text-brand-accent-red transition-colors">Início</a>
-                <a href="catalogo-completo.html" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
-                <a href="produtos.html" class="hover:text-brand-accent-red transition-colors">Produtos</a>
-                <a href="/#sobre" class="hover:text-brand-accent-red transition-colors">Sobre</a>
-                <a href="contacto.html" class="hover:text-brand-accent-red transition-colors">Contacto</a>
+                <a href="catalogo-completo" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
+                <a href="produtos" class="hover:text-brand-accent-red transition-colors">Produtos</a>
+                <a href="/#sobre" class="hover:text-brand-accent-red transition-colors">Editora</a>
+                <a href="contacto" class="hover:text-brand-accent-red transition-colors">Contacto</a>
             </div>
             <button class="md:hidden text-3xl text-brand-text focus:outline-none" onclick="toggleMenu()">&#9776;</button>
         </div>
     </nav>
 
-    <!-- Menu Mobile -->
-    <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-screen bg-white z-[60] flex flex-col items-center justify-center text-center">
-        <button class="absolute top-6 right-6 text-4xl text-brand-accent-blue font-light" onclick="toggleMenu()">&times;</button>
-        <div class="flex flex-col items-center space-y-8 w-full px-12 animate-menu-open">
-            <a href="/" class="font-serif text-2xl text-brand-accent-blue border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Início</a>
-            <a href="catalogo-completo.html" class="font-serif text-2xl text-brand-accent-blue border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Catálogo</a>
-            <a href="produtos.html" class="font-serif text-2xl text-brand-accent-blue border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Produtos</a>
-            <a href="/#sobre" class="font-serif text-2xl text-brand-accent-blue border-b border-gray-100 w-full pb-2" onclick="toggleMenu()">Sobre Nós</a>
-            <a href="contacto.html" class="font-serif text-2xl text-brand-accent-blue w-full" onclick="toggleMenu()">Contacto</a>
+    <!-- Backdrop Escuro para o menu Off-Canvas -->
+    <div id="menu-backdrop" class="fixed inset-0 bg-black/40 z-[55] hidden opacity-0 transition-opacity duration-300 ease-in-out" onclick="toggleMenu()"></div>
+
+    <!-- Drawer Lateral Off-Canvas Mobile (Fallback) -->
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[290px] xs:w-[340px] bg-white z-[60] shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between">
+        <div class="p-6 border-b border-gray-100 flex items-center justify-between flex-shrink-0">
+            <div class="flex items-center space-x-2">
+                <img src="Imagens/Logo J.png" class="h-8 w-auto" alt="Logo">
+                <span class="font-serif text-lg font-bold text-brand-text">Jerónimo</span>
+            </div>
+            <button class="text-3xl text-brand-accent-blue font-light focus:outline-none" onclick="toggleMenu()">&times;</button>
+        </div>
+        
+        <div class="flex-grow overflow-y-auto px-6 py-6 space-y-5 menu-drawer-scroll">
+            <a href="/" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Início</a>
+            <a href="/#sobre" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Editora</a>
+            <a href="catalogo-completo" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Catálogo</a>
+            <a href="produtos" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Produtos</a>
+            <a href="contacto" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block" onclick="toggleMenu()">Contactos</a>
+        </div>
+        
+        <div class="p-6 border-t border-gray-50 text-center flex-shrink-0 bg-gray-50/50">
+            <p class="text-[9px] uppercase tracking-[0.4em] text-gray-400 font-sans font-bold">Jerónimo Editora</p>
         </div>
     </div>
 
@@ -373,6 +394,9 @@
         </div>
     </main>
 
+    <!-- CONTENTOR DO RODAPÉ -->
+    <div id="footer-placeholder"></div>
+
     <footer class="bg-gray-900 text-gray-300 py-12 px-6 border-t-8 border-brand-accent-red font-sans mt-auto">
         <div class="max-w-5xl mx-auto text-center">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
@@ -387,10 +411,10 @@
                     <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-sm">Navegação</h4>
                     <ul class="space-y-2 text-sm font-sans">
                         <li><a href="/" class="hover:text-white">Início</a></li>
-                        <li><a href="catalogo-completo.html" class="hover:text-white">Catálogo</a></li>
-                        <li><a href="produtos.html" class="hover:text-white">Produtos</a></li>
-                        <li><a href="/#sobre" class="hover:text-white">Sobre</a></li>
-                        <li><a href="contacto.html" class="hover:text-white">Contacto</a></li>
+                        <li><a href="catalogo-completo" class="hover:text-white">Catálogo</a></li>
+                        <li><a href="produtos" class="hover:text-white">Produtos</a></li>
+                        <li><a href="/#sobre" class="hover:text-white">Editora</a></li>
+                        <li><a href="contacto" class="hover:text-white">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="flex flex-col items-center">
@@ -437,7 +461,28 @@
 
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            if (menu) menu.classList.toggle('hidden');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                // ABRIR
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                // FECHAR
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
         }
 
         function openQuickView(id) {
@@ -627,7 +672,7 @@
             });
             
             html += `
-                <a href="produtos.html" class="flex-shrink-0 w-32 bg-brand-gold/10 rounded-xl p-3 border border-brand-gold/30 flex flex-col items-center justify-center text-center suggestion-card hover:bg-brand-gold/20">
+                <a href="produtos" class="flex-shrink-0 w-32 bg-brand-gold/10 rounded-xl p-3 border border-brand-gold/30 flex flex-col items-center justify-center text-center suggestion-card hover:bg-brand-gold/20">
                     <div class="w-10 h-10 bg-brand-gold/20 rounded-full flex items-center justify-center mb-3">
                         <i class="fas fa-arrow-right text-brand-gold"></i>
                     </div>
@@ -828,5 +873,9 @@
             handleBillingChoice();
         });
     </script>
+
+    <!-- GoatCounter Analytics Tracker -->
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

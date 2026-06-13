@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
@@ -180,21 +181,44 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 
-'https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec'; 
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec'; 
 
-        // Função de controlo de menu (hamburger) em falta
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            if (menu) menu.classList.toggle('hidden');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                // ABRIR
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                // FECHAR
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
         }
 
         async function loadComponents() {
             try {
-                const nav = await fetch('menu?v=1.0.2'); if(nav.ok) document.getElementById('nav-placeholder').innerHTML = await nav.text();
-                const foot = await fetch('rodape?v=1.0.2'); if(foot.ok) document.getElementById('footer-placeholder').innerHTML = await foot.text();
+                const nav = await fetch('menu?v=1.0.2'); 
+                if(nav.ok) document.getElementById('nav-placeholder').innerHTML = await nav.text();
+                const foot = await fetch('rodape?v=1.0.2'); 
+                if(foot.ok) document.getElementById('footer-placeholder').innerHTML = await foot.text();
                 updateCartUI();
-            } catch (e) {}
+            } catch (e) {
+                console.warn("Modo offline.");
+            }
         }
 
         async function handleContactSubmit(event) {
@@ -248,5 +272,9 @@
         }
         window.onload = loadComponents;
     </script>
+
+    <!-- GoatCounter Analytics Tracker -->
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

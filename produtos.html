@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
@@ -85,7 +86,7 @@
             <div id="cart-confirmation-details" class="flex items-center space-x-4 p-3 border border-gray-100 rounded-lg bg-gray-50 mb-6"></div>
             <div class="flex flex-col space-y-3 font-sans">
                 <button onclick="closeCartConfirmation()" class="w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-md">Continuar a Comprar</button>
-                <button onclick="window.location.href='checkout'" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-3 rounded-lg hover:bg-yellow-600 transition-colors shadow-md">Finalizar Compra</button>
+                <button onclick="window.location.href='checkout.html'" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-3 rounded-lg hover:bg-yellow-600 transition-colors shadow-md">Finalizar Compra</button>
             </div>
         </div>
     </div>
@@ -130,9 +131,10 @@
         </div>
     </div>
 
+    <!-- CONTENTOR DO MENU -->
     <div id="nav-placeholder"></div>
 
-    <main class="flex-grow pt-20 md:pt-32 pb-16"> 
+    <main class="flex-grow pt-24 md:pt-32 pb-16"> 
         <div class="max-w-6xl mx-auto px-4 md:px-6 text-center fade-in">
             <h1 class="font-serif text-3xl md:text-5xl text-brand-gold-dark mb-4 border-b pb-3 text-center border-brand-gold/50 font-normal">
                 Produtos e Artigos Religiosos
@@ -166,6 +168,7 @@
         </div>
     </main>
 
+    <!-- CONTENTOR DO RODAPÉ -->
     <div id="footer-placeholder"></div>
 
     <script>
@@ -233,9 +236,9 @@
 
         async function loadComponents() {
             try {
-                const navResp = await fetch(getSafePath('menu'));
+                const navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
                 if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
-                const footResp = await fetch(getSafePath('rodape'));
+                const footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
                 if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 updateCartUI();
             } catch (e) { console.warn("Modo offline."); }
@@ -388,9 +391,30 @@
             });
         }
 
-        function toggleMenu() { 
+        function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            if (menu) menu.classList.toggle('hidden'); 
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                // ABRIR
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                // FECHAR
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
         }
 
         window.onload = () => { 
@@ -398,5 +422,9 @@
             renderProducts(productData); 
         };
     </script>
+
+    <!-- GoatCounter Analytics Tracker -->
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

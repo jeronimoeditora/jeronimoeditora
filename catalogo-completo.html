@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
@@ -36,7 +37,7 @@
 
     <style>
         .book-shadow {
-            box-shadow: 0 10px 25 rgba(0, 0, 0, 0.08), 0 0 5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 0 5px rgba(0, 0, 0, 0.04);
             transition: all 0.3s ease;
         }
         .book-shadow:hover {
@@ -44,7 +45,7 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
         }
 
-        /* Sombreado reforzado para capas claras para crear profundidad y destaque */
+        /* Sombreado reforçado para capas claras para criar profundidade e destaque */
         .white-cover-shadow {
             filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.15)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
         }
@@ -182,7 +183,7 @@
     <script>
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec'; 
         
-        // Base de datos oficial con IDs Numéricos restaurados para una sincronización ideal con index.html y checkout.html
+        // Base de dados oficial de livros (IDs numéricos sincronizados)
         const bookData = [
             { 
                 id: 3, 
@@ -310,7 +311,6 @@
         }
 
         function openInfoModal(bookId) {
-            // Busqueda flexible por comparación simple (coerción de string/número segura)
             const book = bookData.find(b => b.id == bookId);
             if (!book) return;
             
@@ -392,7 +392,6 @@
             renderBooks(filtered);
         }
 
-        // Renderiza las tarjetas del catálogo utilizando el ID numérico unificado sin generar errores de tipo
         function renderBooks(books) {
             const container = document.getElementById('book-list-container');
             container.innerHTML = '';
@@ -465,9 +464,30 @@
             });
         }
 
-        function toggleMenu() { 
+        function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            if (menu) menu.classList.toggle('hidden'); 
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                // ABRIR
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                // FECHAR
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
         }
 
         window.onload = () => { 
@@ -475,5 +495,8 @@
             filterAndSortBooks(); 
         };
     </script>
+    
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
