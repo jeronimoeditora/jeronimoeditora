@@ -6,6 +6,7 @@
     <title>Arquivo de Artigos | Jerónimo Editora</title>
     
     <script>
+        // Remove a extensão .html da barra de endereço de forma limpa e transparente
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
@@ -47,6 +48,10 @@
     <style>
         body { font-family: 'Inter', sans-serif; color: #2d3748; background-color: #F8F8F8; }
         
+        #nav-placeholder *, #footer-placeholder * {
+            font-style: normal !important;
+        }
+
         .fade-in { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -61,10 +66,13 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- CONTEÚDO PRINCIPAL (Sem menu fixo no topo) -->
-    <main class="flex-grow pt-16 md:pt-24 pb-16">
+    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div id="nav-placeholder"></div>
+
+    <main class="flex-grow pt-28 md:pt-36 pb-16">
         <div class="max-w-6xl mx-auto px-6 fade-in">
             
+            <!-- Título Principal do Arquivo de Artigos -->
             <div class="text-center mb-10">
                 <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-2">Escritos & Formação</span>
                 <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Arquivo de Artigos</h1>
@@ -111,7 +119,6 @@
                 </div>
             </div>
 
-            <!-- Sem Resultados -->
             <div id="no-results" class="hidden text-center py-16">
                 <i class="fas fa-book-open text-gray-300 text-5xl mb-4"></i>
                 <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum artigo encontrado</h3>
@@ -142,10 +149,13 @@
 
     <script>
         const articlesData = [
+            // --- ADVENTO E NATAL ---
             { id: 1, title: "Nossa Senhora foi mãe solteira?", category: "Advento e Natal", date: "2025-12-05", readingTime: "4 min", url: "#" },
             { id: 2, title: "Onde nasceu o menino Jesus?", category: "Advento e Natal", date: "2025-12-12", readingTime: "5 min", url: "#" },
             { id: 3, title: "Maria teve dores de parto", category: "Advento e Natal", date: "2025-12-18", readingTime: "4 min", url: "#" },
             { id: 4, title: "Natal: Origem Cristã, não pagã", category: "Advento e Natal", date: "2025-12-24", readingTime: "6 min", url: "#" },
+
+            // --- AS 7 PALAVRAS DE CRISTO ---
             { id: 5, title: "Introdução", category: "As 7 palavras de Cristo", date: "2026-04-01", readingTime: "3 min", url: "#" },
             { id: 6, title: "I. Pai, perdoa-lhes, porque não sabem o que fazem", category: "As 7 palavras de Cristo", date: "2026-04-02", readingTime: "5 min", url: "#" },
             { id: 7, title: "II. Em verdade te digo: hoje estarás comigo no paraíso", category: "As 7 palavras de Cristo", date: "2026-04-03", readingTime: "4 min", url: "#" },
@@ -154,14 +164,18 @@
             { id: 10, title: "V. Tenho sede!", category: "As 7 palavras de Cristo", date: "2026-04-06", readingTime: "4 min", url: "#" },
             { id: 11, title: "VI. Está consumado!", category: "As 7 palavras de Cristo", date: "2026-04-07", readingTime: "5 min", url: "#" },
             { id: 12, title: "VII. Pai, em Tuas mãos entrego o Meu espírito", category: "As 7 palavras de Cristo", date: "2026-04-08", readingTime: "5 min", url: "#" },
+
+            // --- OUTROS TEMAS ---
             { id: 13, title: "Velho ou novo José?", category: "Outros temas", date: "2026-03-15", readingTime: "5 min", url: "#" },
+
+            // --- TEOLOGIA ---
             {
                 id: 14,
                 title: "A Coroação da História da Salvação (Pentecostes)",
                 category: "Teologia",
                 date: "2026-05-24",
                 readingTime: "10 min",
-                url: "Artigos/a-coroacao-da-historia-da-salvacao-pentecostes", // Sem .html para URL limpa
+                url: "Artigos/a-coroacao-da-historia-da-salvacao-pentecostes",
                 image: "Imagens/pentecostes.png"
             },
             { id: 15, title: "Engolido por uma Má Exegese", category: "Teologia", date: "2026-05-18", readingTime: "4 min", url: "#" },
@@ -169,6 +183,8 @@
             { id: 17, title: "Como Não Ler a Bíblia em Qualquer Século (3 de 3)", category: "Teologia", date: "2026-05-05", readingTime: "6 min", url: "#" },
             { id: 18, title: "Como Não Ler a Bíblia em Qualquer Século (2 de 3)", category: "Teologia", date: "2026-05-03", readingTime: "5 min", url: "#" },
             { id: 19, title: "Como Não Ler a Bíblia em Qualquer Século (1 de 3)", category: "Teologia", date: "2026-05-01", readingTime: "5 min", url: "#" },
+
+            // --- FEMINISMO ---
             { id: 20, title: "A Nova Masculinidade é a Velha Feminilidade", category: "Feminismo", date: "2026-02-28", readingTime: "6 min", url: "#" },
             { id: 21, title: "A Incongruente Utopia Feminista – Parte III", category: "Feminismo", date: "2026-02-20", readingTime: "5 min", url: "#" },
             { id: 22, title: "A Incongruente Utopia Feminista – Parte II", category: "Feminismo", date: "2026-02-15", readingTime: "5 min", url: "#" },
@@ -317,16 +333,36 @@
 
         async function loadComponents() {
             try {
-                let foot = await fetch(getSafePath('rodape') + '?v=1.0.2');
-                if (!foot.ok) {
-                    foot = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
+                let navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
                 }
-                if (foot.ok) {
-                    document.getElementById('footer-placeholder').innerHTML = await foot.text();
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
                 }
-            } catch (e) {
-                console.warn("Modo offline.");
+
+                let footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                }
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
             }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {

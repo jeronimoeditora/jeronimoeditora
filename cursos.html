@@ -68,8 +68,10 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen" oncontextmenu="return false;">
 
-    <!-- CONTEÚDO PRINCIPAL (Sem menu fixo no topo) -->
-    <main class="flex-grow pt-16 md:pt-24 pb-16">
+    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div id="nav-placeholder"></div>
+
+    <main class="flex-grow pt-28 md:pt-36 pb-16">
         <div class="max-w-6xl mx-auto px-6 fade-in">
             
             <div class="text-center mb-10">
@@ -414,12 +416,20 @@
 
         async function loadComponents() {
             try {
-                let foot = await fetch(getSafePath('rodape') + '?v=1.0.2');
-                if (!foot.ok) {
-                    foot = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
+                let navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
                 }
-                if (foot.ok) {
-                    document.getElementById('footer-placeholder').innerHTML = await foot.text();
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                }
+
+                let footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 }
                 updateCartUI();
             } catch (e) { 
