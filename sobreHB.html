@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Sobre Hugo Bacelo | Jerónimo Editora</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Roboto"', 'sans-serif'],
+                        classic: ['"Crimson Text"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#333333',
+                        'brand-accent-blue': '#002147', /* Azul Forte da Jerónimo */
+                        'brand-accent-orange': '#e05300', /* Laranja Forte Solicitado */
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Remoção de itálicos desnecessários globais, excepto nas citações clássicas */
+        * { font-style: normal; }
+        .italic-quote { font-style: italic !important; }
+
+        body { font-family: 'Roboto', sans-serif; color: #333333; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        .font-classic { font-family: 'Crimson Text', serif; }
+        
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Dropcap editorial clássico em Laranja Forte */
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 2px;
+            color: #e05300; /* brand-accent-orange */
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Suavização das transições das fotos da galeria */
+        .gallery-photo {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-photo:hover {
+            transform: scale(1.03);
+            filter: grayscale(0%) contrast(105%);
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div id="nav-placeholder"></div>
+
+    <main class="flex-grow pt-28 md:pt-36 pb-16">
+        <div class="max-w-6xl mx-auto px-6 fade-in">
+            
+            <!-- Grelha de Apresentação -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-16">
+                
+                <!-- Coluna Esquerda: Texto Biográfico em Antigo Acordo Ortográfico -->
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block">Sobre Mim</span>
+                    <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight">O Meu Percurso</h1>
+                    <div class="h-1 w-16 bg-brand-accent-orange"></div>
+
+                    <div class="text-gray-700 text-lg sm:text-xl leading-relaxed font-classic space-y-6">
+                        <p class="dropcap">
+                            A minha missão através do ensino e das palestras assenta no compromisso inequívoco com a Verdade revelada. Sendo teologicamente ancorado na verdade de Cristo e no Magistério da Igreja, considero-me politicamente sem-abrigo. Sou crítico de muitas coisas e, por fidelidade à exigência do Evangelho, admirador de poucas.
+                        </p>
+                        <p>
+                            Como Fundador da Jerónimo Editora e responsável pelo movimento paroquial Aprendizes do Verbo, dedico o meu percurso a formar comunidades paroquiais activas, munindo-as com boas fontes e literatura sólida para fazer face aos desafios intelectuais da contemporaneidade.
+                        </p>
+                        
+                        <!-- Citação de Fernando Pessoa -->
+                        <blockquote class="border-l-4 border-brand-accent-orange pl-4 py-2 my-6 bg-white rounded-r-xl shadow-xs">
+                            <p class="italic-quote text-gray-500 font-classic text-lg leading-relaxed">
+                                «Sem a loucura que é o homem<br>
+                                Mais que a besta sadia,<br>
+                                Cadáver adiado que procria?»
+                            </p>
+                            <cite class="block text-xs uppercase tracking-wider text-brand-accent-blue font-sans font-bold mt-2">— Fernando Pessoa</cite>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <!-- Coluna Direita: Galeria Assimétrica com 6 fotos e salvaguardas elegantes -->
+                <div class="lg:col-span-6 space-y-4">
+                    <span class="text-xs uppercase font-extrabold tracking-widest text-gray-400 block mb-2">Galeria de Registos</span>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <!-- Foto 1 (Retrato Alto) -->
+                        <div class="bg-brand-accent-blue/5 rounded-2xl overflow-hidden border border-gray-200 h-64 relative group hover:shadow-md transition duration-300">
+                            <img src="Imagens/hugo1.png" alt="Hugo Bacelo" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/400x600/002147/cfaf5c?text=Hugo+Bacelo';">
+                        </div>
+                        
+                        <!-- Foto 2 (Quadrada) -->
+                        <div class="bg-brand-accent-blue/5 rounded-2xl overflow-hidden border border-gray-200 h-40 relative group hover:shadow-md transition duration-300">
+                            <img src="Imagens/hugo2.png" alt="Palestra de Hugo" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/400x400/002147/cfaf5c?text=Palestra';">
+                        </div>
+                        
+                        <!-- Foto 3 (Retrato Médio) -->
+                        <div class="bg-brand-accent-blue/5 rounded-2xl overflow-hidden border border-gray-200 h-52 relative group hover:shadow-md transition duration-300">
+                            <img src="Imagens/hugo3.png" alt="Sessão de Formação" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/400x500/002147/cfaf5c?text=Formação';">
+                        </div>
+                        
+                        <!-- Foto 4 (Horizontal Larga) -->
+                        <div class="col-span-2 bg-brand-accent-blue/5 rounded-2xl overflow-hidden border border-gray-200 h-44 relative group hover:shadow-md transition duration-300">
+                            <img src="Imagens/hugo4.png" alt="Comunidade Aprendizes" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/600x300/002147/cfaf5c?text=Aprendizes+do+Verbo';">
+                        </div>
+                        
+                        <!-- Foto 5 (Pequena) -->
+                        <div class="bg-brand-accent-blue/5 rounded-2xl overflow-hidden border border-gray-200 h-36 relative group hover:shadow-md transition duration-300">
+                            <img src="Imagens/hugo5.png" alt="Escritório da Editora" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/300x300/002147/cfaf5c?text=Editora';">
+                        </div>
+                        
+                        <!-- Foto 6 (Vertical Extra Alto) -->
+                        <div class="col-span-2 bg-brand-accent-blue/5 rounded-2xl overflow-hidden border border-gray-200 h-56 relative group hover:shadow-md transition duration-300">
+                            <img src="Imagens/hugo6.png" alt="Estudo e Investigação" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/500x300/002147/cfaf5c?text=Estudo';">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        // Função global corrigida para o menu lateral Off-Canvas deslizante
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                // ABRIR
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                // FECHAR
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        // Carrega dinamicamente o menu e o rodapé corporativos do seu site
+        async function loadComponents() {
+            try {
+                const navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
+                if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                const footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadComponents);
+    </script>
+
+    <!-- GoatCounter Analytics Tracker para monitorizar as visitas da página de biografia -->
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
