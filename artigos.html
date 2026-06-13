@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Artigos | Jerónimo Editora</title>
+    
+    <!-- Google Fonts: Inter para Máxima Legibilidade e Conforto Visual no Ecrã -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748', /* Cinzento carvão suave para reduzir contraste excessivo */
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Regras estritas de conforto visual para eliminar o cansaço na leitura */
+        body { font-family: 'Inter', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+        
+        /* Espaçamento e tipografia ultra-limpos para o leitor de artigos */
+        .text-readable-content { 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.85; 
+            letter-spacing: -0.003em;
+            word-spacing: 0.05em;
+        }
+        
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Transição fluida para os cartões de artigos */
+        .article-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .article-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(0, 33, 71, 0.15);
+        }
+
+        /* Custom scrollbar para o painel de leitura */
+        .readable-scroll::-webkit-scrollbar { width: 6px; }
+        .readable-scroll::-webkit-scrollbar-track { background: transparent; }
+        .readable-scroll::-webkit-scrollbar-thumb { background: #cfaf5c; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div id="nav-placeholder"></div>
+
+    <main class="flex-grow pt-28 md:pt-36 pb-16">
+        <div class="max-w-6xl mx-auto px-6 fade-in">
+            
+            <!-- Título Principal do Artigo -->
+            <div class="text-center mb-10">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-2">Escritos & Formação</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Artigos</h1>
+                <p class="font-sans text-gray-500 max-w-xl mx-auto text-base sm:text-lg font-medium">"Investigar com paciência, crer com convicção e reter com sabedoria."</p>
+                <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
+            </div>
+
+            <!-- Painel de Pesquisa e Filtros -->
+            <div class="bg-white p-4 sm:p-6 rounded-2xl border border-gray-150 shadow-xs max-w-4xl mx-auto mb-12">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 items-center">
+                    
+                    <!-- Barra de Pesquisa por Texto -->
+                    <div class="lg:col-span-5 relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                            <i class="fas fa-search text-gray-400 text-sm"></i>
+                        </span>
+                        <input type="text" id="artigos-search" onkeyup="filterArticles()" placeholder="Pesquise por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                    </div>
+                    
+                    <!-- Filtro de Categoria -->
+                    <div class="lg:col-span-3">
+                        <select id="category-select" onchange="filterArticles()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer">
+                            <option value="all">Todas as Categorias</option>
+                            <option value="Advento e Natal">Advento e Natal</option>
+                            <option value="As 7 palavras de Cristo">As 7 palavras de Cristo</option>
+                            <option value="Teologia">Teologia</option>
+                            <option value="Feminismo">Feminismo</option>
+                            <option value="Outros temas">Outros temas</option>
+                        </select>
+                    </div>
+
+                    <!-- Ordenar por Ordem Alfabética ou Data -->
+                    <div class="lg:col-span-2">
+                        <select id="sort-select" onchange="filterArticles()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer">
+                            <option value="date-desc">Mais Recentes</option>
+                            <option value="date-asc">Mais Antigos</option>
+                            <option value="az">Título A-Z</option>
+                        </select>
+                    </div>
+
+                    <!-- Botão de Reiniciar Filtros -->
+                    <div class="lg:col-span-2">
+                        <button onclick="clearFilters()" class="w-full bg-brand-accent-blue text-white hover:bg-brand-accent-orange font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-sans">
+                            Limpar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Mensagem se nenhum resultado for encontrado -->
+            <div id="no-results" class="hidden text-center py-16">
+                <i class="fas fa-book-open text-gray-300 text-5xl mb-4"></i>
+                <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum artigo encontrado</h3>
+                <p class="text-gray-500 font-sans mt-1">Experimente alterar os termos de pesquisa ou os filtros selecionados.</p>
+            </div>
+
+            <!-- Grelha de Artigos -->
+            <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Preenchido via JavaScript -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal de Leitura de Alta Fidelidade (Imersivo) -->
+    <div id="read-modal" class="fixed inset-0 z-[100] bg-black/60 hidden items-center justify-center p-4 sm:p-6" onclick="closeArticleModal()">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col relative animate-menu-open cursor-default" onclick="event.stopPropagation()">
+            
+            <!-- Botão de Fechar Modal -->
+            <button onclick="closeArticleModal()" class="absolute top-5 right-5 z-20 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-accent-orange hover:bg-gray-200 shadow-sm transition-all focus:outline-none" aria-label="Fechar leitura">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- Área Superior com Informações Técnicas -->
+            <div class="p-6 sm:p-8 border-b border-gray-150 flex-shrink-0 bg-gray-50 rounded-t-3xl pr-16">
+                <span id="modal-category" class="text-brand-accent-orange text-[10px] font-extrabold uppercase tracking-widest block mb-2 font-sans">Categoria</span>
+                <h2 id="modal-title" class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue leading-tight mb-2">Título do Artigo</h2>
+                <div class="flex items-center gap-3 text-xs text-gray-400 font-sans font-medium">
+                    <span id="modal-date"><i class="far fa-calendar mr-1.5"></i> Data</span>
+                    <span class="text-gray-300">|</span>
+                    <span><i class="far fa-user mr-1.5"></i> Hugo Bacelo</span>
+                </div>
+            </div>
+
+            <!-- Conteúdo de Alta Legibilidade com Scrollbars Suaves (Font Inter, Super Macia) -->
+            <div id="modal-content" class="p-6 sm:p-10 overflow-y-auto text-readable-content text-base sm:text-lg text-gray-700 space-y-6 readable-scroll flex-grow font-sans">
+                <!-- O texto completo do artigo é injetado aqui dinamicamente -->
+            </div>
+
+            <!-- Rodapé do Modal (Estilo Editorial) -->
+            <div class="p-4 bg-gray-50 border-t border-gray-150 text-center rounded-b-3xl flex-shrink-0 text-xs text-gray-400 font-sans tracking-wide font-semibold">
+                Jerónimo Editora • Formando Comunidades com Boas Leituras
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Base de dados local com todos os artigos reais e as suas categorias unificadas
+        const articlesData = [
+            // --- ADVENTO E NATAL ---
+            {
+                id: 1,
+                title: "Nossa Senhora foi mãe solteira?",
+                category: "Advento e Natal",
+                date: "2025-12-05",
+                summary: "Um ensaio teológico e exegético acerca das alegações absurdas modernas e do desígnio imaculado de Maria Santíssima.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Um ensaio teológico e exegético acerca das alegações absurdas modernas e do desígnio imaculado de Maria Santíssima e o seu compromisso sagrado com São José à luz da Tradição e das Escrituras.</p>
+                    <p>Nas últimas décadas, assistimos a tentativas recorrentes de secularizar e reinterpretar as narrativas evangélicas sob prismas ideológicos contemporâneos. Uma das afirmações mais infundadas e teologicamente absurdas é a de que Maria Santíssima teria sido uma "mãe solteira" no sentido sociológico moderno.</p>
+                    <p>Esta leitura ignora deliberadamente a realidade jurídica e religiosa do compromisso matrimonial judaico do primeiro século (os <i>kiddushin</i>). O noivado ou desposório entre Maria e José não era um mero namoro contemporâneo, mas sim a primeira fase legal do casamento bíblico. Maria estava sob a proteção e a aliança jurídica de José. Chamar-lhe "mãe solteira" é esvaziar o desígnio providencial da Sagrada Família e cometer um anacronismo grosseiro que não resiste ao escrutínio histórico ou hermenêutico.</p>
+                `
+            },
+            {
+                id: 2,
+                title: "Onde nasceu o menino Jesus?",
+                category: "Advento e Natal",
+                date: "2025-12-12",
+                summary: "Análise bíblica e arqueológica sobre Belém de Judá, o cumprimento das profecias messiânicas e o rigor geográfico das Escrituras.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Análise bíblica e arqueológica sobre Belém de Judá, o cumprimento das profecias messiânicas e o rigor geográfico das Escrituras.</p>
+                    <p>A localização do nascimento de Cristo não é um pormenor acessório ou uma lenda piedosa criada pelas primeiras comunidades cristãs. O profeta Miqueias (Mi 5,2) anunciou com séculos de antecedência que o Messias surgiria de Belém de Éfrata, a menor entre as famílias de Judá.</p>
+                    <p>Os testemunhos históricos e arqueológicos convergem de forma notável sobre a gruta da Natividade em Belém. O próprio imperador Adriano, ao tentar paganizar o local no século II consagrando-o a Adónis, acabou por fixar a sua localização geográfica exata para as gerações futuras. As Escrituras manifestam um rigor geográfico absoluto, ligando a revelação divina à terra real e palpável da nossa história humana.</p>
+                `
+            },
+            {
+                id: 3,
+                title: "Maria teve dores de parto",
+                category: "Advento e Natal",
+                date: "2025-12-18",
+                summary: "Um olhar apologético sobre o nascimento milagroso de Cristo e os dogmas marianos, preservando a mística litúrgica sem concessões.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Um olhar apologético sobre o nascimento milagroso de Cristo e os dogmas marianos, preservando a mística litúrgica sem concessões.</p>
+                    <p>A Tradição da Igreja e o Magistério sempre preservaram o dogma da virgindade perpétua de Maria, que inclui o mistério do nascimento de Jesus (virgindade no parto). Algumas correntes teológicas liberais modernas sugerem que Maria teria sofrido dores físicas comuns de parto, equiparando este nascimento ao de qualquer criatura humana.</p>
+                    <p>No entanto, a teologia clássica ensina que, estando livre do pecado original e das suas consequências diretas descritas no livro de Génesis, o parto de Nossa Senhora deu-se de forma miraculosa e indolor. Cristo passou pelo ventre de Sua Mãe como a luz atravessa um cristal, sem o quebrar ou manchar, preservando a santidade e a integridade daquela que foi eleita como o Sacrário do Altíssimo.</p>
+                `
+            },
+            {
+                id: 4,
+                title: "Natal: Origem Cristã, não pagã",
+                category: "Advento e Natal",
+                date: "2025-12-24",
+                summary: "Uma investigação histórica e litúrgica sobre a verdadeira origem da celebração do Natal, combatendo os mitos e preconceitos seculares.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Investigação histórica e litúrgica sobre a celebração do Natal, combatendo as teses modernas que tentam reduzir a solenidade a uma mera cópia do culto pagão do Sol Invictus.</p>
+                    <p>É comum ler em manuais de divulgação popular e em blogues céticos que o Natal de 25 de Dezembro foi simplesmente inventado pela Igreja para se apropriar da festa romana do Sol Invicto. Esta tese, embora popular, peca por uma profunda falta de rigor histórico.</p>
+                    <p>O cálculo de 25 de Dezembro assenta primariamente em bases cronológicas internas da liturgia judaico-cristã, partindo da data da Anunciação e Concepção de Cristo (25 de Março, calculada em relação ao equinócio da Primavera e à tradição do martírio dos profetas). O Natal é profundamente cristão na sua raiz e teologia, e a Igreja não copiou festivais pagãos, mas sim proclamou que Cristo é o único e verdadeiro Sol da Justiça que ilumina as trevas do mundo.</p>
+                `
+            },
+
+            // --- AS 7 PALAVRAS DE CRISTO ---
+            {
+                id: 5,
+                title: "Introdução",
+                category: "As 7 palavras de Cristo",
+                date: "2026-04-01",
+                summary: "Uma introdução pastoral à importância de meditar as sete últimas sentenças do Divino Redentor na cruz como o derradeiro manual de vida eterna.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">As sete últimas frases de Nosso Senhor Jesus Cristo na Cruz constituem um tesouro espiritual inesgotável para a Igreja.</p>
+                    <p>Estes breves mas profundos ensinamentos, pronunciados no auge do sofrimento redentor, servem como um testamento de amor e de reconciliação. Meditar em cada uma destas palavras é entrar na intimidade do Coração de Jesus e compreender o preço infinito da nossa salvação.</p>
+                `
+            },
+            {
+                id: 6,
+                title: "I. Pai, perdoa-lhes, porque não sabem o que fazem",
+                category: "As 7 palavras de Cristo",
+                date: "2026-04-02",
+                summary: "O mistério do perdão divino perante a ignorância voluntária e involuntária da humanidade no patíbulo do calvário.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">O primeiro ato de Cristo na Cruz é uma oração de intercessão pelos Seus carrascos e por toda a humanidade pecadora.</p>
+                    <p>Ao pedir o perdão do Pai, Jesus revela o desígnio supremo da Sua encarnação: curar a rotura provocada pelo pecado através da misericórdia. O perdão oferecido no Calvário desarma qualquer justiça punitiva humana e inaugura o reino da Graça.</p>
+                `
+            },
+            {
+                id: 7,
+                title: "II. Em verdade te digo: hoje estarás comigo no paraíso",
+                category: "As 7 palavras de Cristo",
+                date: "2026-04-03",
+                summary: "A canonização espontânea do bom ladrão e a beleza da salvação imediata no arrependimento sincero.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">A promessa de salvação ao bom ladrão (São Dimas) é um dos momentos mais consoladores do Evangelho.</p>
+                    <p>A resposta imediata de Nosso Senhor demonstra que não há abismo de pecado que a graça de Deus não possa transpor. O arrependimento sincero, no último instante de vida, foi suficiente para abrir as portas do Paraíso ao pecador contrito.</p>
+                `
+            },
+            {
+                id: 8,
+                title: "III. Mulher, eis o teu Filho; eis a tua mãe",
+                category: "As 7 palavras de Cristo",
+                date: "2026-04-04",
+                summary: "A entrega mútua de Maria e João, simbolizando a maternidade espiritual da Igreja sobre todos os fiéis cristãos.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Ao confiar São João a Maria e Maria a São João, Jesus define a estrutura familiar e espiritual da Igreja.</p>
+                    <p>Esta entrega mútua ultrapassa o âmbito do dever filial humano. Maria é proclamada a Mãe espiritual de todos os discípulos amados de Cristo, exercendo a sua realeza materna sobre o Corpo Místico da Igreja e intercedendo continuamente por nós.</p>
+                `
+            },
+            {
+                id: 9,
+                title: "IV. Meu Deus, Meu Deus, porque Me abandonaste?",
+                category: "As 7 palavras de Cristo",
+                date: "2026-04-05",
+                summary: "A meditação profunda sobre o Salmo 21 e o sofrimento espiritual extremo de Cristo unindo as dores de toda a criação.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">O brado de dor de Jesus na Cruz não é um grito de desespero, mas sim a recitação do Salmo 21.</p>
+                    <p>Este salmo profético inicia com a angústia do justo perseguido, mas conclui com o hino de vitória e a conversão de todas as nações. Cristo assume em Si o silêncio de Deus e o peso da nossa aparente solidão para nos resgatar das trevas do abandono.</p>
+                `
+            },
+            {
+                id: 10,
+                title: "V. Tenho sede!",
+                category: "As 7 palavras de Cristo",
+                date: "2026-04-06",
+                summary: "Não apenas a sede física da secura corporal, mas a Sede Divina e ardente de salvar as almas imortais de todos nós.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">A queixa física de Jesus esconde uma Sede espiritual e profunda de amor e de almas.</p>
+                    <p>O Criador do universo, Aquele que oferece a Água Viva que sacia eternamente, mendiga a resposta de fé das Suas criaturas. A nossa resposta ao Seu sacrifício é o único alívio para a Sua secura divina.</p>
+                `
+            },
+            {
+                id: 11,
+                title: "VI. Está consumado!",
+                category: "As 7 palavras de Cristo",
+                date: "2026-04-07",
+                summary: "A conclusão perfeita de toda a História da Salvação e a restauração da Aliança entre Deus e os Homens.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">A sexta palavra proclama a vitória absoluta de Cristo sobre o pecado, a morte e o demónio.</p>
+                    <p>Tudo o que foi anunciado pelos profetas e prefigurado na antiga aliança encontra o seu cumprimento perfeito na Cruz. A dívida da humanidade está paga e as portas da eternidade estão definitivamente abertas.</p>
+                `
+            },
+            {
+                id: 12,
+                title: "VII. Pai, em Tuas mãos entrego o Meu espírito",
+                category: "As 7 palavras de Cristo",
+                date: "2026-04-08",
+                summary: "O abandono absoluto do Filho nas mãos do Pai, servindo como a máxima oração de entrega cristã.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">A derradeira frase de Cristo na Cruz é uma oração de confiança e de abandono filial nas mãos do Pai.</p>
+                    <p>Ao expirar, Jesus ensina-nos a viver e a morrer sob o desígnio e proteção do Pai Celestial. A Sua morte não é uma derrota, mas sim uma entrega livre, soberana e fecunda que precede a ressurreição gloriosa.</p>
+                `
+            },
+
+            // --- OUTROS TEMAS ---
+            {
+                id: 13,
+                title: "Velho ou novo José?",
+                category: "Outros temas",
+                date: "2026-03-15",
+                summary: "Um ensaio focado na paternidade espiritual de São José, o santo patriarca e protetor da Igreja.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Um ensaio focado na paternidade espiritual de São José, o santo patriarca e protetor da Igreja, analisando de forma rigorosa as perspetivas bíblicas do Novo Testamento versus visões extra-bíblicas antigas.</p>
+                    <p>A iconografia e a devoção popular muitas vezes retratam São José como um homem idoso e cansado, uma imagem herdada de escritos apócrifos antigos que tentavam salvaguardar a virgindade de Maria diminuindo a virilidade e o papel ativo de José.</p>
+                    <p>No entanto, a teologia bíblica e patrística moderna, apoiada pelo Magistério, aponta para um José jovem, forte e virtuoso. José necessitava de vigor físico e espiritual para empreender a fuga para o Egito, proteger a Virgem e o Menino e sustentar a Sagrada Família com o trabalho das suas mãos. A sua castidade não era fruto da velhice ou da incapacidade, mas sim de uma escolha viril e santa de amor puro e total ao desígnio de Deus.</p>
+                `
+            },
+
+            // --- TEOLOGIA ---
+            {
+                id: 14,
+                title: "A Coroação da História da Salvação (Pentecostes)",
+                category: "Teologia",
+                date: "2026-05-24",
+                summary: "Um estudo teológico sobre o Pentecostes, a vinda do Espírito Santo e a consolidação do corpo místico da Igreja.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Um estudo teológico sobre o Pentecostes, a vinda do Espírito Santo e a consolidação do corpo místico da Igreja.</p>
+                    <p>O Pentecostes não representa o início de uma nova religião, mas sim a coroação e a plenitude de toda a História da Salvação. O Espírito Santo derramado sobre os Apóstolos e Maria Santíssima no Cenáculo dá vida e autoridade ao Corpo Místico de Cristo.</p>
+                    <p>Se o Calvário representa o sacrifício redentor, o Pentecostes é a manifestação pública e missionária da Igreja. Pela graça do Espírito Santo, as verdades do Evangelho são preservadas contra o erro e transmitidas a todas as nações, estabelecendo uma nova criação espiritual ancorada na verdade litúrgica e apostólica.</p>
+                `
+            },
+            {
+                id: 15,
+                title: "Engolido por uma Má Exegese",
+                category: "Teologia",
+                date: "2026-05-18",
+                summary: "Crítica feroz às correntes liberais modernas de interpretação bíblica que esvaziam os textos sagrados da sua força profética.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Crítica às correntes liberais modernas de interpretação bíblica que esvaziam os textos sagrados da sua força profética e autoridade dogmática.</p>
+                    <p>A exegese contemporânea, quando desprovida de fé e de fidelidade à Tradição, corre o risco de reduzir a Palavra de Deus a um mero documento arqueológico ou a um conjunto de mitos morais. Ao tentarem desmitologizar as Escrituras, muitos teólogos acabam por "desespiritualizar" o texto sagrado.</p>
+                    <p>Explicar milagres como meros fenómenos psicossociais ou negar a historicidade de eventos cruciais da vida de Cristo não é ciência; é capitulação perante o racionalismo secular. A verdadeira exegese católica exige o uso inteligente da razão, mas sempre sob o olhar atento da fé e guiada pelo Magistério infalível da Igreja.</p>
+                `
+            },
+            {
+                id: 16,
+                title: "Nascimento de Jesus: Belém ou Nazaré?",
+                category: "Teologia",
+                date: "2026-05-10",
+                summary: "Análise teológica detalhada contra as tentativas críticas modernas de duvidar do nascimento de Cristo na cidade de David.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Análise teológica detalhada contra as tentativas críticas modernas de duvidar do nascimento de Cristo na cidade de David.</p>
+                    <p>Algumas correntes de exegese liberal sugerem que Jesus teria nascido em Nazaré e que a narrativa do nascimento em Belém teria sido um artifício literário posterior para cumprir as profecias messiânicas de Miqueias.</p>
+                    <p>No entanto, as evidências evangélicas e patrísticas sustentam com firmeza a historicidade do recenseamento de Augusto e a deslocação da Sagrada Família para a cidade de Belém. Negar este dado histórico é enfraquecer o nexo teológico e providencial das Escrituras, desvalorizando a encarnação real do Verbo de Deus no tempo e no espaço.</p>
+                `
+            },
+            {
+                id: 17,
+                title: "Como Não Ler a Bíblia em Qualquer Século (3 de 3)",
+                category: "Teologia",
+                date: "2026-05-05",
+                summary: "Parte final de uma trilogia indispensável de princípios práticos de exegese católica tradicional.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Parte final de uma trilogia indispensável de princípios práticos de exegese católica tradicional.</p>
+                    <p>Neste terceiro e último caderno de advertências, analisamos o perigo de separar a leitura bíblica da vida sacramental da Igreja. A Bíblia não é um livro de leitura individualista e abstrata; ela nasceu no seio da comunidade litúrgica.</p>
+                    <p>Para compreender plenamente o sentido espiritual e tipológico das Escrituras, o fiel deve ler os textos bíblicos em comunhão com o Magistério e a Tradição viva, sob pena de cair no subjetivismo estéril e desprovido de unção sobrenatural.</p>
+                `
+            },
+            {
+                id: 18,
+                title: "Como Não Ler a Bíblia em Qualquer Século (2 de 3)",
+                category: "Teologia",
+                date: "2026-05-03",
+                summary: "Segundo caderno de advertências litúrgicas e hermenêuticas na leitura diária das Sagradas Escrituras.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Segundo caderno de advertências litúrgicas e hermenêuticas na leitura diária das Sagradas Escrituras.</p>
+                    <p>Focamo-nos aqui no erro do literalismo fundamentalista e, no extremo oposto, da desconstrução puramente secular. Ambos os caminhos desfiguram o texto sagrado.</p>
+                    <p>A exegese católica autêntica reconhece a autoria dual da Escritura: o autor humano e o Autor Divino. É necessário estudar as línguas originais e os géneros literários, mas sempre com a docilidade espiritual que nos permite escutar a voz do Espírito Santo que fala através de cada versículo.</p>
+                `
+            },
+            {
+                id: 19,
+                title: "Como Não Ler a Bíblia em Qualquer Século (1 de 3)",
+                category: "Teologia",
+                date: "2026-05-01",
+                summary: "Introdução sistemática ao método correto de leitura de acordo com os Santos Padres da Igreja.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Introdução sistemática ao método correto de leitura de acordo com os Santos Padres da Igreja.</p>
+                    <p>Iniciamos esta trilogia estabelecendo os princípios hermenêuticos formulados pelos grandes luminares da patrística, como São Jerónimo e Santo Agostinho.</p>
+                    <p>Ler a Sagrada Escritura exige pureza de intenção, oração fervorosa e respeito absoluto pela analogia da fé. O Antigo Testamento deve ser sempre lido à luz do Novo, e o Novo Testamento compreendido à luz do cumprimento das promessas do Antigo.</p>
+                `
+            },
+
+            // --- FEMINISMO ---
+            {
+                id: 20,
+                title: "A Nova Masculinidade é a Velha Feminilidade",
+                category: "Feminismo",
+                date: "2026-02-28",
+                summary: "Um ensaio antropológico clássico sobre a perda de referências e virtudes masculinas no mundo ocidental sob a influência ideológica contemporânea.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Um ensaio antropológico clássico sobre a perda de referências e virtudes masculinas no mundo ocidental sob a influência ideológica contemporânea.</p>
+                    <p>A desconstrução secular das identidades e papéis naturais gerou uma profunda crise de masculinidade no ocidente. Ao apelidar de "tóxicas" as virtudes tradicionais da força, da proteção e da liderança sacrificial, a sociedade contemporânea empurrou os homens para a apatia espiritual.</p>
+                    <p>Esta "nova masculinidade", artificialmente moldada por exigências ideológicas, assemelha-se a uma antiga e distorcida conceção de feminilidade estéril, desprovida da coragem e do nexo existencial que configuravam o homem cristão à imagem do próprio Cristo, o exemplo supremo de entrega ativa e amor firme.</p>
+                `
+            },
+            {
+                id: 21,
+                title: "A Incongruente Utopia Feminista – Parte III",
+                category: "Feminismo",
+                date: "2026-02-20",
+                summary: "Terceira e última parte da análise crítica sobre os fundamentos da ideologia de género e a sua recusa da realeza natural mariana.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Terceira e última parte da análise crítica sobre os fundamentos da ideologia de género e a sua recusa da realeza natural mariana.</p>
+                    <p>O feminismo radical, ao proclamar a autonomia absoluta do indivíduo perante a biologia e a revelação, acaba por colidir frontalmente com o modelo de virtude mariana. Maria Santíssima não conquistou a sua dignidade através da emancipação agressiva ou da imitação do homem, mas sim pela via do acolhimento amoroso e humilde da vontade de Deus (o <i>Fiat</i>).</p>
+                    <p>A utopia feminista revela-se incongruente porque procura libertar a mulher esvaziando-a da sua essência mais bela e da sua vocação mais nobre: a capacidade de acolher a vida, de amar com doçura sacrificial e de reinar espiritualmente com Cristo.</p>
+                `
+            },
+            {
+                id: 22,
+                title: "A Incongruente Utopia Feminista – Parte II",
+                category: "Feminismo",
+                date: "2026-02-15",
+                summary: "Segunda parte do estudo dedicado à destruição das virtudes maternas promovida pelo movimento feminista ocidental.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Segunda parte do estudo dedicado à destruição das virtudes maternas promovida pelo movimento feminista ocidental.</p>
+                    <p>O ataque sistemático à maternidade e ao papel da mulher no lar representa uma das páginas mais negras da história recente. O feminismo ocidental reduziu o valor da mulher à sua produtividade económica no mercado laboral de capitais, desprezando a realeza e o sacerdócio oculto da maternidade cristã.</p>
+                    <p>Educar almas para a eternidade e edificar um lar católico são tarefas de valor espiritual e civilizacional infinito, que nenhuma carreira corporativa pode substituir. Resgatar a nobreza e o respeito absoluto pelas mães de família é um dever urgente para a sobrevivência moral da sociedade.</p>
+                `
+            },
+            {
+                id: 23,
+                title: "A Incongruente Utopia Feminista – Parte I",
+                category: "Feminismo",
+                date: "2026-02-10",
+                summary: "Início da investigação crítica à desconstrução das bases da família tradicional e à rejeição do desígnio evangélico.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Início da investigação crítica à desconstrução das bases da família tradicional e à rejeição do desígnio evangélico.</p>
+                    <p>Estabelecemos nesta primeira parte as bases filosóficas da ideologia de desconstrução social, demonstrando como o relativismo moral pretende diluir o desígnio de Deus para a família.</p>
+                    <p>A destruição da autoridade paterna e do acolhimento materno enfraquece a estrutura psíquica e espiritual das crianças, expondo-as ao desamparo existencial e à manipulação dos poderes estatais seculares.</p>
+                `
+            },
+            {
+                id: 24,
+                title: "Igualdade de Género: um Falso Ideal – Parte II. Género",
+                category: "Feminismo",
+                date: "2026-01-20",
+                summary: "Estudo exegético e filosófico sobre as falsidades terminológicas e ontológicas da ideologia de género.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Estudo exegético e filosófico sobre as falsidades terminológicas e ontológicas da ideologia de género.</p>
+                    <p>Analisamos como o conceito de "género" foi artificialmente separado do sexo biológico para introduzir uma conceção puramente subjetiva e performativa da identidade humana.</p>
+                    <p>A teologia católica, firmemente ancorada em Génesis ("Homem e mulher os criou"), rejeita categoricamente esta separação ontológica. O ser humano é uma unidade indissolúvel de corpo e alma; o corpo não é uma mera máquina moldável pela vontade, mas sim a expressão tangível do desígnio imutável e amoroso do Criador.</p>
+                `
+            },
+            {
+                id: 25,
+                title: "Igualdade de Género: um Falso Ideal – Parte I. Abertura",
+                category: "Feminismo",
+                date: "2026-01-15",
+                summary: "Enquadramento da farsa intelectual que tenta igualar artificialmente as vocações complementares e magníficas do homem e da mulher.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Enquadramento da farsa intelectual que tenta igualar artificialmente as vocações complementares e magníficas do homem e da mulher.</p>
+                    <p>A ideologia contemporânea tenta reduzir a igualdade ontológica fundamental de todos os seres humanos a uma "igualdade de papéis e comportamentos", promovendo um igualitarismo estéril e desprovido de beleza.</p>
+                    <p>A doutrina católica proclama que o homem e a mulher possuem igual dignidade diante de Deus, mas foram criados em complementaridade magnífica. Separar ou homogeneizar as vocações específicas de cada sexo é destruir a harmonia da criação e a força geradora da própria família humana.</p>
+                `
+            },
+            {
+                id: 26,
+                title: "Mulheres Antifeministas Precisam-se!",
+                category: "Feminismo",
+                date: "2026-01-05",
+                summary: "Um apelo corajoso ao regresso das mulheres à virtude mariana, à dignidade espiritual autêntica e ao combate contra as distorções do laicismo feminista.",
+                content: `
+                    <p class="font-bold text-lg text-brand-accent-blue mb-4">Um apelo corajoso ao regresso das mulheres à virtude mariana, à dignidade espiritual autêntica e ao combate contra as distorções do laicismo feminista.</p>
+                    <p>Diante do empobrecimento moral provocado pela cultura contemporânea, urge o surgimento de mulheres corajosas e virtuosas que não temam opor-se aos ditames da ideologia secular.</p>
+                    <p>Ser antifeminista não é ser passiva ou submissa no sentido mundano; é ter a coragem de defender a verdadeira dignidade espiritual feminina, personificada de forma perfeita na Virgem Maria. Precisamos de mulheres intelectuais, mães dedicadas e esposas fiéis que combatam o bom combate em defesa do Evangelho e das almas.</p>
+                `
+            }
+        ];
+
+        // --- MOTOR DE PESQUISA, FILTRAGEM E ORDENAÇÃO DINÂMICA ---
+        function filterArticles() {
+            const searchTerm = document.getElementById('artigos-search').value.toLowerCase().trim();
+            const selectedCategory = document.getElementById('category-select').value;
+            const selectedSort = document.getElementById('sort-select').value;
+            
+            let filtered = articlesData.filter(art => {
+                const matchesSearch = art.title.toLowerCase().includes(searchTerm) || 
+                                      art.summary.toLowerCase().includes(searchTerm) || 
+                                      art.content.toLowerCase().includes(searchTerm);
+                const matchesCategory = selectedCategory === 'all' || art.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            // Ordenação
+            if (selectedSort === 'az') {
+                filtered.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (selectedSort === 'date-asc') {
+                filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+            } else if (selectedSort === 'date-desc') {
+                filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+            }
+
+            renderArticles(filtered);
+        }
+
+        // --- RENDERIZAÇÃO DOS CARTÕES DE ARTIGOS ---
+        function renderArticles(articles) {
+            const grid = document.getElementById('articles-grid');
+            const noResults = document.getElementById('no-results');
+            
+            grid.innerHTML = '';
+            
+            if (articles.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+            
+            noResults.classList.add('hidden');
+            
+            articles.forEach(art => {
+                // Conversão de data simples
+                const dateObj = new Date(art.date);
+                const formattedDate = dateObj.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
+                
+                grid.innerHTML += `
+                    <div class="article-card bg-white p-6 rounded-3xl border border-gray-150 shadow-xs flex flex-col justify-between cursor-pointer" onclick="openArticleModal(${art.id})">
+                        <div>
+                            <!-- Categoria -->
+                            <span class="text-brand-accent-orange text-[10px] font-extrabold uppercase tracking-widest block mb-3 font-sans">${art.category}</span>
+                            
+                            <!-- Título com excelente legibilidade (Inter para repouso visual no ecrã) -->
+                            <h3 class="font-sans text-lg sm:text-xl font-bold text-brand-accent-blue leading-snug mb-3 hover:text-brand-accent-orange transition-colors duration-200">${art.title}</h3>
+                            
+                            <!-- Data -->
+                            <span class="text-xs text-gray-400 font-sans block mb-4 font-medium"><i class="far fa-calendar mr-1.5"></i> ${formattedDate}</span>
+                            
+                            <!-- Resumo confortável de ler -->
+                            <p class="font-sans text-gray-600 text-sm sm:text-base leading-relaxed line-clamp-3 font-medium">${art.summary}</p>
+                        </div>
+                        
+                        <!-- Link de Leitura -->
+                        <div class="pt-5 border-t border-gray-100 mt-6 flex justify-between items-center">
+                            <span class="text-xs text-brand-accent-blue font-extrabold uppercase tracking-widest flex items-center gap-1.5 group-hover:text-brand-accent-orange transition-colors font-sans">
+                                Ler Artigo <i class="fas fa-chevron-right text-[10px] text-brand-accent-orange"></i>
+                            </span>
+                            <span class="text-[10px] text-gray-400 font-sans font-semibold">Escrito por HB</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- CONTROLO DO MODAL DE LEITURA (IMERSIVO) ---
+        function openArticleModal(id) {
+            const article = articlesData.find(a => a.id === id);
+            if (!article) return;
+            
+            const dateObj = new Date(article.date);
+            const formattedDate = dateObj.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
+            
+            document.getElementById('modal-title').textContent = article.title;
+            document.getElementById('modal-category').textContent = article.category;
+            document.getElementById('modal-date').innerHTML = `<i class="far fa-calendar mr-1.5"></i> ${formattedDate}`;
+            document.getElementById('modal-content').innerHTML = article.content;
+            
+            const modal = document.getElementById('read-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Tranca o scroll da página principal
+        }
+
+        function closeArticleModal() {
+            const modal = document.getElementById('read-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = ''; // Liberta o scroll da página principal
+        }
+
+        // Limpa todos os filtros ativos
+        function clearFilters() {
+            document.getElementById('artigos-search').value = '';
+            document.getElementById('category-select').value = 'all';
+            document.getElementById('sort-select').value = 'date-desc';
+            filterArticles();
+        }
+
+        // --- SISTEMA DE COMPONENTES DINÂMICOS (MENU E RODAPÉ) ---
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            try {
+                const navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
+                if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                const footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            renderArticles(articlesData);
+        });
+    </script>
+
+    <!-- GoatCounter Analytics Tracker para monitorizar as visitas da página de biografia -->
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
