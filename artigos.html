@@ -27,7 +27,7 @@
                     colors: {
                         'brand-bg': '#F8F8F8',
                         'brand-text': '#2d3748', /* Cinzento carvão suave para reduzir contraste excessivo */
-                        'brand-accent-red': '#800000', /* GARANTIDO: Cor do destaque do menu sintonizada */
+                        'brand-accent-red': '#800000',
                         'brand-accent-blue': '#002147',
                         'brand-accent-orange': '#e05300',
                         'brand-gold': '#cfaf5c',
@@ -41,7 +41,7 @@
         /* Regras estritas de conforto visual para eliminar o cansaço na leitura */
         body { font-family: 'Inter', sans-serif; color: #2d3748; background-color: #F8F8F8; }
         
-        /* GARANTIDO: Normaliza e padroniza o menu e o rodapé injetados para ficarem idênticos ao contacto.html */
+        /* Normaliza e padroniza o menu e o rodapé injetados para não herdarem itálicos indesejados */
         #nav-placeholder *, #footer-placeholder * {
             font-style: normal !important;
         }
@@ -168,7 +168,7 @@
                 url: "#"
             },
             {
-                id: 3,
+                id: 2,
                 title: "Maria teve dores de parto",
                 category: "Advento e Natal",
                 date: "2025-12-18",
@@ -266,7 +266,7 @@
                 title: "A Coroação da História da Salvação (Pentecostes)",
                 category: "Teologia",
                 date: "2026-05-24",
-                readingTime: "10 min", /* Tempo síncrono padrão */
+                readingTime: "10 min", /* Valor estático inicial correto alinhado ao texto real */
                 url: "Artigos/a-coroacao-da-historia-da-salvacao-pentecostes.html",
                 image: "Imagens/pentecostes.png" // Foto horizontal oficial de Pentecostes
             },
@@ -424,13 +424,13 @@
                 let imageHtml = '';
                 if (art.image) {
                     imageHtml = `
-                        <a ${linkAction} class="block w-full h-32 sm:h-36 overflow-hidden rounded-2xl bg-gray-100 border border-gray-150 mb-4 relative cursor-pointer">
+                        <a ${linkAction} class="block w-full h-32 sm:h-36 overflow-hidden rounded-2xl bg-gray-100 border border-gray-150 mb-4 relative cursor-pointer font-sans">
                             <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x335/f8f8f8/002147?text=Jer%C3%B3nimo+Editora';">
                         </a>
                     `;
                 } else {
                     imageHtml = `
-                        <a ${linkAction} class="block w-full h-32 sm:h-36 overflow-hidden rounded-2xl bg-gray-50 border border-gray-150 mb-4 flex flex-col items-center justify-center text-center cursor-pointer">
+                        <a ${linkAction} class="block w-full h-32 sm:h-36 overflow-hidden rounded-2xl bg-gray-50 border border-gray-150 mb-4 flex flex-col items-center justify-center text-center cursor-pointer font-sans">
                             <i class="fas fa-book-open text-gray-200 text-3xl mb-1.5"></i>
                             <span class="text-[9px] uppercase tracking-widest font-black text-gray-400">Brevemente</span>
                         </a>
