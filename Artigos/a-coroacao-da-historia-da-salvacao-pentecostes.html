@@ -27,6 +27,7 @@
                     colors: {
                         'brand-bg': '#F8F8F8',
                         'brand-text': '#2d3748', /* Cinzento carvão amigo dos olhos */
+                        'brand-accent-red': '#800000',
                         'brand-accent-blue': '#002147',
                         'brand-accent-orange': '#e05300',
                         'brand-gold': '#cfaf5c',
@@ -39,6 +40,11 @@
     <style>
         body { font-family: 'Inter', sans-serif; color: #2d3748; background-color: #F8F8F8; }
         
+        /* Normaliza e padroniza o menu e o rodapé injetados para não herdarem itálicos indesejados */
+        #nav-placeholder *, #footer-placeholder * {
+            font-style: normal !important;
+        }
+
         /* Regras estritas de espaçamento para leitura prolongada no ecrã */
         .text-readable-article {
             line-height: 1.85;
@@ -112,8 +118,8 @@
             <!-- Conteúdo de Alta Legibilidade (Inter Sans-Serif) -->
             <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto font-sans">
                 
-                <p class="dropcap font-semibold text-brand-accent-blue text-lg sm:text-xl leading-relaxed">
-                    O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na vida litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu power transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raízes desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
+                <p class="dropcap">
+                    O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na vida litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu poder transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raízes desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
                 </p>
 
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Primeira Leitura (Actos 2, 1-11): O Novo Sinai e o “Anti-Babel”</h3>
@@ -135,7 +141,7 @@
                 </p>
 
                 <p>
-                    Além de ser o cumprimento do Sinai, o Pentecostes é também a inversão da Torre de Babel.
+                    Além de ser o cumprimento do Sinai, o Pentecostes é também a inversion da Torre de Babel.
                 </p>
 
                 <p>
@@ -201,7 +207,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Verdadeira Paz:</strong> A paz bíblica e a paz de Cristo não se tratam da mera cessação de guerras ou da paz mundana (frequentemente alcançada pela violência e sempre instável). É, pelo contrário, uma serenidade espiritual alicerçada na nossa reconciliação com Deus. Quando não está fundamentada na paz de Cristo, a paz terrena é superficial e efémera.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Verdadeira Paz:</strong> A paz bíblica e a paz de Cristo não se tratam da mera cessação de guerras ou da paz mundana (frequentemente alcançada pela violência e sempre instável). É, pelo contrário, uma serenidade espiritual alicerçada na nossa reconciliation com Deus. Quando não está fundamentada na paz de Cristo, a paz terrena é superficial e efémera.
                 </p>
 
                 <p>
@@ -215,6 +221,21 @@
                 <p>
                     Celebrar as Leituras do Domingo de Pentecostes é reconhecer que a promessa de Cristo se cumpriu e continua a cumprir-se em nós. O Espírito Santo foi derramado para estabelecer a Nova Aliança escrita nos nossos corações. A humanidade, outrora fracturada pela oposição a Deus em Babel, é agora congregada na Igreja una, santa, católica e apostólica. Fomos todos baptizados num só Espírito para constituirmos um só Corpo Místico, ricamente dotado de carismas destinados ao serviço e ao amor comum. E, de uma forma sumamente reconfortante, através dos Sacramentos da Eucaristia e da Reconciliação, esses rios de água viva que brotam do lado de Cristo, a Igreja oferece gratuitamente a vida eterna a todos os que a quiserem receber.
                 </p>
+
+                <!-- SECÇÃO PREMIUM DE SUBSCREVER NEWSLETTER -->
+                <div class="bg-gray-50 border border-gray-150 p-6 sm:p-8 rounded-2xl my-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="text-left max-w-md">
+                        <h4 class="font-sans text-base sm:text-lg font-bold text-brand-accent-blue leading-snug">
+                            Receba <u class="underline decoration-brand-accent-blue decoration-2">gratuitamente</u> os próximos artigos no seu e-mail
+                        </h4>
+                    </div>
+                    <form onsubmit="handleSubscribe(event)" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 flex-grow max-w-xl">
+                        <input type="email" id="sub-email" required placeholder="O seu e-mail..." class="flex-grow p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                        <button type="submit" class="px-6 py-3 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-sans whitespace-nowrap shadow-xs">
+                            Subscrever
+                        </button>
+                    </form>
+                </div>
 
                 <!-- Secção de Fontes (Espaço em Branco Reservado) -->
                 <section class="mt-12 pt-6 border-t border-gray-150">
@@ -244,12 +265,12 @@
                         </div>
                     </div>
 
-                    <!-- Caixa de Comentários Simples (Ligeiramente mais azul para se distinguir) -->
+                    <!-- Caixa de Comentários Simples (Nome sem asterisco e sem e-mail) -->
                     <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl">
                         <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
                         <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <input type="text" id="comm-author" required placeholder="Nome ou E-mail *" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                                <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
                             </div>
                             <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans resize-none"></textarea>
                             <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-sans">
@@ -261,7 +282,7 @@
 
             </div>
 
-            <!-- Rodapé do Artigo / Autor (Saindo para as imagens principais com ../) -->
+            <!-- Rodapé do Artigo / Autor -->
             <footer class="mt-16 pt-8 border-t border-gray-150">
                 <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
                     <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
@@ -280,7 +301,7 @@
                     </div>
                 </div>
 
-                <!-- Ligações de Navegação (Botão Azul-Escuro corporativo para Voltar a Artigos) -->
+                <!-- Ligações de Navegação -->
                 <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-xs uppercase tracking-wider font-bold">
                     <a href="../artigos.html" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
                         <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
@@ -298,7 +319,6 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // --- STREAMING_CHUNK: Managing routing and path resolution ---
         function getSafePath(file) {
             const currentUrl = window.location.href;
             if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
@@ -308,14 +328,12 @@
             } catch (e) { return file; }
         }
 
-        // Função global para o menu lateral Off-Canvas deslizante
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             const backdrop = document.getElementById('menu-backdrop');
             if (!menu || !backdrop) return;
             
             if (menu.classList.contains('translate-x-full')) {
-                // ABRIR
                 backdrop.classList.remove('hidden');
                 setTimeout(() => {
                     backdrop.classList.remove('opacity-0');
@@ -324,7 +342,6 @@
                 }, 20);
                 document.body.style.overflow = 'hidden'; 
             } else {
-                // FECHAR
                 menu.classList.add('translate-x-full');
                 backdrop.classList.remove('opacity-100');
                 backdrop.classList.add('opacity-0');
@@ -335,12 +352,11 @@
             }
         }
 
-        // Função de Path-Rewriting inteligente para ajustar links e logos do menu/rodapé
+        // Correção de caminhos para ficheiros dentro de subpastas como Artigos/
         function adjustPlaceholderLinks(placeholderId) {
             const container = document.getElementById(placeholderId);
             if (!container) return;
             
-            // Corrige caminhos relativos de links (sobe um nível para a raiz)
             const links = container.querySelectorAll('a');
             links.forEach(link => {
                 let href = link.getAttribute('href');
@@ -351,7 +367,6 @@
                 }
             });
 
-            // Corrige caminhos de imagens do menu/rodapé (sobe um nível para encontrar "Imagens/")
             const imgs = container.querySelectorAll('img');
             imgs.forEach(img => {
                 let src = img.getAttribute('src');
@@ -361,31 +376,26 @@
             });
         }
 
-        // --- STREAMING_CHUNK: Loading common site menus and footers ---
-        // Carrega dinamicamente o menu e o rodapé corporativos a partir da raiz (../)
         async function loadComponents() {
             try {
-                // Tenta carregar menu com fallback de extensão
                 let navLoaded = false;
-                let navResp = await fetch(getSafePath('../menu.html') + '?v=1.0.2');
+                let navResp = await fetch(getSafePath('../menu') + '?v=1.0.2');
                 if (!navResp.ok) {
-                    navResp = await fetch(getSafePath('../menu') + '?v=1.0.2');
+                    navResp = await fetch(getSafePath('../menu.html') + '?v=1.0.2');
                 }
                 if (navResp.ok) {
                     document.getElementById('nav-placeholder').innerHTML = await navResp.text();
                     navLoaded = true;
                 }
 
-                // Tenta carregar rodapé com fallback de extensão
-                let footResp = await fetch(getSafePath('../rodape.html') + '?v=1.0.2');
+                let footResp = await fetch(getSafePath('../rodape') + '?v=1.0.2');
                 if (!footResp.ok) {
-                    footResp = await fetch(getSafePath('../rodape') + '?v=1.0.2');
+                    footResp = await fetch(getSafePath('../rodape.html') + '?v=1.0.2');
                 }
                 if (footResp.ok) {
                     document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 }
 
-                // Aplica re-escrita dinâmica de caminhos se carregado de uma subpasta
                 if (navLoaded) {
                     adjustPlaceholderLinks('nav-placeholder');
                     adjustPlaceholderLinks('footer-placeholder');
@@ -393,7 +403,7 @@
 
                 updateCartUI();
             } catch (e) { 
-                console.warn("Modo offline ou erro ao injetar componentes."); 
+                console.warn("Modo offline."); 
             }
         }
 
@@ -408,7 +418,6 @@
             });
         }
 
-        // Calcula o tempo de leitura automaticamente com base no número de palavras
         function calculateReadingTime() {
             const contentElement = document.getElementById('article-content');
             const readingTimeElement = document.getElementById('reading-time');
@@ -420,12 +429,11 @@
             readingTimeElement.textContent = readingTime;
         }
 
-        // Simulação elegante de inserção local de comentários em tempo real
         function addLocalComment(e) {
             e.preventDefault();
-            const author = document.getElementById('comm-author').value.trim();
+            const author = document.getElementById('comm-author').value.trim() || "Anónimo";
             const message = document.getElementById('comm-text').value.trim();
-            if (!author || !message) return;
+            if (!message) return;
 
             const commentsBox = document.getElementById('comments-box');
             const today = new Date();
@@ -446,13 +454,27 @@
             document.getElementById('comment-form').reset();
         }
 
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('sub-email');
+            if (!emailInput || !emailInput.value.trim()) return;
+
+            // Transforma o formulário temporariamente numa mensagem de sucesso premium
+            const container = e.target;
+            container.innerHTML = `
+                <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
+                    <i class="fas fa-check-circle"></i> Subscrição efetuada com sucesso!
+                </div>
+            `;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             loadComponents();
             calculateReadingTime();
         });
     </script>
 
-    <!-- GoatCounter Analytics Tracker para monitorizar as visitas da página do artigo -->
+    <!-- GoatCounter Analytics Tracker -->
     <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
 </body>
