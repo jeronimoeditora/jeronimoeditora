@@ -260,8 +260,8 @@
                 title: "A Coroação da História da Salvação (Pentecostes)",
                 category: "Teologia",
                 date: "2026-05-24",
-                readingTime: "10 min", /* Sincronizado por padrão com o artigo completo */
-                url: "a-coroacao-da-historia-da-salvacao-pentecostes.html",
+                readingTime: "10 min", /* Tempo inicial padrão de salvaguarda */
+                url: "Artigos/a-coroacao-da-historia-da-salvacao-pentecostes.html", /* CAMINHO DA PASTA CORRIGIDO */
                 image: "Imagens/pentecostes.png" // Foto horizontal oficial de Pentecostes
             },
             {
@@ -364,6 +364,7 @@
             }
         ];
 
+        // --- STREAMING_CHUNK: Filtering and rendering articles ---
         // --- MOTOR DE PESQUISA, FILTRAGEM E ORDENAÇÃO DINÂMICA ---
         function filterArticles() {
             const searchTerm = document.getElementById('article-search').value.toLowerCase().trim();
@@ -387,7 +388,7 @@
             }
 
             renderArticles(filtered);
-            fetchReadingTimes(); // Tenta ler e recalcular os tempos de leitura reais
+            fetchReadingTimes(); // Recalcula tempos dinamicamente de forma assíncrona
         }
 
         // --- RENDERIZAÇÃO DOS CARTÕES DE ARTIGOS ---
@@ -414,7 +415,7 @@
                     ? `href="${art.url}"` 
                     : `href="javascript:void(0)" onclick="triggerToastNotice()"`;
 
-                // Espaço de foto horizontal dinâmico por baixo da data e tempo de leitura tornados clicáveis
+                // Espaço de foto horizontal dinâmico tornado CLICÁVEL
                 let imageHtml = '';
                 if (art.image) {
                     imageHtml = `
@@ -451,7 +452,7 @@
                                 </span>
                             </span>
 
-                            <!-- FOTO HORIZONTAL TOTALMENTE CLICÁVEL -->
+                            <!-- FOTO HORIZONTAL CLICÁVEL -->
                             ${imageHtml}
                         </div>
                         
@@ -467,6 +468,7 @@
             });
         }
 
+        // --- STREAMING_CHUNK: Fetching reading times asynchronously ---
         // --- MOTOR DIPLOMÁTICO PARA OBTER O TEMPO DE LEITURA DIRETAMENTE DOS ARTIGOS COMPLETOS ---
         async function fetchReadingTimes() {
             for (let art of articlesData) {
