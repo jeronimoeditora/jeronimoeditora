@@ -172,7 +172,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>As Primícias da Nova Criação:</strong> Tal como no princípio o Espírito pairava como um vento impetuoso sobre as águas da terra jovem (Gn 1,2), no Pentecostes, o vento sobra novamente sobre os crentes reunidos em redor dos Apóstolos. Desta forma, a Igreja constitui o antegozo, ou as primícias, de uma nova criação. Nós possuímos um «pagamento inicial» do Espírito que renova todas as coisas, unindo-nos de forma misteriosa à criação que há-de vir na próxima era. Esta mesma realidade vitalícia foi profetizada na visão dos ossos secos de Ezequiel (c.37), onde o sopro do Espírito causa um acto de re-criação ou «ressurreição» do novo Israel, a Igreja.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>As Primícias da Nova Criação:</strong> Tal como no princípio o Espírito pairava como um vento impetuoso sobre as águas da terra jovem (Gn 1,2), no Pentecostes, o vento sopra novamente sobre os crentes reunidos em redor dos Apóstolos. Desta forma, a Igreja constitui o antegozo, ou as primícias, de uma nova criação. Nós possuímos um «pagamento inicial» do Espírito que renova todas as coisas, unindo-nos de forma misteriosa à criação que há-de vir na próxima era. Esta mesma realidade vitalícia foi profetizada na visão dos ossos secos de Ezequiel (c.37), onde o sopro do Espírito causa um acto de re-criação ou «ressurreição» do novo Israel, a Igreja.
                 </p>
 
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Segunda Leitura (1 Coríntios 12, 3b-7. 12-13): O Corpo Místico e os Carismas</h3>
@@ -267,6 +267,7 @@
                                 <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
                             </div>
                             <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans resize-none"></textarea>
+                            <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
                             <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-sans">
                                 Enviar Comentário
                             </button>
@@ -312,13 +313,12 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        function getSafePath(file) {
-            const currentUrl = window.location.href;
-            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
-            try { 
-                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-                return new URL(file, baseUrl).href; 
-            } catch (e) { return file; }
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/')) {
+                return '../';
+            }
+            return '';
         }
 
         function toggleMenu() {
@@ -345,52 +345,71 @@
             }
         }
 
-        function adjustPlaceholderLinks(placeholderId) {
+        function adjustAndCleanLinks(placeholderId) {
             const container = document.getElementById(placeholderId);
             if (!container) return;
+            const prefix = getPrefix();
             
-            const links = container.querySelectorAll('a');
-            links.forEach(link => {
-                let href = link.getAttribute('href');
-                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
-                    if (!href.startsWith('../')) {
-                        link.setAttribute('href', '../' + href);
+            if (prefix !== '') {
+                container.querySelectorAll('a').forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        if (!href.startsWith('../')) {
+                            link.setAttribute('href', prefix + href);
+                        }
                     }
-                }
-            });
+                });
+                container.querySelectorAll('img').forEach(img => {
+                    let src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                        img.setAttribute('src', prefix + src);
+                    }
+                });
+            }
 
-            const imgs = container.querySelectorAll('img');
-            imgs.forEach(img => {
-                let src = img.getAttribute('src');
-                if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
-                    img.setAttribute('src', '../' + src);
+            // Garante que o menu dinâmico não tenha .html nos links
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
                 }
             });
         }
 
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
         async function loadComponents() {
+            const prefix = getPrefix();
             try {
-                let navLoaded = false;
-                let navResp = await fetch(getSafePath('../menu') + '?v=1.0.2');
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
                 if (!navResp.ok) {
-                    navResp = await fetch(getSafePath('../menu.html') + '?v=1.0.2');
+                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
                 }
                 if (navResp.ok) {
                     document.getElementById('nav-placeholder').innerHTML = await navResp.text();
-                    navLoaded = true;
+                    adjustAndCleanLinks('nav-placeholder');
                 }
 
-                let footResp = await fetch(getSafePath('../rodape') + '?v=1.0.2');
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
                 if (!footResp.ok) {
-                    footResp = await fetch(getSafePath('../rodape.html') + '?v=1.0.2');
+                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
                 }
                 if (footResp.ok) {
                     document.getElementById('footer-placeholder').innerHTML = await footResp.text();
-                }
-
-                if (navLoaded) {
-                    adjustPlaceholderLinks('nav-placeholder');
-                    adjustPlaceholderLinks('footer-placeholder');
+                    adjustAndCleanLinks('footer-placeholder');
                 }
 
                 updateCartUI();
@@ -456,7 +475,6 @@
             const subject = encodeURIComponent("nova subscrição");
             const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
 
-            // Abre o e-mail predefinido do utilizador com os dados pretendidos
             window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
 
             const container = e.target;
