@@ -83,7 +83,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-16">
                 
                 <!-- Coluna Esquerda: Texto Biográfico em Antigo Acordo Ortográfico (Fundo Branco Editorial Clássico) -->
-                <div class="lg:col-span-6 space-y-6">
+                <div class="lg:col-span-5 space-y-6">
                     <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block">Sobre Mim</span>
                     <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight">O Meu Percurso</h1>
                     <div class="h-1 w-16 bg-brand-accent-orange"></div>
@@ -94,7 +94,7 @@
                             A minha missão através do ensino e das palestras assenta no compromisso inequívoco com a Verdade revelada. Sendo teologicamente ancorado na verdade de Cristo e no Magistério da Igreja, considero-me politicamente sem-abrigo. Sou crítico de muitas coisas e admirador de poucas.
                         </p>
                         <p>
-                            Como Fundador da Jerónimo Editora e responsável pelo movimento paroquial Aprendizes do Verbo, dedico o meu percurso a formar comunidades paroquiais activas, munindo-as com boas fontes e literatura sólida para fazer face aos desafios intelectuais da contemporaneidade.
+                            Como Fundador da <a href="catalogo-completo" class="font-bold text-brand-accent-blue hover:text-brand-accent-orange underline decoration-brand-accent-orange/30 transition-colors"><strong>Jerónimo Editora</strong></a> e responsável pelo movimento paroquial <a href="aprendizesdoverbo" class="font-bold text-brand-accent-blue hover:text-brand-accent-orange underline decoration-brand-accent-orange/30 transition-colors"><strong>Aprendizes do Verbo</strong></a>, dedico o meu percurso a formar comunidades paroquiais activas, munindo-as com boas fontes e literatura sólida para fazer face aos desafios intelectuais da contemporaneidade.
                         </p>
                         
                         <!-- Citação de Fernando Pessoa -->
@@ -110,56 +110,58 @@
                 </div>
 
                 <!-- Coluna Direita: Caixa Editorial Premium Laranja Suave contendo a Galeria Assimétrica -->
-                <div class="lg:col-span-6 bg-[#fdf6f0] border border-brand-accent-orange/10 rounded-3xl p-6 sm:p-8 shadow-sm space-y-4">
+                <div class="lg:col-span-7 bg-[#fdf6f0] border border-brand-accent-orange/10 rounded-3xl p-6 sm:p-8 shadow-sm space-y-4">
                     <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accent-orange block mb-2">Galeria de fotos</span>
                     
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <!-- items-start impede que as caixas se estendam artificialmente, eliminando qualquer espaço branco vazio -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-start">
+                        
                         <!-- Foto 1 (Retrato Alto) -->
                         <div class="flex flex-col bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-64 relative">
+                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-56 relative">
                                 <img src="Imagens/estudo.png" alt="Estudo" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/400x600/002147/cfaf5c?text=Estudo';">
                             </div>
-                            <span class="text-xs text-gray-600 font-medium mt-2 px-1 block text-center">Estudo</span>
+                            <span class="text-sm sm:text-base text-gray-800 font-bold tracking-tight mt-2 px-1 block text-center leading-snug">Estudo</span>
                         </div>
                         
                         <!-- Foto 2 (Quadrada) -->
                         <div class="flex flex-col bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-40 relative">
+                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-36 relative">
                                 <img src="Imagens/jose.png" alt="Arcebispo Primaz de Braga D. José Cordeiro" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/400x400/002147/cfaf5c?text=D.+Jose+Cordeiro';">
                             </div>
-                            <span class="text-[10px] text-gray-600 font-medium leading-tight mt-2 px-1 block text-center">Arcebispo Primaz de Braga D. José Cordeiro</span>
+                            <span class="text-[11px] sm:text-xs text-gray-800 font-bold tracking-tight mt-2 px-1 block text-center leading-tight">Arcebispo Primaz de Braga D. José Cordeiro</span>
                         </div>
                         
                         <!-- Foto 3 (Retrato Médio) -->
                         <div class="flex flex-col bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-52 relative">
+                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-44 relative">
                                 <img src="Imagens/renovar.png" alt="Renovar" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/400x500/002147/cfaf5c?text=Renovar';">
                             </div>
-                            <span class="text-xs text-gray-600 font-medium mt-2 px-1 block text-center">Renovar</span>
+                            <span class="text-sm sm:text-base text-gray-800 font-bold tracking-tight mt-2 px-1 block text-center leading-snug">Renovar</span>
                         </div>
                         
                         <!-- Foto 4 (Horizontal Larga) -->
                         <div class="col-span-2 flex flex-col bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-44 relative">
+                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-36 relative">
                                 <img src="Imagens/montemuro.png" alt="Formação Grupos" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/600x300/002147/cfaf5c?text=Formação+Grupos';">
                             </div>
-                            <span class="text-xs text-gray-600 font-medium mt-2 px-1 block text-center">Formação Grupos</span>
+                            <span class="text-sm sm:text-base text-gray-800 font-bold tracking-tight mt-2 px-1 block text-center leading-snug">Formação Grupos</span>
                         </div>
                         
                         <!-- Foto 5 (Pequena) -->
                         <div class="flex flex-col bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-36 relative">
+                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-32 relative">
                                 <img src="Imagens/aprendizes.png" alt="Aprendizes do Verbo" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/300x300/002147/cfaf5c?text=Aprendizes+do+Verbo';">
                             </div>
-                            <span class="text-xs text-gray-600 font-medium mt-2 px-1 block text-center">Aprendizes do Verbo</span>
+                            <span class="text-sm sm:text-base text-gray-800 font-bold tracking-tight mt-2 px-1 block text-center leading-snug">Aprendizes do Verbo</span>
                         </div>
                         
                         <!-- Foto 6 (Vertical Extra Alto) -->
                         <div class="col-span-2 flex flex-col bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-56 relative">
+                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-48 relative">
                                 <img src="Imagens/areais.png" alt="Palestra Padre Domingos Areais" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/500x300/002147/cfaf5c?text=P.+Domingos+Areais';">
                             </div>
-                            <span class="text-xs text-gray-600 font-medium mt-2 px-1 block text-center">Palestra Padre Domingos Areais</span>
+                            <span class="text-sm sm:text-base text-gray-800 font-bold tracking-tight mt-2 px-1 block text-center leading-snug">Palestra Padre Domingos Areais</span>
                         </div>
                     </div>
                 </div>
