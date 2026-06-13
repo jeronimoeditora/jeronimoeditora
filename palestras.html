@@ -6,7 +6,6 @@
     <title>Agendar Palestra | Hugo Bacelo</title>
     
     <script>
-        // Remove a extensão .html da barra de endereço de forma limpa e transparente
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
@@ -256,26 +255,75 @@
             } catch (e) { return file; }
         }
 
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/')) {
+                return '../';
+            }
+            return '';
+        }
+
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId);
+            if (!container) return;
+            const prefix = getPrefix();
+            
+            // Corrige caminhos relativos de imagens e links se estiver em subpastas
+            if (prefix !== '') {
+                container.querySelectorAll('a').forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        if (!href.startsWith('../')) {
+                            link.setAttribute('href', prefix + href);
+                        }
+                    }
+                });
+                container.querySelectorAll('img').forEach(img => {
+                    let src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                        img.setAttribute('src', prefix + src);
+                    }
+                });
+            }
+
+            // Remove estritamente a extensão .html de todos os links internos no menu e rodapé
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
+                }
+            });
+        }
+
         async function loadComponents() {
+            const prefix = getPrefix();
             try {
-                let navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
                 if (!navResp.ok) {
-                    navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
+                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
                 }
                 if (navResp.ok) {
                     document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    adjustAndCleanLinks('nav-placeholder');
                 }
 
-                let footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
                 if (!footResp.ok) {
-                    footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
+                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
                 }
                 if (footResp.ok) {
                     document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                    adjustAndCleanLinks('footer-placeholder');
                 }
                 updateCartUI();
             } catch (e) { 
-                console.warn("Modo offline ou CORS impediu a injeção do menu/rodapé."); 
+                console.warn("Modo offline."); 
             }
         }
 
