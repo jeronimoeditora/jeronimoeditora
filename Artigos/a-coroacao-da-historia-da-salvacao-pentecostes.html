@@ -97,7 +97,7 @@
                 </div>
             </header>
 
-            <!-- Espaço para Foto Horizontal do Artigo (Atualizada para pentecostes.png) -->
+            <!-- Espaço para Foto Horizontal do Artigo -->
             <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-xs relative bg-gray-100">
                 <img src="../Imagens/pentecostes.png" alt="A Coroação da História da Salvação (Pentecostes)" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=A+Coroa%C3%A7%C3%A3o+da+Hist%C3%B3ria+da+Salva%C3%A7%C3%A3o';">
             </div>
@@ -113,7 +113,7 @@
             <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto font-sans">
                 
                 <p class="dropcap font-semibold text-brand-accent-blue text-lg sm:text-xl leading-relaxed">
-                    O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na vida litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu poder transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raízes desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
+                    O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na vida litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu power transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raízes desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
                 </p>
 
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Primeira Leitura (Actos 2, 1-11): O Novo Sinai e o “Anti-Babel”</h3>
@@ -183,7 +183,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Bem Comum:</strong> Estes carismas são graces dadas não apenas para benefício privado, mas para o bem comum, destinados a edificar todos os membros da Igreja e a conduzi-los à salvação (CIC 799-801, 951). O ensinamento Católico faz a distinção clara entre a graça santificante, que concede a filiação divina, e a graça carismática ou ministerial, que equipa os santos para o serviço aos outros (CIC 2003).
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Bem Comum:</strong> Estes carismas são graças dadas não apenas para benefício privado, mas para o bem comum, destinados a edificar todos os membros da Igreja e a conduzi-los à salvação (CIC 799-801, 951). O ensinamento Católico faz a distinção clara entre a graça santificante, que concede a filiação divina, e a graça carismática ou ministerial, que equipa os santos para o serviço aos outros (CIC 2003).
                 </p>
 
                 <p>
@@ -298,6 +298,7 @@
     <div id="footer-placeholder"></div>
 
     <script>
+        // --- STREAMING_CHUNK: Managing routing and path resolution ---
         function getSafePath(file) {
             const currentUrl = window.location.href;
             if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
@@ -307,7 +308,7 @@
             } catch (e) { return file; }
         }
 
-        // Função global corrigida para o menu lateral Off-Canvas deslizante
+        // Função global para o menu lateral Off-Canvas deslizante
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             const backdrop = document.getElementById('menu-backdrop');
@@ -360,35 +361,31 @@
             });
         }
 
+        // --- STREAMING_CHUNK: Loading common site menus and footers ---
         // Carrega dinamicamente o menu e o rodapé corporativos a partir da raiz (../)
         async function loadComponents() {
             try {
-                // Tenta as variações relativas com segurança
+                // Tenta carregar menu com fallback de extensão
                 let navLoaded = false;
-                const navPaths = ['../menu', '../menu.html', 'menu', 'menu.html'];
-                for (let path of navPaths) {
-                    try {
-                        const navResp = await fetch(getSafePath(path) + '?v=1.0.2');
-                        if (navResp.ok) {
-                            document.getElementById('nav-placeholder').innerHTML = await navResp.text();
-                            navLoaded = true;
-                            break;
-                        }
-                    } catch (e) {}
+                let navResp = await fetch(getSafePath('../menu.html') + '?v=1.0.2');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath('../menu') + '?v=1.0.2');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    navLoaded = true;
                 }
 
-                const footPaths = ['../rodape', '../rodape.html', 'rodape', 'rodape.html'];
-                for (let path of footPaths) {
-                    try {
-                        const footResp = await fetch(getSafePath(path) + '?v=1.0.2');
-                        if (footResp.ok) {
-                            document.getElementById('footer-placeholder').innerHTML = await footResp.text();
-                            break;
-                        }
-                    } catch (e) {}
+                // Tenta carregar rodapé com fallback de extensão
+                let footResp = await fetch(getSafePath('../rodape.html') + '?v=1.0.2');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath('../rodape') + '?v=1.0.2');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 }
 
-                // Aplica re-escrita dinâmica de caminhos apenas se carregado a partir de pasta superior
+                // Aplica re-escrita dinâmica de caminhos se carregado de uma subpasta
                 if (navLoaded) {
                     adjustPlaceholderLinks('nav-placeholder');
                     adjustPlaceholderLinks('footer-placeholder');
