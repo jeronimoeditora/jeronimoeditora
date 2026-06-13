@@ -70,9 +70,9 @@
             
             <!-- Título Principal da Plataforma -->
             <div class="text-center mb-10">
-                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-2">Formação de Alta Fidelidade</span>
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-2">Formação em Vídeo</span>
                 <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Cursos em Vídeo</h1>
-                <p class="font-sans text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">Investigar a fé cristã com rigor teológico tradicional.</p>
+                <p class="font-sans text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">Aprender a fé cristã com rigor teológico.</p>
                 <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
             </div>
 
@@ -175,8 +175,82 @@
         </div>
     </div>
 
-    <!-- CONTENTOR DO RODAPÉ DINÂMICO -->
-    <div id="footer-placeholder"></div>
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Com fallback estático integrado de segurança) -->
+    <div id="footer-placeholder">
+        <footer class="bg-gray-900 text-gray-300 py-12 px-6 border-t-8 border-brand-accent-red font-sans">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 items-start text-center sm:text-left">
+                    
+                    <!-- Coluna 1: Logo -->
+                    <div class="flex flex-col items-center sm:items-start space-y-4">
+                        <div class="flex items-center space-x-2">
+                            <img src="Imagens/Logo J Dourado.png" alt="Logo" class="h-8 w-auto" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
+                            <span class="font-serif text-2xl font-bold text-white leading-tight">Jerónimo Editora</span>
+                        </div>
+                        <p class="text-sm text-gray-400 leading-relaxed max-w-[250px] mx-auto sm:mx-0">
+                            Rigor teológico e excelência editorial. Dedicada a enriquecer a cultura bíblica em Portugal.
+                        </p>
+                    </div>
+
+                    <!-- Coluna 2: Navegação -->
+                    <div class="flex flex-col items-center sm:items-start">
+                        <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-xs">Navegação</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="index.html" class="hover:text-white transition-colors duration-200">Início</a></li>
+                            <li><a href="index.html#sobre" class="hover:text-white transition-colors duration-200">Editora</a></li>
+                            <li><a href="catalogo-completo" class="hover:text-white transition-colors duration-200">Catálogo</a></li>
+                            <li><a href="produtos" class="hover:text-white transition-colors duration-200">Produtos</a></li>
+                            <li><a href="contacto" class="hover:text-white transition-colors duration-200">Contactos</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Coluna 3: Hugo Bacelo -->
+                    <div class="flex flex-col items-center sm:items-start">
+                        <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-xs">Hugo Bacelo</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="sobreHB" class="hover:text-white transition-colors duration-200">Sobre HB</a></li>
+                            <li><a href="artigos.html" class="hover:text-white transition-colors duration-200">Artigos</a></li>
+                            <li>
+                                <span class="text-gray-500 block text-xs font-bold uppercase tracking-wider mt-1 sm:text-left">Formação</span>
+                                <div class="flex flex-col sm:items-start pl-2 sm:pl-0 space-y-1 mt-1 border-l border-gray-800">
+                                    <a href="cursos" class="hover:text-white text-xs pl-2 transition-colors duration-200">Cursos</a>
+                                    <a href="presencas" class="hover:text-white text-xs pl-2 transition-colors duration-200">Palestras (Agendar)</a>
+                                </div>
+                            </li>
+                            <li><a href="aprendizesdoverbo" class="hover:text-white transition-colors duration-200">Comunidade: Aprendizes do Verbo</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Coluna 4: Contactos -->
+                    <div class="flex flex-col items-center sm:items-start">
+                        <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-xs">Contacto</h4>
+                        <div class="text-sm space-y-2">
+                            <p class="hover:text-white transition-colors duration-200">editorajeronimo@gmail.com</p>
+                            <p class="text-gray-500 italic">Braga, Portugal</p>
+                        </div>
+                        
+                        <div class="flex justify-center sm:justify-start space-x-5 mt-5 text-gray-400">
+                            <a href="https://www.facebook.com/jeronimoeditora" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gold transition-all duration-300 hover:scale-110 text-xl" aria-label="Facebook">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="https://www.instagram.com/editorajeronimo/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gold transition-all duration-300 hover:scale-110 text-xl" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/company/jer%C3%B3nimo-editora/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gold transition-all duration-300 hover:scale-110 text-xl" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center pt-8 mt-10 border-t border-gray-800">
+                    <p class="text-sm text-gray-500 font-sans tracking-wide">
+                        © 2026 Jerónimo Editora. Todos os direitos reservados.
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
 
     <script>
         // Base de dados local com apenas os dois cursos autorizados
@@ -205,9 +279,35 @@
             }
         ];
 
+        // --- SISTEMA DE COMPONENTES E COMPATIBILIDADE ---
+
+        // Função toggleMenu de compatibilidade global solicitada
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
         // --- SISTEMA DINÂMICO DE FILTRAGEM E ORDENAÇÃO SEGURO ---
         function filterCourses() {
-            // Guardas de segurança defensivos contra elementos nulos no arranque
             const searchInput = document.getElementById('course-search');
             const categorySelect = document.getElementById('category-select');
             const sortSelect = document.getElementById('sort-select');
@@ -415,18 +515,18 @@
                     document.getElementById('nav-placeholder').innerHTML = await navResp.text();
                 }
 
-                // Rodapé
-                let footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
-                if (!footResp.ok) {
-                    footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
+                // Rodapé dinâmico usando 'rodape?v=1.0.2'
+                let foot = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                if (!foot.ok) {
+                    foot = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
                 }
-                if (footResp.ok) {
-                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                if (foot.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await foot.text();
                 }
                 
                 updateCartUI();
             } catch (e) { 
-                console.warn("Modo offline ou CORS impediu injeção."); 
+                console.warn("Modo offline ativo. O rodapé integrado está a ser utilizado como fallback seguro."); 
             }
         }
 
