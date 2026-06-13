@@ -413,20 +413,20 @@
                     ? `href="${art.url}" target="_blank"` 
                     : `href="javascript:void(0)" onclick="triggerToastNotice()"`;
 
-                // Espaço de foto horizontal dinâmico por baixo da data e tempo de leitura
+                // Espaço de foto horizontal dinâmico por baixo da data e tempo de leitura tornados clicáveis
                 let imageHtml = '';
                 if (art.image) {
                     imageHtml = `
-                        <div class="w-full h-32 sm:h-36 overflow-hidden rounded-2xl bg-gray-100 border border-gray-150 mb-4 relative">
+                        <a ${linkAction} class="block w-full h-32 sm:h-36 overflow-hidden rounded-2xl bg-gray-100 border border-gray-150 mb-4 relative cursor-pointer">
                             <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x335/f8f8f8/002147?text=Jer%C3%B3nimo+Editora';">
-                        </div>
+                        </a>
                     `;
                 } else {
                     imageHtml = `
-                        <div class="w-full h-32 sm:h-36 overflow-hidden rounded-2xl bg-gray-50 border border-gray-150 mb-4 flex flex-col items-center justify-center text-center">
+                        <a ${linkAction} class="block w-full h-32 sm:h-36 overflow-hidden rounded-2xl bg-gray-50 border border-gray-150 mb-4 flex flex-col items-center justify-center text-center cursor-pointer">
                             <i class="fas fa-book-open text-gray-200 text-3xl mb-1.5"></i>
                             <span class="text-[9px] uppercase tracking-widest font-black text-gray-400">Brevemente</span>
-                        </div>
+                        </a>
                     `;
                 }
 
