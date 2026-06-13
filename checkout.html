@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto:wght@300;400;500;700;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -132,7 +133,7 @@
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-green-600 mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
             <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center">Encomenda recebida!</h3>
-            <p class="text-gray-600 mb-6 font-sans text-sm text-center">Obrigado pela sua preferência. Enviaremos um e-mail de confirmação para o seu endereço.</p>
+            <p id="success-modal-msg" class="text-gray-650 mb-6 font-sans text-sm text-center">Obrigado pela sua preferência. Enviaremos um e-mail de confirmação para o seu endereço.</p>
             <a href="/" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg text-center">Voltar ao Início</a>
         </div>
     </div>
@@ -202,8 +203,13 @@
                 <!-- COLUNA ESQUERDA: FORMULÁRIOS -->
                 <div class="lg:w-7/12 order-2 lg:order-1">
                     
-                    <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg mb-8 border border-gray-100">
-                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">1. Detalhes de Envio</h2>
+                    <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg mb-8 border border-gray-150">
+                        <div class="flex justify-between items-center border-b pb-2 mb-1">
+                            <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red">1. Detalhes de Envio</h2>
+                            <span id="morada-opcional-badge" class="hidden text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded bg-blue-50 text-brand-accent-blue border border-blue-100 font-sans">
+                                Entrega Digital Direta
+                            </span>
+                        </div>
                         
                         <form id="shipping-form" class="space-y-5 mt-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -220,69 +226,73 @@
                                 <label class="block text-sm font-medium text-gray-700 mb-1">NIF (Opcional)</label>
                                 <input type="text" id="nif" name="nif" class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50">
                             </div>
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-                                <div class="md:col-span-3">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Morada completa *</label>
-                                    <input type="text" id="morada" name="morada" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
-                                </div>
-                                <div class="md:col-span-1">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Nº / Andar *</label>
-                                    <input type="text" id="nr-andar" name="nr_andar" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
-                                <div class="sm:col-span-4">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Código Postal *</label>
-                                    <input type="text" id="cod-postal" name="cod_postal" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input" placeholder="XXXX-XXX">
-                                </div>
-                                <div class="sm:col-span-8">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Cidade *</label>
-                                    <input type="text" id="cidade" name="cidade" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">País *</label>
-                                <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white shipping-input" onchange="loadCartSummary()">
-                                    <option value="PT">Portugal (Continente e Ilhas)</option>
-                                    <option value="EU_Normal">Europa (Entrega Normal)</option>
-                                    <option value="EU_Econ">Europa (Entrega Económica)</option>
-                                </select>
-                            </div>
-                            <div class="pt-6 border-t border-gray-100 mt-4">
-                                <span class="block text-sm font-medium text-gray-700 mb-3">A morada de facturação é igual à de envio?</span>
-                                <div class="flex items-center space-x-8">
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="radio" name="billing-choice" id="choice-sim" value="sim" class="radio-small" onchange="handleBillingChoice()" checked>
-                                        <span class="text-sm text-gray-700 font-medium">Sim</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="radio" name="billing-choice" id="choice-nao" value="nao" class="radio-small" onchange="handleBillingChoice()">
-                                        <span class="text-sm text-gray-700 font-medium">Não</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <!-- Morada de Facturação -->
-                            <div id="billing-address-container" class="hidden space-y-5 pt-6 border-t border-gray-100 mt-4 fade-in bg-gray-50/50 p-4 rounded-lg">
-                                <h3 class="text-lg font-bold text-brand-text mb-4 underline font-serif">Morada de Facturação</h3>
+                            
+                            <!-- Container de morada física - Totalmente ocultável para compras digitais -->
+                            <div id="physical-address-fields" class="space-y-5">
                                 <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
                                     <div class="md:col-span-3">
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Morada *</label>
-                                        <input type="text" id="morada-fat" name="morada_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field">
+                                        <label id="label-morada" class="block text-sm font-medium text-gray-700 mb-1">Morada completa *</label>
+                                        <input type="text" id="morada" name="morada" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
                                     </div>
                                     <div class="md:col-span-1">
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Nº / Andar *</label>
-                                        <input type="text" id="nr-andar-fat" name="nr_andar_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field">
+                                        <label id="label-nr-andar" class="block text-sm font-medium text-gray-700 mb-1">Nº / Andar *</label>
+                                        <input type="text" id="nr-andar" name="nr_andar" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
                                     <div class="sm:col-span-4">
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Cód. Postal *</label>
-                                        <input type="text" id="cod-postal-fat" name="cod_postal_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field">
+                                        <label id="label-cod-postal" class="block text-sm font-medium text-gray-700 mb-1">Código Postal *</label>
+                                        <input type="text" id="cod-postal" name="cod_postal" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input" placeholder="XXXX-XXX">
                                     </div>
                                     <div class="sm:col-span-8">
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Cidade *</label>
-                                        <input type="text" id="cidade-fat" name="cidade_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field">
+                                        <label id="label-cidade" class="block text-sm font-medium text-gray-700 mb-1">Cidade *</label>
+                                        <input type="text" id="cidade" name="cidade" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">País *</label>
+                                    <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white shipping-input" onchange="loadCartSummary()">
+                                        <option value="PT">Portugal (Continente e Ilhas)</option>
+                                        <option value="EU_Normal">Europa (Entrega Normal)</option>
+                                        <option value="EU_Econ">Europa (Entrega Económica)</option>
+                                    </select>
+                                </div>
+                                <div class="pt-6 border-t border-gray-100 mt-4">
+                                    <span class="block text-sm font-medium text-gray-700 mb-3">A morada de facturação é igual à de envio?</span>
+                                    <div class="flex items-center space-x-8">
+                                        <label class="flex items-center space-x-2 cursor-pointer">
+                                            <input type="radio" name="billing-choice" id="choice-sim" value="sim" class="radio-small" onchange="handleBillingChoice()" checked>
+                                            <span class="text-sm text-gray-700 font-medium">Sim</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer">
+                                            <input type="radio" name="billing-choice" id="choice-nao" value="nao" class="radio-small" onchange="handleBillingChoice()">
+                                            <span class="text-sm text-gray-700 font-medium">Não</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Morada de Facturação -->
+                                <div id="billing-address-container" class="hidden space-y-5 pt-6 border-t border-gray-100 mt-4 fade-in bg-gray-50/50 p-4 rounded-lg">
+                                    <h3 class="text-lg font-bold text-brand-text mb-4 underline font-serif">Morada de Facturação</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+                                        <div class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Morada *</label>
+                                            <input type="text" id="morada-fat" name="morada_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field">
+                                        </div>
+                                        <div class="md:col-span-1">
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Nº / Andar *</label>
+                                            <input type="text" id="nr-andar-fat" name="nr_andar_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field">
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
+                                        <div class="sm:col-span-4">
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Cód. Postal *</label>
+                                            <input type="text" id="cod-postal-fat" name="cod_postal_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field">
+                                        </div>
+                                        <div class="sm:col-span-8">
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Cidade *</label>
+                                            <input type="text" id="cidade-fat" name="cidade_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -349,7 +359,7 @@
                     </section>
                 </div>
 
-                <!-- COLUNA DIREITA: CARRINHO -->
+                <!-- COLUNA DIREITA: SUMÁRIO DO CARRINHO -->
                 <div class="lg:w-5/12 order-1 lg:order-2 h-fit lg:sticky lg:top-24">
                     <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10">
                         <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2">Carrinho de Compras</h2>
@@ -465,7 +475,6 @@
             if (!menu || !backdrop) return;
             
             if (menu.classList.contains('translate-x-full')) {
-                // ABRIR
                 backdrop.classList.remove('hidden');
                 setTimeout(() => {
                     backdrop.classList.remove('opacity-0');
@@ -474,7 +483,6 @@
                 }, 20);
                 document.body.style.overflow = 'hidden'; 
             } else {
-                // FECHAR
                 menu.classList.add('translate-x-full');
                 backdrop.classList.remove('opacity-100');
                 backdrop.classList.add('opacity-0');
@@ -535,6 +543,7 @@
             }
         }
 
+        // --- STREAMING_CHUNK: Setup Event listeners for input validation ---
         ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'].forEach(id => {
             const el = document.getElementById(id);
             if (el) {
@@ -581,31 +590,46 @@
             return 0;
         }
 
+        // --- STREAMING_CHUNK: Dynamically calculating and rendering the checkout cart sum ---
         function loadCartSummary() {
             const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const list = document.getElementById('summary-list');
-            const destino = document.getElementById('pais').value;
+            const destinoElement = document.getElementById('pais');
+            const destino = destinoElement ? destinoElement.value : 'PT';
             let subtotal = 0, pesoTotal = 0, html = '';
             
+            const hasPhysicalItems = items.some(item => item.type !== 'curso');
+            const hasDigitalItems = items.some(item => item.type === 'curso');
+
             items.forEach(item => {
                 const lineTotal = item.price * item.quantity;
                 subtotal += lineTotal;
                 
-                // Comparação string-safe de IDs para evitar colisões
+                // Exibe etiqueta de vídeo/curso se for digital
+                const isDigital = item.type === 'curso';
+                const typeBadge = isDigital 
+                    ? `<span class="bg-blue-100 text-brand-accent-blue text-[9px] px-1.5 py-0.5 rounded font-bold uppercase ml-2 border border-blue-200">Acesso Digital</span>` 
+                    : ``;
+
                 const book = bookData.find(b => String(b.id) === String(item.id));
-                let itemWeight = 272; // Peso padrão de segurança (g)
-                if (book) {
-                    itemWeight = book.weight; 
-                } else if (item.weight) {
-                    // Conversão de segurança para pesos guardados noutros formatos
-                    itemWeight = item.weight < 5 ? parseFloat(item.weight) * 1000 : parseFloat(item.weight);
-                }
+                let itemWeight = 0; // Padrão 0 para itens digitais
                 
-                pesoTotal += (itemWeight * item.quantity);
+                if (!isDigital) {
+                    itemWeight = 272; // Peso físico padrão de segurança (g)
+                    if (book) {
+                        itemWeight = book.weight; 
+                    } else if (item.weight) {
+                        itemWeight = item.weight < 5 ? parseFloat(item.weight) * 1000 : parseFloat(item.weight);
+                    }
+                    pesoTotal += (itemWeight * item.quantity);
+                }
+
                 html += `
                     <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
-                            <span class="font-lora text-sm text-brand-gold leading-tight flex-grow font-bold">${item.title}</span>
+                            <span class="font-lora text-sm text-brand-gold leading-tight flex-grow font-bold">
+                                ${item.title} ${typeBadge}
+                            </span>
                             <span class="font-sans font-bold text-white text-sm">€ ${lineTotal.toFixed(2).replace('.', ',')}</span>
                         </div>
                         <div class="flex items-center justify-between">
@@ -620,12 +644,44 @@
             });
             
             let custoPortes = 0;
-            if (pesoTotal > 0) {
+            const badge = document.getElementById('otimizacao-badge');
+            const physicalAddressContainer = document.getElementById('physical-address-fields');
+
+            // Os portes de envio e recolha de morada aplicam-se UNICAMENTE a mercadoria física
+            if (hasPhysicalItems && pesoTotal > 0) {
                 const pesoFinal = pesoTotal + SHIPPING_MARGIN;
                 let numPacotes = Math.ceil(pesoFinal / 5000), pesoPorPacote = pesoFinal / numPacotes;
                 for (let i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, destino);
-                const badge = document.getElementById('otimizacao-badge');
-                if (badge) badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide">Envio Editorial CTT</span>`;
+                
+                if (badge) {
+                    badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Envio Editorial CTT (Portes Físicos)</span>`;
+                }
+                
+                // Mostrar campos de morada e torná-los obrigatórios
+                if (physicalAddressContainer) physicalAddressContainer.classList.remove('hidden');
+                document.getElementById('morada-opcional-badge').classList.add('hidden');
+                document.querySelectorAll('.shipping-input').forEach(el => el.setAttribute('required', 'true'));
+            } else {
+                custoPortes = 0; // Grátis para digital
+                if (badge) {
+                    if (hasDigitalItems) {
+                        badge.innerHTML = `<span class="bg-blue-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Entrega Digital Gratuita</span>`;
+                    } else {
+                        badge.innerHTML = ``;
+                    }
+                }
+                
+                // Se só existem artigos digitais, a secção inteira de morada física é ocultada do utilizador
+                if (!hasPhysicalItems && hasDigitalItems) {
+                    if (physicalAddressContainer) physicalAddressContainer.classList.add('hidden');
+                    document.getElementById('morada-opcional-badge').classList.remove('hidden');
+                    document.querySelectorAll('.shipping-input').forEach(el => {
+                        el.removeAttribute('required');
+                    });
+                } else if (!hasPhysicalItems && !hasDigitalItems) {
+                    // Carrinho vazio
+                    if (physicalAddressContainer) physicalAddressContainer.classList.add('hidden');
+                }
             }
             
             list.innerHTML = html || '<p class="text-center py-4 font-lora opacity-50 text-white">O seu carrinho está vazio</p>';
@@ -633,6 +689,16 @@
             document.getElementById('summary-shipping').textContent = `€ ${custoPortes.toFixed(2).replace('.', ',')}`;
             document.getElementById('summary-total').textContent = `€ ${(subtotal + custoPortes).toFixed(2).replace('.', ',')}`;
             
+            // Personaliza mensagem modal de sucesso com base na natureza da encomenda
+            const successMsg = document.getElementById('success-modal-msg');
+            if (successMsg) {
+                if (hasDigitalItems && !hasPhysicalItems) {
+                    successMsg.innerHTML = `O seu pagamento foi simulado com sucesso. O vídeo e o acesso digital do curso foram processados e enviados para o e-mail: <strong>${document.getElementById('email').value || 'indicado'}</strong>.`;
+                } else {
+                    successMsg.textContent = "Obrigado pela sua preferência. Enviaremos um e-mail com a confirmação da encomenda e detalhes de envio de imediato.";
+                }
+            }
+
             renderSuggestions(items);
             validateFinalButton();
         }
@@ -763,28 +829,41 @@
             validateFinalButton();
         }
 
+        // --- STREAMING_CHUNK: Validating form elements based on cart requirements ---
         function validateFinalButton() {
             const method = document.querySelector('input[name="payment-method"]:checked')?.value;
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const requiredEnvio = ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'];
-            let envioValid = true;
-            requiredEnvio.forEach(id => { 
-                const el = document.getElementById(id);
-                if (el && !el.value.trim()) envioValid = false; 
-            });
-            const isDifferentBilling = document.getElementById('choice-nao').checked;
-            let billingValid = true;
-            if (isDifferentBilling) {
-                const requiredBilling = ['morada-fat', 'nr-andar-fat', 'cod-postal-fat', 'cidade-fat'];
-                requiredBilling.forEach(id => { 
+            
+            // Verifica se existem produtos físicos
+            const hasPhysicalItems = cartItems.some(item => item.type !== 'curso');
+
+            // Nome e email são os requisitos base globais
+            const nomeVal = document.getElementById('nome')?.value.trim();
+            const emailVal = document.getElementById('email')?.value.trim();
+            let inputsValid = nomeVal && emailVal;
+
+            // Se for puramente físico ou cabaz misto, a morada de envio torna-se estritamente requerida
+            if (hasPhysicalItems) {
+                const requiredEnvio = ['morada', 'nr-andar', 'cod-postal', 'cidade'];
+                requiredEnvio.forEach(id => { 
                     const el = document.getElementById(id);
-                    if (el && !el.value.trim()) billingValid = false; 
+                    if (el && !el.value.trim()) inputsValid = false; 
                 });
+
+                const isDifferentBilling = document.getElementById('choice-nao').checked;
+                if (isDifferentBilling) {
+                    const requiredBilling = ['morada-fat', 'nr-andar-fat', 'cod-postal-fat', 'cidade-fat'];
+                    requiredBilling.forEach(id => { 
+                        const el = document.getElementById(id);
+                        if (el && !el.value.trim()) inputsValid = false; 
+                    });
+                }
             }
+
             const btn = document.getElementById('place-order-button');
             if (btn) {
-                btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !envioValid || !billingValid;
+                btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid;
             }
         }
 
@@ -799,6 +878,9 @@
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const method = document.querySelector('input[name="payment-method"]:checked')?.value;
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
+            
+            const hasPhysicalItems = cartItems.some(item => item.type !== 'curso');
+
             try {
                 let base64File = "";
                 if (fileInput && fileInput.files.length > 0) {
@@ -806,6 +888,7 @@
                     progress.style.width = "40%";
                     base64File = await fileToBase64(fileInput.files[0]);
                 }
+                
                 const payload = {
                     type: 'order',
                     cliente: {
@@ -813,18 +896,29 @@
                         email: document.getElementById('email').value,
                         nif: document.getElementById('nif')?.value || "N/A"
                     },
-                    envio: {
+                    envio: hasPhysicalItems ? {
                         morada: document.getElementById('morada').value,
                         nr_andar: document.getElementById('nr-andar').value,
                         cod_postal: document.getElementById('cod-postal').value,
                         cidade: document.getElementById('cidade').value,
                         pais: document.getElementById('pais').value
+                    } : {
+                        morada: "Entrega Digital (E-mail)",
+                        nr_andar: "N/A",
+                        cod_postal: "N/A",
+                        cidade: "N/A",
+                        pais: "N/A"
                     },
-                    faturacao: {
+                    faturacao: (hasPhysicalItems && document.getElementById('choice-nao').checked) ? {
                         morada: document.getElementById('morada-fat').value,
                         nr_andar: document.getElementById('nr-andar-fat').value,
                         cod_postal: document.getElementById('cod-postal-fat').value,
                         cidade: document.getElementById('cidade-fat').value
+                    } : {
+                        morada: "N/A",
+                        nr_andar: "N/A",
+                        cod_postal: "N/A",
+                        cidade: "N/A"
                     },
                     pagamento: {
                         metodo: method,
@@ -832,7 +926,7 @@
                         fileBase64: base64File,
                         fileName: fileInput.files[0].name
                     },
-                    itens: cartItems.map(i => ({ titulo: i.title, qtd: i.quantity, preco_unit: i.price }))
+                    itens: cartItems.map(i => ({ titulo: i.title, qtd: i.quantity, preco_unit: i.price, tipo: i.type || "físico" }))
                 };
                 loadText.textContent = "A enviar dados à Editora...";
                 progress.style.width = "70%";
