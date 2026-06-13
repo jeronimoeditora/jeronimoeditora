@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Cursos em Vídeo | Hugo Bacelo</title>
+    
+    <!-- Google Fonts: Inter para legibilidade e Playfair para os títulos clássicos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Iconografia -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+        
+        /* Proteção visual básica contra cópia */
+        .video-wrapper {
+            position: relative;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .course-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(0, 33, 71, 0.12);
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen" oncontextmenu="return false;">
+
+    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div id="nav-placeholder"></div>
+
+    <main class="flex-grow pt-28 md:pt-36 pb-16">
+        <div class="max-w-6xl mx-auto px-6 fade-in">
+            
+            <!-- Título Principal da Plataforma -->
+            <div class="text-center mb-10">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-2">Formação de Alta Fidelidade</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Cursos em Vídeo</h1>
+                <p class="font-sans text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">Investigar a fé cristã com rigor teológico tradicional.</p>
+                <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
+            </div>
+
+            <!-- Painel de Pesquisa e Filtros -->
+            <div class="bg-white p-4 sm:p-6 rounded-2xl border border-gray-150 shadow-xs max-w-4xl mx-auto mb-12">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 items-center">
+                    
+                    <!-- Barra de Pesquisa por Texto -->
+                    <div class="lg:col-span-5 relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                            <i class="fas fa-search text-gray-400 text-sm"></i>
+                        </span>
+                        <input type="text" id="course-search" onkeyup="filterCourses()" placeholder="Pesquise cursos por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                    </div>
+                    
+                    <!-- Filtro de Categoria -->
+                    <div class="lg:col-span-3">
+                        <select id="category-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer">
+                            <option value="all">Todas as Categorias</option>
+                            <option value="Liturgia">Liturgia</option>
+                        </select>
+                    </div>
+
+                    <!-- Ordenar por Ordem Alfabética ou Data -->
+                    <div class="lg:col-span-2">
+                        <select id="sort-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer">
+                            <option value="date-desc">Mais Recentes</option>
+                            <option value="date-asc">Mais Antigos</option>
+                            <option value="az">Título A-Z</option>
+                        </select>
+                    </div>
+
+                    <!-- Botão de Reiniciar Filtros -->
+                    <div class="lg:col-span-2">
+                        <button onclick="clearFilters()" class="w-full bg-brand-accent-blue text-white hover:bg-brand-accent-orange font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-sans">
+                            Limpar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Mensagem se nenhum resultado for encontrado -->
+            <div id="no-results" class="hidden text-center py-16">
+                <i class="fas fa-video-slash text-gray-300 text-5xl mb-4"></i>
+                <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum curso encontrado</h3>
+                <p class="text-gray-500 font-sans mt-1">Experimente alterar os termos de pesquisa ou os filtros selecionados.</p>
+            </div>
+
+            <!-- Grelha de Cursos -->
+            <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Preenchido dinamicamente via JavaScript -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Notificação Flutuante Premium de Adicionado ao Carrinho -->
+    <div id="toast-notice" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-500 ease-out max-w-sm w-[90%] sm:w-full bg-white rounded-2xl shadow-2xl border border-brand-accent-blue/10 p-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 flex-shrink-0">
+            <i class="fas fa-check-circle text-lg"></i>
+        </div>
+        <div class="flex-grow">
+            <p class="text-xs text-emerald-800 font-bold uppercase tracking-wider">Adicionado com Sucesso</p>
+            <p id="toast-message" class="text-sm text-gray-650 font-medium">O curso foi adicionado ao seu carrinho.</p>
+        </div>
+    </div>
+
+    <!-- Modal Informativo Clássico sobre o Envio Protegido por E-mail -->
+    <div id="payment-warning-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl p-6 relative border-t-4 border-brand-accent-orange">
+            <button onclick="closeWarningModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-brand-accent-orange flex-shrink-0">
+                    <i class="fas fa-info-circle text-lg"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-brand-accent-blue">Acesso aos Cursos</h3>
+            </div>
+            
+            <div class="space-y-3 text-sm text-gray-650 font-sans leading-relaxed">
+                <p class="font-semibold text-brand-accent-blue">Como funciona o acesso?</p>
+                <p>O curso foi adicionado ao seu carrinho de compras para que possa prosseguir para o pagamento.</p>
+                <p class="bg-[#fcf8ee] border border-amber-100 p-3.5 rounded-xl font-medium text-brand-accent-orange flex gap-2">
+                    <i class="fas fa-envelope-open-text mt-0.5"></i>
+                    <span>O seu vídeo será enviado para o seu e-mail após a confirmação do pagamento.</span>
+                </p>
+            </div>
+
+            <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                <button onclick="closeWarningModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center">
+                    Continuar a ver
+                </button>
+                <a href="checkout" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center block">
+                    Ir para o Carrinho <i class="fas fa-shopping-cart ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Base de dados local com apenas os dois cursos autorizados
+        const coursesData = [
+            {
+                id: "curso_missa_1",
+                title: "Conhecer a Missa (parte 1)",
+                category: "Liturgia",
+                date: "2026-05-15",
+                status: "Disponível",
+                price: 8.99,
+                badgeClass: "bg-emerald-600",
+                description: "Uma análise litúrgica profunda sobre os ritos iniciais, a Liturgia da Palavra e o mistério que envolve a primeira parte do Santo Sacrifício da Missa.",
+                videoDuration: "45:12"
+            },
+            {
+                id: "curso_missa_2",
+                title: "Conhecer a Missa (parte 2)",
+                category: "Liturgia",
+                date: "2026-07-01",
+                status: "Em breve",
+                price: null,
+                badgeClass: "bg-gray-500",
+                description: "Aprofunde o coração do mistério eucarístico, a Liturgia Eucarística, os ritos de comunhão e o envio final do culto cristão tradicional.",
+                videoDuration: "Em breve"
+            }
+        ];
+
+        // --- SISTEMA DINÂMICO DE FILTRAGEM E ORDENAÇÃO SEGURO ---
+        function filterCourses() {
+            // Guardas de segurança defensivos contra elementos nulos no arranque
+            const searchInput = document.getElementById('course-search');
+            const categorySelect = document.getElementById('category-select');
+            const sortSelect = document.getElementById('sort-select');
+
+            const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+            const selectedCategory = categorySelect ? categorySelect.value : 'all';
+            const selectedSort = sortSelect ? sortSelect.value : 'date-desc';
+            
+            let filtered = coursesData.filter(course => {
+                const matchesSearch = course.title.toLowerCase().includes(searchTerm) || 
+                                      course.description.toLowerCase().includes(searchTerm) ||
+                                      course.category.toLowerCase().includes(searchTerm);
+                const matchesCategory = selectedCategory === 'all' || course.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            // Ordenação segura
+            if (selectedSort === 'az') {
+                filtered.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (selectedSort === 'date-asc') {
+                filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+            } else if (selectedSort === 'date-desc') {
+                filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+            }
+
+            renderCourses(filtered);
+        }
+
+        // --- STREAMING_CHUNK: Executing safe DOM rendering logic ---
+        // --- RENDERIZAÇÃO DOS CARTÕES DE CURSOS ---
+        function renderCourses(courses) {
+            const grid = document.getElementById('courses-grid');
+            const noResults = document.getElementById('no-results');
+            
+            if (!grid) return;
+            grid.innerHTML = '';
+            
+            if (courses.length === 0) {
+                if (noResults) noResults.classList.remove('hidden');
+                return;
+            }
+            
+            if (noResults) noResults.classList.add('hidden');
+            
+            courses.forEach(course => {
+                const isAvailable = course.status === "Disponível";
+                
+                // Botão de compra ou indisponibilidade
+                let actionButton = '';
+                let priceHtml = '';
+                
+                if (isAvailable) {
+                    priceHtml = `
+                        <div>
+                            <span class="text-gray-400 text-[10px] block uppercase font-bold">Valor do Acesso</span>
+                            <span class="text-lg font-bold text-brand-accent-blue">${course.price.toFixed(2)}€</span>
+                        </div>
+                    `;
+                    actionButton = `
+                        <button onclick="adicionarAoCheckout('${course.id}', '${course.title}', ${course.price})" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl shadow-xs transition-all duration-300">
+                            Comprar Acesso
+                        </button>
+                    `;
+                } else {
+                    priceHtml = `
+                        <div>
+                            <span class="text-gray-400 text-[10px] block uppercase font-bold">Lançamento</span>
+                            <span class="text-sm font-bold text-gray-400">Em Breve</span>
+                        </div>
+                    `;
+                    actionButton = `
+                        <button disabled class="bg-gray-200 text-gray-400 cursor-not-allowed text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl">
+                            Em Breve
+                        </button>
+                    `;
+                }
+
+                grid.innerHTML += `
+                    <div class="course-card bg-white border border-gray-150 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between">
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-white ${course.badgeClass} px-2 py-0.5 rounded">
+                                    ${course.status}
+                                </span>
+                                <span class="text-xs text-brand-accent-orange font-bold uppercase tracking-wider font-sans">
+                                    ${course.category}
+                                </span>
+                            </div>
+                            
+                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue">${course.title}</h2>
+                            <p class="text-xs text-gray-400 font-medium">Aulas Gravadas • Acesso Imediato • Proteção Anti-Cópia</p>
+                            
+                            <p class="text-sm text-gray-650 leading-relaxed font-light font-sans">
+                                ${course.description}
+                            </p>
+
+                            <!-- Reprodutor de Vídeo Simulado Segurado -->
+                            <div class="video-wrapper bg-slate-900 aspect-video rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center text-white border border-white/10 relative">
+                                <div class="space-y-3 z-10">
+                                    <span class="text-amber-500 text-2xl"><i class="fas fa-lock"></i></span>
+                                    <h4 class="font-serif font-bold text-sm">Acesso Reservado</h4>
+                                    <p class="text-[11px] text-slate-400 px-4">Adquira o acesso. O vídeo será entregue via e-mail para reprodução digital protegida.</p>
+                                </div>
+                                <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest">
+                                    Jerónimo Editora - Streaming Protegido (${course.videoDuration})
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rodapé do Cartão com Preços e Botão -->
+                        <div class="p-6 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+                            ${priceHtml}
+                            ${actionButton}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- STREAMING_CHUNK: Managing shopping cart system and notifications ---
+        // --- SISTEMA DE CARRINHO GLOBAL (ADICIONA AO CHECKOUT) ---
+        function adicionarAoCheckout(id, title, price) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const existingItemIndex = cartItems.findIndex(item => item.id === id);
+            
+            if (existingItemIndex > -1) {
+                document.getElementById('toast-message').textContent = `"${title}" já está no carrinho!`;
+            } else {
+                cartItems.push({
+                    id: id,
+                    title: title,
+                    price: price,
+                    quantity: 1,
+                    image: 'Imagens/Logo J.png',
+                    type: 'curso'
+                });
+                
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                document.getElementById('toast-message').textContent = `"${title}" adicionado ao carrinho!`;
+            }
+
+            updateCartUI();
+            triggerToast();
+            openWarningModal();
+        }
+
+        // --- SISTEMA DE NOTIFICAÇÕES E MODAL ---
+        let toastTimeout;
+        function triggerToast() {
+            const toast = document.getElementById('toast-notice');
+            if (!toast) return;
+
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+
+        function openWarningModal() {
+            const modal = document.getElementById('payment-warning-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeWarningModal() {
+            const modal = document.getElementById('payment-warning-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        // Limpa todos os filtros ativos de forma segura
+        function clearFilters() {
+            const searchInput = document.getElementById('course-search');
+            const categorySelect = document.getElementById('category-select');
+            const sortSelect = document.getElementById('sort-select');
+
+            if (searchInput) searchInput.value = '';
+            if (categorySelect) categorySelect.value = 'all';
+            if (sortSelect) sortSelect.value = 'date-desc';
+            
+            filterCourses();
+        }
+
+        // --- STREAMING_CHUNK: Fetching external menus and footers dynamically ---
+        // --- CARREGAMENTO DE COMPONENTES EXTERNOS ---
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            try {
+                // Menu
+                let navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                }
+
+                // Rodapé
+                let footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                }
+                
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline ou CORS impediu injeção."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            filterCourses(); // Inicia com filtros seguros, protegidos contra nulos
+        });
+    </script>
+
+    <!-- GoatCounter Analytics Tracker -->
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
