@@ -27,6 +27,7 @@
                     colors: {
                         'brand-bg': '#F8F8F8',
                         'brand-text': '#2d3748', /* Cinzento carvão suave para reduzir contraste excessivo */
+                        'brand-accent-red': '#800000', /* GARANTIDO: Cor do destaque do menu sintonizada */
                         'brand-accent-blue': '#002147',
                         'brand-accent-orange': '#e05300',
                         'brand-gold': '#cfaf5c',
@@ -40,6 +41,11 @@
         /* Regras estritas de conforto visual para eliminar o cansaço na leitura */
         body { font-family: 'Inter', sans-serif; color: #2d3748; background-color: #F8F8F8; }
         
+        /* GARANTIDO: Normaliza e padroniza o menu e o rodapé injetados para ficarem idênticos ao contacto.html */
+        #nav-placeholder *, #footer-placeholder * {
+            font-style: normal !important;
+        }
+
         .fade-in { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -260,8 +266,8 @@
                 title: "A Coroação da História da Salvação (Pentecostes)",
                 category: "Teologia",
                 date: "2026-05-24",
-                readingTime: "10 min", /* Tempo inicial padrão de salvaguarda */
-                url: "Artigos/a-coroacao-da-historia-da-salvacao-pentecostes.html", /* CAMINHO DA PASTA CORRIGIDO */
+                readingTime: "10 min", /* Tempo síncrono padrão */
+                url: "Artigos/a-coroacao-da-historia-da-salvacao-pentecostes.html",
                 image: "Imagens/pentecostes.png" // Foto horizontal oficial de Pentecostes
             },
             {
@@ -364,7 +370,6 @@
             }
         ];
 
-        // --- STREAMING_CHUNK: Filtering and rendering articles ---
         // --- MOTOR DE PESQUISA, FILTRAGEM E ORDENAÇÃO DINÂMICA ---
         function filterArticles() {
             const searchTerm = document.getElementById('article-search').value.toLowerCase().trim();
@@ -388,7 +393,7 @@
             }
 
             renderArticles(filtered);
-            fetchReadingTimes(); // Recalcula tempos dinamicamente de forma assíncrona
+            fetchReadingTimes(); // Tenta ler e recalcular os tempos de leitura reais
         }
 
         // --- RENDERIZAÇÃO DOS CARTÕES DE ARTIGOS ---
@@ -415,7 +420,7 @@
                     ? `href="${art.url}"` 
                     : `href="javascript:void(0)" onclick="triggerToastNotice()"`;
 
-                // Espaço de foto horizontal dinâmico tornado CLICÁVEL
+                // Espaço de foto horizontal dinâmico por baixo da data e tempo de leitura tornados clicáveis
                 let imageHtml = '';
                 if (art.image) {
                     imageHtml = `
@@ -452,7 +457,7 @@
                                 </span>
                             </span>
 
-                            <!-- FOTO HORIZONTAL CLICÁVEL -->
+                            <!-- FOTO HORIZONTAL TOTALMENTE CLICÁVEL -->
                             ${imageHtml}
                         </div>
                         
@@ -468,7 +473,6 @@
             });
         }
 
-        // --- STREAMING_CHUNK: Fetching reading times asynchronously ---
         // --- MOTOR DIPLOMÁTICO PARA OBTER O TEMPO DE LEITURA DIRETAMENTE DOS ARTIGOS COMPLETOS ---
         async function fetchReadingTimes() {
             for (let art of articlesData) {
@@ -498,7 +502,6 @@
                         }
                     } catch (e) {
                         console.warn(`Tempo de leitura dinâmico indisponível localmente para: ${art.title}. Revertendo para padrão de segurança.`);
-                        // Mantém o valor pré-definido seguro (10 min para Pentecostes)
                         const badge = document.getElementById(`time-val-${art.id}`);
                         if (badge && (badge.textContent === "Calculando..." || badge.textContent === "x min")) {
                             badge.textContent = art.id === 14 ? "10 min" : "4 min";
@@ -542,10 +545,9 @@
             } catch (e) { return file; }
         }
 
-        // Carrega dinamicamente os componentes menu e rodapé, suportando com e sem extensão .html
         async function loadComponents() {
             try {
-                // Tenta carregar menu
+                // Tenta carregar menu com duplo fallback síncrono
                 let navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
                 if (!navResp.ok) {
                     navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
@@ -554,7 +556,7 @@
                     document.getElementById('nav-placeholder').innerHTML = await navResp.text();
                 }
 
-                // Tenta carregar rodapé
+                // Tenta carregar rodapé com duplo fallback síncrono
                 let footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
                 if (!footResp.ok) {
                     footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
