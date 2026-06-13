@@ -260,8 +260,8 @@
                 title: "A Coroação da História da Salvação (Pentecostes)",
                 category: "Teologia",
                 date: "2026-05-24",
-                readingTime: "4 min", /* Tempo dinâmico sincronizado */
-                url: "Artigos/a-coroacao-da-historia-da-salvacao-pentecostes.html",
+                readingTime: "10 min", /* Sincronizado por padrão com o artigo completo */
+                url: "a-coroacao-da-historia-da-salvacao-pentecostes.html",
                 image: "Imagens/pentecostes.png" // Foto horizontal oficial de Pentecostes
             },
             {
@@ -387,6 +387,7 @@
             }
 
             renderArticles(filtered);
+            fetchReadingTimes(); // Tenta ler e recalcular os tempos de leitura reais
         }
 
         // --- RENDERIZAÇÃO DOS CARTÕES DE ARTIGOS ---
@@ -410,7 +411,7 @@
                 
                 // Configuração do gatilho de link direto no separador ou aviso de brevemente
                 const linkAction = art.url !== '#' 
-                    ? `href="${art.url}" target="_blank"` 
+                    ? `href="${art.url}"` 
                     : `href="javascript:void(0)" onclick="triggerToastNotice()"`;
 
                 // Espaço de foto horizontal dinâmico por baixo da data e tempo de leitura tornados clicáveis
@@ -436,7 +437,7 @@
                             <!-- Categoria -->
                             <span class="text-brand-accent-orange text-[10px] font-extrabold uppercase tracking-widest block mb-3 font-sans">${art.category}</span>
                             
-                            <!-- Título com excelente legibilidade (Inter para repouso visual no ecrã) -->
+                            <!-- Título com excelente legibilidade -->
                             <h3 class="font-sans text-lg sm:text-xl font-bold text-brand-accent-blue leading-snug mb-3 hover:text-brand-accent-orange transition-colors duration-200">
                                 <a ${linkAction}>${art.title}</a>
                             </h3>
@@ -445,10 +446,12 @@
                             <span class="text-xs text-gray-450 font-sans block mb-4 font-medium flex flex-wrap items-center gap-1.5">
                                 <i class="far fa-calendar text-gray-400"></i> ${formattedDate}
                                 <span class="text-gray-300">|</span>
-                                <i class="far fa-clock text-gray-400"></i> ${art.readingTime} de leitura
+                                <span id="reading-time-wrapper-${art.id}" class="inline-flex items-center gap-1">
+                                    <i class="far fa-clock text-gray-400"></i> <span id="time-val-${art.id}">${art.readingTime}</span> de leitura
+                                </span>
                             </span>
 
-                            <!-- FOTO HORIZONTAL POR BAIXO DA DATA E TEMPO DE LEITURA -->
+                            <!-- FOTO HORIZONTAL TOTALMENTE CLICÁVEL -->
                             ${imageHtml}
                         </div>
                         
@@ -462,6 +465,45 @@
                     </div>
                 `;
             });
+        }
+
+        // --- MOTOR DIPLOMÁTICO PARA OBTER O TEMPO DE LEITURA DIRETAMENTE DOS ARTIGOS COMPLETOS ---
+        async function fetchReadingTimes() {
+            for (let art of articlesData) {
+                if (art.url && art.url !== '#') {
+                    try {
+                        const response = await fetch(getSafePath(art.url));
+                        if (response.ok) {
+                            const htmlText = await response.text();
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(htmlText, 'text/html');
+                            const contentEl = doc.getElementById('article-content') || doc.querySelector('article') || doc.body;
+                            if (contentEl) {
+                                const text = contentEl.innerText || contentEl.textContent;
+                                const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+                                // 200 palavras por minuto como média de conforto no ecrã
+                                const computedTime = Math.ceil(words / 200);
+                                
+                                // Atualiza os dados na memória local
+                                art.readingTime = `${computedTime} min`;
+                                
+                                // Atualiza dinamicamente o elemento no DOM
+                                const badge = document.getElementById(`time-val-${art.id}`);
+                                if (badge) {
+                                    badge.textContent = `${computedTime} min`;
+                                }
+                            }
+                        }
+                    } catch (e) {
+                        console.warn(`Tempo de leitura dinâmico indisponível localmente para: ${art.title}. Revertendo para padrão de segurança.`);
+                        // Mantém o valor pré-definido seguro (10 min para Pentecostes)
+                        const badge = document.getElementById(`time-val-${art.id}`);
+                        if (badge && (badge.textContent === "Calculando..." || badge.textContent === "x min")) {
+                            badge.textContent = art.id === 14 ? "10 min" : "4 min";
+                        }
+                    }
+                }
+            }
         }
 
         // --- SISTEMA DE NOTIFICAÇÃO PARA ARTIGOS BREVEMENTE ---
@@ -498,12 +540,26 @@
             } catch (e) { return file; }
         }
 
+        // Carrega dinamicamente os componentes menu e rodapé, suportando com e sem extensão .html
         async function loadComponents() {
             try {
-                const navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
-                if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
-                const footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
-                if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                // Tenta carregar menu
+                let navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                }
+
+                // Tenta carregar rodapé
+                let footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                }
                 updateCartUI();
             } catch (e) { 
                 console.warn("Modo offline."); 
