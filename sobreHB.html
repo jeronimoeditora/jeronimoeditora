@@ -66,8 +66,7 @@
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .gallery-photo:hover {
-            transform: scale(1.03);
-            filter: grayscale(0%) contrast(105%);
+            transform: scale(1.02);
         }
     </style>
 </head>
@@ -91,7 +90,7 @@
                     <!-- Texto com excelente contraste e legibilidade literária -->
                     <div class="text-gray-800 text-lg sm:text-xl leading-relaxed font-classic space-y-6">
                         <p class="dropcap">
-                            Natural de <strong class="font-bold text-brand-accent-blue">Ermesinde</strong> (Porto) e filho de serralheiro. Conquistado por uma bracarense, residindo actualmente na histórica cidade de <strong class="font-bold text-brand-accent-blue">Braga</strong>. O meu percurso intelectual e espiritual é marcado por uma profunda conversão: autores como Jordan Peterson e C. S. Lewis foram instrumentos providenciais na minha viagem pessoal desde o ateísmo até à fé Católica.
+                            Natural de <strong class="font-bold text-brand-accent-blue">Ermesinde</strong> (Porto) e filho de serralheiro. Conquistado por uma bracarense, resido actualmente na histórica cidade de <strong class="font-bold text-brand-accent-blue">Braga</strong>. O meu percurso intelectual e espiritual é marcado por uma profunda conversão: autores como Jordan Peterson e C. S. Lewis foram instrumentos providenciais na minha viagem pessoal desde o ateísmo até à fé católica.
                         </p>
                         <p>
                             Aluno nos cursos do <a href="https://stpaulcenter.com/" target="_blank" rel="noopener noreferrer" class="font-bold text-brand-accent-blue hover:text-brand-accent-orange underline transition-colors">St. Paul Center</a> e um atento estudioso da <a href="https://ignatius.com/ignatius-catholic-study-bible-2h/" target="_blank" rel="noopener noreferrer" class="font-bold text-brand-accent-blue hover:text-brand-accent-orange underline transition-colors"><strong>Ignatius Catholic Study Bible</strong></a>, referências fundamentais para o meu trabalho formativo. 
@@ -104,14 +103,14 @@
                         <blockquote class="border-l-4 border-brand-accent-orange pl-4 py-3 my-6 bg-white rounded-r-xl shadow-sm">
                             <p class="italic-quote text-gray-500 font-classic text-lg leading-relaxed">
                                 «Sem a loucura que é o homem<br>
-                                Mais que a basta sadia,<br>
+                                Mais que a besta sadia,<br>
                                 Cadáver adiado que procria?»
                             </p>
                             <cite class="block font-sans font-bold text-xs uppercase text-brand-accent-orange tracking-widest mt-2 not-italic">Fernando Pessoa</cite>
                         </blockquote>
 
                         <p>
-                            A minha missão através do ensino e das palestras assenta no compromisso inequívoco com a Verdade revelada. Sendo teologicamente ancorado na verdade de Cristo e no Magistério da Igreja, considero-me politicamente sem-abrigo. Sou crítico de muitas coisas e admirador de poucas.
+                            A minha missão através do ensino e das palestras assenta no compromisso inequívoco com a Verdade revelada. Sendo teologicamente ancorado na Verdade de Cristo e no Magistério da Igreja, considero-me politicamente sem-abrigo. Sou crítico de muitas coisas e admirador de poucas.
                         </p>
                         <p>
                             Como Fundador da <a href="catalogo-completo" class="font-bold text-brand-accent-blue hover:text-brand-accent-orange underline decoration-brand-accent-orange/30 transition-colors"><strong>Jerónimo Editora</strong></a> e responsável pelo movimento paroquial <a href="aprendizesdoverbo" class="font-bold text-brand-accent-blue hover:text-brand-accent-orange underline decoration-brand-accent-orange/30 transition-colors"><strong>Aprendizes do Verbo</strong></a>, dedico o meu percurso a formar comunidades paroquiais activas, munindo-as com boas fontes e literatura sólida para fazer face aos desafios intelectuais da contemporaneidade.
@@ -119,61 +118,90 @@
                     </div>
                 </div>
 
-                <!-- Coluna Direita: Caixa Editorial Premium Laranja Suave contendo a Galeria Assimétrica -->
-                <div class="lg:col-span-7 bg-[#fdf6f0] border border-brand-accent-orange/10 rounded-3xl p-6 sm:p-8 shadow-sm space-y-4">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accent-orange block mb-2">Galeria de fotos</span>
+                <!-- Coluna Direita: Caixa Editorial Premium Laranja Suave contendo o Slideshow Sem Cortes -->
+                <div class="lg:col-span-7 bg-[#fdf6f0] border border-brand-accent-orange/10 rounded-3xl p-5 sm:p-8 shadow-sm space-y-6">
                     
-                    <!-- items-start impede que as caixas se estendam artificialmente, eliminando qualquer espaço branco vazio -->
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-start">
-                        
-                        <!-- Foto 1 (Retrato Alto) -->
-                        <div class="flex flex-col bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-56 relative">
-                                <img src="Imagens/estudo.png" alt="Estudo" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/400x600/002147/cfaf5c?text=Estudo';">
-                            </div>
-                            <span class="text-sm sm:text-base text-gray-800 font-bold tracking-tight mt-2 px-1 block text-center leading-snug">Estudo</span>
+                    <!-- Cabeçalho do Slideshow com Controlos Superiores -->
+                    <div class="flex items-center justify-between border-b border-brand-accent-orange/10 pb-4">
+                        <div class="flex flex-col">
+                            <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accent-orange">Galeria de fotos</span>
                         </div>
                         
-                        <!-- Foto 2 (Quadrada) - Altura Aumentada -->
-                        <div class="flex flex-col bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-56 relative">
-                                <img src="Imagens/jose.png" alt="Arcebispo Primaz de Braga D. José Cordeiro" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/400x400/002147/cfaf5c?text=D.+Jose+Cordeiro';">
-                            </div>
-                            <span class="text-[11px] sm:text-xs text-gray-800 font-bold tracking-tight mt-2 px-1 block text-center leading-tight">Arcebispo Primaz de Braga D. José Cordeiro</span>
-                        </div>
-                        
-                        <!-- Foto 3 (Retrato Médio) -->
-                        <div class="flex flex-col bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-56 relative">
-                                <img src="Imagens/renovar.png" alt="Renovar" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/400x500/002147/cfaf5c?text=Renovar';">
-                            </div>
-                            <span class="text-sm sm:text-base text-gray-800 font-bold tracking-tight mt-2 px-1 block text-center leading-snug">Renovar</span>
-                        </div>
-                        
-                        <!-- Foto 4 (Horizontal Larga) - Altura aumentada para h-52 -->
-                        <div class="col-span-2 flex flex-col bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-52 relative">
-                                <img src="Imagens/montemuro.png" alt="Formação Grupos" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/600x300/002147/cfaf5c?text=Formação+Grupos';">
-                            </div>
-                            <span class="text-sm sm:text-base text-gray-800 font-bold tracking-tight mt-2 px-1 block text-center leading-snug">Formação Grupos</span>
-                        </div>
-                        
-                        <!-- Foto 5 (Aprendizes do Verbo) - Reduzida para col-span-1 (menos larga) e com h-52 para se alinhar horizontalmente com a Foto 4 -->
-                        <div class="flex flex-col bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-52 relative">
-                                <img src="Imagens/aprendizes.png" alt="Aprendizes do Verbo" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/300x300/002147/cfaf5c?text=Aprendizes+do+Verbo';">
-                            </div>
-                            <span class="text-sm sm:text-base text-gray-800 font-bold tracking-tight mt-2 px-1 block text-center leading-snug">Aprendizes do Verbo</span>
-                        </div>
-                        
-                        <!-- Foto 6 (Palestra Padre Domingos Areais) - Spans 2 columns para manter um belo equilíbrio no fundo -->
-                        <div class="col-span-2 flex flex-col bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-48 relative">
-                                <img src="Imagens/areais.png" alt="Palestra Padre Domingos Areais" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/500x300/002147/cfaf5c?text=P.+Domingos+Areais';">
-                            </div>
-                            <span class="text-sm sm:text-base text-gray-800 font-bold tracking-tight mt-2 px-1 block text-center leading-snug">Palestra Padre Domingos Areais</span>
+                        <!-- Controlos estáveis no Topo -->
+                        <div class="flex items-center gap-3">
+                            <button onclick="prevSlide()" class="p-2.5 rounded-xl bg-white border border-gray-200 text-brand-accent-blue hover:bg-brand-accent-orange hover:text-white hover:border-brand-accent-orange transition-all shadow-xs focus:outline-none" aria-label="Foto anterior">
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </button>
+                            <span id="slide-indicator" class="text-xs sm:text-sm font-bold text-gray-600 font-sans min-w-[35px] text-center">1 / 6</span>
+                            <button onclick="nextSlide()" class="p-2.5 rounded-xl bg-white border border-gray-200 text-brand-accent-blue hover:bg-brand-accent-orange hover:text-white hover:border-brand-accent-orange transition-all shadow-xs focus:outline-none" aria-label="Próxima foto">
+                                <i class="fas fa-chevron-right text-xs"></i>
+                            </button>
                         </div>
                     </div>
+                    
+                    <!-- Contentor do Slideshow (Com Suporte de Gestos e ajuste nativo de tamanho sem esticar) -->
+                    <div id="slideshow-container" class="relative overflow-hidden w-full flex flex-col justify-center select-none cursor-grab active:cursor-grabbing">
+                        
+                        <!-- Slide 1 -->
+                        <div class="slide-item block transition-all duration-500 ease-in-out opacity-100 scale-100" data-index="0">
+                            <div class="bg-white p-3 rounded-2xl border border-gray-200/50 shadow-xs flex flex-col items-center justify-center w-fit mx-auto">
+                                <span class="text-base sm:text-lg text-brand-accent-blue font-extrabold tracking-tight mb-3 px-2 text-center block leading-snug border-b border-gray-100 pb-2 w-full">Estudo</span>
+                                <img src="Imagens/estudo.png" alt="Estudo" class="w-auto max-h-[300px] sm:max-h-[420px] object-contain rounded-xl pointer-events-none gallery-photo" onerror="this.src='https://placehold.co/600x400/002147/cfaf5c?text=Estudo';">
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2 -->
+                        <div class="slide-item hidden transition-all duration-500 ease-in-out opacity-0 scale-95" data-index="1">
+                            <div class="bg-white p-3 rounded-2xl border border-gray-200/50 shadow-xs flex flex-col items-center justify-center w-fit mx-auto">
+                                <span class="text-[12px] sm:text-base text-brand-accent-blue font-extrabold tracking-tight mb-3 px-2 text-center block leading-tight border-b border-gray-100 pb-2 w-full">Arcebispo Primaz de Braga D. José Cordeiro</span>
+                                <img src="Imagens/jose.png" alt="Arcebispo Primaz de Braga D. José Cordeiro" class="w-auto max-h-[300px] sm:max-h-[420px] object-contain rounded-xl pointer-events-none gallery-photo" onerror="this.src='https://placehold.co/600x400/002147/cfaf5c?text=D.+Jose+Cordeiro';">
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 3 -->
+                        <div class="slide-item hidden transition-all duration-500 ease-in-out opacity-0 scale-95" data-index="2">
+                            <div class="bg-white p-3 rounded-2xl border border-gray-200/50 shadow-xs flex flex-col items-center justify-center w-fit mx-auto">
+                                <span class="text-base sm:text-lg text-brand-accent-blue font-extrabold tracking-tight mb-3 px-2 text-center block leading-snug border-b border-gray-100 pb-2 w-full">Renovar</span>
+                                <img src="Imagens/renovar.png" alt="Renovar" class="w-auto max-h-[300px] sm:max-h-[420px] object-contain rounded-xl pointer-events-none gallery-photo" onerror="this.src='https://placehold.co/600x400/002147/cfaf5c?text=Renovar';">
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 4 -->
+                        <div class="slide-item hidden transition-all duration-500 ease-in-out opacity-0 scale-95" data-index="3">
+                            <div class="bg-white p-3 rounded-2xl border border-gray-200/50 shadow-xs flex flex-col items-center justify-center w-fit mx-auto">
+                                <span class="text-base sm:text-lg text-brand-accent-blue font-extrabold tracking-tight mb-3 px-2 text-center block leading-snug border-b border-gray-100 pb-2 w-full">Formação Grupos</span>
+                                <img src="Imagens/montemuro.png" alt="Formação Grupos" class="w-auto max-h-[300px] sm:max-h-[420px] object-contain rounded-xl pointer-events-none gallery-photo" onerror="this.src='https://placehold.co/600x300/002147/cfaf5c?text=Formação+Grupos';">
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 5 -->
+                        <div class="slide-item hidden transition-all duration-500 ease-in-out opacity-0 scale-95" data-index="4">
+                            <div class="bg-white p-3 rounded-2xl border border-gray-200/50 shadow-xs flex flex-col items-center justify-center w-fit mx-auto">
+                                <span class="text-base sm:text-lg text-brand-accent-blue font-extrabold tracking-tight mb-3 px-2 text-center block leading-snug border-b border-gray-100 pb-2 w-full">Aprendizes do Verbo</span>
+                                <img src="Imagens/aprendizes.png" alt="Aprendizes do Verbo" class="w-auto max-h-[300px] sm:max-h-[420px] object-contain rounded-xl pointer-events-none gallery-photo" onerror="this.src='https://placehold.co/300x300/002147/cfaf5c?text=Aprendizes+do+Verbo';">
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 6 -->
+                        <div class="slide-item hidden transition-all duration-500 ease-in-out opacity-0 scale-95" data-index="5">
+                            <div class="bg-white p-3 rounded-2xl border border-gray-200/50 shadow-xs flex flex-col items-center justify-center w-fit mx-auto">
+                                <span class="text-base sm:text-lg text-brand-accent-blue font-extrabold tracking-tight mb-3 px-2 text-center block leading-snug border-b border-gray-100 pb-2 w-full">Palestra Padre Domingos Areais</span>
+                                <img src="Imagens/areais.png" alt="Palestra Padre Domingos Areais" class="w-auto max-h-[300px] sm:max-h-[420px] object-contain rounded-xl pointer-events-none gallery-photo" onerror="this.src='https://placehold.co/500x300/002147/cfaf5c?text=P.+Domingos+Areais';">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Indicadores Pontilhados (Dots) de Posição -->
+                    <div class="flex justify-center items-center gap-2 pt-2 border-t border-brand-accent-orange/5">
+                        <button onclick="goToSlide(0)" class="w-2.5 h-2.5 rounded-full bg-brand-accent-orange transition-all duration-300" id="slide-dot-0" aria-label="Ir para imagem 1"></button>
+                        <button onclick="goToSlide(1)" class="w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300" id="slide-dot-1" aria-label="Ir para imagem 2"></button>
+                        <button onclick="goToSlide(2)" class="w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300" id="slide-dot-2" aria-label="Ir para imagem 3"></button>
+                        <button onclick="goToSlide(3)" class="w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300" id="slide-dot-3" aria-label="Ir para imagem 4"></button>
+                        <button onclick="goToSlide(4)" class="w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300" id="slide-dot-4" aria-label="Ir para imagem 5"></button>
+                        <button onclick="goToSlide(5)" class="w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300" id="slide-dot-5" aria-label="Ir para imagem 6"></button>
+                    </div>
+                    
                 </div>
 
             </div>
@@ -245,7 +273,86 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', loadComponents);
+        // --- SISTEMA INTERATIVO DO SLIDESHOW ---
+        let currentSlide = 0;
+        const totalSlidesCount = 6;
+
+        function showSlide(index) {
+            if (index >= totalSlidesCount) currentSlide = 0;
+            else if (index < 0) currentSlide = totalSlidesCount - 1;
+            else currentSlide = index;
+
+            const slides = document.querySelectorAll('.slide-item');
+            slides.forEach((slide, i) => {
+                if (i === currentSlide) {
+                    slide.classList.remove('hidden');
+                    setTimeout(() => {
+                        slide.classList.remove('opacity-0', 'scale-95');
+                        slide.classList.add('block', 'opacity-100', 'scale-100');
+                    }, 20);
+                } else {
+                    slide.classList.add('hidden', 'opacity-0', 'scale-95');
+                    slide.classList.remove('block', 'opacity-100', 'scale-100');
+                }
+            });
+
+            // Atualiza indicadores dot (bolinhas)
+            for (let i = 0; i < totalSlidesCount; i++) {
+                const dot = document.getElementById(`slide-dot-${i}`);
+                if (dot) {
+                    if (i === currentSlide) {
+                        dot.classList.remove('bg-gray-300');
+                        dot.classList.add('bg-brand-accent-orange');
+                    } else {
+                        dot.classList.remove('bg-brand-accent-orange');
+                        dot.classList.add('bg-gray-300');
+                    }
+                }
+            }
+
+            // Atualiza o texto contador (Ex: 1 / 6)
+            const indicator = document.getElementById('slide-indicator');
+            if (indicator) {
+                indicator.textContent = `${currentSlide + 1} / ${totalSlidesCount}`;
+            }
+        }
+
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function prevSlide() { showSlide(currentSlide - 1); }
+        function goToSlide(index) { showSlide(index); }
+
+        // --- SUPORTE A TOQUE / DESLIZAR (SWIPE) PARA TELEMÓVEIS ---
+        let slideStartX = 0;
+        let slideEndX = 0;
+
+        function setupSwipeGestures() {
+            const slideContainer = document.getElementById('slideshow-container');
+            if (!slideContainer) return;
+
+            slideContainer.addEventListener('touchstart', (e) => {
+                slideStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            slideContainer.addEventListener('touchend', (e) => {
+                slideEndX = e.changedTouches[0].screenX;
+                handleSlideSwipe();
+            }, { passive: true });
+        }
+
+        function handleSlideSwipe() {
+            const swipeThreshold = 50; // Margem de segurança de deslize em píxeis
+            if (slideStartX - slideEndX > swipeThreshold) {
+                nextSlide(); // Deslizou para a esquerda (próximo)
+            } else if (slideEndX - slideStartX > swipeThreshold) {
+                prevSlide(); // Deslizou para a direita (anterior)
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            showSlide(0);
+            setupSwipeGestures();
+        });
     </script>
 
     <!-- GoatCounter Analytics Tracker para monitorizar as visitas da página de biografia -->
