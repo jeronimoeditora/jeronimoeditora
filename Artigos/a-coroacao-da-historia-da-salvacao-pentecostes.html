@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>A Coroação da História da Salvação (Pentecostes) | Hugo Bacelo</title>
     
-    <!-- Google Fonts: Inter para Máxima Legibilidade e Playfair Display para Títulos -->
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght=0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Font Awesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -40,7 +47,6 @@
     <style>
         body { font-family: 'Inter', sans-serif; color: #2d3748; background-color: #F8F8F8; }
         
-        /* Normalização para impedir heranças de estilo indesejadas dos menus injetados */
         #nav-placeholder *, #footer-placeholder * {
             font-style: normal !important;
         }
@@ -69,6 +75,7 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
+    <!-- CONTENTOR DO MENU DINÂMICO -->
     <div id="nav-placeholder"></div>
 
     <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
@@ -76,7 +83,8 @@
         <article class="max-w-4xl mx-auto px-6 fade-in">
             
             <div class="mb-8">
-                <a href="../artigos.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
+                <!-- Direcionado para a URL limpa de artigos -->
+                <a href="../artigos" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
                     <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
                 </a>
             </div>
@@ -164,7 +172,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>As Primícias da Nova Criação:</strong> Tal como no princípio o Espírito pairava como um vento impetuoso sobre as águas da terra jovem (Gn 1,2), no Pentecostes, o vento sopra novamente sobre os crentes reunidos em redor dos Apóstolos. Desta forma, a Igreja constitui o antegozo, ou as primícias, de uma nova criação. Nós possuímos um «pagamento inicial» do Espírito que renova todas as coisas, unindo-nos de forma misteriosa à criação que há-de vir na próxima era. Esta mesma realidade vitalícia foi profetizada na visão dos ossos secos de Ezequiel (c.37), onde o sopro do Espírito causa um acto de re-criação ou «ressurreição» do novo Israel, a Igreja.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>As Primícias da Nova Criação:</strong> Tal como no princípio o Espírito pairava como um vento impetuoso sobre as águas da terra jovem (Gn 1,2), no Pentecostes, o vento sobra novamente sobre os crentes reunidos em redor dos Apóstolos. Desta forma, a Igreja constitui o antegozo, ou as primícias, de uma nova criação. Nós possuímos um «pagamento inicial» do Espírito que renova todas as coisas, unindo-nos de forma misteriosa à criação que há-de vir na próxima era. Esta mesma realidade vitalícia foi profetizada na visão dos ossos secos de Ezequiel (c.37), onde o sopro do Espírito causa um acto de re-criação ou «ressurreição» do novo Israel, a Igreja.
                 </p>
 
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Segunda Leitura (1 Coríntios 12, 3b-7. 12-13): O Corpo Místico e os Carismas</h3>
@@ -178,43 +186,40 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Origem dos Carismas:</strong> Há diversidade de dons espirituais (charismata, ligados teologicamente a charis, ou graça), diversidade de ministérios e diversas operações, mas fluem do mesmo Espírito Santo, do mesmo Senhor Cristo e do mesmo Deus Pai.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Origem dos Carismas:</strong> Ao nível de ministérios e dons espirituais, fluem do mesmo Espírito Santo, do mesmo Senhor Cristo e do mesmo Deus Pai.
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Bem Comum:</strong> Estes carismas são graças dadas não apenas para benefício privado, mas para o bem comum, destinados a edificar todos os membros da Igreja e a conduzi-los à salvação (CIC 799-801, 951). O ensinamento Católico faz a distinção clara entre a graça santificante, que concede a filiação divina, e a graça carismática ou ministerial, que equipa os santos para o serviço aos outros (CIC 2003).
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Bem Comum:</strong> Estes carismas são graças dadas não apenas para benefício privado, mas para o bem comum, destinados a edificar todos os membros da Igreja e a conduzi-los à salvação (CIC 799-801, 951). O ensinamento Católico faz a distinção clara entre a graça santificante e a carismática (CIC 2003).
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Unidade no Baptismo:</strong> A acção divina do Espírito a operar no Baptismo une-nos a Cristo não como uma mera metáfora organizacional, mas expressando a realidade metafísica de que cada crente está verdadeiramente unido através dos Sacramentos (CIC 790). O Espírito é a alma deste corpo místico, dando vida, crescimento e direcção a cada membro (CIC 797). Por causa desta união, as distinções étnicas e sociais (Judeus ou Gregos, escravos ou homens livres) tornam-se irrelevantes aos olhos de Deus (Gl 3,28; CIC 1267). Todos recebemos de beber de um único Espírito, uma realidade que nos refresca no Baptismo e na bebida espiritual que é a Sagrada Eucaristia.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Unidade no Baptismo:</strong> A acção divina do Espírito a operar no Baptismo une-nos a Cristo não como uma mera metáfora organizacional, mas expressando a realidade metafísica de que cada crente está verdadeiramente unido através dos Sacramentos (CIC 790). O Espírito é a alma deste corpo místico (CIC 797). Por causa desta união, as distinções étnicas e sociais tornam-se irrelevantes aos olhos de Deus (Gl 3,28; CIC 1267).
                 </p>
 
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Evangelho (João 20, 19-23): A Paz, o Sopro Divino e o Sacramento da Reconciliação</h3>
                 
                 <p>
-                    O Evangelho de São João situa-nos na tarde do Domingo de Páscoa. Jesus ressuscitado aparece aos discípulos no meio do medo e do isolamento, mostrando-lhes as Suas mãos e o Seu lado. Ele ergue-se não apenas com um corpo, mas com o mesmíssimo corpo que foi crucificado, carregando as marcas do Seu sacrifício terreno, sinais que transporta consigo até na Sua ascensão ao céu (CIC 645).
+                    O Evangelho de São João situa-nos na tarde do Domingo de Páscoa. Jesus ressuscitado aparece aos discípulos no meio do medo e do isolamento, mostrando-lhes as Suas mãos e o Seu lado. Ele ergue-se carregando as marcas do Seu sacrifício terreno, sinais que transporta consigo até na Sua ascensão ao céu (CIC 645).
                 </p>
 
                 <p>
-                    Neste encontro, Jesus oferece-lhes o grande dom da Sua paz (shalom): «A paz esteja convosco».
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Verdadeira Paz:</strong> A paz de Cristo não se trata de paz mundana, mas de uma serenidade espiritual alicerçada na nossa reconciliação com Deus.
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Verdadeira Paz:</strong> A paz bíblica e a paz de Cristo não se tratam da mera cessação de guerras ou da paz mundana (frequentemente alcançada pela violência e sempre instável). É, pelo contrário, uma serenidade espiritual alicerçada na nossa reconciliation com Deus. Quando não está fundamentada na paz de Cristo, a paz terrena é superficial e efémera.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Sopro da Nova Vida:</strong> De seguida, Jesus sopra sobre eles e diz: «Recebei o Espírito Santo». A acção de soprar ecoa os grandes momentos de criação no Antigo Testamento (Gn 2,7; Ez 37,9). Jesus, o Novo Adão, torna-se um «espírito vivificante» que sopra nova vida nos Apóstolos.
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Sopro da Nova Vida:</strong> De seguida, Jesus sopra sobre eles e diz: «Recebei o Espírito Santo». A humanidade ressuscitada de Jesus torna-se, assim, um sacramento do Espírito divino (CIC 1116). A acção de soprar ecoa os grandes momentos de criação e ressurreição no Antigo Testamento: o Senhor a soprar a vida em Adão (Gn 2,7), Elias a ressuscitar um menino com o seu sopro (1Rs 17,21), e Deus a levantar um exército de cadáveres pelo sopro do Espírito (Ez 37,9). Jesus, o Novo Adão, torna-se um «espírito vivificante» que sopra nova vida nos Apóstolos. Não há aqui contradição com o evento descrito em Actos 2; o Espírito vem a nós continuamente, e a descida no Pentecostes foi um revestimento extraordinário com força do alto para o ministério apostólico.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Sacramento da Reconciliação:</strong> João sublinha a coordenação do ministério do Espírito com os Apóstolos: «àqueles a quem perdoardes os pecados ser-lhes-ão perdoados; e àqueles a quem os retiverdes ser-lhes-ão retidos». O Concílio de Trento (Sess. 14, cap. 1) liga expressamente este episódio à instituição do Sacramento da Reconciliação (CIC 976, 1441, 1461). Para nós, Católicos, é a garantia objectiva de que podemos ouvir de forma audível e real a voz do Espírito através do sacerdote que nos concede a absolvição.
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Sacramento da Reconciliação:</strong> João sublinha a coordenação do ministério do Espírito com os Apóstolos e o propósito primordial deste dom: para que os pecados sejam perdoados. Jesus confere-lhes uma autoridade tremenda: «àqueles a quem perdoardes os pecados ser-lhes-ão perdoados; e àqueles a quem os retiverdes ser-lhes-ão retidos». O ministério de misericórdia e reconciliação de Jesus continuará através dos apóstolos. O Concílio de Trento (Sess. 14, cap. 1) liga expressamente este episódio à instituição do Sacramento da Reconciliação. Através deste sacramento, Cristo distribui o perdão divino ao mundo pelos sucessores dos apóstolos (os bispos) e os seus assistentes no presbitério (os padres) (CIC 976, 1441, 1461). Para nós, Católicos, é a garantia objectiva de que não estamos reféns dos nossos julgamentos subjectivos e tendenciosos, mas podemos ouvir de forma audível e real a voz do Espírito através do sacerdote que nos concede a absolvição.
+                    Celebrar as Leituras do Domingo de Pentecostes é reconhecer que a promessa de Cristo se cumpriu e continua a cumprir-se em nós. Fomos todos baptizados num só Espírito para constituirmos um só Corpo Místico, ricamente dotado de carismas destinados ao serviço e ao amor comum.
                 </p>
 
-                <p>
-                    Celebrar as Leituras do Domingo de Pentecostes é reconhecer que a promessa de Cristo se cumpriu e continua a cumprir-se em nós. O Espírito Santo foi derramado para estabelecer a Nova Aliança escrita nos nossos corações. A humanidade, outrora fracturada pela oposição a Deus em Babel, é agora congregada na Igreja una, santa, católica e apostólica. Fomos todos baptizados num só Espírito para constituirmos um só Corpo Místico, ricamente dotado de carismas destinados ao serviço e ao amor comum. E, de uma forma sumamente reconfortante, através dos Sacramentos da Eucaristia e da Reconciliação, esses rios de água viva que brotam do lado de Cristo, a Igreja oferece gratuitamente a vida eterna a todos os que a quiserem receber.
-                </p>
-
+                <!-- SECÇÃO PREMIUM DE SUBSCREVER NEWSLETTER -->
                 <div class="bg-gray-50 border border-gray-150 p-6 sm:p-8 rounded-2xl my-10 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div class="text-left max-w-md">
                         <h4 class="font-sans text-base sm:text-lg font-bold text-brand-accent-blue leading-snug">
@@ -229,14 +234,13 @@
                     </form>
                 </div>
 
-                <!-- Fontes -->
+                <!-- Secção de Fontes -->
                 <section class="mt-12 pt-6 border-t border-gray-150">
                     <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4">Fontes</h4>
                     <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2 font-sans">
                         <li><i>Ignatius Catholic Study Bible: Old and New Testament</i>, Ignatius Press, 2024.</li>
                         <li>Scott Hahn & Ken Ogorek, <i>Breaking the Bread: A Biblical Devotional for Catholics – Year A</i>, Emmaus Road Publishing, 2025</li>
                         <li>John Bergsma, <i>The Word of the Lord: Reflections on the Sunday Mass Readings for Year A</i>, Emmaus Road Publishing, 2022</li>
-                        <li>John Bergsma, <i>The Word of the Lord: Reflections on the Mass Readings for Solemnities and Feasts</i>, Emmaus Road Publishing, 2021</li>
                     </ul>
                 </section>
 
@@ -251,7 +255,7 @@
                                 <span class="text-xs text-gray-400 font-sans">24 de Maio de 2026</span>
                             </div>
                             <p class="text-sm text-gray-650 font-sans leading-relaxed">
-                                Gostei muito deste texto, dá-nos uma reflexão do que é ser um verdadeiro filho de Deus, na verdadeira concepção da palavra.
+                                Gostei muito deste texto, dá-nos uma reflexão do que é ser um verdadeiro filho de Deus.
                             </p>
                         </div>
                     </div>
@@ -272,7 +276,7 @@
 
             </div>
 
-            <!-- Rodapé do Autor -->
+            <!-- Rodapé do Artigo -->
             <footer class="mt-16 pt-8 border-t border-gray-150">
                 <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
                     <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
@@ -286,13 +290,13 @@
                         </h4>
                         <p class="text-xs text-gray-500 font-sans mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
                         <p class="text-sm text-gray-650 font-sans leading-relaxed">
-                            Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional e ao enriquecimento da cultura teológica católica em Portugal.
+                            Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
                         </p>
                     </div>
                 </div>
 
                 <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-xs uppercase tracking-wider font-bold">
-                    <a href="../artigos.html" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
+                    <a href="../artigos" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
                         <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
                     </a>
                     <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
@@ -304,85 +308,19 @@
         </article>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Com fallback estático integrado de segurança) -->
-    <div id="footer-placeholder">
-        <footer class="bg-gray-900 text-gray-300 py-12 px-6 border-t-8 border-brand-accent-red font-sans">
-            <div class="max-w-6xl mx-auto">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 items-start text-center sm:text-left">
-                    
-                    <!-- Coluna 1: Logo -->
-                    <div class="flex flex-col items-center sm:items-start space-y-4">
-                        <div class="flex items-center space-x-2">
-                            <img src="../Imagens/Logo J Dourado.png" alt="Logo" class="h-8 w-auto" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
-                            <span class="font-serif text-2xl font-bold text-white leading-tight">Jerónimo Editora</span>
-                        </div>
-                        <p class="text-sm text-gray-400 leading-relaxed max-w-[250px] mx-auto sm:mx-0">
-                            Rigor teológico e excelência editorial. Dedicada a enriquecer a cultura bíblica em Portugal.
-                        </p>
-                    </div>
-
-                    <!-- Coluna 2: Navegação -->
-                    <div class="flex flex-col items-center sm:items-start">
-                        <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-xs">Navegação</h4>
-                        <ul class="space-y-2 text-sm">
-                            <li><a href="../index.html" class="hover:text-white transition-colors duration-200">Início</a></li>
-                            <li><a href="../index.html#sobre" class="hover:text-white transition-colors duration-200">Editora</a></li>
-                            <li><a href="../catalogo-completo" class="hover:text-white transition-colors duration-200">Catálogo</a></li>
-                            <li><a href="../produtos" class="hover:text-white transition-colors duration-200">Produtos</a></li>
-                            <li><a href="../contacto" class="hover:text-white transition-colors duration-200">Contactos</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Coluna 3: Hugo Bacelo -->
-                    <div class="flex flex-col items-center sm:items-start">
-                        <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-xs">Hugo Bacelo</h4>
-                        <ul class="space-y-2 text-sm">
-                            <li><a href="../sobreHB" class="hover:text-white transition-colors duration-200">Sobre HB</a></li>
-                            <li><a href="../artigos.html" class="hover:text-white transition-colors duration-200">Artigos</a></li>
-                            <li>
-                                <span class="text-gray-500 block text-xs font-bold uppercase tracking-wider mt-1 sm:text-left">Formação</span>
-                                <div class="flex flex-col sm:items-start pl-2 sm:pl-0 space-y-1 mt-1 border-l border-gray-800">
-                                    <a href="../cursos" class="hover:text-white text-xs pl-2 transition-colors duration-200">Cursos</a>
-                                    <a href="../presencas" class="hover:text-white text-xs pl-2 transition-colors duration-200">Palestras (Agendar)</a>
-                                </div>
-                            </li>
-                            <li><a href="../aprendizesdoverbo" class="hover:text-white transition-colors duration-200">Comunidade: Aprendizes do Verbo</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Coluna 4: Contactos -->
-                    <div class="flex flex-col items-center sm:items-start">
-                        <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-xs">Contacto</h4>
-                        <div class="text-sm space-y-2">
-                            <p class="hover:text-white transition-colors duration-200">editorajeronimo@gmail.com</p>
-                            <p class="text-gray-500 italic">Braga, Portugal</p>
-                        </div>
-                        
-                        <div class="flex justify-center sm:justify-start space-x-5 mt-5 text-gray-400">
-                            <a href="https://www.facebook.com/jeronimoeditora" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gold transition-all duration-300 hover:scale-110 text-xl" aria-label="Facebook">
-                                <i class="fab fa-facebook"></i>
-                            </a>
-                            <a href="https://www.instagram.com/editorajeronimo/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gold transition-all duration-300 hover:scale-110 text-xl" aria-label="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/company/jer%C3%B3nimo-editora/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gold transition-all duration-300 hover:scale-110 text-xl" aria-label="LinkedIn">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center pt-8 mt-10 border-t border-gray-800">
-                    <p class="text-sm text-gray-500 font-sans tracking-wide">
-                        © 2026 Jerónimo Editora. Todos os direitos reservados.
-                    </p>
-                </div>
-            </div>
-        </footer>
-    </div>
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO -->
+    <div id="footer-placeholder"></div>
 
     <script>
-        // Função toggleMenu de compatibilidade global solicitada
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             const backdrop = document.getElementById('menu-backdrop');
@@ -407,16 +345,6 @@
             }
         }
 
-        function getSafePath(file) {
-            const currentUrl = window.location.href;
-            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
-            try { 
-                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-                return new URL(file, baseUrl).href; 
-            } catch (e) { return file; }
-        }
-
-        // Correção de caminhos para ficheiros dentro de subpastas como Artigos/
         function adjustPlaceholderLinks(placeholderId) {
             const container = document.getElementById(placeholderId);
             if (!container) return;
@@ -452,13 +380,12 @@
                     navLoaded = true;
                 }
 
-                // Tenta carregar o rodapé de forma dinâmica a partir de rodape ou rodape.html
-                let foot = await fetch(getSafePath('../rodape') + '?v=1.0.2');
-                if (!foot.ok) {
-                    foot = await fetch(getSafePath('../rodape.html') + '?v=1.0.2');
+                let footResp = await fetch(getSafePath('../rodape') + '?v=1.0.2');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath('../rodape.html') + '?v=1.0.2');
                 }
-                if (foot.ok) {
-                    document.getElementById('footer-placeholder').innerHTML = await foot.text();
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 }
 
                 if (navLoaded) {
@@ -467,8 +394,8 @@
                 }
 
                 updateCartUI();
-            } catch (e) {
-                console.warn("Modo offline ativo. O rodapé integrado está a ser utilizado como fallback seguro.");
+            } catch (e) { 
+                console.warn("Modo offline."); 
             }
         }
 
@@ -527,15 +454,15 @@
             const userEmail = emailInput.value.trim();
             const recipient = "editorajeronimo@gmail.com";
             const subject = encodeURIComponent("nova subscrição");
-            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever a newsletter de artigos com o e-mail: " + userEmail);
+            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
 
-            // Abre o cliente de e-mail local do utilizador para envio direto
+            // Abre o e-mail predefinido do utilizador com os dados pretendidos
             window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
 
             const container = e.target;
             container.innerHTML = `
                 <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
-                    <i class="fas fa-check-circle"></i> A carregar o seu cliente de e-mail para finalizar a subscrição!
+                    <i class="fas fa-check-circle"></i> A iniciar o seu cliente de e-mail para processar a subscrição!
                 </div>
             `;
         }
