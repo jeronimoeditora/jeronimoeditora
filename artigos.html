@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Artigos | Jerónimo Editora</title>
+    <title>Blog (Artigos) | Jerónimo Editora</title>
     
     <!-- Google Fonts: Inter para Máxima Legibilidade e Conforto Visual no Ecrã -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,11 +74,11 @@
     <main class="flex-grow pt-28 md:pt-36 pb-16">
         <div class="max-w-6xl mx-auto px-6 fade-in">
             
-            <!-- Título Principal do Artigo -->
+            <!-- Título Principal do Blog -->
             <div class="text-center mb-10">
                 <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-2">Escritos & Formação</span>
-                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Artigos</h1>
-                <p class="font-sans text-gray-500 max-w-xl mx-auto text-base sm:text-lg font-medium">"Investigar com paciência, crer com convicção e reter com sabedoria."</p>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Blog (Artigos)</h1>
+                <p class="font-sans text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium whitespace-normal md:whitespace-nowrap">"Investigar com paciência, crer com convicção e reter com sabedoria."</p>
                 <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
             </div>
 
@@ -91,7 +91,7 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                             <i class="fas fa-search text-gray-400 text-sm"></i>
                         </span>
-                        <input type="text" id="artigos-search" onkeyup="filterArticles()" placeholder="Pesquise por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                        <input type="text" id="blog-search" onkeyup="filterArticles()" placeholder="Pesquise por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
                     </div>
                     
                     <!-- Filtro de Categoria -->
@@ -496,7 +496,7 @@
 
         // --- MOTOR DE PESQUISA, FILTRAGEM E ORDENAÇÃO DINÂMICA ---
         function filterArticles() {
-            const searchTerm = document.getElementById('artigos-search').value.toLowerCase().trim();
+            const searchTerm = document.getElementById('blog-search').value.toLowerCase().trim();
             const selectedCategory = document.getElementById('category-select').value;
             const selectedSort = document.getElementById('sort-select').value;
             
@@ -595,13 +595,13 @@
 
         // Limpa todos os filtros ativos
         function clearFilters() {
-            document.getElementById('artigos-search').value = '';
+            document.getElementById('blog-search').value = '';
             document.getElementById('category-select').value = 'all';
             document.getElementById('sort-select').value = 'date-desc';
             filterArticles();
         }
 
-        // --- SISTEMA DE COMPONENTES DINÂMICOS (MENU E RODAPÉ) ---
+        // --- SISTEMA DE COMPONENTES DINÂMICO (MENU E RODAPÉ) ---
         function getSafePath(file) {
             const currentUrl = window.location.href;
             if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
@@ -636,7 +636,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             loadComponents();
-            renderArticles(articlesData);
+            filterArticles(); // Garante a ordenação automática por "Mais Recentes" no arranque
         });
     </script>
 
