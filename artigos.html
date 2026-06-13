@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Arquivo de Artigos | Jerónimo Editora</title>
     
-    <!-- Google Fonts: Inter para Máxima Legibilidade e Conforto Visual -->
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
@@ -54,7 +61,7 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- CONTEÚDO PRINCIPAL (Espaçamento superior ajustado para ausência de menu) -->
+    <!-- CONTEÚDO PRINCIPAL (Sem menu fixo no topo) -->
     <main class="flex-grow pt-16 md:pt-24 pb-16">
         <div class="max-w-6xl mx-auto px-6 fade-in">
             
@@ -65,7 +72,7 @@
                 <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
             </div>
 
-            <!-- Filtros e Caixa de Pesquisa -->
+            <!-- Painel de Pesquisa e Filtros -->
             <div class="bg-white p-4 sm:p-6 rounded-2xl border border-gray-150 shadow-xs max-w-4xl mx-auto mb-12">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 items-center">
                     
@@ -104,12 +111,14 @@
                 </div>
             </div>
 
+            <!-- Sem Resultados -->
             <div id="no-results" class="hidden text-center py-16">
                 <i class="fas fa-book-open text-gray-300 text-5xl mb-4"></i>
                 <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum artigo encontrado</h3>
                 <p class="text-gray-500 font-sans mt-1">Experimente alterar os termos de pesquisa ou os filtros selecionados.</p>
             </div>
 
+            <!-- Grelha de Artigos -->
             <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Preenchido via JavaScript -->
             </div>
@@ -128,133 +137,47 @@
         </div>
     </div>
 
-    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Com fallback estático integrado de segurança) -->
-    <div id="footer-placeholder">
-        <footer class="bg-gray-900 text-gray-300 py-12 px-6 border-t-8 border-brand-accent-red font-sans">
-            <div class="max-w-6xl mx-auto">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 items-start text-center sm:text-left">
-                    
-                    <!-- Coluna 1: Logo -->
-                    <div class="flex flex-col items-center sm:items-start space-y-4">
-                        <div class="flex items-center space-x-2">
-                            <img src="Imagens/Logo J Dourado.png" alt="Logo" class="h-8 w-auto" onerror="this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
-                            <span class="font-serif text-2xl font-bold text-white leading-tight">Jerónimo Editora</span>
-                        </div>
-                        <p class="text-sm text-gray-400 leading-relaxed max-w-[250px] mx-auto sm:mx-0">
-                            Rigor teológico e excelência editorial. Dedicada a enriquecer a cultura bíblica em Portugal.
-                        </p>
-                    </div>
-
-                    <!-- Coluna 2: Navegação -->
-                    <div class="flex flex-col items-center sm:items-start">
-                        <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-xs">Navegação</h4>
-                        <ul class="space-y-2 text-sm">
-                            <li><a href="index.html" class="hover:text-white transition-colors duration-200">Início</a></li>
-                            <li><a href="index.html#sobre" class="hover:text-white transition-colors duration-200">Editora</a></li>
-                            <li><a href="catalogo-completo" class="hover:text-white transition-colors duration-200">Catálogo</a></li>
-                            <li><a href="produtos" class="hover:text-white transition-colors duration-200">Produtos</a></li>
-                            <li><a href="contacto" class="hover:text-white transition-colors duration-200">Contactos</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Coluna 3: Hugo Bacelo -->
-                    <div class="flex flex-col items-center sm:items-start">
-                        <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-xs">Hugo Bacelo</h4>
-                        <ul class="space-y-2 text-sm">
-                            <li><a href="sobreHB" class="hover:text-white transition-colors duration-200">Sobre HB</a></li>
-                            <li><a href="artigos.html" class="hover:text-white transition-colors duration-200">Artigos</a></li>
-                            <li>
-                                <span class="text-gray-500 block text-xs font-bold uppercase tracking-wider mt-1 sm:text-left">Formação</span>
-                                <div class="flex flex-col sm:items-start pl-2 sm:pl-0 space-y-1 mt-1 border-l border-gray-800">
-                                    <a href="cursos" class="hover:text-white text-xs pl-2 transition-colors duration-200">Cursos</a>
-                                    <a href="presencas" class="hover:text-white text-xs pl-2 transition-colors duration-200">Palestras (Agendar)</a>
-                                </div>
-                            </li>
-                            <li><a href="aprendizesdoverbo" class="hover:text-white transition-colors duration-200">Comunidade: Aprendizes do Verbo</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Coluna 4: Contactos -->
-                    <div class="flex flex-col items-center sm:items-start">
-                        <h4 class="font-bold text-brand-gold uppercase tracking-widest mb-4 text-xs">Contacto</h4>
-                        <div class="text-sm space-y-2">
-                            <p class="hover:text-white transition-colors duration-200">editorajeronimo@gmail.com</p>
-                            <p class="text-gray-500 italic">Braga, Portugal</p>
-                        </div>
-                        
-                        <div class="flex justify-center sm:justify-start space-x-5 mt-5 text-gray-400">
-                            <a href="https://www.facebook.com/jeronimoeditora" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gold transition-all duration-300 hover:scale-110 text-xl" aria-label="Facebook">
-                                <i class="fab fa-facebook"></i>
-                            </a>
-                            <a href="https://www.instagram.com/editorajeronimo/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gold transition-all duration-300 hover:scale-110 text-xl" aria-label="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/company/jer%C3%B3nimo-editora/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gold transition-all duration-300 hover:scale-110 text-xl" aria-label="LinkedIn">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center pt-8 mt-10 border-t border-gray-800">
-                    <p class="text-sm text-gray-500 font-sans tracking-wide">
-                        © 2026 Jerónimo Editora. Todos os direitos reservados.
-                    </p>
-                </div>
-            </div>
-        </footer>
-    </div>
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO -->
+    <div id="footer-placeholder"></div>
 
     <script>
         const articlesData = [
-            // --- ADVENTO E NATAL ---
-            { id: 1, title: "Nossa Senhora foi mãe solteira?", category: "Advento e Natal", date: "2025-12-05", readingTime: "x min", url: "#" },
-            { id: 2, title: "Onde nasceu o menino Jesus?", category: "Advento e Natal", date: "2025-12-12", readingTime: "x min", url: "#" },
-            { id: 3, title: "Maria teve dores de parto", category: "Advento e Natal", date: "2025-12-18", readingTime: "x min", url: "#" },
-            { id: 4, title: "Natal: Origem Cristã, não pagã", category: "Advento e Natal", date: "2025-12-24", readingTime: "x min", url: "#" },
-
-            // --- AS 7 PALAVRAS DE CRISTO ---
-            { id: 5, title: "Introdução", category: "As 7 palavras de Cristo", date: "2026-04-01", readingTime: "x min", url: "#" },
-            { id: 6, title: "I. Pai, perdoa-lhes, porque não sabem o que fazem", category: "As 7 palavras de Cristo", date: "2026-04-02", readingTime: "x min", url: "#" },
-            { id: 7, title: "II. Em verdade te digo: hoje estarás comigo no paraíso", category: "As 7 palavras de Cristo", date: "2026-04-03", readingTime: "x min", url: "#" },
-            { id: 8, title: "III. Mulher, eis o teu Filho; eis a tua mãe", category: "As 7 palavras de Cristo", date: "2026-04-04", readingTime: "x min", url: "#" },
-            { id: 9, title: "IV. Meu Deus, Meu Deus, porque Me abandonaste?", category: "As 7 palavras de Cristo", date: "2026-04-05", readingTime: "x min", url: "#" },
-            { id: 10, title: "V. Tenho sede!", category: "As 7 palavras de Cristo", date: "2026-04-06", readingTime: "x min", url: "#" },
-            { id: 11, title: "VI. Está consumado!", category: "As 7 palavras de Cristo", date: "2026-04-07", readingTime: "x min", url: "#" },
-            { id: 12, title: "VII. Pai, em Tuas mãos entrego o Meu espírito", category: "As 7 palavras de Cristo", date: "2026-04-08", readingTime: "x min", url: "#" },
-
-            // --- OUTROS TEMAS ---
-            { id: 13, title: "Velho ou novo José?", category: "Outros temas", date: "2026-03-15", readingTime: "x min", url: "#" },
-
-            // --- TEOLOGIA ---
+            { id: 1, title: "Nossa Senhora foi mãe solteira?", category: "Advento e Natal", date: "2025-12-05", readingTime: "4 min", url: "#" },
+            { id: 2, title: "Onde nasceu o menino Jesus?", category: "Advento e Natal", date: "2025-12-12", readingTime: "5 min", url: "#" },
+            { id: 3, title: "Maria teve dores de parto", category: "Advento e Natal", date: "2025-12-18", readingTime: "4 min", url: "#" },
+            { id: 4, title: "Natal: Origem Cristã, não pagã", category: "Advento e Natal", date: "2025-12-24", readingTime: "6 min", url: "#" },
+            { id: 5, title: "Introdução", category: "As 7 palavras de Cristo", date: "2026-04-01", readingTime: "3 min", url: "#" },
+            { id: 6, title: "I. Pai, perdoa-lhes, porque não sabem o que fazem", category: "As 7 palavras de Cristo", date: "2026-04-02", readingTime: "5 min", url: "#" },
+            { id: 7, title: "II. Em verdade te digo: hoje estarás comigo no paraíso", category: "As 7 palavras de Cristo", date: "2026-04-03", readingTime: "4 min", url: "#" },
+            { id: 8, title: "III. Mulher, eis o teu Filho; eis a tua mãe", category: "As 7 palavras de Cristo", date: "2026-04-04", readingTime: "5 min", url: "#" },
+            { id: 9, title: "IV. Meu Deus, Meu Deus, porque Me abandonaste?", category: "As 7 palavras de Cristo", date: "2026-04-05", readingTime: "6 min", url: "#" },
+            { id: 10, title: "V. Tenho sede!", category: "As 7 palavras de Cristo", date: "2026-04-06", readingTime: "4 min", url: "#" },
+            { id: 11, title: "VI. Está consumado!", category: "As 7 palavras de Cristo", date: "2026-04-07", readingTime: "5 min", url: "#" },
+            { id: 12, title: "VII. Pai, em Tuas mãos entrego o Meu espírito", category: "As 7 palavras de Cristo", date: "2026-04-08", readingTime: "5 min", url: "#" },
+            { id: 13, title: "Velho ou novo José?", category: "Outros temas", date: "2026-03-15", readingTime: "5 min", url: "#" },
             {
                 id: 14,
                 title: "A Coroação da História da Salvação (Pentecostes)",
                 category: "Teologia",
                 date: "2026-05-24",
                 readingTime: "10 min",
-                url: "Artigos/a-coroacao-da-historia-da-salvacao-pentecostes.html",
+                url: "Artigos/a-coroacao-da-historia-da-salvacao-pentecostes", // Sem .html para URL limpa
                 image: "Imagens/pentecostes.png"
             },
-            { id: 15, title: "Engolido por uma Má Exegese", category: "Teologia", date: "2026-05-18", readingTime: "x min", url: "#" },
-            { id: 16, title: "Nascimento de Jesus: Belém ou Nazaré?", category: "Teologia", date: "2026-05-10", readingTime: "x min", url: "#" },
-            { id: 17, title: "Como Não Ler a Bíblia em Qualquer Século (3 de 3)", category: "Teologia", date: "2026-05-05", readingTime: "x min", url: "#" },
-            { id: 18, title: "Como Não Ler a Bíblia em Qualquer Século (2 de 3)", category: "Teologia", date: "2026-05-03", readingTime: "x min", url: "#" },
-            { id: 19, title: "Como Não Ler a Bíblia em Qualquer Século (1 de 3)", category: "Teologia", date: "2026-05-01", readingTime: "x min", url: "#" },
-
-            // --- FEMINISMO ---
-            { id: 20, title: "A Nova Masculinidade é a Velha Feminilidade", category: "Feminismo", date: "2026-02-28", readingTime: "x min", url: "#" },
-            { id: 21, title: "A Incongruente Utopia Feminista – Parte III", category: "Feminismo", date: "2026-02-20", readingTime: "x min", url: "#" },
-            { id: 22, title: "A Incongruente Utopia Feminista – Parte II", category: "Feminismo", date: "2026-02-15", readingTime: "x min", url: "#" },
-            { id: 23, title: "A Incongruente Utopia Feminista – Parte I", category: "Feminismo", date: "2026-02-10", readingTime: "x min", url: "#" },
-            { id: 24, title: "Igualdade de Género: um Falso Ideal – Parte II. Género", category: "Feminismo", date: "2026-01-20", readingTime: "x min", url: "#" },
-            { id: 25, title: "Igualdade de Género: um Falso Ideal – Parte I. Abertura", category: "Feminismo", date: "2026-01-15", readingTime: "x min", url: "#" },
-            { id: 26, title: "Mulheres Antifeministas Precisam-se!", category: "Feminismo", date: "2026-01-05", readingTime: "x min", url: "#" }
+            { id: 15, title: "Engolido por uma Má Exegese", category: "Teologia", date: "2026-05-18", readingTime: "4 min", url: "#" },
+            { id: 16, title: "Nascimento de Jesus: Belém ou Nazaré?", category: "Teologia", date: "2026-05-10", readingTime: "5 min", url: "#" },
+            { id: 17, title: "Como Não Ler a Bíblia em Qualquer Século (3 de 3)", category: "Teologia", date: "2026-05-05", readingTime: "6 min", url: "#" },
+            { id: 18, title: "Como Não Ler a Bíblia em Qualquer Século (2 de 3)", category: "Teologia", date: "2026-05-03", readingTime: "5 min", url: "#" },
+            { id: 19, title: "Como Não Ler a Bíblia em Qualquer Século (1 de 3)", category: "Teologia", date: "2026-05-01", readingTime: "5 min", url: "#" },
+            { id: 20, title: "A Nova Masculinidade é a Velha Feminilidade", category: "Feminismo", date: "2026-02-28", readingTime: "6 min", url: "#" },
+            { id: 21, title: "A Incongruente Utopia Feminista – Parte III", category: "Feminismo", date: "2026-02-20", readingTime: "5 min", url: "#" },
+            { id: 22, title: "A Incongruente Utopia Feminista – Parte II", category: "Feminismo", date: "2026-02-15", readingTime: "5 min", url: "#" },
+            { id: 23, title: "A Incongruente Utopia Feminista – Parte I", category: "Feminismo", date: "2026-02-10", readingTime: "4 min", url: "#" },
+            { id: 24, title: "Igualdade de Género: um Falso Ideal – Parte II. Género", category: "Feminismo", date: "2026-01-20", readingTime: "5 min", url: "#" },
+            { id: 25, title: "Igualdade de Género: um Falso Ideal – Parte I. Abertura", category: "Feminismo", date: "2026-01-15", readingTime: "5 min", url: "#" },
+            { id: 26, title: "Mulheres Antifeministas Precisam-se!", category: "Feminismo", date: "2026-01-05", readingTime: "6 min", url: "#" }
         ];
 
-        // --- SISTEMA DE COMPONENTES E COMPATIBILIDADE ---
-
-        // Função toggleMenu de compatibilidade global solicitada
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             const backdrop = document.getElementById('menu-backdrop');
@@ -278,33 +201,6 @@
                 document.body.style.overflow = ''; 
             }
         }
-
-        function getSafePath(file) {
-            const currentUrl = window.location.href;
-            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
-            try { 
-                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-                return new URL(file, baseUrl).href; 
-            } catch (e) { return file; }
-        }
-
-        // Função de carregamento assíncrono para obter o rodapé mais recente de forma automática
-        async function loadComponents() {
-            try {
-                // Tenta carregar o rodapé de forma dinâmica a partir de rodape ou rodape.html
-                let foot = await fetch(getSafePath('rodape') + '?v=1.0.2');
-                if (!foot.ok) {
-                    foot = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
-                }
-                if (foot.ok) {
-                    document.getElementById('footer-placeholder').innerHTML = await foot.text();
-                }
-            } catch (e) {
-                console.warn("Modo offline ativo. O rodapé integrado está a ser utilizado como fallback seguro.");
-            }
-        }
-
-        // --- SISTEMA DE FILTRAGEM E PESQUISA ---
 
         function filterArticles() {
             const searchTerm = document.getElementById('article-search').value.toLowerCase().trim();
@@ -345,7 +241,7 @@
                 const formattedDate = dateObj.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
                 const linkAction = art.url !== '#' 
                     ? `href="${art.url}"` 
-                    : `href="javascript:void(0)" onclick="triggerToastNotice()"`;
+                    : `href="javascript:void(0)" onclick="triggerToastNotice()"`
 
                 let imageHtml = '';
                 if (art.image) {
@@ -408,6 +304,29 @@
             document.getElementById('category-select').value = 'all';
             document.getElementById('sort-select').value = 'date-desc';
             filterArticles();
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            try {
+                let foot = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                if (!foot.ok) {
+                    foot = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
+                }
+                if (foot.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await foot.text();
+                }
+            } catch (e) {
+                console.warn("Modo offline.");
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
