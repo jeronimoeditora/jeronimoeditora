@@ -6,6 +6,7 @@
     <title>Cursos em Vídeo | Hugo Bacelo</title>
     
     <script>
+        // Limpeza de URL sem .html no GitHub Pages
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
@@ -68,7 +69,7 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen" oncontextmenu="return false;">
 
-    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <!-- CONTENTOR DO MENU DINÂMICO (Carregado do seu GitHub) -->
     <div id="nav-placeholder"></div>
 
     <main class="flex-grow pt-28 md:pt-36 pb-16">
@@ -93,14 +94,14 @@
                     </div>
                     
                     <div class="lg:col-span-3">
-                        <select id="category-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer">
+                        <select id="category-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
                             <option value="all">Todas as Categorias</option>
                             <option value="Liturgia">Liturgia</option>
                         </select>
                     </div>
 
                     <div class="lg:col-span-2">
-                        <select id="sort-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer">
+                        <select id="sort-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
                             <option value="date-desc">Mais Recentes</option>
                             <option value="date-asc">Mais Antigos</option>
                             <option value="az">Título A-Z</option>
@@ -120,7 +121,7 @@
             <div id="no-results" class="hidden text-center py-16">
                 <i class="fas fa-video-slash text-gray-300 text-5xl mb-4"></i>
                 <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum curso encontrado</h3>
-                <p class="text-gray-500 font-sans mt-1">Experimente alterar os termos de pesquisa ou os filtros selecionados.</p>
+                <p class="text-gray-500 font-sans mt-1">Experimente alterar os termos de pesquisa ou os filtros seleccionados.</p>
             </div>
 
             <!-- Grelha de Cursos -->
@@ -161,7 +162,7 @@
                 <p>O curso foi adicionado ao seu carrinho de compras para que possa prosseguir para o pagamento.</p>
                 <p class="bg-[#fcf8ee] border border-amber-100 p-3.5 rounded-xl font-medium text-brand-accent-orange flex gap-2">
                     <i class="fas fa-envelope-open-text mt-0.5"></i>
-                    <span>O seu vídeo será enviado para o seu e-mail após a confirmação do pagamento.</span>
+                    <span>O seu vídeo será enviado para o seu email após a confirmação do pagamento.</span>
                 </p>
             </div>
 
@@ -176,7 +177,7 @@
         </div>
     </div>
 
-    <!-- CONTENTOR DO RODAPÉ DINÂMICO -->
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado do seu GitHub) -->
     <div id="footer-placeholder"></div>
 
     <script>
@@ -204,30 +205,6 @@
                 videoDuration: "Em breve"
             }
         ];
-
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const backdrop = document.getElementById('menu-backdrop');
-            if (!menu || !backdrop) return;
-            
-            if (menu.classList.contains('translate-x-full')) {
-                backdrop.classList.remove('hidden');
-                setTimeout(() => {
-                    backdrop.classList.remove('opacity-0');
-                    backdrop.classList.add('opacity-100');
-                    menu.classList.remove('translate-x-full');
-                }, 20);
-                document.body.style.overflow = 'hidden'; 
-            } else {
-                menu.classList.add('translate-x-full');
-                backdrop.classList.remove('opacity-100');
-                backdrop.classList.add('opacity-0');
-                setTimeout(() => {
-                    backdrop.classList.add('hidden');
-                }, 300);
-                document.body.style.overflow = ''; 
-            }
-        }
 
         function filterCourses() {
             const searchInput = document.getElementById('course-search');
@@ -316,7 +293,7 @@
                             </div>
                             
                             <h2 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue">${course.title}</h2>
-                            <p class="text-xs text-gray-400 font-medium">Aulas Gravadas • Acesso Imediato • Proteção Anti-Cópia</p>
+                            <p class="text-xs text-gray-400 font-medium">Aulas Gravadas • Acesso Imediato • Protecção Anti-Cópia</p>
                             
                             <p class="text-sm text-gray-650 leading-relaxed font-light font-sans">
                                 ${course.description}
@@ -326,7 +303,7 @@
                                 <div class="space-y-3 z-10">
                                     <span class="text-amber-500 text-2xl"><i class="fas fa-lock"></i></span>
                                     <h4 class="font-serif font-bold text-sm">Acesso Reservado</h4>
-                                    <p class="text-[11px] text-slate-400 px-4">Adquira o acesso. O vídeo será entregue via e-mail para reprodução digital protegida.</p>
+                                    <p class="text-[11px] text-slate-400 px-4">Adquira o acesso. O vídeo será entregue via email para reprodução digital protegida.</p>
                                 </div>
                                 <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest">
                                     Jerónimo Editora - Streaming Protegido (${course.videoDuration})
@@ -427,7 +404,6 @@
             if (!container) return;
             const prefix = getPrefix();
             
-            // Corrige caminhos relativos se estiver em subpastas
             if (prefix !== '') {
                 container.querySelectorAll('a').forEach(link => {
                     let href = link.getAttribute('href');
@@ -445,7 +421,6 @@
                 });
             }
 
-            // Remove estritamente a extensão .html de todos os links internos no menu e rodapé
             container.querySelectorAll('a').forEach(link => {
                 let href = link.getAttribute('href');
                 if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
@@ -502,6 +477,7 @@
             filterCourses();
         });
     </script>
+    <!-- GoatCounter Analytics Tracker -->
     <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

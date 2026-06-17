@@ -6,6 +6,7 @@
     <title>Agendar Palestra | Hugo Bacelo</title>
     
     <script>
+        // Limpeza de URL sem .html no GitHub Pages
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
@@ -64,7 +65,7 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <!-- CONTENTOR DO MENU DINÂMICO (Carregado do seu GitHub) -->
     <div id="nav-placeholder"></div>
 
     <main class="flex-grow pt-28 md:pt-36 pb-16">
@@ -83,7 +84,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-5xl mx-auto items-start">
                 
-                <!-- Coluna da Esquerda: Informação e Temas (6 colunas) -->
+                <!-- Coluna da Esquerda: Informação e Temas -->
                 <div class="lg:col-span-7 space-y-8">
                     <div>
                         <h2 class="font-serif text-2xl font-bold text-brand-accent-orange mb-3">Descrição</h2>
@@ -125,7 +126,7 @@
                     </div>
                 </div>
 
-                <!-- Coluna da Direita: Formulário de Agendamento (5 colunas) -->
+                <!-- Coluna da Direita: Formulário de Agendamento -->
                 <div class="lg:col-span-5 bg-white p-6 sm:p-8 rounded-3xl border border-gray-150 shadow-xs">
                     <div class="mb-6">
                         <h3 class="font-serif text-xl font-bold text-brand-accent-blue mb-1">Formulário de Pedido</h3>
@@ -145,7 +146,7 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label for="book-email" class="block text-xs font-bold uppercase text-gray-500 mb-1.5 font-sans">E-mail</label>
+                                <label for="book-email" class="block text-xs font-bold uppercase text-gray-500 mb-1.5 font-sans">Email</label>
                                 <input type="email" id="book-email" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
                             </div>
                             <div>
@@ -156,7 +157,7 @@
 
                         <div>
                             <label for="book-theme" class="block text-xs font-bold uppercase text-gray-500 mb-1.5 font-sans">Tema Pretendido</label>
-                            <select id="book-theme" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
+                            <select id="book-theme" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-750">
                                 <option value="" disabled selected>Escolha uma área temática...</option>
                                 <option value="A Missa e o Mistério da Sagrada Liturgia">A Missa e o Mistério da Sagrada Liturgia</option>
                                 <option value="Nossa Senhora no Advento e Natal">Nossa Senhora no Advento e Natal</option>
@@ -180,7 +181,7 @@
         </div>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ DINÂMICO -->
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado do seu GitHub) -->
     <div id="footer-placeholder"></div>
 
     <script>
@@ -201,7 +202,7 @@
                               "Gostaria de solicitar o agendamento de uma palestra com Hugo Bacelo. Abaixo indico os detalhes:\n\n" +
                               "- Nome do Requerente: " + name + "\n" +
                               "- Paróquia / Organização: " + org + "\n" +
-                              "- E-mail de Contacto: " + email + "\n" +
+                              "- Email de Contacto: " + email + "\n" +
                               "- Data Proposta: " + date + "\n" +
                               "- Tema Pretendido: " + theme + "\n" +
                               "- Detalhes adicionais / Mensagem:\n" + msg + "\n\n" +
@@ -216,34 +217,10 @@
                     <span class="text-2xl"><i class="fas fa-check-circle"></i></span>
                     <div>
                         <p class="font-extrabold uppercase tracking-wider text-xs text-emerald-800">Pedido Preparado</p>
-                        <p class="text-xs font-medium text-emerald-700 mt-1">A iniciar a sua aplicação de correio eletrónico para enviar o e-mail de agendamento!</p>
+                        <p class="text-xs font-medium text-emerald-700 mt-1">A iniciar a sua aplicação de email para enviar o email de agendamento!</p>
                     </div>
                 </div>
             `;
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const backdrop = document.getElementById('menu-backdrop');
-            if (!menu || !backdrop) return;
-            
-            if (menu.classList.contains('translate-x-full')) {
-                backdrop.classList.remove('hidden');
-                setTimeout(() => {
-                    backdrop.classList.remove('opacity-0');
-                    backdrop.classList.add('opacity-100');
-                    menu.classList.remove('translate-x-full');
-                }, 20);
-                document.body.style.overflow = 'hidden'; 
-            } else {
-                menu.classList.add('translate-x-full');
-                backdrop.classList.remove('opacity-100');
-                backdrop.classList.add('opacity-0');
-                setTimeout(() => {
-                    backdrop.classList.add('hidden');
-                }, 300);
-                document.body.style.overflow = ''; 
-            }
         }
 
         function getSafePath(file) {
@@ -268,7 +245,6 @@
             if (!container) return;
             const prefix = getPrefix();
             
-            // Corrige caminhos relativos de imagens e links se estiver em subpastas
             if (prefix !== '') {
                 container.querySelectorAll('a').forEach(link => {
                     let href = link.getAttribute('href');
@@ -286,7 +262,6 @@
                 });
             }
 
-            // Remove estritamente a extensão .html de todos os links internos no menu e rodapé
             container.querySelectorAll('a').forEach(link => {
                 let href = link.getAttribute('href');
                 if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
@@ -340,6 +315,7 @@
 
         document.addEventListener('DOMContentLoaded', loadComponents);
     </script>
+    <!-- GoatCounter Analytics Tracker -->
     <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
