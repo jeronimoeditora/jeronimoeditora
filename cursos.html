@@ -6,7 +6,7 @@
     <title>Cursos em Vídeo | Hugo Bacelo</title>
     
     <script>
-        // Limpeza de URL sem .html no GitHub Pages
+        // Limpeza de URL sem .html no GitHub Pages para manter os endereços limpos
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
@@ -82,7 +82,6 @@
                 <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
             </div>
 
-            <!-- Painel de Pesquisa e Filtros -->
             <div class="bg-white p-4 sm:p-6 rounded-2xl border border-gray-150 shadow-xs max-w-4xl mx-auto mb-12">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 items-center">
                     
@@ -206,6 +205,31 @@
             }
         ];
 
+        // Função local estritamente requerida para garantir a abertura e fecho do menu importado no telemóvel
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
         function filterCourses() {
             const searchInput = document.getElementById('course-search');
             const categorySelect = document.getElementById('category-select');
@@ -281,13 +305,13 @@
                 }
 
                 grid.innerHTML += `
-                    <div class="course-card bg-white border border-gray-150 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between">
+                    <div class="course-card bg-white border border-gray-150 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between font-sans">
                         <div class="p-6 space-y-4">
                             <div class="flex justify-between items-center">
                                 <span class="text-[10px] font-bold uppercase tracking-wider text-white ${course.badgeClass} px-2 py-0.5 rounded">
                                     ${course.status}
                                 </span>
-                                <span class="text-xs text-brand-accent-orange font-bold uppercase tracking-wider font-sans">
+                                <span class="text-xs text-brand-accent-orange font-bold uppercase tracking-wider">
                                     ${course.category}
                                 </span>
                             </div>
@@ -295,7 +319,7 @@
                             <h2 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue">${course.title}</h2>
                             <p class="text-xs text-gray-400 font-medium">Aulas Gravadas • Acesso Imediato • Protecção Anti-Cópia</p>
                             
-                            <p class="text-sm text-gray-650 leading-relaxed font-light font-sans">
+                            <p class="text-sm text-gray-650 leading-relaxed font-light">
                                 ${course.description}
                             </p>
 
