@@ -196,6 +196,33 @@
             { id: 26, title: "Mulheres Antifeministas Precisam-se!", category: "Feminismo", date: "2026-01-05", readingTime: "6 min", url: "#" }
         ];
 
+        // --- STREAMING_CHUNK: Declarando a lógica de controlo do menu e filtros... ---
+        // Função local para garantir o controlo de abertura e fecho do menu dinâmico no telemóvel
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        // Filtra e ordena a visualização de artigos com base na pesquisa
         function filterArticles() {
             const searchTerm = document.getElementById('article-search').value.toLowerCase().trim();
             const selectedCategory = document.getElementById('category-select').value;
@@ -219,6 +246,8 @@
             renderArticles(filtered);
         }
 
+        // --- STREAMING_CHUNK: Implementando a renderização dinâmica de artigos... ---
+        // Renderiza visualmente o HTML dos artigos na grelha
         function renderArticles(articles) {
             const grid = document.getElementById('articles-grid');
             const noResults = document.getElementById('no-results');
@@ -301,6 +330,7 @@
             filterArticles();
         }
 
+        // --- STREAMING_CHUNK: Adicionando utilitários de carregamento de componentes... ---
         function getSafePath(file) {
             const currentUrl = window.location.href;
             if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
