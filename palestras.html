@@ -6,7 +6,7 @@
     <title>Agendar Palestra | Hugo Bacelo</title>
     
     <script>
-        // Limpeza de URL sem .html no GitHub Pages
+        // Limpeza de URL sem .html no GitHub Pages para manter os endereços limpos
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
@@ -84,7 +84,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-5xl mx-auto items-start">
                 
-                <!-- Coluna da Esquerda: Informação e Temas -->
+                <!-- Coluna da Esquerda: Informação e Temas (7 colunas) -->
                 <div class="lg:col-span-7 space-y-8">
                     <div>
                         <h2 class="font-serif text-2xl font-bold text-brand-accent-orange mb-3">Descrição</h2>
@@ -126,7 +126,7 @@
                     </div>
                 </div>
 
-                <!-- Coluna da Direita: Formulário de Agendamento -->
+                <!-- Coluna da Direita: Formulário de Agendamento (5 colunas) -->
                 <div class="lg:col-span-5 bg-white p-6 sm:p-8 rounded-3xl border border-gray-150 shadow-xs">
                     <div class="mb-6">
                         <h3 class="font-serif text-xl font-bold text-brand-accent-blue mb-1">Formulário de Pedido</h3>
@@ -157,7 +157,7 @@
 
                         <div>
                             <label for="book-theme" class="block text-xs font-bold uppercase text-gray-500 mb-1.5 font-sans">Tema Pretendido</label>
-                            <select id="book-theme" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-750">
+                            <select id="book-theme" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
                                 <option value="" disabled selected>Escolha uma área temática...</option>
                                 <option value="A Missa e o Mistério da Sagrada Liturgia">A Missa e o Mistério da Sagrada Liturgia</option>
                                 <option value="Nossa Senhora no Advento e Natal">Nossa Senhora no Advento e Natal</option>
@@ -185,6 +185,7 @@
     <div id="footer-placeholder"></div>
 
     <script>
+        // Função para lidar com o envio de formulário de agendamento por correio eletrónico (email)
         function handleBooking(e) {
             e.preventDefault();
             
@@ -221,6 +222,31 @@
                     </div>
                 </div>
             `;
+        }
+
+        // Função local estritamente requerida para garantir a abertura e fecho do menu importado no telemóvel
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
         }
 
         function getSafePath(file) {
