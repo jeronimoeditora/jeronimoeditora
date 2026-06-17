@@ -133,7 +133,7 @@
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-green-600 mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
             <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center">Encomenda recebida!</h3>
-            <p id="success-modal-msg" class="text-gray-650 mb-6 font-sans text-sm text-center">Obrigado pela sua preferência. Enviaremos um e-mail de confirmação para o seu endereço.</p>
+            <p id="success-modal-msg" class="text-gray-650 mb-6 font-sans text-sm text-center">Obrigado pela sua preferência. Enviaremos um email de confirmação para o seu endereço.</p>
             <a href="/" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg text-center">Voltar ao Início</a>
         </div>
     </div>
@@ -207,7 +207,7 @@
                         <div class="flex justify-between items-center border-b pb-2 mb-1">
                             <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red">1. Detalhes de Envio</h2>
                             <span id="morada-opcional-badge" class="hidden text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded bg-blue-50 text-brand-accent-blue border border-blue-100 font-sans">
-                                Entrega Digital Direta
+                                Entrega Digital Directa
                             </span>
                         </div>
                         
@@ -386,13 +386,26 @@
                                     <span>Portes de Envio:</span>
                                     <span id="summary-shipping" class="font-bold text-brand-gold">€ 0,00</span>
                                 </div>
-                                <div id="otimizacao-badge" class="mt-2"></div>
+                                <div id="optimizacao-badge" class="mt-2"></div>
                             </div>
                         </div>
 
-                        <div class="flex justify-between items-center mt-5 pt-3 border-t border-brand-gold">
+                        <div class="flex justify-between items-center mt-5 pt-3 border-t border-brand-gold mb-4">
                             <span class="font-serif text-xl font-bold">Total:</span>
                             <span id="summary-total" class="text-2xl md:text-3xl font-extrabold text-brand-gold">€ 0,00</span>
+                        </div>
+
+                        <!-- SECÇÃO RGPD / POLÍTICA DE PRIVACIDADE (OPT-IN ACTIVO) -->
+                        <div class="mt-4 pt-4 border-t border-white/15 text-xs text-left">
+                            <div class="flex items-start space-x-2">
+                                <input type="checkbox" id="privacy-policy" class="mt-1 rounded border-white/30 text-brand-accent-red focus:ring-brand-gold bg-white/10 cursor-pointer w-4 h-4" onchange="validateFinalButton()">
+                                <label for="privacy-policy" class="text-white/90 leading-relaxed cursor-pointer select-none">
+                                    Li e aceito os <a href="termos-condicoes" target="_blank" class="underline text-brand-gold hover:text-white font-bold">Termos e Condições</a> e a <a href="politica-privacidade" target="_blank" class="underline text-brand-gold hover:text-white font-bold">Política de Privacidade</a> da Jerónimo Editora. *
+                                </label>
+                            </div>
+                            <p class="mt-2 text-[10px] text-white/60 leading-snug">
+                                Os seus dados pessoais serão tratados estritamente para o processamento, entrega e facturação da sua encomenda, em total conformidade com o Regulamento Geral sobre a Protecção de Dados (RGPD).
+                            </p>
                         </div>
 
                         <button id="place-order-button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-all shadow-xl text-lg md:text-xl disabled:bg-gray-500 disabled:cursor-not-allowed" disabled>
@@ -543,7 +556,6 @@
             }
         }
 
-        // --- STREAMING_CHUNK: Setup Event listeners for input validation ---
         ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'].forEach(id => {
             const el = document.getElementById(id);
             if (el) {
@@ -590,7 +602,6 @@
             return 0;
         }
 
-        // --- STREAMING_CHUNK: Dynamically calculating and rendering the checkout cart sum ---
         function loadCartSummary() {
             const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const list = document.getElementById('summary-list');
@@ -605,17 +616,16 @@
                 const lineTotal = item.price * item.quantity;
                 subtotal += lineTotal;
                 
-                // Exibe etiqueta de vídeo/curso se for digital
                 const isDigital = item.type === 'curso';
                 const typeBadge = isDigital 
                     ? `<span class="bg-blue-100 text-brand-accent-blue text-[9px] px-1.5 py-0.5 rounded font-bold uppercase ml-2 border border-blue-200">Acesso Digital</span>` 
                     : ``;
 
                 const book = bookData.find(b => String(b.id) === String(item.id));
-                let itemWeight = 0; // Padrão 0 para itens digitais
+                let itemWeight = 0;
                 
                 if (!isDigital) {
-                    itemWeight = 272; // Peso físico padrão de segurança (g)
+                    itemWeight = 272; 
                     if (book) {
                         itemWeight = book.weight; 
                     } else if (item.weight) {
@@ -644,10 +654,9 @@
             });
             
             let custoPortes = 0;
-            const badge = document.getElementById('otimizacao-badge');
+            const badge = document.getElementById('optimizacao-badge');
             const physicalAddressContainer = document.getElementById('physical-address-fields');
 
-            // Os portes de envio e recolha de morada aplicam-se UNICAMENTE a mercadoria física
             if (hasPhysicalItems && pesoTotal > 0) {
                 const pesoFinal = pesoTotal + SHIPPING_MARGIN;
                 let numPacotes = Math.ceil(pesoFinal / 5000), pesoPorPacote = pesoFinal / numPacotes;
@@ -657,12 +666,11 @@
                     badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Envio Editorial CTT (Portes Físicos)</span>`;
                 }
                 
-                // Mostrar campos de morada e torná-los obrigatórios
                 if (physicalAddressContainer) physicalAddressContainer.classList.remove('hidden');
                 document.getElementById('morada-opcional-badge').classList.add('hidden');
                 document.querySelectorAll('.shipping-input').forEach(el => el.setAttribute('required', 'true'));
             } else {
-                custoPortes = 0; // Grátis para digital
+                custoPortes = 0;
                 if (badge) {
                     if (hasDigitalItems) {
                         badge.innerHTML = `<span class="bg-blue-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Entrega Digital Gratuita</span>`;
@@ -671,7 +679,6 @@
                     }
                 }
                 
-                // Se só existem artigos digitais, a secção inteira de morada física é ocultada do utilizador
                 if (!hasPhysicalItems && hasDigitalItems) {
                     if (physicalAddressContainer) physicalAddressContainer.classList.add('hidden');
                     document.getElementById('morada-opcional-badge').classList.remove('hidden');
@@ -679,7 +686,6 @@
                         el.removeAttribute('required');
                     });
                 } else if (!hasPhysicalItems && !hasDigitalItems) {
-                    // Carrinho vazio
                     if (physicalAddressContainer) physicalAddressContainer.classList.add('hidden');
                 }
             }
@@ -693,9 +699,9 @@
             const successMsg = document.getElementById('success-modal-msg');
             if (successMsg) {
                 if (hasDigitalItems && !hasPhysicalItems) {
-                    successMsg.innerHTML = `O seu pagamento foi simulado com sucesso. O vídeo e o acesso digital do curso foram processados e enviados para o e-mail: <strong>${document.getElementById('email').value || 'indicado'}</strong>.`;
+                    successMsg.innerHTML = `O seu pagamento foi simulado com sucesso. O vídeo e o acesso digital do curso foram processados e enviados para o email: <strong>${document.getElementById('email').value || 'indicado'}</strong>.`;
                 } else {
-                    successMsg.textContent = "Obrigado pela sua preferência. Enviaremos um e-mail com a confirmação da encomenda e detalhes de envio de imediato.";
+                    successMsg.textContent = "Obrigado pela sua preferência. Enviaremos um email com a confirmação da encomenda e detalhes de envio de imediato.";
                 }
             }
 
@@ -829,21 +835,19 @@
             validateFinalButton();
         }
 
-        // --- STREAMING_CHUNK: Validating form elements based on cart requirements ---
         function validateFinalButton() {
             const method = document.querySelector('input[name="payment-method"]:checked')?.value;
             const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             
-            // Verifica se existem produtos físicos
+            const privacyChecked = document.getElementById('privacy-policy')?.checked;
+            
             const hasPhysicalItems = cartItems.some(item => item.type !== 'curso');
 
-            // Nome e email são os requisitos base globais
             const nomeVal = document.getElementById('nome')?.value.trim();
             const emailVal = document.getElementById('email')?.value.trim();
             let inputsValid = nomeVal && emailVal;
 
-            // Se for puramente físico ou cabaz misto, a morada de envio torna-se estritamente requerida
             if (hasPhysicalItems) {
                 const requiredEnvio = ['morada', 'nr-andar', 'cod-postal', 'cidade'];
                 requiredEnvio.forEach(id => { 
@@ -863,7 +867,7 @@
 
             const btn = document.getElementById('place-order-button');
             if (btn) {
-                btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid;
+                btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid || !privacyChecked;
             }
         }
 
@@ -903,7 +907,7 @@
                         cidade: document.getElementById('cidade').value,
                         pais: document.getElementById('pais').value
                     } : {
-                        morada: "Entrega Digital (E-mail)",
+                        morada: "Entrega Digital (Email)",
                         nr_andar: "N/A",
                         cod_postal: "N/A",
                         cidade: "N/A",
