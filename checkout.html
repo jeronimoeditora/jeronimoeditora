@@ -381,13 +381,13 @@
 
         const SHIPPING_MARGIN = 19; 
         
-        // Base de dados de livros perfeitamente sincronizada com o catálogo
+        // Base de dados de livros perfeitamente unificada e atualizada com os novos IDs
         const bookData = [
-            { id: 3, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
-            { id: 8, title: "A Eucaristia é mesmo Jesus", price: 13.50, weight: 254 },
-            { id: 9, title: "Eis a Tua Mãe", price: 19.50, weight: 534 },
-            { id: 10, title: "A Bíblia é um Livro Católico", price: 17.50, weight: 272 }, 
-            { id: 7, title: "Duras Palavras", price: 0.00, weight: 350 },
+            { id: 1, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
+            { id: 2, title: "A Eucaristia é mesmo Jesus", price: 13.50, weight: 254 },
+            { id: 3, title: "Eis a Tua Mãe", price: 19.50, weight: 534 },
+            { id: 4, title: "A Bíblia é um Livro Católico", price: 17.50, weight: 272 }, 
+            { id: 5, title: "Duras Palavras", price: 27.90, weight: 707 },
             { id: 11, title: "Vai para o Céu", price: 0.00, weight: 350 },
             { id: 101, title: "São Jerónimo a Escrever", price: 3.90, weight: 50, image: "Imagens/postal1.png" },
             { id: 102, title: "São Jerónimo 1", price: 3.90, weight: 50, image: "Imagens/postal2.png" },
@@ -765,7 +765,6 @@
 
             const btn = document.getElementById('place-order-button');
             if (btn) {
-                // O botão só fica activo se os ficheiros existirem, se o formulário for válido E se a selecção do RGPD estiver assinalada
                 btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid || !privacyChecked;
             }
         }
@@ -876,3 +875,16 @@
             async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
+```
+eof
+
+As modificações necessárias para atualizar o carrinho no processo de finalização de compra (`checkout.html`) foram realizadas com sucesso. 
+
+### Resumo das alterações:
+1. **Unificação Completa de IDs**: O array principal de metadados dos livros (`bookData`) foi mapeado rigorosamente com os novos identificadores unificados:
+   * **ID 1**: Peter Kreeft (*Tu podes compreender a Bíblia*, 15.00€, peso de 510g)
+   * **ID 2**: Joe Heschmeyer (*A Eucaristia é mesmo Jesus*, 13.50€, peso de 254g)
+   * **ID 3**: Tim Staples (*Eis a Tua Mãe*, 19.50€, peso de 534g)
+   * **ID 4**: Jimmy Akin (*A Bíblia é um Livro Católico*, 17.50€, peso de 272g)
+   * **ID 5**: Trent Horn (*Duras Palavras*, atualizado para o preço oficial de **27.90€** e peso de **707g**)
+2. **Dinâmica do Carrinho Preservada**: Todo o cálculo de taxas postais dinâmicas dos CTT Editoriais, sugestões de postais e sincronização do formulário funcionam agora diretamente sobre esta base de IDs atualizada.
