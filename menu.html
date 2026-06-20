@@ -29,7 +29,7 @@
             <span class="font-serif text-xl md:text-2xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors duration-200 hidden sm:inline">Jerónimo Editora</span>
         </a>
         
-        <!-- Menu Desktop: Letras equilibradas (text-[14px]) -->
+        <!-- Menu Desktop -->
         <div class="hidden md:flex items-center space-x-5 lg:space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700">
             <a href="/" class="hover:text-brand-accent-red transition-colors">Início</a>
             <a href="/#sobre" class="hover:text-brand-accent-red transition-colors">Editora</a>
@@ -47,8 +47,6 @@
                 <div class="absolute left-0 top-full pt-1 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                     <div class="bg-white border border-gray-100 shadow-xl rounded-lg flex flex-col py-2 text-[13px] normal-case tracking-normal font-medium text-gray-700">
                         <a href="sobreHB" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Sobre HB</a>
-                        
-                        <!-- Artigos como ligação direta, sem submenus e sem a palavra Blog -->
                         <a href="artigos-geral" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Artigos</a>
 
                         <!-- Submenu: Formação -->
@@ -85,7 +83,7 @@
             </div>
         </div>
         
-        <!-- Botão Menu Mobile -->
+        <!-- Botão Menu Mobile com ícones vetoriais estáveis -->
         <div class="flex items-center md:hidden space-x-5">
             <a href="checkout" class="relative text-gray-800">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -122,11 +120,8 @@
     <!-- Links de Navegação com Scroll Interno Seguro -->
     <div class="flex-grow overflow-y-auto px-6 py-6 space-y-5 menu-drawer-scroll">
         <a href="/" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Início</a>
-        
         <a href="/#sobre" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Editora</a>
-        
         <a href="catalogo-completo" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Catálogo</a>
-        
         <a href="produtos" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Produtos</a>
         
         <!-- Accordion Mobile: Hugo Bacelo -->
@@ -137,8 +132,6 @@
             </summary>
             <div class="flex flex-col space-y-4 pl-3 mt-4 text-sm text-gray-700">
                 <a href="sobreHB" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()">Sobre HB</a>
-                
-                <!-- Artigos direto como ligação simples em mobile e sem a palavra Blog -->
                 <a href="artigos-geral" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()">Artigos</a>
 
                 <!-- Sub Accordion: Formação -->
@@ -166,7 +159,6 @@
     </div>
 </div>
 
-<!-- Lógica de Interceção e Sobrescrita para o Menu Slide-in (Off-canvas) -->
 <script>
     window.toggleMenu = function() {
         const menu = document.getElementById('mobile-menu');
@@ -174,23 +166,21 @@
         if (!menu || !backdrop) return;
         
         if (menu.classList.contains('translate-x-full')) {
-            // ABRIR
             backdrop.classList.remove('hidden');
             setTimeout(() => {
                 backdrop.classList.remove('opacity-0');
                 backdrop.classList.add('opacity-100');
                 menu.classList.remove('translate-x-full');
             }, 20);
-            document.body.style.overflow = 'hidden'; // Tranca o scroll da página principal
+            document.body.style.overflow = 'hidden';
         } else {
-            // FECHAR
             menu.classList.add('translate-x-full');
             backdrop.classList.remove('opacity-100');
             backdrop.classList.add('opacity-0');
             setTimeout(() => {
                 backdrop.classList.add('hidden');
             }, 300);
-            document.body.style.overflow = ''; // Liberta o scroll da página principal
+            document.body.style.overflow = '';
         }
     }
 </script>

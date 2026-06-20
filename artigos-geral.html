@@ -6,14 +6,13 @@
     <title>Arquivo de Artigos | Jerónimo Editora</title>
     
     <script>
-        // Limpeza estética do URL removendo a extensão .html na barra de pesquisa (GitHub Pages)
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
         }
     </script>
     
-    <!-- Google Fonts (Incluída a Roboto para uniformizar o Menu e a Inter para os Artigos) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -29,8 +28,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Roboto"', 'sans-serif'], // Menu herda Roboto e fica igual a todo o site
-                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
+                        sans: ['"Roboto"', 'sans-serif'], // Menu herda Roboto de forma limpa e idêntica
+                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura de artigos
                         serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
@@ -146,7 +145,6 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // Base de dados contendo apenas os 6 artigos de Teologia, com o mais antigo iniciando em ID 1
         const articlesData = [
             {
                 id: 6,
@@ -204,7 +202,6 @@
             }
         ];
 
-        // Função local para garantir o controlo de abertura e fecho do menu dinâmico no telemóvel
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             const backdrop = document.getElementById('menu-backdrop');
@@ -229,7 +226,6 @@
             }
         }
 
-        // Filtra e ordena a visualização de artigos com base na pesquisa
         function filterArticles() {
             const searchTerm = document.getElementById('article-search').value.toLowerCase().trim();
             const selectedCategory = document.getElementById('category-select').value;
@@ -253,7 +249,6 @@
             renderArticles(filtered);
         }
 
-        // Renderiza visualmente o HTML dos artigos na grelha
         function renderArticles(articles) {
             const grid = document.getElementById('articles-grid');
             const noResults = document.getElementById('no-results');
@@ -271,7 +266,7 @@
                 const formattedDate = dateObj.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
                 const linkAction = art.url !== '#' 
                     ? `href="${art.url}"` 
-                    : `href="javascript:void(0)" onclick="triggerToastNotice()"`;
+                    : `href="javascript:void(0)" onclick="triggerToastNotice()"` ;
 
                 let imageHtml = '';
                 if (art.image) {

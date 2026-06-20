@@ -6,14 +6,13 @@
     <title>Cursos em Vídeo | Hugo Bacelo</title>
     
     <script>
-        // Limpeza de URL sem .html no GitHub Pages para manter os endereços limpos
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
         }
     </script>
     
-    <!-- Google Fonts (Incluída a Roboto para uniformizar o Menu e a Inter para as aulas e cards) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -29,8 +28,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Roboto"', 'sans-serif'], // Menu herda Roboto e fica igual a todo o site
-                        inter: ['"Inter"', 'sans-serif'], // Inter para o visual moderno de aulas
+                        sans: ['"Roboto"', 'sans-serif'], // Menu herda Roboto de forma idêntica
+                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de cursos
                         serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
@@ -48,6 +47,10 @@
     <style>
         body { font-family: 'Inter', sans-serif; color: #2d3748; background-color: #F8F8F8; }
         
+        #nav-placeholder *, #footer-placeholder * {
+            font-style: normal !important;
+        }
+
         .video-wrapper {
             position: relative;
             -webkit-user-select: none;
@@ -120,7 +123,7 @@
             <!-- Sem Resultados -->
             <div id="no-results" class="hidden text-center py-16">
                 <i class="fas fa-video-slash text-gray-300 text-5xl mb-4"></i>
-                <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum curso encontrado</h3>
+                <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum artigo encontrado</h3>
                 <p class="text-gray-500 font-inter mt-1">Experimente alterar os termos de pesquisa ou os filtros seleccionados.</p>
             </div>
 
@@ -206,7 +209,6 @@
             }
         ];
 
-        // Função local estritamente requerida para garantir a abertura e fecho do menu importado no telemóvel
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             const backdrop = document.getElementById('menu-backdrop');
@@ -287,7 +289,7 @@
                         </div>
                     `;
                     actionButton = `
-                        <button onclick="adicionarAoCheckout('${course.id}', '${course.title}', ${course.price})" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl shadow-xs transition-all duration-300">
+                        <button onclick="adicionarAoCheckout('${course.id}', '${course.title}', ${course.price})" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl shadow-xs transition-all duration-300 font-inter">
                             Comprar Acesso
                         </button>
                     `;
@@ -299,7 +301,7 @@
                         </div>
                     `;
                     actionButton = `
-                        <button disabled class="bg-gray-200 text-gray-400 cursor-not-allowed text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl">
+                        <button disabled class="bg-gray-200 text-gray-400 cursor-not-allowed text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl font-inter">
                             Em Breve
                         </button>
                     `;
