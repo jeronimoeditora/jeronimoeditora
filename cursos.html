@@ -13,10 +13,10 @@
         }
     </script>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts (Incluída a Roboto para uniformizar o Menu e a Inter para as aulas e cards) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <!-- Font Awesome para Iconografia -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -29,7 +29,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Inter"', 'sans-serif'],
+                        sans: ['"Roboto"', 'sans-serif'], // Menu herda Roboto e fica igual a todo o site
+                        inter: ['"Inter"', 'sans-serif'], // Inter para o visual moderno de aulas
                         serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
@@ -72,13 +73,13 @@
     <!-- CONTENTOR DO MENU DINÂMICO (Carregado do seu GitHub) -->
     <div id="nav-placeholder"></div>
 
-    <main class="flex-grow pt-28 md:pt-36 pb-16">
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
         <div class="max-w-6xl mx-auto px-6 fade-in">
             
             <div class="text-center mb-10">
                 <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-2">Formação</span>
                 <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Cursos em Vídeo</h1>
-                <p class="font-sans text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">Aprender a fé cristã com rigor teológico tradicional.</p>
+                <p class="font-inter text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">Aprender a fé cristã com rigor teológico tradicional.</p>
                 <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
             </div>
 
@@ -89,18 +90,18 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                             <i class="fas fa-search text-gray-400 text-sm"></i>
                         </span>
-                        <input type="text" id="course-search" onkeyup="filterCourses()" placeholder="Pesquise cursos por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                        <input type="text" id="course-search" onkeyup="filterCourses()" placeholder="Pesquise cursos por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
                     </div>
                     
                     <div class="lg:col-span-3">
-                        <select id="category-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
+                        <select id="category-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter cursor-pointer text-gray-700">
                             <option value="all">Todas as Categorias</option>
                             <option value="Liturgia">Liturgia</option>
                         </select>
                     </div>
 
                     <div class="lg:col-span-2">
-                        <select id="sort-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
+                        <select id="sort-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter cursor-pointer text-gray-700">
                             <option value="date-desc">Mais Recentes</option>
                             <option value="date-asc">Mais Antigos</option>
                             <option value="az">Título A-Z</option>
@@ -108,7 +109,7 @@
                     </div>
 
                     <div class="lg:col-span-2">
-                        <button onclick="clearFilters()" class="w-full bg-brand-accent-blue text-white hover:bg-brand-accent-orange font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-sans">
+                        <button onclick="clearFilters()" class="w-full bg-brand-accent-blue text-white hover:bg-brand-accent-orange font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-inter">
                             Limpar
                         </button>
                     </div>
@@ -120,7 +121,7 @@
             <div id="no-results" class="hidden text-center py-16">
                 <i class="fas fa-video-slash text-gray-300 text-5xl mb-4"></i>
                 <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum curso encontrado</h3>
-                <p class="text-gray-500 font-sans mt-1">Experimente alterar os termos de pesquisa ou os filtros seleccionados.</p>
+                <p class="text-gray-500 font-inter mt-1">Experimente alterar os termos de pesquisa ou os filtros seleccionados.</p>
             </div>
 
             <!-- Grelha de Cursos -->
@@ -138,7 +139,7 @@
         </div>
         <div class="flex-grow">
             <p class="text-xs text-emerald-800 font-bold uppercase tracking-wider">Adicionado com Sucesso</p>
-            <p id="toast-message" class="text-sm text-gray-650 font-medium">O curso foi adicionado ao seu carrinho.</p>
+            <p id="toast-message" class="text-sm text-gray-650 font-medium font-inter">O curso foi adicionado ao seu carrinho.</p>
         </div>
     </div>
 
@@ -156,7 +157,7 @@
                 <h3 class="font-serif text-xl font-bold text-brand-accent-blue">Acesso aos Cursos</h3>
             </div>
             
-            <div class="space-y-3 text-sm text-gray-650 font-sans leading-relaxed">
+            <div class="space-y-3 text-sm text-gray-650 font-inter leading-relaxed">
                 <p class="font-semibold text-brand-accent-blue">Como funciona o acesso?</p>
                 <p>O curso foi adicionado ao seu carrinho de compras para que possa prosseguir para o pagamento.</p>
                 <p class="bg-[#fcf8ee] border border-amber-100 p-3.5 rounded-xl font-medium text-brand-accent-orange flex gap-2">
@@ -166,10 +167,10 @@
             </div>
 
             <div class="mt-6 flex flex-col sm:flex-row gap-3">
-                <button onclick="closeWarningModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center">
+                <button onclick="closeWarningModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-inter text-center">
                     Continuar a ver
                 </button>
-                <a href="checkout" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center block">
+                <a href="checkout" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-inter text-center block">
                     Ir para o Carrinho <i class="fas fa-shopping-cart ml-1"></i>
                 </a>
             </div>
@@ -305,7 +306,7 @@
                 }
 
                 grid.innerHTML += `
-                    <div class="course-card bg-white border border-gray-150 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between font-sans">
+                    <div class="course-card bg-white border border-gray-150 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between font-inter">
                         <div class="p-6 space-y-4">
                             <div class="flex justify-between items-center">
                                 <span class="text-[10px] font-bold uppercase tracking-wider text-white ${course.badgeClass} px-2 py-0.5 rounded">

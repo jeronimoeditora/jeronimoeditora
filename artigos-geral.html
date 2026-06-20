@@ -13,10 +13,10 @@
         }
     </script>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts (Incluída a Roboto para uniformizar o Menu e a Inter para os Artigos) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <!-- Font Awesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -29,7 +29,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Inter"', 'sans-serif'],
+                        sans: ['"Roboto"', 'sans-serif'], // Menu herda Roboto e fica igual a todo o site
+                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
                         serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
@@ -69,14 +70,14 @@
     <!-- CONTENTOR DO MENU DINÂMICO (Carregado do GitHub) -->
     <div id="nav-placeholder"></div>
 
-    <main class="flex-grow pt-28 md:pt-36 pb-16">
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
         <div class="max-w-6xl mx-auto px-6 fade-in">
             
             <!-- Título Principal do Arquivo de Artigos -->
             <div class="text-center mb-10">
                 <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-2">Escritos & Formação</span>
                 <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Arquivo de Artigos</h1>
-                <p class="font-sans text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">"Investigar com paciência, crer com convicção e reter com sabedoria."</p>
+                <p class="font-inter text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">"Investigar com paciência, crer com convicção e reter com sabedoria."</p>
                 <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
             </div>
 
@@ -88,18 +89,18 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                             <i class="fas fa-search text-gray-400 text-sm"></i>
                         </span>
-                        <input type="text" id="article-search" onkeyup="filterArticles()" placeholder="Pesquise artigos por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                        <input type="text" id="article-search" onkeyup="filterArticles()" placeholder="Pesquise artigos por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
                     </div>
                     
                     <div class="lg:col-span-3">
-                        <select id="category-select" onchange="filterArticles()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
+                        <select id="category-select" onchange="filterArticles()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter cursor-pointer text-gray-700">
                             <option value="all">Todas as Categorias</option>
                             <option value="Teologia">Teologia</option>
                         </select>
                     </div>
 
                     <div class="lg:col-span-2">
-                        <select id="sort-select" onchange="filterArticles()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
+                        <select id="sort-select" onchange="filterArticles()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter cursor-pointer text-gray-700">
                             <option value="date-desc">Mais Recentes</option>
                             <option value="date-asc">Mais Antigos</option>
                             <option value="az">Título A-Z</option>
@@ -107,7 +108,7 @@
                     </div>
 
                     <div class="lg:col-span-2">
-                        <button onclick="clearFilters()" class="w-full bg-brand-accent-blue text-white hover:bg-brand-accent-orange font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-sans">
+                        <button onclick="clearFilters()" class="w-full bg-brand-accent-blue text-white hover:bg-brand-accent-orange font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-inter">
                             Limpar
                         </button>
                     </div>
@@ -119,7 +120,7 @@
             <div id="no-results" class="hidden text-center py-16">
                 <i class="fas fa-book-open text-gray-300 text-5xl mb-4"></i>
                 <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum artigo encontrado</h3>
-                <p class="text-gray-500 font-sans mt-1">Experimente alterar os termos de pesquisa ou os filtros seleccionados.</p>
+                <p class="text-gray-500 font-inter mt-1">Experimente alterar os termos de pesquisa ou os filtros seleccionados.</p>
             </div>
 
             <!-- Grelha de Artigos -->
@@ -137,7 +138,7 @@
         </div>
         <div class="flex-grow">
             <p class="text-xs text-brand-accent-blue font-bold uppercase tracking-wider">Aviso de Disponibilidade</p>
-            <p class="text-sm text-gray-650 font-medium">Este artigo estará disponível online brevemente.</p>
+            <p class="text-sm text-gray-650 font-medium font-inter">Este artigo estará disponível online brevemente.</p>
         </div>
     </div>
 
@@ -283,7 +284,7 @@
                     imageHtml = `
                         <a ${linkAction} class="block w-full h-32 sm:h-36 overflow-hidden rounded-2xl bg-gray-50 border border-gray-150 mb-4 flex flex-col items-center justify-center text-center cursor-pointer">
                             <i class="fas fa-book-open text-gray-200 text-3xl mb-1.5"></i>
-                            <span class="text-[9px] uppercase tracking-widest font-black text-gray-400 font-sans">Brevemente</span>
+                            <span class="text-[9px] uppercase tracking-widest font-black text-gray-400 font-inter">Brevemente</span>
                         </a>
                     `;
                 }
@@ -291,11 +292,11 @@
                 grid.innerHTML += `
                     <div class="article-card bg-white p-6 rounded-3xl border border-gray-150 shadow-xs flex flex-col justify-between">
                         <div>
-                            <span class="text-brand-accent-orange text-[10px] font-extrabold uppercase tracking-widest block mb-3 font-sans">${art.category}</span>
-                            <h3 class="font-sans text-lg sm:text-xl font-bold text-brand-accent-blue leading-snug mb-3 hover:text-brand-accent-orange transition-colors duration-200">
+                            <span class="text-brand-accent-orange text-[10px] font-extrabold uppercase tracking-widest block mb-3 font-inter">${art.category}</span>
+                            <h3 class="font-inter text-lg sm:text-xl font-bold text-brand-accent-blue leading-snug mb-3 hover:text-brand-accent-orange transition-colors duration-200">
                                 <a ${linkAction}>${art.title}</a>
                             </h3>
-                            <span class="text-xs text-gray-400 font-sans block mb-4 font-medium flex flex-wrap items-center gap-1.5">
+                            <span class="text-xs text-gray-400 font-inter block mb-4 font-medium flex flex-wrap items-center gap-1.5">
                                 <i class="far fa-calendar text-gray-400"></i> ${formattedDate}
                                 <span class="text-gray-300">|</span>
                                 <span class="inline-flex items-center gap-1">
@@ -305,10 +306,10 @@
                             ${imageHtml}
                         </div>
                         <div class="pt-5 border-t border-gray-100 mt-2 flex justify-between items-center">
-                            <a ${linkAction} class="text-xs text-brand-accent-blue font-extrabold uppercase tracking-widest flex items-center gap-1.5 hover:text-brand-accent-orange transition-colors font-sans">
+                            <a ${linkAction} class="text-xs text-brand-accent-blue font-extrabold uppercase tracking-widest flex items-center gap-1.5 hover:text-brand-accent-orange transition-colors font-inter">
                                 Ler Artigo <i class="fas fa-chevron-right text-[10px] text-brand-accent-orange"></i>
                             </a>
-                            <span class="text-[10px] text-gray-400 font-sans font-semibold">Escrito por HB</span>
+                            <span class="text-[10px] text-gray-400 font-inter font-semibold">Escrito por HB</span>
                         </div>
                     </div>
                 `;
@@ -346,7 +347,7 @@
 
         function getPrefix() {
             const path = window.location.pathname.toLowerCase();
-            if (path.includes('/artigos/') || path.includes('/artigos-individuais/') || path.includes('/artigos-individuais/')) {
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
                 return '../';
             }
             return '';
