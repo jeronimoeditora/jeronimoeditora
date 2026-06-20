@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Engolido por uma má exegese | Hugo Bacelo</title>
+    
+    <script>
+        // Remove a extensão .html da barra de endereço para um aspeto limpo e profissional
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <!-- Google Fonts unificadas com suporte a pesos e itálicos completos para Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
+                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+
+        .text-readable-article {
+            line-height: 1.85;
+            letter-spacing: -0.003em;
+            word-spacing: 0.05em;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 2px;
+            color: #e05300;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div id="nav-placeholder"></div>
+
+    <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
+        <article class="max-w-4xl mx-auto px-6 fade-in">
+            
+            <div class="mb-8">
+                <!-- Direcionado para a URL limpa de artigos -->
+                <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
+                    <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
+                </a>
+            </div>
+
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center md:text-left">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3">Teologia</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">
+                    Engolido por uma má exegese
+                </h1>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500 font-medium">
+                    <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 23 de Abril de 2026</span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5 font-inter">
+                        <i class="far fa-user"></i> Escrito por 
+                        <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">10</span> min de leitura</span>
+                </div>
+            </header>
+
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-xs relative bg-gray-100">
+                <img src="../Imagens/5.png" alt="Engolido por uma má exegese" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Engolido+por+uma+m%C3%A1+exegese';">
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto">
+                    Crítica ao livro Ler a Bíblia no Século XXI escrito por Pe. Carreira das Neves da Editorial Presença (3 de 3)
+                </p>
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto">
+                
+                <p class="dropcap">
+                    O Livro de Jonas ocupa um lugar singular no imaginário bíblico, oscilando, na percepção popular e académica, entre a crónica histórica e a narrativa parabólica. Recentemente, o Pe. Ariel Álvarez Valdés, no artigo de capa da revista Bíblica N.º 414 (Setembro/Outubro 2024), relançou o debate ao questionar a historicidade do profeta e a veracidade do episódio do «grande peixe». Sob o título «O Profeta Jonas foi engolido por uma baleia?», o autor propõe que o text é um «romance» tardio, repleto de imprecisões que invalidariam qualquer pretensão de factualidade.
+                </p>
+
+                <p>
+                    O presente ensaio propõe uma análise crítica desta tese. Sem ignorar os desafios que a exegese moderna coloca ao texto, procuraremos demonstrar que muitos dos «erros» apontados pelo Pe. Ariel resultam de uma leitura que impõe categorias literárias modernas ao mundo antigo e que a pressuposição da não-historicidade pode, por vezes, servir mais como uma «saída de emergência» para o racionalismo do que como uma conclusão científica inevitável. Mais do que resolver o enigma biológico do cetáceo, importa resgatar a integridade do texto e a profundidade da sua mensagem teológica.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Erros, Incoerências e Fantasias</h3>
+
+                <p>
+                    O Pe. Ariel afirma, logo à partida, que uma «análise cuidadosa do livro revela que a história contém tantos erros, incoerências e fantasias que não pode ser o Jonas histórico». Que espécie de análise é esta que categoriza um documento como não-historico apenas por conter supostas imprecisões? Um historiador da Antiguidade não estaria sujeito a lapsos ou ao uso de convenções literárias da sua época? Como é evidente, a ausência de erros históricos numa fábula contemporânea não a transmutaria em documento historiográfico; porquê, então, exigir que a presença de imprecisões desqualifique, por si só, a historicidade de um relato antigo? A historicidade de um texto bíblico prende-se com a sua intenção teológica e a sua recepção canónica, não com a exactidão de um guia turístico moderno. Analisemos, então, os referidos «erros, incoerências e fantasias».
+                </p>
+
+                <h4 class="font-serif text-lg sm:text-xl font-bold text-brand-accent-orange pt-2">Qual Jonas?</h4>
+
+                <p>
+                    «O Jonas do século VIII a.C. foi um profeta glorioso, que a Bíblia recorda com admiração (2Rs 14,25–27). O profeta deste livro, pelo contrário, é uma personagem ridícula e grotesca, que, com uma mentalidade infantil, tenta fazer o contrário do que Deus lhe pede.»
+                </p>
+
+                <p>
+                    O Pe. Ariel contrapõe o Jonas do 2 Reis, que classifica como «glorioso» e «admirado», ao Jonas do livro homónimo, que descreve como «ridículo e grotesco». Esta é uma dicotomia forçada. Concordo com a descrição do profeta do Livro de Jonas, mas julgo a descrição do Jonas do 2 Reis sem fundamento. O texto de Reis limita-se a registar que Jonas foi um «servo do Senhor» que anunciou a restauração de fronteiras ao Rei de Israel, como vemos abaixo.
+                </p>
+
+                <blockquote class="border-l-4 border-brand-accent-orange pl-4 italic text-gray-500 my-6">
+                    No décimo quinto ano do reinado de Amacias, filho de Joás, rei de Judá, Jeroboão, filho de Joás, começou a reinar sobre Israel, na Samaria. Reinou quarenta e um anos. Fez o mal aos olhos do Senhor, e não se afastou dos pecados de Jeroboão, filho de Nabat, que fizera pecar Israel. Restabeleceu as fronteiras de Israel, desde a entrada para Hamat até ao mar da planície, conforme o Senhor anunciara pela boca do seu servo Jonas, filho de Amitai, natural de Gat-Héfer. (2Rs 14,23–25)
+                </blockquote>
+
+                <p>
+                    Como pode ser esta passagem suficiente para afirmar que «a Bíblia recorda Jonas com admiração», fazendo-o «um profeta glorioso»? Acaso ser servo de Deus imuniza o homem contra a rebeldia ou a mesquinhez? A Bíblia está repleta de figuras que alternam entre a glória e a miséria espiritual (veja-se o Rei David ou o Apóstolo Pedro). Sugerir que o protagonista do Livro de Jonas não pode ser o mesmo de 2 Reis apenas porque um texto foca na sua profecia política e o outro na sua crise espiritual é ignorar a complexidade da alma humana que a Escritura tão bem retrata. Parece-me, portanto, exagerado usar esta passagem como se fosse evidência suficiente para concluir que o protagonista do Livro de Jonas não possa ser a mesma pessoa de que o profeta Jonas mencionado em 2 Rs 14.
+                </p>
+
+                <h4 class="font-serif text-lg sm:text-xl font-bold text-brand-accent-orange pt-2">Capital do Reino e Títulos Reais</h4>
+
+                <p>
+                    «No tempo do profeta Jonas, a capital da Assiria não era Ninive, como diz o livro, mas Assur. Portanto, não havia nenhum rei na cidade de Ninive naquela época que pudesse ordenar a conversão dos ninivitas.»
+                </p>
+
+                <p>
+                    O «rei de Nínive» seria, possivelmente, o rei da Assíria que, na época da carreira de Jonas, seria provavelmente Salmanaser IV (782–773 a.C.) ou Assurdã III (772–755 a.C.). Contudo, dado que o termo Hebraico para «rei» (melek) pode também designar um «governante» menor, a expressão poderá referir-se a um governador provincial sediado em Nínive.<sup>i</sup> De facto, melek aparece na Bíblia mais de 2000 vezes, referindo-se a todas as categorias de governantes, desde os pequenos chefes tribais ao Rei dos reis escatológico.
+                </p>
+
+                <p>
+                    «Na época de Jonas, o rei não se chamava “rei de Nínive”, como diz o relato, mas “rei da Assíria” (como lemos em 2 Rs 18,17–35). É claro que quando o livro de Jonas foi escrito, muitos séculos depois, o seu autor já não se lembrava do título oficial do monarca.»
+                </p>
+
+                <p>
+                    Confirmo que na passagem bíblica indicada pelo autor o título do rei é «rei da Assíria». Todavia, isso de nada serve. Como observou Bento XVI na sua obra <i>Jesus de Nazaré: A Infância de Jesus</i>, os títulos dependem do sujeito que os profere. Os Magos do Oriente perguntam pelo «Rei dos Judeus», «uma expressão tipicamente não-Judaica; em ambiente Judaica ter-se-ia dito “Rei de Israel”».<sup>ii</sup> Que um autor Israelita se refira ao monarca Assírio como «Rei de Nínive», cidade que personificava o pecado e o poder opressor, pode simplesmente significar uma escolha literária e teológica perfeitamente coerente. Além disso, se o livro tivesse sido escrito séculos depois (como Ariel defende), o autor teria acesso aos Livros dos Reis e saberia o título dito «oficial». Se usou outro, fê-lo por intenção, não por amnésia histórica.
+                </p>
+
+                <h4 class="font-serif text-lg sm:text-xl font-bold text-brand-accent-orange pt-2">O Silêncio da História</h4>
+
+                <p>
+                    «É impossível que, no século VIII, um profeta de Israel pudesse ter entrado tão livremente na capital assíria e pregado contra ela e seus deuses.»
+                </p>
+
+                <p>
+                    «O livro diz que todos os habitantes de Nínive, desde o rei até ao último súbdito, se converteram a Deus. Mas que um povo sanguinário e feroz como a Assíria se tivesse convertido ao Deus de Israel seria inaudito, e teria deixado vestígios nos documentos assírios, ou noutros livros da Bíblia, o que não aconteceu.»
+                </p>
+
+                <p>
+                    Aqui, o Pe. Ariel toca no seu único argumento robusto. É verdade que não há registos extrabíblicos de uma conversão nacional Assíria. Contudo, o argumento do silêncio é perigoso. A ausência de evidência não é evidência de ausência, especialmente num povo cujos anais serviam quase exclusivamente para a auto-exaltação dos seus soberanos. Uma humilhação colectiva perante um Deus estrangeiro seria o último facto que um escriba de Nínive registaria.
+                </p>
+
+                <h4 class="font-serif text-lg sm:text-xl font-bold text-brand-accent-orange pt-2">A Hiperbolização do Tamanho</h4>
+
+                <p>
+                    «O livro diz que Nínive “era tão grande que eram necessários três dias de viagem para atravessá-la” (Jn 3,3). Isso significa, segundo cálculos arqueológicos, que a cidade devia ter cerca de 45 quilómetros de diâmetro. Mas hoje os arqueólogos que escavaram Nínive mostraram que o perímetro das suas muralhas era de apenas 12 quilómetros.»
+                </p>
+
+                <p>
+                    Neste caso, força-se um literalismo matemático sobre uma expressão idiomática. De facto, o significado preciso da expressão é disputado. Se um contemporâneo diz estar com «mil e um problemas», não o acusamos de mentira se tiver apenas dez. Portanto, tal expressão hiperbólica não obriga a conclusão que o autor bíblico seja mentiroso ou ignorante relativamente à dimensão histórica de Nínive. Por outro lado, o autor poderá querer dizer que Jonas precisará de três dias para pregar a mensagem do Senhor em todos os distritos e bairros da cidade e, talvez, até nos subúrbios.<sup>iii</sup>
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">A Armadilha do «Romance» e a Apologética Cristã</h3>
+
+                <p>
+                    Após apresentar estes seis «erros», o Pe. Ariel conclui que «isto levou os biblistas a considerarem hoje o livro de Jonas não como um relato histórico, mas como um pequeno romance, uma narrativa imaginária». Primeiro, é importante referir que não existe uma unidade homogénea de seu nome «biblistas». Raramente existe consenso total e pleno entre eles. O debate História vs. Ficção sobre o Livro de Jonas não é excepção e existem bons argumentos para ambos os lados (como veremos mais adiante), pelo que seria imprudente declarar o debate como encerrado.
+                </p>
+
+                <p>
+                    Segundo, a insistência do Pe. Ariel em classificar Jonas como um «romance» (termo que usa dezoito vezes) é, do ponto de vista apologético, um tiro no pé. O conceito de romance é uma invenção literária dos séculos XVIII e XIX. Ao projectar esta categoria sobre um texto do Antigo Testamento, o Pe. Ariel dá armas ao cepticismo ateu que, usando a mesma lógica anacrónica, tenta classificar os Evangelhos como romances ficcionais. O comum contra-argumento Cristão é precisamente alertar que o conceito de romance seria totalmente desconhecido para os Evangelistas.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">O Grande Peixe: Uma Falsa Dificuldade</h3>
+
+                <p>
+                    Tomando como ponto de partida a categorização do Livro de Jonas como romance, o Pe. Ariel parte para uma exegese que empobrece grandemente a leitura deste livro bíblico.
+                </p>
+
+                <blockquote class="border-l-4 border-brand-accent-orange pl-4 italic text-gray-500 my-6">
+                    Este famoso peixe causou muitos problemas aos antigos intérpretes da Bíblia, que durante séculos se interrogaram: que animal marinho seria aquele? Como é que Jonas conseguiu sobreviver no ventre daquele monstro? Como é que saiu ileso? Mas agora que estamos a lidar com um romance, essas dificuldades desapareceram. É por isso que também não temos problemas em aceitar que, do ventre do peixe, Jonas faça uma bela oração a Deus, pedindo-lhe que o salve (Jn 2,3-11).
+                </blockquote>
+
+                <p>
+                    A primeira questão, «que animal marinho seria aquele?», desvia o foco do leitor para um detalhe irrelevante, cujo debate é mera curiosidade e não afecta o teor teológico do livro. O Hebraico (gadol dag) não é específico quanto à espécie de animal marinho em questão; especifica apenas o seu grande tamanho. A versão Grega dos LXX (Septuaginta) traduz como kētos, que significa «monstro marinho» ou, possivelmente, «baleia». Portanto, o foco deverá ser sobre o significado teológico do «grande peixe», o qual pode ser entendido não como um instrumento de morte, mas o meio pelo qual Deus salva Jonas de se afogar e lhe concede uma segunda oportunidade para cumprir a sua missão profética.<sup>iv</sup>
+                </p>
+
+                <p>
+                    As outras questões, «como Jonas sobreviveu?» e «como saiu ileso?», convidam o leitor à falta de fé, pois aquilo que aos homens é impossível, é possível para Deus (cf. Mc 10,27). São Cirilo de Jerusalém desafia o cepticismo com uma lógica implacável: «Consideremos qual destas coisas é a mais difícil: se um homem ressuscitar depois de ser sepultado, ou se um homem escapar à corrupção no calor do ventre de uma baleia. Se uma não é credível, também a outra o não é. Jonas foi preservado, dado que todas as coisas são possíveis para Deus, e Cristo foi, da mesma forma, ressuscitado dos mortos».<sup>v</sup> Como tal, não é verdade que as dificuldades desaparecem por estarmos «a lidar com um romance»; as dificuldades nem sequer surgem para o leitor crente.
+                </p>
+
+                <p>
+                    Atrevo-me a especular que os «erros, incoerências e fantasias» não são os alicerces para a conclusão de não-historicidade do Livro de Jonas do Pe. Ariel. Ao invés disso, parece-me que a motivação foi resolver o «problema» do grande peixe, indo à procura de razões para nem sequer considerar como literal o episódio com o monstro marinho. Ou seja, a categorização como romance serve de cómoda «saída de emergência» para evitar o escândalo da intervenção sobrenatural de Deus na história. Se for esse o caso, Peter Kreeft adverte-nos: quem encara o Livro de Jonas desta forma
+                </p>
+
+                <blockquote class="border-l-4 border-brand-accent-orange pl-4 italic text-gray-500 my-6">
+                    é um modernista, pois a sua premissa escondida é que os milagres não podem acontecer na história real. Esta premissa é (1) herética, (2) irracional e, muitas vezes, até (3) desonesta. É herética porque a essência do Cristianismo é milagrosa (criação, Encarnação, Ressurreição). É irracional porque um Deus suficientemente grande para criar o universo do nada é certamente suficientemente grande para conservar um homem vivo dentro de um peixe. E é muitas vezes desonesta porque a verdadeira razão para interpretar uma passagem de forma não histórica raramente é explicitada pelo teólogo modernista; é simplesmente assumida de modo suave, introduzida sorrateiramente, como um mágico que mete uma carta na manga.<sup>vi</sup>
+                </blockquote>
+
+                <p>
+                    Se partirmos do pressuposto de que Deus existe e é o Criador do universo, a questão da «impossibilidade» do milagre torna-se irrelevante. Defender a impossibilidade da sobrevivência de Jonas é, no fundo, um argumento contra a omnipotência divina disfarçado de exegese.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Oração a Partir do Ventre do Grande Peixe: Outra Falsa Dificuldade</h3>
+
+                <p>
+                    O Pe. Ariel também considera que a oração de Jonas a partir do ventre do peixe levanta «muitas dificuldades» e, por conseguinte, conclui que se trata de um «acrescento tardio».
+                </p>
+
+                <blockquote class="border-l-4 border-brand-accent-orange pl-4 italic text-gray-500 my-6">
+                    Esta oração levanta, de facto, muitas dificuldades. Em primeiro lugar, não menciona o peixe, e Jonas parece estar no fundo do mar (Jn 2,6–7), não no ventre do cetáceo. Além disso, não faz alusão à sua missão, que foi a causa de todos os seus problemas. Finalmente, Jonas agradece a Deus por o ter salvo (Jn 2,10) enquanto ainda está no estômago do animal (Jn 2,11). Por isso, os estudiosos defendem que esta oração é um salmo que não fazia parte da história original e que foi acrescentado mais tarde para tornar Jonas um pouco mais piedoso e aceitável para os leitores.
+                </blockquote>
+
+                <p>
+                    Por um lado, o facto de Jonas não mencionar o peixe nem a sua missão é prova de nada pois se trata do argumento falacioso do silêncio: como a oração não menciona as circunstâncias não pode ter sido proferida por alguém que estava inserido nelas. Tal raciocínio não é lógico. Por outro lado, a oração é precedida pela afirmação que Jonas a proferiu a partir do ventre do peixe (Jn 2,1), pelo que não compreendo o comentário que «Jonas parece estar no fundo do mar, não no ventre do cetáceo». Será pela expressão «raízes das montanhas» que significava as profundidades do mar<sup>vii</sup>? Mas se Jonas foi engolido pelo grande peixe, para onde é que este o havia de levar!? Jonas pode estar simultaneamente no ventre do grande peixe e no fundo mar!
+                </p>
+
+                <p>
+                    Além disso, o Pe. Ariel considera uma dificuldade Jonas agradecer a salvação de Deus antes d’Ele o ter salvo. Tal facto não é uma dificuldade se interpretamos o grande peixe, como já referido, como instrumento de salvação de Deus. Rezando a partir do interior do grande peixe, Jonas recorda o seu clamor a Deus enquanto se afundava no mar. Isto poderá ter sido (i) uma experiência de quase-morte da qual foi salvo no último instante ou (ii) uma experiência real de morte por afogamento da qual foi reanimado. De qualquer forma, o Senhor salvou-o de uma sepultura aquática ao enviar um peixe para o engolir e devolvê-lo a terra firme. Jonas faz o voto de oferecer um sacrifício em gratidão pela sua libertação de afogamento. Note-se que Jonas recita uma oração de acção de graças pelo seu resgate do ventre do Sheol; ele não está a recitar uma oração de súplica para ser resgatado do ventre do peixe.<sup>viii</sup>
+                </p>
+
+                <p>
+                    Jonas faz o voto de realizar uma oferta de acção de graças no Templo, momento em que relatará a história do seu livramento aos seus companheiros de adoração.<sup>ix</sup> Com este detalhe final, percebemos que a oração de Jonas encaixa na estrutura dos Salmos de Acção de Graças (Hb. Todah). Os salmos de acção de graças seguem um enredo típico que se move do infortúnio para o louvor. Eram cantados ou recitados nos átrios do Templo, onde a gratidão era expressa numa liturgia de culto divino, mas olham retrospectivamente para uma crise do passado e avançam para uma celebração de como Deus a resolveu. Os elementos básicos são os seguintes:<sup>x</sup>
+                </p>
+
+                <div class="space-y-3 my-6">
+                    <p>
+                        <span class="text-brand-accent-orange mr-1.5">•</span><strong>(a)</strong> O Salmista lamenta um tempo passado em que se encontrou em sérias dificuldades (e.g., perseguições hostis, doenças terminais e traição violenta, etc.);
+                    </p>
+                    <p>
+                        <span class="text-brand-accent-orange mr-1.5">•</span><strong>(b)</strong> No meio da sua angústia, o Salmista clamou ao Senhor por ajuda e, confiando no poder de Deus para salvar, fez o voto de levar um sacrifício de acção de graças ao Templo e de proclamar a bondade do Senhor perante os outros;
+                    </p>
+                    <p>
+                        <span class="text-brand-accent-orange mr-1.5">•</span><strong>(c)</strong> Se Deus respondesse à sua oração, o Salmista cumpria o seu voto apresentando uma oferta pacífica ao Senhor: um animal sacrificado em acção de graças, juntamente com bolos de farinha e pães (cf. Lv 7,12–14);
+                    </p>
+                    <p>
+                        <span class="text-brand-accent-orange mr-1.5">•</span><strong>(d)</strong> O Salmista oferecia então um banquete de todah com a família, amigos e companheiros de adoração, no qual todos comiam a carne e o pão do sacrifício em celebração da libertação concedido por Deus ao anfitrião;
+                    </p>
+                    <p>
+                        <span class="text-brand-accent-orange mr-1.5">•</span><strong>(e)</strong> Durante a refeição, o Salmista recitava, sobre um cálice de vinho, a história de como o Senhor atendeu à sua oração e o resgatou da sua provação lancinante. Era um acto de testemunho que louvava a Deus por ser um Salvador poderoso, que encorajava os outros a confiarem n’Ele nos seus próprios tempos de necessidade, e era uma forma de rejubilar no dom da vida dado pelo Senhor após um encontro terrível com a morte.
+                    </p>
+                </div>
+
+                <p>
+                    Em suma, não há motivo nenhum, tanto no próprio texto como no contexto cultural e litúrgico, que encaminhe o leitor para uma conclusão razoável que a oração se trata de um acrescento tardio.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Propondo uma Exegese Mais Robusta<sup>xi</sup></h3>
+
+                <p>
+                    A questão do género literário do Livro de Jonas constitui um dos eixos fundamentais da exegese bíblica contemporânea. Durante séculos, a vasta maioria dos intérpretes Judeus e Cristãos leu esta obra como uma crónica de história profética, alicerçada em eventos reais. Todavia, a modernidade trouxe consigo uma mudança de paradigma, sugerindo que o livro possa ser uma obra de ficção didáctica ou uma parábola expandida. O debate não reside na negação da mensagem espiritual, o alcance da misericórdia divina, mas sim na intenção original do autor: teria ele pretendido registar factos históricos ou ensinar verdades religiosas através de uma narrativa ficcional?
+                </p>
+
+                <h4 class="font-serif text-lg sm:text-xl font-bold text-brand-accent-orange pt-2">Os Argumentos a Favor da Leitura Ficcional</h4>
+
+                <p>
+                    A perspectiva de que o Livro de Jonas é uma obra de ficção, parábola ou alegoria baseia-se, fundamentalmente, em quatro pilares críticos:
+                </p>
+
+                <p>
+                    Primeiramente, aponta-se a escassez de detalhes históricos. Embora 2 Reis 14,25 identifique Jonas como um profeta do século VIII a.C., sob o reinado de Jeroboão II, o livro de Jonas omite estas referências temporais e políticas. Esta vagueza é característica das narrativas de cariz didáctico ou folclórico, onde a lição moral prevalece sobre a precisão cronológica que seria expectável num relato que pretendesse ser estritamente historiográfico.
+                </p>
+
+                <p>
+                    Em segundo lugar, a obra faz um uso extensivo da caricatura, da ironia e da sátira. Jonas, a única personagem humana com nome próprio, surge como uma figura quase grotesca de um profeta relutante, cujas peripécias são marcadas por reviravoltas irónicas que parecem ridicularizá-lo. Para muitos intérpretes, este nível de licença artística e caracterização satírica é incompatível com a redacção de um relato histórico directo, sugerindo antes uma construção literária deliberada.
+                </p>
+
+                <p>
+                    Em terceiro lugar, o texto está repleto de elementos fantásticos e maravilhas ad hoc. Sem negar a possibilidade de milagres, os críticos notam que os prodígios aqui descritos — a conversão instantânea de toda a população de Nínive após um único dia de pregação, os animais a participar em actos de penitência vestidos de saco, ou a planta que cresce numa só noite — parecem desenhados para acentuar a ironia da história. O facto de tais eventos não terem paralelo em registos contemporâneos fora da Bíblia reforça a ideia de que a sua função é literária e teológica, e não factual.
+                </p>
+
+                <p>
+                    Por último, os estudiosos identificam paralelos mitológicos do Médio Oriente. A permanência de três dias de Jonas no peixe (1,17), descrita como uma descida ao reino dos mortos (2,1-6), assemelha-se a contos mitológicos sobre viagens ao submundo. Desta forma, mesmo que exista um núcleo histórico, este teria sido amplamente enriquecido com elementos ficcionais para enfatizar o tema teológico.
+                </p>
+
+                <h4 class="font-serif text-lg sm:text-xl font-bold text-brand-accent-orange pt-2">Os Argumentos a Favor da Leitura Histórica</h4>
+
+                <p>
+                    Em contrapartida, a defesa da historicidade do livro assenta em evidências internas e na força da tradição:
+                </p>
+
+                <p>
+                    O argumento inicial refere-se à identidade do protagonista. Jonas, filho de Amitai, é uma figura histórica atestada em 2 Reis 14,25. Seria invulgar na literatura bíblica a criação de uma ficção pura em torno de um profeta real e identificado. Além disso, as localizações geográficas mencionadas — Jafa, Társis e Nínive — são lugares reais do mundo bíblico, e não topónimos imaginários de um contador de histórias.
+                </p>
+
+                <p>
+                    A tradição interpretativa antiga é outro factor de peso. O historiador Flávio Josefo incluiu as aventuras de Jonas ao lado de outros eventos históricos do século VIII a.C. Do mesmo modo, os Padres da Igreja, como S. Jerónimo, S. Agostinho e S. Cirilo de Jerusalém, consideraram o livro histórico. Embora se deleitassem na interpretação tipológica, vendo em Jonas uma prefiguração de Cristo, nunca puseram em causa a realidade dos factos que serviam de base a essa prefiguração.
+                </p>
+
+                <p>
+                    Um ponto de distinção importante é que, embora Israel usasse parábolas frequentemente, não existem exemplos claros fora de Jonas onde uma parábola envolva milagres desta magnitude. Isto sugere que o autor não estava a escrever no género parabolístico habitual.
+                </p>
+
+                <p>
+                    Finalmente, o argumento mais robusto para muitos crentes é a perspectiva de Jesus Cristo. No Evangelho de Mateus (12,40–41), Jesus não só compara a Sua sepultura aos três dias de Jonas no peixe, como afirma que «os homens de Nínive se levantarão no Juízo com esta geração e a condenarão, porque se arrependeram com a pregação de Jonas». Ao passar da comparação ilustrativa para a profecia escatológica, Jesus parece referir-se a pessoas reais que agiram na história real. Se os Ninivitas fossem personagens puramente ficcionais, a crítica de Jesus à incredulidade da Sua própria geração perderia o seu fundamento lógico e ético.
+                </p>
+
+                <h4 class="font-serif text-lg sm:text-xl font-bold text-brand-accent-orange pt-2">Posição da Igreja</h4>
+
+                <p>
+                    Enfim, o debate entre a leitura ficcional e a histórica permanece aberto. Por um lado, não há objecção teológica à utilização da ficção como veículo de verdade espiritual, técnica que os próprios profetas e Jesus utilizaram. Por outro lado, o peso da tradição Judaica e Cristã não deve ser ignorado levemente.
+                </p>
+
+                <p>
+                    A Igreja Católica não assumiu uma posição oficial e definitiva sobre a historicidade ou o género literário de Jonas. Os intérpretes gozam de liberdade para investigar estas questões, desde que reconheçam que ambos os géneros podem ser instrumentos da revelação divina. Independentemente de se considerar Jonas como história ou ficção didáctica, a mensagem central — o amor universal de Deus e o apelo ao arrependimento — permanece límpida e inalterada, transcendendo as fronteiras da discussão académica sobre a sua forma literária.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Ponto de Convergência</h3>
+
+                <p>
+                    Nesta análise, é imperativo reconhecer que a minha divergência quanto à exegese sobre a historicidade da narrativa não impede uma profunda convergência com o Pe. Ariel no que concerne à intenção teológica da obra. Ambos identificamos no Livro de Jonas um manifesto vibrante contra o exclusivismo de Israel. Como bem observa o Pe. Ariel, a mensagem central é a revelação de um Deus que ama inclusivamente os opressores, neste caso os Ninivitas, que arruinaram a vida nacional do povo eleito.
+                </p>
+
+                <p>
+                    A fuga de Jonas não é motivada pelo medo da violência dos inimigos, mas sim pelo receio da misericórdia de Deus. Ele conhece o carácter «clemente e compassivo» do Senhor e teme, acima de tudo, que os adversários de Israel sejam perdoados. Há uma ironia sublime no facto do profeta mais relutante, xenófobo e irritável da Escritura ser, simultaneamente, o mais bem-sucedido de toda a Bíblia: com apenas cinco palavras, ele converte uma metrópole inteira. Este sucesso improvável é a prova máxima de que a salvação é uma obra de Deus e não do homem.
+                </p>
+
+                <p>
+                    Esta crítica divina a Jonas é uma censura a todo o sistema religioso que se torna funcionalista e egoísta. Convergo, pois, com o Pe. Ariel na ideia de que o livro é um hino à misericórdia de limites insuspeitados. É esta universalidade radical, operada através de instrumentos imperfeitos e cenários de uma «comédia divina», como a imagem de um profeta a pingar resíduos gástricos enquanto resmunga uma profecia que desejaria ver falhar, que torna o Livro de Jonas uma obra perene e teologicamente inesgotável.
+                </p>
+
+                <p>
+                    Em última análise, a desconstrução operada pelo Pe. Ariel Álvarez Valdés, embora ecoe tendências comuns na exegese contemporânea, parece pecar por um certo anacronismo ao rotular o Livro de Jonas como um «romance», uma categoria estranha ao horizonte semântico do Antigo Testamento. Ao tentar «salvar» o texto das suas supostas incoerências históricas, a análise corre o risco de sacrificar a dimensão do maravilhoso e a omnipotência divina no altar de um literalismo geográfico e matemático que o próprio autor bíblico talvez nunca tenha pretendido satisfazer.
+                </p>
+
+                <p>
+                    Todavia, esta divergência não deve obscurecer o ponto de convergência fundamental: a mensagem central de Jonas é uma das mais belas e radicais de toda a Escritura. Quer leiamos o livro como o relato de uma intervenção milagrosa na história, quer como uma parábola magistralmente construída, o escândalo da misericórdia de Deus para com os «outros» permanece intacto. No fim, Jonas, o profeta que foge, que se irrita e que se molha, continua a ser o espelho de uma humanidade que teima em limitar o amor de Deus, enquanto o Senhor, através de grandes peixes ou de plantas efémeras, insiste em expandir as fronteiras da Sua graça a todos os habitantes de todas as Nínives da história.
+                </p>
+
+                <!-- SECÇÃO PREMIUM DE SUBSCREVER NEWSLETTER -->
+                <div class="bg-gray-50 border border-gray-150 p-6 sm:p-8 rounded-2xl my-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="text-left max-w-md">
+                        <h4 class="font-sans text-base sm:text-lg font-bold text-brand-accent-blue leading-snug">
+                            Receba <u class="underline decoration-brand-accent-blue decoration-2 font-inter">gratuitamente</u> os próximos artigos no seu e-mail
+                        </h4>
+                    </div>
+                    <form onsubmit="handleSubscribe(event)" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 flex-grow max-w-xl">
+                        <input type="email" id="sub-email" required placeholder="O seu e-mail..." class="flex-grow p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                        <button type="submit" class="px-6 py-3 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter whitespace-nowrap shadow-xs">
+                            Subscrever
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Secção de Bibliografia -->
+                <section class="mt-12 pt-6 border-t border-gray-150">
+                    <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4">Bibliografia</h4>
+                    <ol class="list-decimal pl-5 text-xs text-gray-500 space-y-2 font-inter leading-relaxed">
+                        <li id="fn-1"><i>Ignatius Catholic Study Bible: Old and New Testament</i>, nota sobre Jn 3,8. 2024, Ignatius Press.</li>
+                        <li id="fn-2">Bento XVI, <i>Jesus de Nazaré: Prólogo — A Infância de Jesus</i>. 2012, Princípia, pág. 87.</li>
+                        <li id="fn-3"><i>Ignatius Catholic Study Bible: Old and New Testament</i>, nota sobre Jn 3,3. 2024, Ignatius Press.</li>
+                        <li id="fn-4">idem, nota sobre Jn 1,7. Ignatius Press.</li>
+                        <li id="fn-5">S. Cirilo de Jerusalém, <i>Catequese 14</i>, 18.</li>
+                        <li id="fn-6">Peter Kreeft, <i>Tu Podes Compreender a Bíblia</i>. Parte Um, Cap. 22. 2026, Jerónimo Editora.</li>
+                        <li id="fn-7"><i>Bíblia dos Franciscanos Capuchinhos</i>, nota sobre Jn 2,7. 2021, Difusora Bíblica.</li>
+                        <li id="fn-8"><i>Ignatius Catholic Study Bible: Old and New Testament</i>, nota sobre Jn 2,1–9. 2024, Ignatius Press.</li>
+                        <li id="fn-9">idem, nota sobre Jn 2,9.</li>
+                        <li id="fn-10">idem, ensaio «Thanksgiving Psalms».</li>
+                        <li id="fn-11">idem, «Introduction to Jonah: Literary Genre».</li>
+                    </ol>
+                </section>
+
+                <!-- Secção de Comentários (Livre de dados inventados de terceiros) -->
+                <section class="mt-12 pt-8 border-t border-gray-150">
+                    <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-6">Comentários</h4>
+                    
+                    <div class="space-y-4 mb-8 font-inter" id="comments-box">
+                        <!-- Sem comentários automáticos inventados -->
+                    </div>
+
+                    <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl font-inter">
+                        <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
+                        <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                            </div>
+                            <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter resize-none"></textarea>
+                            <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
+                            <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter">
+                                Enviar Comentário
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Rodapé do Artigo -->
+            <footer class="mt-16 pt-8 border-t border-gray-150 font-inter">
+                <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
+                    <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
+                        <a href="../sobreHB" class="block w-full h-full">
+                            <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
+                        </a>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <h4 class="font-serif text-lg font-bold text-brand-accent-blue">
+                            <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
+                        </h4>
+                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
+                        <p class="text-sm text-gray-650 leading-relaxed font-inter">
+                            Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-inter text-xs uppercase tracking-wider font-bold">
+                    <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
+                        <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                    </a>
+                    <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
+                        Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                    </a>
+                </div>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado assincronamente do GitHub) -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
+                return '../';
+            }
+            return '';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId);
+            if (!container) return;
+            const prefix = getPrefix();
+            
+            if (prefix !== '') {
+                container.querySelectorAll('a').forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        if (!href.startsWith('../')) {
+                            link.setAttribute('href', prefix + href);
+                        }
+                    }
+                });
+                container.querySelectorAll('img').forEach(img => {
+                    let src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                        img.setAttribute('src', prefix + src);
+                    }
+                });
+            }
+
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
+                }
+            });
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            const prefix = getPrefix();
+            try {
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    adjustAndCleanLinks('nav-placeholder');
+                }
+
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                    adjustAndCleanLinks('footer-placeholder');
+                }
+
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        function calculateReadingTime() {
+            const contentElement = document.getElementById('article-content');
+            const readingTimeElement = document.getElementById('reading-time');
+            if (!contentElement || !readingTimeElement) return;
+
+            const text = contentElement.innerText || contentElement.textContent;
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+            const readingTime = Math.ceil(words / 200);
+            readingTimeElement.textContent = readingTime;
+        }
+
+        function addLocalComment(e) {
+            e.preventDefault();
+            const author = document.getElementById('comm-author').value.trim() || "Anónimo";
+            const message = document.getElementById('comm-text').value.trim();
+            if (!message) return;
+
+            const commentsBox = document.getElementById('comments-box');
+            const today = new Date();
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formattedDate = today.toLocaleDateString('pt-PT', options);
+
+            const commentElement = document.createElement('div');
+            commentElement.className = "bg-white p-5 rounded-2xl border border-gray-100 shadow-xs fade-in";
+            commentElement.innerHTML = `
+                <div class="flex items-center justify-between gap-4 mb-2">
+                    <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
+                    <span class="text-xs text-gray-400">${formattedDate}</span>
+                </div>
+                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
+            `;
+
+            commentsBox.appendChild(commentElement);
+            document.getElementById('comment-form').reset();
+        }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('sub-email');
+            if (!emailInput || !emailInput.value.trim()) return;
+
+            const userEmail = emailInput.value.trim();
+            const recipient = "editorajeronimo@gmail.com";
+            const subject = encodeURIComponent("nova subscrição");
+            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
+
+            window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+
+            const container = e.target;
+            container.innerHTML = `
+                <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
+                    <i class="fas fa-check-circle"></i> A iniciar o seu cliente de e-mail para processar a subscrição!
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            calculateReadingTime();
+        });
+    </script>
+</body>
+</html>

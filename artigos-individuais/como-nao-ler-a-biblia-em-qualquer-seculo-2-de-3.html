@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Como Não Ler a Bíblia em Qualquer Século (2 de 3) | Hugo Bacelo</title>
+    
+    <script>
+        // Remove a extensão .html da barra de endereço para um aspeto limpo e profissional
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <!-- Google Fonts unificadas com suporte a pesos e itálicos completos para Playfair Display e Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
+                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+
+        .text-readable-article {
+            line-height: 1.85;
+            letter-spacing: -0.003em;
+            word-spacing: 0.05em;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 2px;
+            color: #e05300;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div id="nav-placeholder"></div>
+
+    <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
+        <article class="max-w-4xl mx-auto px-6 fade-in">
+            
+            <div class="mb-8">
+                <!-- Direcionado para a URL limpa de artigos -->
+                <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
+                    <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
+                </a>
+            </div>
+
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center md:text-left">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3">Crítica Literária</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">
+                    Como Não Ler a Bíblia em Qualquer Século (2 de 3)
+                </h1>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500 font-medium">
+                    <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 10 de Setembro de 2025</span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5 font-inter">
+                        <i class="far fa-user"></i> Escrito por 
+                        <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">10</span> min de leitura</span>
+                </div>
+            </header>
+
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-xs relative bg-gray-100">
+                <img src="../Imagens/2.png" alt="Como Não Ler a Bíblia em Qualquer Século" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Como+N%C3%A3o+Ler+a+B%C3%ADblia';">
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto">
+                    Crítica ao livro Ler a Bíblia no Século XXI escrito por Pe. Carreira das Neves da Editorial Presença (2 de 3).
+                </p>
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto">
+                
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Cristologia e Ministério de Jesus</h3>
+                
+                <h4 class="font-serif text-lg sm:text-xl font-bold text-brand-accent-orange">A Procura do «Jesus Histórico»</h4>
+
+                <p class="dropcap">
+                    A análise bíblica do Pe. Carreira das Neves revela-se defeituosa em grande parte por se apoiar na procura do chamado «Jesus histórico» e no método de exegese que está na sua base: o método histórico-crítico ou crítica histórica. Os axiomas da crítica histórica são (1) o princípio da analogia, segundo o qual o passado se assemelha sempre ao presente; (2) a ideia de correlação, que consiste em procurar sempre causas naturais por detrás de qualquer acontecimento que se estude; e (3) o princípio da crítica, que implica uma desconfiança sistemática em relação aos relatos da tradição e, sobretudo, da autoridade.<sup>i</sup>
+                </p>
+
+                <p>
+                    Este método, desenvolvido nos últimos dois a três séculos, pode ser útil como instrumento auxiliar para compreender melhor o contexto histórico e literário da Escritura. No entanto, quando usado de forma exclusiva e desligado da fé, conduz inevitavelmente a uma leitura redutiva e céptica.
+                </p>
+
+                <p>
+                    O próprio Magistério da Igreja advertiu para este perigo: Pio XII, na encíclica <i>Divino Afflante Spiritu</i> (1943), encorajou o estudo crítico mas sempre no quadro da inspiração divina e «condenou as acções daqueles que “ousaram restringir a verdade da Sagrada Escritura apenas a questões de fé e moral”, e disse também que o Papa Leão XIII tinha “justa e correctamente condenado estes erros” em <i>Providentissimus Deus</i> (1893)».<sup>ii</sup>
+                </p>
+
+                <p>
+                    Além disso, a Comissão Bíblica Pontifícia afirmou que embora «o método histórico-crítico é o método indispensável para o estudo científico do sentido dos textos antigos», este método «não pode pretender o monopólio. Ele deve ser consciente de seus limites, assim como dos perigos que o espreitam».<sup>iii</sup> Na sua conferência Erasmus de 1988, o Cardeal Ratzinger apelou à necessidade de uma «crítica dos críticos» — e do uso indevido que estes fazia do método histórico-crítico.<sup>iv</sup>
+                </p>
+
+                <p>
+                    Mais tarde, aquando Papa, Bento XVI, escreveu o seu <i>magnum opus</i> de três volumes <i>Jesus de Nazaré</i> precisamente com o propósito de pintar um retrato do Jesus real que fosse além do Jesus histórico como produto do método histórico-crítico. Aí, ele escreveu que quando a cissão entre o «Jesus histórico» e o «Cristo da fé» se torna ampla impera questionar «que significado poderia ter a fé em Jesus Cristo, em Jesus Filho do Deus vivo, se depois o homem Jesus tivesse sido tão diverso da forma como O apresentam os evangelistas e do modo como a Igreja, partindo dos evangelhos, O anuncia?».<sup>v</sup>
+                </p>
+
+                <p>
+                    Tal como Scott Hahn explica, a questão é que a crítica histórica é, por natureza e por definição, incapaz de provar que um acontecimento sobrenatural.<sup>vi</sup> Logo, um fiel nunca poderá usar tal método de forma isolada. Infelizmente, o autor faz precisamente isso, chegando a conclusões bizaras.
+                </p>
+
+                <p>
+                    Por exemplo, defende que o Evangelho de João «está muito longe do verdadeiro Jesus de Nazaré» porque nele «não é apresentada uma única parábola nem um único exorcismo» (p. 80). Contudo, se o próprio método histórico-crítico envolve a premissa de que o evangelista escreve com uma intenção teológica e pastoral, não faz sentido descartar a historicidade de um Evangelho inteiro por não incluir determinados géneros literários.
+                </p>
+
+                <p>
+                    Do mesmo modo, considera como referência o padre J.P. Meier, que estabeleceu critérios para identificar quais parábolas seriam autênticas. A conclusão é surpreendente: apenas quatro parábolas (do semeador, dos vinhateiros homicidas, do grande banquete e dos talentos) poderiam ser atribuídas ao Jesus histórico, por se encontrarem nos três Sinópticos. As restantes seriam duvidosas.
+                </p>
+
+                <p>
+                    O próprio autor chega a afirmar que a parábola do filho pródigo e a do bom samaritano, embora sejam «as que mais me tocam», possivelmente «foram postas na boca de Jesus pelo redator de Lucas» (p. 229) e, consequentemente, afirma que não as pode considerar quando delibera sobre a parábola mais importante. A procura histórico-crítica do Jesus histórico não serve meramente para calcular probabilidades da autenticidade dos ditos de Jesus, mas para ignorar aqueles ditos que o método considera pouco provavelmente autênticos.
+                </p>
+
+                <p>
+                    Esta forma de pensar reduz os Evangelhos a colagens literárias de intenções subjectivas, em contradição directa com a fé da Igreja (CIC 126, citando DV 19). O método histórico-crítico, quando usado assim, tem duas consequências negativas. Em primeiro lugar, introduz uma hermenêutica de suspeita, levando o exegeta a desconfiar de tudo o que está escrito, como se os evangelistas fossem manipuladores ideológicos e não testemunhas fiéis. Em segundo lugar, leva ao esquecimento da autoria divina da Escritura. Mesmo que se discutisse a redacção concreta de certas parábolas, o crente nunca pode esquecer que «a Sagrada Escritura deve ser lida e interpretada com o mesmo Espírito com que foi escrita» (DV 12).
+                </p>
+
+                <p>
+                    No fundo, todas as parábolas são autênticas, porque todas são ditas pelo Espírito Santo; e, rejeitando a suspeita, podemos afirmar que provavelmente Jesus as proferiu de facto, pois seria contrário à verdade divina que o Espírito inspirasse uma mentira sobre a Pessoa do Filho.
+                </p>
+
+                <p>
+                    Para além disso, é seguro considerar os Evangelhos como documentos históricos fiáveis por três razões:<sup>vii</sup>
+                </p>
+
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>(1)</strong> os Evangelistas tinham a capacidade de escrever história fiável pois foram testemunhas oculares ou discípulos de testemunhas, escreveram pouco tempo após os acontecimentos (no máximo 35 anos depois), e os discípulos de Jesus ouviram os seus ensinamentos durante três anos e recitaram-nos repetidamente ao longo das décadas seguintes, garantindo que ainda estivessem frescos nas suas memórias aquando da redacção do Evangelhos;
+                </p>
+
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>(2)</strong> os Evangelistas tinham a intenção de escrever história fiável pois inseriram dados concretos verificáveis (lugares e pessoas históricas), declaram explicitamente o propósito de transmistir factos reais (Jo 13, 35; Lc 1, 1–4), a forma literária dos Evangelhos corresponde ao género de biografia antiga com genealogias, estrutura tripla (nascimento, vida pública, morte), e selecção parcial de acontecimentos, e o estilo aproxima-se dos historiadores clássicos;
+                </p>
+
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>(3)</strong> os Evangelistas escreveram, de facto, história fiável pois os relatos cumprem os critérios históricos de múltipla atestação (p.ex., morte de Jesus reportada dentro e fora da Bíblia), de embaraço (p.ex., mulheres como primeiras testemunhas) e de coêrencia (p.ex., pena de morte por blasfémia a quem se declarava como Filho de Deus). A arqueologia confirma detalhes (piscina de Betzatá, ossário de Caifás, etc.), e fontes não-Cristãs (Josefo, Tácito) confirmam a existência de Jesus, João Baptista, Tiago e a crucifixão sob Pilatos.
+                </p>
+
+                <p>
+                    Em síntese, o problema não é o método histórico-crítico em si, mas a sua absolutização. Enquanto instrumento, pode iluminar aspectos importantes do texto bíblico; mas quando usado como única chave, destrói a confiança no Evangelho, conduz a um cepticismo corrosivo e esquece que o verdadeiro Autor da Escritura é o Espírito Santo. «A Bíblia é plenamente divina na sua inspiração e plenamente humana na sua composição, isenta de erro e escrita para que sejamos salvos do pecado.»<sup>viii</sup> Portanto, devemos abandonar a hermenêutica de suspeita e adoptar a hermenêutica de fé.<sup>ix</sup>
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4" id="contradicoes-evangelistas">Contradições entre Evangelistas</h3>
+
+                <p>
+                    Apesar disso, o autor insiste em encontrar contradições entre os Evangelhos sinópticos, detendo-se especialmente na relação de Jesus com a sua família. Em Mc 3, 20–21 lemos que «os seus familiares» ouviram falar da agitação que Jesus estava a provocar e «saíram para o deterem, pois diziam: “Está fora de si!” [i.e., está louco, perdeu a cabeça]». Mais adiante no mesmo capítulo (vv. 31–35) aparece um novo episódio: «Chegaram, então, a sua mãe e os seus irmãos e, permanecendo fora, mandaram chamá-lo». Jesus então pronuncia as célebres palavras: «“Quem é a minha mãe e os meus irmãos?” E, olhando em redor para os que estavam sentados em círculo à sua volta, disse: “Eis a minha mãe e os meus irmãos! Pois aquele que fizer a vontade de Deus, esse é meu irmão, minha irmã e minha mãe”».
+                </p>
+
+                <p>
+                    Com base neste texto, o autor conclui que «em Marcos, a mãe de Jesus e os seus familiares são descritos em confronto com Jesus» e que Ele «se distancia da sua família de sangue» (p. 211). Em contraste, defende que Lucas 8, 19–21 apresenta o mesmo episódio de forma mais «suave», sem qualquer indício de oposição: «Vieram ter com Ele a sua mãe e os seus irmãos mas não conseguiam chegar junto dele por causa da multidão. Foram, então, informá-lo: “A tua mãe e os teus irmãos estão lá fora e querem ver-te”. Mas Ele respondeu-lhes: “A minha mãe e os meus irmãos são aqueles que ouvem a palavra de Deus e a põem em prática”». Em Mateus 12, 46–50, segundo o autor, Maria e os parentes vão ao encontro de Jesus não para O repreender, mas «para O escutarem juntamente com os demais» (p. 214) e, desta forma, também contrastando com Marcos.
+                </p>
+
+                <p>
+                    O problema desta análise é que nasce de uma confusão de conceitos. Marcos fala primeiro de «os seus familiares» (em Grego, <i>par’ autou</i>), que pode significar simplesmente conhecidos, conterrâneos ou pessoas próximas e não necessariamente parentes de sangue. Por isso, várias traduções optam por «amigos» ou «a sua gente». Já nos vv. 31–35 Marcos usa termos precisos para designar «mãe» e «irmãos». É altamente improvável que, a poucas linhas de distância, Marcos tivesse utilizado vocabulário diferente para referir o mesmo grupo de pessoas. Concluir que «familiares» e «mãe e irmãos» são exactamente os mesmos é fruto da chamada hermenêutica de suspeita.
+                </p>
+
+                <p>
+                    A partir dessa hipótese, o método histórico-crítico traça uma narrativa evolutiva: em Marcos, Jesus teria rejeitado a sua família por O considerar louco; depois Mateus e Lucas teriam «corrigido» ou suavizado o relato para proteger a figura de Maria e adaptá-lo à sensibilidade das comunidades Cristãs posteriores ou outra qualquer especulada intenção escondida. Porém, esta reconstrução é um castelo de cartas: assenta numa premissa linguística errada e num preconceito contra a veracidade dos Evangelhos. Além disso, tudo isto também depende que Marcos é o Evangelho mais antigo, algo que, como vimos, ainda é discutido.
+                </p>
+
+                <p>
+                    Na realidade, não existe contradição entre os Evangelistas. Todos eles testemunham a mesma verdade: Jesus ensina que a verdadeira pertença à sua família não depende da carne e do sangue, mas da obediência à vontade de Deus, ou seja, a sua verdadeira família é de ordem espiritual. Cristo alarga o âmbito da sua família espiritual para incluir os seus discípulos, não para excluir a sua Mãe ou os seus parentes biológicos. Não se trata de uma repreensão à sua Mãe e restantes familiares visto que não é dito, por nenhum Evangelista, que Jesus rejeitou recebê-los depois do seu ensinamento; afirmar que isso aconteceu é puramente conjectura.
+                </p>
+
+                <p>
+                    «Longe de diminuir o papel de Maria, Jesus revela a verdadeira grandeza da sua maternidade divina. Afinal, ela não foi apenas sua mãe natural pela geração, mas tornou-se Mãe de Deus precisamente por ter abraçado a vontade do Pai (Lc 1, 38.43). A sua relação com Jesus — tanto física como espiritual — é, assim, enaltecida pela afirmação do próprio Jesus.»<sup>x</sup>
+                </p>
+
+                <p>
+                    O Catecismo resume assim: «Maria é, ao mesmo tempo, Virgem e Mãe, porque é a figura e a mais perfeita realização da Igreja» (CIC 507); e «o que a fé Católica, crê a respeito de Maria, funda-se no que crê a respeito de Cristo» (CIC 487). É, portanto, contrário à fé da Igreja transformar este episódio num confronto entre Jesus e a Sua Mãe.
+                </p>
+
+                <p>
+                    Uma vez corrigida a confusão terminológica, percebe-se a harmonia entre os três Evangelhos e a coerência do ensinamento. Jesus convida todos os crentes a fazer parte da sua família através da submissão à vontade do Pai, e Maria é o exemplo por excelência do cumprimento desse requisito.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4" id="narrativas-infancia">Narrativas da Infância de Jesus</h3>
+
+                <p>
+                    Os «evangelhos da infância» — os dois primeiros capítulos de Mateus e Lucas — também são tratados com desconfiança. Afirma-se que estes textos «não são uma narrativa de história factual, de crónica, mas uma interpretação midráshica [explicarei adiante] arrancada a textos do AT [Antigo Testamento], que se traduzem, agora, na estória da infância de Jesus. Não se trata de uma lenda, de um mito, mas de um “conto” midráshico. E por detrás de todo o conto há uma memória histórica» (p. 216). O autor reconhece a «memória histórica», todavia não é claro quão fielmente histórica é essa memória. Por outro lado, defende que os evangelistas tinham uma agenda, uma intenção «puramente teológica ao afirmar que se trata de cumprir a palavra do profeta: Do Egipto chamei o meu filho» (p. 220). Esta análise textual que rejeita quase totalmente a historicidade parte do pressuposto que as narrativas da infância de Jesus em Mateus e Lucas são midrash. «Realmente, não se trata de uma crónica, mas de uma história narrativa midráshica em função de uma outra história comandada pela profecia e pelo Jesus real do Reino de Deus, morte e ressurreição» (p. 221). Será esse pressuposto razoável?
+                </p>
+
+                <p>
+                    Antes de mais, temos que definir midrash. Trata-se de um termo Hebraico que significa «interpretação» ou «comentário» e usado para descrever escritos Judaicos comuns após 200 d.C. Mais notoriamente, o midrash é conhecido por recontar histórias bíblicas e embelezá-las com detalhes ficcionais. Tal rótulo não encaixa em Mt 1–2 pelos seguintes motivos:
+                </p>
+
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(i)</span> O texto é estilisticamente diferente de midrash não tendo como base um texto do Antigo Testamento, isto é, não reconta uma história já escrita mas sim uma história totalmente nova que se sustenta por si só;
+                </p>
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(ii)</span> A ligação entre as antigas profecias e os acontecimentos da infância de Jesus só faz sentido se estes realmente ocorreram, cumprindo assim as promessas do Antigo Testamento, caso contrário o evangelista estaria apenas a enganar-se a si próprio;
+                </p>
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(iii)</span> O Antigo Testamento não é tratado como um guião pré-escrito da vida Jesus, citando textos pouco óbvios ou obscuros, dando-lhes um sentido novo à luz de Cristo, e sugerindo que a história vivida por Jesus é que molda a leitura da Escritura e não o inverso;
+                </p>
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(iv)</span> Os relatos de Mateus sobre a infância de Jesus estão em sintonia com dados históricos externos (e.g., a presença de comunidades judaicas no Egipto, a existência de magos persas interessados em astrologia e a crueldade de Herodes confirmada por outras fontes);
+                </p>
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(v)</span> A Pontifícia Comissão Bíblica, em 1911, após análise detalhada, concluiu que as críticas à historicidade Mt 1–2 carecem de fundamento sólido.
+                </p>
+
+                <p>
+                    A narrativa da infância em Mateus é simultaneamente teológica e histórica. O evangelista cita o Antigo Testamento como confirmação, não como base da história. Jesus inaugura o cumprimento de todas as promessas divinas, e os factos narrados devem ser lidos como reais. Assim, a historicidade de Mt 1–2 é coerente com a Tradição Católica e com princípios válidos de estudo bíblico e histórico.<sup>xi</sup> Argumentos semelhantes poderiam ser feitos sobre Lc 1–2.
+                </p>
+
+                <p>
+                    Além da defesa do suposto midrash destas passagens, o autor também defende a existência de «contradições históricas e geográficas entre Lucas e Mateus e entre o que está escrito sobre Quirino e Herodes» (p. 221). Além disso, o nascimento de Jesus em Belém também parece ser posto em causa visto «que, segundo Lucas, é fruto de um recenseamento que, historicamente, não aconteceu naquele ano» (p. 220). Tais alegadas incongruências e imprecisões históricas são comummente usadas por Ateus como arma de arremesso contra a Bíblia e a fé Cristã.
+                </p>
+
+                <p>
+                    Por um lado, é incerto quais «contradições históricas e geográficas» o que autor se refere. Como tal, reuni as acusações mais comuns de contradições entre Mt 1–2 e Lc 1–2, juntamente com a sua resolução, de forma elucidativa na seguinte tabela:<sup>xii,xiii</sup>
+                </p>
+
+                <!-- TABELA DE CONTRADIÇÕES DA INFÂNCIA -->
+                <div class="overflow-x-auto my-8 border border-gray-200 rounded-2xl shadow-sm bg-white">
+                    <table class="min-w-full divide-y divide-gray-200 text-left text-sm">
+                        <thead class="bg-brand-accent-blue text-white font-serif">
+                            <tr>
+                                <th scope="col" class="px-4 py-3 font-semibold tracking-wider">Tema</th>
+                                <th scope="col" class="px-4 py-3 font-semibold tracking-wider">Mateus</th>
+                                <th scope="col" class="px-4 py-3 font-semibold tracking-wider">Lucas</th>
+                                <th scope="col" class="px-4 py-3 font-semibold tracking-wider">Resolução</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 text-gray-650 font-sans">
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-4 py-3 font-bold text-brand-accent-blue">Residência inicial</td>
+                                <td class="px-4 py-3">Dá a entender que já viviam em Belém.</td>
+                                <td class="px-4 py-3">Família vivia em Nazaré e viajou a Belém por causa do recenseamento.</td>
+                                <td class="px-4 py-3 bg-amber-50/20">Mateus omite a viagem, mas não a exclui; Lucas fornece o detalhe.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-4 py-3 font-bold text-brand-accent-blue">Local do nascimento</td>
+                                <td class="px-4 py-3">Jesus é encontrado numa casa (2, 11).</td>
+                                <td class="px-4 py-3">Jesus nasce numa manjedoura (2, 7).</td>
+                                <td class="px-4 py-3 bg-amber-50/20">Nasceu numa manjedoura; mais tarde a família instalou-se numa casa. Os Magos chegaram 1–2 anos depois.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-4 py-3 font-bold text-brand-accent-blue">Visitantes</td>
+                                <td class="px-4 py-3">Magos do Oriente (muito depois do nascimento).</td>
+                                <td class="px-4 py-3">Pastores na noite do nascimento.</td>
+                                <td class="px-4 py-3 bg-amber-50/20">Dois episódios diferentes em tempos distintos: pastores no nascimento, Magos mais tarde.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-4 py-3 font-bold text-brand-accent-blue">Destino após nascimento</td>
+                                <td class="px-4 py-3">Após visita dos Magos → Egipto → depois Nazaré.</td>
+                                <td class="px-4 py-3">Após purificação no Templo (40 dias) → Nazaré.</td>
+                                <td class="px-4 py-3 bg-amber-50/20">Lucas omite a fuga ao Egipto. Ambos concordam que acabaram por fixar-se em Nazaré.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-4 py-3 font-bold text-brand-accent-blue">Lugar da visita dos Magos</td>
+                                <td class="px-4 py-3">Magos enviados a Belém e encontram Jesus numa casa.</td>
+                                <td class="px-4 py-3">Após 40 dias a família já estava em Nazaré.</td>
+                                <td class="px-4 py-3 bg-amber-50/20">O texto não dizer que a «casa» era em Belém; a estrela pode tê-los guiado até Nazaré.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    As diferenças não são contradições, mas sim complementaridades de perspectiva. Mateus destaca José, a dimensão régia e profética (Herodes, Magos, fuga para o Egipto) e Lucas centra-se em Maria, a humildade e a universalidade da salvação (anúncio aos pastores, cânticos, apresentação no Templo). Ambos convergem no essencial: Jesus nasceu em Belém, de Maria Virgem, com José como pai legal, concebido por obra do Espírito Santo, e cresceu em Nazaré.
+                </p>
+
+                <p>
+                    Por outro lado, a historicidade do Censo de Quirino tem sido considerado por muitos como problemática, mas investigações recentes oferecem explicações plausíveis:
+                </p>
+
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(a)</span> <strong>Data da morte de Herodes:</strong> A visão convencional situa-a em 4 a.C., o que levaria o nascimento de Jesus para 6–4 a.C. No entanto, estudos recentes defendem 1 a.C. como a data da morte de Herodes, em conformidade com o testemunho de vários Padres da Igreja (Irineu, Clemente, Tertuliano, Orígenes, Hipólito, Eusébio, Epifânio), que colocam a Natividade entre 3 e 2 a.C;
+                </p>
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(b)</span> <strong>O decreto de César Augusto:</strong> Costuma-se pensar que foi um recenseamento fiscal impossível durante o reinado de Herodes. Porém, há evidências históricas e arqueológicas de que, por volta de 3 a.C., se exigiu um juramento público de lealdade a Augusto em todo o império. Isto corresponde bem ao que Lucas descreve e ao que mais tarde relata Orósio (séc. V), confirmando que não se tratava de impostos, mas de fidelidade ao imperador;
+                </p>
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(c)</span> <strong>O papel de Quirino:</strong> É sabido que ele conduziu um censo fiscal em 6 d.C., mas Lucas pode referir-se a uma função administrativa anterior. Justino Mártir afirma que Quirino era «procurador» na Judeia no tempo de Jesus, e Tertuliano acrescenta que o legado da Síria nessa altura era outro (Saturnino). Assim, Quirino pode ter supervisionado a inscrição de juramento em 3 a.C., anos antes de se tornar legado da Síria.
+                </p>
+
+                <p>
+                    Revendo estes três pontos — a morte de Herodes, a natureza do decreto de César e o cargo de Quirino —, torna-se plausível situar o nascimento de Jesus entre 3 e 2 a.C. Maria e José teriam ido a Belém para se inscreverem num registo de lealdade ao imperador, organizado na Judeia sob Quirino. Embora permaneçam lacunas, esta reconstrução reduz as aparentes contradições e confirma a fiabilidade histórica de Lucas e da tradição cristã primitiva.<sup>xiv</sup>
+                </p>
+
+                <p>
+                    A tentativa de opor Mateus e Lucas ou de reduzir os relatos a midrash ignora, mais uma vez, o dado fundamental: o Espírito Santo é o Autor divino da Escritura (CIC 136), e não inspiraria um «conto fictício» para apresentar a Encarnação do Verbo. Para o crente, as narrativas da infância não são parábolas literárias, mas parte do único Evangelho, onde Deus Se revela em Jesus Cristo, «nascido de uma mulher, nascido sujeito à Lei» (Gl 4, 4).
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4" id="teologia-paulo">Teologia de Paulo e Escritos Apostólicos</h3>
+
+                <h4 class="font-serif text-lg sm:text-xl font-bold text-brand-accent-orange">Contradições entre Paulo e os Evangelhos</h4>
+
+                <p>
+                    Também encontramos neste livro uma tentativa de fundamentar uma oposição entre as Cartas Paulinas e os Evangelhos a partir da sua própria datação tardia dos textos, colocando a redacção de todos os Evangelhos após a morte de Paulo. Escreve: «Ao ler os quatro evangelhos […] não nos lembramos de Paulo. […] dá a impressão que os autores dos evangelhos, que escreveram depois de Paulo, não conheciam a teologia cristológica de Paulo» (p. 74). Mais ainda, especula: «Se S. Paulo tivesse conhecido os quatro evangelhos […] teria escrito as suas cartas da mesma maneira?» (p. 206). Assim, passa a ideia de que as Cartas Paulinas, reconhecidas pela Igreja como inspiradas pelo Espírito Santo, careceriam de correcção. Esta tese é infundada por várias razões.
+                </p>
+
+                <p>
+                    Primeiro, Paulo não precisava de «conhecer os Evangelhos escritos» para partilhar o mesmo conteúdo. Ele conheceu directamente a Tradição apostólica e pregou-a desde cedo, tal como o próprio afirma: «transmiti-vos, em primeiro lugar, o que também recebi: que Cristo morreu pelos nossos pecados segundo as Escrituras, foi sepultado e ressuscitou ao terceiro dia segundo as Escrituras, apareceu a Cefas e depois aos Doze» (1Cor 15, 3–5). Estes elementos são o núcleo dos Evangelhos e mostram que Paulo já transmitia o mesmo Evangelho pregado pelos Apóstolos.
+                </p>
+
+                <p>
+                    Segundo, a ideia de que Paulo «jamais conheceu o drama de Jesus narrado nos quatro evangelhos pelo simples facto, como sabemos de os não conhecer» (p. 205) é logicamente circular: assume-se uma datação tardia e depois usa-se essa mesma hipótese como prova da conclusão. Em contrapartida, assumindo uma datação mais conservadora, que coloca a redacção dos Sinópticos entre a década de 50 e o início da década de 60, torna plausível que São Paulo tivesse de facto conhecido e lido esses textos. Seja como for, é verdadeiro dizer que Paulo conheceu o «Jesus histórico» não só pela Tradição apostólica recebida, mas também pelo encontro pessoal com o Ressuscitado (1Cor 9, 1).
+                </p>
+
+                <p>
+                    Terceiro, há uma miríade de evidentes pontos de contacto entre Paulo e os Evangelhos, tal como indicado pelo Papa Bento XVI em 2008:<sup>xv</sup>
+                </p>
+
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(1)</span> <strong>Sermão da Montanha reflectido em Paulo:</strong> Rm 12, 9–21 é «quase um reflexo fiel» de Mt 5–7 (amar os inimigos, vencer o mal com o bem, viver em paz com todos);
+                </p>
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(2)</span> <strong>Preceitos matrimoniais:</strong> 1Cor 7, 10–11 cita o mandamento do Senhor sobre a indissolubilidade do matrimónio (Mc 10, 11–12);
+                </p>
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(3)</span> <strong>Sustento dos pregadores:</strong> 1Cor 9, 14 recorda o ensinamento de Jesus: «O trabalhador merece o seu salário» (Lc 10, 7);
+                </p>
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(4)</span> <strong>Eucaristia:</strong> 1Cor 11, 23–25 transmite fielmente as palavras e gestos de Jesus na Última Ceia (Lc 22, 19–20);
+                </p>
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(5)</span> <strong>Publicanos e pecadores:</strong> A doutrina Paulina da misericórdia de Deus pelos pecadores (Rm 5, 8; Ef 2, 3–5) corresponde às palavras de Jesus que os Publicanos e prostitutas precedem os Fariseus no Reino (Mt 21, 31; Lc 7, 36–50; 15, 1–2).
+                </p>
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(6)</span> <strong>Abbá, Pai:</strong> Jesus dirige-se a Deus como «Abbá» (Mc 14, 36); Paulo ensina que o Espírito de Cristo nos faz clamar «Abbá, Pai» (Gl 4, 6; Rm 8, 15).
+                </p>
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">(7)</span> <strong>Cristo como resgate:</strong> Jesus disse que daria a vida «em resgate por muitos» (Mc 10, 45; Mt 20, 28); o reflexo desta ideia sobressai na doutrina Paulina sobre a morte de Jesus como resgate (1 Cor 6, 20), como redenção Rm 3, 24), como libertação (Gl 5, 1) e como reconciliação (Rm 5, 10; 2 Cor 5, 18–20).
+                </p>
+
+                <p>
+                    Portanto, qualquer oposição entre São Paulo e os Evangelhos é apenas aparente. Os Evangelhos trazem-nos as palavras e actos de Jesus; as cartas Paulinas ajudam-nos a compreender o sentido salvífico dessas palavras e actos para a Igreja nascente e para o mundo gentio. Parafraseando Bento XVI, Paulo conhecia certamente a grande tradição da vida, palavras, morte e ressurreição de Jesus. Deste modo, não há «Jesus de Nazaré vs. Paulo de Tarso» na fé Católica, mas sim Jesus Cristo Senhor anunciado por diferentes vozes e em diferentes circunstâncias em perfeita consonância. Colocar uns contra os outros é criar uma falsa oposição que nem a história, nem a fé da Igreja, sustentam.
+                </p>
+
+                <h4 class="font-serif text-lg sm:text-xl font-bold text-brand-accent-orange">Contradições Internas nas Cartas Paulinas</h4>
+
+                <p>
+                    Além de contradições entre Paulo e os Evangelhos, também são alegadas contradições internas nas Cartas Paulinas. A defesa desta posição é o facto de se tratarem de cartas pseudopaulinas, isto é, quando é encontrada uma contradição entre cartas assume-se que uma delas, normalmente a que tem a passagem que não agrada ao histórico-crítico, não foi escrita por Paulo.
+                </p>
+
+                <p>
+                    Daí considerar-se pseudopaulinas as cartas a Tito e Timóteo por se dirigiram a comunidades Cristãs «com bispos, presbíteros e diáconos, escravos e livres, com éticas familiares heirarquizadas» e pela «proibição das mulheres se manifestarem nas reuniões de oração (1Tm 2, 11–15)», e as cartas aos Efésios e Colossenses pois defende-se «a estrutura classista dos escravos que se devem submeter aos seus donos (Ef 6, 5–9; Cl 3, 22–4, 1)» assim como a «obrigação das mulheres se submeterem aos seus maridos como ética familiar (Ef 5, 22–23; Cl 3, 18)» (p. 185).
+                </p>
+
+                <p>
+                    <strong>Tito e Timóteo:</strong> Sobre o silêncio das mulheres na Primeira a Timóteo, é afirmado que isso contraria o que «Paulo escreve na primeira aos Coríntios 11, 5». Contudo, o próprio autor menciona que na mesma carta (1Cor), que ele considera autêntica de Paulo, é também defendida a mesma ideia sobre o silêncio das mulheres (14, 33b–35), rotulando esta passagem de «texto estranho ou paradoxal» (p. 185). Trata-se de um claro caso de um exegeta escolher a passagem que gosta como autêntica e a passagem que lhe faz torcer o nariz como «estranha ou paradoxal».
+                </p>
+
+                <p>
+                    Poderia-se perfeitamente concluir que em 1Tm 2, 11–15 e 1Cor 14, 33b–35 se encontram ensinamentos análogos e, consequentemente, que é totalmente plausível partilharem o mesmo autor ou que o autor de uma das passagens concordaria com o conteúdo da outra. Tal não acontece, pois há uma passagem da Bíblia que a priori se quer rejeitar e é preciso encontrar a posteriori argumentos para essa rejeição.
+                </p>
+
+                <p>
+                    Na verdade, Paulo impõe, em 1Cor 14, 34–35 e 1Tm 2, 12, o silêncio às mulheres Cristãs no culto público. Todavia, não se trata de uma restrição absoluta aplicável a todas as circunstâncias, mas uma exclusão das mulheres do ministério de ensino exercido pelos clérigos ordenados, na qualidade oficial de pastor ou de pregador. As mulheres podem legitimamente orar e profetizar na assembleia litúrgica (1Cor 11, 5), são encorajadas a ensinar noutros contextos (Tt 2, 3-4), e Paulo não nega a igual dignidade de homens e mulheres em Cristo (Gl 3, 28). Segundo o ensinamento da Igreja, Paulo proíbe as mulheres de exercer a função oficial de ensino na assembleia cristã (Sagrada Congregação para a Doutrina da Fé, Inter insigniores [1976], 4).<sup>xvi</sup> «Criados à imagem do Deus único, dotados duma idêntica alma racional, todos os homens têm a mesma natureza e a mesma origem» (CIC 1934, cf. 791).
+                </p>
+
+                <p>
+                    <strong>Efésios e Colossenses:</strong> A Carta aos Colossenses apresenta-nos «uma ética familiar e social (pais, filhos, mulher submetida ao marido, escravos submissos aos donos, em 3, 18–22)» que contradiz aquilo que encontramos «nas cartas aos Coríntios e Gálatas, onde não há diferença alguma entre homem e mulher, judeus e não judeus, escravos e livres» (p. 187). A justificação, segundo o autor, apelando ao trabalho de James Dunn, é que Colossenses é «de Paulo e Timóteo. Paulo assina o que Timóteo, com toda a liberdade, escreveu» e, assim, «compreendemos o paradoxo de 3, 11 comparados com 3, 18–22» (p. 187).
+                </p>
+
+                <p>
+                    A suposta contradição entre afirmações de igualdade (Gl 3, 28; Cl 3, 11) e exortações disciplinares sobre família e escravidão (Ef 5, 22–6, 9; Cl 3, 18–4, 1) dissolve-se quando se analisa os distintos contextos das distintas passagens. Por um lado, Paulo defende que todos, independentemente da raça, sexo, ou classe social, são iguais candidatos à salvação e à filiação em Cristo, o que não significa, de todo, que «não há diferença alguma entre homem e mulher, judeus e não judeus, escravos e livres». Por outro, «Paulo desafia cada lar a ser transformado pela «paz de Cristo» (Cl 3, 15). A visão do apóstolo para a vida doméstica contrasta fortemente com a impiedade da sociedade Pagã, em especial com a tirania de maridos e pais, assim como com o tratamento desumano dos escravos da casa».<sup>xvii</sup>
+                </p>
+
+                <p>
+                    De facto, o Grego sugere que a submissão das esposas é livre e voluntária, não degradante, servil ou coerciva enquanto a missão do marido é edificar o seu matrimónio e a sua família, não dominá-los nem rebaixá-los por fins egoístas, defendendo o matrimónio como uma parceria amorosa entre esposos de igual dignidade. Mais ainda, Paulo sublinha a igual dignidade escravos e senhores diante de Deus, tentando melhorar a relação entre eles para que os escravos sirvam os seus senhores de forma voluntária e honesta e os senhores respeitem os seus servos e abstenham-se de tratamentos duros.<sup>xviii</sup> Nada disto é «machismo» ou «classismo».
+                </p>
+
+                <p>
+                    <strong>Tessalonicenses:</strong> Também é defendido que as cartas aos Tessalonicenses se contradizem explicitamente: «encontramos [em 2Ts], na questão da parusia ou segunda vinda do Senhor, uma doutrinação oposta à da primeira [1Ts]. […] [2Ts 2, 1–3a] é, pura e simplesmente, uma negação da primeira carta com Paulo como autor. […] Para o autor da segunda carta é preciso apagar o passado sobre este assunto» (p. 183).
+                </p>
+
+                <p>
+                    Apenas uma leitura superficial poderia levar a tal conclusão pois parte pressuposto errado de que Paulo afirma em 1Ts que a Parusia está para breve. Tal não se verifica. Em 1Ts 13–18, Paulo descreve a parusia detalhando sobre o que acontecerá aos vivos e aos mortos durante esse acontecimento. Ora, Paulo estava vivo quando escreveu isto e, por isso, quando fala dos vivos usa o pronome «nós». Isto é suficiente para alguns inferirem que Paulo acreditava que a Parusia iria acontecer ainda durante a sua vida.
+                </p>
+
+                <p>
+                    O próprio autor partilha essa posição pois diz que que São Paulo «esperava a parusia para os seus dias históricos de acordo com o que escreve na primeira carta aos Tessalonicenses e, frequentemente, nas demais cartas sobre a vinda de “o Dia do Senhor”» (p. 73). Em contrapartida, outras passagens indicam que Paulo considerava a sua morte como uma possibilidade real (Fl 3, 10–11; 2Tm 4, 6) e que se incluía entre aqueles que iriam ressuscitar (1Cor 6, 14; 2Cor 4, 14), contrariando a posição do autor.
+                </p>
+
+                <p>
+                    Além disso, imediatamente a seguir, em 1Ts 5, 1–6, Paulo insiste que o «Dia do Senhor» virá de forma inesperada e, como tal, os fiéis devem permanecer vigilantes. As suas palavras desencorajam as tentativas de especular sobre o momento preciso do regresso de Cristo (CIC 672–673, 1849). Em 2Ts, ele corrige uma interpretação errada que teria surgido: precisamente a ideia de que a Parusia era para breve. Por isso, adverte que «não vos perturbeis […] como se o dia do Senhor fosse iminente» (2Ts 2, 2), reforçando assim a mesma ideia que transmitiu na carta precedente.<sup>xix</sup> «A partir da ascensão, a vinda de Cristo na glória está iminente» (CIC 673).
+                </p>
+
+                <p>
+                    Em suma, Paulo não se contradiz: adapta o ensinamento às circunstâncias pastorais de cada comunidade. Conclui aqui.
+                </p>
+
+                <!-- Secção de Bibliografia -->
+                <section class="mt-12 pt-6 border-t border-gray-150">
+                    <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4">Bibliografia</h4>
+                    <ol class="list-decimal pl-5 text-xs text-gray-500 space-y-2 font-inter leading-relaxed">
+                        <li id="fn-1">Keating, K. & Hahn, S. (1996) <i>Scott Hahn on the Politicized Bible</i>. Catholic Answers. <span class="break-all text-brand-accent-blue">catholic.com/magazine/print-edition/scott-hahn-on-the-politicized-bible</span></li>
+                        <li id="fn-2">Horn, T. (2016) <i>Hard Sayings: A Catholic Approach to Answering Bible Difficulties</i>. Catholic Answers, Inc., Califórnia.</li>
+                        <li id="fn-3">Pontifícia Comissão Bíblica (1993) <i>A Interpretação da Bíblia na Igreja</i>, § I, A, 1 e Conclusão.</li>
+                        <li id="fn-4">Keating & Hahn (1996). idem</li>
+                        <li id="fn-5">Bento XVI (2008) <i>Jesus de Nazaré: Do Baptismo no Jordão até à Transfiguração</i>. A Esfera dos Livros, Lisboa.</li>
+                        <li id="fn-6">Keating & Hahn (1996). idem</li>
+                        <li id="fn-7">Broussard, K. (2021) <i>The Reliability of the Gospels</i>. Catholic Answers. <span class="break-all text-brand-accent-blue">catholic.com/magazine/print-edition/the-reliability-of-the-gospels</span></li>
+                        <li id="fn-8">Horn, T. (2017) <i>Why We’re Catholic: Our Reasons for Faith, Hope, and Love</i>. Catholic Answers Inc., Califórnia.</li>
+                        <li id="fn-9">Cardeal Ratzinger, J. (1988) <i>Biblical Interpretation in Crisis: The 1988 Erasmus Lecture</i>. Nova Iorque</li>
+                        <li id="fn-10">Hahn, S. & Mitch J. (2024) <i>Ignatius Catholic Study Bible: Old and New Testament – Comentário sobre Mt 12, 50</i>. Ignatius Press, São Francisco.</li>
+                        <li id="fn-11">Hahn, S. & Mitch J. (2024) idem – <i>Topical Essay: Is Matthew’s Infancy Narrative Historical?</i></li>
+                        <li id="fn-12">Staples, T. (2014) <i>Do the Infancy Narratives of Matthew and Luke Contradict Each Other?</i> Catholic Answers. <span class="break-all text-brand-accent-blue">catholic.com/magazine/online-edition/do-the-infancy-narratives-of-matthew-and-luke-contradict-each-other</span></li>
+                        <li id="fn-13">Akin, J. <i>How the Accounts of Jesus’ Childhood Fit Together</i>. <span class="break-all text-brand-accent-blue">jimmyakin.com/how-the-accounts-of-jesus-childhood-fit-together</span></li>
+                        <li id="fn-14">Hahn, S. & Mitch J. (2024). idem – <i>Topical Essay: The Census of Quirinius</i></li>
+                        <li id="fn-15">Bento XVI (2008) <i>Audiência Geral: São Paulo (7) – A relação com o Jesus histórico</i>.</li>
+                        <li id="fn-16">Hahn, S. & Mitch J. (2024) idem – <i>Comentários sobre 1Cor 14, 34–35 e 2Tm 2, 12</i>.</li>
+                        <li id="fn-17">Hahn, S. & Mitch J. (2024) idem – <i>Comentários sobre Gl 3, 18; Cl 3, 11 e Cl 3, 18–4, 1</i>.</li>
+                        <li id="fn-18">Hahn, S. & Mitch J. (2024) idem – <i>Comentários sobre Ef 5, 22.25 e Ef 6, 5</i>.</li>
+                        <li id="fn-19">Hahn, S. & Mitch J. (2024) idem – <i>Comentários sobre 1Ts 4, 15; 5, 1–11 e 2Ts 2, 1–12</i>.</li>
+                    </ol>
+                </section>
+
+                
+                    <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl font-inter">
+                        <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
+                        <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                            </div>
+                            <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter resize-none"></textarea>
+                            <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
+                            <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter">
+                                Enviar Comentário
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Rodapé do Artigo -->
+            <footer class="mt-16 pt-8 border-t border-gray-150 font-inter">
+                <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
+                    <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
+                        <a href="../sobreHB" class="block w-full h-full">
+                            <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
+                        </a>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <h4 class="font-serif text-lg font-bold text-brand-accent-blue">
+                            <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
+                        </h4>
+                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
+                        <p class="text-sm text-gray-650 leading-relaxed font-inter">
+                            Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-inter text-xs uppercase tracking-wider font-bold">
+                    <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
+                        <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                    </a>
+                    <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
+                        Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                    </a>
+                </div>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado assincronamente do GitHub) -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
+                return '../';
+            }
+            return '';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId);
+            if (!container) return;
+            const prefix = getPrefix();
+            
+            if (prefix !== '') {
+                container.querySelectorAll('a').forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        if (!href.startsWith('../')) {
+                            link.setAttribute('href', prefix + href);
+                        }
+                    }
+                });
+                container.querySelectorAll('img').forEach(img => {
+                    let src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                        img.setAttribute('src', prefix + src);
+                    }
+                });
+            }
+
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
+                }
+            });
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            const prefix = getPrefix();
+            try {
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    adjustAndCleanLinks('nav-placeholder');
+                }
+
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                    adjustAndCleanLinks('footer-placeholder');
+                }
+
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        function calculateReadingTime() {
+            const contentElement = document.getElementById('article-content');
+            const readingTimeElement = document.getElementById('reading-time');
+            if (!contentElement || !readingTimeElement) return;
+
+            const text = contentElement.innerText || contentElement.textContent;
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+            const readingTime = Math.ceil(words / 200);
+            readingTimeElement.textContent = readingTime;
+        }
+
+        function addLocalComment(e) {
+            e.preventDefault();
+            const author = document.getElementById('comm-author').value.trim() || "Anónimo";
+            const message = document.getElementById('comm-text').value.trim();
+            if (!message) return;
+
+            const commentsBox = document.getElementById('comments-box');
+            const today = new Date();
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formattedDate = today.toLocaleDateString('pt-PT', options);
+
+            const commentElement = document.createElement('div');
+            commentElement.className = "bg-white p-5 rounded-2xl border border-gray-100 shadow-xs fade-in";
+            commentElement.innerHTML = `
+                <div class="flex items-center justify-between gap-4 mb-2">
+                    <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
+                    <span class="text-xs text-gray-400">${formattedDate}</span>
+                </div>
+                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
+            `;
+
+            commentsBox.appendChild(commentElement);
+            document.getElementById('comment-form').reset();
+        }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('sub-email');
+            if (!emailInput || !emailInput.value.trim()) return;
+
+            const userEmail = emailInput.value.trim();
+            const recipient = "editorajeronimo@gmail.com";
+            const subject = encodeURIComponent("nova subscrição");
+            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
+
+            window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+
+            const container = e.target;
+            container.innerHTML = `
+                <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
+                    <i class="fas fa-check-circle"></i> A iniciar o seu cliente de e-mail para processar a subscrição!
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            calculateReadingTime();
+        });
+    </script>
+</body>
+</html>

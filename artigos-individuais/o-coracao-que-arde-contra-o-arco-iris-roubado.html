@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>O coração que arde contra o arco-íris roubado | Hugo Bacelo</title>
+    
+    <script>
+        // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <!-- Google Fonts unificadas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
+                        inter: ['"Inter"', 'sans-serif'], // Leitura premium de artigos
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+
+        .text-readable-article {
+            line-height: 1.85;
+            letter-spacing: -0.003em;
+            word-spacing: 0.05em;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 2px;
+            color: #e05300;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div id="nav-placeholder"></div>
+
+    <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
+        <article class="max-w-4xl mx-auto px-6 fade-in">
+            
+            <div class="mb-8">
+                <!-- Direcionado para a URL limpa de artigos -->
+                <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
+                    <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
+                </a>
+            </div>
+
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center md:text-left">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3">Apologética e Cultura</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">
+                    O coração que arde contra o arco-íris roubado
+                </h1>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500 font-medium">
+                    <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 13 de Junho de 2026</span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5 font-inter">
+                        <i class="far fa-user"></i> Escrito por 
+                        <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">10</span> min de leitura</span>
+                </div>
+            </header>
+
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-xs relative bg-gray-100">
+                <img src="../Imagens/7.png" alt="O coração que arde contra o arco-íris roubado" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=O+cora%C3%A7%C3%A3o+que+arde+contra+o+arco-%C3%ADris+roubado';">
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto">
+                    Junho: mês do Sagrado Coração de Jesus, não mês do orgulho no pecado
+                </p>
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto">
+                
+                <p class="dropcap">
+                    Há dois calendários a disputar o mês de Junho. Um deles é antigo, litúrgico, gravado na memória da Igreja desde séculos: começa com o Corpus Christi, sobe ao cume da Solenidade do Sagrado Coração de Jesus e da memória do Imaculado Coração de Maria, atravessa a Natividade de São João Baptista e termina na grande festa de São Pedro e São Paulo. O outro calendário é recente, secular, promovido por empresas, instituições e governos: chamam-lhe «Mês do Orgulho». Os dois calendários não convivem em paz. Disputam o mesmo espaço, as mesmas semanas, e até o mesmo símbolo: o arco-íris.
+                </p>
+
+                <p>
+                    Este ensaio defende uma tese simples mas urgente. A Igreja já consagrou Junho a uma realidade concreta, o Coração de Cristo aberto em amor sacrificial, e esse amor nada tem que ver com a afirmação indiscriminada de qualquer desejo humano. A apropriação do arco-íris pela ideologia que hoje se celebra em Junho representa uma usurpação simbólica que importa desmascarar, não por desprezo às pessoas, mas precisamente por amor a elas. Para o demonstrar, percorrerei cinco passos: o verdadeiro sentido de Junho, o roubo do arco-íris, a falácia do slogan «amor é amor», o dever do Católico de não se conformar mas converter, e finalmente um apelo caritativo a quantos vivem hoje desvios à ordem natural da sexualidade.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Junho, mês do Sagrado Coração</h3>
+
+                <p>
+                    A riqueza litúrgica de Junho começa logo na solenidade do Corpus Christi, que celebra o Corpo e o Sangue reais de Cristo presentes na Eucaristia. A tradição liga esta festa a um episódio do século XIII, quando um sacerdote Alemão, duvidando da presença real, viu sangue brotar da hóstia consagrada durante a missa em Bolsena. O Papa Urbano IV, ao tomar conhecimento do prodígio, pediu a São Tomás de Aquino que compusesse o ofício para uma nova festa em honra da Eucaristia. Nasce assim, sob o impulso de um milagre, uma celebração que recorda a promessa de Cristo: «E sabei que Eu estarei sempre convosco até ao fim dos tempos.» (Mt 28,20)
+                </p>
+
+                <p>
+                    Pouco depois chega o coração do mês: a Solenidade do Sagrado Coração de Jesus, seguida pela memória do Imaculado Coração de Maria. A devoção ao Coração de Jesus remonta, em germe, ao século II, mas foi nas aparições a Santa Margarida Maria Alacoque, no século XVII, que recebeu a forma que hoje conhecemos. Cristo pediu então três coisas aos fiéis: a reparação pelos pecados cometidos contra o seu amor, a comunhão frequente, especialmente nas primeiras Sextas-feiras, e a prática da Hora Santa. Cada um destes pedidos revela a natureza do amor que este Coração representa. Não é um amor que se contenta em observar e aprovar. É um amor que pede reparação, que chama à conversão, que exige tempo de oração diante do Santíssimo.
+                </p>
+
+                <p>
+                    Eis, portanto, o «amor» que Junho celebra desde sempre: um amor sacrificial, eucarístico, purificador, totalmente ordenado à salvação das almas. Um amor que sangra por nós e que, precisamente por isso, não pode confundir-se com a mera validação de qualquer impulso humano. Quando se compreende isto, torna-se claro que existe já, há séculos, um «Junho do amor» na Igreja. A questão que se segue é saber o que aconteceu quando um outro movimento decidiu também reivindicar Junho, e um símbolo celeste, para um «amor» de sentido completamente diferente.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">O roubo do arco-íris</h3>
+
+                <p>
+                    O arco-íris não nasceu como invenção humana nem como bandeira de movimento algum. A primeira vez que aparece nas Escrituras é depois do dilúvio, quando Deus estabelece a sua aliança com Noé, com os seus filhos e com toda a criação: «coloquei o meu arco nas nuvens, para que seja o sinal da aliança entre mim e a Terra» (Gn 9,13). Este arco pertence a Deus e só a Ele cabe oferecê-lo. Mais tarde, na visão mística de Ezequiel, o arco-íris volta a surgir como imagem da glória divina sobre o trono celeste (Ez 1,27–28), e o livro do Apocalipse retoma a mesma imagem em torno do trono de Deus (Ap 4,3). Ao longo da literatura Cristã, de Dante a Milton, o arco-íris foi sempre lido como sinal da beleza, da justiça, da misericórdia e da fidelidade de Deus para com a sua criação.
+                </p>
+
+                <p>
+                    Ora, quando um movimento cultural se apropria deste símbolo e o transforma em bandeira de uma visão do amor centrada na autonomia absoluta do desejo, algo de profundo se inverte. Aquilo que era sinal de uma aliança recebida torna-se emblema de uma autoafirmação reivindicada. O que apontava para Deus passa a apontar para o eu. Mesmo que muitos dos que hoje hasteiam essa bandeira não tenham consciência desta inversão, o resultado objectivo é o mesmo: um símbolo que falava da fidelidade divina passa a falar da autodeterminação humana.
+                </p>
+
+                <p>
+                    Esta confusão simbólica não acontece isoladamente. Encontra-se também, por exemplo, na recuperação distorcida da imagem dos anjos em certos contextos da cultura «arco-íris». Os anjos são seres assexuais, e por isso a sua imagem é por vezes usada para legitimar a desconstrução das categorias de sexo. Mas há aqui uma confusão entre dois conceitos muito diferentes: transcendência e transgressão. A androgenia que monges e santos buscam, à imagem dos anjos, não nasce da confusão das categorias criadas por Deus, mas da sua superação pela graça, dentro da própria masculinidade ou feminilidade de cada um. O hermafroditismo simbólico, pelo contrário, representa não a superação mas a mistura confusa de categorias que Deus quis distintas. Confundir estas duas realidades é tomar por libertação aquilo que é, na verdade, desordem.
+                </p>
+
+                <p>
+                    Recuperar o sentido original do arco-íris não é, portanto, um gesto de hostilidade contra pessoas. É um acto de justiça simbólica e espiritual: devolver a Deus aquilo que Lhe foi tirado, para que o céu volte a falar da sua aliança e não apenas da revolta humana contra ela.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">A falácia de «amor é amor»</h3>
+
+                <p>
+                    Poucos slogans atravessaram tão silenciosamente as defesas morais da sociedade como «amor é amor». A frase apresenta-se como evidente, quase tautológica, e por isso difícil de contestar sem parecer mesquinho. Mas, examinada de perto, esconde uma escolha filosófica decisiva.
+                </p>
+
+                <p>
+                    Existem apenas duas respostas possíveis à pergunta sobre a verdade moral. Ou a verdade moral não existe, e tudo se reduz então a preferências subjectivas, ou existe de facto uma verdade moral objectiva, válida para todos independentemente das suas opiniões. Quando alguém diz «esta é a minha verdade» ou «esta é a nossa verdade», coloca-se geralmente na primeira hipótese. Mas se não há uma verdade que esteja por debaixo dessas verdade pessoais, então «a minha verdade» não é mais do que uma preferência emotiva travestida de afirmação. E uma sociedade construída sobre a imposição de preferências emotivas, mesmo que maioritárias, acaba a funcionar segundo a lógica do mais forte: «obedece e celebra-me, porque eu o digo».
+                </p>
+
+                <p>
+                    Para escapar a esta conclusão, seria necessário que o slogan «amor é amor» afirmasse algo verdadeiro para todos, independentemente de quem o proclame. Mas, levado a essa exigência de universalidade, o slogan revela-se incapaz de estabelecer qualquer distinção moral coerente entre formas de atracção ou de conduta sexual, por mais que os seus próprios defensores não desejem, conscientemente, todas as consequências dessa lógica. Um princípio que não consegue justificar nenhuma distinção entre desejos não é, na verdade, um princípio moral. É apenas a recusa de qualquer princípio.
+                </p>
+
+                <p>
+                    O amor Cristão segue um caminho inteiramente diferente. Não nega que o amor seja central à existência humana, antes o afirma com mais radicalidade do que qualquer slogan: «Deus é amor» (1Jo 4,8). Mas este amor não se limita a confirmar o homem onde ele está. Ordena o desejo ao verdadeiro bem da pessoa, mesmo quando esse bem exige renúncia, mudança, conversão. O Coração de Jesus, aberto na cruz, não diz ao homem «estás bem como estás». Diz-lhe «por ti morro, para que deixes de estar como estás e vivas». Trocar este amor pela fórmula «amor é amor» é trocar a cruz por um espelho. É escolher um conforto que nada cura, em lugar de um sofrimento que tudo transforma.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Não conformados, mas convertidos, e instrumentos de conversão</h3>
+
+                <p>
+                    São Paulo escreveu aos Romanos uma frase que continua a valer hoje tanto quanto valia então: «Não vos acomodeis a este mundo. Pelo contrário, deixai-vos transformar, adquirindo uma nova mentalidade para poderdes discernir qual é a vontade de Deus: o que é bom, o que lhe é agradável, o que é perfeito» (Rm 12,2). Esta exortação tem implicações concretas para o Católico no mês de Junho. Adoptar acriticamente a linguagem, os símbolos e os pressupostos morais do «Mês do Orgulho» seria precisamente aquele conformismo que o apóstolo proíbe.
+                </p>
+
+                <p>
+                    Importa, porém, evitar uma confusão muito comum. Caridade para com as pessoas e aprovação da ideologia que as rodeia são duas coisas distintas, e a segunda não decorre necessariamente da primeira. Amar o pecador não significa afirmar o pecado, do mesmo modo que um médico pode amar profundamente um doente sem por isso fingir que a doença não existe. Pelo contrário, afirmar alguém num caminho que o destrói não é caridade. É abandono disfarçado de simpatia.
+                </p>
+
+                <p>
+                    A vocação do Católico em Junho consiste em ser, à imagem do Coração de Jesus, um sinal de contradição: arder de amor reparador em vez de se deixar consumir pelo conformismo ambiente. Isto traduz-se em várias atitudes concretas. Primeiro, um testemunho sereno mas firme da verdade sobre a sexualidade humana e sobre a ordem da criação, recusando participar em gestos simbólicos, hastear bandeiras ou adoptar linguagem que contradiga aquilo em que se crê. Segundo, e mais profundamente, uma vida de oração e sacrifício oferecida pela conversão de quantos vivem hoje no erro, retomando a antiga prática da oferta da manhã ao Sagrado e ao Imaculado Coração, unindo a ela as próprias alegrias, trabalhos e sofrimentos do dia.
+                </p>
+
+                <p>
+                    Há ainda um discernimento adicional que importa cultivar, e que a tradição simbólica Cristã sempre soube reconhecer: o do inimigo que finge ser amigo. Diferente do inimigo que ataca de frente, este outro tipo de inimigo infiltra-se, oferece hospitalidade aparente, ganha confiança, e só depois revela a sua verdadeira intenção. As fábulas tradicionais conheciam bem esta figura, do lobo que se disfarça de avó à bruxa que oferece doces às crianças perdidas. O perigo não está apenas em discursos que atacam abertamente categorias como a família, a maternidade ou a identidade sexual, mas também naqueles que, sob aparência de inclusão e bondade, acabam por esvaziar essas mesmas categorias do interior, desviando afectos e energias para fins que não servem o verdadeiro bem da pessoa. O Católico precisa de discernimento para não deixar entrar, sob disfarce de hospitalidade, aquilo que destrói por dentro.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Apelo caritativo final</h3>
+
+                <p>
+                    Tudo o que foi dito até aqui poderia, mal compreendido, soar como um discurso de rejeição. É exactamente o contrário que este ensaio pretende transmitir. As pessoas que hoje vivem atracções ou identidades em desacordo com a ordem natural da sexualidade humana não são adversárias a combater, mas filhos de Deus a quem Ele próprio dirige um convite. Reconhecer o seu sofrimento, muitas vezes real e profundo, e a sua dignidade inalienável, em nada exige branquear o erro em que se encontram. Ambas as coisas, compaixão e verdade, podem e devem coexistir.
+                </p>
+
+                <p>
+                    A verdadeira boa notícia de Junho não é o orgulho, mas a misericórdia. O Coração de Jesus permanece aberto, traspassado, disponível para qualquer pecador que decida converter-se, sem excepção alguma. Não existe, da parte de Deus, nenhuma condenação antecipada que feche essa porta. Mas também não existe, da parte de Deus, nenhuma aceitação que dispense o homem da conversão. Misericórdia e chamamento à mudança não são opostos. São, no Coração de Jesus, a mesma realidade vista de dois ângulos.
+                </p>
+
+                <p>
+                    A todos quantos sentem hoje o peso de desejos ou identidades que os afastam da ordem que Deus quis para a sexualidade humana, este mês oferece caminhos concretos de cura e de paz interior: a confissão sacramental, a Eucaristia recebida com fé, a Hora Santa diante do Santíssimo, a devoção ao Sagrado Coração e ao Imaculado Coração. Nenhum destes caminhos exige perfeição prévia. Todos eles começam precisamente onde a pessoa se encontra, e conduzem-na, passo a passo, para onde Deus a espera.
+                </p>
+
+                <p>
+                    Junho pertence ao Sagrado Coração de Jesus. O arco-íris pertence a Deus, sinal da sua aliança e da sua glória, muito antes de pertencer a qualquer bandeira. O amor verdadeiro, aquele que brota do lado aberto de Cristo, exige conversão e não se contenta com conformismo. E a caridade Católica consiste precisamente em chamar todos, sem excepção, incluindo a própria Igreja, sempre necessitada de se converter de novo, para o único Coração capaz de saciar verdadeiramente o coração humano.
+                </p>
+
+                <p>
+                    Que este Junho seja, para cada um de nós, não o mês em que hasteamos bandeiras emprestadas, mas o mês em que devolvemos a Deus o arco-íris, o coração e a vida.
+                </p>
+
+                <!-- SECÇÃO PREMIUM DE SUBSCREVER NEWSLETTER -->
+                <div class="bg-gray-50 border border-gray-150 p-6 sm:p-8 rounded-2xl my-10 flex flex-col md:flex-row items-center justify-between gap-6 font-inter">
+                    <div class="text-left max-w-md">
+                        <h4 class="font-sans text-base sm:text-lg font-bold text-brand-accent-blue leading-snug">
+                            Receba <u class="underline decoration-brand-accent-blue decoration-2 font-inter">gratuitamente</u> os próximos artigos no seu e-mail
+                        </h4>
+                    </div>
+                    <form onsubmit="handleSubscribe(event)" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 flex-grow max-w-xl">
+                        <input type="email" id="sub-email" required placeholder="O seu e-mail..." class="flex-grow p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                        <button type="submit" class="px-6 py-3 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter whitespace-nowrap shadow-xs">
+                            Subscrever
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Secção de Comentários (Livre de dados inventados de terceiros) -->
+                <section class="mt-12 pt-8 border-t border-gray-150">
+                    <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-6">Comentários</h4>
+                    
+                    <div class="space-y-4 mb-8 font-inter" id="comments-box">
+                        <!-- Sem comentários automáticos inventados -->
+                    </div>
+
+                    <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl font-inter">
+                        <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
+                        <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                            </div>
+                            <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter resize-none"></textarea>
+                            <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
+                            <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter">
+                                Enviar Comentário
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Rodapé do Artigo -->
+            <footer class="mt-16 pt-8 border-t border-gray-150 font-inter">
+                <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
+                    <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
+                        <a href="../sobreHB" class="block w-full h-full">
+                            <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
+                        </a>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <h4 class="font-serif text-lg font-bold text-brand-accent-blue">
+                            <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
+                        </h4>
+                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
+                        <p class="text-sm text-gray-650 leading-relaxed font-inter">
+                            Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-inter text-xs uppercase tracking-wider font-bold">
+                    <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
+                        <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                    </a>
+                    <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
+                        Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                    </a>
+                </div>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado assincronamente do GitHub) -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
+                return '../';
+            }
+            return '';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId);
+            if (!container) return;
+            const prefix = getPrefix();
+            
+            if (prefix !== '') {
+                container.querySelectorAll('a').forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        if (!href.startsWith('../')) {
+                            link.setAttribute('href', prefix + href);
+                        }
+                    }
+                });
+                container.querySelectorAll('img').forEach(img => {
+                    let src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                        img.setAttribute('src', prefix + src);
+                    }
+                });
+            }
+
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
+                }
+            });
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            const prefix = getPrefix();
+            try {
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    adjustAndCleanLinks('nav-placeholder');
+                }
+
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                    adjustAndCleanLinks('footer-placeholder');
+                }
+
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        function calculateReadingTime() {
+            const contentElement = document.getElementById('article-content');
+            const readingTimeElement = document.getElementById('reading-time');
+            if (!contentElement || !readingTimeElement) return;
+
+            const text = contentElement.innerText || contentElement.textContent;
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+            const readingTime = Math.ceil(words / 200);
+            readingTimeElement.textContent = readingTime;
+        }
+
+        function addLocalComment(e) {
+            e.preventDefault();
+            const author = document.getElementById('comm-author').value.trim() || "Anónimo";
+            const message = document.getElementById('comm-text').value.trim();
+            if (!message) return;
+
+            const commentsBox = document.getElementById('comments-box');
+            const today = new Date();
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formattedDate = today.toLocaleDateString('pt-PT', options);
+
+            const commentElement = document.createElement('div');
+            commentElement.className = "bg-white p-5 rounded-2xl border border-gray-100 shadow-xs fade-in";
+            commentElement.innerHTML = `
+                <div class="flex items-center justify-between gap-4 mb-2">
+                    <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
+                    <span class="text-xs text-gray-400">${formattedDate}</span>
+                </div>
+                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
+            `;
+
+            commentsBox.appendChild(commentElement);
+            document.getElementById('comment-form').reset();
+        }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('sub-email');
+            if (!emailInput || !emailInput.value.trim()) return;
+
+            const userEmail = emailInput.value.trim();
+            const recipient = "editorajeronimo@gmail.com";
+            const subject = encodeURIComponent("nova subscrição");
+            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
+
+            window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+
+            const container = e.target;
+            container.innerHTML = `
+                <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
+                    <i class="fas fa-check-circle"></i> A iniciar o seu cliente de e-mail para processar a subscrição!
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            calculateReadingTime();
+        });
+    </script>
+</body>
+</html>

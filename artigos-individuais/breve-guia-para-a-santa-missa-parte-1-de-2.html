@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Breve Guia para a Santa Missa (Parte 1 de 2) | Hugo Bacelo</title>
+    
+    <script>
+        // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <!-- Google Fonts unificadas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
+                        inter: ['"Inter"', 'sans-serif'], // Leitura premium de artigos
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+
+        .text-readable-article {
+            line-height: 1.85;
+            letter-spacing: -0.003em;
+            word-spacing: 0.05em;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 2px;
+            color: #e05300;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div id="nav-placeholder"></div>
+
+    <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
+        <article class="max-w-4xl mx-auto px-6 fade-in">
+            
+            <div class="mb-8">
+                <!-- Direcionado para a URL limpa de artigos -->
+                <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
+                    <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
+                </a>
+            </div>
+
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center md:text-left">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3">Formação</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">
+                    Breve Guia para a Santa Missa (Parte 1 de 2)
+                </h1>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500 font-medium">
+                    <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 11 de Junho de 2026</span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5 font-inter">
+                        <i class="far fa-user"></i> Escrito por 
+                        <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">10</span> min de leitura</span>
+                </div>
+            </header>
+
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-xs relative bg-gray-100">
+                <img src="../Imagens/1.png" alt="Breve Guia para a Santa Missa (Parte 1 de 2)" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Breve+Guia+para+a+Santa+Missa';">
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto">
+                
+                <p class="dropcap">
+                    Este texto acompanhou uma palestra sobre a primeira metade da Santa Missa, proferida no Círculo da 1.ª Quinta no CCM. Serve de apoio a quem esteve presente e quer rever o que foi abordado e de introdução a quem chega pela primeira vez ao tema.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">A Missa como «total obra de arte»</h3>
+
+                <p>
+                    Richard Wagner defendia que a ópera deveria ser a expressão máxima da cultura humana, uma obra que combinasse todas as artes. Nunca o conseguirá ser, porque lhe falta um elemento decisivo: a participação. É a Missa — e, em particular, o ciclo do ano litúrgico — que merece verdadeiramente esse título. Envolve todas as formas de arte humana, percorre todos os aspectos da vida, e fá-lo com a participação efectiva de todos os presentes.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Doutrina e Disciplina</h3>
+
+                <p>
+                    Antes de entrar na Missa propriamente dita, é útil distinguir dois conceitos que muitas vezes se confundem.
+                </p>
+
+                <p>
+                    A Doutrina engloba as verdades imutáveis de fé e de moral recebidas por Revelação Divina através da Sagrada Escritura e da Tradição Apostólica e propostas definitivamente pelo Magistério da Igreja. Não estão sujeitas a alteração.
+                </p>
+
+                <p>
+                    A Disciplina refere-se às normas práticas e leis eclesiásticas que a autoridade legítima da Igreja estabelece para o bem das almas, e que podem ser modificadas ao longo dos séculos.
+                </p>
+
+                <p>
+                    Dois exemplos concretos: o celibato sacerdotal (no Ocidente) é uma questão disciplinar; a proibição de ordenação de mulheres é doutrinal. Na Missa, as duas coexistem: a matéria do sacrifício, as palavras da Consagração e a presença real de Cristo sob as espécies sagradas são dogmas doutrinários; a postura dos fiéis, o jejum eucarístico e o uso do vernáculo são disciplina.
+                </p>
+
+                <p>
+                    Importa, porém, sublinhar: o facto de uma norma ser disciplinar não a torna opcional. A docilidade à autoridade legítima da Igreja é ela própria uma virtude, talvez subvalorizada numa cultura que tende a exaltar a independência individual acima de tudo.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Os fins da Missa</h3>
+
+                <p>
+                    O fim primário, absoluto e supremo da celebração é a adoração, a glorificação de Deus e a acção de graças. Deste fim decorre o secundário: a santificação dos fiéis.
+                </p>
+
+                <p>
+                    A Missa não é meramente um banquete de comunhão fraternal, nem um sacrifício distante e intimidante. É indissociavelmente ambos: a actualização do sacrifício da Cruz e o banquete pascal da Nova e Eterna Aliança.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">A preparação</h3>
+
+                <p>
+                    A preparação para a Missa começa no dia-a-dia, na fidelidade à oração e no combate ao pecado. Mas exige também uma preparação imediata no próprio dia: o jejum eucarístico (mínimo de uma hora) e aquilo a que poderíamos chamar um jejum de palavras: desligar o rádio no caminho para a igreja, guardar o telemóvel, substituir a conversa fútil pelo recolhimento ou por um mistério do Terço.
+                </p>
+
+                <p>
+                    É igualmente importante chegar mais cedo. As graças da Eucaristia não frutificam sem o solo fértil de uma vida interior cultivada.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Os Ritos Iniciais</h3>
+
+                <p>
+                    A partir do momento em que entramos na igreja, nada é aleatório. Tudo tem significado.
+                </p>
+
+                <p>
+                    A água benta à entrada é o memorial solene do nosso Baptismo: recorda-nos que não entramos na presença de Deus por direito próprio, mas porque fomos lavados e revestidos da dignidade de filhos adoptivos.
+                </p>
+
+                <p>
+                    Genuflexão ou inclinação profunda? A genuflexão (joelho direito ao solo) é sinal de adoração e reserva-se ao Santíssimo Sacramento. A inclinação profunda reserva-se ao Altar e a momentos específicos da celebração (cf. IGMR 274-5). Se o Sacrário estiver noutra capela ou fora do campo visual, o gesto correcto ao passar em frente ao presbitério é a inclinação ao Altar, não uma genuflexão a um altar vazio. Esta distinção protege a clareza da nossa fé na Presença Real.
+                </p>
+
+                <p>
+                    A Procissão de Entrada deve partir do fundo da assembleia. O sacerdote é alguém da assembleia chamado por Deus para presidir e a procissão simboliza a vida Cristã como peregrinação, como movimento em direcção a algo.
+                </p>
+
+                <p>
+                    A assinatura do Altar (beijo ao Altar) manifesta o afecto da Igreja por Cristo, que o altar simboliza, simbologia que remonta já ao Antigo Testamento (Ex 24,4b-8).
+                </p>
+
+                <p>
+                    O Acto Penitencial é precedido de uma breve pausa de silêncio para exame de consciência. Purifica dos pecados veniais. O gesto de bater três vezes no peito pode ser interpretado da seguinte forma. O Hebraico antigo não tinha superlativos: «santo, santo, santo» significa que Deus não é muito santo, é santíssimo. De forma análoga, ao batermos no peito três vezes proclamamos que somos culpadíssimos.
+                </p>
+
+                <p>
+                    O Kýrie é a única parte da Liturgia Romana conservada em Grego antigo, um elo ininterrupto com os primeiros séculos da Igreja.
+                </p>
+
+                <p>
+                    O Glória abre com as palavras angélicas de Belém e, pelo seu carácter festivo, é omitido nos tempos de penitência (Advento e Quaresma).
+                </p>
+
+                <p>
+                    A Oração Colecta encerra os Ritos Iniciais. Após o «Oremos», há uma pausa de silêncio: cada fiel formula interiormente a sua intenção particular para aquela Missa. O sacerdote eleva as mãos, «colecta» todas as intenções silenciosas da assembleia e apresenta-as a Deus Pai, recebendo o «Ámen» do povo como selo de união.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Liturgia da Palavra</h3>
+
+                <p>
+                    O Ambão é a Mesa da Palavra, reservado exclusivamente à proclamação das Sagradas Escrituras. Sentarmo-nos neste momento não significa passividade, mas receptividade. Deus, pelo Profeta Isaías, descreve o que a Palavra proclamada deve fazer em nós:
+                </p>
+
+                <blockquote class="border-l-4 border-brand-accent-orange pl-4 italic text-gray-500 my-6">
+                    Assim como a chuva e a neve descem do céu, e não voltam mais para lá, senão depois de empapar a terra, de a fecundar e fazer germinar […] o mesmo sucede à palavra que sai da minha boca: não voltará para mim vazia, sem ter realizado a minha vontade. (Is 55,10–11)
+                </blockquote>
+
+                <p>
+                    A Liturgia da Palavra compreende uma Primeira Leitura (normalmente do Antigo Testamento), o Salmo Responsorial, uma Segunda Leitura (Domingos e Solenidades, do Novo Testamento) e o Evangelho. O Salmo é a resposta inspirada da assembleia à leitura precedente: Deus falou, e o povo responde usando as próprias palavras que Deus inspirou ao salmista. Por isso, deve ser cantado e executado por pessoa diferente do Leitor.
+                </p>
+
+                <p>
+                    A assembleia ergue-se para a Aclamação do Evangelho em sinal de reverência: o Evangelho é o ponto culminante da Liturgia da Palavra, ouvido de pé porque é o próprio Cristo a falar directamente à Sua Igreja.
+                </p>
+
+                <p>
+                    Antes da leitura, fazemos o pequeno sinal da Cruz triplo na fronte, nos lábios e no peito, uma prece que pode formular-se assim: «Senhor, que a Tua Palavra esteja na minha mente para que a compreenda, nos meus lábios para que a proclame, e no meu coração para que a ame e a transforme em vida diária.»
+                </p>
+
+                <p>
+                    A Homilia é reservada ao ministro ordenado. Não é uma palestra nem uma aula bíblica: é uma forma de paternidade espiritual, uma direcção espiritual colectiva que incita a assembleia à acção.
+                </p>
+
+                <p>
+                    O Credo é a resposta formal da assembleia à Palavra proclamada. Ambas as formas — o Símbolo Apostólico e o Símbolo Niceno-Constantinopolitano — gozam de idêntica autoridade litúrgica.
+                </p>
+
+                <p>
+                    A Oração dos Fiéis (ou Oração Universal) encerra a Liturgia da Palavra. É possivelmente o elemento litúrgico mais antigo, fora as palavras da instituição da Eucaristia. Aqui o povo exerce activamente o seu sacerdócio baptismal, intercedendo pela Igreja universal, pelas autoridades civis, pelos necessitados e pelas carências da comunidade local.
+                </p>
+
+                <p>
+                    Este guião cobre a primeira metade da Missa, até à Oração Universal. No próximo mês, abordaremos a segunda metade, a partir da Liturgia Eucarística.
+                </p>
+
+                <!-- SECÇÃO PREMIUM DE SUBSCREVER NEWSLETTER -->
+                <div class="bg-gray-50 border border-gray-150 p-6 sm:p-8 rounded-2xl my-10 flex flex-col md:flex-row items-center justify-between gap-6 font-inter">
+                    <div class="text-left max-w-md">
+                        <h4 class="font-sans text-base sm:text-lg font-bold text-brand-accent-blue leading-snug">
+                            Receba <u class="underline decoration-brand-accent-blue decoration-2 font-inter">gratuitamente</u> os próximos artigos no seu e-mail
+                        </h4>
+                    </div>
+                    <form onsubmit="handleSubscribe(event)" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 flex-grow max-w-xl">
+                        <input type="email" id="sub-email" required placeholder="O seu e-mail..." class="flex-grow p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                        <button type="submit" class="px-6 py-3 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter whitespace-nowrap shadow-xs">
+                            Subscrever
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Secção de Comentários (Livre de dados inventados de terceiros) -->
+                <section class="mt-12 pt-8 border-t border-gray-150">
+                    <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-6">Comentários</h4>
+                    
+                    <div class="space-y-4 mb-8 font-inter" id="comments-box">
+                        <!-- Sem comentários automáticos inventados -->
+                    </div>
+
+                    <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl font-inter">
+                        <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
+                        <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                            </div>
+                            <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter resize-none"></textarea>
+                            <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
+                            <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter">
+                                Enviar Comentário
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Rodapé do Artigo -->
+            <footer class="mt-16 pt-8 border-t border-gray-150 font-inter">
+                <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
+                    <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
+                        <a href="../sobreHB" class="block w-full h-full">
+                            <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
+                        </a>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <h4 class="font-serif text-lg font-bold text-brand-accent-blue">
+                            <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
+                        </h4>
+                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
+                        <p class="text-sm text-gray-650 leading-relaxed font-inter">
+                            Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-inter text-xs uppercase tracking-wider font-bold">
+                    <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
+                        <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                    </a>
+                    <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
+                        Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                    </a>
+                </div>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado assincronamente do GitHub) -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
+                return '../';
+            }
+            return '';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId);
+            if (!container) return;
+            const prefix = getPrefix();
+            
+            if (prefix !== '') {
+                container.querySelectorAll('a').forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        if (!href.startsWith('../')) {
+                            link.setAttribute('href', prefix + href);
+                        }
+                    }
+                });
+                container.querySelectorAll('img').forEach(img => {
+                    let src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                        img.setAttribute('src', prefix + src);
+                    }
+                });
+            }
+
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
+                }
+            });
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            const prefix = getPrefix();
+            try {
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    adjustAndCleanLinks('nav-placeholder');
+                }
+
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                    adjustAndCleanLinks('footer-placeholder');
+                }
+
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        function calculateReadingTime() {
+            const contentElement = document.getElementById('article-content');
+            const readingTimeElement = document.getElementById('reading-time');
+            if (!contentElement || !readingTimeElement) return;
+
+            const text = contentElement.innerText || contentElement.textContent;
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+            const readingTime = Math.ceil(words / 200);
+            readingTimeElement.textContent = readingTime;
+        }
+
+        function addLocalComment(e) {
+            e.preventDefault();
+            const author = document.getElementById('comm-author').value.trim() || "Anónimo";
+            const message = document.getElementById('comm-text').value.trim();
+            if (!message) return;
+
+            const commentsBox = document.getElementById('comments-box');
+            const today = new Date();
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formattedDate = today.toLocaleDateString('pt-PT', options);
+
+            const commentElement = document.createElement('div');
+            commentElement.className = "bg-white p-5 rounded-2xl border border-gray-100 shadow-xs fade-in";
+            commentElement.innerHTML = `
+                <div class="flex items-center justify-between gap-4 mb-2">
+                    <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
+                    <span class="text-xs text-gray-400">${formattedDate}</span>
+                </div>
+                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
+            `;
+
+            commentsBox.appendChild(commentElement);
+            document.getElementById('comment-form').reset();
+        }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('sub-email');
+            if (!emailInput || !emailInput.value.trim()) return;
+
+            const userEmail = emailInput.value.trim();
+            const recipient = "editorajeronimo@gmail.com";
+            const subject = encodeURIComponent("nova subscrição");
+            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
+
+            window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+
+            const container = e.target;
+            container.innerHTML = `
+                <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
+                    <i class="fas fa-check-circle"></i> A iniciar o seu cliente de e-mail para processar a subscrição!
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            calculateReadingTime();
+        });
+    </script>
+</body>
+</html>

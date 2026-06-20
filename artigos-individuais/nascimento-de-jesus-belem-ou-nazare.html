@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Nascimento de Jesus: Belém ou Nazaré? | Hugo Bacelo</title>
+    
+    <script>
+        // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <!-- Google Fonts unificadas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
+                        inter: ['"Inter"', 'sans-serif'], // Leitura premium de artigos
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+
+        .text-readable-article {
+            line-height: 1.85;
+            letter-spacing: -0.003em;
+            word-spacing: 0.05em;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 2px;
+            color: #e05300;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div id="nav-placeholder"></div>
+
+    <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
+        <article class="max-w-4xl mx-auto px-6 fade-in">
+            
+            <div class="mb-8">
+                <!-- Direcionado para a URL limpa de artigos -->
+                <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
+                    <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
+                </a>
+            </div>
+
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center md:text-left">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3">Teologia</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">
+                    Nascimento de Jesus: Belém ou Nazaré?
+                </h1>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500 font-medium">
+                    <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 3 de Fevereiro de 2026</span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5 font-inter">
+                        <i class="far fa-user"></i> Escrito por 
+                        <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">10</span> min de leitura</span>
+                </div>
+            </header>
+
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-xs relative bg-gray-100">
+                <img src="../Imagens/4.png" alt="Nascimento de Jesus: Belém ou Nazaré?" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Bel%C3%A9m+ou+Nazar%C3%A9%3F';">
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto">
+                
+                <p class="dropcap">
+                    O debate sobre a historicidade do local de nascimento de Jesus Cristo permanece um tema central na exegese bíblica contemporânea, apesar de ser afirmado explicitamente por São Mateus e São Lucas que Jesus nasceu em Belém (é preciso desencantar temas para teses de doutoramento em Teologia). O presente ensaio analisa a tese proposta pelo Pe. Ariel Álvarez Valdés no artigo de capa da revista Bíblica N.º 415 de Novembro/Dezembro 2024. O biblista defende que o nascimento em Belém é um «facto teológico» e não um «facto histórico», sustentando que as evidências apontam para Nazaré como o verdadeiro berço de Jesus.
+                </p>
+
+                <p>
+                    Esta argumentação assenta em quatro pilares fundamentais: (1) a defesa da não-historicidade dos relatos da infância de Jesus em Mateus e Lucas; (2) a afirmação de Marcos que a pátria de Jesus é Nazaré e a ausência de correcção da multidão em João quando esta rejeita Jesus por não ser de Belém; (3) a identificação sistemática de Jesus como «o Nazareno» ou «de Nazaré» ao longo do Novo Testamento; e (4) o silêncio dos restantes escritos do Novo Testamento, especialmente nos de São Paulo, sobre o assunto. Desta argumentação resulta a tese que Mateus e Lucas «adaptaram» o relato do nascimento como tendo acontecido em Belém, cidade de David, e não na insignificante Nazaré, para o tornar menos «escandaloso» aos seus destinatários.
+                </p>
+
+                <p>
+                    Contudo, este trabalho visa demonstrar que a separação entre a teologia e a história é artificial, uma vez que a mensagem dos Evangelistas se alicerça em acontecimentos concretos. Através da harmonização dos relatos de Mateus e Lucas e do escrutínio das supostas contradições literárias, argumentar-se-á que o cumprimento das profecias messiânicas não exigiu a invenção de uma narrativa, mas antes o reconhecimento de que os factos históricos se alinham com o Plano Divino. Depois, o ensaio procura refutar os restantes três pilares da argumentação do Pe. Ariel, apontando para a inexistência de evidências bíblicas contra o nascimento de Jesus in Belém.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Harmonização dos Relatos da Infância de Jesus (Mt 1–2 e Lc 1–2)</h3>
+
+                <p>
+                    Antes de mais, temos que começar com o óbvio. Se a questão é «Onde nasceu Jesus?», a primeira coisa a fazer é averiguar se no Novo Testamento existe alguma afirmação directa e explícita sobre o local de nascimento de Jesus. Tal averiguação terminaria com resultado positivo: Mateus e Lucas afirmam, nos respectivos relatos da infância (dois primeiros capítulos dos seus evangelhos), que Jesus nasceu em Belém. O local de nascimento não é abordado em mais lado nenhum. Assim, a questão é respondida e o caso fica encerrado.
+                </p>
+
+                <p>
+                    Alguns estudiosos da Bíblia discordam desta linha de argumentação, tal como o autor do nosso ensaio a analisar, o Pe. Ariel. Porquê? Porque rejeitam a historicidade dos relatos da infância de Mateus e Lucas. E por que motivo haveriam de fazer tal coisa? Porque defendem que «os relatos de Mateus e Lucas se contradizem em vários pontos». Uma refutação mais abrangente desta posição pode ser encontrada nesta secção de um ensaio mais longo, pelo que aqui seremos mais breves.
+                </p>
+
+                <p>
+                    O autor aponta os seguintes detalhes contraditórios entre Mt e Lc que enfraquecem a historicidade do relato, nomeadamente: (a) residência inicial: segundo Mt, vivia em Belém, numa casa; segundo Lc, vivia em Nazaré e foi a Belém pelo recenseamento; (b) tempo em Belém: segundo Mt: ficou quase dois anos; segundo Lc, ficou cerca de mês e meio; (c) motivo da ida para Nazaré após o Egipto: segundo Mt, José teve medo do governador Arquelau; segundo Lc, porque era a sua [Jesus] cidade. Na verdade, os relatos de Mt e Lc são complementares e as divergências são apenas omissões literárias deliberadas, selecionando acontecimentos para servir os seus temas.
+                </p>
+
+                <div class="space-y-3 my-6">
+                    <p>
+                        <span class="text-brand-accent-orange mr-1.5">•</span><strong>(a)</strong> A menção de uma «casa» em Mt 2,11 em vez de uma manjedoura não é uma contradicção, mas indica que a visita dos Magos ocorreu meses ou até dois anos após o nascimento. Aquando o nascimento de Jesus, Maria e José não encontraram lugar na «sala de hóspedes» pelo que tiveram que ficar na «sala dos animais». Aquando a visita dos Magos, uma data completamente diferente à do nascimento, estes encontram o Menino numa casa, indicando que a Sagrada Família terá temporariamente vivido em Belém após o nascimento de Jesus.
+                    </p>
+                    <p>
+                        <span class="text-brand-accent-orange mr-1.5">•</span><strong>(b)</strong> O Jimmy Akin propõe uma cronologia coerente, aqui sumariada: Viagem de Nazaré até Belém → Nascimento em Belém → Apresentação no Templo (40 dias após o nascimento) → Breve regresso a Nazaré (referido em Lc 2,39) → Fixação posterior em Belém numa «casa» (onde os Magos os encontram) → Fuga para o Egipto → Regresso definitivo a Nazaré.
+                    </p>
+                    <p>
+                        <span class="text-brand-accent-orange mr-1.5">•</span><strong>(c)</strong> Aquilo que o autor afirma aqui como sendo uma contradicção simplesmente não o é: José não regressou a Belém onde se tinham fixado antes da fuga para o Egipto porque teve medo do governador e regressou a Nazaré pois era a cidade onde já tinham vivido (e que se tornou a cidade de Jesus).
+                    </p>
+                </div>
+
+                <p>
+                    No fundo, as contradicções dissipam-se quando consideramos o factor tempo. Existem múltiplas cronologias hipotéticas que tornam os relatos de Mt e Lc totalmente complementares. O facto do Pe. Ariel escolher uma cronologia que torna os relatos contraditórios é mais revelador da sua capacidade exegética do que a fiabilidade dos relatos. Mesmo assim, haverá alguma coisa no restante Novo Testamento que contradiga Mt e Lc e prove que Jesus não nasceu em Belém?
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Marcos e João e o Local de Nascimento de Jesus</h3>
+
+                <p>
+                    Marcos e João, nos seus evangelhos, não fazem nenhuma afirmação sobre o local de nascimento de Jesus. Contudo, segundo o Pe. Ariel, para estes dois evangelistas «não há dúvidas» que Jesus tenha nascido em Nazaré. Porquê? Primeiro, Marcos «dá a entender que Jesus nasceu em Nazaré» pois «[…] quando Jesus visita Nazaré, diz que “foi para a sua pátria” (Mc 6,1); e pátria (grego: patris) significa “a terra natal”, “o lugar de nascimento”». No entanto, o termo Grego patris transmite mais do que geografia; engloba ideias de linhagem familiar, identidade cívica e tradições herdadas. Na cultura Mediterrânica do primeiro século, a pátria de uma pessoa era o centro dos laços de parentesco, da vida na sinagoga local e da posição social. Presumia-se que a lealdade, a honra e a credibilidade seriam maiores ali, um pressuposto que o Novo Testamento refuta repetidamente no caso de Jesus.
+                </p>
+
+                <p>
+                    Segundo, João «afirma expressamente que Jesus era de Nazaré» ao citar pessoas que duvidam de Jesus por este ser da Galileia (Jo 7,41–42), região onde ficava Nazaré, e «ninguém, neste debate, se encarrega de explicar que Jesus era de Belém». Mas a ausência aqui de menção de Belém é irrelevante; Belém é mencionada onde faz sentido: nos relatos do nascimento de Jesus. O Pe. Ariel simplesmente pressupõe que dizer que alguém é de certo lugar significa que nasceu nesse lugar. Mas será essa pressuposição razoável?
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Jesus de Nazaré ou Jesus, o Nazareno</h3>
+
+                <p>
+                    O Pe. Ariel argumenta que as cerca de vinte menções à «origem Nazarena», tanto «Jesus de Nazaré» como «Jesus o Nazareno», são prova do Seu nascimento em Nazaré. Aliás, afirma que «na Bíblia, quando uma cidade é mencionada depois do nome de uma pessoa, trata-se do seu lugar de nascimento», exemplificando com «Paulo de Tarso (Act 9,1), José de Arimateia (Mc 15,43), Simão de Cirene (Mc 15,21), Lázaro de Betânia (Jo 11,1) ou Amós de Tecoa (Am 1,1)» apesar da Bíblia não conter nenhuma declaração sobre o local de nascimento sobre os homens citados; que as cidades mencionadas sejam o local de nascimento de cada um deles é mera especulação do autor.
+                </p>
+
+                <p>
+                    De facto, a designação de uma cidade junto ao nome indica a origem social e o local onde a pessoa era conhecida, podendo ou não coincidir com o local de nascimento. O autor sugere que, na entrada triunfal em Jerusalém, Jesus deveria ter sido recebido como «Jesus de Belém»: «teria sido muito mais apropriado […] pois teria sido um argumento muito forte para confirmar o messianismo de Jesus aos seus leitores de origem judaica». Mas Jesus viveu cerca de 30 anos in Nazaré; seria absurdo que a multidão Lhe chamasse «Jesus de Belém». Na verdade, o Novo Testamento mantém a tensão entre as duas cidades, mostrando que Jesus cumpre tanto a origem Davídica (Belém) quanto a obscuridade do «Ramo» (Netzer) de Jessé associada a Nazaré.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">O Argumento do Silêncio</h3>
+
+                <p>
+                    Por fim, o biblista recorre a uma falácia clássica para defender a sua tese. «Em nenhum outro lugar há uma única palavra sobre o assunto. [Estará o Pe. Ariel a reconhecer que Marcos e João nada afirmam sobre o local de nascimento após ter afirmado que para estes dois evangelistas «não há dúvidas» que Jesus nasceu em Nazaré?] Nem mesmo São Paulo, que teve de argumentar com os leitores das suas cartas para os convencer de que Jesus era o Messias, e que poderia ter usado o argumento da origem belemita de Jesus, parece conhecer esta informação.»
+                </p>
+
+                <p>
+                    O silêncio de Paulo sobre Belém é uma evidência fraca e logicamente falível, pois ausência de menção sobre o nascimento em Belém não é prova que o nascimento não tenha acontecido em Belém. (É um falácia lógica: ausência de prova não é prova de ausência.) Paulo foca-se no kerygma (ministério, morte e ressurreição de Jesus), escrevendo cartas ocasionais para resolver problemas doutrinários específicos, não biografias completas. O seu silêncio, assim como dos restantes autores do Novo Testamento, sobre o local de nascimento é irrelevante para a veracidade do facto.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Crítica à Tese da «Adaptação» e do Público-Alvo</h3>
+
+                <p>
+                    Se o nascimento histórico ocorreu em Nazaré, por que razão Mateus e Lucas escreveram que foi em Belém? O Pe. Ariel explica que se trata de uma necessidade messiânica. O profeta Miqueias (séc. VIII a.C.) anunciou em Mq 5,2 que de Belém sairia um governante justo (o autor rejeita que esta profecia seja uma referência ao nascimento de Jesus e afirma que os profetas «[a]nunciavam uma mensagem, que diziam receber de Deus»). Originalmente, este era um apelo para que a monarquia voltasse à simplicidade das origens de David. No tempo de Jesus, muitos Judeus acreditavam que o Messias tinha de nascer literalmente em Belém para ser um sucessor legítimo de David. Para provar que Jesus era o Messias aos leitores de origem Judaica, as primeiras comunidades adaptaram o relato do Seu nascimento à geografia das profecias para «contá-lo como tendo ocorrido na cidade de Belém» pois «[…] o facto de o Messias Jesus ter nascido ali [Nazaré] era escandaloso para o povo».
+                </p>
+
+                <p>
+                    Ora, se os evangelistas quisessem tornar o relato menos escandaloso certamente registaram um relato glorioso sem detalhes difíceis e embaraçosos tais como o facto da Sagrada Família apenas ter encontrado lugar na «sala dos animais» para passar a noite, o local de repouso do Menino ser uma manjedoura e visitado por pobres pastores que estavam na vigília da noite. Certo? Além disso, os argumentos do autor são contraditórios. Se de facto Mt e Lc tivessem a intenção de ocultar Nazaré como local de nascimento, porque é que o título «Jesus de Nazaré» é usado por esses mesmos dois evangelistas quando relatam a vida adulta de Jesus, algo que Pe. Ariel defende que prova que Ele nasceu em Nazaré?
+                </p>
+
+                <p>
+                    O próprio autor reconhece isso mesmo, sem nunca detectar a ilogicidade da sua posição: «estes dois evangelistas [Mt e Lc], embora digam que Jesus nasceu em Belém, quando o apresentam na sua vida adulta, mudam de opinião e chamam-lhe “Jesus de Nazaré”». A teoria do autor, então, é a seguinte: Mt e Lc mentiram sobre o local de nascimento de Jesus para o tornar «messiânico» e, mais à frente nos mesmos pergaminhos, usam várias vezes o título «Jesus de Nazaré», revelando assim que Jesus afinal nasceu em Nazaré. Portanto, Mt e Lc não só são mentirosos como são idiotas!
+                </p>
+
+                <p>
+                    Além disso, se Lucas estivesse a inventar um mito, não escolheria um detalhe tão complexo e politicamente carregado como um recenseamento Romano, que envolvia questões fiscais e administrativas conhecidas. A inclusão de um dado histórico tão específico (e difícil de harmonizar) sugere que ele está a tentar integrar um facto recebido, e não a criar uma fábula conveniente.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">A História ao Serviço da Teologia</h3>
+
+                <p>
+                    O autor conclui que Belém representa uma verdade espiritual: Jesus é o Messias que escolhe a humildade e a fragilidade em vez do poder e da arrogância. Celebrar o Natal em Belém continua a ser válido como uma afirmação de fé na natureza da missão de Jesus, mesmo que a história aponte para Nazaré. «Na realidade, o nascimento de Jesus em Belém é mais um facto teológico do que um facto histórico. O que Mateus e Lucas pretendiam transmitir era uma ideia religiosa, enunciada sob a forma de um relato histórico, para deixar um ensinamento.»
+                </p>
+
+                <p>
+                    Todavia, apesar das aparentes «boas intenções» do Pe. Ariel, separar o «facto teológico» do «facto histórico» é um anacronismo moderno. O cumprimento da profecia de Miqueias, assim como qualquer profecia do Antigo Testamento, não exigia a invenção de uma estória, mas sim o reconhecimento de que os acontecimentos históricos se alinhavam com o Plano Divino. Para os Evangelistas, a Teologia não é o substituto da História, mas a sua hermenêutica. Inventar um Messias sem base factual seria, para a mentalidade apostólica, uma construção sobre areia, invalidando o próprio kerygma que pretendiam anunciar.
+                </p>
+
+                <p>
+                    Se não lemos o Antigo Testamento procurando perceber de que forma cada passagem aponta para Cristo, lemos sem fé n’Ele, ou seja, lemos como os Judeus. Nós, os de Cristo, devemos ler com plena confiança que tudo lá incluído aponta para Cristo; tal atitude é meramente a consequência lógica da nossa fé em Jesus, O qual cumpriu plenamente a Lei e os Profetas.
+                </p>
+
+                <!-- SECÇÃO PREMIUM DE SUBSCREVER NEWSLETTER -->
+                <div class="bg-gray-50 border border-gray-150 p-6 sm:p-8 rounded-2xl my-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="text-left max-w-md">
+                        <h4 class="font-sans text-base sm:text-lg font-bold text-brand-accent-blue leading-snug">
+                            Receba <u class="underline decoration-brand-accent-blue decoration-2 font-inter">gratuitamente</u> os próximos artigos no seu e-mail
+                        </h4>
+                    </div>
+                    <form onsubmit="handleSubscribe(event)" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 flex-grow max-w-xl">
+                        <input type="email" id="sub-email" required placeholder="O seu e-mail..." class="flex-grow p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                        <button type="submit" class="px-6 py-3 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter whitespace-nowrap shadow-xs">
+                            Subscrever
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Secção de Comentários (Livre de dados inventados de terceiros) -->
+                <section class="mt-12 pt-8 border-t border-gray-150">
+                    <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-6">Comentários</h4>
+                    
+                    <div class="space-y-4 mb-8 font-inter" id="comments-box">
+                        <!-- Sem comentários automáticos inventados -->
+                    </div>
+
+                    <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl font-inter">
+                        <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
+                        <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                            </div>
+                            <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter resize-none"></textarea>
+                            <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
+                            <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter">
+                                Enviar Comentário
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Rodapé do Artigo -->
+            <footer class="mt-16 pt-8 border-t border-gray-150 font-inter">
+                <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
+                    <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
+                        <a href="../sobreHB" class="block w-full h-full">
+                            <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
+                        </a>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <h4 class="font-serif text-lg font-bold text-brand-accent-blue">
+                            <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
+                        </h4>
+                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
+                        <p class="text-sm text-gray-650 leading-relaxed font-inter">
+                            Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-inter text-xs uppercase tracking-wider font-bold">
+                    <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
+                        <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                    </a>
+                    <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
+                        Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                    </a>
+                </div>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado assincronamente do GitHub) -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
+                return '../';
+            }
+            return '';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId);
+            if (!container) return;
+            const prefix = getPrefix();
+            
+            if (prefix !== '') {
+                container.querySelectorAll('a').forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        if (!href.startsWith('../')) {
+                            link.setAttribute('href', prefix + href);
+                        }
+                    }
+                });
+                container.querySelectorAll('img').forEach(img => {
+                    let src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                        img.setAttribute('src', prefix + src);
+                    }
+                });
+            }
+
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
+                }
+            });
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            const prefix = getPrefix();
+            try {
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    adjustAndCleanLinks('nav-placeholder');
+                }
+
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                    adjustAndCleanLinks('footer-placeholder');
+                }
+
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        function calculateReadingTime() {
+            const contentElement = document.getElementById('article-content');
+            const readingTimeElement = document.getElementById('reading-time');
+            if (!contentElement || !readingTimeElement) return;
+
+            const text = contentElement.innerText || contentElement.textContent;
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+            const readingTime = Math.ceil(words / 200);
+            readingTimeElement.textContent = readingTime;
+        }
+
+        function addLocalComment(e) {
+            e.preventDefault();
+            const author = document.getElementById('comm-author').value.trim() || "Anónimo";
+            const message = document.getElementById('comm-text').value.trim();
+            if (!message) return;
+
+            const commentsBox = document.getElementById('comments-box');
+            const today = new Date();
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formattedDate = today.toLocaleDateString('pt-PT', options);
+
+            const commentElement = document.createElement('div');
+            commentElement.className = "bg-white p-5 rounded-2xl border border-gray-100 shadow-xs fade-in";
+            commentElement.innerHTML = `
+                <div class="flex items-center justify-between gap-4 mb-2">
+                    <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
+                    <span class="text-xs text-gray-400">${formattedDate}</span>
+                </div>
+                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
+            `;
+
+            commentsBox.appendChild(commentElement);
+            document.getElementById('comment-form').reset();
+        }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('sub-email');
+            if (!emailInput || !emailInput.value.trim()) return;
+
+            const userEmail = emailInput.value.trim();
+            const recipient = "editorajeronimo@gmail.com";
+            const subject = encodeURIComponent("nova subscrição");
+            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
+
+            window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+
+            const container = e.target;
+            container.innerHTML = `
+                <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
+                    <i class="fas fa-check-circle"></i> A iniciar o seu cliente de e-mail para processar a subscrição!
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            calculateReadingTime();
+        });
+    </script>
+</body>
+</html>
