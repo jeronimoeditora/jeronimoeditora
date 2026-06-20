@@ -13,10 +13,10 @@
         }
     </script>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts (Unificados: Roboto para o Menu e Inter + Playfair para o Artigo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <!-- Font Awesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -29,7 +29,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Inter"', 'sans-serif'],
+                        sans: ['"Roboto"', 'sans-serif'], // Menu herda Roboto e fica igual a todo o site
+                        inter: ['"Inter"', 'sans-serif'], // Artigo e elementos secundários mantêm a Inter
                         serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
@@ -80,7 +81,7 @@
     <div id="nav-placeholder"></div>
 
     <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
-    <main class="flex-grow pt-28 md:pt-36 pb-16">
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
         <article class="max-w-4xl mx-auto px-6 fade-in">
             
             <div class="mb-8">
@@ -99,7 +100,7 @@
                 <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500 font-medium">
                     <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 24 de Maio de 2026</span>
                     <span class="hidden sm:inline text-gray-300">|</span>
-                    <span class="flex items-center gap-1.5">
+                    <span class="flex items-center gap-1.5 font-inter">
                         <i class="far fa-user"></i> Escrito por 
                         <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
                     </span>
@@ -113,12 +114,12 @@
             </div>
 
             <div class="text-center mb-8">
-                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed font-sans max-w-2xl mx-auto">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto">
                     Comentário às leituras da Missa do Dia de Pentecostes.
                 </p>
             </div>
 
-            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto font-sans">
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto">
                 
                 <p class="dropcap">
                     O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na vida litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu poder transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raízes desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
@@ -224,12 +225,12 @@
                 <div class="bg-gray-50 border border-gray-150 p-6 sm:p-8 rounded-2xl my-10 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div class="text-left max-w-md">
                         <h4 class="font-sans text-base sm:text-lg font-bold text-brand-accent-blue leading-snug">
-                            Receba <u class="underline decoration-brand-accent-blue decoration-2">gratuitamente</u> os próximos artigos no seu e-mail
+                            Receba <u class="underline decoration-brand-accent-blue decoration-2 font-inter">gratuitamente</u> os próximos artigos no seu e-mail
                         </h4>
                     </div>
                     <form onsubmit="handleSubscribe(event)" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 flex-grow max-w-xl">
-                        <input type="email" id="sub-email" required placeholder="O seu e-mail..." class="flex-grow p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
-                        <button type="submit" class="px-6 py-3 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-sans whitespace-nowrap shadow-xs">
+                        <input type="email" id="sub-email" required placeholder="O seu e-mail..." class="flex-grow p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                        <button type="submit" class="px-6 py-3 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter whitespace-nowrap shadow-xs">
                             Subscrever
                         </button>
                     </form>
@@ -238,7 +239,7 @@
                 <!-- Secção de Fontes -->
                 <section class="mt-12 pt-6 border-t border-gray-150">
                     <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4">Fontes</h4>
-                    <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2 font-sans">
+                    <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2 font-inter">
                         <li><i>Ignatius Catholic Study Bible: Old and New Testament</i>, Ignatius Press, 2024.</li>
                         <li>Scott Hahn & Ken Ogorek, <i>Breaking the Bread: A Biblical Devotional for Catholics – Year A</i>, Emmaus Road Publishing, 2025</li>
                         <li>John Bergsma, <i>The Word of the Lord: Reflections on the Sunday Mass Readings for Year A</i>, Emmaus Road Publishing, 2022</li>
@@ -249,27 +250,27 @@
                 <section class="mt-12 pt-8 border-t border-gray-150">
                     <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-6">Comentários</h4>
                     
-                    <div class="space-y-4 mb-8" id="comments-box">
+                    <div class="space-y-4 mb-8 font-inter" id="comments-box">
                         <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs">
                             <div class="flex items-center justify-between gap-4 mb-2">
                                 <span class="font-bold text-brand-accent-blue text-sm">clearly7387205a17</span>
-                                <span class="text-xs text-gray-400 font-sans">24 de Maio de 2026</span>
+                                <span class="text-xs text-gray-400">24 de Maio de 2026</span>
                             </div>
-                            <p class="text-sm text-gray-650 font-sans leading-relaxed">
+                            <p class="text-sm text-gray-650 leading-relaxed">
                                 Gostei muito deste texto, dá-nos uma reflexão do que é ser um verdadeiro filho de Deus.
                             </p>
                         </div>
                     </div>
 
-                    <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl">
+                    <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl font-inter">
                         <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
                         <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                                <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
                             </div>
-                            <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans resize-none"></textarea>
+                            <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter resize-none"></textarea>
                             <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
-                            <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-sans">
+                            <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter">
                                 Enviar Comentário
                             </button>
                         </form>
@@ -279,7 +280,7 @@
             </div>
 
             <!-- Rodapé do Artigo -->
-            <footer class="mt-16 pt-8 border-t border-gray-150">
+            <footer class="mt-16 pt-8 border-t border-gray-150 font-inter">
                 <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
                     <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
                         <a href="../sobreHB" class="block w-full h-full">
@@ -290,14 +291,14 @@
                         <h4 class="font-serif text-lg font-bold text-brand-accent-blue">
                             <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
                         </h4>
-                        <p class="text-xs text-gray-500 font-sans mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
-                        <p class="text-sm text-gray-650 font-sans leading-relaxed">
+                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
+                        <p class="text-sm text-gray-650 leading-relaxed">
                             Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
                         </p>
                     </div>
                 </div>
 
-                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-xs uppercase tracking-wider font-bold">
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-inter text-xs uppercase tracking-wider font-bold">
                     <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
                         <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
                     </a>
@@ -314,10 +315,9 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // --- STREAMING_CHUNK: Definindo funções utilitárias e carregamento dinâmico de componentes... ---
         function getPrefix() {
             const path = window.location.pathname.toLowerCase();
-            if (path.includes('/artigos/') || path.includes('/artigos-individuais/') || path.includes('/artigos-individuais/')) {
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
                 return '../';
             }
             return '';
@@ -460,7 +460,7 @@
                     <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
                     <span class="text-xs text-gray-400">${formattedDate}</span>
                 </div>
-                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
+                <p class="text-sm text-gray-650 font-inter leading-relaxed">${message}</p>
             `;
 
             commentsBox.appendChild(commentElement);
