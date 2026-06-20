@@ -12,10 +12,10 @@
         }
     </script>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts unificadas com suporte a pesos e itálicos completos para Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <!-- Font Awesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -47,10 +47,6 @@
 
     <style>
         body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
-        
-        #nav-placeholder *, #footer-placeholder * {
-            font-style: normal !important;
-        }
 
         .text-readable-article {
             line-height: 1.85;
@@ -135,7 +131,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Novo Sinai:</strong> A descida do Espírito em Jerusalém, com o som de uma forte rajada de vento e o fogo visível, dramatiza e recorda a descida ruidosa e ardente de Javé no Monte Sinai durante o Êxodo (Êx 19,16-19).
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Novo Sinai:</strong> A descida do Espírito em Jerusalém, com o som de uma forte rajada de vento e o fogo visível, dramatiza e recorda a descida ruidosa e abruta de Javé no Monte Sinai durante o Êxodo (Êx 19,16-19).
                 </p>
 
                 <p>
@@ -195,7 +191,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Unidade no Baptismo:</strong> A acção divina do Espírito a operar no Baptismo une-nos a Cristo não como uma mera metáfora organizacional, mas expressando a realidade metafísica de que cada crente está verdadeiramente unido através dos Sacramentos (CIC 790). O Espírito é a alma deste corpo místico (CIC 797). Por causa desta união, as distinções étnicas e sociais tornam-se irrelevantes aos olhos de Deus (Gl 3,28; CIC 1267).
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Unidade no Baptismo:</strong> A acção divina do Espírito a operar no Baptismo une-nos a Cristo não como uma mera metáfora organizacional, mas expressando a reality metafísica de que cada crente está verdadeiramente unido através dos Sacramentos (CIC 790). O Espírito é a alma deste corpo místico (CIC 797). Por causa desta união, as distinções étnicas e sociais tornam-se irrelevantes aos olhos de Deus (Gl 3,28; CIC 1267).
                 </p>
 
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Evangelho (João 20, 19-23): A Paz, o Sopro Divino e o Sacramento da Reconciliação</h3>
@@ -458,7 +454,7 @@
                     <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
                     <span class="text-xs text-gray-400">${formattedDate}</span>
                 </div>
-                <p class="text-sm text-gray-650 font-inter leading-relaxed">${message}</p>
+                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
             `;
 
             commentsBox.appendChild(commentElement);
@@ -490,6 +486,5 @@
             calculateReadingTime();
         });
     </script>
-    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
