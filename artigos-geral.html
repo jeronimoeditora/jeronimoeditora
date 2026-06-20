@@ -28,8 +28,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Roboto"', 'sans-serif'], // Menu herda Roboto de forma limpa e idêntica
-                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura de artigos
+                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
+                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
                         serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
@@ -46,7 +46,7 @@
     </script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
         
         #nav-placeholder *, #footer-placeholder * {
             font-style: normal !important;
@@ -66,7 +66,7 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- CONTENTOR DO MENU DINÂMICO (Carregado do GitHub) -->
+    <!-- CONTENTOR DO MENU DINÂMICO (Carregado do seu GitHub) -->
     <div id="nav-placeholder"></div>
 
     <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
