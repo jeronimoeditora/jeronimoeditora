@@ -12,10 +12,10 @@
         }
     </script>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts unificadas com suporte completo a pesos e itálicos de Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <!-- Font Awesome para Iconografia -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -46,10 +46,6 @@
     
     <style>
         body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
-        
-        #nav-placeholder *, #footer-placeholder * {
-            font-style: normal !important;
-        }
 
         .video-wrapper {
             position: relative;
@@ -76,16 +72,18 @@
     <!-- CONTENTOR DO MENU DINÂMICO (Carregado do seu GitHub) -->
     <div id="nav-placeholder"></div>
 
+    <!-- CONTEÚDO DOS CURSOS -->
     <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
         <div class="max-w-6xl mx-auto px-6 fade-in">
             
             <div class="text-center mb-10">
                 <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-2">Formação</span>
                 <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Cursos em Vídeo</h1>
-                <p class="font-inter text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">Aprender a fé cristã com rigor teológico tradicional.</p>
+                <p class="font-sans text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">Aprender a fé cristã com rigor teológico tradicional.</p>
                 <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
             </div>
 
+            <!-- Barra de Filtros -->
             <div class="bg-white p-4 sm:p-6 rounded-2xl border border-gray-150 shadow-xs max-w-4xl mx-auto mb-12">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 items-center">
                     
@@ -93,18 +91,18 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                             <i class="fas fa-search text-gray-400 text-sm"></i>
                         </span>
-                        <input type="text" id="course-search" onkeyup="filterCourses()" placeholder="Pesquise cursos por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                        <input type="text" id="course-search" onkeyup="filterCourses()" placeholder="Pesquise cursos por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
                     </div>
                     
                     <div class="lg:col-span-3">
-                        <select id="category-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter cursor-pointer text-gray-700">
+                        <select id="category-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
                             <option value="all">Todas as Categorias</option>
                             <option value="Liturgia">Liturgia</option>
                         </select>
                     </div>
 
                     <div class="lg:col-span-2">
-                        <select id="sort-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter cursor-pointer text-gray-700">
+                        <select id="sort-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
                             <option value="date-desc">Mais Recentes</option>
                             <option value="date-asc">Mais Antigos</option>
                             <option value="az">Título A-Z</option>
@@ -112,7 +110,7 @@
                     </div>
 
                     <div class="lg:col-span-2">
-                        <button onclick="clearFilters()" class="w-full bg-brand-accent-blue text-white hover:bg-brand-accent-orange font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-inter">
+                        <button onclick="clearFilters()" class="w-full bg-brand-accent-blue text-white hover:bg-brand-accent-orange font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-sans">
                             Limpar
                         </button>
                     </div>
@@ -123,8 +121,8 @@
             <!-- Sem Resultados -->
             <div id="no-results" class="hidden text-center py-16">
                 <i class="fas fa-video-slash text-gray-300 text-5xl mb-4"></i>
-                <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum artigo encontrado</h3>
-                <p class="text-gray-500 font-inter mt-1">Experimente alterar os termos de pesquisa ou os filtros seleccionados.</p>
+                <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum curso encontrado</h3>
+                <p class="text-gray-500 font-sans mt-1">Experimente alterar os termos de pesquisa ou os filtros seleccionados.</p>
             </div>
 
             <!-- Grelha de Cursos -->
@@ -142,7 +140,7 @@
         </div>
         <div class="flex-grow">
             <p class="text-xs text-emerald-800 font-bold uppercase tracking-wider">Adicionado com Sucesso</p>
-            <p id="toast-message" class="text-sm text-gray-650 font-medium font-inter">O curso foi adicionado ao seu carrinho.</p>
+            <p id="toast-message" class="text-sm text-gray-650 font-medium font-sans">O curso foi adicionado ao seu carrinho.</p>
         </div>
     </div>
 
@@ -160,7 +158,7 @@
                 <h3 class="font-serif text-xl font-bold text-brand-accent-blue">Acesso aos Cursos</h3>
             </div>
             
-            <div class="space-y-3 text-sm text-gray-650 font-inter leading-relaxed">
+            <div class="space-y-3 text-sm text-gray-650 font-sans leading-relaxed">
                 <p class="font-semibold text-brand-accent-blue">Como funciona o acesso?</p>
                 <p>O curso foi adicionado ao seu carrinho de compras para que possa prosseguir para o pagamento.</p>
                 <p class="bg-[#fcf8ee] border border-amber-100 p-3.5 rounded-xl font-medium text-brand-accent-orange flex gap-2">
@@ -170,10 +168,10 @@
             </div>
 
             <div class="mt-6 flex flex-col sm:flex-row gap-3">
-                <button onclick="closeWarningModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-inter text-center">
+                <button onclick="closeWarningModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center">
                     Continuar a ver
                 </button>
-                <a href="checkout" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-inter text-center block">
+                <a href="checkout" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center block">
                     Ir para o Carrinho <i class="fas fa-shopping-cart ml-1"></i>
                 </a>
             </div>
@@ -261,6 +259,7 @@
             renderCourses(filtered);
         }
 
+        // --- STREAMING_CHUNK: Processando e populando a grelha de cursos ativos... ---
         function renderCourses(courses) {
             const grid = document.getElementById('courses-grid');
             const noResults = document.getElementById('no-results');
@@ -289,7 +288,7 @@
                         </div>
                     `;
                     actionButton = `
-                        <button onclick="adicionarAoCheckout('${course.id}', '${course.title}', ${course.price})" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl shadow-xs transition-all duration-300 font-inter">
+                        <button onclick="adicionarAoCheckout('${course.id}', '${course.title}', ${course.price})" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl shadow-xs transition-all duration-300 font-sans">
                             Comprar Acesso
                         </button>
                     `;
@@ -301,28 +300,28 @@
                         </div>
                     `;
                     actionButton = `
-                        <button disabled class="bg-gray-200 text-gray-400 cursor-not-allowed text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl font-inter">
+                        <button disabled class="bg-gray-200 text-gray-400 cursor-not-allowed text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl font-sans">
                             Em Breve
                         </button>
                     `;
                 }
 
                 grid.innerHTML += `
-                    <div class="course-card bg-white border border-gray-150 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between font-inter">
+                    <div class="course-card bg-white border border-gray-150 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between">
                         <div class="p-6 space-y-4">
                             <div class="flex justify-between items-center">
-                                <span class="text-[10px] font-bold uppercase tracking-wider text-white ${course.badgeClass} px-2 py-0.5 rounded">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-white ${course.badgeClass} px-2 py-0.5 rounded font-sans">
                                     ${course.status}
                                 </span>
-                                <span class="text-xs text-brand-accent-orange font-bold uppercase tracking-wider">
+                                <span class="text-xs text-brand-accent-orange font-bold uppercase tracking-wider font-sans">
                                     ${course.category}
                                 </span>
                             </div>
                             
                             <h2 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue">${course.title}</h2>
-                            <p class="text-xs text-gray-400 font-medium">Aulas Gravadas • Acesso Imediato • Protecção Anti-Cópia</p>
+                            <p class="text-xs text-gray-400 font-medium font-sans">Aulas Gravadas • Acesso Imediato • Protecção Anti-Cópia</p>
                             
-                            <p class="text-sm text-gray-650 leading-relaxed font-light">
+                            <p class="text-sm text-gray-650 leading-relaxed font-light font-sans">
                                 ${course.description}
                             </p>
 
@@ -330,15 +329,15 @@
                                 <div class="space-y-3 z-10">
                                     <span class="text-amber-500 text-2xl"><i class="fas fa-lock"></i></span>
                                     <h4 class="font-serif font-bold text-sm">Acesso Reservado</h4>
-                                    <p class="text-[11px] text-slate-400 px-4">Adquira o acesso. O vídeo será entregue via email para reprodução digital protegida.</p>
+                                    <p class="text-[11px] text-slate-400 px-4 font-sans">Adquira o acesso. O vídeo será entregue via email para reprodução digital protegida.</p>
                                 </div>
-                                <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest">
+                                <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
                                     Jerónimo Editora - Streaming Protegido (${course.videoDuration})
                                 </div>
                             </div>
                         </div>
 
-                        <div class="p-6 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+                        <div class="p-6 bg-gray-50 border-t border-gray-100 flex items-center justify-between font-sans">
                             ${priceHtml}
                             ${actionButton}
                         </div>
@@ -409,6 +408,7 @@
             filterCourses();
         }
 
+        // --- STREAMING_CHUNK: Configurando os utilitários de limpeza e carregamento de componentes CTT... ---
         function getSafePath(file) {
             const currentUrl = window.location.href;
             if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 

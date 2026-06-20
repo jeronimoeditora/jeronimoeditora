@@ -6,16 +6,17 @@
     <title>Arquivo de Artigos | Jerónimo Editora</title>
     
     <script>
+        // Limpeza estética do URL removendo a extensão .html na barra de pesquisa (GitHub Pages)
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
         }
     </script>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts unificadas com suporte completo a pesos e itálicos de Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <!-- Font Awesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -28,8 +29,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
-                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
+                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé em Roboto unificado
+                        inter: ['"Inter"', 'sans-serif'], // Conteúdo de leitura em Inter premium
                         serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
@@ -47,10 +48,6 @@
 
     <style>
         body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
-        
-        #nav-placeholder *, #footer-placeholder * {
-            font-style: normal !important;
-        }
 
         .fade-in { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -66,7 +63,7 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- CONTENTOR DO MENU DINÂMICO (Carregado do seu GitHub) -->
+    <!-- CONTENTOR DO MENU DINÂMICO (Carregado do GitHub) -->
     <div id="nav-placeholder"></div>
 
     <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
@@ -76,7 +73,7 @@
             <div class="text-center mb-10">
                 <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-2">Escritos & Formação</span>
                 <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Arquivo de Artigos</h1>
-                <p class="font-inter text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">"Investigar com paciência, crer com convicção e reter com sabedoria."</p>
+                <p class="font-sans text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">"Investigar com paciência, crer com convicção e reter com sabedoria."</p>
                 <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
             </div>
 
@@ -88,18 +85,18 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                             <i class="fas fa-search text-gray-400 text-sm"></i>
                         </span>
-                        <input type="text" id="article-search" onkeyup="filterArticles()" placeholder="Pesquise artigos por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                        <input type="text" id="article-search" onkeyup="filterArticles()" placeholder="Pesquise artigos por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
                     </div>
                     
                     <div class="lg:col-span-3">
-                        <select id="category-select" onchange="filterArticles()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter cursor-pointer text-gray-700">
+                        <select id="category-select" onchange="filterArticles()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
                             <option value="all">Todas as Categorias</option>
                             <option value="Teologia">Teologia</option>
                         </select>
                     </div>
 
                     <div class="lg:col-span-2">
-                        <select id="sort-select" onchange="filterArticles()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter cursor-pointer text-gray-700">
+                        <select id="sort-select" onchange="filterArticles()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
                             <option value="date-desc">Mais Recentes</option>
                             <option value="date-asc">Mais Antigos</option>
                             <option value="az">Título A-Z</option>
@@ -107,7 +104,7 @@
                     </div>
 
                     <div class="lg:col-span-2">
-                        <button onclick="clearFilters()" class="w-full bg-brand-accent-blue text-white hover:bg-brand-accent-orange font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-inter">
+                        <button onclick="clearFilters()" class="w-full bg-brand-accent-blue text-white hover:bg-brand-accent-orange font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-sans">
                             Limpar
                         </button>
                     </div>
@@ -119,7 +116,7 @@
             <div id="no-results" class="hidden text-center py-16">
                 <i class="fas fa-book-open text-gray-300 text-5xl mb-4"></i>
                 <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum artigo encontrado</h3>
-                <p class="text-gray-500 font-inter mt-1">Experimente alterar os termos de pesquisa ou os filtros seleccionados.</p>
+                <p class="text-gray-500 font-sans mt-1">Experimente alterar os termos de pesquisa ou os filtros seleccionados.</p>
             </div>
 
             <!-- Grelha de Artigos -->
@@ -137,7 +134,7 @@
         </div>
         <div class="flex-grow">
             <p class="text-xs text-brand-accent-blue font-bold uppercase tracking-wider">Aviso de Disponibilidade</p>
-            <p class="text-sm text-gray-650 font-medium font-inter">Este artigo estará disponível online brevemente.</p>
+            <p class="text-sm text-gray-650 font-medium font-sans">Este artigo estará disponível online brevemente.</p>
         </div>
     </div>
 
@@ -145,6 +142,7 @@
     <div id="footer-placeholder"></div>
 
     <script>
+        // Base de dados contendo apenas os 6 artigos de Teologia, com o mais antigo iniciando em ID 1
         const articlesData = [
             {
                 id: 6,
@@ -202,6 +200,7 @@
             }
         ];
 
+        // Função local para garantir o controlo de abertura e fecho do menu dinâmico no telemóvel
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             const backdrop = document.getElementById('menu-backdrop');
@@ -226,6 +225,7 @@
             }
         }
 
+        // Filtra e ordena a visualização de artigos com base na pesquisa
         function filterArticles() {
             const searchTerm = document.getElementById('article-search').value.toLowerCase().trim();
             const selectedCategory = document.getElementById('category-select').value;
@@ -249,6 +249,7 @@
             renderArticles(filtered);
         }
 
+        // Renderiza visualmente o HTML dos artigos na grelha
         function renderArticles(articles) {
             const grid = document.getElementById('articles-grid');
             const noResults = document.getElementById('no-results');
@@ -272,7 +273,7 @@
                 if (art.image) {
                     imageHtml = `
                         <a ${linkAction} class="block w-full h-32 sm:h-36 overflow-hidden rounded-2xl bg-gray-100 border border-gray-150 mb-4 relative cursor-pointer">
-                            <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x335/f8f8f8/002147?text=Jer%C3%B3nimo+Editora';">
+                            <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x335/f8f8f8/002147?text=Jer%C3%B3nimo+Editora';">
                         </a>
                     `;
                 } else {
@@ -426,7 +427,5 @@
             filterArticles();
         });
     </script>
-    <!-- GoatCounter Analytics Tracker -->
-    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
