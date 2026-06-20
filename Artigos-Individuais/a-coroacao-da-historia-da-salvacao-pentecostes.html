@@ -6,14 +6,13 @@
     <title>A Coroação da História da Salvação (Pentecostes) | Hugo Bacelo</title>
     
     <script>
-        // Limpeza estética do URL removendo a extensão .html no GitHub Pages
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
         }
     </script>
     
-    <!-- Google Fonts (Unificados: Roboto para o Menu e Inter + Playfair para o Artigo) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -29,8 +28,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Roboto"', 'sans-serif'], // Menu herda Roboto e fica igual a todo o site
-                        inter: ['"Inter"', 'sans-serif'], // Artigo e elementos secundários mantêm a Inter
+                        sans: ['"Roboto"', 'sans-serif'], // Menu herda Roboto de forma limpa e idêntica
+                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
                         serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
@@ -77,7 +76,7 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- CONTENTOR DO MENU DINÂMICO (Carregado assincronamente do GitHub) -->
+    <!-- CONTENTOR DO MENU DINÂMICO -->
     <div id="nav-placeholder"></div>
 
     <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
@@ -85,7 +84,7 @@
         <article class="max-w-4xl mx-auto px-6 fade-in">
             
             <div class="mb-8">
-                <!-- Direcionado para a URL limpa de artigos (artigos-geral) sem .html -->
+                <!-- Direcionado para a URL limpa de artigos -->
                 <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
                     <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
                 </a>
@@ -128,7 +127,7 @@
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Primeira Leitura (Actos 2, 1-11): O Novo Sinai e o “Anti-Babel”</h3>
                 
                 <p>
-                    A Primeira Leitura narra o relato do próprio Pentecostes Cristão. Para compreendermos o seu impacto, devemos recordar que o Pentecostes era, originalmente, uma das três festas de peregrinação que exigiam que os homens adultos de Israel viajassem para Jerusalém (Dt 16,16). Inicialmente, era um festival de colheita celebrado cinquenta dias após a Páscoa, dedicado à oferta das primícias do trigo ao Senhor (Lv 23,15-17). Com o tempo, acrescentou-se um profundo significado teológico ao seu foco agrícola: o Pentecostes tornou-se uma celebração da Lei (Torá) dada a Israel no Monte Sinai.
+                    A Primeira Leitura narra o relato do próprio Pentecostes Cristão. Para compreendermos o seu impacto, devemos recordar que o Pentecostes era, originalmente, uma das três festas de peregrinação que exigiam que os homens adults de Israel viajassem para Jerusalém (Dt 16,16). Inicialmente, era um festival de colheita celebrado cinquenta dias após a Páscoa, dedicado à oferta das primícias do trigo ao Senhor (Lv 23,15-17). Com o tempo, acrescentou-se um profundo significado teológico ao seu foco agrícola: o Pentecostes tornou-se uma celebração da Lei (Torá) dada a Israel no Monte Sinai.
                 </p>
 
                 <p>
@@ -254,9 +253,9 @@
                         <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs">
                             <div class="flex items-center justify-between gap-4 mb-2">
                                 <span class="font-bold text-brand-accent-blue text-sm">clearly7387205a17</span>
-                                <span class="text-xs text-gray-400">24 de Maio de 2026</span>
+                                <span class="text-xs text-gray-400 font-inter">24 de Maio de 2026</span>
                             </div>
-                            <p class="text-sm text-gray-650 leading-relaxed">
+                            <p class="text-sm text-gray-650 leading-relaxed font-inter">
                                 Gostei muito deste texto, dá-nos uma reflexão do que é ser um verdadeiro filho de Deus.
                             </p>
                         </div>
@@ -292,7 +291,7 @@
                             <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
                         </h4>
                         <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
-                        <p class="text-sm text-gray-650 leading-relaxed">
+                        <p class="text-sm text-gray-650 leading-relaxed font-inter">
                             Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
                         </p>
                     </div>
@@ -369,7 +368,6 @@
                 });
             }
 
-            // Garante que o menu dinâmico não tenha .html nos links
             container.querySelectorAll('a').forEach(link => {
                 let href = link.getAttribute('href');
                 if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
