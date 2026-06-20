@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Jerónimo Editora | Início</title>
     
+    <script>
+        // Limpeza estética do URL removendo a extensão .html na barra de pesquisa (GitHub Pages)
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,6 +31,7 @@
                         serif: ['"Playfair Display"', 'serif'],
                         sans: ['"Roboto"', 'sans-serif'],
                         classic: ['"Crimson Text"', 'serif'],
+                        inter: ['"Inter"', 'sans-serif'],
                     },
                     colors: {
                         'brand-bg': '#F8F8F8',
@@ -233,11 +245,60 @@
                     
                     <div id="carousel-track" class="flex w-full h-full transition-transform duration-700 ease-in-out" style="transform: translateX(0%);">
                         
-                        <!-- SLIDE 1: JIMMY AKIN -->
+                        <!-- SLIDE 1: TRENT HORN (ID 5) -->
                         <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-0">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
                                     <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold text-brand-accent-blue text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full animate-pulse-subtle">Novo Lançamento</span>
+                                </div>
+                                
+                                <div class="h-auto min-h-[50px] xs:min-h-[60px] sm:min-h-[100px] lg:min-h-[110px] mb-1 sm:mb-3 flex items-start pt-1 pb-1">
+                                    <h1 class="font-serif hero-title text-brand-accent-blue font-bold leading-tight">
+                                        Duras <br> <span class="text-brand-accent-red italic">Palavras</span>
+                                    </h1>
+                                </div>
+                                
+                                <div class="h-auto mb-1.5 sm:mb-4 flex items-center">
+                                    <p class="font-classic text-[13px] xs:text-sm sm:text-xl lg:text-2xl text-gray-600 italic leading-relaxed">
+                                        Uma obra esclarecedora sobre as passagens difíceis e desafiadoras da Sagrada Escritura.
+                                    </p>
+                                </div>
+                                
+                                <div class="h-auto min-h-[40px] sm:min-h-[100px] lg:min-h-[115px] flex items-center mb-1.5 lg:mb-4">
+                                    <a href="detalhes/duras-palavras" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
+                                        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0">
+                                            <img src="Imagens/TrentHorn.png" alt="Trent Horn" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/ECE6D9/002147?text=TH';">
+                                        </div>
+                                        <div class="text-left">
+                                            <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none">Trent Horn</span>
+                                            <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5 leading-none">27,90€</span>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[32px] xs:h-[38px] sm:h-[48px] lg:h-[46px]">
+                                    <button onclick="addToCart(5, 'Duras Palavras', 27.90, 'Imagens/capadp1.png', 'detalhes/duras-palavras')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                        Comprar
+                                    </button>
+                                    <a href="detalhes/duras-palavras" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
+                                </div>
+                            </div>
+                            
+                            <div class="col-span-5 sm:col-span-5 hero-book-container flex justify-center pr-2 sm:pr-8 lg:pr-12">
+                                <a href="detalhes/duras-palavras" class="relative w-full max-w-[110px] xs:max-w-[130px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                    <img src="Imagens/capadp4.png" alt="Contracapa" class="hidden lg:block absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 rounded-sm">
+                                    <img src="Imagens/capadp1.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- SLIDE 2: JIMMY AKIN (ID 4) -->
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-1">
+                            <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
+                                <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
+                                    <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Formação Bíblica</span>
                                 </div>
                                 
                                 <div class="h-auto min-h-[50px] xs:min-h-[60px] sm:min-h-[100px] lg:min-h-[110px] mb-1 sm:mb-3 flex items-start pt-1 pb-1">
@@ -253,9 +314,9 @@
                                 </div>
                                 
                                 <div class="h-auto min-h-[40px] sm:min-h-[100px] lg:min-h-[115px] flex items-center mb-1.5 lg:mb-4">
-                                    <a href="a-biblia-é-um-livro-catolico.html" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
+                                    <a href="detalhes/a-biblia-e-um-livro-catolico" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
                                         <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0">
-                                            <img src="Imagens/Jimmy Akin.png" alt="Jimmy Akin" class="w-full h-full object-cover" onerror="this.src='Imagens/jimmy.png';">
+                                            <img src="Imagens/Jimmy Akin.png" alt="Jimmy Akin" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/ECE6D9/002147?text=JA';">
                                         </div>
                                         <div class="text-left">
                                             <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
@@ -266,27 +327,27 @@
                                 </div>
 
                                 <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[32px] xs:h-[38px] sm:h-[48px] lg:h-[46px]">
-                                    <button onclick="addToCart(10, 'A Bíblia é um Livro Católico', 17.50, 'Imagens/capablc1.png', 'a-biblia-é-um-livro-catolico.html')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
+                                    <button onclick="addToCart(4, 'A Bíblia é um Livro Católico', 17.50, 'Imagens/blccapa.png', 'detalhes/a-biblia-e-um-livro-catolico')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
                                     </button>
-                                    <a href="a-biblia-é-um-livro-catolico.html" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
+                                    <a href="detalhes/a-biblia-e-um-livro-catolico" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
                                 </div>
                             </div>
                             
                             <div class="col-span-5 sm:col-span-5 hero-book-container flex justify-center pr-2 sm:pr-8 lg:pr-12">
-                                <a href="a-biblia-é-um-livro-catolico.html" class="relative w-full max-w-[110px] xs:max-w-[130px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                <a href="detalhes/a-biblia-e-um-livro-catolico" class="relative w-full max-w-[110px] xs:max-w-[130px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
                                     <img src="Imagens/capaBLC4.png" alt="Contracapa" class="hidden lg:block absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 rounded-sm">
-                                    <img src="Imagens/capablc1.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                                    <img src="Imagens/blccapa.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/400x600/002147/cfaf5c?text=A+Biblia';">
                                 </a>
                             </div>
                         </div>
 
-                        <!-- SLIDE 2: TIM STAPLES -->
-                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-1">
+                        <!-- SLIDE 3: TIM STAPLES (ID 3) -->
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-2">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
-                                    <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Apologética Mariana</span>
+                                    <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Apolegética Mariana</span>
                                 </div>
                                 
                                 <div class="h-auto min-h-[50px] xs:min-h-[60px] sm:min-h-[100px] lg:min-h-[110px] mb-1 sm:mb-3 flex items-start pt-1 pb-1">
@@ -302,9 +363,9 @@
                                 </div>
                                 
                                 <div class="h-auto min-h-[40px] sm:min-h-[100px] lg:min-h-[115px] flex items-center mb-1.5 lg:mb-4">
-                                    <a href="eis-a-tua-mae.html" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
+                                    <a href="detalhes/eis-a-tua-mae" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
                                         <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0">
-                                            <img src="Imagens/TimStaples.png" alt="Tim Staples" class="w-full h-full object-cover" onerror="this.src='Imagens/tim.png';">
+                                            <img src="Imagens/TimStaples.png" alt="Tim Staples" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/ECE6D9/002147?text=TS';">
                                         </div>
                                         <div class="text-left">
                                             <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
@@ -315,27 +376,27 @@
                                 </div>
 
                                 <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[32px] xs:h-[38px] sm:h-[48px] lg:h-[46px]">
-                                    <button onclick="addToCart(9, 'Eis a Tua Mãe', 19.50, 'Imagens/capaETM1.png', 'eis-a-tua-mae.html')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
+                                    <button onclick="addToCart(3, 'Eis a Tua Mãe', 19.50, 'Imagens/etmcapa.png', 'detalhes/eis-a-tua-mae')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
                                     </button>
-                                    <a href="eis-a-tua-mae.html" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
+                                    <a href="detalhes/eis-a-tua-mae" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
                                 </div>
                             </div>
                             
                             <div class="col-span-5 sm:col-span-5 hero-book-container flex justify-center pr-2 sm:pr-8 lg:pr-12">
-                                <a href="eis-a-tua-mae.html" class="relative w-full max-w-[110px] xs:max-w-[130px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                <a href="detalhes/eis-a-tua-mae" class="relative w-full max-w-[110px] xs:max-w-[130px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
                                     <img src="Imagens/capaETM4.png" alt="Contracapa" class="hidden lg:block absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 rounded-sm">
-                                    <img src="Imagens/capaETM1.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                                    <img src="Imagens/etmcapa.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/400x600/002147/cfaf5c?text=Eis+a+Tua+Mae';">
                                 </a>
                             </div>
                         </div>
 
-                        <!-- SLIDE 3: JOE HESCHMEYER -->
-                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-2">
+                        <!-- SLIDE 4: JOE HESCHMEYER (ID 2) -->
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-3">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
-                                    <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Teologia & Eucaristia</span>
+                                    <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Teologia Católica</span>
                                 </div>
                                 
                                 <div class="h-auto min-h-[50px] xs:min-h-[60px] sm:min-h-[100px] lg:min-h-[110px] mb-1 sm:mb-3 flex items-start pt-1 pb-1">
@@ -351,9 +412,9 @@
                                 </div>
                                 
                                 <div class="h-auto min-h-[40px] sm:min-h-[100px] lg:min-h-[115px] flex items-center mb-1.5 lg:mb-4">
-                                    <a href="a-eucaristia-e-mesmo-jesus.html" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
+                                    <a href="detalhes/a-eucaristia-e-mesmo-jesus" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
                                         <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0">
-                                            <img src="Imagens/JoeHeschmeyer.png" alt="Joe Heschmeyer" class="w-full h-full object-cover" onerror="this.src='Imagens/joe.png';">
+                                            <img src="Imagens/JoeHeschmeyer.png" alt="Joe Heschmeyer" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/ECE6D9/002147?text=JH';">
                                         </div>
                                         <div class="text-left">
                                             <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
@@ -364,24 +425,24 @@
                                 </div>
 
                                 <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[32px] xs:h-[38px] sm:h-[48px] lg:h-[46px]">
-                                    <button onclick="addToCart(8, 'A Eucaristia é mesmo Jesus', 13.50, 'Imagens/capaAEMJ1.png', 'a-eucaristia-e-mesmo-jesus.html')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
+                                    <button onclick="addToCart(2, 'A Eucaristia é mesmo Jesus', 13.50, 'Imagens/aemjcapa.png', 'detalhes/a-eucaristia-e-mesmo-jesus')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
                                     </button>
-                                    <a href="a-eucaristia-e-mesmo-jesus.html" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
+                                    <a href="detalhes/a-eucaristia-e-mesmo-jesus" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
                                 </div>
                             </div>
                             
                             <div class="col-span-5 sm:col-span-5 hero-book-container flex justify-center pr-2 sm:pr-8 lg:pr-12">
-                                <a href="a-eucaristia-e-mesmo-jesus.html" class="relative w-full max-w-[110px] xs:max-w-[130px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                <a href="detalhes/a-eucaristia-e-mesmo-jesus" class="relative w-full max-w-[110px] xs:max-w-[130px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
                                     <img src="Imagens/capaAEMJ4.png" alt="Contracapa" class="hidden lg:block absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 rounded-sm">
-                                    <img src="Imagens/capaAEMJ1.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                                    <img src="Imagens/aemjcapa.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/400x600/002147/cfaf5c?text=A+Eucaristia';">
                                 </a>
                             </div>
                         </div>
 
-                        <!-- SLIDE 4: PETER KREEFT -->
-                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-3">
+                        <!-- SLIDE 5: PETER KREEFT (ID 1) -->
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-4">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
                                     <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Formação Bíblica</span>
@@ -400,9 +461,9 @@
                                 </div>
                                 
                                 <div class="h-auto min-h-[40px] sm:min-h-[100px] lg:min-h-[115px] flex items-center mb-1.5 lg:mb-4">
-                                    <a href="tu-podes-compreender-a-biblia.html" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
+                                    <a href="detalhes/tu-podes-compreender-a-biblia" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
                                         <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0">
-                                            <img src="Imagens/PeterKreeft.png" alt="Peter Kreeft" class="w-full h-full object-cover" onerror="this.src='Imagens/kreeft.png';">
+                                            <img src="Imagens/PeterKreeft.png" alt="Peter Kreeft" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/ECE6D9/002147?text=PK';">
                                         </div>
                                         <div class="text-left">
                                             <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
@@ -413,18 +474,18 @@
                                 </div>
 
                                 <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[32px] xs:h-[38px] sm:h-[48px] lg:h-[46px]">
-                                    <button onclick="addToCart(3, 'Tu podes compreender a Bíblia', 15.00, 'Imagens/capaTPCB2.png', 'tu-podes-compreender-a-biblia.html')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
+                                    <button onclick="addToCart(1, 'Tu podes compreender a Bíblia', 15.00, 'Imagens/tpcbcapa.png', 'detalhes/tu-podes-compreender-a-biblia')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
                                     </button>
-                                    <a href="tu-podes-compreender-a-biblia.html" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
+                                    <a href="detalhes/tu-podes-compreender-a-biblia" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
                                 </div>
                             </div>
                             
                             <div class="col-span-5 sm:col-span-5 hero-book-container flex justify-center pr-2 sm:pr-8 lg:pr-12">
-                                <a href="tu-podes-compreender-a-biblia.html" class="relative w-full max-w-[110px] xs:max-w-[130px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                <a href="detalhes/tu-podes-compreender-a-biblia" class="relative w-full max-w-[110px] xs:max-w-[130px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
                                     <img src="Imagens/capaTPCB4.png" alt="Contracapa" class="hidden lg:block absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 rounded-sm">
-                                    <img src="Imagens/capaTPCB2.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300">
+                                    <img src="Imagens/tpcbcapa.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/400x600/002147/cfaf5c?text=Tu+Podes';">
                                 </a>
                             </div>
                         </div>
@@ -447,6 +508,9 @@
                         </button>
                         <button class="w-7 h-7 flex items-center justify-center focus:outline-none transition-all duration-300" onclick="setSlide(3)" aria-label="Slide 4">
                             <span class="w-3.5 h-3.5 rounded-full bg-gray-300 transition-all duration-300" id="dot-3"></span>
+                        </button>
+                        <button class="w-7 h-7 flex items-center justify-center focus:outline-none transition-all duration-300" onclick="setSlide(4)" aria-label="Slide 5">
+                            <span class="w-3.5 h-3.5 rounded-full bg-gray-300 transition-all duration-300" id="dot-4"></span>
                         </button>
                     </div>
                     
@@ -481,7 +545,7 @@
                     </div>
                 </div>
                 <div class="w-full md:w-auto border-t md:border-t-0 border-white/20 pt-3 md:pt-0">
-                    <a href="catalogo-completo.html" class="inline-flex items-center gap-2 text-brand-gold hover:text-white transition-colors group">
+                    <a href="catalogo-completo" class="inline-flex items-center gap-2 text-brand-gold hover:text-white transition-colors group">
                         <span>Ver Catálogo Completo</span>
                         <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </a>
@@ -510,18 +574,18 @@
                                         <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#b38e4a" stroke-width="1.2" stroke-linejoin="round" fill="#f0f0f0"/>
                                         <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#b38e4a" stroke-width="1.2" stroke-linecap="round"/>
                                         <line x1="28" y1="15" x2="28" y2="125" stroke="#b38e4a" stroke-width="0.5" stroke-dasharray="1 2"/>
-                                        <text x="79" y="62" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">DURAS</text>
-                                        <text x="79" y="80" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">PALAVRAS</text>
+                                        <text x="79" y="62" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">VAI PARA</text>
+                                        <text x="79" y="80" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">O CÉU</text>
                                     </svg>
                                 </div>
 
-                                <img src="Imagens/TrentHorn.png" alt="Trent Horn" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold object-cover shadow-sm flex-shrink-0" onerror="this.src='Imagens/trent.png';">
+                                <img src="Imagens/Sheen.png" alt="Fulton J. Sheen" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold object-cover shadow-sm flex-shrink-0" onerror="this.src='https://placehold.co/150x150/002147/cfaf5c?text=FS';">
                             </div>
                             
                             <div class="flex flex-col text-center sm:text-left">
-                                <span class="text-brand-gold-dark font-sans text-sm sm:text-base font-bold uppercase tracking-wider mb-1">Trent Horn</span>
-                                <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold mb-2">Duras Palavras</h3>
-                                <p class="text-lg sm:text-xl text-gray-700 font-classic italic leading-relaxed">Uma obra esclarecedora sobre as passagens difíceis e desafiadoras da Sagrada Escritura.</p>
+                                <span class="text-brand-gold-dark font-sans text-sm sm:text-base font-bold uppercase tracking-wider mb-1">Fulton J. Sheen</span>
+                                <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold mb-2">Vai para o Céu</h3>
+                                <p class="text-lg sm:text-xl text-gray-700 font-classic italic leading-relaxed">O guia indispensável do Venerável Arcebispo Sheen sobre a salvação e a vida cristã.</p>
                             </div>
                         </div>
                     </div>
@@ -536,23 +600,24 @@
                         <div class="flex-grow flex flex-col gap-6 p-6 sm:p-8 bg-brand-bg rounded-3xl border border-gray-200/70 relative overflow-hidden group min-h-[300px] sm:min-h-[290px] lg:min-h-[320px] h-full shadow-sm hover:shadow-md transition-shadow justify-center">
                             <div class="flex flex-row items-center justify-center sm:justify-start gap-4 sm:gap-6 flex-shrink-0">
                                 
-                                <div class="w-28 sm:w-32 md:w-36 flex-shrink-0 flex items-center justify-center">
+                                <div class="w-20 xs:w-24 sm:w-28 md:w-32 flex-shrink-0 flex items-center justify-center">
                                     <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto max-h-[140px] drop-shadow-md group-hover:scale-105 transition-transform duration-300">
                                         <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#b38e4a" stroke-width="1.2" stroke-linejoin="round" fill="#f0f0f0"/>
                                         <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#b38e4a" stroke-width="1.2" stroke-linecap="round"/>
                                         <line x1="28" y1="15" x2="28" y2="125" stroke="#b38e4a" stroke-width="0.5" stroke-dasharray="1 2"/>
-                                        <text x="79" y="62" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">VAI PARA</text>
-                                        <text x="79" y="80" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">O CÉU</text>
+                                        <text x="79" y="55" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="11" letter-spacing="0.04em">A SAGRADA</text>
+                                        <text x="79" y="73" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="11" letter-spacing="0.04em">ESCRITURA</text>
+                                        <text x="79" y="91" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="9" letter-spacing="0.02em">MAGISTÉRIO</text>
                                     </svg>
                                 </div>
 
-                                <img src="Imagens/Sheen.png" alt="Fulton J. Sheen" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold object-cover shadow-sm flex-shrink-0" onerror="this.src='Imagens/fulton.png';">
+                                <img src="Imagens/LaF.png" alt="Leão XIII a Francisco" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold object-cover shadow-sm flex-shrink-0" onerror="this.src='https://placehold.co/150x150/ECE6D9/002147?text=Magisterio';">
                             </div>
                             
                             <div class="flex flex-col text-center sm:text-left">
-                                <span class="text-brand-gold-dark font-sans text-sm sm:text-base font-bold uppercase tracking-wider mb-1">Fulton J. Sheen</span>
-                                <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold mb-2">Vai para o Céu</h3>
-                                <p class="text-lg sm:text-xl text-gray-700 font-classic italic leading-relaxed">O guia indispensável do Venerável Arcebispo Sheen sobre a salvação cristã.</p>
+                                <span class="text-brand-gold-dark font-sans text-sm sm:text-base font-bold uppercase tracking-wider mb-1">Vários (Leão XIII a Francisco)</span>
+                                <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold mb-2">A Sagrada Escritura no Magistério Bíblico Contemporâneo</h3>
+                                <p class="text-lg sm:text-xl text-gray-700 font-classic italic leading-relaxed">Compêndio de Documentos do Magistério sobre a Sagrada Escritura.</p>
                             </div>
                         </div>
                     </div>
@@ -622,6 +687,125 @@
                 </div>
             </div>
         </section>
+
+        <!-- ÚLTIMOS ARTIGOS (3 COLUNAS - DINÂMICO CONFORME ARTIGOS-GERAL.HTML) -->
+        <section class="py-16 sm:py-24 bg-white border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                
+                <!-- Cabeçalho Alinhado na Mesma Linha -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 pb-6 mb-12 gap-4">
+                    <div>
+                        <span class="text-brand-gold-dark font-sans text-xs font-bold uppercase tracking-[0.2em] block mb-1">Leituras de Formação</span>
+                        <h2 class="font-serif text-3xl md:text-4xl text-brand-accent-blue font-bold">Últimos Artigos</h2>
+                    </div>
+                    <div>
+                        <a href="artigos-geral" class="inline-flex items-center justify-center gap-2 bg-brand-accent-red hover:bg-brand-accent-blue text-white font-sans font-bold text-xs uppercase tracking-widest px-5 py-3 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md group hover:-translate-y-0.5 active:translate-y-0">
+                            <span>Ver Mais Artigos</span>
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Artigo 1 (ID 8) -->
+                    <div class="bg-brand-bg rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col h-full group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="Imagens/8.png" alt="O coração que arde contra o arco-íris roubado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/ECE6D9/002147?text=Apologetica';">
+                            <span class="absolute top-4 left-4 bg-brand-accent-blue text-brand-gold text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Apologética e Cultura</span>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <span class="text-xs text-gray-400 mb-2 block flex items-center gap-1"><i class="far fa-calendar"></i> 13 de Junho de 2026</span>
+                            <h3 class="font-serif text-xl text-brand-accent-blue font-bold mb-3 line-clamp-2">O coração que arde contra o arco-íris roubado</h3>
+                            <p class="text-sm text-gray-600 font-classic italic leading-relaxed mb-6 flex-grow">Uma profunda reflexão e crítica católica sobre a distorção dos símbolos e as respostas fiéis perante os desafios culturais hodiernos.</p>
+                            <span class="text-xs text-gray-400 block mb-4"><i class="far fa-clock"></i> 10 min de leitura</span>
+                            <a href="artigos-individuais/o-coracao-que-arde-contra-o-arco-iris-roubado" class="inline-flex items-center text-brand-accent-red font-bold text-sm hover:text-brand-accent-blue transition-colors group/link mt-auto">
+                                Ler Artigo
+                                <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Artigo 2 (ID 7) -->
+                    <div class="bg-brand-bg rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col h-full group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="Imagens/7.png" alt="Breve Guia para a Santa Missa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/ECE6D9/002147?text=Liturgia';">
+                            <span class="absolute top-4 left-4 bg-brand-accent-blue text-brand-gold text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Liturgia</span>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <span class="text-xs text-gray-400 mb-2 block flex items-center gap-1"><i class="far fa-calendar"></i> 11 de Junho de 2026</span>
+                            <h3 class="font-serif text-xl text-brand-accent-blue font-bold mb-3 line-clamp-2">Breve Guia para a Santa Missa (Parte 1 de 2)</h3>
+                            <p class="text-sm text-gray-600 font-classic italic leading-relaxed mb-6 flex-grow">Aprofunde a sua participação litúrgica através deste precioso guia explicativo sobre as partes, os ritos e a mística do Santo Sacrifício.</p>
+                            <span class="text-xs text-gray-400 block mb-4"><i class="far fa-clock"></i> 7 min de leitura</span>
+                            <a href="artigos-individuais/breve-guia-para-a-santa-missa-parte-1-de-2" class="inline-flex items-center text-brand-accent-red font-bold text-sm hover:text-brand-accent-blue transition-colors group/link mt-auto">
+                                Ler Artigo
+                                <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Artigo 3 (ID 6) -->
+                    <div class="bg-brand-bg rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col h-full group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="Imagens/6.png" alt="A Coroação da História da Salvação" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/ECE6D9/002147?text=Leituras';">
+                            <span class="absolute top-4 left-4 bg-brand-accent-blue text-brand-gold text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Comentários às Leituras</span>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <span class="text-xs text-gray-400 mb-2 block flex items-center gap-1"><i class="far fa-calendar"></i> 24 de Maio de 2026</span>
+                            <h3 class="font-serif text-xl text-brand-accent-blue font-bold mb-3 line-clamp-2">A Coroação da História da Salvação (Pentecostes)</h3>
+                            <p class="text-sm text-gray-600 font-classic italic leading-relaxed mb-6 flex-grow">O Pentecostes explicado à luz da Tradição: saiba como a efusão do Espírito Santo sela e coroa majestosamente toda a Aliança Divina.</p>
+                            <span class="text-xs text-gray-400 block mb-4"><i class="far fa-clock"></i> 8 min de leitura</span>
+                            <a href="artigos-individuais/a-coroacao-da-historia-da-salvacao-pentecostes" class="inline-flex items-center text-brand-accent-red font-bold text-sm hover:text-brand-accent-blue transition-colors group/link mt-auto">
+                                Ler Artigo
+                                <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECÇÃO NEWSLETTER (OPORTUNA E PREMIUM) -->
+        <section class="py-16 sm:py-24 bg-brand-accent-blue text-white relative overflow-hidden">
+            <!-- Circulos de Decoração -->
+            <div class="absolute -top-12 -left-12 w-64 h-64 rounded-full bg-white/5 pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-brand-gold/10 pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+                <span class="text-brand-gold font-sans text-xs font-bold uppercase tracking-[0.2em] block mb-3">Fique em Contacto</span>
+                
+                <!-- Título Editorial Premium -->
+                <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-5 text-glow-white leading-tight">Newsletter Jerónimo & Hugo Bacelo</h2>
+                
+                <!-- Frase Altamente Legível (Sem-serifa) com Contraste Perfeito -->
+                <p class="font-sans text-base sm:text-lg text-white/95 max-w-2xl mx-auto mb-8 tracking-normal leading-relaxed">
+                    Subscreva a nossa newsletter para estar a par de todos os novos lançamentos da Jerónimo Editora, cursos de formação e dos últimos artigos teológicos do Hugo Bacelo.
+                </p>
+
+                <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="max-w-lg mx-auto flex flex-col sm:flex-row gap-3">
+                    <div class="flex-grow">
+                        <input type="email" required placeholder="O seu endereço de e-mail" aria-label="Endereço de e-mail" class="w-full px-5 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-450 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all">
+                    </div>
+                    <button type="submit" class="bg-brand-accent-red hover:bg-brand-accent-red/90 text-white font-bold uppercase text-xs tracking-wider px-8 py-4 sm:py-3.5 rounded-xl transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0">
+                        Subscrever
+                    </button>
+                </form>
+
+                <div class="mt-4 flex items-center justify-center gap-2">
+                    <input type="checkbox" id="privacy-consent" required class="accent-brand-gold rounded h-4 w-4">
+                    <label for="privacy-consent" class="text-xs text-gray-300">
+                        Aceito receber novidades e concordo com a <a href="politica-privacidade" class="underline text-brand-gold hover:text-white transition-colors">Política de Privacidade</a>.
+                    </label>
+                </div>
+
+                <div id="newsletter-success-msg" class="hidden mt-6 p-4 bg-green-900/40 border border-green-500/30 text-green-300 text-sm rounded-xl max-w-md mx-auto">
+                    Subscrição registada com sucesso! Obrigado por acompanhar a Jerónimo Editora.
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- TOAST DE CONFIRMAÇÃO DO CARRINHO (ALTAMENTE PREMIUM) -->
@@ -637,7 +821,7 @@
             </button>
         </div>
         <div class="mt-4 flex gap-2">
-            <a href="checkout.html" class="flex-1 bg-brand-accent-blue hover:bg-brand-accent-red text-white text-center text-xs py-2.5 rounded-lg font-bold transition-colors">Ver Carrinho</a>
+            <a href="checkout" class="flex-1 bg-brand-accent-blue hover:bg-brand-accent-red text-white text-center text-xs py-2.5 rounded-lg font-bold transition-colors">Ver Carrinho</a>
             <button onclick="closeToast()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-brand-text text-xs py-2.5 rounded-lg font-bold transition-colors">Continuar</button>
         </div>
     </div>
@@ -647,7 +831,7 @@
     <script>
         /* --- LOGICA DO CARROSSEL HERO --- */
         let currentSlideIdx = 0;
-        const totalSlides = 4;
+        const totalSlides = 5;
         let slideInterval;
         let isPaused = false;
 
@@ -764,15 +948,14 @@
         let toastTimeout;
 
         function addToCart(id, title, price, img, link) {
-            // 1. Obter itens do carrinho existentes do localStorage
             let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             
-            // 2. Base de dados auxiliar para sincronizar autor e peso em index.html
             const bookMeta = {
-                10: { author: 'Jimmy Akin', weight: 0.272, image: 'Imagens/blccapa.png' },
-                9: { author: 'Tim Staples', weight: 0.534, image: 'Imagens/etmcapa.png' },
-                8: { author: 'Joe Heschmeyer', weight: 0.254, image: 'Imagens/aemjcapa.png' },
-                3: { author: 'Peter Kreeft', weight: 0.510, image: 'Imagens/tpcbcapa.png' }
+                5: { author: 'Trent Horn', weight: 0.707, image: 'Imagens/dpcapa.png' },
+                4: { author: 'Jimmy Akin', weight: 0.272, image: 'Imagens/blccapa.png' },
+                3: { author: 'Tim Staples', weight: 0.534, image: 'Imagens/etmcapa.png' },
+                2: { author: 'Joe Heschmeyer', weight: 0.254, image: 'Imagens/aemjcapa.png' },
+                1: { author: 'Peter Kreeft', weight: 0.510, image: 'Imagens/tpcbcapa.png' }
             };
 
             const meta = bookMeta[id] || { author: 'Jerónimo Editora', weight: 0.300, image: img };
@@ -825,6 +1008,36 @@
             }
         }
 
+        /* --- TRATAMENTO DA SUBSCRICAO DA NEWSLETTER --- */
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('newsletter-form');
+            const successMsg = document.getElementById('newsletter-success-msg');
+            if (form && successMsg) {
+                form.reset();
+                successMsg.classList.remove('hidden');
+                setTimeout(() => {
+                    successMsg.classList.add('hidden');
+                }, 8000);
+            }
+        }
+
+        /* --- LIMPEZA DE LINKS INTERNOS (REMOVENDO .HTML) --- */
+        function cleanAllInternalLinks() {
+            document.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
+                }
+            });
+        }
+
         /* --- COMPONENTES & CARRINHO --- */
         async function loadComponent(id, file) {
             try {
@@ -833,6 +1046,7 @@
                     const html = await response.text();
                     document.getElementById(id).innerHTML = html;
                     if (id === 'nav-placeholder') updateCartUI();
+                    cleanAllInternalLinks();
                 }
             } catch (err) { console.warn('Ambiente local.'); }
         }
@@ -844,7 +1058,6 @@
             if (!menu || !backdrop) return;
             
             if (menu.classList.contains('translate-x-full')) {
-                // ABRIR
                 backdrop.classList.remove('hidden');
                 setTimeout(() => {
                     backdrop.classList.remove('opacity-0');
@@ -853,7 +1066,6 @@
                 }, 20);
                 document.body.style.overflow = 'hidden'; 
             } else {
-                // FECHAR
                 menu.classList.add('translate-x-full');
                 backdrop.classList.remove('opacity-100');
                 backdrop.classList.add('opacity-0');
@@ -870,6 +1082,7 @@
             showSlide(0); 
             setupSwipeGestures(); 
             updateCartUI(); 
+            setTimeout(cleanAllInternalLinks, 500); 
         });
 
         function updateCartUI() {
@@ -884,7 +1097,5 @@
             });
         }
     </script>
-    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
-            async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
