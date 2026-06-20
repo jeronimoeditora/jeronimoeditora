@@ -6,6 +6,7 @@
     <title>A Coroação da História da Salvação (Pentecostes) | Hugo Bacelo</title>
     
     <script>
+        // Limpeza estética do URL removendo a extensão .html no GitHub Pages
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
@@ -75,7 +76,7 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <!-- CONTENTOR DO MENU DINÂMICO (Carregado assincronamente do GitHub) -->
     <div id="nav-placeholder"></div>
 
     <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
@@ -83,8 +84,8 @@
         <article class="max-w-4xl mx-auto px-6 fade-in">
             
             <div class="mb-8">
-                <!-- Direcionado para a URL limpa de artigos -->
-                <a href="../artigos" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
+                <!-- Direcionado para a URL limpa de artigos (artigos-geral) sem .html -->
+                <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
                     <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
                 </a>
             </div>
@@ -120,7 +121,7 @@
             <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto font-sans">
                 
                 <p class="dropcap">
-                    O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na vida litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu power transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raízes desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
+                    O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na vida litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu poder transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raízes desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
                 </p>
 
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Primeira Leitura (Actos 2, 1-11): O Novo Sinai e o “Anti-Babel”</h3>
@@ -142,7 +143,7 @@
                 </p>
 
                 <p>
-                    Além de ser o cumprimento do Sinai, o Pentecostes é também a inversion da Torre de Babel.
+                    Além de ser o cumprimento do Sinai, o Pentecostes é também a inversão da Torre de Babel.
                 </p>
 
                 <p>
@@ -297,7 +298,7 @@
                 </div>
 
                 <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-xs uppercase tracking-wider font-bold">
-                    <a href="../artigos" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
+                    <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
                         <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
                     </a>
                     <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
@@ -309,13 +310,14 @@
         </article>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ DINÂMICO -->
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado assincronamente do GitHub) -->
     <div id="footer-placeholder"></div>
 
     <script>
+        // --- STREAMING_CHUNK: Definindo funções utilitárias e carregamento dinâmico de componentes... ---
         function getPrefix() {
             const path = window.location.pathname.toLowerCase();
-            if (path.includes('/artigos/')) {
+            if (path.includes('/artigos/') || path.includes('/artigos individuais/') || path.includes('/artigos-individuais/')) {
                 return '../';
             }
             return '';
