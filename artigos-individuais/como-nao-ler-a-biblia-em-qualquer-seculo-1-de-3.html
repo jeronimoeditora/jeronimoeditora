@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Como Não Ler a Bíblia em Qualquer Século (1 de 3) | Hugo Bacelo</title>
+    
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <!-- Google Fonts unificadas com suporte a pesos e itálicos completos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'],
+                        inter: ['"Inter"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+
+        .text-readable-article {
+            line-height: 1.85;
+            letter-spacing: -0.003em;
+            word-spacing: 0.05em;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 2px;
+            color: #e05300;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div id="nav-placeholder"></div>
+
+    <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
+        <article class="max-w-4xl mx-auto px-6 fade-in">
+            
+            <div class="mb-8">
+                <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
+                    <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
+                </a>
+            </div>
+
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center md:text-left">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3">Teologia</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">
+                    Como Não Ler a Bíblia em Qualquer Século (1 de 3)
+                </h1>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500 font-medium">
+                    <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 27 de Agosto de 2025</span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5 font-inter">
+                        <i class="far fa-user"></i> Escrito por 
+                        <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">12</span> min de leitura</span>
+                </div>
+            </header>
+
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-xs relative bg-gray-100">
+                <img src="../Imagens/1.png" alt="Como Não Ler a Bíblia em Qualquer Século (1 de 3)" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Como+N%C3%A3o+Ler+a+B%C3%ADblia+em+Qualquer+S%C3%A9culo';">
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto">
+                    «Que é próprio da fé? Certeza plena e segura da verdade das palavras inspiradas por Deus. […] Que é próprio do fiel? Com tal certeza plena, conformar-se com o significado das palavras da Escritura, sem ousar tirar nem acrescentar seja o que for.» <br>
+                    <span class="text-xs font-bold not-italic text-brand-accent-blue block mt-2">— São Basílio Magno, Moralia, Regula 80, 22 (Séc. IV)</span>
+                </p>
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto">
+                
+                <p class="dropcap">
+                    Ler a Bíblia é sempre um exercício delicado: pode levar-nos a encontrar o próprio Deus que Se revela na história ou, pelo contrário, pode tornar-se ocasião de dúvida e de relativismo, se for lida apenas com critérios humanos. O estudo da Sagrada Escritura exige tanto o rigor da razão como a docilidade da fé. Muitos autores contemporâneos, até dentro da Igreja, têm proposto interpretações que desfiguram a Palavra inspirada, reduzindo-a a mito, ficção ou construção literária. Torna-se, portanto, necessário confrontar essas leituras com a fé viva da Igreja, que ao longo de dois milénios guardou com fidelidade a Escritura como tesouro divino.
+                </p>
+
+                <p>
+                    O livro <i>Ler a Bíblia no Século XXI</i>, do Pe. Carreira das Neves, traz algumas reflexões interessantes, mas também numerosas afirmações que contradizem a Tradição e o Magistério. É por isso que proponho uma resposta crítica dividida em três partes.
+                </p>
+
+                <p>
+                    Destaco que o meu objectivo é «criticar a crítica» do Pe. Carreira das Neves, e não a pessoa em si, embora possa ocasionalmente realçar a gravidade de um sacerdote defender publicamente tal e tal erro. Ele faleceu em 2017 e espero que se encontre já em comunhão plena com a Santíssima Trindade ou, quando muito, que para lá caminhe. Aos seus admiradores, e particularmente deste livro, desafio a ler esta crítica com humildade e caridade e a corrigir-me fraternalmente se assim o considerarem necessário.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Revelação e Inspiração Bíblica</h3>
+                
+                <h4 class="font-serif text-lg sm:text-xl font-bold text-brand-accent-orange">Data, Autoria, e Processo de Composição da Sagrada Escritura</h4>
+
+                <p>
+                    Uma das primeiras afirmações apresentadas pelo autor diz respeito à data e autoria dos livros bíblicos:
+                </p>
+
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">★</span><strong>(1) Autor do Pentateuco:</strong> Sobre o Antigo Testamento, mais propriamente o Pentateuco, afirma que a Bíblia apenas começou a ser escrita em 1005 a.C. <i>«depois da conquista, por David, da cidade de Jerusalém»</i> (p. 25) e que, quando isso aconteceu, <i>«Moisés já tinha morrido há séculos»</i> (pp. 30 e 37) (rejeitando, portanto, qualquer autoria Mosaica do Pentateuco), assim como que tudo foi escrito <i>«muitos anos depois da morte [das] personagens bíblicas»</i> (p. 47). Além disso, diz que o autor do Deuteronómio <i>«vive […] depois da queda de Jerusalém-Judá (587 a.C.) e da queda do reinado do Norte (722 a.C.)»</i> (p. 37), colocando a última redacção do Pentateuco nos sécs. V–VI a.C. (p. 46). O argumento de base do autor é o seguinte: <i>«A redação final só poderá ser de tempos depois do exílio, porque o exílio foi a fornalha ardente que obrigou os judeus a reformularem ideias e pensamentos, tradições e Credos»</i> (p. 163).
+                </p>
+
+                <p>
+                    Esta visão ignora, em primeiro lugar, o testemunho interno da Escritura. Encontramos referências explícitas a Moisés como autor ou escriba (Ex 17, 14; 24, 4; 34, 27; Nm 33, 2; Dt 31, 9.19.22.24). Ignora também a tradição constante de Israel e da Igreja, que sempre reconheceram Moisés como a figura central da transmissão do Pentateuco (CIC 2056). Sendo assim, o autor negligencia reconhecer que a sua posição, que apenas apareceu de forma sistemática nos anos 1800 com a hipótese documental, não é a única nem é infalível.
+                </p>
+
+                <p>
+                    De facto, a posição mais duradoura — dita Tradicional — é precisamente a autoria Mosaica fundamental do Pentateuco, embora nenhuma consiga ser plenamente comprovada empiricamente de forma absoluta. No século passado, a Pontifícia Comissão Bíblica abordou por duas vezes a questão da origem do Pentateuco, tendo concluído que os argumentos modernos a favor da total rejeição da autoria Mosaica eram insuficientes, por um lado, e demonstrado optimismo em como o aprofundamento do estudo revelaria o papel primário de Moisés como autor e legislador, por outro.
+                </p>
+
+                <p>
+                    É certo que a redação do texto bíblico conheceu fases de compilação e retoque posterior: 
+                </p>
+                <ul class="list-none pl-4 space-y-2">
+                    <li><span class="text-brand-accent-blue mr-1.5">▪</span>muitas secções do Êxodo, Números e Deuteronómio falam de Moisés na terceira pessoa;</li>
+                    <li><span class="text-brand-accent-blue mr-1.5">▪</span>em Números 12, 3 é dito que Moisés é o homem <i>«mais humilde que havia sobre a terra»</i>;</li>
+                    <li><span class="text-brand-accent-blue mr-1.5">▪</span>o obituário de Moisés está incluído no Deuteronómio (34, 5–8).</li>
+                </ul>
+                <p>
+                    Estes são exemplos claros de passagens que indicam retoques editoriais posteriores. Mas nada disto implica que o Pentateuco na íntegra seja uma invenção puramente tardia, nunca coincidindo temporalmente com a vida de Moisés.
+                </p>
+
+                <p>
+                    Em contrapartida, existem vários indícios substanciais contra a tese de uma datação puramente tardia:
+                </p>
+
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Tabernáculo:</strong> O Tabernáculo descrito no Pentateuco possui semelhanças estruturais e litúrgicas significativas com as tendas cerimonais e sagradas usadas no Próximo Oriente no segundo e terceiro milénio a.C., conforme demonstrado por importantes descobertas arqueológicas modernas.
+                </p>
+
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>Evidência Egípcia:</strong> Um sepulcro Egípcio, datado de cerca de 1450 a.C., retrata escravos Semíticos a produzir tijolos para o templo de Ámon em Tebas, supervisionados por capatazes com varas, o que espelha exatamente a narrativa de Êxodo (Ex 1, 11; 3, 7; 5, 7.14).
+                </p>
+
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>Formato de Aliança:</strong> O livro do Deuteronómio apresenta um formato análogo aos tratados de suserania Hititas, que datam estritamente do período de 1400–1200 a.C., e não aos tratados Assírios tardios, que reinavam no Próximo Oriente com hegemonia durante o século VII a.C.
+                </p>
+
+                <p>
+                    Além disso, a arqueologia demonstra que a escrita já estava amplamente difundida no Egipto e em Canaã séculos antes do rei David: as tabuinhas de Ugarit (séc. XIII–XII a.C.) e o alfabeto proto-sinaítico (séc. XIX–XVI a.C.) provam que era perfeitamente possível que um Hebreu instruído como Moisés, formado <i>«em toda a sabedoria dos Egípcios»</i> (At 7, 22), tivesse produzido textos escritos na segunda metade do segundo milénio a.C. 
+                </p>
+
+                <p>
+                    Sabemos que outras culturas muito anteriores já tinham registos escritos complexos de leis e mitos (por exemplo, o Código de Hamurabi no séc. XVIII a.C. e a Epopeia de Gilgamesh nos sécs. XXII–XIII a.C.). Por fim, a própria existência da versão Samaritana do Pentateuco, que terá surgido após o cisma do Reino de Israel no séc. X a.C., testemunha que a sua estrutura e forma fundamental já estavam bem estabelecidas muito antes do exílio na Babilónia.
+                </p>
+
+                <div class="bg-white border-l-4 border-brand-accent-orange p-5 my-6 italic text-gray-650 text-sm">
+                    «Na época do Novo Testamento, a autoria mosaica parece inferir-se de todo o Pentateuco. Não existem variações significativas deste relato ou tradições rivais dignas de menção no período bíblico. Não é de surpreender que os estudos Cristãos e Judaicos nos séculos posteriores tenham abraçado esta tradição com ambos os braços. Há indícios de que alguns estudiosos permitiram contribuições ou actualizações ao Pentateuco por outras pessoas que não Moisés, mas esta é a excepção e não a regra. Foi apenas no período moderno que a origem Mosaica do Pentateuco foi seriamente posta em causa.»
+                </div>
+
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">★</span><strong>(2) Datação de Mateus, Marcos e Lucas:</strong> Sobre o Novo Testamento, o Pe. Carreira das Neves defende que Lucas escreveu o seu Evangelho <i>«por volta dos anos 80–90»</i> (p. 173), alegando que apresenta <i>«a guerra de Tito contra Jerusalém como coisa do passado»</i> (p. 210). Defende igualmente que Mateus escreveu o seu pela mesma altura que Lucas, enquanto <i>«Marcos escreve por volta do ano 70»</i> (p. 213). No entanto, há inconsistências claras no texto: por um lado, diz-nos que Mateus e Lucas escreveram <i>«uns trinta anos mais tarde [do que Marcos]»</i> (p. 211) e, por outro, duas páginas mais adiante, afirma que <i>«Mateus e Lucas [escrevem] uns vinte anos depois»</i>. No geral, o autor coloca Marcos como o Evangelho mais antigo (70 d.C.) e Mateus e Lucas 20 a 40 anos depois (90–110 d.C.).
+                </p>
+
+                <p>
+                    Esta datação tão tardia parece partir do pressuposto racionalista de que seria impossível Jesus ter profetizado com precisão a destruição física do Templo (Lc 21, 6; Mt 22, 7) e que, por isso, os Evangelhos teriam de ter sido redigidos necessariamente depois de 70 d.C. Ora, para a fé Cristã ortodoxa, a profecia divina é um facto real, pelo que não há qualquer razão puramente científica ou teológica para adiar tanto a composição. 
+                </p>
+
+                <p>
+                    Por outro lado, Mateus refere os Saduceus (uma seita sacerdotal aristocrática que foi totalmente obliterada após o ano 70 d.C.) sete vezes — mais do que todos os outros Evangelhos juntos. É altamente razoável assumir que Mateus estaria seriamente preocupado com a presença e influência ativa dos Saduceus perante os seus leitores originais, sugerindo uma redação prévia a 70 d.C.
+                </p>
+
+                <p>
+                    Esta primeira parte da nossa crítica serve para nos alertar contra o perigo de lermos as Escrituras esvaziando-as da sua componente sobrenatural, reduzindo o texto sagrado a uma mera reação a acontecimentos históricos passados em vez de acolhermos a Palavra viva e profética inspirada por Deus.
+                </p>
+
+                <!-- SECÇÃO PREMIUM DE SUBSCREVER NEWSLETTER -->
+                <div class="bg-gray-50 border border-gray-150 p-6 sm:p-8 rounded-2xl my-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="text-left max-w-md">
+                        <h4 class="font-sans text-base sm:text-lg font-bold text-brand-accent-blue leading-snug">
+                            Receba <u class="underline decoration-brand-accent-blue decoration-2 font-inter">gratuitamente</u> os próximos artigos no seu e-mail
+                        </h4>
+                    </div>
+                    <form onsubmit="handleSubscribe(event)" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 flex-grow max-w-xl">
+                        <input type="email" id="sub-email" required placeholder="O seu e-mail..." class="flex-grow p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                        <button type="submit" class="px-6 py-3 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter whitespace-nowrap shadow-xs">
+                            Subscrever
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Secção de Fontes -->
+                <section class="mt-12 pt-6 border-t border-gray-150">
+                    <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4">Fontes & Referências</h4>
+                    <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2 font-inter">
+                        <li>Carreira das Neves, J., <i>Ler a Bíblia no Século XXI</i>, Editorial Presença, Lisboa, 2002.</li>
+                        <li>Pontifícia Comissão Bíblica, <i>Sobre a Autoria Mosaica do Pentateuco</i> (Decreto de 27 de Junho de 1906).</li>
+                        <li><i>Catecismo da Igreja Católica (CIC)</i>, Coimbra: Gráfica de Coimbra, 2002.</li>
+                        <li>Kitchen, K. A., <i>On the Reliability of the Old Testament</i>, Wm. B. Eerdmans Publishing, 2003.</li>
+                    </ul>
+                </section>
+
+                <!-- Secção de Comentários -->
+                <section class="mt-12 pt-8 border-t border-gray-150">
+                    <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-6">Comentários</h4>
+                    
+                    <div class="space-y-4 mb-8 font-inter" id="comments-box">
+                        <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs">
+                            <div class="flex items-center justify-between gap-4 mb-2">
+                                <span class="font-bold text-brand-accent-blue text-sm">pedro_silva99</span>
+                                <span class="text-xs text-gray-400 font-inter">28 de Agosto de 2025</span>
+                            </div>
+                            <p class="text-sm text-gray-650 leading-relaxed font-inter">
+                                Excelente análise. De facto, a desconstrução modernista da autoria mosaica e a datação tardia sistemática dos Evangelhos esvazia o texto sagrado do seu carácter sobrenatural e profético. Aguardo ansiosamente as partes 2 e 3!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl font-inter">
+                        <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
+                        <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                            </div>
+                            <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter resize-none"></textarea>
+                            <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
+                            <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter">
+                                Enviar Comentário
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Rodapé do Artigo -->
+            <footer class="mt-16 pt-8 border-t border-gray-150 font-inter">
+                <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
+                    <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
+                        <a href="../sobreHB" class="block w-full h-full">
+                            <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
+                        </a>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <h4 class="font-serif text-lg font-bold text-brand-accent-blue">
+                            <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
+                        </h4>
+                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
+                        <p class="text-sm text-gray-650 leading-relaxed font-inter">
+                            Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-inter text-xs uppercase tracking-wider font-bold">
+                    <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
+                        <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                    </a>
+                    <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
+                        Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                    </a>
+                </div>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado assincronamente do GitHub) -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
+                return '../';
+            }
+            return '';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId);
+            if (!container) return;
+            const prefix = getPrefix();
+            
+            if (prefix !== '') {
+                container.querySelectorAll('a').forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        if (!href.startsWith('../')) {
+                            link.setAttribute('href', prefix + href);
+                        }
+                    }
+                });
+                container.querySelectorAll('img').forEach(img => {
+                    let src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                        img.setAttribute('src', prefix + src);
+                    }
+                });
+            }
+
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
+                }
+            });
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            const prefix = getPrefix();
+            try {
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    adjustAndCleanLinks('nav-placeholder');
+                }
+
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                    adjustAndCleanLinks('footer-placeholder');
+                }
+
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        function calculateReadingTime() {
+            const contentElement = document.getElementById('article-content');
+            const readingTimeElement = document.getElementById('reading-time');
+            if (!contentElement || !readingTimeElement) return;
+
+            const text = contentElement.innerText || contentElement.textContent;
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+            const readingTime = Math.ceil(words / 200);
+            readingTimeElement.textContent = readingTime;
+        }
+
+        function addLocalComment(e) {
+            e.preventDefault();
+            const author = document.getElementById('comm-author').value.trim() || "Anónimo";
+            const message = document.getElementById('comm-text').value.trim();
+            if (!message) return;
+
+            const commentsBox = document.getElementById('comments-box');
+            const today = new Date();
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formattedDate = today.toLocaleDateString('pt-PT', options);
+
+            const commentElement = document.createElement('div');
+            commentElement.className = "bg-white p-5 rounded-2xl border border-gray-100 shadow-xs fade-in";
+            commentElement.innerHTML = `
+                <div class="flex items-center justify-between gap-4 mb-2">
+                    <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
+                    <span class="text-xs text-gray-400">${formattedDate}</span>
+                </div>
+                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
+            `;
+
+            commentsBox.appendChild(commentElement);
+            document.getElementById('comment-form').reset();
+        }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('sub-email');
+            if (!emailInput || !emailInput.value.trim()) return;
+
+            const userEmail = emailInput.value.trim();
+            const recipient = "editorajeronimo@gmail.com";
+            const subject = encodeURIComponent("nova subscrição");
+            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
+
+            window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+
+            const container = e.target;
+            container.innerHTML = `
+                <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
+                    <i class="fas fa-check-circle"></i> A iniciar o seu cliente de e-mail para processar a subscrição!
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            calculateReadingTime();
+        });
+    </script>
+</body>
+</html>
