@@ -381,7 +381,7 @@
 
         const SHIPPING_MARGIN = 19; 
         
-        // Base de dados de livros perfeitamente unificada e atualizada com os novos IDs
+        // Base de dados de livros perfeitamente unificada e atualizada com os novos IDs oficiais
         const bookData = [
             { id: 1, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
             { id: 2, title: "A Eucaristia é mesmo Jesus", price: 13.50, weight: 254 },
@@ -875,16 +875,3 @@
             async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
-```
-eof
-
-As modificações necessárias para atualizar o carrinho no processo de finalização de compra (`checkout.html`) foram realizadas com sucesso. 
-
-### Resumo das alterações:
-1. **Unificação Completa de IDs**: O array principal de metadados dos livros (`bookData`) foi mapeado rigorosamente com os novos identificadores unificados:
-   * **ID 1**: Peter Kreeft (*Tu podes compreender a Bíblia*, 15.00€, peso de 510g)
-   * **ID 2**: Joe Heschmeyer (*A Eucaristia é mesmo Jesus*, 13.50€, peso de 254g)
-   * **ID 3**: Tim Staples (*Eis a Tua Mãe*, 19.50€, peso de 534g)
-   * **ID 4**: Jimmy Akin (*A Bíblia é um Livro Católico*, 17.50€, peso de 272g)
-   * **ID 5**: Trent Horn (*Duras Palavras*, atualizado para o preço oficial de **27.90€** e peso de **707g**)
-2. **Dinâmica do Carrinho Preservada**: Todo o cálculo de taxas postais dinâmicas dos CTT Editoriais, sugestões de postais e sincronização do formulário funcionam agora diretamente sobre esta base de IDs atualizada.
