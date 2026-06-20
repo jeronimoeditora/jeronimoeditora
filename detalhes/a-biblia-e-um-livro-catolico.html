@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Bíblia é um Livro Católico | Jerónimo Editora</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS & FontAwesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Roboto"', 'sans-serif'],
+                        classic: ['"Crimson Text"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#333333',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-gold': '#cfaf5c',
+                        'brand-gold-light': '#fcf7e8',
+                        'brand-gold-dark': '#b38e4a',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .book-shadow {
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15));
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            backface-visibility: hidden;
+            will-change: opacity, transform;
+        }
+
+        .fade-in {
+            animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-btn {
+            position: relative;
+            transition: all 0.3s ease;
+            font-family: 'Playfair Display', serif;
+        }
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: #800000;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .tab-active { color: #800000 !important; }
+        .tab-active::after { width: 100%; }
+
+        .thumb-btn {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .thumb-active {
+            border-color: #800000 !important;
+            border-width: 2px !important;
+            opacity: 1 !important;
+            transform: scale(1.08);
+            box-shadow: 0 4px 10px rgba(128, 0, 0, 0.1);
+        }
+        .thumb-inactive {
+            border-color: #e5e7eb;
+            opacity: 0.5;
+        }
+
+        .nav-arrow {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #002147;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 40;
+        }
+        .nav-arrow:hover {
+            background: #800000;
+            color: white;
+            transform: translateY(-50%) scale(1.15); 
+        }
+
+        .lupa-btn {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            background: white;
+            padding: 12px;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 35;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #800000;
+            opacity: 0.95;
+        }
+        .lupa-btn:hover {
+            transform: scale(1.15);
+            background: #800000;
+            color: white;
+        }
+
+        #lightbox-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.97);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            touch-action: none;
+        }
+        #lightbox-img {
+            max-width: 85%;
+            max-height: 85vh;
+            object-fit: contain;
+            box-shadow: 0 0 80px rgba(0,0,0,0.9);
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen pt-20">
+
+    <div id="nav-placeholder"></div>
+
+    <main class="flex-grow pt-12 md:pt-20 pb-16">
+        <div class="max-w-6xl mx-auto px-6 fade-in">
+            
+            <nav class="text-[10px] md:text-sm text-gray-400 mb-8 uppercase tracking-[0.2em] font-sans">
+                <a href="../" class="hover:text-brand-accent-red transition">Início</a> 
+                <span class="mx-1 md:mx-2">/</span> 
+                <a href="../catalogo-completo" class="hover:text-brand-accent-red transition">Catálogo</a> 
+                <span class="mx-1 md:mx-2">/</span> 
+                <span class="text-brand-text font-bold">Detalhes</span>
+            </nav>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-10 lg:gap-20 items-start">
+                
+                <!-- Coluna de Imagens -->
+                <div class="md:col-span-2 space-y-10 flex flex-col items-center">
+                    
+                    <div id="main-image-container" class="relative w-full max-w-sm group bg-white rounded-3xl p-6 shadow-sm overflow-hidden touch-pan-y">
+                        
+                        <button onclick="changeImage(-1)" class="nav-arrow absolute left-5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 hidden md:flex transition-all" aria-label="Anterior">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                        </button>
+                        <button onclick="changeImage(1)" class="nav-arrow absolute right-5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 hidden md:flex transition-all" aria-label="Próximo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                        </button>
+
+                        <div onclick="openLightbox()" class="lupa-btn" title="Ampliar Imagem">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        </div>
+
+                        <div class="flex justify-center w-full min-h-[400px] items-center cursor-pointer" onclick="openLightbox()">
+                            <img id="main-image" src="../Imagens/blccapa.png" alt="Capa A Bíblia é um Livro Católico" 
+                                 class="w-full h-auto object-contain book-shadow pointer-events-none" 
+                                 onerror="this.src='https://placehold.co/400x600?text=LIVRO';">
+                        </div>
+                    </div>
+                    
+                    <div id="thumb-grid" class="grid grid-cols-4 gap-4 w-full max-w-sm"></div>
+                </div>
+
+                <!-- Informação do Livro -->
+                <div class="md:col-span-3 space-y-8">
+                    <div class="text-center md:text-left">
+                        <div class="mb-4 text-[10px] md:text-base font-bold text-green-700 tracking-[0.2em] uppercase font-sans">Disponível</div>
+                        <h1 class="font-serif text-2xl md:text-4xl text-brand-accent-blue font-black leading-tight uppercase tracking-tight">A Bíblia é um Livro Católico</h1>
+                        <p class="font-sans text-xs md:text-lg text-gray-500 font-bold uppercase tracking-widest mt-6">Jimmy Akin</p>
+                    </div>
+
+                    <p class="text-base md:text-xl italic text-gray-700 mb-6 border-t border-gray-100 pt-8 leading-relaxed font-classic">
+                        Muitos Protestantes apelidam-se de «Cristãos bíblicos» — por oposição aos Católicos, que supostamente ignorariam a Bíblia por terem, em sua substituição, a Igreja. Demasiados Católicos aceitaram este equívoco como um facto. Já não temos de o fazer, afirma Jimmy Akin.
+Pelo contrário, devemos abraçar a Sagrada Escritura — não apenas como a palavra de Deus revelada por escrito, mas como uma obra profundamente Católica, intimamente ligada à Igreja desde os primeiros séculos.
+Em A Bíblia é um Livro Católico, Jimmy demonstra como a Bíblia não pode existir separada da Igreja. Nas suas origens e na sua formulação, nas verdades que contém, na sua cuidadosa preservação ao longo dos séculos e no estudo orante e na elucidação dos seus mistérios, a Escritura é inseparável do Catolicismo. Tal é apropriado, dado que ambos provêm de Deus para a nossa salvação.
+Se és um Católico que, por vezes, se sente intimidado pela Bíblia (especialmente perante os desafios bíblicos dos Protestantes), A Bíblia é um Livro Católico ajudar-te-á a compreender melhor e a orgulhar-te deste dom que Deus deu ao mundo através da Igreja. Nós somos os «Cristãos bíblicos» originais!
+E mesmo os não-Católicos avaliarão a forma clara e caridosa como Jimmy explica de que modo a Igreja primitiva nos deu a Bíblia — e como a Igreja, até ao dia de hoje, a reverencia e lhe obedece.
+A Bíblia é um Livro Católico assume-se como o recurso de referência no que toca a aprender onde e como obtivemos a Bíblia e a transmitir essa informação a outrem!
+                    </p>
+
+                    <div class="flex flex-col items-center md:items-start gap-6">
+                        <span class="font-classic text-4xl md:text-5xl font-extrabold text-brand-accent-red">17,50€</span>
+                        <button onclick="addToCart('A Bíblia é um Livro Católico', 17.50)" class="w-full md:w-auto bg-brand-accent-red text-white py-4 px-12 rounded-xl font-bold uppercase tracking-widest hover:bg-red-900 transition-all shadow-2xl active:scale-95 text-base">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+
+                    <div id="cart-alert" class="hidden p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg text-sm font-bold text-center">
+                        Item adicionado ao seu cesto!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs de Informação Extra -->
+            <div class="mt-24">
+                <div class="flex flex-col sm:flex-row justify-center sm:space-x-16 border-b-2 border-gray-100 mb-12 text-center">
+                    <button onclick="showTab('autor')" id="tab-autor" class="tab-btn py-6 text-lg md:text-2xl font-bold text-gray-400 hover:text-brand-accent-red transition-all">Sobre o Autor</button>
+                    <button onclick="showTab('ficha')" id="tab-ficha" class="tab-btn py-6 text-lg md:text-2xl font-bold text-gray-400 hover:text-brand-accent-red transition-all">Ficha Técnica</button>
+                </div>
+
+                <div id="content-autor" class="hidden space-y-8 fade-in">
+                    <div class="flex flex-col md:flex-row items-center gap-10 bg-white p-8 md:p-14 rounded-2xl shadow-sm border border-gray-50">
+                        <div class="w-32 h-32 md:w-56 md:h-56 flex-shrink-0">
+                            <img src="../Imagens/Jimmy Akin.png" alt="Jimmy Akin" class="w-full h-full object-cover rounded-full shadow-lg border-4 border-brand-gold-light" onerror="this.src='https://placehold.co/200x200/002147/cfaf5c?text=JA';">
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h3 class="font-serif text-2xl md:text-3xl text-brand-accent-blue mb-4 font-bold">Jimmy Akin</h3>
+                            <p class="text-lg md:text-2xl text-gray-700 font-classic leading-relaxed">
+                                Jimmy Akin é um autor e conferencista conhecido internacionalmente. Como apologista sénior na Catholic Answers, conta com mais de vinte e cinco anos de experiência na defesa e explicação da Fé.
+Jimmy é um convertido à Fé e possui uma vasta formação em áreas como a Bíblia, teologia, os Padres da Igreja, filosofia, direito canónico e liturgia. Jimmy é convidado semanal no programa de rádio nacional Catholic Answers Live, colaborador regular da Catholic Answers Magazine, sendo também um popular autor de blogues e podcasts. Entre as suas obras incluem-se The Fathers Know Best [Os Padres da Igreja Sabem Melhor] e A Daily Defense [Uma Defesa Diária]. O seu sítio pessoal na Internet é <a href="https://jimmyakin.com/" target="_blank" rel="noopener noreferrer" class="text-brand-accent-red font-bold hover:underline">JimmyAkin.com</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-ficha" class="hidden fade-in">
+                    <div class="bg-white overflow-hidden rounded-2xl shadow-sm border border-gray-100 p-8">
+                        <table class="w-full text-sm md:text-xl text-left font-sans">
+                            <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 w-1/3 px-6">ISBN</td><td class="py-6 px-6">978-989-36716-3-4</td></tr>
+                            <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 px-6">Páginas</td><td class="py-6 px-6">180</td></tr>
+                            <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 px-6">Formato</td><td class="py-6 px-6">Capa Mole (14.8 x 21 cm)</td></tr>
+                            <tr class="border-b border-gray-50"><td class="py-6 px-6 font-bold text-brand-accent-blue bg-gray-50/30">Peso</td><td class="py-6 px-6 text-gray-600 font-sans">0,272 kg</td></tr>
+                            <tr><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 px-6">Editora</td><td class="py-6 px-6 text-brand-accent-red font-bold font-serif">Jerónimo Editora</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox-modal" onclick="closeLightbox()">
+        <button class="absolute top-8 right-8 text-white hover:text-brand-gold transition-colors z-[110]" onclick="closeLightbox()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <img id="lightbox-img" src="" alt="Ampliação" onclick="event.stopPropagation()">
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        var galleryImages = [
+            "../Imagens/blccapa.png",
+            "../Imagens/blc1.png",
+            "../Imagens/blc2.png",
+            "../Imagens/blc3.png",
+            "../Imagens/blc4.png",
+            "../Imagens/blc5.png",
+            "../Imagens/blc6.png",
+            "../Imagens/blccontracapa.png"
+        ];
+        var currentIndex = 0;
+        var touchStartX = 0;
+        var touchEndX = 0;
+
+        function renderThumbs() {
+            var grid = document.getElementById('thumb-grid');
+            if (!grid) return;
+            grid.innerHTML = galleryImages.map(function(src, idx) {
+                return `
+                <img src="${src}" alt="Miniatura ${idx}" 
+                     class="thumb-btn ${idx === currentIndex ? 'thumb-active' : 'thumb-inactive'} w-full aspect-[2/3] object-cover rounded-xl cursor-pointer border-2 hover:opacity-100" 
+                     onclick="updateImage(${idx})">
+                `;
+            }).join('');
+        }
+
+        function updateImage(index) {
+            currentIndex = index;
+            var mainImg = document.getElementById('main-image');
+            mainImg.style.opacity = '0';
+            setTimeout(function() {
+                mainImg.src = galleryImages[currentIndex];
+                mainImg.style.opacity = '1';
+                renderThumbs();
+            }, 250);
+        }
+
+        function changeImage(step) {
+            currentIndex = (currentIndex + step + galleryImages.length) % galleryImages.length;
+            updateImage(currentIndex);
+        }
+
+        function openLightbox() {
+            var modal = document.getElementById('lightbox-modal');
+            var lImg = document.getElementById('lightbox-img');
+            lImg.src = galleryImages[currentIndex];
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function correctPaths(container) {
+            if (!container) return;
+            container.querySelectorAll('img').forEach(function(img) {
+                var src = img.getAttribute('src');
+                if (src && !src.startsWith('http') && !src.startsWith('/') && !src.startsWith('../')) {
+                    img.src = '../' + src;
+                }
+            });
+            container.querySelectorAll('a').forEach(function(a) {
+                var href = a.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('/') && !href.startsWith('../')) {
+                    var cleanHref = href.replace(/\.html$/, '');
+                    a.setAttribute('href', '../' + cleanHref);
+                } else if (href && href.startsWith('#')) {
+                    a.setAttribute('href', '../' + href);
+                }
+            });
+        }
+
+        async function loadComponents() {
+            try {
+                var navResp = await fetch('../menu.html?v=' + Date.now());
+                if (navResp.ok) {
+                    var menuHtml = await navResp.text();
+                    var navPlaceholder = document.getElementById('nav-placeholder');
+                    if (navPlaceholder) {
+                        navPlaceholder.innerHTML = menuHtml;
+                        correctPaths(navPlaceholder);
+                    }
+                }
+
+                var footResp = await fetch('../rodape.html?v=' + Date.now());
+                if (footResp.ok) {
+                    var footerHtml = await footResp.text();
+                    var footerPlaceholder = document.getElementById('footer-placeholder');
+                    if (footerPlaceholder) {
+                        footerPlaceholder.innerHTML = footerHtml;
+                        correctPaths(footerPlaceholder);
+                    }
+                }
+
+                updateCartUI();
+            } catch (e) {
+                console.warn("Erro ao obter menu/rodape dinâmicos:", e);
+                updateCartUI();
+            }
+        }
+
+        function showTab(tabId) {
+            ['autor', 'ficha'].forEach(function(id) {
+                document.getElementById('content-' + id).classList.add('hidden');
+                document.getElementById('tab-' + id).classList.remove('tab-active');
+                document.getElementById('tab-' + id).classList.add('text-gray-400');
+            });
+            document.getElementById('content-' + tabId).classList.remove('hidden');
+            document.getElementById('tab-' + tabId).classList.add('tab-active');
+        }
+
+        function addToCart(title, price) {
+            var cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            var bookId = 4; // ID 4 Oficial (Jimmy Akin)
+            var existingIndex = cartItems.findIndex(function(item) {
+                return String(item.id) === String(bookId);
+            });
+
+            if (existingIndex > -1) {
+                cartItems[existingIndex].quantity += 1;
+            } else {
+                cartItems.push({ 
+                    id: bookId, 
+                    title: title, 
+                    price: price, 
+                    quantity: 1, 
+                    image: 'Imagens/blccapa.png', 
+                    author: 'Jimmy Akin',
+                    weight: 0.272
+                });
+            }
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartUI();
+            
+            var alert = document.getElementById('cart-alert');
+            if (alert) {
+                alert.classList.remove('hidden');
+                setTimeout(function() { alert.classList.add('hidden'); }, 3000);
+            }
+        }
+
+        function updateCartUI() {
+            var count = JSON.parse(localStorage.getItem('cartItems') || '[]').reduce(function(s, i) {
+                return s + i.quantity;
+            }, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(function(el) {
+                if (el) { el.textContent = count; el.classList.toggle('opacity-0', count === 0); }
+            });
+        }
+
+        var container = document.getElementById('main-image-container');
+        if (container) {
+            container.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, {passive: true});
+            container.addEventListener('touchend', function(e) {
+                var touchEndX = e.changedTouches[0].screenX;
+                if (touchStartX - touchEndX > 50) changeImage(1);
+                if (touchStartX - touchEndX < -50) changeImage(-1);
+            }, {passive: true});
+        }
+
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') changeImage(1);
+            if (e.key === 'ArrowLeft') changeImage(-1);
+        });
+
+        window.onload = function() {
+            loadComponents();
+            renderThumbs();
+            showTab('autor');
+        };
+    </script>
+
+    <!-- GoatCounter Analytics Tracker -->
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
