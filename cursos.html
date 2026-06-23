@@ -146,37 +146,36 @@
     </div>
 
     <!-- Modal Informativo -->
-    <div id="payment-warning-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 flex items-center justify-center p-4 backdrop-blur-sm animate-fadeIn">
+    <div id="payment-warning-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl p-6 relative border-t-4 border-brand-accent-orange">
             <button onclick="closeWarningModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none">
                 <i class="fas fa-times text-lg"></i>
             </button>
             
             <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-brand-accent-blue flex-shrink-0">
-                    <i class="fas fa-info-circle text-lg"></i>
+                <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-brand-accent-blue flex-shrink-0 border border-blue-100">
+                    <i class="fas fa-info-circle text-lg text-brand-accent-blue"></i>
                 </div>
                 <h3 class="font-serif text-xl font-bold text-brand-accent-blue">Como funciona o acesso?</h3>
             </div>
             
             <div class="space-y-4 text-sm text-gray-650 font-sans leading-relaxed">
-                <!-- Parágrafo 1 (Carrinho e Pagamento) -->
+                <!-- Parágrafo 1 -->
                 <p>O curso é adicionado ao seu carrinho de compras para que possa prosseguir para o pagamento.</p>
                 
-                <!-- Parágrafo 2 (Envio do Código) -->
+                <!-- Parágrafo 2 -->
                 <p class="bg-blue-50/60 border border-blue-100 p-3.5 rounded-xl font-medium text-brand-accent-blue flex gap-3">
                     <i class="fas fa-envelope-open-text mt-0.5 text-lg flex-shrink-0"></i>
                     <span>O código de acesso será enviado para o seu email após a confirmação do pagamento.</span>
                 </p>
 
-                <!-- Parágrafo 3 (Tempo Limite de Acesso) -->
+                <!-- Parágrafo 3 -->
                 <p class="bg-[#fcf8ee] border border-amber-100 p-3.5 rounded-xl font-semibold text-brand-accent-orange flex gap-3">
                     <i class="fas fa-clock mt-0.5 text-lg flex-shrink-0"></i>
                     <span>Terá 10 dias para assistir ao vídeo após a primeira utilização da chave de acesso.</span>
                 </p>
             </div>
 
-            <!-- Botões de Navegação Conformes -->
             <div class="mt-6 flex flex-col sm:flex-row gap-3">
                 <button onclick="closeWarningModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center">
                     Voltar a cursos
@@ -315,7 +314,7 @@
                         </div>
                     `;
                     
-                    // Painel de controlo de acesso directo no player (Sem exemplo no placeholder e texto visível ao digitar)
+                    // Painel de controlo de acesso directo no player (Sem exemplo no placeholder e texto de senha visível ao digitar)
                     videoPlaceholder = `
                         <div id="video-container-${course.id}" class="video-wrapper bg-slate-900 aspect-video rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center text-white border border-white/10 relative">
                             <div id="locked-screen-${course.id}" class="space-y-3 z-10 w-full max-w-[280px] px-2">
@@ -459,8 +458,42 @@
             liberarVideo(courseId, course.videoId);
         }
 
+        // --- STREAMING_CHUNK: Definindo o reconstrutor da interface de bloqueio... ---
+        // Reconstrói a tela de bloqueio e formulário de acesso originais quando o vídeo é terminado
+        function restaurarBloqueio(courseId) {
+            const container = document.getElementById(`video-container-${courseId}`);
+            if (!container) return;
+
+            const course = coursesData.find(c => c.id === courseId);
+            if (!course) return;
+
+            container.innerHTML = `
+                <div id="locked-screen-${course.id}" class="space-y-3 z-10 w-full max-w-[280px] px-2">
+                    <span class="text-amber-500 text-xl block"><i class="fas fa-lock"></i></span>
+                    <h4 class="font-serif font-bold text-xs uppercase tracking-wider text-slate-200">Acesso Reservado</h4>
+                    <p class="text-[10px] text-slate-400 font-sans leading-relaxed">Introduza a sua chave de acesso enviada por email para iniciar a reprodução:</p>
+                    
+                    <div class="flex flex-col gap-2 mt-1">
+                        <div class="flex gap-1.5">
+                            <input type="text" id="key-input-${course.id}" 
+                                   onkeydown="if(event.key === 'Enter') validarChaveAcesso('${course.id}')"
+                                   placeholder="Chave de Acesso" 
+                                   class="w-full text-center bg-slate-800 border border-slate-700 rounded-lg py-1.5 px-3 text-[11px] text-white focus:outline-none focus:border-brand-accent-orange transition-all font-mono tracking-wider uppercase">
+                            <button onclick="validarChaveAcesso('${course.id}')" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-[10px] font-bold uppercase py-1.5 px-3 rounded-lg transition-all flex-shrink-0">
+                                Entrar
+                            </button>
+                        </div>
+                        <p id="error-message-${course.id}" class="text-[10px] text-red-400 font-semibold hidden font-sans text-center leading-tight"></p>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
+                    Jerónimo Editora - Streaming Protegido (${course.videoDuration})
+                </div>
+            `;
+        }
+
         // --- STREAMING_CHUNK: Carregando reprodutor seguro com resolução nativa ao erro 153 do YouTube... ---
-        // Carrega o vídeo contornando o Erro 153 do YouTube em ambientes sem domínio/referenciador válido
+        // Carrega o vídeo contornando o Erro 153 do YouTube em ambientes sem domínio/referenciador válido e blindando o link de partilha
         function liberarVideo(courseId, videoId) {
             const container = document.getElementById(`video-container-${courseId}`);
             if (!container) return;
@@ -478,8 +511,8 @@
                 
                 container.innerHTML = `
                     <div class="absolute inset-0 w-full h-full bg-black flex flex-col justify-between">
-                        <!-- Reprodutor de Vídeo de Amostra Estético -->
-                        <video class="w-full h-full object-cover" autoplay controls controlsList="nodownload" oncontextmenu="return false;">
+                        <!-- Reprodutor de Vídeo de Amostra Estético que acciona a reposição ao terminar -->
+                        <video class="w-full h-full object-cover" autoplay controls controlsList="nodownload" oncontextmenu="return false;" onended="restaurarBloqueio('${courseId}')">
                             <source src="${sampleVideoUrl}" type="video/mp4">
                             O seu navegador não suporta reprodução de vídeo nativa.
                         </video>
@@ -497,11 +530,11 @@
                     </div>
                 `;
             } else {
-                // Modo Produção: Iframe original do YouTube nocookie optimizado contra Erro 153 com política estrita
+                // Modo Produção: Iframe do YouTube nocookie optimizado contra Erro 153, activando enablejsapi=1 para escuta de fecho
                 container.innerHTML = `
                     <div class="absolute inset-0 w-full h-full bg-black">
                         <iframe class="w-full h-full" 
-                                src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&disablekb=1&fs=0&autoplay=1" 
+                                src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&disablekb=1&fs=0&autoplay=1&enablejsapi=1" 
                                 title="Visualizador Editora Jerónimo" 
                                 frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -514,6 +547,9 @@
                         <!-- MÁSCARA INFERIOR DIREITA: Bloqueia cliques sobre o logótipo oficial do YouTube e os seus links de redireccionamento externo -->
                         <div class="absolute bottom-0 right-0 w-[110px] h-[48px] bg-transparent z-25" oncontextmenu="return false;"></div>
                         
+                        <!-- MÁSCARA INFERIOR ESQUERDA (Ficheiro image_419f4a.png): Bloqueia especificamente e por completo o botão redondo de copiar link/partilha do YouTube (image_419f4a.png) -->
+                        <div class="absolute bottom-0 left-0 w-[75px] h-[75px] bg-transparent z-25" oncontextmenu="return false;"></div>
+                        
                         <!-- MÁSCARA CENTRAL/Geral: Protecção total anti-cópia e bloqueio de menu de contexto do rato (clique direito) -->
                         <div class="absolute top-[60px] left-0 w-full h-[calc(100%-108px)] bg-transparent z-25" oncontextmenu="return false;"></div>
                         
@@ -525,6 +561,28 @@
                 `;
             }
         }
+
+        // --- STREAMING_CHUNK: Monitorizando eventos globais de encerramento do leitor do YouTube... ---
+        // Escuta as notificações postMessage enviadas pelo iframe do YouTube para bloquear o ecrã no final do vídeo
+        window.addEventListener('message', function(event) {
+            try {
+                const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+                // O YouTube com "enablejsapi=1" emite alterações de estado via infoDelivery
+                if (data && data.event === 'infoDelivery' && data.info) {
+                    if (data.info.playerState === 0) { // Estado 0 equivale a YT.PlayerState.ENDED (Vídeo Terminado)
+                        // Procura e bloqueia imediatamente o curso que terminou de reproduzir
+                        coursesData.forEach(course => {
+                            const container = document.getElementById(`video-container-${course.id}`);
+                            if (container && container.querySelector('iframe')) {
+                                restaurarBloqueio(course.id);
+                            }
+                        });
+                    }
+                }
+            } catch (e) {
+                // Mensagem ignorada por não pertencer ao sistema do YouTube ou não conter JSON válido
+            }
+        });
 
         // Função de checkout - Adiciona ao carrinho sem fazer saltar o modal informativo de aviso directamente
         function adicionarAoCheckout(id, title, price) {
