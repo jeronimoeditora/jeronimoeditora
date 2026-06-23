@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
     <title>Cursos em Vídeo | Hugo Bacelo</title>
     
+    <!-- Script para remover o .html da barra de endereços de forma elegante -->
     <script>
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
@@ -182,9 +186,12 @@
     <div id="footer-placeholder"></div>
 
     <script>
+        // Dados Estruturados dos Cursos de acordo com o padrão de chaves [PREFIXO]-[ANO]-[MÊS]-[DIA]-[SUFIXO_ALEATÓRIO]
         const coursesData = [
             {
                 id: "curso_missa_1",
+                prefix: "JRN1", // Prefixo obrigatório para validação da chave
+                videoId: "OwL0LrOL214", // ID extraído do link fornecido para embed
                 title: "Conhecer a Missa (parte 1)",
                 category: "Liturgia",
                 date: "2026-05-15",
@@ -196,6 +203,8 @@
             },
             {
                 id: "curso_missa_2",
+                prefix: "JRN2",
+                videoId: "", // Sem ID activo por estar indisponível no momento
                 title: "Conhecer a Missa (parte 2)",
                 category: "Liturgia",
                 date: "2026-07-01",
@@ -259,7 +268,7 @@
             renderCourses(filtered);
         }
 
-        // --- STREAMING_CHUNK: Processando e populando a grelha de cursos ativos... ---
+        // --- STREAMING_CHUNK: Processando a renderização fluida dos cartões de curso... ---
         function renderCourses(courses) {
             const grid = document.getElementById('courses-grid');
             const noResults = document.getElementById('no-results');
@@ -279,6 +288,7 @@
                 
                 let actionButton = '';
                 let priceHtml = '';
+                let videoPlaceholder = '';
                 
                 if (isAvailable) {
                     priceHtml = `
@@ -292,6 +302,33 @@
                             Comprar Acesso
                         </button>
                     `;
+                    
+                    // Painel de controlo de acesso directo no player (Type TEXT para que os caracteres digitados sejam visíveis)
+                    videoPlaceholder = `
+                        <div id="video-container-${course.id}" class="video-wrapper bg-slate-900 aspect-video rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center text-white border border-white/10 relative">
+                            <div id="locked-screen-${course.id}" class="space-y-3 z-10 w-full max-w-[280px] px-2">
+                                <span class="text-amber-500 text-xl block"><i class="fas fa-lock"></i></span>
+                                <h4 class="font-serif font-bold text-xs uppercase tracking-wider text-slate-200">Acesso Reservado</h4>
+                                <p class="text-[10px] text-slate-400 font-sans leading-relaxed">Introduza a sua chave de acesso enviada por email para iniciar a reprodução:</p>
+                                
+                                <div class="flex flex-col gap-2 mt-1">
+                                    <div class="flex gap-1.5">
+                                        <input type="text" id="key-input-${course.id}" 
+                                               onkeydown="if(event.key === 'Enter') validarChaveAcesso('${course.id}')"
+                                               placeholder="Chave de Acesso" 
+                                               class="w-full text-center bg-slate-800 border border-slate-700 rounded-lg py-1.5 px-3 text-[11px] text-white focus:outline-none focus:border-brand-accent-orange transition-all font-mono tracking-wider uppercase">
+                                        <button onclick="validarChaveAcesso('${course.id}')" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-[10px] font-bold uppercase py-1.5 px-3 rounded-lg transition-all flex-shrink-0">
+                                            Entrar
+                                        </button>
+                                    </div>
+                                    <p id="error-message-${course.id}" class="text-[10px] text-red-400 font-semibold hidden font-sans text-center leading-tight"></p>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
+                                Jerónimo Editora - Streaming Protegido (${course.videoDuration})
+                            </div>
+                        </div>
+                    `;
                 } else {
                     priceHtml = `
                         <div>
@@ -303,6 +340,18 @@
                         <button disabled class="bg-gray-200 text-gray-400 cursor-not-allowed text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl font-sans">
                             Em Breve
                         </button>
+                    `;
+                    videoPlaceholder = `
+                        <div class="video-wrapper bg-slate-900 aspect-video rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center text-white border border-white/10 relative">
+                            <div class="space-y-3 z-10">
+                                <span class="text-amber-500 text-2xl"><i class="fas fa-lock"></i></span>
+                                <h4 class="font-serif font-bold text-sm">Acesso Reservado</h4>
+                                <p class="text-[11px] text-slate-400 px-4 font-sans">Adquira o acesso. O vídeo será entregue via email para reprodução digital protegida.</p>
+                            </div>
+                            <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
+                                Jerónimo Editora - Streaming Protegido (${course.videoDuration})
+                            </div>
+                        </div>
                     `;
                 }
 
@@ -325,16 +374,7 @@
                                 ${course.description}
                             </p>
 
-                            <div class="video-wrapper bg-slate-900 aspect-video rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center text-white border border-white/10 relative">
-                                <div class="space-y-3 z-10">
-                                    <span class="text-amber-500 text-2xl"><i class="fas fa-lock"></i></span>
-                                    <h4 class="font-serif font-bold text-sm">Acesso Reservado</h4>
-                                    <p class="text-[11px] text-slate-400 px-4 font-sans">Adquira o acesso. O vídeo será entregue via email para reprodução digital protegida.</p>
-                                </div>
-                                <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
-                                    Jerónimo Editora - Streaming Protegido (${course.videoDuration})
-                                </div>
-                            </div>
+                            ${videoPlaceholder}
                         </div>
 
                         <div class="p-6 bg-gray-50 border-t border-gray-100 flex items-center justify-between font-sans">
@@ -344,6 +384,100 @@
                     </div>
                 `;
             });
+        }
+
+        // --- STREAMING_CHUNK: Implementando o sistema de validação strict de chaves offline... ---
+        // Validador de chaves de segurança sem necessidade de servidor ou base de dados
+        function validarChaveAcesso(courseId) {
+            const inputEl = document.getElementById(`key-input-${courseId}`);
+            const errorEl = document.getElementById(`error-message-${courseId}`);
+            if (!inputEl || !errorEl) return;
+
+            errorEl.classList.add('hidden');
+            errorEl.textContent = '';
+
+            const key = inputEl.value.trim().toUpperCase();
+            if (!key) {
+                errorEl.textContent = "Por favor, introduza a sua chave de acesso.";
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            // Exemplo esperado: JRN1-2026-07-03-X7Y2
+            const parts = key.split('-');
+            if (parts.length < 4) {
+                errorEl.textContent = "Chave incorrecta. Formato inválido.";
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            const keyPrefix = parts[0];
+            const ano = parseInt(parts[1], 10);
+            const mes = parseInt(parts[2], 10) - 1; // Conversão para base 0 do JS
+            const dia = parseInt(parts[3], 10);
+
+            const course = coursesData.find(c => c.id === courseId);
+            if (!course) return;
+
+            // 1. Validar se a chave pertence a este produto específico (ID de curso correspondente ao prefixo)
+            if (keyPrefix !== course.prefix) {
+                errorEl.textContent = "Chave incorrecta. Não pertence a este curso.";
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            // 2. Criar objecto de data de expiração (final do dia especificado na chave)
+            const keyDate = new Date(ano, mes, dia, 23, 59, 59);
+            if (isNaN(keyDate.getTime())) {
+                errorEl.textContent = "Adulteração detectada. Data de chave inválida.";
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            // 3. Comparar com a data actual
+            const today = new Date();
+            if (keyDate < today) {
+                const dataFormatada = String(dia).padStart(2, '0') + '/' + String(mes + 1).padStart(2, '0') + '/' + ano;
+                errorEl.textContent = `Acesso Expirado. Terminou a ${dataFormatada}.`;
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            // Sucesso! Carregar o vídeo de forma segura substituindo o elemento
+            liberarVideo(courseId, course.videoId);
+        }
+
+        // --- STREAMING_CHUNK: Carregando reprodutor seguro com resolução ao erro 153 do YouTube... ---
+        // Carrega o vídeo com iframe protegido e máscara contra clique direito e cópias rápidas
+        function liberarVideo(courseId, videoId) {
+            const container = document.getElementById(`video-container-${courseId}`);
+            if (!container) return;
+
+            // Resolve o Erro 153 garantindo o envio correto do cabeçalho "Referer" e do parâmetro "origin" em qualquer ambiente (local/web)
+            const currentOrigin = (window.location.origin && window.location.origin.startsWith('http')) 
+                ? window.location.origin 
+                : 'https://editorajeronimo.com';
+
+            container.innerHTML = `
+                <div class="absolute inset-0 w-full h-full bg-black">
+                    <!-- Iframe configurado com domínio nocookie, referrerpolicy strict e parâmetro origin para anular o erro 153 do YouTube -->
+                    <iframe class="w-full h-full" 
+                            src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&disablekb=1&fs=0&autoplay=1&origin=${encodeURIComponent(currentOrigin)}" 
+                            title="Visualizador Editora Jerónimo" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                    
+                    <!-- Máscara transparente overlay para bloquear o clique direito (Upper 85% do player para libertar controlos nativos na base) -->
+                    <div class="absolute top-0 left-0 w-full h-[calc(100%-48px)] bg-transparent z-10" oncontextmenu="return false;"></div>
+                    
+                    <!-- Aviso de copyright flutuante de autorização e protecção intelectual -->
+                    <div class="absolute top-2 left-3 z-20 text-[8px] text-white/50 select-none pointer-events-none uppercase tracking-widest font-sans bg-slate-950/60 px-2 py-0.5 rounded">
+                        Conteúdo exclusivo exclusivo licenciado para uso privado
+                    </div>
+                </div>
+            `;
         }
 
         function adicionarAoCheckout(id, title, price) {
