@@ -146,34 +146,43 @@
     </div>
 
     <!-- Modal Informativo -->
-    <div id="payment-warning-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 flex items-center justify-center p-4 backdrop-blur-sm">
+    <div id="payment-warning-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 flex items-center justify-center p-4 backdrop-blur-sm animate-fadeIn">
         <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl p-6 relative border-t-4 border-brand-accent-orange">
             <button onclick="closeWarningModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none">
                 <i class="fas fa-times text-lg"></i>
             </button>
             
             <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-brand-accent-orange flex-shrink-0">
+                <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-brand-accent-blue flex-shrink-0">
                     <i class="fas fa-info-circle text-lg"></i>
                 </div>
-                <h3 class="font-serif text-xl font-bold text-brand-accent-blue">Acesso aos Cursos</h3>
+                <h3 class="font-serif text-xl font-bold text-brand-accent-blue">Como funciona o acesso?</h3>
             </div>
             
-            <div class="space-y-3 text-sm text-gray-650 font-sans leading-relaxed">
-                <p class="font-semibold text-brand-accent-blue">Como funciona o acesso?</p>
-                <p>O curso foi adicionado ao seu carrinho de compras para que possa prosseguir para o pagamento.</p>
-                <p class="bg-[#fcf8ee] border border-amber-100 p-3.5 rounded-xl font-medium text-brand-accent-orange flex gap-2">
-                    <i class="fas fa-envelope-open-text mt-0.5"></i>
-                    <span>O seu vídeo será enviado para o seu email após a confirmação do pagamento.</span>
+            <div class="space-y-4 text-sm text-gray-650 font-sans leading-relaxed">
+                <!-- Parágrafo 1 (Carrinho e Pagamento) -->
+                <p>O curso é adicionado ao seu carrinho de compras para que possa prosseguir para o pagamento.</p>
+                
+                <!-- Parágrafo 2 (Envio do Código) -->
+                <p class="bg-blue-50/60 border border-blue-100 p-3.5 rounded-xl font-medium text-brand-accent-blue flex gap-3">
+                    <i class="fas fa-envelope-open-text mt-0.5 text-lg flex-shrink-0"></i>
+                    <span>O código de acesso será enviado para o seu email após a confirmação do pagamento.</span>
+                </p>
+
+                <!-- Parágrafo 3 (Tempo Limite de Acesso) -->
+                <p class="bg-[#fcf8ee] border border-amber-100 p-3.5 rounded-xl font-semibold text-brand-accent-orange flex gap-3">
+                    <i class="fas fa-clock mt-0.5 text-lg flex-shrink-0"></i>
+                    <span>Terá 10 dias para assistir ao vídeo após a primeira utilização da chave de acesso.</span>
                 </p>
             </div>
 
+            <!-- Botões de Navegação Conformes -->
             <div class="mt-6 flex flex-col sm:flex-row gap-3">
-                <button onclick="closeWarningModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center">
-                    Continuar a ver
+                <button onclick="closeWarningModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center">
+                    Voltar a cursos
                 </button>
-                <a href="checkout" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center block">
-                    Ir para o Carrinho <i class="fas fa-shopping-cart ml-1"></i>
+                <a href="checkout" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center block">
+                    Ir para o carrinho <i class="fas fa-shopping-cart ml-1"></i>
                 </a>
             </div>
         </div>
@@ -265,7 +274,7 @@
             renderCourses(filtered);
         }
 
-        // --- STREAMING_CHUNK: Processando a renderização fluida dos cartões de curso... ---
+        // --- STREAMING_CHUNK: Processando e populando a grelha de cursos activos... ---
         function renderCourses(courses) {
             const grid = document.getElementById('courses-grid');
             const noResults = document.getElementById('no-results');
@@ -294,10 +303,16 @@
                             <span class="text-lg font-bold text-brand-accent-blue">${course.price.toFixed(2)}€</span>
                         </div>
                     `;
+                    // Botão de Informações em Azul Vibrante, Perfeitamente Visível
                     actionButton = `
-                        <button onclick="adicionarAoCheckout('${course.id}', '${course.title}', ${course.price})" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl shadow-xs transition-all duration-300 font-sans">
-                            Comprar Acesso
-                        </button>
+                        <div class="flex items-center gap-2">
+                            <button onclick="openWarningModal()" class="bg-blue-50 hover:bg-brand-accent-blue text-brand-accent-blue hover:text-white border border-brand-accent-blue/20 text-sm p-3.5 rounded-xl transition-all duration-300 flex items-center justify-center shadow-xs" title="Como funciona o acesso?">
+                                <i class="fas fa-info-circle text-lg"></i>
+                            </button>
+                            <button onclick="adicionarAoCheckout('${course.id}', '${course.title}', ${course.price})" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-xs font-bold uppercase tracking-wider px-5 py-4 rounded-xl shadow-xs transition-all duration-300 font-sans">
+                                Comprar Acesso
+                            </button>
+                        </div>
                     `;
                     
                     // Painel de controlo de acesso directo no player (Sem exemplo no placeholder e texto visível ao digitar)
@@ -334,7 +349,7 @@
                         </div>
                     `;
                     actionButton = `
-                        <button disabled class="bg-gray-200 text-gray-400 cursor-not-allowed text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl font-sans">
+                        <button disabled class="bg-gray-200 text-gray-400 cursor-not-allowed text-xs font-bold uppercase tracking-wider px-5 py-4 rounded-xl font-sans">
                             Em Breve
                         </button>
                     `;
@@ -511,6 +526,7 @@
             }
         }
 
+        // Função de checkout - Adiciona ao carrinho sem fazer saltar o modal informativo de aviso directamente
         function adicionarAoCheckout(id, title, price) {
             let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const existingItemIndex = cartItems.findIndex(item => item.id === id);
@@ -533,7 +549,6 @@
 
             updateCartUI();
             triggerToast();
-            openWarningModal();
         }
 
         let toastTimeout;
@@ -556,6 +571,7 @@
             if (modal) modal.classList.remove('hidden');
         }
 
+        // --- STREAMING_CHUNK: Configurando os utilitários de navegação... ---
         function closeWarningModal() {
             const modal = document.getElementById('payment-warning-modal');
             if (modal) modal.classList.add('hidden');
@@ -573,7 +589,6 @@
             filterCourses();
         }
 
-        // --- STREAMING_CHUNK: Configurando os utilitários de limpeza e carregamento de componentes CTT... ---
         function getSafePath(file) {
             const currentUrl = window.location.href;
             if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
