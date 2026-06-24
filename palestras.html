@@ -148,24 +148,26 @@
                 </div>
 
                 <!-- Coluna da Direita: Card de Redirecionamento Estilizado (5 colunas) -->
-                <div class="lg:col-span-5 bg-white p-8 sm:p-10 rounded-3xl border border-gray-150 shadow-xs flex flex-col justify-between text-center relative overflow-hidden min-h-[350px]">
+                <div class="lg:col-span-5 bg-white p-8 sm:p-10 rounded-3xl border border-gray-150 shadow-xs flex flex-col justify-center text-center relative overflow-hidden min-h-[350px]">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-brand-accent-blue/5 rounded-bl-[100px] pointer-events-none"></div>
                     
-                    <div class="my-auto space-y-4">
-                        <div class="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center text-brand-accent-orange mx-auto mb-6 border border-orange-100">
+                    <div class="space-y-6">
+                        <div class="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center text-brand-accent-orange mx-auto border border-orange-100">
                             <i class="fas fa-calendar-check text-xl"></i>
                         </div>
-                        <h3 class="font-serif text-2xl font-bold text-brand-accent-blue mb-2">Formulário de Pedido</h3>
-                        <p class="text-sm text-gray-500 font-sans leading-relaxed max-w-xs mx-auto">
-                            Submeta a proposta de data e tema. Responderemos com brevidade.
-                        </p>
-                    </div>
-
-                    <!-- Botão com o estilo premium unificado (Mesmo do Limpar/Cursos) -->
-                    <div class="mt-8">
-                        <a href="contacto" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase py-4 rounded-xl transition-all tracking-wider font-sans shadow-md hover:shadow-lg flex items-center justify-center gap-2">
-                            <span>Pedir Agendamento</span> <i class="fas fa-arrow-right text-[10px]"></i>
-                        </a>
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-brand-accent-blue mb-2">Formulário de Pedido</h3>
+                            <p class="text-sm text-gray-500 font-sans leading-relaxed max-w-xs mx-auto">
+                                Submeta a proposta de data e tema. Responderemos com brevidade.
+                            </p>
+                        </div>
+                        
+                        <!-- Botão imediatamente abaixo da descrição direcionando para a aba de palestras -->
+                        <div class="pt-2">
+                            <a href="contacto?tab=palestra" class="w-full bg-brand-accent-blue hover:bg-[#00132b] text-white font-bold text-xs uppercase py-4 rounded-xl transition-all tracking-wider font-sans shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                                <span>Pedir Agendamento</span> <i class="fas fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
 

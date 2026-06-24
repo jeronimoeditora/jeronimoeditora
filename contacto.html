@@ -389,7 +389,21 @@
                 if (el) { el.textContent = total; el.classList.toggle('opacity-0', total === 0); }
             });
         }
-        window.onload = loadComponents;
+
+        // Carregamento de componentes e ativação de aba por parâmetro URL
+        window.onload = async function() {
+            await loadComponents();
+            
+            // Lê se há uma aba definida no URL (?tab=palestra)
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('tab') === 'palestra') {
+                switchContactTab('palestra');
+                setTimeout(() => {
+                    const formTitle = document.getElementById('form-title');
+                    if (formTitle) formTitle.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            }
+        };
     </script>
 
     <!-- GoatCounter Analytics Tracker -->
