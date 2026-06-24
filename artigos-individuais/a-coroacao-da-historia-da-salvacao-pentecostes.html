@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>A Coroação da História da Salvação (Pentecostes) | Hugo Bacelo</title>
+    <title>A Coroação da História da Salvação (Pentecostes) | Jerónimo Editora</title>
+    
+    <!-- Favicons e Ícones (Desktop, Mobile e Apple) - Com parâmetro para evitar Cache -->
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="../Imagens/favicon.png?v=1.0.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="../Imagens/favicon.png?v=1.0.0">
+    <link rel="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
     
     <script>
         // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
@@ -76,19 +82,50 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
+    <!-- Barra de Progresso de Leitura no Topo -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100] pointer-events-none">
+        <div id="scroll-progress-bar" class="h-full bg-brand-accent-orange transition-all duration-75" style="width: 0%"></div>
+    </div>
+
+    <!-- Indicador de Percentagem de Leitura Flutuante -->
+    <div id="scroll-percentage" class="fixed bottom-6 right-6 bg-brand-accent-blue text-white text-xs font-bold px-3 py-2 rounded-full shadow-xl z-50 opacity-0 transition-opacity duration-300 pointer-events-none flex items-center gap-1">
+        <i class="fas fa-book-open text-brand-gold"></i> <span id="scroll-percentage-text">0%</span>
+    </div>
+
+    <!-- Modal de Ações Customizado (Premium, sem usar alert ou confirm) -->
+    <div id="custom-modal" class="fixed inset-0 z-[150] flex items-center justify-center bg-black/60 hidden opacity-0 transition-opacity duration-300 backdrop-blur-xs px-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-100 transform translate-y-4 transition-transform duration-300">
+            <h3 id="modal-title" class="font-serif text-xl font-bold text-brand-accent-blue mb-3">Aviso</h3>
+            <p id="modal-desc" class="text-sm text-gray-600 mb-4 font-sans leading-relaxed">Detalhe do aviso.</p>
+            
+            <div id="modal-input-container" class="hidden mb-4">
+                <input type="text" id="modal-input" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans" placeholder="...">
+            </div>
+            
+            <div class="flex justify-end gap-3 font-inter text-xs uppercase tracking-wider font-bold">
+                <button id="modal-cancel-btn" class="px-5 py-3 bg-gray-100 hover:bg-gray-200 text-brand-text rounded-xl transition-all">Cancelar</button>
+                <button id="modal-confirm-btn" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white rounded-xl transition-all">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de Notificação do Sistema (Sucesso ou Erro) -->
+    <div id="system-toast" class="fixed bottom-6 left-6 z-[160] transform translate-y-20 opacity-0 pointer-events-none transition-all duration-500 ease-out max-w-sm w-[90%] sm:w-full bg-white rounded-2xl shadow-2xl border p-4 flex items-center gap-3">
+        <div id="system-toast-icon" class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
+            <i class="fas"></i>
+        </div>
+        <div class="flex-grow">
+            <p id="system-toast-title" class="text-xs font-bold uppercase tracking-wider">Notificação</p>
+            <p id="system-toast-desc" class="text-sm text-gray-650 font-medium font-sans">Mensagem de status.</p>
+        </div>
+    </div>
+
     <!-- CONTENTOR DO MENU DINÂMICO -->
     <div id="nav-placeholder"></div>
 
     <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
     <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
         <article class="max-w-4xl mx-auto px-6 fade-in">
-            
-            <div class="mb-8">
-                <!-- Direcionado para a URL limpa de artigos -->
-                <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
-                    <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
-                </a>
-            </div>
 
             <header class="border-b border-gray-150 pb-8 mb-8 text-center md:text-left">
                 <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3">Comentários às Leituras</span>
@@ -108,7 +145,7 @@
                 </div>
             </header>
 
-            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-xs relative bg-gray-100">
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden border border-gray-200 shadow-xs relative bg-gray-100 mb-8">
                 <img src="../Imagens/6.png" alt="A Coroação da História da Salvação (Pentecostes)" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=A+Coroa%C3%A7%C3%A3o+da+Hist%C3%B3ria+da+Salva%C3%A7%C3%A3o';">
             </div>
 
@@ -121,13 +158,13 @@
             <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto">
                 
                 <p class="dropcap">
-                    O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na vida litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu poder transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raízes desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
+                    O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na vida litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu power transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raíces desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
                 </p>
 
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Primeira Leitura (Actos 2, 1-11): O Novo Sinai e o “Anti-Babel”</h3>
                 
                 <p>
-                    A Primeira Leitura narra o relato do próprio Pentecostes Cristão. Para compreendermos o seu impacto, devemos recordar que o Pentecostes era, originalmente, uma das três festas de peregrinação que exigiam que os homens adultos de Israel viajassem para Jerusalém (Dt 16,16). Inicialmente, era um festival de colheita celebrado cinquenta dias após a Páscoa, dedicado à oferta das primícias do trigo ao Senhor (Lv 23,15-17). Com o tempo, acrescentou-se um profundo significado teológico ao seu foco agrícola: o Pentecostes tornou-se uma celebração da Lei (Torá) dada a Israel no Monte Sinai.
+                    A Primeira Leitura narra o relato do próprio Pentecostes Criador. Para compreendermos o seu impacto, devemos recordar que o Pentecostes era, originalmente, uma das três festas de peregrinação que exigiam que os homens adultos de Israel viajassem para Jerusalém (Dt 16,16). Inicialmente, era um festival de colheita celebrado cinquenta dias após a Páscoa, dedicado à oferta das primícias do trigo ao Senhor (Lv 23,15-17). Com o tempo, acrescentou-se um profundo significado teológico ao seu foco agrícola: o Pentecostes tornou-se uma celebração da Lei (Torá) dada a Israel no Monte Sinai.
                 </p>
 
                 <p>
@@ -161,7 +198,7 @@
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Salmo Responsorial (Salmo 103/104): A Glória da Nova Criação</h3>
                 
                 <p>
-                    O Salmo 104(103) é um hino de louvor que celebra a grandeza de Deus e as maravilhas da Sua criação. O foco deste salmo move-se através dos elementos do mundo criado, culminando na soberania do Senhor sobre a vida e a morte, sendo a criação apresentada como uma grande demonstração da Sabedoria e da Providência de Deus.
+                    O Salmo 104(103) é um hino de louvar que celebra a grandeza de Deus e as maravilhas da Sua criação. O foco deste salmo move-se através dos elements do mundo criado, culminando na soberania do Senhor sobre a vida e a morte, sendo a criação apresentada como uma grande demonstração da Sabedoria e da Providência de Deus.
                 </p>
 
                 <p>
@@ -222,19 +259,22 @@
 
             </div>
 
-            <!-- SECÇÃO PREMIUM DE SUBSCREVER NEWSLETTER -->
-            <div class="bg-gray-50 border border-gray-150 p-6 sm:p-8 rounded-2xl my-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="text-left max-w-md">
-                    <h4 class="font-sans text-base sm:text-lg font-bold text-brand-accent-blue leading-snug">
-                        Receba <u class="underline decoration-brand-accent-blue decoration-2 font-inter">gratuitamente</u> os próximos artigos no seu e-mail
-                    </h4>
-                </div>
-                <form onsubmit="handleSubscribe(event)" class="w-full md:w-auto flex flex-col sm:flex-row gap-3 flex-grow max-w-xl">
-                    <input type="email" id="sub-email" required placeholder="O seu e-mail..." class="flex-grow p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
-                    <button type="submit" class="px-6 py-3 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter whitespace-nowrap shadow-xs">
+            <!-- SECÇÃO NEWSLETTER ESTÁTICA (No mesmo formato de artigos-geral.html, colocado antes das Fontes) -->
+            <div class="bg-[#ecf3fa] p-6 sm:p-8 rounded-2xl border border-brand-accent-blue/10 shadow-xs max-w-4xl mx-auto my-12 text-center font-inter animate-fade-in">
+                <p class="font-serif text-lg sm:text-2xl text-brand-accent-blue font-bold mb-4">
+                    Receba <span class="underline decoration-brand-accent-orange decoration-2 underline-offset-4 font-bold">gratuitamente</span> a nossa newsletter e fica a par das novidades
+                </p>
+                <form id="articles-newsletter-form" onsubmit="handleArticlesNewsletterSubmit(event)" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 mt-4">
+                    <div class="flex-grow">
+                        <input type="email" id="articles-newsletter-email" required placeholder="O seu endereço de e-mail" aria-label="Endereço de e-mail" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-brand-text placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent-orange focus:border-transparent transition-all text-sm font-sans">
+                    </div>
+                    <button type="submit" class="bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold uppercase text-xs tracking-wider px-6 py-3.5 rounded-xl transition-all shadow-sm hover:-translate-y-0.5 active:translate-y-0 font-sans">
                         Subscrever
                     </button>
                 </form>
+                <div id="articles-newsletter-success-msg" class="hidden mt-4 p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-xl max-w-md mx-auto font-sans">
+                    Subscrição registada com sucesso! Obrigado por nos acompanhar.
+                </div>
             </div>
 
             <!-- Secção de Fontes -->
@@ -247,23 +287,34 @@
                 </ul>
             </section>
 
-            <!-- Secção de Comentários (Livre de dados inventados de terceiros) -->
-            <section class="mt-12 pt-8 border-t border-gray-150">
+            <!-- Botões de Navegação Rápidos (Reposicionados com elegância logo antes dos comentários) -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-12 border-t border-b border-gray-150 py-8 font-inter text-xs uppercase tracking-wider font-bold">
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all text-center">
+                    <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                </a>
+                <a href="../catalogo-completo" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all text-center">
+                    Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                </a>
+            </div>
+
+            <!-- Secção de Comentários (Gerida de forma reativa com Firebase Firestore) -->
+            <section class="mt-8 pt-4">
                 <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-6">Comentários</h4>
                 
                 <div class="space-y-4 mb-8 font-inter" id="comments-box">
-                    <!-- Sem comentários automáticos inventados -->
+                    <div class="text-center py-8 bg-gray-50 border border-gray-100 rounded-2xl">
+                        <p class="text-sm text-gray-400 font-sans">A ligar à base de dados segura...</p>
+                    </div>
                 </div>
 
                 <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl font-inter">
                     <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
-                    <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
+                    <form id="comment-form" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                            <input type="text" id="comm-author" required placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
                         </div>
-                        <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter resize-none"></textarea>
-                        <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
-                        <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter">
+                        <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all text-sm font-sans resize-none"></textarea>
+                        <button type="submit" class="bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold uppercase text-xs tracking-wider px-6 py-3.5 rounded-xl transition-all font-inter shadow-xs">
                             Enviar Comentário
                         </button>
                     </form>
@@ -288,15 +339,6 @@
                         </p>
                     </div>
                 </div>
-
-                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-inter text-xs uppercase tracking-wider font-bold">
-                    <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
-                        <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
-                    </a>
-                    <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
-                        Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
-                    </a>
-                </div>
             </footer>
 
         </article>
@@ -304,6 +346,294 @@
 
     <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado assincronamente do GitHub) -->
     <div id="footer-placeholder"></div>
+
+    <!-- Módulo Firebase e Lógica de Comentários Integrada -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, addDoc, getDoc, collection, onSnapshot, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // CONFIGURAÇÕES GLOBAIS DE AMBIENTE (Provided by host environment)
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : {
+                apiKey: "mock-placeholder-key",
+                authDomain: "mock-editora.firebaseapp.com",
+                projectId: "mock-editora",
+                storageBucket: "mock-editora.appspot.com",
+                messagingSenderId: "12345678",
+                appId: "1:1234:web:abcd"
+              };
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // Inicialização de Serviços
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Sessão de Utilizador Local
+        let currentUser = null;
+        let isAdminSession = false;
+
+        // Gerar ou detetar Token Único de Autor (localStorage)
+        let authorToken = localStorage.getItem('jeronimo_author_token');
+        if (!authorToken) {
+            authorToken = 'usr_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            localStorage.setItem('jeronimo_author_token', authorToken);
+        }
+
+        // Função para obter o ID do artigo de forma dinâmica pela URL
+        function getArticleId() {
+            const pathname = window.location.pathname;
+            const filename = pathname.substring(pathname.lastIndexOf('/') + 1);
+            const articleId = filename.replace(/\.html$/, '') || 'a-coroacao-da-historia-da-salvacao-pentecostes';
+            return articleId;
+        }
+
+        // --- AUTHENTICATION FLOW (RULE 3) ---
+        const initAuth = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (err) {
+                console.error("Auth initialization failed:", err);
+            }
+        };
+
+        initAuth();
+
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            if (user) {
+                // Escuta comentários assim que autenticação estiver pronta
+                loadCommentsRealtime();
+            }
+        });
+
+        // --- SISTEMA DE COMENTÁRIOS FIRESTORE (RULES 1 & 2) ---
+        let currentCommentsList = [];
+
+        function loadCommentsRealtime() {
+            if (!currentUser) return;
+
+            // Coleção seguindo estritamente a RULE 1 (artifacts/{appId}/public/data/{collectionName})
+            const commentsCollection = collection(db, 'artifacts', appId, 'public', 'data', 'comments');
+
+            // Escuta em tempo real com callback de sucesso e erro (Obrigatório)
+            onSnapshot(commentsCollection, (snapshot) => {
+                const fetched = [];
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    // RULE 2: Filtragem em memória (sem clausula where no Firestore)
+                    if (data.articleId === getArticleId()) {
+                        fetched.push({
+                            id: doc.id,
+                            ...data
+                        });
+                    }
+                });
+
+                // RULE 2: Ordenação em memória (data ascendente)
+                fetched.sort((a, b) => a.createdAt - b.createdAt);
+                currentCommentsList = fetched;
+                
+                renderCommentsUI(fetched);
+            }, (error) => {
+                console.error("Erro Firestore ao ler comentários:", error);
+                showSystemToast("Erro de Rede", "Incapaz de atualizar os comentários em tempo real.", true);
+            });
+        }
+
+        // Submeter comentário à base de dados
+        async function handleCommentSubmit(event) {
+            event.preventDefault();
+            if (!currentUser) {
+                showSystemToast("Aguarde", "A estabelecer ligação segura à base de dados...", true);
+                return;
+            }
+
+            const authorInput = document.getElementById('comm-author');
+            const textInput = document.getElementById('comm-text');
+            const authorName = authorInput.value.trim() || "Anónimo";
+            const messageText = textInput.value.trim();
+
+            if (!messageText) return;
+
+            try {
+                const commentsCollection = collection(db, 'artifacts', appId, 'public', 'data', 'comments');
+                await addDoc(commentsCollection, {
+                    author: authorName,
+                    text: messageText,
+                    articleId: getArticleId(),
+                    authorToken: authorToken,
+                    createdAt: Date.now()
+                });
+
+                textInput.value = '';
+                showSystemToast("Enviado", "O seu comentário foi publicado com sucesso!");
+            } catch (err) {
+                console.error("Erro ao submeter comentário:", err);
+                showSystemToast("Erro", "Incapaz de guardar o comentário neste momento.", true);
+            }
+        }
+
+        document.getElementById('comment-form').addEventListener('submit', handleCommentSubmit);
+
+        // Eliminar comentário (Autor ou Admin)
+        async function deleteComment(id) {
+            if (!currentUser) return;
+
+            const confirmed = await showCustomModal({
+                title: "Eliminar Comentário",
+                desc: "Tem a certeza que deseja eliminar permanentemente este comentário?",
+                showInput: false
+            });
+
+            if (!confirmed) return;
+
+            try {
+                const commentRef = doc(db, 'artifacts', appId, 'public', 'data', 'comments', id);
+                await deleteDoc(commentRef);
+                showSystemToast("Eliminado", "Comentário removido com sucesso.");
+            } catch (err) {
+                console.error("Erro ao eliminar comentário:", err);
+                showSystemToast("Erro", "Não foi possível eliminar o comentário.", true);
+            }
+        }
+
+        // Editar comentário (Autor ou Admin)
+        async function editComment(id, currentText) {
+            if (!currentUser) return;
+
+            const newText = await showCustomModal({
+                title: "Editar Comentário",
+                desc: "Altere a sua mensagem abaixo:",
+                showInput: true,
+                placeholder: "Conteúdo do comentário...",
+                initialValue: currentText
+            });
+
+            if (newText === null) return;
+            const textTrimmed = newText.trim();
+            if (!textTrimmed) return;
+
+            try {
+                const commentRef = doc(db, 'artifacts', appId, 'public', 'data', 'comments', id);
+                await updateDoc(commentRef, {
+                    text: textTrimmed
+                });
+                showSystemToast("Atualizado", "Comentário editado com sucesso.");
+            } catch (err) {
+                console.error("Erro ao atualizar comentário:", err);
+                showSystemToast("Erro", "Não foi possível atualizar o comentário.", true);
+            }
+        }
+
+        // Prompt de moderação por PIN
+        async function moderatorPrompt(id, currentText) {
+            const pin = await showCustomModal({
+                title: "Moderação do Artigo",
+                desc: "Esta ação requer privilégios de administração. Digite o PIN de moderação para continuar:",
+                showInput: true,
+                placeholder: "PIN de Segurança",
+                isPassword: true
+            });
+
+            if (pin === null) return;
+
+            const hash = await sha256(pin);
+            if (hash === "fae1136bdf2cbdf82e6d5e16ec3cb653fcbc27993092b7754b79cf66191f6d90") {
+                isAdminSession = true;
+                showSystemToast("Autenticado", "Sessão de Administrador ativada!");
+                // Re-renderizar comentários agora com ações de admin desbloqueadas
+                renderCommentsUI(currentCommentsList);
+            } else {
+                showSystemToast("Negado", "PIN de moderação incorreto.", true);
+            }
+        }
+
+        // Renderização da Interface
+        function renderCommentsUI(comments) {
+            const box = document.getElementById('comments-box');
+            if (!box) return;
+            box.innerHTML = '';
+
+            if (comments.length === 0) {
+                box.innerHTML = `
+                    <div class="text-center py-8 bg-gray-50 border border-gray-100 rounded-2xl animate-fade-in">
+                        <p class="text-sm text-gray-500 font-sans">Seja o primeiro a comentar este artigo!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            comments.forEach(c => {
+                const dateObj = new Date(c.createdAt);
+                const formattedDate = dateObj.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                
+                const isAuthor = c.authorToken === authorToken;
+                
+                let actionButtons = '';
+                if (isAuthor || isAdminSession) {
+                    actionButtons = `
+                        <div class="flex items-center gap-1">
+                            <button onclick="editComment('${c.id}', \`${c.text.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)" class="p-2 text-gray-400 hover:text-brand-accent-blue transition-colors duration-200" title="Editar comentário">
+                                <i class="fas fa-pencil-alt text-xs"></i>
+                            </button>
+                            <button onclick="deleteComment('${c.id}')" class="p-2 text-gray-400 hover:text-brand-accent-orange transition-colors duration-200" title="Eliminar comentário">
+                                <i class="fas fa-trash-alt text-xs"></i>
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    actionButtons = `
+                        <div class="flex items-center">
+                            <button onclick="moderatorPrompt('${c.id}', \`${c.text.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)" class="p-2 text-gray-300 hover:text-brand-accent-blue transition-colors duration-200" title="Moderação (Requer PIN)">
+                                <i class="fas fa-shield-alt text-xs"></i>
+                            </button>
+                        </div>
+                    `;
+                }
+
+                box.innerHTML += `
+                    <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between relative group animate-fade-in">
+                        <div class="flex items-start justify-between gap-4 mb-2">
+                            <div>
+                                <span class="font-bold text-brand-accent-blue text-sm">${escapeHTML(c.author)}</span>
+                                ${isAuthor ? '<span class="ml-2 text-[9px] font-sans font-extrabold uppercase tracking-widest text-brand-gold bg-brand-gold-light border border-brand-gold/20 px-2 py-0.5 rounded-md">Autor</span>' : ''}
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-gray-400">${formattedDate}</span>
+                                ${actionButtons}
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-650 font-sans leading-relaxed whitespace-pre-wrap">${escapeHTML(c.text)}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Helper anti-XSS
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        }
+
+        // Mapear funções locais ao objeto window devido ao escopo type="module"
+        window.deleteComment = deleteComment;
+        window.editComment = editComment;
+        window.moderatorPrompt = moderatorPrompt;
+    </script>
 
     <script>
         function getPrefix() {
@@ -432,49 +762,167 @@
             readingTimeElement.textContent = readingTime;
         }
 
-        function addLocalComment(e) {
-            e.preventDefault();
-            const author = document.getElementById('comm-author').value.trim() || "Anónimo";
-            const message = document.getElementById('comm-text').value.trim();
-            if (!message) return;
-
-            const commentsBox = document.getElementById('comments-box');
-            const today = new Date();
-            const options = { day: 'numeric', month: 'long', year: 'numeric' };
-            const formattedDate = today.toLocaleDateString('pt-PT', options);
-
-            const commentElement = document.createElement('div');
-            commentElement.className = "bg-white p-5 rounded-2xl border border-gray-100 shadow-xs fade-in";
-            commentElement.innerHTML = `
-                <div class="flex items-center justify-between gap-4 mb-2">
-                    <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
-                    <span class="text-xs text-gray-400">${formattedDate}</span>
-                </div>
-                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
-            `;
-
-            commentsBox.appendChild(commentElement);
-            document.getElementById('comment-form').reset();
-        }
-
-        function handleSubscribe(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('sub-email');
+        /* --- TRATAMENTO DA SUBSCRICAO DA NEWSLETTER (INTEGRAÇÃO MAILERLITE) --- */
+        function handleArticlesNewsletterSubmit(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('articles-newsletter-email');
             if (!emailInput || !emailInput.value.trim()) return;
 
-            const userEmail = emailInput.value.trim();
-            const recipient = "editorajeronimo@gmail.com";
-            const subject = encodeURIComponent("nova subscrição");
-            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
+            // CONFIGURAÇÃO MAILERLITE (IDs ATUALIZADOS)
+            const accountId = "2468444"; 
+            const formId = "191175533290063317";       
 
-            window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+            // 1. Criar um iframe oculto dinamicamente para processar o envio sem sair da página
+            let iframe = document.getElementById('ml-hidden-iframe-articles');
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.id = 'ml-hidden-iframe-articles';
+                iframe.name = 'ml-hidden-iframe-articles';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+            }
 
-            const container = e.target;
-            container.innerHTML = `
-                <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
-                    <i class="fas fa-check-circle"></i> A iniciar o seu cliente de e-mail para processar a subscrição!
-                </div>
-            `;
+            // 2. Configurar o formulário atual para apontar para o MailerLite através do iframe oculto
+            const form = event.target;
+            form.action = `https://assets.mailerlite.com/jsonp/${accountId}/forms/${formId}/subscribe`;
+            form.method = 'POST';
+            form.target = 'ml-hidden-iframe-articles';
+
+            // 3. Garantir que o campo de e-mail usa o nome interno exigido pelo MailerLite
+            emailInput.name = 'fields[email]';
+
+            // 4. Submeter o formulário de forma silenciosa
+            form.submit();
+
+            // 5. Ativar a mensagem de sucesso
+            const successMsg = document.getElementById('articles-newsletter-success-msg');
+            if (successMsg) {
+                successMsg.classList.remove('hidden');
+                emailInput.value = ''; // Limpa o campo para o utilizador
+                setTimeout(() => {
+                    successMsg.classList.add('hidden');
+                }, 8000);
+            }
+        }
+
+        /* --- CONTROLO DO PROGRESSO DE LEITURA (SCROLL PERCENTAGE) --- */
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = height > 0 ? Math.round((winScroll / height) * 100) : 0;
+            
+            const bar = document.getElementById('scroll-progress-bar');
+            const percentLabel = document.getElementById('scroll-percentage');
+            const percentText = document.getElementById('scroll-percentage-text');
+            
+            if (bar) bar.style.width = scrolled + '%';
+            if (percentLabel && percentText) {
+                percentText.textContent = scrolled + '%';
+                if (winScroll > 120) {
+                    percentLabel.classList.remove('opacity-0');
+                    percentLabel.classList.add('opacity-100');
+                } else {
+                    percentLabel.classList.remove('opacity-100');
+                    percentLabel.classList.add('opacity-0');
+                }
+            }
+        });
+
+        // --- SISTEMA DE DIÁLOGOS E TOASTS CUSTOMIZADOS (PREMIUM) ---
+        let modalResolve = null;
+
+        function showCustomModal({ title, desc, showInput = false, placeholder = "", isPassword = false, initialValue = "" }) {
+            return new Promise((resolve) => {
+                modalResolve = resolve;
+                const modal = document.getElementById('custom-modal');
+                const modalContent = modal.querySelector('div');
+                const titleEl = document.getElementById('modal-title');
+                const descEl = document.getElementById('modal-desc');
+                const inputContainer = document.getElementById('modal-input-container');
+                const inputEl = document.getElementById('modal-input');
+                
+                titleEl.textContent = title;
+                descEl.textContent = desc;
+                
+                if (showInput) {
+                    inputContainer.classList.remove('hidden');
+                    inputEl.type = isPassword ? "password" : "text";
+                    inputEl.value = initialValue;
+                    inputEl.placeholder = placeholder;
+                    setTimeout(() => inputEl.focus(), 150);
+                } else {
+                    inputContainer.classList.add('hidden');
+                }
+                
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('translate-y-4');
+                }, 20);
+            });
+        }
+
+        function closeModal(result) {
+            const modal = document.getElementById('custom-modal');
+            const modalContent = modal.querySelector('div');
+            
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('translate-y-4');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                if (modalResolve) {
+                    modalResolve(result);
+                    modalResolve = null;
+                }
+            }, 300);
+        }
+
+        document.getElementById('modal-cancel-btn').addEventListener('click', () => closeModal(null));
+        document.getElementById('modal-confirm-btn').addEventListener('click', () => {
+            const inputEl = document.getElementById('modal-input');
+            const showInput = !document.getElementById('modal-input-container').classList.contains('hidden');
+            closeModal(showInput ? inputEl.value : true);
+        });
+
+        // Toast de Notificação
+        let toastSystemTimeout;
+        function showSystemToast(title, desc, isError = false) {
+            const toast = document.getElementById('system-toast');
+            const iconContainer = document.getElementById('system-toast-icon');
+            const icon = iconContainer.querySelector('i');
+            const titleEl = document.getElementById('system-toast-title');
+            const descEl = document.getElementById('system-toast-desc');
+            
+            titleEl.textContent = title;
+            descEl.textContent = desc;
+            
+            if (isError) {
+                toast.className = toast.className.replace(/border-[a-z-]+/g, '') + ' border-red-200 bg-white';
+                iconContainer.className = 'w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-red-50 text-red-600';
+                icon.className = 'fas fa-exclamation-circle text-lg';
+            } else {
+                toast.className = toast.className.replace(/border-[a-z-]+/g, '') + ' border-emerald-200 bg-white';
+                iconContainer.className = 'w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-emerald-50 text-emerald-600';
+                icon.className = 'fas fa-check-circle text-lg';
+            }
+            
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            clearTimeout(toastSystemTimeout);
+            toastSystemTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 4000);
+        }
+
+        // Gerar Hash SHA-256 no browser de forma nativa e segura
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
