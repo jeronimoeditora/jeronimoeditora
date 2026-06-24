@@ -31,7 +31,7 @@
                     fontFamily: {
                         sans: ['"Roboto"', 'sans-serif'],
                         inter: ['"Inter"', 'sans-serif'],
-                        serif: ['"Playfair Display"', 'serif'],
+                        serif: ['"Playfair Display"', 'serif'], 
                     },
                     colors: {
                         'brand-bg': '#F8F8F8',
@@ -92,6 +92,33 @@
         .parts-scroll::-webkit-scrollbar { width: 4px; }
         .parts-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
         .parts-scroll::-webkit-scrollbar-thumb { background: #e05300; border-radius: 4px; }
+
+        /* Escalonamento automático de fontes e botões quando o player estiver em ecrã inteiro (fullscreen) */
+        .video-wrapper:fullscreen .fullscreen-title,
+        .video-wrapper:-webkit-full-screen .fullscreen-title {
+            font-size: 16px !important;
+        }
+        .video-wrapper:fullscreen .fullscreen-part-title,
+        .video-wrapper:-webkit-full-screen .fullscreen-part-title {
+            font-size: 15px !important;
+        }
+        .video-wrapper:fullscreen .fullscreen-part-btn,
+        .video-wrapper:-webkit-full-screen .fullscreen-part-btn {
+            padding: 14px 16px !important;
+        }
+        .video-wrapper:fullscreen .fullscreen-sidebar,
+        .video-wrapper:-webkit-full-screen .fullscreen-sidebar {
+            width: 280px !important;
+        }
+
+        /* Ocultar scrollbar mantendo a funcionalidade */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen" oncontextmenu="return false;">
@@ -104,7 +131,7 @@
             
             <div class="text-center mb-10">
                 <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-2">Formação</span>
-                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Cursos em Vídeo</h1>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4 tracking-tight">Cursos em Vídeo</h1>
                 <p class="font-sans text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">Aprender a fé cristã com rigor teológico tradicional.</p>
                 <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
             </div>
@@ -145,14 +172,17 @@
                 </div>
             </div>
 
-            <!-- Botões de Atalho para o Checkout e de Informações -->
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-3 mb-12 max-w-lg mx-auto">
-                <a href="#checkout-section" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-xs sm:text-sm font-extrabold uppercase tracking-wider px-6 py-4 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300">
+            <!-- Botões de Atalho para o Checkout e de Informações em Linha Única sem Parágrafos -->
+            <div class="flex flex-row justify-center items-center gap-2 sm:gap-3 mb-12 max-w-2xl mx-auto overflow-x-auto pb-2 px-4 no-scrollbar">
+                <a href="#checkout-section" class="inline-flex items-center justify-center gap-1.5 bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider px-4 sm:px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300 whitespace-nowrap">
                     <i class="fas fa-shopping-cart"></i> Adquirir Acesso
                 </a>
-                <button onclick="abrirModalInfo()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-brand-accent-blue hover:text-brand-accent-orange text-xs sm:text-sm font-extrabold uppercase tracking-wider px-6 py-4 rounded-xl border border-gray-200 shadow-sm transition-all transform hover:-translate-y-0.5 duration-300">
+                <button onclick="abrirModalInfo()" class="inline-flex items-center justify-center gap-1.5 bg-white hover:bg-gray-100 text-brand-accent-blue text-[11px] sm:text-xs font-extrabold uppercase tracking-wider px-4 sm:px-6 py-3.5 rounded-xl border border-gray-200 shadow-sm transition-all transform hover:-translate-y-0.5 duration-300 whitespace-nowrap">
                     <i class="fas fa-question-circle"></i> Como funciona?
                 </button>
+                <a href="sobreHB" class="inline-flex items-center justify-center gap-1.5 bg-brand-accent-blue hover:bg-[#001730] text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider px-4 sm:px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300 whitespace-nowrap">
+                    <i class="fas fa-user-tie"></i> Formador Hugo Bacelo
+                </a>
             </div>
 
             <!-- Sem Resultados -->
@@ -167,13 +197,13 @@
                 <!-- Preenchido dinamicamente via JavaScript -->
             </div>
 
-            <!-- SECÇÃO MINI CHECKOUT GERAL -->
+            <!-- SECÇÃO MINI CHECKOUT GERAL NO FINAL DA PÁGINA -->
             <div id="checkout-section" class="bg-blue-50/70 p-6 md:p-8 rounded-3xl border-2 border-blue-100 shadow-xl max-w-4xl mx-auto relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-48 h-48 bg-brand-accent-blue/5 rounded-bl-[150px] -z-10 pointer-events-none"></div>
                 
                 <!-- Cabeçalho com o botão Como Funciona alinhado -->
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4 border-b border-blue-100 pb-4">
-                    <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-accent-blue flex items-center gap-3">
+                    <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-accent-blue flex items-center gap-3 tracking-tight">
                         <i class="fas fa-shopping-basket text-brand-accent-orange"></i> Adquirir Chave de Acesso
                     </h2>
                     <button type="button" onclick="abrirModalInfo()" class="self-start sm:self-auto inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-brand-accent-blue text-xs font-extrabold uppercase tracking-wider px-4 py-2.5 rounded-xl border border-gray-200 shadow-sm transition-all">
@@ -181,13 +211,13 @@
                     </button>
                 </div>
                 
-                <p class="text-sm text-gray-600 mb-6 font-sans">Escolha o seu curso na lista, confirme o total, submeta os seus dados e envie-nos o comprovativo de pagamento.</p>
+                <p class="text-sm text-gray-650 mb-6 font-sans">Escolha o seu curso na lista, confirme o total, submeta os seus dados e envie-nos o comprovativo de pagamento.</p>
                 
                 <form id="mini-checkout-form" class="space-y-6" onsubmit="enviarPedidoCheckout(event)">
                     
                     <!-- Passo 1: Selecionar Curso Direto no Dropdown -->
                     <div class="bg-white p-4 rounded-xl border border-blue-100">
-                        <label for="course-dropdown-select" class="block text-xs font-bold text-brand-accent-blue uppercase tracking-wider mb-2">
+                        <label for="course-dropdown-select" class="block text-xs font-bold text-brand-accent-blue uppercase tracking-wider mb-2 font-inter">
                             <i class="fas fa-graduation-cap text-brand-accent-orange mr-1"></i> 1. Seleccione o Curso
                         </label>
                         
@@ -216,15 +246,15 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Nome *</label>
+                                <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1 font-inter">Nome *</label>
                                 <input type="text" id="checkout-nome" required class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">NIF (Opcional)</label>
+                                <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1 font-inter">NIF (Opcional)</label>
                                 <input type="text" id="checkout-nif" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Contacto (E-mail/Telemóvel) *</label>
+                                <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1 font-inter">Contacto (E-mail/Telemóvel) *</label>
                                 <input type="text" id="checkout-contacto" required class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
                             </div>
                         </div>
@@ -232,7 +262,7 @@
                         <!-- Detalhes de Pagamento & Envio de Comprovativo Personalizado -->
                         <div class="bg-white p-5 rounded-2xl border border-blue-100 flex flex-col justify-between space-y-4 shadow-sm">
                             <div>
-                                <span class="block text-xs font-bold text-brand-accent-blue uppercase tracking-wider mb-2">2. Detalhes de Pagamento & Comprovativo</span>
+                                <span class="block text-xs font-bold text-brand-accent-blue uppercase tracking-wider mb-2 font-inter">2. Detalhes de Pagamento & Comprovativo</span>
                                 
                                 <div class="text-[14px] sm:text-[15px] text-gray-700 mb-4 font-sans leading-relaxed space-y-2 bg-gray-50 p-4 rounded-xl border border-gray-150">
                                     <p>Pague por <strong>MB WAY (939 667 267)</strong></p>
@@ -240,7 +270,7 @@
                                     <p>e anexe o comprovativo correspondente.</p>
                                 </div>
                                 
-                                <div class="relative">
+                                <div class="relative font-inter">
                                     <input type="file" id="checkout-comprovativo" required accept="image/*,application/pdf" class="hidden" onchange="atualizarNomeFicheiro()">
                                     <label for="checkout-comprovativo" class="inline-flex items-center gap-2 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider py-3.5 px-5 rounded-xl cursor-pointer transition-all duration-300 w-full justify-center">
                                         <i class="fas fa-file-upload"></i> Anexar comprovativo
@@ -253,13 +283,13 @@
                             </div>
 
                             <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                                <span class="text-xs text-brand-accent-blue uppercase font-bold tracking-wider">Total a Pagar:</span>
+                                <span class="text-xs text-brand-accent-blue uppercase font-bold tracking-wider font-inter">Total a Pagar:</span>
                                 <span id="checkout-total-exibido" class="text-2xl font-black text-brand-accent-orange font-sans">0.00€</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Passo 3: Aceitação de Termos, Política de Privacidade e Submissão -->
+                    <!-- Passo 3: Aceitação de Termos e Submissão -->
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-5 pt-4 border-t border-blue-100">
                         <div class="flex flex-col gap-2.5 flex-1">
                             <div class="flex items-start gap-2.5">
@@ -345,7 +375,6 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // Dados Estruturados dos Cursos de acordo com a nova estratégia pedagógica
         const coursesData = [
             {
                 id: "curso_missa",
@@ -357,7 +386,7 @@
                 price: 16.90,
                 badgeClass: "bg-emerald-600",
                 description: "O mistério eucarístico revelado em detalhe. Adquira acesso ao módulo completo que aborda desde a preparação litúrgica até à bênção e envio final.",
-                videoDuration: "4 Aulas Completas",
+                videoDuration: "4 aulas",
                 parts: [
                     { title: "Parte I - Antes e Ritos Iniciais", videoId: "OwL0LrOL214", available: true },
                     { title: "Parte II - Liturgia da Palavra", videoId: "OwL0LrOL214", available: true },
@@ -368,14 +397,14 @@
             {
                 id: "curso_profetas",
                 prefix: "JRN2",
-                title: "Os Profetas",
+                title: "Os Profetas Maiores",
                 category: "Formação Bíblica",
                 date: "2026-07-01",
                 status: "Em breve",
                 price: 21.00,
                 badgeClass: "bg-amber-600",
                 description: "A voz de Deus ao longo da história de Israel. Explore a teologia e a mensagem profética tradicional através de um estudo bíblico aprofundado.",
-                videoDuration: "5 Partes Detalhadas",
+                videoDuration: "5 aulas",
                 parts: [
                     { title: "Parte I - Introdução: História do Reino de Israel", videoId: "", available: false },
                     { title: "Parte II - Isaías", videoId: "", available: false },
@@ -386,7 +415,6 @@
             }
         ];
 
-        // Lista interna de cursos seleccionados para compra
         let cursosSeleccionados = [];
 
         // Funções do Modal de Informações
@@ -489,7 +517,7 @@
                 if (course) {
                     total += course.price;
                     html += `
-                        <div class="flex items-center justify-between py-1.5 px-2.5 bg-blue-50 rounded-lg text-xs font-sans border border-blue-100">
+                        <div class="flex items-center justify-between py-1.5 px-2.5 bg-blue-50 rounded-lg text-xs font-sans border border-blue-100 font-inter font-medium">
                             <span class="font-bold text-brand-accent-blue truncate pr-4">${course.title}</span>
                             <div class="flex items-center gap-3">
                                 <span class="font-extrabold text-brand-accent-orange">${course.price.toFixed(2)}€</span>
@@ -591,7 +619,6 @@
                     fileName = fileInput.files[0].name;
                 }
 
-                // Prepara itens seleccionados
                 const payloadItens = cursosSeleccionados.map(id => {
                     const c = coursesData.find(item => item.id === id);
                     return {
@@ -602,7 +629,6 @@
                     };
                 });
 
-                // Constrói o Payload com etiqueta 'digital_course_order' dedicada
                 const payload = {
                     type: 'digital_course_order', 
                     cliente: {
@@ -619,14 +645,12 @@
                     itens: payloadItens
                 };
 
-                // Executa o envio para a sua folha de cálculo Google
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     body: JSON.stringify(payload)
                 });
 
-                // Exibe ecrã de sucesso integrado
                 document.getElementById('checkout-success-view').classList.remove('hidden');
             } catch (err) {
                 console.error(err);
@@ -678,7 +702,6 @@
             renderCourses(filtered);
         }
 
-        // Controla visualização das abas de Chave e Programa nos cartões trancados
         function switchLockedTab(courseId, tab) {
             const tabKey = document.getElementById(`tab-key-${courseId}`);
             const tabProgram = document.getElementById(`tab-program-${courseId}`);
@@ -688,26 +711,25 @@
             if (!tabKey || !tabProgram || !paneKey || !paneProgram) return;
 
             if (tab === 'key') {
-                tabKey.className = "px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-200 border-b-2 border-neutral-300 transition-all duration-300";
-                tabProgram.className = "px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300 ml-4";
+                tabKey.className = "px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-neutral-200 border-b-2 border-brand-gold transition-all duration-300";
+                tabProgram.className = "px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300 ml-4";
                 paneKey.classList.remove('hidden');
                 paneProgram.classList.add('hidden');
             } else {
-                tabProgram.className = "px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-200 border-b-2 border-neutral-300 transition-all duration-300 ml-4";
-                tabKey.className = "px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300";
+                tabProgram.className = "px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-neutral-200 border-b-2 border-brand-gold transition-all duration-300 ml-4";
+                tabKey.className = "px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300";
                 paneKey.classList.add('hidden');
                 paneProgram.classList.remove('hidden');
 
-                // Renderiza partes do programa bloqueado se vazio (apenas o cadeado amarelo sem texto "Programa")
                 const course = coursesData.find(c => c.id === courseId);
                 if (course) {
                     let html = '';
                     course.parts.forEach((part, index) => {
                         html += `
-                            <div class="w-full text-left p-2 rounded text-[11px] font-medium leading-tight bg-white/5 border border-white/5 text-slate-300 flex items-center justify-between hover:bg-white/10 transition-all cursor-pointer" onclick="alertaProgramaBloqueado('${courseId}')">
-                                <span class="truncate font-sans">${part.title}</span>
+                            <div class="w-full text-left p-3 rounded text-xs sm:text-sm font-semibold leading-tight bg-white/5 border border-white/5 text-slate-300 flex items-center justify-between hover:bg-white/10 transition-all cursor-pointer" onclick="alertaProgramaBloqueado('${courseId}')">
+                                <span class="truncate font-sans font-medium">${part.title}</span>
                                 <span class="shrink-0 text-amber-500">
-                                    <i class="fas fa-lock text-[10px]"></i>
+                                    <i class="fas fa-lock text-[11px]"></i>
                                 </span>
                             </div>
                         `;
@@ -717,17 +739,15 @@
             }
         }
 
-        // Traz o cliente de volta para introduzir a chave de acesso caso tente clicar nas partes bloqueadas
         function alertaProgramaBloqueado(courseId) {
             switchLockedTab(courseId, 'key');
             const errorEl = document.getElementById(`error-message-${courseId}`);
             if (errorEl) {
-                errorEl.textContent = "Introduza a sua chave de acesso para desbloquear o programa completo deste curso!";
+                errorEl.textContent = "Introduza a sua chave de acesso para desbloquear este curso!";
                 errorEl.classList.remove('hidden');
             }
         }
 
-        // Geração dos cards de cursos com preço em destaque no topo e bloco escuro simplificado
         function renderCourses(courses) {
             const grid = document.getElementById('courses-grid');
             const noResults = document.getElementById('no-results');
@@ -747,20 +767,18 @@
                 let priceHtml = '';
                 let videoPlaceholder = '';
                 
-                // Preço no Topo
                 priceHtml = `
                     <div class="text-right">
-                        <span class="text-[9px] text-gray-400 block uppercase font-bold tracking-wider leading-none">Preço do Acesso</span>
-                        <span class="text-xl font-extrabold text-brand-accent-blue">${course.price.toFixed(2)}€</span>
+                        <span class="text-[9px] text-gray-400 block uppercase font-bold tracking-wider leading-none font-inter">Preço do Acesso</span>
+                        <span class="text-xl font-extrabold text-brand-accent-blue font-inter">${course.price.toFixed(2)}€</span>
                     </div>
                 `;
 
-                // Renderização do Player com Segurança Total (Tema escuro neutro simplificado)
                 videoPlaceholder = `
-                    <div id="video-container-${course.id}" class="video-wrapper bg-zinc-900 aspect-video rounded-xl overflow-hidden flex flex-col p-4 text-white border border-neutral-800 relative shadow-inner">
-                        <!-- Abas superiores para chave e programa (Cores neutras simplificadas) -->
-                        <div class="flex justify-center border-b border-neutral-800 pb-2 mb-3 z-10">
-                            <button onclick="switchLockedTab('${course.id}', 'key')" id="tab-key-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-200 border-b-2 border-neutral-300 transition-all duration-300">
+                    <div id="video-container-${course.id}" class="video-wrapper bg-gradient-to-b from-[#001730] to-[#002b54] aspect-video rounded-xl overflow-hidden flex flex-col p-4 text-white border border-white/10 relative shadow-inner">
+                        <!-- Abas superiores para chave e programa -->
+                        <div class="flex justify-center border-b border-white/10 pb-2 mb-3 z-10">
+                            <button onclick="switchLockedTab('${course.id}', 'key')" id="tab-key-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-200 border-b-2 border-brand-gold transition-all duration-300">
                                 <i class="fas fa-key mr-1"></i> Chave de acesso
                             </button>
                             <button onclick="switchLockedTab('${course.id}', 'program')" id="tab-program-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300 ml-4">
@@ -768,18 +786,17 @@
                             </button>
                         </div>
 
-                        <!-- Painel de entrada de chave (Silencioso e discreto) -->
+                        <!-- Painel de entrada de chave com fundo escuro de alto contraste e letra clara -->
                         <div id="pane-key-${course.id}" class="flex-grow flex flex-col items-center justify-center space-y-3 z-10 w-full max-w-[280px] mx-auto px-2">
                             <span class="text-amber-500 text-lg block"><i class="fas fa-lock"></i></span>
-                            <p class="text-[10px] text-neutral-400 font-sans text-center leading-relaxed">Introduza a sua chave de acesso enviada para iniciar a reprodução:</p>
                             
                             <div class="flex flex-col gap-2 w-full mt-1">
                                 <div class="flex gap-1.5">
                                     <input type="text" id="key-input-${course.id}" 
                                            onkeydown="if(event.key === 'Enter') validarChaveAcesso('${course.id}')"
                                            placeholder="Chave de Acesso" 
-                                           class="w-full text-center bg-zinc-800 border border-neutral-700 rounded-lg py-1.5 px-3 text-[11px] text-white focus:outline-none focus:border-neutral-500 transition-all font-mono tracking-wider uppercase">
-                                    <button onclick="validarChaveAcesso('${course.id}')" class="bg-zinc-700 hover:bg-zinc-600 text-white text-[10px] font-bold uppercase py-1.5 px-3 rounded-lg transition-all flex-shrink-0">
+                                           class="w-full text-center bg-neutral-900 border border-neutral-800 rounded-lg py-1.5 px-3 text-[11px] text-white focus:outline-none focus:border-brand-gold transition-all font-mono tracking-wider uppercase font-medium placeholder-neutral-500">
+                                    <button onclick="validarChaveAcesso('${course.id}')" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-[11px] font-extrabold uppercase py-1.5 px-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex-shrink-0">
                                         Entrar
                                     </button>
                                 </div>
@@ -787,13 +804,12 @@
                             </div>
                         </div>
 
-                        <!-- Painel de programa trancado (será populado via JS) -->
+                        <!-- Painel de programa trancado -->
                         <div id="pane-program-${course.id}" class="hidden flex-grow overflow-y-auto pr-1 space-y-1.5 z-10 w-full text-left max-w-[340px] mx-auto parts-scroll">
-                            <!-- Injetado dinamicamente via JS ao clicar na aba -->
                         </div>
 
                         <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
-                            Jerónimo Editora - Streaming Protegido (${course.videoDuration})
+                            Jerónimo Editora • Streaming Protegido (${course.videoDuration})
                         </div>
                     </div>
                 `;
@@ -801,7 +817,7 @@
                 grid.innerHTML += `
                     <div class="course-card bg-white border border-gray-150 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between">
                         <div class="p-6 space-y-4">
-                            <!-- Topo do Card Simplificado com Preço de Destaque -->
+                            <!-- Topo do Card Simplificado com Letra Inter Black -->
                             <div class="flex justify-between items-center">
                                 <div class="flex flex-col gap-1">
                                     <span class="text-[10px] w-max font-bold uppercase tracking-wider text-white ${course.badgeClass} px-2 py-0.5 rounded font-sans">
@@ -814,7 +830,8 @@
                                 ${priceHtml}
                             </div>
                             
-                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue leading-tight">${course.title}</h2>
+                            <!-- Utilização da fonte Inter unificada com artigos-geral para títulos de cartões -->
+                            <h2 class="font-inter text-xl sm:text-2xl font-bold text-brand-accent-blue leading-tight tracking-tight">${course.title}</h2>
                             
                             <p class="text-sm text-gray-650 leading-relaxed font-light font-sans">
                                 ${course.description}
@@ -828,7 +845,6 @@
             });
         }
 
-        // Validador de chaves de segurança local offline (Oculta qualquer lógica do inspect do browser)
         function validarChaveAcesso(courseId) {
             const inputEl = document.getElementById(`key-input-${courseId}`);
             const errorEl = document.getElementById(`error-message-${courseId}`);
@@ -844,7 +860,6 @@
                 return;
             }
 
-            // Validação matemática estrutural (PREFIXO-ANO-MES-DIA-SUFIXO_ALEATORIO)
             const parts = key.split('-');
             if (parts.length < 4) {
                 errorEl.textContent = "Chave incorrecta. Formato inválido.";
@@ -881,11 +896,9 @@
                 return;
             }
 
-            // Sucesso - Desbloqueia o módulo interactivo completo
             liberarModuloCompleto(courseId);
         }
 
-        // Libera a interface interactiva com os vídeos/partes do módulo completo
         function liberarModuloCompleto(courseId) {
             const container = document.getElementById(`video-container-${courseId}`);
             if (!container) return;
@@ -893,31 +906,26 @@
             const course = coursesData.find(c => c.id === courseId);
             if (!course) return;
 
-            // Interface do Player com Seletor Lateral Integrado de Partes de Vídeo
+            // Interface com apenas o botão "Expandir" (Não há fecho ou bloquear redundante)
             container.innerHTML = `
                 <div class="absolute inset-0 w-full h-full bg-slate-950 flex flex-col md:flex-row">
                     
                     <!-- Lado Esquerdo: Área do Player de Vídeo Activo -->
-                    <div class="flex-grow h-[65%] md:h-full relative bg-black flex items-center justify-center" id="active-player-area-${courseId}">
-                        <!-- Carregado dinamicamente ao selecionar a parte -->
+                    <div class="flex-grow h-[60%] md:h-full relative bg-black flex items-center justify-center" id="active-player-area-${courseId}">
                     </div>
 
-                    <!-- Lado Direito: Seletor de Partes do Curso -->
-                    <div class="w-full md:w-[200px] h-[35%] md:h-full bg-slate-900 border-t md:border-t-0 md:border-l border-white/10 flex flex-col justify-between">
-                        <div class="p-2 border-b border-white/10">
-                            <h4 class="text-[10px] font-bold text-brand-gold uppercase tracking-wider flex items-center gap-1">
+                    <!-- Lado Direito: Seletor de Partes do Curso (Maiores no Fullscreen) -->
+                    <div class="fullscreen-sidebar w-full md:w-[220px] h-[40%] md:h-full bg-slate-900 border-t md:border-t-0 md:border-l border-white/10 flex flex-col justify-between">
+                        <div class="p-3 border-b border-white/10">
+                            <h4 class="fullscreen-title text-[11px] font-bold text-brand-gold uppercase tracking-wider flex items-center gap-1 font-inter">
                                 <i class="fas fa-list-ol"></i> Módulos do Curso
                             </h4>
                         </div>
-                        <div class="flex-grow overflow-y-auto p-1 space-y-1 parts-scroll" id="parts-selector-list-${courseId}">
-                            <!-- Lista de Partes Injetada -->
+                        <div class="flex-grow overflow-y-auto p-1.5 space-y-1.5 parts-scroll" id="parts-selector-list-${courseId}">
                         </div>
-                        <div class="p-2 border-t border-white/10 flex gap-1 justify-between">
-                            <button onclick="toggleVideoWrapperFullscreen('${courseId}')" class="bg-brand-accent-orange text-white text-[9px] font-bold uppercase py-1 px-2 rounded hover:bg-orange-600 transition-colors flex items-center gap-1">
+                        <div class="p-3 border-t border-white/10 flex justify-center">
+                            <button id="fs-toggle-btn-${courseId}" onclick="toggleVideoWrapperFullscreen('${courseId}')" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white text-[11px] font-bold uppercase py-3 px-3 rounded-lg transition-all flex items-center justify-center gap-1.5 shadow-md font-sans">
                                 <i class="fas fa-expand"></i> Expandir
-                            </button>
-                            <button onclick="restaurarBloqueio('${courseId}')" class="text-white/40 hover:text-white/80 text-[9px] font-bold uppercase py-1 px-1.5 transition-colors">
-                                <i class="fas fa-sign-out-alt"></i> Bloquear
                             </button>
                         </div>
                     </div>
@@ -925,26 +933,24 @@
                 </div>
             `;
 
-            // Popula os seletores de módulos
+            // Popula os seletores de módulos com fontes ampliadas para legibilidade
             const selectList = document.getElementById(`parts-selector-list-${courseId}`);
             course.parts.forEach((part, index) => {
                 const btn = document.createElement('button');
-                btn.className = `w-full text-left p-2 rounded text-[10px] font-medium leading-tight transition-all duration-300 flex items-start gap-1.5 ${
+                btn.className = `fullscreen-part-btn w-full text-left p-2.5 rounded-lg text-xs sm:text-sm font-semibold leading-tight transition-all duration-300 flex items-start gap-2 ${
                     index === 0 ? 'bg-brand-accent-orange text-white font-bold' : 'text-slate-300 hover:bg-white/5 hover:text-white'
                 }`;
                 btn.id = `part-btn-${courseId}-${index}`;
                 btn.onclick = () => carregarParteVideo(courseId, index);
                 
                 const icon = part.available ? '<i class="fas fa-play-circle text-brand-gold mt-0.5"></i>' : '<i class="fas fa-clock text-white/30 mt-0.5"></i>';
-                btn.innerHTML = `${icon} <span class="flex-1">${part.title}</span>`;
+                btn.innerHTML = `${icon} <span class="fullscreen-part-title flex-1 font-sans font-semibold">${part.title}</span>`;
                 selectList.appendChild(btn);
             });
 
-            // Carrega o primeiro vídeo por defeito
             carregarParteVideo(courseId, 0);
         }
 
-        // Carrega o vídeo selecionado correspondente à parte
         function carregarParteVideo(courseId, partIndex) {
             const course = coursesData.find(c => c.id === courseId);
             const playerArea = document.getElementById(`active-player-area-${courseId}`);
@@ -952,24 +958,22 @@
 
             const part = course.parts[partIndex];
             
-            // Atualiza botões activos no seletor
             course.parts.forEach((p, idx) => {
                 const btn = document.getElementById(`part-btn-${courseId}-${idx}`);
                 if (btn) {
                     if (idx === partIndex) {
-                        btn.className = "w-full text-left p-2 rounded text-[10px] font-bold leading-tight transition-all duration-300 bg-brand-accent-orange text-white flex items-start gap-1.5";
+                        btn.className = "fullscreen-part-btn w-full text-left p-2.5 rounded-lg text-xs sm:text-sm font-bold leading-tight transition-all duration-300 bg-brand-accent-orange text-white flex items-start gap-2";
                     } else {
-                        btn.className = "w-full text-left p-2 rounded text-[10px] font-medium leading-tight transition-all duration-300 text-slate-300 hover:bg-white/5 hover:text-white flex items-start gap-1.5";
+                        btn.className = "fullscreen-part-btn w-full text-left p-2.5 rounded-lg text-xs sm:text-sm font-semibold leading-tight transition-all duration-300 text-slate-300 hover:bg-white/5 hover:text-white flex items-start gap-2";
                     }
                 }
             });
 
             if (!part.available || !part.videoId) {
-                // Caso o curso esteja em breve (Ex: Os Profetas)
                 playerArea.innerHTML = `
                     <div class="text-center p-4">
                         <i class="fas fa-hourglass-half text-amber-500 text-2xl mb-2"></i>
-                        <h5 class="font-serif font-bold text-xs text-slate-200">Vídeo em Pós-Produção</h5>
+                        <h5 class="font-inter font-bold text-xs text-slate-200">Vídeo em Pós-Produção</h5>
                         <p class="text-[9px] text-slate-400 font-sans mt-1">Este módulo estará disponível muito brevemente.</p>
                     </div>
                 `;
@@ -1003,67 +1007,14 @@
                             allowfullscreen
                             referrerpolicy="strict-origin-when-cross-origin"></iframe>
                     
-                    <!-- Máscaras anti-cópia -->
-                    <div class="absolute top-0 left-0 w-full h-[50px] bg-transparent z-15" oncontextmenu="return false;"></div>
-                    <div class="absolute bottom-0 right-0 w-[110px] h-[40px] bg-transparent z-15" oncontextmenu="return false;"></div>
-                    <div class="absolute bottom-0 left-0 w-[60px] h-[60px] bg-transparent z-15" oncontextmenu="return false;"></div>
+                    <!-- Máscaras anti-cópia e anti-redirecionamento super protetoras para bloquear cliques no YouTube -->
+                    <div class="absolute top-0 left-0 w-full h-[60px] bg-transparent z-15" oncontextmenu="return false;"></div>
+                    <div class="absolute bottom-0 right-0 w-[120px] h-[50px] bg-transparent z-15" oncontextmenu="return false;"></div>
+                    <div class="absolute bottom-0 left-0 w-[80px] h-[65px] bg-transparent z-15" oncontextmenu="return false;"></div>
                 `;
             }
         }
 
-        // Restaura ecrã bloqueado com navegação em abas consistente ao travar vídeo
-        function restaurarBloqueio(courseId) {
-            if (document.fullscreenElement || document.webkitFullscreenElement) {
-                if (document.exitFullscreen) document.exitFullscreen();
-                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-            }
-
-            const container = document.getElementById(`video-container-${courseId}`);
-            if (!container) return;
-
-            const course = coursesData.find(c => c.id === courseId);
-            if (!course) return;
-
-            container.innerHTML = `
-                <!-- Abas superiores para chave e programa (Cores neutras simplificadas) -->
-                <div class="flex justify-center border-b border-neutral-800 pb-2 mb-3 z-10">
-                    <button onclick="switchLockedTab('${course.id}', 'key')" id="tab-key-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-200 border-b-2 border-neutral-300 transition-all duration-300">
-                        <i class="fas fa-key mr-1"></i> Chave de acesso
-                    </button>
-                    <button onclick="switchLockedTab('${course.id}', 'program')" id="tab-program-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300 ml-4">
-                        <i class="fas fa-list-ul mr-1"></i> Programa
-                    </button>
-                </div>
-
-                <!-- Painel de entrada de chave (Silencioso e discreto) -->
-                <div id="pane-key-${course.id}" class="flex-grow flex flex-col items-center justify-center space-y-3 z-10 w-full max-w-[280px] mx-auto px-2">
-                    <span class="text-amber-500 text-lg block"><i class="fas fa-lock"></i></span>
-                    <p class="text-[10px] text-neutral-400 font-sans text-center leading-relaxed">Introduza a sua chave de acesso enviada para iniciar a reprodução:</p>
-                    
-                    <div class="flex flex-col gap-2 w-full mt-1">
-                        <div class="flex gap-1.5">
-                            <input type="text" id="key-input-${course.id}" 
-                                   onkeydown="if(event.key === 'Enter') validarChaveAcesso('${course.id}')"
-                                   placeholder="Chave de Acesso" 
-                                   class="w-full text-center bg-zinc-800 border border-neutral-700 rounded-lg py-1.5 px-3 text-[11px] text-white focus:outline-none focus:border-neutral-500 transition-all font-mono tracking-wider uppercase">
-                            <button onclick="validarChaveAcesso('${course.id}')" class="bg-zinc-700 hover:bg-zinc-600 text-white text-[10px] font-bold uppercase py-1.5 px-3 rounded-lg transition-all flex-shrink-0">
-                                Entrar
-                            </button>
-                        </div>
-                        <p id="error-message-${course.id}" class="text-[10px] text-red-400 font-semibold hidden font-sans text-center leading-tight"></p>
-                    </div>
-                </div>
-
-                <!-- Painel de programa trancado -->
-                <div id="pane-program-${course.id}" class="hidden flex-grow overflow-y-auto pr-1 space-y-1.5 z-10 w-full text-left max-w-[340px] mx-auto parts-scroll"></div>
-
-                <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
-                    Jerónimo Editora - Streaming Protegido (${course.videoDuration})
-                </div>
-            `;
-        }
-
-        // Ativa/Desativa o modo ecrã inteiro no container do vídeo
         function toggleVideoWrapperFullscreen(courseId) {
             const container = document.getElementById(`video-container-${courseId}`);
             if (!container) return;
@@ -1083,7 +1034,24 @@
             }
         }
 
-        // Limpa filtros aplicados na pesquisa
+        function handleFullscreenChange() {
+            const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+            coursesData.forEach(course => {
+                const btn = document.getElementById(`fs-toggle-btn-${course.id}`);
+                if (btn) {
+                    if (isFs) {
+                        btn.innerHTML = '<i class="fas fa-compress"></i> <span class="font-sans font-bold tracking-wider uppercase text-[10px]">Minimizar</span>';
+                        btn.className = "w-full bg-red-700 hover:bg-red-800 text-white text-[11px] font-bold uppercase py-3 px-3 rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-md font-sans";
+                    } else {
+                        btn.innerHTML = '<i class="fas fa-expand"></i> <span class="font-sans font-bold tracking-wider uppercase text-[10px]">Expandir</span>';
+                        btn.className = "w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white text-[11px] font-bold uppercase py-3 px-3 rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-md font-sans";
+                    }
+                }
+            });
+        }
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+
         function clearFilters() {
             const searchInput = document.getElementById('course-search');
             const categorySelect = document.getElementById('category-select');
@@ -1116,7 +1084,7 @@
                     document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 }
             } catch (e) { 
-                console.warn("Modo offline ativo."); 
+                console.warn("Modo offline activo."); 
             }
         }
 
