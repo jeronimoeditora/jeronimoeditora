@@ -8,8 +8,8 @@
     <!-- Favicons e Ícones (Desktop, Mobile e Apple) - Com parâmetro para evitar Cache -->
     <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="../Imagens/favicon.png?v=1.0.0">
     <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="../Imagens/favicon.png?v=1.0.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="../Imagens/favicon.png?v=1.0.0">
-    <link rel="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
     
     <script>
         // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
@@ -182,7 +182,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Nova Lei:</strong> No entanto, enquanto a Lei de Moisés foi inscrita em tábuas de pedra (Êx 31,18), o Pentecostes Criador celebra a nova lei do Espírito (Rm 8,2), selando a Nova Aliança trazida por Jesus, que é escrita não em pedra, mas nos corações dos crentes, tal como os profetas prometeram (Jr 31,31-34; 2Cor 3,4-6). Como afirma São Tomás de Aquino na sua Suma Teológica, <i>«A nova lei é principalmente a própria graça do Espírito Santo»</i>.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Nova Lei:</strong> No entanto, enquanto a Lei de Moisés foi inscrita em tábuas de pedra (Êx 31,18), o Pentecostes Criador celebra a nova lei do Espírito (Rm 8,2), selando a Nova Aliança trazão por Jesus, que é escrita não em pedra, mas nos corações dos crentes, tal como os profetas prometeram (Jr 31,31-34; 2Cor 3,4-6). Como afirma São Tomás de Aquino na sua Suma Teológica, <i>«A nova lei é principalmente a própria graça do Espírito Santo»</i>.
                 </p>
 
                 <p>
@@ -244,7 +244,7 @@
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Evangelho (João 20, 19-23): A Paz, o Sopro Divino e o Sacramento da Reconciliação</h3>
                 
                 <p>
-                    O Evangelho de São João situa-nos na tarde do Domingo de Páscoa. Jesus ressuscitado aparece aos discípulos no meio do medo e do isolamento, mostrando-lhes as Suas mãos e o Seu lado. Ele ergue-se carregando as marcas do Seu sacrifício terreno, sinais que transporta consigo até na Sua ascensão ao céu (CIC 645).
+                    O Evangelho de São João situa-nos na tarde do Domingo de Páscoa. Jesus ressuscitado aparece aos disciples no meio do medo e do isolamento, mostrando-lhes as Suas mãos e o Seu lado. Ele ergue-se carregando as marcas do Seu sacrifício terreno, sinais que transporta consigo até na Sua ascensão ao céu (CIC 645).
                 </p>
 
                 <p>
@@ -546,7 +546,6 @@
                         authorToken: authorToken,
                         createdAt: Date.now()
                     });
-                    showSystemToast("Enviado", "O seu comentário foi publicado com sucesso!");
                 } else {
                     const newComment = {
                         id: 'local_' + Date.now(),
@@ -561,8 +560,8 @@
                     saveLocalComments(localComments);
                     currentCommentsList = localComments;
                     renderCommentsUI(localComments);
-                    showSystemToast("Enviado", "O seu comentário local foi guardado com sucesso!");
                 }
+                showSystemToast("Enviado", "O seu comentário foi publicado com sucesso!");
                 textInput.value = '';
             } catch (err) {
                 console.error("Erro ao submeter comentário:", err);
@@ -600,8 +599,12 @@
             }
         }
 
-        // Editar comentário
-        async function editComment(id, currentText) {
+        // Editar comentário (Lê em memória e evita quebra de aspas/linhas na UI)
+        async function editComment(id) {
+            const comment = currentCommentsList.find(c => c.id === id);
+            if (!comment) return;
+            const currentText = comment.text;
+
             const newText = await showCustomModal({
                 title: "Editar Comentário",
                 desc: "Altere a sua mensagem abaixo:",
@@ -638,7 +641,7 @@
         }
 
         // Prompt de moderação por PIN
-        async function moderatorPrompt(id, currentText) {
+        async function moderatorPrompt(id) {
             const pin = await showCustomModal({
                 title: "Moderação do Artigo",
                 desc: "Esta ação requer privilégios de administração. Digite o PIN de moderação para continuar:",
@@ -684,7 +687,7 @@
                 if (isAuthor || isAdminSession) {
                     actionButtons = `
                         <div class="flex items-center gap-1">
-                            <button onclick="editComment('${c.id}', \`${c.text.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)" class="p-2 text-gray-400 hover:text-brand-accent-blue transition-colors duration-200" title="Editar comentário">
+                            <button onclick="editComment('${c.id}')" class="p-2 text-gray-400 hover:text-brand-accent-blue transition-colors duration-200" title="Editar comentário">
                                 <i class="fas fa-pencil-alt text-xs"></i>
                             </button>
                             <button onclick="deleteComment('${c.id}')" class="p-2 text-gray-400 hover:text-brand-accent-orange transition-colors duration-200" title="Eliminar comentário">
@@ -695,7 +698,7 @@
                 } else {
                     actionButtons = `
                         <div class="flex items-center">
-                            <button onclick="moderatorPrompt('${c.id}', \`${c.text.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)" class="p-2 text-gray-300 hover:text-brand-accent-blue transition-colors duration-200" title="Moderação (Requer PIN)">
+                            <button onclick="moderatorPrompt('${c.id}')" class="p-2 text-gray-300 hover:text-brand-accent-blue transition-colors duration-200" title="Moderação (Requer PIN)">
                                 <i class="fas fa-shield-alt text-xs"></i>
                             </button>
                         </div>
