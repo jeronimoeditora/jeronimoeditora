@@ -152,11 +152,12 @@
                 </div>
             </div>
 
-            <div class="flex flex-row justify-center items-center gap-2 sm:gap-3 mb-12 max-w-2xl mx-auto overflow-x-auto pb-2 px-4 no-scrollbar">
-                <button onclick="abrirModalInfo()" class="inline-flex items-center justify-center gap-1.5 bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider px-4 sm:px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300 whitespace-nowrap">
+            <!-- Layout otimizado: empilhado em mobile sem cortes (flex-col), lado a lado em desktop (sm:flex-row) -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-3 mb-12 max-w-2xl mx-auto px-4">
+                <button onclick="abrirModalInfo()" class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-xs sm:text-xs font-extrabold uppercase tracking-wider px-6 sm:px-6 py-4 sm:py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300 whitespace-nowrap">
                     <i class="fas fa-question-circle"></i> Como funciona?
                 </button>
-                <a href="sobreHB" class="inline-flex items-center justify-center gap-1.5 bg-brand-accent-blue hover:bg-[#001730] text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider px-4 sm:px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300 whitespace-nowrap">
+                <a href="sobreHB" class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-brand-accent-blue hover:bg-[#001730] text-white text-xs sm:text-xs font-extrabold uppercase tracking-wider px-6 sm:px-6 py-4 sm:py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300 whitespace-nowrap">
                     <i class="fas fa-user-tie"></i> Formador Hugo Bacelo
                 </a>
             </div>
@@ -440,9 +441,10 @@
                         </button>
                     `;
 
+                    // Altura do bloco ajustada em mobile (h-[310px]) para que "Jerónimo Editora • Streaming..." caiba perfeitamente sem sobreposições
                     videoPlaceholder = `
-                        <div id="video-container-${course.id}" class="video-wrapper bg-gradient-to-b from-[#001730] to-[#002b54] aspect-video rounded-xl overflow-hidden flex flex-col p-4 text-white border border-white/10 relative shadow-inner">
-                            <div class="flex justify-center border-b border-white/10 pb-2 mb-3 z-10">
+                        <div id="video-container-${course.id}" class="video-wrapper bg-gradient-to-b from-[#001730] to-[#002b54] h-[310px] sm:h-auto sm:aspect-video rounded-xl overflow-hidden flex flex-col p-4 text-white border border-white/10 relative shadow-inner">
+                            <div class="flex justify-center border-b border-white/10 pb-2 mb-3 z-10 flex-shrink-0">
                                 <button onclick="switchLockedTab('${course.id}', 'key')" id="tab-key-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-200 border-b-2 border-brand-gold transition-all duration-300">
                                     <i class="fas fa-key mr-1"></i> Chave de acesso
                                 </button>
@@ -471,7 +473,7 @@
                             <div id="pane-program-${course.id}" class="hidden flex-grow overflow-y-auto pr-1 space-y-1.5 z-10 w-full text-left max-w-[340px] mx-auto parts-scroll">
                             </div>
 
-                            <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
+                            <div class="absolute bottom-2 right-3 text-[8px] text-white/40 select-none pointer-events-none uppercase tracking-widest font-sans">
                                 Jerónimo Editora • Streaming Protegido (${course.videoDuration})
                             </div>
                         </div>
@@ -489,8 +491,8 @@
                         </button>
                     `;
                     videoPlaceholder = `
-                        <div class="video-wrapper bg-gradient-to-b from-[#001730] to-[#002b54] aspect-video rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center text-white border border-white/10 relative">
-                            <div class="flex justify-center border-b border-white/10 pb-2 mb-3 z-10 w-full">
+                        <div class="video-wrapper bg-gradient-to-b from-[#001730] to-[#002b54] h-[310px] sm:h-auto sm:aspect-video rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center text-white border border-white/10 relative">
+                            <div class="flex justify-center border-b border-white/10 pb-2 mb-3 z-10 w-full flex-shrink-0">
                                 <button onclick="switchLockedTab('${course.id}', 'key')" id="tab-key-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-200 border-b-2 border-brand-gold transition-all duration-300">
                                     <i class="fas fa-key mr-1"></i> Chave de acesso
                                 </button>
@@ -519,7 +521,7 @@
                             <div id="pane-program-${course.id}" class="hidden flex-grow overflow-y-auto pr-1 space-y-1.5 z-10 w-full text-left max-w-[340px] mx-auto parts-scroll">
                             </div>
 
-                            <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
+                            <div class="absolute bottom-2 right-3 text-[8px] text-white/40 select-none pointer-events-none uppercase tracking-widest font-sans">
                                 Jerónimo Editora • Streaming Protegido (${course.videoDuration})
                             </div>
                         </div>
@@ -612,6 +614,7 @@
             liberarModuloCompleto(courseId);
         }
 
+        // Otimizado: Aumenta a altura para h-[450px] em mobile para que caiba o player, a lista de módulos e o botão expandir sem cortes
         function liberarModuloCompleto(courseId) {
             const container = document.getElementById(`video-container-${courseId}`);
             if (!container) return;
@@ -619,24 +622,28 @@
             const course = coursesData.find(c => c.id === courseId);
             if (!course) return;
 
+            // Remove altura trancada padrão e adiciona altura desbloqueada perfeita para mobile
+            container.classList.remove('h-[310px]', 'aspect-video');
+            container.classList.add('h-[450px]', 'sm:h-auto', 'sm:aspect-video');
+
             container.innerHTML = `
                 <div class="absolute inset-0 w-full h-full bg-slate-950 flex flex-col md:flex-row">
                     
-                    <!-- Lado Esquerdo: Área do Player de Vídeo Activo -->
-                    <div class="flex-grow h-[60%] md:h-full relative bg-black flex items-center justify-center" id="active-player-area-${courseId}">
+                    <!-- Lado Esquerdo: Área do Player de Vídeo Activo (55% de altura em mobile) -->
+                    <div class="flex-grow h-[55%] md:h-full relative bg-black flex items-center justify-center" id="active-player-area-${courseId}">
                     </div>
 
-                    <!-- Lado Direito: Seletor de Partes do Curso -->
-                    <div class="fullscreen-sidebar w-full md:w-[220px] h-[40%] md:h-full bg-slate-900 border-t md:border-t-0 md:border-l border-white/10 flex flex-col justify-between">
-                        <div class="p-3 border-b border-white/10">
-                            <h4 class="fullscreen-title text-[11px] font-bold text-brand-gold uppercase tracking-wider flex items-center gap-1 font-inter">
+                    <!-- Lado Direito: Seletor de Partes do Curso (45% de altura em mobile, compacto nos paddings) -->
+                    <div class="fullscreen-sidebar w-full md:w-[220px] h-[45%] md:h-full bg-slate-900 border-t md:border-t-0 md:border-l border-white/10 flex flex-col justify-between overflow-hidden">
+                        <div class="p-2 md:p-3 border-b border-white/10 flex-shrink-0">
+                            <h4 class="fullscreen-title text-[10px] md:text-[11px] font-bold text-brand-gold uppercase tracking-wider flex items-center gap-1 font-inter">
                                 <i class="fas fa-list-ol"></i> Módulos do Curso
                             </h4>
                         </div>
-                        <div class="flex-grow overflow-y-auto p-1.5 space-y-1.5 parts-scroll" id="parts-selector-list-${courseId}">
+                        <div class="flex-grow overflow-y-auto p-1.5 space-y-1.5 parts-scroll" id="parts-selector-list-${courseId}" style="-webkit-overflow-scrolling: touch;">
                         </div>
-                        <div class="p-3 border-t border-white/10 flex justify-center">
-                            <button id="fs-toggle-btn-${courseId}" onclick="toggleVideoWrapperFullscreen('${courseId}')" class="w-full bg-brand-accent-blue hover:bg-[#00132b] text-white text-[11px] font-bold uppercase py-3 px-3 rounded-lg transition-all flex items-center justify-center gap-1.5 shadow-md font-sans">
+                        <div class="p-2 md:p-3 border-t border-white/10 flex justify-center flex-shrink-0">
+                            <button id="fs-toggle-btn-${courseId}" onclick="toggleVideoWrapperFullscreen('${courseId}')" class="w-full bg-brand-accent-blue hover:bg-[#00132b] text-white text-[10px] md:text-[11px] font-bold uppercase py-2.5 md:py-3 px-3 rounded-lg transition-all flex items-center justify-center gap-1.5 shadow-md font-sans">
                                 <i class="fas fa-expand"></i> Expandir
                             </button>
                         </div>
@@ -648,14 +655,14 @@
             const selectList = document.getElementById(`parts-selector-list-${courseId}`);
             course.parts.forEach((part, index) => {
                 const btn = document.createElement('button');
-                btn.className = `fullscreen-part-btn w-full text-left p-2.5 rounded-lg text-xs sm:text-sm font-semibold leading-tight transition-all duration-300 flex items-start gap-2 ${
+                btn.className = `fullscreen-part-btn w-full text-left p-2 rounded-lg text-xs font-semibold leading-tight transition-all duration-300 flex items-start gap-2 ${
                     index === 0 ? 'bg-brand-accent-orange text-white font-bold' : 'text-slate-300 hover:bg-white/5 hover:text-white'
                 }`;
                 btn.id = `part-btn-${courseId}-${index}`;
                 btn.onclick = () => carregarParteVideo(courseId, index);
                 
                 const icon = part.available ? '<i class="fas fa-play-circle text-brand-gold mt-0.5"></i>' : '<i class="fas fa-clock text-white/30 mt-0.5"></i>';
-                btn.innerHTML = `${icon} <span class="fullscreen-part-title flex-1 font-sans font-semibold text-[13px]">${part.title}</span>`;
+                btn.innerHTML = `${icon} <span class="fullscreen-part-title flex-1 font-sans font-semibold text-[12px] md:text-[13px]">${part.title}</span>`;
                 selectList.appendChild(btn);
             });
 
@@ -673,9 +680,9 @@
                 const btn = document.getElementById(`part-btn-${courseId}-${idx}`);
                 if (btn) {
                     if (idx === partIndex) {
-                        btn.className = "fullscreen-part-btn w-full text-left p-2.5 rounded-lg text-xs sm:text-sm font-bold leading-tight transition-all duration-300 bg-brand-accent-orange text-white flex items-start gap-2";
+                        btn.className = "fullscreen-part-btn w-full text-left p-2 rounded-lg text-xs font-bold leading-tight transition-all duration-300 bg-brand-accent-orange text-white flex items-start gap-2";
                     } else {
-                        btn.className = "fullscreen-part-btn w-full text-left p-2.5 rounded-lg text-xs sm:text-sm font-semibold leading-tight transition-all duration-300 text-slate-300 hover:bg-white/5 hover:text-white flex items-start gap-2";
+                        btn.className = "fullscreen-part-btn w-full text-left p-2 rounded-lg text-xs font-semibold leading-tight transition-all duration-300 text-slate-300 hover:bg-white/5 hover:text-white flex items-start gap-2";
                     }
                 }
             });
@@ -771,20 +778,56 @@
             } catch (e) { return file; }
         }
 
+        // Força a extração e execução de tags <script> que vêm de menu.html de modo a que o menu funcione no mobile!
         async function loadComponents() {
             try {
                 let navResp = await fetch(getSafePath('menu.html') + '?v=1.0.3');
                 if (navResp.ok) {
-                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    const htmlText = await navResp.text();
+                    const placeholder = document.getElementById('nav-placeholder');
+                    placeholder.innerHTML = htmlText;
+                    
+                    // Força a execução dos scripts contidos no HTML injetado
+                    const scripts = placeholder.getElementsByTagName('script');
+                    for (let i = 0; i < scripts.length; i++) {
+                        const scriptNode = document.createElement('script');
+                        if (scripts[i].src) {
+                            scriptNode.src = scripts[i].src;
+                        } else {
+                            scriptNode.textContent = scripts[i].textContent;
+                        }
+                        document.head.appendChild(scriptNode).parentNode.removeChild(scriptNode);
+                    }
                 }
                 let footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.3');
                 if (footResp.ok) {
                     document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 }
             } catch (e) { 
-                console.warn("Modo offline activo."); 
+                console.warn("Modo offline activo.", e); 
             }
         }
+
+        // Ouvinte de clique global de apoio que age como segurança caso os eventos internos do menu não façam toggle.
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('[id*="menu-btn"], [class*="menu-btn"], [id*="hamburger"], [class*="hamburger"], [id*="mobile-menu-toggle"], [class*="mobile-menu-toggle"]');
+            if (btn) {
+                const menu = document.getElementById('mobile-menu') || 
+                             document.querySelector('[id*="mobile-menu"]') || 
+                             document.querySelector('[class*="mobile-menu-panel"]') ||
+                             document.querySelector('.mobile-menu');
+                if (menu) {
+                    menu.classList.toggle('hidden');
+                    if (menu.classList.contains('-translate-x-full')) {
+                        menu.classList.remove('-translate-x-full');
+                        menu.classList.add('translate-x-0');
+                    } else if (menu.classList.contains('translate-x-0')) {
+                        menu.classList.remove('translate-x-0');
+                        menu.classList.add('-translate-x-full');
+                    }
+                }
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             loadComponents();
