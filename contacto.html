@@ -61,9 +61,9 @@
         .line-r { border-right: 1px solid #e5e7eb; }
         .line-b { border-bottom: 1px solid #e5e7eb; }
 
-        input:focus, textarea:focus {
-            border-color: #800000 !important;
-            box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.1);
+        input:focus, select:focus, textarea:focus {
+            border-color: #002147 !important;
+            box-shadow: 0 0 0 2px rgba(0, 33, 71, 0.1);
         }
 
         .photo-frame {
@@ -107,8 +107,9 @@
             <div class="text-green-500 mb-4 flex justify-center">
                 <i class="fas fa-check-circle fa-3x"></i>
             </div>
-            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-6">Obrigado pela sua mensagem.</h3>
-            <button onclick="document.getElementById('message-modal').classList.add('hidden')" class="w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors font-sans">Fechar</button>
+            <h3 id="modal-success-title" class="text-2xl font-bold font-serif text-brand-accent-blue mb-4">Obrigado pela sua mensagem.</h3>
+            <p id="modal-success-text" class="text-sm text-gray-500 mb-6 font-sans">A sua mensagem foi enviada com sucesso à Jerónimo Editora.</p>
+            <button onclick="document.getElementById('message-modal').classList.add('hidden')" class="w-full bg-brand-accent-blue text-white py-3 rounded-lg font-bold hover:bg-[#001730] transition-colors font-sans">Fechar</button>
         </div>
     </div>
 
@@ -164,15 +165,55 @@
                 </figure>            
             </div>
             
-            <section class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100 max-w-4xl mx-auto">
-                <h2 class="font-serif text-3xl font-bold text-brand-accent-red mb-8 border-b border-brand-accent-red/10 pb-4">Deixe a sua mensagem</h2>
+            <section class="bg-white p-6 md:p-12 rounded-2xl shadow-xl border border-gray-100 max-w-4xl mx-auto">
+                <h2 id="form-title" class="font-serif text-3xl font-bold text-brand-accent-blue mb-6 border-b border-brand-accent-blue/10 pb-4 text-center">Deixe a sua mensagem</h2>
+                
+                <!-- Seletores de Abas em Estilo Premium Unificado (Azul da Marca) -->
+                <div class="flex flex-col sm:flex-row gap-3 justify-center mb-8">
+                    <button type="button" id="tab-geral" onclick="switchContactTab('geral')" class="flex-1 py-3 px-4 bg-brand-accent-blue text-white font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-brand-accent-blue">
+                        Mensagem Geral / Dúvida / Sugestão
+                    </button>
+                    <button type="button" id="tab-palestra" onclick="switchContactTab('palestra')" class="flex-1 py-3 px-4 bg-white text-brand-accent-blue hover:border-brand-accent-blue font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-gray-200">
+                        Pedido de Agendamento de Palestra
+                    </button>
+                </div>
+
                 <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-6">
+                    <!-- Campo Oculto para Guardar o Assunto Atual -->
+                    <input type="hidden" id="contact-type" value="geral">
+
                     <div class="grid md:grid-cols-2 gap-6">
-                        <input type="text" name="nome" placeholder="Nome" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
-                        <input type="email" name="email" placeholder="E-mail *" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
+                        <input type="text" name="nome" id="contact-name" placeholder="Nome" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
+                        <input type="email" name="email" id="contact-email" placeholder="E-mail *" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
                     </div>
-                    <textarea name="mensagem" placeholder="Mensagem *" rows="5" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none resize-none font-sans"></textarea>
-                    <button type="submit" id="submit-button" class="w-full bg-brand-accent-red text-white font-bold py-5 rounded-xl shadow-lg hover:bg-red-900 transition-all text-lg tracking-widest font-sans uppercase">Enviar mensagem</button>
+
+                    <!-- Campos Dinâmicos (Surgem apenas quando "Agendar Palestra" está ativo) -->
+                    <div id="palestra-extra-fields" class="hidden space-y-4 pt-4 border-t border-dashed border-gray-200">
+                        <div>
+                            <input type="text" id="contact-org" placeholder="Paróquia / Organização *" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <input type="text" id="contact-date" placeholder="Data Proposta (Ex: DD/MM/AAAA ou época)" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
+                            </div>
+                            <div>
+                                <select id="contact-theme" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans cursor-pointer text-gray-500">
+                                    <option value="" disabled selected>Escolha o tema pretendido... *</option>
+                                    <option value="Conhecer a Missa">Conhecer a Missa</option>
+                                    <option value="Os Profetas Maiores">Os Profetas Maiores</option>
+                                    <option value="A Missa e o Mystério da Sagrada Liturgia">A Missa e o Mistério da Sagrada Liturgia</option>
+                                    <option value="Nossa Senhora no Advento e Natal">Nossa Senhora no Advento e Natal</option>
+                                    <option value="Outro Tema / Sugestão Livre">Outro Tema / Sugestão Livre</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <textarea name="mensagem" id="contact-msg" placeholder="Mensagem *" rows="5" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none resize-none font-sans"></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-button" class="w-full bg-brand-accent-blue text-white font-bold py-5 rounded-xl shadow-lg hover:bg-[#001730] transition-all text-lg tracking-widest font-sans uppercase">Enviar mensagem</button>
                 </form>
             </section>
         </div>
@@ -183,13 +224,58 @@
     <script>
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec'; 
 
+        // Alternador de Abas Dinâmico com alteração de estilos para o Azul da Marca
+        function switchContactTab(type) {
+            const btnGeral = document.getElementById('tab-geral');
+            const btnPalestra = document.getElementById('tab-palestra');
+            const extraFields = document.getElementById('palestra-extra-fields');
+            const typeInput = document.getElementById('contact-type');
+            const formTitle = document.getElementById('form-title');
+            
+            const orgInput = document.getElementById('contact-org');
+            const themeSelect = document.getElementById('contact-theme');
+
+            if (!btnGeral || !btnPalestra || !extraFields || !typeInput) return;
+
+            typeInput.value = type;
+
+            if (type === 'palestra') {
+                // Altera as cores das abas para Azul
+                btnPalestra.className = "flex-1 py-3 px-4 bg-brand-accent-blue text-white font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-brand-accent-blue";
+                btnGeral.className = "flex-1 py-3 px-4 bg-white text-brand-accent-blue hover:border-brand-accent-blue font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-gray-200";
+                
+                // Mostra campos extra e torna os obrigatórios
+                extraFields.classList.remove('hidden');
+                orgInput.setAttribute('required', 'true');
+                themeSelect.setAttribute('required', 'true');
+                
+                if (formTitle) {
+                    formTitle.textContent = "Pedido de Palestra";
+                    formTitle.className = "font-serif text-3xl font-bold text-brand-accent-blue mb-6 border-b border-brand-accent-blue/10 pb-4 text-center";
+                }
+            } else {
+                // Altera as cores das abas para Azul
+                btnGeral.className = "flex-1 py-3 px-4 bg-brand-accent-blue text-white font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-brand-accent-blue";
+                btnPalestra.className = "flex-1 py-3 px-4 bg-white text-brand-accent-blue hover:border-brand-accent-blue font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-gray-200";
+                
+                // Esconde campos extra e remove a obrigatoriedade
+                extraFields.classList.add('hidden');
+                orgInput.removeAttribute('required');
+                themeSelect.removeAttribute('required');
+                
+                if (formTitle) {
+                    formTitle.textContent = "Deixe a sua mensagem";
+                    formTitle.className = "font-serif text-3xl font-bold text-brand-accent-blue mb-6 border-b border-brand-accent-blue/10 pb-4 text-center";
+                }
+            }
+        }
+
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             const backdrop = document.getElementById('menu-backdrop');
             if (!menu || !backdrop) return;
             
             if (menu.classList.contains('translate-x-full')) {
-                // ABRIR
                 backdrop.classList.remove('hidden');
                 setTimeout(() => {
                     backdrop.classList.remove('opacity-0');
@@ -198,7 +284,6 @@
                 }, 20);
                 document.body.style.overflow = 'hidden'; 
             } else {
-                // FECHAR
                 menu.classList.add('translate-x-full');
                 backdrop.classList.remove('opacity-100');
                 backdrop.classList.add('opacity-0');
@@ -224,36 +309,70 @@
         async function handleContactSubmit(event) {
             event.preventDefault(); 
             const button = document.getElementById('submit-button');
-            const form = event.target;
-            const formData = new FormData(form);
+            const type = document.getElementById('contact-type').value;
+            
+            const nome = document.getElementById('contact-name').value.trim() || "Não preenchido";
+            const email = document.getElementById('contact-email').value.trim();
+            const msgOriginal = document.getElementById('contact-msg').value.trim();
             
             button.disabled = true; 
             button.textContent = 'A processar...';
             button.classList.add('sending');
 
+            let finalMessage = msgOriginal;
+
+            // Se for pedido de palestra, compilamos os dados na mensagem para não quebrar o Code.gs
+            if (type === 'palestra') {
+                const org = document.getElementById('contact-org').value.trim();
+                const date = document.getElementById('contact-date').value.trim() || "Não especificada";
+                const theme = document.getElementById('contact-theme').value || "Não especificado";
+
+                finalMessage = `PEDIDO DE AGENDAMENTO DE PALESTRA\n` +
+                               `--------------------------------------------------\n` +
+                               `Paróquia / Organização: ${org}\n` +
+                               `Data Proposta: ${date}\n` +
+                               `Tema Selecionado: ${theme}\n` +
+                               `--------------------------------------------------\n\n` +
+                               `Mensagem / Observações:\n${msgOriginal}`;
+            }
+
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 seg timeout
+            const timeoutId = setTimeout(() => controller.abort(), 15000); 
 
             try {
+                // Enviamos para o script existente usando a mesma rota contact_message
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     body: JSON.stringify({
                         type: 'contact_message',
-                        nome: formData.get('nome') || "Não preenchido",
-                        email: formData.get('email'),
-                        mensagem: formData.get('mensagem')
+                        nome: nome,
+                        email: email,
+                        mensagem: finalMessage
                     }),
                     signal: controller.signal
                 });
 
-                form.reset();
+                event.target.reset();
+                switchContactTab('geral'); // Restaura o formulário para a aba inicial
+
+                // Personaliza o modal de sucesso com base na aba submetida
+                const modalTitle = document.getElementById('modal-success-title');
+                const modalText = document.getElementById('modal-success-text');
+                
+                if (type === 'palestra') {
+                    if (modalTitle) modalTitle.textContent = "Pedido de Palestra Enviado!";
+                    if (modalText) modalText.textContent = "Obrigado pela sua proposta de agendamento. Iremos avaliar a sua mensagem com a maior brevidade possível.";
+                } else {
+                    if (modalTitle) modalTitle.textContent = "Obrigado pela sua mensagem.";
+                    if (modalText) modalText.textContent = "A sua mensagem foi enviada com sucesso à Jerónimo Editora.";
+                }
+
                 document.getElementById('message-modal').classList.remove('hidden');
             } catch (error) {
-                if (error.name === 'AbortError') {
-                    console.log('O envio está a demorar, mas provavelmente será processado.');
-                }
-                form.reset();
+                // Fallback amigável de sucesso caso o fetch seja cortado localmente
+                event.target.reset();
+                switchContactTab('geral');
                 document.getElementById('message-modal').classList.remove('hidden');
             } finally {
                 clearTimeout(timeoutId);
