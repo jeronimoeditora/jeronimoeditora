@@ -176,7 +176,7 @@
         </div>
     </main>
 
-    <!-- Modal Informativo: Como Funciona (Antigo Acordo Ortográfico) -->
+    <!-- Modal Informativo: Como Funciona (Antigo Acordo Ortográfico com Chave de Envio Digital) -->
     <div id="info-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300">
         <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl p-6 md:p-8 relative border-t-4 border-brand-accent-orange transform scale-95 transition-transform duration-300" id="info-modal-content">
             <button onclick="fecharModalInfo()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none">
@@ -201,7 +201,11 @@
                 </div>
                 <div class="flex gap-3 items-start">
                     <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5">3</span>
-                    <p class="text-gray-700 font-medium font-sans">Efectue o pagamento e anexe o comprovativo correspondente para libertação rápida da chave.</p>
+                    <p class="text-gray-700 font-medium font-sans">Efectue o pagamento e anexe o comprovativo correspondente.</p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5">4</span>
+                    <p class="text-gray-700 font-medium font-sans">A chave de acesso será enviada para o seu contacto (por correio electrónico ou por SMS).</p>
                 </div>
                 
                 <div class="bg-orange-50 border border-orange-100 p-4 rounded-xl font-semibold text-brand-accent-orange flex gap-3 mt-4">
@@ -210,7 +214,6 @@
                 </div>
             </div>
 
-            <!-- Botões de Ação do Modal - Botão Voltar Eliminado -->
             <div class="mt-6">
                 <button onclick="scrollParaCursos(); fecharModalInfo();" class="w-full bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center block shadow-md">
                     Ver Cursos
@@ -251,7 +254,7 @@
                 status: "Em breve",
                 price: 21.00,
                 badgeClass: "bg-amber-600",
-                description: "A voz de Deus ao longo da história de Israel. Explore a teologia e a mensagem profética tradicional através de um estudo bíblico aprofundado.",
+                description: "A voice de Deus ao longo da história de Israel. Explore a teologia e a mensagem profética tradicional através de um estudo bíblico aprofundado.",
                 videoDuration: "5 aulas",
                 parts: [
                     { title: "Parte I - Introdução: História do Reino de Israel", videoId: "", available: false },
@@ -262,6 +265,18 @@
                 ]
             }
         ];
+
+        // Sincronização do Contador de Carrinho
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
 
         // Adiciona um curso ao carrinho geral (localStorage) e redireciona de imediato para a página checkout
         function adquirirAcessoCurso(id, title, price) {
@@ -280,6 +295,7 @@
             });
             
             localStorage.setItem('cartItems', JSON.stringify(items));
+            updateCartUI();
             window.location.href = 'checkout';
         }
 
@@ -441,7 +457,6 @@
                         </button>
                     `;
 
-                    // Altura do bloco ajustada em mobile (h-[310px]) para que "Jerónimo Editora • Streaming..." caiba perfeitamente sem sobreposições
                     videoPlaceholder = `
                         <div id="video-container-${course.id}" class="video-wrapper bg-gradient-to-b from-[#001730] to-[#002b54] h-[310px] sm:h-auto sm:aspect-video rounded-xl overflow-hidden flex flex-col p-4 text-white border border-white/10 relative shadow-inner">
                             <div class="flex justify-center border-b border-white/10 pb-2 mb-3 z-10 flex-shrink-0">
@@ -803,6 +818,9 @@
                 if (footResp.ok) {
                     document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 }
+                
+                // Carrega a contagem inicial no menu após a injeção
+                updateCartUI();
             } catch (e) { 
                 console.warn("Modo offline activo.", e); 
             }
@@ -832,6 +850,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadComponents();
             filterCourses();
+            updateCartUI();
         });
     </script>
 
