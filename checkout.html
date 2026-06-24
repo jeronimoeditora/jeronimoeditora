@@ -43,8 +43,8 @@
 
         input, select, textarea { font-size: 16px !important; font-family: 'Roboto', sans-serif; }
         input:focus, select:focus, textarea:focus {
-            border-color: #800000 !important; 
-            box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.2);
+            border-color: #002147 !important; 
+            box-shadow: 0 0 0 2px rgba(0, 33, 71, 0.15);
         }
         
         .fade-in { animation: fadeIn 0.6s ease-out forwards; }
@@ -130,7 +130,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-green-600 mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
             <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center">Pedido recebido!</h3>
             <p id="success-modal-msg" class="text-gray-650 mb-6 font-sans text-sm text-center">Agradecemos o seu pedido. Iremos validar o comprovativo de imediato.</p>
-            <a href="/" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg text-center font-sans text-sm uppercase tracking-wider">Voltar ao Início</a>
+            <a href="index" class="inline-block w-full bg-brand-accent-blue text-white py-3 rounded-lg font-bold hover:bg-black transition-colors shadow-lg text-center font-sans text-sm uppercase tracking-wider">Voltar ao Início</a>
         </div>
     </div>
 
@@ -341,11 +341,17 @@
 
                         <div class="mt-4 pt-4 border-t border-white/15 text-xs text-left font-sans">
                             <div class="flex items-start space-x-2">
-                                <input type="checkbox" id="privacy-policy" class="mt-1 rounded border-white/30 text-brand-accent-red focus:ring-brand-gold bg-white/10 cursor-pointer w-4 h-4" onchange="validateFinalButton()">
+                                <input type="checkbox" id="privacy-policy" class="mt-1 rounded border-white/30 text-brand-accent-red focus:ring-brand-gold bg-white/10 cursor-pointer w-4 h-4" onchange="clearPrivacyError()">
                                 <label for="privacy-policy" class="text-white/90 leading-relaxed cursor-pointer select-none">
                                     Li e aceito os <a href="termos-condicoes" target="_blank" class="underline text-brand-gold hover:text-white font-bold">Termos e Condições</a> e a <a href="politica-privacidade" target="_blank" class="underline text-brand-gold hover:text-white font-bold">Política de Privacidade</a> da Jerónimo Editora. *
                                 </label>
                             </div>
+                            
+                            <!-- Alerta de Privacidade Inline (Redimensionado e amigável) -->
+                            <div id="privacy-error-box" class="hidden mt-3 p-3 bg-red-950/40 border border-red-500/30 text-red-200 text-xs rounded-lg font-sans">
+                                <i class="fas fa-exclamation-circle mr-1.5"></i> Por favor, aceite os Termos e Condições e a Política de Privacidade para avançar.
+                            </div>
+
                             <p class="mt-2 text-[10px] text-white/60 leading-snug">
                                 Os seus dados pessoais serão tratados estritamente para o processamento, entrega e facturação da sua encomenda, em total conformidade com o Regulamento Geral sobre a Protecção de Dados (RGPD).
                             </p>
@@ -439,6 +445,11 @@
             }
         }
 
+        function clearPrivacyError() {
+            var errorBox = document.getElementById('privacy-error-box');
+            if (errorBox) errorBox.classList.add('hidden');
+        }
+
         ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'].forEach(function(id) {
             var el = document.getElementById(id);
             if (el) {
@@ -485,7 +496,6 @@
             return 0;
         }
 
-        // Carrega o resumo do carrinho com suporte a apenas cursos digitais
         function loadCartSummary() {
             var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             var list = document.getElementById('summary-list');
@@ -531,20 +541,30 @@
                 }
                 pesoTotal += (itemWeight * item.quantity);
 
+                // Oculta os botões - 1 + para artigos digitais (Cursos)
+                var quantitySelectorHtml = '';
+                if (item.type === 'curso') {
+                    quantitySelectorHtml = `<span class="text-brand-gold text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 bg-white/5 rounded-lg border border-white/10 font-sans flex items-center gap-1.5"><i class="fas fa-video"></i> Curso Digital</span>`;
+                } else {
+                    quantitySelectorHtml = `
+                        <div class="flex items-center space-x-3 bg-white/10 rounded-lg px-2 py-1 border border-white/20">
+                            <button onclick="changeQuantity('${item.id}', -1)" class="text-white hover:text-brand-gold p-1"><i class="fas fa-minus text-xs"></i></button>
+                            <span class="text-white text-sm font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="changeQuantity('${item.id}', 1)" class="text-white hover:text-brand-gold p-1"><i class="fas fa-plus text-xs"></i></button>
+                        </div>
+                    `;
+                }
+
                 html += `
                     <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
                             <span class="font-lora text-sm text-brand-gold leading-tight flex-grow font-bold">
-                                ${item.title} ${item.type === 'curso' ? '<span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-brand-gold uppercase ml-1 font-sans">Curso Digital</span>' : ''}
+                                ${item.title}
                             </span>
                             <span class="font-sans font-bold text-white text-sm">€ ${lineTotal.toFixed(2).replace('.', ',')}</span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3 bg-white/10 rounded-lg px-2 py-1 border border-white/20">
-                                <button onclick="changeQuantity('${item.id}', -1)" class="text-white hover:text-brand-gold p-1"><i class="fas fa-minus text-xs"></i></button>
-                                <span class="text-white text-sm font-bold w-4 text-center">${item.quantity}</span>
-                                <button onclick="changeQuantity('${item.id}', 1)" class="text-white hover:text-brand-gold p-1"><i class="fas fa-plus text-xs"></i></button>
-                            </div>
+                            ${quantitySelectorHtml}
                             <button onclick="removeItem('${item.id}')" class="text-gray-400 hover:text-white p-2"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>`;
@@ -565,7 +585,7 @@
                 custoPortes = 0;
                 if (badge) {
                     if (apenasCursos) {
-                        badge.innerHTML = `<span class="bg-amber-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Processamento Digital Chave</span>`;
+                        badge.innerHTML = `<span class="bg-amber-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Processamento Digital</span>`;
                     } else {
                         badge.innerHTML = ``;
                     }
@@ -686,7 +706,6 @@
             validateFinalButton();
         }
 
-        // Converte e comprime imagens de forma ultra-leve (JPEG 0.6 @ Max-Width 1000px)
         async function fileToBase64(file) {
             return new Promise(function(resolve) {
                 var reader = new FileReader();
@@ -733,7 +752,6 @@
             var method = document.querySelector('input[name="payment-method"]:checked')?.value;
             var fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             var cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            var privacyChecked = document.getElementById('privacy-policy')?.checked;
 
             var nomeVal = document.getElementById('nome')?.value.trim();
             var emailVal = document.getElementById('email')?.value.trim();
@@ -762,13 +780,28 @@
 
             var btn = document.getElementById('place-order-button');
             if (btn) {
-                btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid || !privacyChecked;
+                // Ativa o botão sem exigir que o checkbox de privacidade esteja marcado para permitir o alerta dinâmico
+                btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid;
             }
         }
 
-        // Executa o envio inteligente adaptando o payload conforme o tipo do carrinho
         async function placeOrder(e) {
             e.preventDefault();
+            
+            // Verificação Inteligente da Política de Privacidade
+            var privacyChecked = document.getElementById('privacy-policy')?.checked;
+            var errorBox = document.getElementById('privacy-error-box');
+            
+            if (!privacyChecked) {
+                if (errorBox) {
+                    errorBox.classList.remove('hidden');
+                    errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return; // Impede a submissão
+            } else {
+                if (errorBox) errorBox.classList.add('hidden');
+            }
+
             var overlay = document.getElementById('loading-overlay');
             var loadText = document.getElementById('loading-text');
             var progress = document.getElementById('progress-fill');
@@ -791,66 +824,49 @@
                     base64File = await fileToBase64(fileInput.files[0]);
                 }
                 
-                var payload;
-
-                // 1. Se contiver exclusivamente cursos digitais, monta o payload 'digital_course_order' sem morada física
-                if (apenasCursos) {
-                    payload = {
-                        type: 'digital_course_order', 
-                        cliente: {
-                            nome: document.getElementById('nome').value,
-                            email: document.getElementById('email').value, // contacto
-                            nif: document.getElementById('nif')?.value || "N/A"
-                        },
-                        pagamento: {
-                            metodo: method,
-                            total: document.getElementById('summary-total').textContent,
-                            fileBase64: base64File,
-                            fileName: fileInput.files[0].name
-                        },
-                        itens: cartItems.map(function(i) {
-                            return { titulo: i.title, qtd: i.quantity, preco_unit: i.price, tipo: "curso" };
-                        })
-                    };
-                } 
-                // 2. Se contiver artigos físicos (isolados ou misturados), monta o payload 'order' tradicional
-                else {
-                    payload = {
-                        type: 'order',
-                        cliente: {
-                            nome: document.getElementById('nome').value,
-                            email: document.getElementById('email').value,
-                            nif: document.getElementById('nif')?.value || "N/A"
-                        },
-                        envio: {
-                            morada: document.getElementById('morada').value,
-                            nr_andar: document.getElementById('nr-andar').value,
-                            cod_postal: document.getElementById('cod-postal').value,
-                            cidade: document.getElementById('cidade').value,
-                            pais: document.getElementById('pais').value
-                        },
-                        faturacao: document.getElementById('choice-nao').checked ? {
-                            morada: document.getElementById('morada-fat').value,
-                            nr_andar: document.getElementById('nr-andar-fat').value,
-                            cod_postal: document.getElementById('cod-postal-fat').value,
-                            cidade: document.getElementById('cidade-fat').value
-                        } : {
-                            morada: "N/A",
-                            nr_andar: "N/A",
-                            cod_postal: "N/A",
-                            cidade: "N/A"
-                        },
-                        pagamento: {
-                            metodo: method,
-                            total: document.getElementById('summary-total').textContent,
-                            fileBase64: base64File,
-                            fileName: fileInput.files[0].name
-                        },
-                        itens: cartItems.map(function(i) {
-                            return { titulo: i.title, qtd: i.quantity, preco_unit: i.price, tipo: i.type || "físico" };
-                        })
-                    };
-                }
+                // Nós sempre enviamos type: 'order' para usar a rota original que funciona e dispara os e-mails
+                var payload = {
+                    type: 'order',
+                    cliente: {
+                        nome: document.getElementById('nome').value,
+                        email: document.getElementById('email').value,
+                        nif: document.getElementById('nif')?.value || "N/A"
+                    },
+                    envio:apenasCursos ? {
+                        // Se for apenas cursos, adaptamos os campos de morada de forma inteligente
+                        morada: "ENVIO DIGITAL (Chave de Acesso enviada por E-mail/Telemóvel)",
+                        nr_andar: "N/A",
+                        cod_postal: "N/A",
+                        cidade: "N/A",
+                        pais: "N/A"
+                    } : {
+                        morada: document.getElementById('morada').value,
+                        nr_andar: document.getElementById('nr-andar').value,
+                        cod_postal: document.getElementById('cod-postal').value,
+                        cidade: document.getElementById('cidade').value,
+                        pais: document.getElementById('pais').value
+                    },
+                    faturacao: (document.getElementById('choice-nao') && document.getElementById('choice-nao').checked && !apenasCursos) ? {
+                        morada: document.getElementById('morada-fat').value,
+                        nr_andar: document.getElementById('nr-andar-fat').value,
+                        cod_postal: document.getElementById('cod-postal-fat').value,
+                        cidade: document.getElementById('cidade-fat').value
+                    } : {
+                        morada: "N/A",
+                        nr_andar: "N/A",
+                        cod_postal: "N/A",
+                        cidade: "N/A"
+                    },
+                    pagamento: {
+                        metodo: method,
+                        total: document.getElementById('summary-total').textContent,
+                        fileBase64: base64File,
+                        fileName: fileInput.files[0].name
+                    },
+                    itens: cartItems.map(function(i) {
+                        return { titulo: i.title, qtd: i.quantity, preco_unit: i.price, tipo: i.type || "físico" };
+                    })
+                };
                 
                 loadText.textContent = "A submeter dados...";
                 progress.style.width = "70%";
