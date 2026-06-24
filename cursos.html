@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Cursos em Vídeo | Hugo Bacelo</title>
     
-    <!-- Script para remover o .html da barra de endereços de forma elegante -->
     <script>
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
@@ -31,7 +30,7 @@
                     fontFamily: {
                         sans: ['"Roboto"', 'sans-serif'],
                         inter: ['"Inter"', 'sans-serif'],
-                        serif: ['"Playfair Display"', 'serif'], 
+                        serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
                         'brand-bg': '#F8F8F8',
@@ -93,24 +92,6 @@
         .parts-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
         .parts-scroll::-webkit-scrollbar-thumb { background: #e05300; border-radius: 4px; }
 
-        /* Escalonamento automático de fontes e botões quando o player estiver em ecrã inteiro (fullscreen) */
-        .video-wrapper:fullscreen .fullscreen-title,
-        .video-wrapper:-webkit-full-screen .fullscreen-title {
-            font-size: 16px !important;
-        }
-        .video-wrapper:fullscreen .fullscreen-part-title,
-        .video-wrapper:-webkit-full-screen .fullscreen-part-title {
-            font-size: 15px !important;
-        }
-        .video-wrapper:fullscreen .fullscreen-part-btn,
-        .video-wrapper:-webkit-full-screen .fullscreen-part-btn {
-            padding: 14px 16px !important;
-        }
-        .video-wrapper:fullscreen .fullscreen-sidebar,
-        .video-wrapper:-webkit-full-screen .fullscreen-sidebar {
-            width: 280px !important;
-        }
-
         /* Ocultar scrollbar mantendo a funcionalidade */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
@@ -123,7 +104,6 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen" oncontextmenu="return false;">
 
-    <!-- CONTENTOR DO MENU DINÂMICO (Carregado do seu GitHub) -->
     <div id="nav-placeholder"></div>
 
     <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
@@ -172,7 +152,6 @@
                 </div>
             </div>
 
-            <!-- Botões de Atalho para o Checkout e de Informações em Linha Única sem Parágrafos -->
             <div class="flex flex-row justify-center items-center gap-2 sm:gap-3 mb-12 max-w-2xl mx-auto overflow-x-auto pb-2 px-4 no-scrollbar">
                 <a href="#checkout-section" class="inline-flex items-center justify-center gap-1.5 bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider px-4 sm:px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300 whitespace-nowrap">
                     <i class="fas fa-shopping-cart"></i> Adquirir Acesso
@@ -192,12 +171,10 @@
                 <p class="text-gray-500 font-sans mt-1">Experimente alterar os termos de pesquisa ou os filtros seleccionados.</p>
             </div>
 
-            <!-- Grelha de Cursos -->
             <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
                 <!-- Preenchido dinamicamente via JavaScript -->
             </div>
 
-            <!-- SECÇÃO MINI CHECKOUT GERAL NO FINAL DA PÁGINA -->
             <div id="checkout-section" class="bg-blue-50/70 p-6 md:p-8 rounded-3xl border-2 border-blue-100 shadow-xl max-w-4xl mx-auto relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-48 h-48 bg-brand-accent-blue/5 rounded-bl-[150px] -z-10 pointer-events-none"></div>
                 
@@ -371,10 +348,10 @@
         </div>
     </div>
 
-    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado do seu GitHub) -->
     <div id="footer-placeholder"></div>
 
     <script>
+        // Dados de Cursos em Vídeo
         const coursesData = [
             {
                 id: "curso_missa",
@@ -559,31 +536,39 @@
             if (container) container.classList.add('hidden');
         }
 
-        // Converte o comprovativo anexado para texto Base64 legível pelo script Google
+        // Converte o comprovativo anexado para texto Base64 de forma ultra-segura com compressão para JPEG 0.6 e largura máxima de 1000px
         async function fileToBase64(file) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
+                reader.onerror = () => resolve(""); // Garante tolerância total a falhas
                 reader.onload = function(event) {
-                    if (file.type === 'application/pdf') {
+                    if (file.type === 'application/pdf' || !file.type.startsWith('image/')) {
                         resolve(event.target.result);
                         return;
                     }
                     const img = new Image();
                     img.src = event.target.result;
+                    img.onerror = () => {
+                        resolve(event.target.result); // Fallback imediato
+                    };
                     img.onload = function() {
-                        const canvas = document.createElement('canvas');
-                        const MAX_WIDTH = 1200;
-                        let width = img.width, height = img.height;
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
+                        try {
+                            const canvas = document.createElement('canvas');
+                            const MAX_WIDTH = 1000; // Otimizado de 1200px para 1000px
+                            let width = img.width, height = img.height;
+                            if (width > MAX_WIDTH) {
+                                height *= MAX_WIDTH / width;
+                                width = MAX_WIDTH;
+                            }
+                            canvas.width = width;
+                            canvas.height = height;
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(img, 0, 0, width, height);
+                            resolve(canvas.toDataURL('image/jpeg', 0.6)); // Otimizado de 0.7 para 0.6 para performance
+                        } catch (err) {
+                            resolve(event.target.result); // Fallback para qualquer exceção
                         }
-                        canvas.width = width;
-                        canvas.height = height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-                        resolve(canvas.toDataURL('image/jpeg', 0.7));
                     };
                 };
             });
@@ -645,6 +630,7 @@
                     itens: payloadItens
                 };
 
+                // Executa o envio silencioso e automático para a sua folha de cálculo e email
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -653,9 +639,9 @@
 
                 document.getElementById('checkout-success-view').classList.remove('hidden');
             } catch (err) {
-                console.error(err);
+                console.error("Erro detalhado na submissão de cursos:", err);
                 if (errorEl) {
-                    errorEl.textContent = "Ocorreu um erro no envio. Verifique a sua ligação e tente novamente.";
+                    errorEl.textContent = "Ocorreu um erro no envio. Verifique a sua ligação, desative o bloqueador de anúncios (Adblocker) se ativo, e tente novamente.";
                     errorEl.classList.remove('hidden');
                 }
             } finally {
@@ -702,6 +688,7 @@
             renderCourses(filtered);
         }
 
+        // Alterna entre abas trancadas
         function switchLockedTab(courseId, tab) {
             const tabKey = document.getElementById(`tab-key-${courseId}`);
             const tabProgram = document.getElementById(`tab-program-${courseId}`);
@@ -748,6 +735,7 @@
             }
         }
 
+        // Renderização dos cards de cursos mais limpos (Com preço no topo)
         function renderCourses(courses) {
             const grid = document.getElementById('courses-grid');
             const noResults = document.getElementById('no-results');
@@ -767,52 +755,100 @@
                 let priceHtml = '';
                 let videoPlaceholder = '';
                 
-                priceHtml = `
-                    <div class="text-right">
-                        <span class="text-[9px] text-gray-400 block uppercase font-bold tracking-wider leading-none font-inter">Preço do Acesso</span>
-                        <span class="text-xl font-extrabold text-brand-accent-blue font-inter">${course.price.toFixed(2)}€</span>
-                    </div>
-                `;
-
-                videoPlaceholder = `
-                    <div id="video-container-${course.id}" class="video-wrapper bg-gradient-to-b from-[#001730] to-[#002b54] aspect-video rounded-xl overflow-hidden flex flex-col p-4 text-white border border-white/10 relative shadow-inner">
-                        <!-- Abas superiores para chave e programa -->
-                        <div class="flex justify-center border-b border-white/10 pb-2 mb-3 z-10">
-                            <button onclick="switchLockedTab('${course.id}', 'key')" id="tab-key-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-200 border-b-2 border-brand-gold transition-all duration-300">
-                                <i class="fas fa-key mr-1"></i> Chave de acesso
-                            </button>
-                            <button onclick="switchLockedTab('${course.id}', 'program')" id="tab-program-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300 ml-4">
-                                <i class="fas fa-list-ul mr-1"></i> Programa
-                            </button>
+                if (isAvailable) {
+                    priceHtml = `
+                        <div class="text-right">
+                            <span class="text-[9px] text-gray-400 block uppercase font-bold tracking-wider leading-none">Preço do Acesso</span>
+                            <span class="text-xl font-extrabold text-brand-accent-blue">${course.price.toFixed(2)}€</span>
                         </div>
+                    `;
+                    
+                    videoPlaceholder = `
+                        <div id="video-container-${course.id}" class="video-wrapper bg-gradient-to-b from-[#001730] to-[#002b54] aspect-video rounded-xl overflow-hidden flex flex-col p-4 text-white border border-white/10 relative shadow-inner">
+                            <!-- Abas superiores para chave e programa -->
+                            <div class="flex justify-center border-b border-white/10 pb-2 mb-3 z-10">
+                                <button onclick="switchLockedTab('${course.id}', 'key')" id="tab-key-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-200 border-b-2 border-brand-gold transition-all duration-300">
+                                    <i class="fas fa-key mr-1"></i> Chave de acesso
+                                </button>
+                                <button onclick="switchLockedTab('${course.id}', 'program')" id="tab-program-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300 ml-4">
+                                    <i class="fas fa-list-ul mr-1"></i> Programa
+                                </button>
+                            </div>
 
-                        <!-- Painel de entrada de chave com fundo escuro de alto contraste e letra clara -->
-                        <div id="pane-key-${course.id}" class="flex-grow flex flex-col items-center justify-center space-y-3 z-10 w-full max-w-[280px] mx-auto px-2">
-                            <span class="text-amber-500 text-lg block"><i class="fas fa-lock"></i></span>
-                            
-                            <div class="flex flex-col gap-2 w-full mt-1">
-                                <div class="flex gap-1.5">
-                                    <input type="text" id="key-input-${course.id}" 
-                                           onkeydown="if(event.key === 'Enter') validarChaveAcesso('${course.id}')"
-                                           placeholder="Chave de Acesso" 
-                                           class="w-full text-center bg-neutral-900 border border-neutral-800 rounded-lg py-1.5 px-3 text-[11px] text-white focus:outline-none focus:border-brand-gold transition-all font-mono tracking-wider uppercase font-medium placeholder-neutral-500">
-                                    <button onclick="validarChaveAcesso('${course.id}')" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-[11px] font-extrabold uppercase py-1.5 px-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex-shrink-0">
-                                        Entrar
-                                    </button>
+                            <!-- Painel de entrada de chave com fundo escuro de alto contraste e letra clara -->
+                            <div id="pane-key-${course.id}" class="flex-grow flex flex-col items-center justify-center space-y-3 z-10 w-full max-w-[280px] mx-auto px-2">
+                                <span class="text-amber-500 text-lg block"><i class="fas fa-lock"></i></span>
+                                
+                                <div class="flex flex-col gap-2 w-full mt-1">
+                                    <div class="flex gap-1.5">
+                                        <input type="text" id="key-input-${course.id}" 
+                                               onkeydown="if(event.key === 'Enter') validarChaveAcesso('${course.id}')"
+                                               placeholder="Chave de Acesso" 
+                                               class="w-full text-center bg-neutral-900 border border-neutral-800 rounded-lg py-1.5 px-3 text-[11px] text-white focus:outline-none focus:border-brand-gold transition-all font-mono tracking-wider uppercase font-medium placeholder-neutral-500">
+                                        <button onclick="validarChaveAcesso('${course.id}')" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-[11px] font-extrabold uppercase py-1.5 px-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex-shrink-0">
+                                            Entrar
+                                        </button>
+                                    </div>
+                                    <p id="error-message-${course.id}" class="text-[10px] text-red-400 font-semibold hidden font-sans text-center leading-tight"></p>
                                 </div>
-                                <p id="error-message-${course.id}" class="text-[10px] text-red-400 font-semibold hidden font-sans text-center leading-tight"></p>
+                            </div>
+
+                            <!-- Painel de programa trancado -->
+                            <div id="pane-program-${course.id}" class="hidden flex-grow overflow-y-auto pr-1 space-y-1.5 z-10 w-full text-left max-w-[340px] mx-auto parts-scroll">
+                            </div>
+
+                            <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
+                                Jerónimo Editora • Streaming Protegido (${course.videoDuration})
                             </div>
                         </div>
-
-                        <!-- Painel de programa trancado -->
-                        <div id="pane-program-${course.id}" class="hidden flex-grow overflow-y-auto pr-1 space-y-1.5 z-10 w-full text-left max-w-[340px] mx-auto parts-scroll">
+                    `;
+                } else {
+                    priceHtml = `
+                        <div class="text-right">
+                            <span class="text-[9px] text-gray-400 block uppercase font-bold tracking-wider leading-none">Lançamento</span>
+                            <span class="text-sm font-bold text-gray-400 uppercase tracking-widest">Em Breve</span>
                         </div>
+                    `;
+                    videoPlaceholder = `
+                        <div class="video-wrapper bg-gradient-to-b from-[#001730] to-[#002b54] aspect-video rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center text-white border border-white/10 relative">
+                            <!-- Abas superiores para chave e programa (Permite navegar no programa mesmo em breve) -->
+                            <div class="flex justify-center border-b border-white/10 pb-2 mb-3 z-10 w-full">
+                                <button onclick="switchLockedTab('${course.id}', 'key')" id="tab-key-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-200 border-b-2 border-brand-gold transition-all duration-300">
+                                    <i class="fas fa-key mr-1"></i> Chave de acesso
+                                </button>
+                                <button onclick="switchLockedTab('${course.id}', 'program')" id="tab-program-${course.id}" class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300 ml-4">
+                                    <i class="fas fa-list-ul mr-1"></i> Programa
+                                </button>
+                            </div>
 
-                        <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
-                            Jerónimo Editora • Streaming Protegido (${course.videoDuration})
+                            <!-- Painel de entrada de chave com fundo escuro de alto contraste e letra clara -->
+                            <div id="pane-key-${course.id}" class="flex-grow flex flex-col items-center justify-center space-y-3 z-10 w-full max-w-[280px] mx-auto px-2">
+                                <span class="text-amber-500 text-lg block"><i class="fas fa-lock"></i></span>
+                                
+                                <div class="flex flex-col gap-2 w-full mt-1">
+                                    <div class="flex gap-1.5">
+                                        <input type="text" id="key-input-${course.id}" 
+                                               onkeydown="if(event.key === 'Enter') validarChaveAcesso('${course.id}')"
+                                               placeholder="Chave de Acesso" 
+                                               class="w-full text-center bg-neutral-900 border border-neutral-800 rounded-lg py-1.5 px-3 text-[11px] text-white focus:outline-none focus:border-brand-gold transition-all font-mono tracking-wider uppercase font-medium placeholder-neutral-500">
+                                        <button onclick="validarChaveAcesso('${course.id}')" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-[11px] font-extrabold uppercase py-1.5 px-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex-shrink-0">
+                                            Entrar
+                                        </button>
+                                    </div>
+                                    <p id="error-message-${course.id}" class="text-[10px] text-red-400 font-semibold hidden font-sans text-center leading-tight"></p>
+                                </div>
+                            </div>
+
+                            <!-- Painel de programa trancado -->
+                            <div id="pane-program-${course.id}" class="hidden flex-grow overflow-y-auto pr-1 space-y-1.5 z-10 w-full text-left max-w-[340px] mx-auto parts-scroll">
+                            </div>
+
+                            <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
+                                Jerónimo Editora • Streaming Protegido (${course.videoDuration})
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
+                }
 
                 grid.innerHTML += `
                     <div class="course-card bg-white border border-gray-150 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between">
@@ -924,7 +960,7 @@
                         <div class="flex-grow overflow-y-auto p-1.5 space-y-1.5 parts-scroll" id="parts-selector-list-${courseId}">
                         </div>
                         <div class="p-3 border-t border-white/10 flex justify-center">
-                            <button id="fs-toggle-btn-${courseId}" onclick="toggleVideoWrapperFullscreen('${courseId}')" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white text-[11px] font-bold uppercase py-3 px-3 rounded-lg transition-all flex items-center justify-center gap-1.5 shadow-md font-sans">
+                            <button id="fs-toggle-btn-${courseId}" onclick="toggleVideoWrapperFullscreen('${courseId}')" class="w-full bg-brand-accent-blue hover:bg-[#00132b] text-white text-[11px] font-bold uppercase py-3 px-3 rounded-lg transition-all flex items-center justify-center gap-1.5 shadow-md font-sans">
                                 <i class="fas fa-expand"></i> Expandir
                             </button>
                         </div>
@@ -1044,25 +1080,13 @@
                         btn.className = "w-full bg-red-700 hover:bg-red-800 text-white text-[11px] font-bold uppercase py-3 px-3 rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-md font-sans";
                     } else {
                         btn.innerHTML = '<i class="fas fa-expand"></i> <span class="font-sans font-bold tracking-wider uppercase text-[10px]">Expandir</span>';
-                        btn.className = "w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white text-[11px] font-bold uppercase py-3 px-3 rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-md font-sans";
+                        btn.className = "w-full bg-brand-accent-blue hover:bg-[#00132b] text-white text-[11px] font-bold uppercase py-3 px-3 rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-md font-sans";
                     }
                 }
             });
         }
         document.addEventListener('fullscreenchange', handleFullscreenChange);
         document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-
-        function clearFilters() {
-            const searchInput = document.getElementById('course-search');
-            const categorySelect = document.getElementById('category-select');
-            const sortSelect = document.getElementById('sort-select');
-
-            if (searchInput) searchInput.value = '';
-            if (categorySelect) categorySelect.value = 'all';
-            if (sortSelect) sortSelect.value = 'date-desc';
-            
-            filterCourses();
-        }
 
         function getSafePath(file) {
             const currentUrl = window.location.href;
