@@ -334,7 +334,7 @@
 
                                 <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[32px] xs:h-[38px] sm:h-[48px] lg:h-[46px]">
                                     <button onclick="addToCart(4, 'A Bíblia é um Livro Católico', 17.50, 'Imagens/capablc1.png', 'detalhes/a-biblia-e-um-livro-catolico')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.45M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
                                     </button>
                                     <a href="detalhes/a-biblia-e-um-livro-catolico" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
@@ -788,7 +788,7 @@
                 
                 <!-- Frase Altamente Legível (Sem-serifa) com Contraste Perfeito -->
                 <p class="font-sans text-base sm:text-lg text-white/95 max-w-2xl mx-auto mb-8 tracking-normal leading-relaxed">
-                    Subscreva a nossa newsletter para estar a par de todos os novos lançamentos da Jerónimo Editora, cursos de formação e dos últimos artigos teológicos do Hugo Bacelo.
+                    Subscreva a nossa newsletter para estar a par de todos os novos lançamentos da Jerónimo Editora, cursos de formação e dos últimos artigos do Hugo Bacelo.
                 </p>
 
                 <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="max-w-lg mx-auto flex flex-col sm:flex-row gap-3">
@@ -800,11 +800,13 @@
                     </button>
                 </form>
 
-                <div class="mt-4 flex items-center justify-center gap-2">
-                    <input type="checkbox" id="privacy-consent" required class="accent-brand-gold rounded h-4 w-4">
-                    <label for="privacy-consent" class="text-xs text-gray-300">
-                        Aceito receber novidades e concordo com a <a href="politica-privacidade" class="underline text-brand-gold hover:text-white transition-colors">Política de Privacidade</a>.
-                    </label>
+                <div class="mt-4 text-center">
+                    <p class="text-xs text-gray-300">
+                        Ao subscrever, concorda em receber as nossas novidades.
+                    </p>
+                    <p class="text-xs text-gray-300 mt-1">
+                        Para mais informações consulte <a href="politica-privacidade" class="underline text-brand-gold hover:text-white transition-colors">política de privacidade</a> e os <a href="termos-servico" class="underline text-brand-gold hover:text-white transition-colors">termos de serviço</a>.
+                    </p>
                 </div>
 
                 <div id="newsletter-success-msg" class="hidden mt-6 p-4 bg-green-900/40 border border-green-500/30 text-green-300 text-sm rounded-xl max-w-md mx-auto">
