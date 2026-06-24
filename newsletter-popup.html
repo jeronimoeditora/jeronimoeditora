@@ -1,186 +1,163 @@
-<div id="newsletter-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-    <!-- Fundo desfocado com transição suave -->
-    <div id="newsletter-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity duration-500 opacity-0" onclick="dismissNewsletterPopup()"></div>
+<!-- Popup de Newsletter Premium da Jerónimo Editora (Estilo Flutuante no Fundo) -->
+<div id="ml-newsletter-popup" class="fixed bottom-6 right-6 left-6 sm:left-auto z-50 max-w-sm sm:max-w-md w-[calc(100%-3rem)] sm:w-full transform translate-y-20 opacity-0 pointer-events-none transition-all duration-700 ease-out">
     
-    <!-- Caixa do Popup -->
-    <div id="newsletter-content" class="bg-white rounded-3xl overflow-hidden w-full max-w-lg relative z-10 shadow-2xl border border-gray-100 transform translate-y-8 scale-95 opacity-0 transition-all duration-500 font-inter">
+    <!-- Cartão Flutuante -->
+    <div id="ml-popup-card" class="bg-white rounded-2xl p-5 sm:p-8 shadow-2xl border border-brand-gold/30 relative font-inter">
         
-        <!-- Botão de Fechar -->
-        <button onclick="dismissNewsletterPopup()" class="absolute top-4 right-4 text-gray-400 hover:text-brand-accent-blue hover:bg-gray-100 p-2 rounded-full transition-all z-20" aria-label="Fechar">
-            <i class="fas fa-times text-lg"></i>
+        <!-- Botão para Fechar -->
+        <button onclick="closeNewsletterPopup()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 p-1.5 rounded-full hover:bg-gray-50 transition-all" aria-label="Fechar">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
         </button>
 
-        <div class="p-6 sm:p-8 flex flex-col items-center text-center">
-            <!-- Icon/Estética de Editora Clássica -->
-            <div class="w-16 h-16 rounded-full bg-brand-gold-light border-2 border-brand-gold flex items-center justify-center text-brand-gold-dark text-2xl mb-4 shadow-inner">
-                <i class="fas fa-envelope-open-text"></i>
+        <!-- Conteúdo do Formulário -->
+        <div id="ml-popup-content">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-[#fdfaf2] border border-brand-gold/30 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-brand-gold-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <div>
+                    <span class="text-brand-gold-dark text-[10px] font-black uppercase tracking-widest block font-sans">Newsletter Oficial</span>
+                    <h3 class="font-serif text-lg font-bold text-brand-accent-blue leading-none">Jerónimo & Hugo Bacelo</h3>
+                </div>
             </div>
-
-            <span class="text-brand-accent-orange text-[10px] font-extrabold uppercase tracking-[0.2em] mb-2 block">Novidades & Formação</span>
-            <h3 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue leading-tight mb-3">
-                Newsletter Jerónimo <br>& Hugo Bacelo
-            </h3>
             
-            <p class="text-sm text-gray-650 leading-relaxed mb-6 font-sans">
-                Subscreva gratuitamente para receber os próximos artigos teológicos, cursos de formação e novidades exclusivas de lançamentos diretamente no seu e-mail.
+            <p class="text-xs text-gray-500 leading-relaxed mb-4">
+                Receba gratuitamente as novidades dos nossos livros e os ensaios de formação teológica do Hugo Bacelo.
             </p>
 
-            <!-- Formulário -->
-            <form id="popup-newsletter-form" onsubmit="handlePopupSubscribe(event)" class="w-full space-y-3">
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
-                        <i class="far fa-envelope"></i>
-                    </span>
-                    <input type="email" id="popup-sub-email" required placeholder="O seu endereço de e-mail..." class="w-full pl-10 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans text-gray-700">
+            <form id="ml-popup-form" onsubmit="submitToMailerLite(event)" class="space-y-2">
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <input type="text" id="ml-field-name" placeholder="Nome (opcional)" class="w-full px-3 py-2 bg-brand-bg border border-gray-250 rounded-xl text-xs focus:outline-none focus:border-brand-accent-orange transition-all text-gray-700">
+                    <input type="email" id="ml-field-email" required placeholder="O seu e-mail (obrigatório)" class="w-full px-3 py-2 bg-brand-bg border border-gray-250 rounded-xl text-xs focus:outline-none focus:border-brand-accent-orange transition-all text-gray-700">
                 </div>
                 
-                <button type="submit" class="w-full py-3.5 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-sans shadow-md hover:-translate-y-0.5 active:translate-y-0">
-                    Subscrever Gratuitamente
+                <button type="submit" id="ml-submit-btn" class="w-full bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-extrabold uppercase text-[10px] tracking-widest py-3 rounded-xl transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0">
+                    Quero Subscrever
                 </button>
-
-                <div class="flex items-start justify-center gap-2 pt-2">
-                    <input type="checkbox" id="popup-privacy" required class="accent-brand-gold rounded h-4 w-4 mt-0.5">
-                    <label for="popup-privacy" class="text-[10px] text-gray-400 text-left leading-tight font-sans">
-                        Concordo em receber novidades e aceito a <a href="politica-privacidade" class="underline hover:text-brand-accent-blue transition-colors">Política de Privacidade</a>.
-                    </label>
-                </div>
             </form>
-
-            <!-- Mensagem de Sucesso (Será mostrada dinamicamente) -->
-            <div id="popup-success-message" class="hidden w-full p-4 bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm rounded-xl font-sans font-medium flex items-center gap-2.5">
-                <i class="fas fa-check-circle text-lg"></i>
-                <div class="text-left leading-tight">
-                    A iniciar o seu cliente de e-mail para processar a subscrição!
-                </div>
-            </div>
-
         </div>
+
+        <!-- Mensagem de Sucesso (Oculta por padrão) -->
+        <div id="ml-popup-success" class="hidden text-center py-2">
+            <div class="w-10 h-10 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3 border border-emerald-100">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-1">Inscrição Confirmada!</h4>
+            <p class="text-xs text-gray-500 leading-relaxed mb-4">
+                Muito obrigado por se juntar a nós. Em breve receberá o nosso primeiro e-mail!
+            </p>
+            <button onclick="closeNewsletterPopup()" class="px-5 py-2 bg-brand-accent-blue hover:bg-brand-accent-orange text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all">
+                Fechar
+            </button>
+        </div>
+
     </div>
 </div>
 
 <script>
-    // Configurações do Popup
-    const TIME_DELAY = 7000; // Tempo em milissegundos para o popup aparecer (7 segundos)
-    const SCROLL_TRIGGER = 0.4; // Percentagem de scroll para acionar o popup (40% de descida na página)
-    const COOKIE_EXPIRATION_DAYS = 30; // Dias para o popup não voltar a incomodar após ser fechado
-    
-    let isPopupTriggered = false;
+    // Configurações do MailerLite - Identificador da Conta e do Formulário
+    const MAILERLITE_ACCOUNT_ID = "2468444"; 
+    const MAILERLITE_FORM_ID = "1245638"; // Substitua este valor pelo seu ID longo obtido em embutidos (Passo 1 do guia)
 
-    // Inicialização segura
-    function initNewsletterPopup() {
-        // Se o leitor já subscreveu ou fechou nos últimos 30 dias, não fazemos nada
-        if (localStorage.getItem('jeronimo_newsletter_dismissed')) {
-            return;
-        }
+    // Tempo de espera (em milissegundos) para o popup surgir de baixo (7 segundos)
+    const DISPLAY_DELAY = 7000;
 
-        // Acionador 1: Tempo na página
-        setTimeout(() => {
-            triggerNewsletterPopup();
-        }, TIME_DELAY);
-
-        // Acionador 2: Scroll na página
-        window.addEventListener('scroll', handleNewsletterScroll, { passive: true });
-    }
-
-    function handleNewsletterScroll() {
-        if (isPopupTriggered) return;
-
-        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-        if (totalHeight <= 0) return;
-
-        const scrolled = window.scrollY / totalHeight;
-        if (scrolled >= SCROLL_TRIGGER) {
-            triggerNewsletterPopup();
-            window.removeEventListener('scroll', handleNewsletterScroll);
-        }
-    }
-
-    // Mostrar o Popup com animações fluidas
-    function triggerNewsletterPopup() {
-        if (isPopupTriggered || localStorage.getItem('jeronimo_newsletter_dismissed')) return;
-        isPopupTriggered = true;
-
-        const modal = document.getElementById('newsletter-modal');
-        const overlay = document.getElementById('newsletter-overlay');
-        const content = document.getElementById('newsletter-content');
-
-        if (!modal || !overlay || !content) return;
-
-        // Ativa exibição
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Evita scroll ao ler o popup
-
-        // Animação Fade-in & Scale-up
-        setTimeout(() => {
-            overlay.classList.remove('opacity-0');
-            overlay.classList.add('opacity-100');
-            
-            content.classList.remove('translate-y-8', 'scale-95', 'opacity-0');
-            content.classList.add('translate-y-0', 'scale-100', 'opacity-100');
-        }, 50);
-    }
-
-    // Fechar o Popup e guardar decisão por 30 dias
-    window.dismissNewsletterPopup = function(saveDismiss = true) {
-        const modal = document.getElementById('newsletter-modal');
-        const overlay = document.getElementById('newsletter-overlay');
-        const content = document.getElementById('newsletter-content');
-
-        if (!modal || !overlay || !content) return;
-
-        // Animações inversas
-        overlay.classList.remove('opacity-100');
-        overlay.classList.add('opacity-0');
+    // Função para abrir o Popup deslizando suavemente de baixo
+    function openNewsletterPopup() {
+        const isSubscribed = localStorage.getItem('jeronimo_ml_subscribed');
+        const isClosed = localStorage.getItem('jeronimo_ml_closed_time');
         
-        content.classList.remove('translate-y-0', 'scale-100', 'opacity-100');
-        content.classList.add('translate-y-8', 'scale-95', 'opacity-0');
+        if (isSubscribed) return;
 
-        setTimeout(() => {
-            modal.classList.add('hidden');
-            document.body.style.overflow = ''; // Devolve o controlo do scroll
+        if (isClosed) {
+            const daysLimit = 15;
+            const elapsedTime = Date.now() - parseInt(isClosed);
+            const limitTime = daysLimit * 24 * 60 * 60 * 1000;
+            if (elapsedTime < limitTime) return;
+        }
+
+        const popup = document.getElementById('ml-newsletter-popup');
+
+        if (popup) {
+            popup.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-20');
+            popup.classList.add('opacity-100', 'translate-y-0');
+        }
+    }
+
+    // Função para fechar o Popup com animação de descida
+    window.closeNewsletterPopup = function() {
+        const popup = document.getElementById('ml-newsletter-popup');
+
+        if (popup) {
+            popup.classList.remove('opacity-100', 'translate-y-0');
+            popup.classList.add('opacity-0', 'pointer-events-none', 'translate-y-20');
             
-            if (saveDismiss) {
-                // Guarda marca temporal no navegador do cliente
-                const expireDate = new Date();
-                expireDate.setDate(expireDate.getDate() + COOKIE_EXPIRATION_DAYS);
-                localStorage.setItem('jeronimo_newsletter_dismissed', expireDate.getTime().toString());
+            const alreadySubscribed = localStorage.getItem('jeronimo_ml_subscribed');
+            if (!alreadySubscribed) {
+                localStorage.setItem('jeronimo_ml_closed_time', Date.now().toString());
             }
-        }, 500);
+        }
     };
 
-    // Subscrição Premium (Mailto nativo adaptável a outras integrações futuramente)
-    window.handlePopupSubscribe = function(e) {
-        e.preventDefault();
-        const emailInput = document.getElementById('popup-sub-email');
-        const form = document.getElementById('popup-newsletter-form');
-        const successMsg = document.getElementById('popup-success-msg');
+    // Subscrição silenciosa para o MailerLite (Sem recarregar a página)
+    window.submitToMailerLite = async function(event) {
+        event.preventDefault();
+        
+        const emailInput = document.getElementById('ml-field-email');
+        const nameInput = document.getElementById('ml-field-name');
+        const submitBtn = document.getElementById('ml-submit-btn');
 
         if (!emailInput || !emailInput.value.trim()) return;
 
         const email = emailInput.value.trim();
-        const recipient = "editorajeronimo@gmail.com";
-        const subject = encodeURIComponent("Subscrição de Newsletter");
-        const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos e novidades com o e-mail: " + email);
+        const name = nameInput ? nameInput.value.trim() : "";
 
-        // Dispara o cliente de e-mail nativo
-        window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<i class="fas fa-spinner animate-spin mr-2"></i> A processar...`;
 
-        // Feedback visual premium no modal
-        if (form && successMsg) {
-            form.classList.add('hidden');
-            successMsg.classList.remove('hidden');
+        try {
+            const formData = new FormData();
+            formData.append('fields[email]', email);
+            if (name) {
+                formData.append('fields[name]', name);
+            }
+
+            const url = `https://assets.mailerlite.com/jsonp/${MAILERLITE_ACCOUNT_ID}/forms/${MAILERLITE_FORM_ID}/subscribe`;
+
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData,
+                mode: 'cors'
+            });
+
+            if (response.ok) {
+                localStorage.setItem('jeronimo_ml_subscribed', 'true');
+                localStorage.removeItem('jeronimo_ml_closed_time');
+
+                const contentBlock = document.getElementById('ml-popup-content');
+                const successBlock = document.getElementById('ml-popup-success');
+
+                if (contentBlock && successBlock) {
+                    contentBlock.classList.add('hidden');
+                    successBlock.classList.remove('hidden');
+                }
+            } else {
+                throw new Error("Erro na resposta do servidor.");
+            }
+        } catch (error) {
+            console.error("Erro na subscrição:", error);
+            alert("Ocorreu um problema ao registar a subscrição. Por favor, tente novamente.");
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `Quero Subscrever`;
         }
-
-        // Guarda que o leitor já subscreveu para nunca mais incomodar com o pop-up
-        localStorage.setItem('jeronimo_author_subscribed', 'true');
-        localStorage.setItem('jeronimo_author_token', 'subscriber_' + Math.random().toString(36).substring(2, 10));
-
-        // Fecha após 5 segundos
-        setTimeout(() => {
-            dismissNewsletterPopup(true);
-        }, 5000);
     };
 
-    // Iniciar
-    initNewsletterPopup();
+    // Ativa o temporizador global para a abertura do popup
+    setTimeout(openNewsletterPopup, DISPLAY_DELAY);
 </script>
