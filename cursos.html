@@ -156,9 +156,9 @@
                 <button onclick="abrirModalInfo()" class="inline-flex items-center justify-center gap-1.5 bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider px-4 sm:px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300 whitespace-nowrap">
                     <i class="fas fa-question-circle"></i> Como funciona?
                 </button>
-                <button class="inline-flex items-center justify-center gap-1.5 bg-brand-accent-blue hover:bg-[#001730] text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider px-4 sm:px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300 whitespace-nowrap">
+                <a href="sobreHB" class="inline-flex items-center justify-center gap-1.5 bg-brand-accent-blue hover:bg-[#001730] text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider px-4 sm:px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300 whitespace-nowrap">
                     <i class="fas fa-user-tie"></i> Formador Hugo Bacelo
-                </button>
+                </a>
             </div>
 
             <!-- Sem Resultados -->
@@ -175,7 +175,7 @@
         </div>
     </main>
 
-    <!-- Modal Informativo: Como Funciona -->
+    <!-- Modal Informativo: Como Funciona (Antigo Acordo Ortográfico) -->
     <div id="info-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300">
         <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl p-6 md:p-8 relative border-t-4 border-brand-accent-orange transform scale-95 transition-transform duration-300" id="info-modal-content">
             <button onclick="fecharModalInfo()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none">
@@ -192,28 +192,25 @@
             <div class="space-y-4 text-sm text-gray-650 font-sans leading-relaxed">
                 <div class="flex gap-3 items-start">
                     <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5">1</span>
-                    <p class="text-gray-700 font-medium">Escolha o curso pretendido na listagem de cursos em vídeo.</p>
+                    <p class="text-gray-700 font-medium font-sans">Escolha o curso pretendido na listagem de cursos em vídeo.</p>
                 </div>
                 <div class="flex gap-3 items-start">
                     <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5">2</span>
-                    <p class="text-gray-700 font-medium">Clique em Adquirir Acesso para ser direcionado para o Checkout.</p>
+                    <p class="text-gray-700 font-medium font-sans">Clique em Adquirir Acesso para ser direccionado para o Checkout.</p>
                 </div>
                 <div class="flex gap-3 items-start">
                     <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5">3</span>
-                    <p class="text-gray-700 font-medium">Efetue o pagamento e anexe o comprovativo correspondente para libertação rápida da chave.</p>
+                    <p class="text-gray-700 font-medium font-sans">Efectue o pagamento e anexe o comprovativo correspondente para libertação rápida da chave.</p>
                 </div>
                 
                 <div class="bg-orange-50 border border-orange-100 p-4 rounded-xl font-semibold text-brand-accent-orange flex gap-3 mt-4">
                     <i class="fas fa-clock mt-0.5 text-lg flex-shrink-0"></i>
-                    <span class="text-xs leading-normal">Terá 10 dias para assistir ao vídeo após a primeira utilização da chave de acesso.</span>
+                    <span class="text-xs leading-normal font-sans">Terá 10 dias para assistir ao vídeo após a primeira utilização da chave de acesso.</span>
                 </div>
             </div>
 
-            <!-- Botões de Ação do Modal -->
-            <div class="mt-6 flex flex-col sm:flex-row gap-3">
-                <button onclick="fecharModalInfo()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center">
-                    Voltar
-                </button>
+            <!-- Botões de Ação do Modal - Botão Voltar Eliminado -->
+            <div class="mt-6">
                 <button onclick="scrollParaCursos(); fecharModalInfo();" class="w-full bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center block shadow-md">
                     Ver Cursos
                 </button>
@@ -319,6 +316,19 @@
             }
         }
 
+        // Limpeza dos filtros de pesquisa
+        function clearFilters() {
+            const searchInput = document.getElementById('course-search');
+            const categorySelect = document.getElementById('category-select');
+            const sortSelect = document.getElementById('sort-select');
+
+            if (searchInput) searchInput.value = '';
+            if (categorySelect) categorySelect.value = 'all';
+            if (sortSelect) sortSelect.value = 'date-desc';
+
+            filterCourses();
+        }
+
         // Filtros e ordenação da grelha de cursos
         function filterCourses() {
             const searchInput = document.getElementById('course-search');
@@ -348,7 +358,7 @@
             renderCourses(filtered);
         }
 
-        // Alterna entre abas trancadas
+        // Alterna entre abas trancadas no player
         function switchLockedTab(courseId, tab) {
             const tabKey = document.getElementById(`tab-key-${courseId}`);
             const tabProgram = document.getElementById(`tab-program-${courseId}`);
@@ -358,13 +368,13 @@
             if (!tabKey || !tabProgram || !paneKey || !paneProgram) return;
 
             if (tab === 'key') {
-                tabKey.className = "px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-neutral-200 border-b-2 border-brand-gold transition-all duration-300";
-                tabProgram.className = "px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300 ml-4";
+                tabKey.className = "px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-200 border-b-2 border-brand-gold transition-all duration-300";
+                tabProgram.className = "px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300 ml-4";
                 paneKey.classList.remove('hidden');
                 paneProgram.classList.add('hidden');
             } else {
-                tabProgram.className = "px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-neutral-200 border-b-2 border-brand-gold transition-all duration-300 ml-4";
-                tabKey.className = "px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300";
+                tabProgram.className = "px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-200 border-b-2 border-brand-gold transition-all duration-300 ml-4";
+                tabKey.className = "px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-500 border-b-2 border-transparent hover:text-neutral-300 transition-all duration-300";
                 paneKey.classList.add('hidden');
                 paneProgram.classList.remove('hidden');
 
@@ -375,7 +385,7 @@
                         html += `
                             <div class="w-full text-left p-3 rounded text-xs sm:text-sm font-semibold leading-tight bg-white/5 border border-white/5 text-slate-300 flex items-center justify-between hover:bg-white/10 transition-all cursor-pointer" onclick="alertaProgramaBloqueado('${courseId}')">
                                 <span class="truncate font-sans font-medium text-[13px]">${part.title}</span>
-                                <span class="shrink-0 text-amber-500">
+                                <span class="shrink-0 text-brand-gold">
                                     <i class="fas fa-lock text-[11px]"></i>
                                 </span>
                             </div>
@@ -442,7 +452,7 @@
                             </div>
 
                             <div id="pane-key-${course.id}" class="flex-grow flex flex-col items-center justify-center space-y-3 z-10 w-full max-w-[280px] mx-auto px-2">
-                                <span class="text-amber-500 text-lg block"><i class="fas fa-lock"></i></span>
+                                <span class="text-brand-gold text-lg block"><i class="fas fa-lock"></i></span>
                                 
                                 <div class="flex flex-col gap-2 w-full mt-1">
                                     <div class="flex gap-1.5">
@@ -490,7 +500,7 @@
                             </div>
 
                             <div id="pane-key-${course.id}" class="flex-grow flex flex-col items-center justify-center space-y-3 z-10 w-full max-w-[280px] mx-auto px-2">
-                                <span class="text-amber-500 text-lg block"><i class="fas fa-lock"></i></span>
+                                <span class="text-brand-gold text-lg block"><i class="fas fa-lock"></i></span>
                                 
                                 <div class="flex flex-col gap-2 w-full mt-1">
                                     <div class="flex gap-1.5">
@@ -673,7 +683,7 @@
             if (!part.available || !part.videoId) {
                 playerArea.innerHTML = `
                     <div class="text-center p-4">
-                        <i class="fas fa-hourglass-half text-amber-500 text-2xl mb-2"></i>
+                        <i class="fas fa-hourglass-half text-brand-gold text-2xl mb-2"></i>
                         <h5 class="font-inter font-bold text-xs text-slate-200">Vídeo em Pós-Produção</h5>
                         <p class="text-[9px] text-slate-400 font-sans mt-1">Este módulo estará disponível muito brevemente.</p>
                     </div>
