@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-PT" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -13,7 +13,7 @@
         }
     </script>
     
-    <!-- Google Fonts unificadas com suporte completo a pesos e itálicos de Playfair Display -->
+    <!-- Google Fonts unificadas com suporte completo a pesos e itálicos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -29,8 +29,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
-                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de cursos
+                        sans: ['"Roboto"', 'sans-serif'],
+                        inter: ['"Inter"', 'sans-serif'],
                         serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
@@ -54,6 +54,27 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Compatibilidade de ecrã inteiro (fullscreen) para o wrapper do vídeo */
+        .video-wrapper:fullscreen {
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            background-color: #000;
+        }
+        .video-wrapper:-webkit-full-screen {
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            background-color: #000;
         }
 
         .fade-in { animation: fadeIn 0.6s ease-out forwards; }
@@ -73,7 +94,6 @@
     <!-- CONTENTOR DO MENU DINÂMICO (Carregado do seu GitHub) -->
     <div id="nav-placeholder"></div>
 
-    <!-- CONTEÚDO DOS CURSOS -->
     <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
         <div class="max-w-6xl mx-auto px-6 fade-in">
             
@@ -85,14 +105,14 @@
             </div>
 
             <!-- Barra de Filtros -->
-            <div class="bg-white p-4 sm:p-6 rounded-2xl border border-gray-150 shadow-xs max-w-4xl mx-auto mb-12">
+            <div class="bg-white p-4 sm:p-6 rounded-2xl border border-gray-150 shadow-xs max-w-4xl mx-auto mb-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 items-center">
                     
                     <div class="lg:col-span-5 relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                             <i class="fas fa-search text-gray-400 text-sm"></i>
                         </span>
-                        <input type="text" id="course-search" onkeyup="filterCourses()" placeholder="Pesquise cursos por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                        <input type="text" id="course-search" onkeyup="filterCourses()" placeholder="Pesquise cursos..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
                     </div>
                     
                     <div class="lg:col-span-3">
@@ -119,6 +139,16 @@
                 </div>
             </div>
 
+            <!-- Botões de Atalho para o Checkout e de Informações -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-3 mb-12 max-w-lg mx-auto">
+                <a href="#checkout-section" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-xs sm:text-sm font-extrabold uppercase tracking-wider px-6 py-4 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300">
+                    <i class="fas fa-shopping-cart"></i> Adquirir Acesso
+                </a>
+                <button onclick="abrirModalInfo()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-brand-accent-blue hover:text-brand-accent-orange text-xs sm:text-sm font-extrabold uppercase tracking-wider px-6 py-4 rounded-xl border border-gray-200 shadow-sm transition-all transform hover:-translate-y-0.5 duration-300">
+                    <i class="fas fa-question-circle"></i> Como funciona?
+                </button>
+            </div>
+
             <!-- Sem Resultados -->
             <div id="no-results" class="hidden text-center py-16">
                 <i class="fas fa-video-slash text-gray-300 text-5xl mb-4"></i>
@@ -127,62 +157,174 @@
             </div>
 
             <!-- Grelha de Cursos -->
-            <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
                 <!-- Preenchido dinamicamente via JavaScript -->
+            </div>
+
+            <!-- SECÇÃO MINI CHECKOUT GERAL -->
+            <div id="checkout-section" class="bg-blue-50/70 p-6 md:p-8 rounded-3xl border-2 border-blue-100 shadow-xl max-w-4xl mx-auto relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-48 h-48 bg-brand-accent-blue/5 rounded-bl-[150px] -z-10 pointer-events-none"></div>
+                
+                <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-accent-blue mb-2 flex items-center gap-3">
+                    <i class="fas fa-shopping-basket text-brand-accent-orange"></i> Adquirir Chave de Acesso
+                </h2>
+                <p class="text-sm text-gray-600 mb-6 font-sans">Escolha o seu curso na lista, confirme o total, submeta os seus dados e envie-nos o comprovativo de pagamento.</p>
+                
+                <form id="mini-checkout-form" class="space-y-6" onsubmit="enviarPedidoCheckout(event)">
+                    
+                    <!-- Passo 1: Selecionar Curso Direto no Dropdown -->
+                    <div class="bg-white p-4 rounded-xl border border-blue-100">
+                        <label for="course-dropdown-select" class="block text-xs font-bold text-brand-accent-blue uppercase tracking-wider mb-2">
+                            <i class="fas fa-graduation-cap text-brand-accent-orange mr-1"></i> 1. Seleccione o Curso
+                        </label>
+                        
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                                <i class="fas fa-search-plus text-gray-400 text-sm"></i>
+                            </span>
+                            <select id="course-dropdown-select" onchange="adicionarCursoDropdown()" class="w-full pl-10 pr-10 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700 appearance-none">
+                                <option value="">-- Clique aqui para escolher um curso --</option>
+                                <!-- Injetado via Javascript baseado em cursos com status "Disponível" -->
+                            </select>
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none">
+                                <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+                            </span>
+                        </div>
+
+                        <!-- Lista de compras super compacta -->
+                        <div id="mc-selected-container" class="mt-3 hidden">
+                            <div id="mc-selected-list" class="space-y-1.5 pt-1.5 border-t border-gray-150">
+                                <!-- Items de compra rápidos e limpos -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Passo 2: Dados do Cliente e Envio do Comprovativo -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Nome *</label>
+                                <input type="text" id="checkout-nome" required class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">NIF (Opcional)</label>
+                                    <input type="text" id="checkout-nif" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Contacto (E-mail/Telemóvel) *</label>
+                                    <input type="text" id="checkout-contacto" required class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Detalhes de Pagamento & Envio de Comprovativo Personalizado -->
+                        <div class="bg-white p-5 rounded-2xl border border-blue-100 flex flex-col justify-between space-y-4 shadow-sm">
+                            <div>
+                                <span class="block text-xs font-bold text-brand-accent-blue uppercase tracking-wider mb-1">2. Detalhes de Pagamento & Comprovativo</span>
+                                <p class="text-[11px] text-gray-550 mb-4 font-sans leading-relaxed">
+                                    Pague por <strong>MB WAY (939 667 267)</strong> ou <strong>IBAN (PT50 0035 0284 0001 5872 4004 0)</strong> e anexe o comprovativo correspondente.
+                                </p>
+                                
+                                <div class="relative">
+                                    <input type="file" id="checkout-comprovativo" required accept="image/*,application/pdf" class="hidden" onchange="atualizarNomeFicheiro()">
+                                    <label for="checkout-comprovativo" class="inline-flex items-center gap-2 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider py-3.5 px-5 rounded-xl cursor-pointer transition-all duration-300 w-full justify-center">
+                                        <i class="fas fa-file-upload"></i> Anexar Comprovativo
+                                    </label>
+                                    <div id="file-selected-name" class="hidden mt-2 text-xs text-green-600 font-bold bg-green-50 p-2 rounded-lg border border-green-150 flex items-center justify-between">
+                                        <span class="truncate pr-2" id="file-name-text">Nenhum ficheiro</span>
+                                        <button type="button" onclick="removerFicheiro()" class="text-red-500 hover:text-red-700 text-sm font-bold pl-2">×</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs text-brand-accent-blue uppercase font-bold tracking-wider">Total a Pagar:</span>
+                                <span id="checkout-total-exibido" class="text-2xl font-black text-brand-accent-orange font-sans">0.00€</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Passo 3: Aceitação de Termos e Submissão -->
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-5 pt-4 border-t border-blue-100">
+                        <div class="flex flex-col gap-2.5 flex-1">
+                            <div class="flex items-start gap-2.5">
+                                <input type="checkbox" id="checkout-termos" required class="mt-1 w-4 h-4 rounded text-brand-accent-orange focus:ring-brand-accent-orange cursor-pointer">
+                                <label for="checkout-termos" class="text-[11px] text-gray-550 font-sans leading-tight cursor-pointer">
+                                    Li e aceito os <a href="termos-condicoes" target="_blank" class="underline text-brand-accent-blue font-semibold hover:text-brand-accent-orange">Termos e Condições</a> e a <a href="politica-privacidade" target="_blank" class="underline text-brand-accent-blue font-semibold hover:text-brand-accent-orange">Política de Privacidade</a>. *
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="w-full sm:w-auto flex flex-col items-end">
+                            <button type="submit" id="checkout-submit-btn" class="w-full sm:w-auto bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-xl transition-all shadow-md font-sans">
+                                Confirmar Pagamento <i class="fas fa-check-circle ml-2"></i>
+                            </button>
+                            <p id="checkout-error" class="text-xs text-red-500 font-bold mt-2 hidden"></p>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Div de Sucesso (Exibida por cima do formulário quando finalizado) -->
+                <div id="checkout-success-view" class="hidden absolute inset-0 bg-white z-20 flex flex-col items-center justify-center p-6 text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-500 mb-4 shadow-sm">
+                        <i class="fas fa-check text-2xl"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-brand-accent-blue mb-2">Comprovativo Submetido!</h3>
+                    <p class="text-gray-650 font-sans mb-6 max-w-md text-sm">Obrigado. Confirmaremos o seu pagamento com a maior brevidade possível e enviaremos a respectiva chave de acesso digital para o contacto indicado.</p>
+                    <button onclick="resetCheckoutForm()" class="bg-gray-150 hover:bg-gray-250 text-gray-700 font-bold text-xs uppercase tracking-wider py-3.5 px-6 rounded-xl transition-all font-sans">
+                        Efectuar Outro Pedido
+                    </button>
+                </div>
             </div>
 
         </div>
     </main>
 
-    <!-- Notificação Flutuante de Adicionado ao Carrinho -->
-    <div id="toast-notice" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-500 ease-out max-w-sm w-[90%] sm:w-full bg-white rounded-2xl shadow-2xl border border-brand-accent-blue/10 p-4 flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 flex-shrink-0">
-            <i class="fas fa-check-circle text-lg"></i>
-        </div>
-        <div class="flex-grow">
-            <p class="text-xs text-emerald-800 font-bold uppercase tracking-wider">Adicionado com Sucesso</p>
-            <p id="toast-message" class="text-sm text-gray-650 font-medium font-sans">O curso foi adicionado ao seu carrinho.</p>
-        </div>
-    </div>
-
-    <!-- Modal Informativo -->
-    <div id="payment-warning-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 flex items-center justify-center p-4 backdrop-blur-sm">
-        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl p-6 relative border-t-4 border-brand-accent-orange">
-            <button onclick="closeWarningModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none">
+    <!-- Modal Informativo: Como Funciona -->
+    <div id="info-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl p-6 md:p-8 relative border-t-4 border-brand-accent-orange transform scale-95 transition-transform duration-300" id="info-modal-content">
+            <button onclick="fecharModalInfo()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none">
                 <i class="fas fa-times text-lg"></i>
             </button>
             
-            <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-brand-accent-blue flex-shrink-0 border border-blue-100">
-                    <i class="fas fa-info-circle text-lg text-brand-accent-blue"></i>
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-brand-accent-orange flex-shrink-0 border border-orange-100">
+                    <i class="fas fa-info-circle text-lg"></i>
                 </div>
-                <h3 class="font-serif text-xl font-bold text-brand-accent-blue">Como funciona o acesso?</h3>
+                <h3 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-blue">Como funciona?</h3>
             </div>
             
             <div class="space-y-4 text-sm text-gray-650 font-sans leading-relaxed">
-                <!-- Parágrafo 1 -->
-                <p>O curso é adicionado ao seu carrinho de compras para que possa prosseguir para o pagamento.</p>
+                <!-- Passos -->
+                <div class="flex gap-3 items-start">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5">1</span>
+                    <p class="text-gray-700 font-medium">Escolha o curso ou cursos no final da página.</p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5">2</span>
+                    <p class="text-gray-700 font-medium">Efectue o pagamento e envie o respectivo comprovativo.</p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5">3</span>
+                    <p class="text-gray-700 font-medium">A sua chave de acesso será enviada para o seu mail ou contacto via SMS.</p>
+                </div>
                 
-                <!-- Parágrafo 2 -->
-                <p class="bg-blue-50/60 border border-blue-100 p-3.5 rounded-xl font-medium text-brand-accent-blue flex gap-3">
-                    <i class="fas fa-envelope-open-text mt-0.5 text-lg flex-shrink-0"></i>
-                    <span>O código de acesso será enviado para o seu email após a confirmação do pagamento.</span>
-                </p>
-
-                <!-- Parágrafo 3 -->
-                <p class="bg-[#fcf8ee] border border-amber-100 p-3.5 rounded-xl font-semibold text-brand-accent-orange flex gap-3">
+                <!-- Aviso Cor de Laranja -->
+                <div class="bg-orange-50 border border-orange-100 p-4 rounded-xl font-semibold text-brand-accent-orange flex gap-3 mt-4">
                     <i class="fas fa-clock mt-0.5 text-lg flex-shrink-0"></i>
-                    <span>Terá 10 dias para assistir ao vídeo após a primeira utilização da chave de acesso.</span>
-                </p>
+                    <span class="text-xs leading-normal">Terá 10 dias para assistir ao vídeo após a primeira utilização da chave de acesso.</span>
+                </div>
             </div>
 
+            <!-- Botões de Ação do Modal -->
             <div class="mt-6 flex flex-col sm:flex-row gap-3">
-                <button onclick="closeWarningModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center">
+                <button onclick="fecharModalInfo()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center">
                     Voltar a cursos
                 </button>
-                <a href="checkout" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center block">
-                    Ir para o carrinho <i class="fas fa-shopping-cart ml-1"></i>
-                </a>
+                <button onclick="irParaAdquirirAcesso()" class="w-full bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center block shadow-md">
+                    Adquirir Chave
+                </button>
             </div>
         </div>
     </div>
@@ -191,12 +333,15 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // Dados Estruturados dos Cursos de acordo com o padrão de chaves [PREFIXO]-[ANO]-[MÊS]-[DIA]-[SUFIXO_ALEATÓRIO]
+        // Endpoint do Google Apps Script (Igual ao do checkout.html)
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec";
+
+        // Dados Estruturados dos Cursos
         const coursesData = [
             {
                 id: "curso_missa_1",
-                prefix: "JRN1", // Prefixo obrigatório para validação da chave
-                videoId: "OwL0LrOL214", // ID extraído do link fornecido para embed
+                prefix: "JRN1", 
+                videoId: "OwL0LrOL214", 
                 title: "Conhecer a Missa (parte 1)",
                 category: "Liturgia",
                 date: "2026-05-15",
@@ -209,7 +354,7 @@
             {
                 id: "curso_missa_2",
                 prefix: "JRN2",
-                videoId: "", // Sem ID activo por estar indisponível no momento
+                videoId: "", 
                 title: "Conhecer a Missa (parte 2)",
                 category: "Liturgia",
                 date: "2026-07-01",
@@ -221,30 +366,270 @@
             }
         ];
 
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const backdrop = document.getElementById('menu-backdrop');
-            if (!menu || !backdrop) return;
-            
-            if (menu.classList.contains('translate-x-full')) {
-                backdrop.classList.remove('hidden');
+        // Lista interna de cursos seleccionados para compra
+        let cursosSeleccionados = [];
+
+        // Funções do Modal de Informações
+        function abrirModalInfo() {
+            const modal = document.getElementById('info-modal');
+            const content = document.getElementById('info-modal-content');
+            if (modal && content) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
                 setTimeout(() => {
-                    backdrop.classList.remove('opacity-0');
-                    backdrop.classList.add('opacity-100');
-                    menu.classList.remove('translate-x-full');
-                }, 20);
-                document.body.style.overflow = 'hidden'; 
-            } else {
-                menu.classList.add('translate-x-full');
-                backdrop.classList.remove('opacity-100');
-                backdrop.classList.add('opacity-0');
-                setTimeout(() => {
-                    backdrop.classList.add('hidden');
-                }, 300);
-                document.body.style.overflow = ''; 
+                    content.classList.remove('scale-95');
+                    content.classList.add('scale-100');
+                }, 10);
+                document.body.style.overflow = 'hidden';
             }
         }
 
+        function fecharModalInfo() {
+            const modal = document.getElementById('info-modal');
+            const content = document.getElementById('info-modal-content');
+            if (modal && content) {
+                content.classList.remove('scale-100');
+                content.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.remove('flex');
+                    modal.classList.add('hidden');
+                }, 150);
+                document.body.style.overflow = '';
+            }
+        }
+
+        function irParaAdquirirAcesso() {
+            fecharModalInfo();
+            setTimeout(() => {
+                const checkoutSec = document.getElementById('checkout-section');
+                if (checkoutSec) {
+                    checkoutSec.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 200);
+        }
+
+        // Popula o select dropdown com os cursos disponíveis
+        function popularDropdownCursos() {
+            const dropdown = document.getElementById('course-dropdown-select');
+            if (!dropdown) return;
+            
+            dropdown.innerHTML = '<option value="">-- Clique aqui para escolher um curso --</option>';
+            
+            coursesData.forEach(course => {
+                if (course.status === "Disponível") {
+                    const opt = document.createElement('option');
+                    opt.value = course.id;
+                    opt.textContent = `${course.title} — ${course.price.toFixed(2)}€`;
+                    dropdown.appendChild(opt);
+                }
+            });
+        }
+
+        // Acciona a inserção automática de curso ao mudar a seleção do dropdown
+        function adicionarCursoDropdown() {
+            const dropdown = document.getElementById('course-dropdown-select');
+            if (!dropdown) return;
+            
+            const selectedId = dropdown.value;
+            if (!selectedId) return;
+
+            if (!cursosSeleccionados.includes(selectedId)) {
+                cursosSeleccionados.push(selectedId);
+            }
+
+            dropdown.value = ""; 
+            atualizarVisualizacaoListaCursos();
+        }
+
+        // Remove um curso da lista seleccionada
+        function removerCursoDeLista(courseId) {
+            cursosSeleccionados = cursosSeleccionados.filter(id => id !== courseId);
+            atualizarVisualizacaoListaCursos();
+        }
+
+        // Reconstrói a lista visual de cursos seleccionados e recalcula o total
+        function atualizarVisualizacaoListaCursos() {
+            const listContainer = document.getElementById('mc-selected-list');
+            const mainContainer = document.getElementById('mc-selected-container');
+            if (!listContainer || !mainContainer) return;
+
+            if (cursosSeleccionados.length === 0) {
+                mainContainer.classList.add('hidden');
+                listContainer.innerHTML = '';
+                document.getElementById('checkout-total-exibido').textContent = '0.00€';
+                return;
+            }
+
+            mainContainer.classList.remove('hidden');
+            let html = '';
+            let total = 0;
+
+            cursosSeleccionados.forEach(id => {
+                const course = coursesData.find(c => c.id === id);
+                if (course) {
+                    total += course.price;
+                    html += `
+                        <div class="flex items-center justify-between py-1.5 px-2.5 bg-blue-50 rounded-lg text-xs font-sans border border-blue-100">
+                            <span class="font-bold text-brand-accent-blue truncate pr-4">${course.title}</span>
+                            <div class="flex items-center gap-3">
+                                <span class="font-extrabold text-brand-accent-orange">${course.price.toFixed(2)}€</span>
+                                <button type="button" onclick="removerCursoDeLista('${course.id}')" class="text-gray-400 hover:text-red-500 transition-colors" title="Remover">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            listContainer.innerHTML = html;
+            document.getElementById('checkout-total-exibido').textContent = total.toFixed(2) + '€';
+            
+            const errorEl = document.getElementById('checkout-error');
+            if (errorEl) errorEl.classList.add('hidden');
+        }
+
+        // Actualiza o display de ficheiro personalizado do comprovativo
+        function atualizarNomeFicheiro() {
+            const fileInput = document.getElementById('checkout-comprovativo');
+            const container = document.getElementById('file-selected-name');
+            const textSpan = document.getElementById('file-name-text');
+            
+            if (fileInput && fileInput.files.length > 0) {
+                textSpan.textContent = fileInput.files[0].name;
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+
+        // Permite ao utilizador remover o ficheiro anexado
+        function removerFicheiro() {
+            const fileInput = document.getElementById('checkout-comprovativo');
+            const container = document.getElementById('file-selected-name');
+            if (fileInput) fileInput.value = "";
+            if (container) container.classList.add('hidden');
+        }
+
+        // Converte o comprovativo anexado para texto Base64 legível pelo script Google
+        async function fileToBase64(file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function(event) {
+                    if (file.type === 'application/pdf') {
+                        resolve(event.target.result);
+                        return;
+                    }
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 1200;
+                        let width = img.width, height = img.height;
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        resolve(canvas.toDataURL('image/jpeg', 0.7));
+                    };
+                };
+            });
+        }
+
+        // Envia o pedido de checkout à API do Google Sheets de forma integrada
+        async function enviarPedidoCheckout(e) {
+            e.preventDefault();
+            const errorEl = document.getElementById('checkout-error');
+            const submitBtn = document.getElementById('checkout-submit-btn');
+            
+            if (cursosSeleccionados.length === 0) {
+                if (errorEl) {
+                    errorEl.textContent = "Por favor, seleccione pelo menos um curso.";
+                    errorEl.classList.remove('hidden');
+                }
+                return;
+            }
+
+            if (errorEl) errorEl.classList.add('hidden');
+            
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> A processar...';
+
+            try {
+                const fileInput = document.getElementById('checkout-comprovativo');
+                let base64File = "";
+                let fileName = "Sem ficheiro";
+
+                if (fileInput && fileInput.files.length > 0) {
+                    base64File = await fileToBase64(fileInput.files[0]);
+                    fileName = fileInput.files[0].name;
+                }
+
+                // Prepara itens seleccionados
+                const payloadItens = cursosSeleccionados.map(id => {
+                    const c = coursesData.find(item => item.id === id);
+                    return {
+                        titulo: c ? c.title : "Curso Adquirido",
+                        qtd: 1,
+                        preco_unit: c ? c.price : 0,
+                        tipo: "curso"
+                    };
+                });
+
+                // Constrói o Payload com etiqueta 'digital_course_order' dedicada
+                const payload = {
+                    type: 'digital_course_order', // Chave fundamental para o Google Apps Script distinguir do envio de livros físicos
+                    cliente: {
+                        nome: document.getElementById('checkout-nome').value,
+                        email: document.getElementById('checkout-contacto').value, // Recebe Email ou Telemóvel
+                        nif: document.getElementById('checkout-nif').value || "N/A"
+                    },
+                    pagamento: {
+                        metodo: 'MBWAY/IBAN (Mini Checkout)',
+                        total: document.getElementById('checkout-total-exibido').textContent,
+                        fileBase64: base64File,
+                        fileName: fileName
+                    },
+                    itens: payloadItens
+                };
+
+                // Executa o envio para a sua folha de cálculo Google
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(payload)
+                });
+
+                // Exibe ecrã de sucesso integrado
+                document.getElementById('checkout-success-view').classList.remove('hidden');
+            } catch (err) {
+                console.error(err);
+                if (errorEl) {
+                    errorEl.textContent = "Ocorreu um erro no envio. Verifique a sua ligação e tente novamente.";
+                    errorEl.classList.remove('hidden');
+                }
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        }
+
+        // Permite ao utilizador efetuar um novo pedido
+        function resetCheckoutForm() {
+            document.getElementById('mini-checkout-form').reset();
+            cursosSeleccionados = [];
+            atualizarVisualizacaoListaCursos();
+            removerFicheiro();
+            document.getElementById('checkout-success-view').classList.add('hidden');
+        }
+
+        // Filtros e ordenação da grelha de cursos
         function filterCourses() {
             const searchInput = document.getElementById('course-search');
             const categorySelect = document.getElementById('category-select');
@@ -273,7 +658,7 @@
             renderCourses(filtered);
         }
 
-        // --- STREAMING_CHUNK: Processando e populando a grelha de cursos activos... ---
+        // Geração dos cards de cursos mais limpos (Com preço no topo)
         function renderCourses(courses) {
             const grid = document.getElementById('courses-grid');
             const noResults = document.getElementById('no-results');
@@ -290,37 +675,23 @@
             
             courses.forEach(course => {
                 const isAvailable = course.status === "Disponível";
-                
-                let actionButton = '';
                 let priceHtml = '';
                 let videoPlaceholder = '';
                 
                 if (isAvailable) {
                     priceHtml = `
-                        <div>
-                            <span class="text-gray-400 text-[10px] block uppercase font-bold">Valor do Acesso</span>
-                            <span class="text-lg font-bold text-brand-accent-blue">${course.price.toFixed(2)}€</span>
-                        </div>
-                    `;
-                    // Botão de Informações em Azul Vibrante, Perfeitamente Visível
-                    actionButton = `
-                        <div class="flex items-center gap-2">
-                            <button onclick="openWarningModal()" class="bg-blue-50 hover:bg-brand-accent-blue text-brand-accent-blue hover:text-white border border-brand-accent-blue/20 text-sm p-3.5 rounded-xl transition-all duration-300 flex items-center justify-center shadow-xs" title="Como funciona o acesso?">
-                                <i class="fas fa-info-circle text-lg"></i>
-                            </button>
-                            <button onclick="adicionarAoCheckout('${course.id}', '${course.title}', ${course.price})" class="bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-xs font-bold uppercase tracking-wider px-5 py-4 rounded-xl shadow-xs transition-all duration-300 font-sans">
-                                Comprar Acesso
-                            </button>
+                        <div class="text-right">
+                            <span class="text-[9px] text-gray-400 block uppercase font-bold tracking-wider leading-none">Preço do Acesso</span>
+                            <span class="text-xl font-extrabold text-brand-accent-blue">${course.price.toFixed(2)}€</span>
                         </div>
                     `;
                     
-                    // Painel de controlo de acesso directo no player (Sem exemplo no placeholder e texto de senha visível ao digitar)
                     videoPlaceholder = `
-                        <div id="video-container-${course.id}" class="video-wrapper bg-slate-900 aspect-video rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center text-white border border-white/10 relative">
+                        <div id="video-container-${course.id}" class="video-wrapper bg-slate-900 aspect-video rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center text-white border border-white/10 relative shadow-inner">
                             <div id="locked-screen-${course.id}" class="space-y-3 z-10 w-full max-w-[280px] px-2">
                                 <span class="text-amber-500 text-xl block"><i class="fas fa-lock"></i></span>
                                 <h4 class="font-serif font-bold text-xs uppercase tracking-wider text-slate-200">Acesso Reservado</h4>
-                                <p class="text-[10px] text-slate-400 font-sans leading-relaxed">Introduza a sua chave de acesso enviada por email para iniciar a reprodução:</p>
+                                <p class="text-[10px] text-slate-400 font-sans leading-relaxed">Introduza a sua chave de acesso enviada para iniciar a reprodução:</p>
                                 
                                 <div class="flex flex-col gap-2 mt-1">
                                     <div class="flex gap-1.5">
@@ -342,25 +713,17 @@
                     `;
                 } else {
                     priceHtml = `
-                        <div>
-                            <span class="text-gray-400 text-[10px] block uppercase font-bold">Lançamento</span>
-                            <span class="text-sm font-bold text-gray-400">Em Breve</span>
+                        <div class="text-right">
+                            <span class="text-[9px] text-gray-400 block uppercase font-bold tracking-wider leading-none">Status</span>
+                            <span class="text-sm font-bold text-gray-400 uppercase tracking-widest">Em Breve</span>
                         </div>
-                    `;
-                    actionButton = `
-                        <button disabled class="bg-gray-200 text-gray-400 cursor-not-allowed text-xs font-bold uppercase tracking-wider px-5 py-4 rounded-xl font-sans">
-                            Em Breve
-                        </button>
                     `;
                     videoPlaceholder = `
                         <div class="video-wrapper bg-slate-900 aspect-video rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center text-white border border-white/10 relative">
                             <div class="space-y-3 z-10">
-                                <span class="text-amber-500 text-2xl"><i class="fas fa-lock"></i></span>
+                                <span class="text-amber-500 text-2xl"><i class="fas fa-clock"></i></span>
                                 <h4 class="font-serif font-bold text-sm">Acesso Reservado</h4>
-                                <p class="text-[11px] text-slate-400 px-4 font-sans">Adquira o acesso. O vídeo será entregue via email para reprodução digital protegida.</p>
-                            </div>
-                            <div class="absolute bottom-2 right-3 text-[8px] text-white/20 select-none pointer-events-none uppercase tracking-widest font-sans">
-                                Jerónimo Editora - Streaming Protegido (${course.videoDuration})
+                                <p class="text-[11px] text-slate-400 px-4 font-sans">Curso em pós-produção. Disponível muito brevemente.</p>
                             </div>
                         </div>
                     `;
@@ -369,36 +732,34 @@
                 grid.innerHTML += `
                     <div class="course-card bg-white border border-gray-150 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between">
                         <div class="p-6 space-y-4">
+                            <!-- Topo do Card Simplificado com Preço de Destaque -->
                             <div class="flex justify-between items-center">
-                                <span class="text-[10px] font-bold uppercase tracking-wider text-white ${course.badgeClass} px-2 py-0.5 rounded font-sans">
-                                    ${course.status}
-                                </span>
-                                <span class="text-xs text-brand-accent-orange font-bold uppercase tracking-wider font-sans">
-                                    ${course.category}
-                                </span>
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-[10px] w-max font-bold uppercase tracking-wider text-white ${course.badgeClass} px-2 py-0.5 rounded font-sans">
+                                        ${course.status}
+                                    </span>
+                                    <span class="text-xs text-brand-accent-orange font-bold uppercase tracking-wider font-sans">
+                                        ${course.category}
+                                    </span>
+                                </div>
+                                ${priceHtml}
                             </div>
                             
-                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue">${course.title}</h2>
-                            <p class="text-xs text-gray-400 font-medium font-sans">Aulas Gravadas • Acesso Imediato • Protecção Anti-Cópia</p>
+                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue leading-tight">${course.title}</h2>
                             
                             <p class="text-sm text-gray-650 leading-relaxed font-light font-sans">
                                 ${course.description}
                             </p>
 
+                            <!-- Player / Placeholder -->
                             ${videoPlaceholder}
-                        </div>
-
-                        <div class="p-6 bg-gray-50 border-t border-gray-100 flex items-center justify-between font-sans">
-                            ${priceHtml}
-                            ${actionButton}
                         </div>
                     </div>
                 `;
             });
         }
 
-        // --- STREAMING_CHUNK: Implementando o sistema de validação de chaves offline... ---
-        // Validador de chaves de segurança sem necessidade de servidor ou base de dados
+        // Validador de chaves de segurança local
         function validarChaveAcesso(courseId) {
             const inputEl = document.getElementById(`key-input-${courseId}`);
             const errorEl = document.getElementById(`error-message-${courseId}`);
@@ -414,7 +775,7 @@
                 return;
             }
 
-            // Exemplo esperado: JRN1-2026-07-03-X7Y2
+            // Formato de chave: PREFIX-ANO-MES-DIA-SUFIXO
             const parts = key.split('-');
             if (parts.length < 4) {
                 errorEl.textContent = "Chave incorrecta. Formato inválido.";
@@ -424,43 +785,44 @@
 
             const keyPrefix = parts[0];
             const ano = parseInt(parts[1], 10);
-            const mes = parseInt(parts[2], 10) - 1; // Conversão para base 0 do JS
+            const mes = parseInt(parts[2], 10) - 1; 
             const dia = parseInt(parts[3], 10);
 
             const course = coursesData.find(c => c.id === courseId);
             if (!course) return;
 
-            // 1. Validar se a chave pertence a este produto específico (ID de curso correspondente ao prefixo)
             if (keyPrefix !== course.prefix) {
                 errorEl.textContent = "Chave incorrecta. Não pertence a este curso.";
                 errorEl.classList.remove('hidden');
                 return;
             }
 
-            // 2. Criar objecto de data de expiração (final do dia especificado na chave)
             const keyDate = new Date(ano, mes, dia, 23, 59, 59);
             if (isNaN(keyDate.getTime())) {
-                errorEl.textContent = "Adulteração detectada. Data de chave inválida.";
+                errorEl.textContent = "Data de chave inválida.";
                 errorEl.classList.remove('hidden');
                 return;
             }
 
-            // 3. Comparar com a data actual
             const today = new Date();
             if (keyDate < today) {
                 const dataFormatada = String(dia).padStart(2, '0') + '/' + String(mes + 1).padStart(2, '0') + '/' + ano;
-                errorEl.textContent = `Acesso Expirado. Terminou a ${dataFormatada}.`;
+                errorEl.textContent = `Acesso Expirado em ${dataFormatada}.`;
                 errorEl.classList.remove('hidden');
                 return;
             }
 
-            // Sucesso! Carregar o vídeo
+            // Sucesso - Abre o vídeo
             liberarVideo(courseId, course.videoId);
         }
 
-        // --- STREAMING_CHUNK: Definindo o reconstrutor da interface de bloqueio... ---
-        // Reconstrói a tela de bloqueio e formulário de acesso originais quando o vídeo é terminado
+        // Restaura ecrã bloqueado quando vídeo finaliza
         function restaurarBloqueio(courseId) {
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                if (document.exitFullscreen) document.exitFullscreen();
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            }
+
             const container = document.getElementById(`video-container-${courseId}`);
             if (!container) return;
 
@@ -492,13 +854,38 @@
             `;
         }
 
-        // --- STREAMING_CHUNK: Carregando reprodutor seguro com resolução nativa ao erro 153 do YouTube... ---
-        // Carrega o vídeo contornando o Erro 153 do YouTube em ambientes sem domínio/referenciador válido e blindando o link de partilha
+        // Ativa/Desativa o modo ecrã inteiro no container do vídeo
+        function toggleVideoWrapperFullscreen(courseId) {
+            const container = document.getElementById(`video-container-${courseId}`);
+            if (!container) return;
+
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen(); 
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
+        }
+
+        // Libera o reprodutor seguro e adiciona botão de "Expandir"
         function liberarVideo(courseId, videoId) {
             const container = document.getElementById(`video-container-${courseId}`);
             if (!container) return;
 
-            // Deteção inteligente de ambiente local, iframe sandboxed ou local file (causadores do Erro 153)
+            // Elemento de expansão nativo personalizado
+            const expandBtn = `
+                <button onclick="toggleVideoWrapperFullscreen('${courseId}')" class="absolute top-3 right-3 z-30 bg-black/60 hover:bg-brand-accent-orange text-white text-[11px] font-bold uppercase tracking-wider py-1.5 px-3 rounded-lg flex items-center gap-1.5 shadow-md border border-white/10 transition-all font-sans">
+                    <i class="fas fa-expand"></i> Expandir
+                </button>
+            `;
+
             const isSandboxOrLocal = window.location.protocol === 'file:' || 
                                      window.location.hostname === '' || 
                                      window.location.hostname === 'localhost' || 
@@ -506,135 +893,46 @@
                                      window.self !== window.top;
 
             if (isSandboxOrLocal) {
-                // Modo Simulação/Ambiente de Testes: Utiliza um reprodutor nativo HTML5 para evitar o Erro 153
                 const sampleVideoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
                 
                 container.innerHTML = `
                     <div class="absolute inset-0 w-full h-full bg-black flex flex-col justify-between">
-                        <!-- Reprodutor de Vídeo de Amostra Estético que acciona a reposição ao terminar -->
-                        <video class="w-full h-full object-cover" autoplay controls controlsList="nodownload" oncontextmenu="return false;" onended="restaurarBloqueio('${courseId}')">
+                        ${expandBtn}
+                        <video class="w-full h-full object-contain" autoplay controls controlsList="nodownload" oncontextmenu="return false;" onended="restaurarBloqueio('${courseId}')">
                             <source src="${sampleVideoUrl}" type="video/mp4">
-                            O seu navegador não suporta reprodução de vídeo nativa.
                         </video>
+                        <div class="absolute inset-0 bg-transparent z-10" oncontextmenu="return false;" style="pointer-events: none;"></div>
                         
-                        <!-- Máscara de protecção contra clique direito -->
-                        <div class="absolute inset-0 bg-transparent z-10" oncontextmenu="return false;"></div>
-                        
-                        <!-- Painel Superior de Informação do Modo de Teste (Sem qualquer link para o exterior) -->
-                        <div class="absolute top-2 left-3 right-3 z-20 flex justify-center items-center bg-slate-950/85 px-3 py-1.5 rounded-lg border border-brand-accent-orange/30 shadow-lg text-[10px]">
-                            <span class="text-white select-none leading-tight font-sans text-center">
+                        <div class="absolute top-2 left-3 right-3 z-20 flex justify-center items-center bg-slate-950/85 px-3 py-1 rounded-lg border border-brand-accent-orange/30 shadow-lg text-[9px]">
+                            <span class="text-white select-none leading-none font-sans text-center">
                                 <span class="text-brand-accent-orange font-bold"><i class="fas fa-info-circle mr-1"></i> MODO DE SIMULAÇÃO ACTIVADO</span> 
-                                <span class="text-slate-300">| Em produção real com domínio verificado, o YouTube reproduz com segurança total.</span>
                             </span>
                         </div>
                     </div>
                 `;
             } else {
-                // Modo Produção: Iframe do YouTube nocookie optimizado contra Erro 153, activando enablejsapi=1 para escuta de fecho
                 container.innerHTML = `
                     <div class="absolute inset-0 w-full h-full bg-black">
+                        ${expandBtn}
                         <iframe class="w-full h-full" 
-                                src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&disablekb=1&fs=0&autoplay=1&enablejsapi=1" 
+                                src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&disablekb=1&fs=1&autoplay=1&enablejsapi=1" 
                                 title="Visualizador Editora Jerónimo" 
                                 frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
                                 allowfullscreen
                                 referrerpolicy="strict-origin-when-cross-origin"></iframe>
                         
-                        <!-- MÁSCARA SUPERIOR: Bloqueia cliques no título, botões de partilha e cartão informativo do YouTube (Evita a mensagem de link copiado) -->
-                        <div class="absolute top-0 left-0 w-full h-[60px] bg-transparent z-25" oncontextmenu="return false;"></div>
-                        
-                        <!-- MÁSCARA INFERIOR DIREITA: Bloqueia cliques sobre o logótipo oficial do YouTube e os seus links de redireccionamento externo -->
-                        <div class="absolute bottom-0 right-0 w-[110px] h-[48px] bg-transparent z-25" oncontextmenu="return false;"></div>
-                        
-                        <!-- MÁSCARA INFERIOR ESQUERDA (Ficheiro image_419f4a.png): Bloqueia especificamente e por completo o botão redondo de copiar link/partilha do YouTube (image_419f4a.png) -->
-                        <div class="absolute bottom-0 left-0 w-[75px] h-[75px] bg-transparent z-25" oncontextmenu="return false;"></div>
-                        
-                        <!-- MÁSCARA CENTRAL/Geral: Protecção total anti-cópia e bloqueio de menu de contexto do rato (clique direito) -->
-                        <div class="absolute top-[60px] left-0 w-full h-[calc(100%-108px)] bg-transparent z-25" oncontextmenu="return false;"></div>
-                        
-                        <!-- Aviso de copyright flutuante de autorização e protecção intelectual -->
-                        <div class="absolute top-[70px] left-3 z-30 text-[8px] text-white/50 select-none pointer-events-none uppercase tracking-widest font-sans bg-slate-950/60 px-2 py-0.5 rounded">
-                            Conteúdo exclusivo licenciado para uso privado
-                        </div>
+                        <!-- Máscaras anti-cópia -->
+                        <div class="absolute top-0 left-0 w-full h-[60px] bg-transparent z-15" oncontextmenu="return false;"></div>
+                        <div class="absolute bottom-0 right-0 w-[110px] h-[48px] bg-transparent z-15" oncontextmenu="return false;"></div>
+                        <div class="absolute bottom-0 left-0 w-[75px] h-[75px] bg-transparent z-15" oncontextmenu="return false;"></div>
+                        <div class="absolute top-[60px] left-0 w-full h-[calc(100%-108px)] bg-transparent z-15" oncontextmenu="return false;"></div>
                     </div>
                 `;
             }
         }
 
-        // --- STREAMING_CHUNK: Monitorizando eventos globais de encerramento do leitor do YouTube... ---
-        // Escuta as notificações postMessage enviadas pelo iframe do YouTube para bloquear o ecrã no final do vídeo
-        window.addEventListener('message', function(event) {
-            try {
-                const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
-                // O YouTube com "enablejsapi=1" emite alterações de estado via infoDelivery
-                if (data && data.event === 'infoDelivery' && data.info) {
-                    if (data.info.playerState === 0) { // Estado 0 equivale a YT.PlayerState.ENDED (Vídeo Terminado)
-                        // Procura e bloqueia imediatamente o curso que terminou de reproduzir
-                        coursesData.forEach(course => {
-                            const container = document.getElementById(`video-container-${course.id}`);
-                            if (container && container.querySelector('iframe')) {
-                                restaurarBloqueio(course.id);
-                            }
-                        });
-                    }
-                }
-            } catch (e) {
-                // Mensagem ignorada por não pertencer ao sistema do YouTube ou não conter JSON válido
-            }
-        });
-
-        // Função de checkout - Adiciona ao carrinho sem fazer saltar o modal informativo de aviso directamente
-        function adicionarAoCheckout(id, title, price) {
-            let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const existingItemIndex = cartItems.findIndex(item => item.id === id);
-            
-            if (existingItemIndex > -1) {
-                document.getElementById('toast-message').textContent = `"${title}" já está no carrinho!`;
-            } else {
-                cartItems.push({
-                    id: id,
-                    title: title,
-                    price: price,
-                    quantity: 1,
-                    image: 'Imagens/Logo J.png',
-                    type: 'curso'
-                });
-                
-                localStorage.setItem('cartItems', JSON.stringify(cartItems));
-                document.getElementById('toast-message').textContent = `"${title}" adicionado ao carrinho!`;
-            }
-
-            updateCartUI();
-            triggerToast();
-        }
-
-        let toastTimeout;
-        function triggerToast() {
-            const toast = document.getElementById('toast-notice');
-            if (!toast) return;
-
-            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-            toast.classList.add('translate-y-0', 'opacity-100');
-
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-                toast.classList.remove('translate-y-0', 'opacity-100');
-            }, 3000);
-        }
-
-        function openWarningModal() {
-            const modal = document.getElementById('payment-warning-modal');
-            if (modal) modal.classList.remove('hidden');
-        }
-
-        // --- STREAMING_CHUNK: Configurando os utilitários de navegação... ---
-        function closeWarningModal() {
-            const modal = document.getElementById('payment-warning-modal');
-            if (modal) modal.classList.add('hidden');
-        }
-
+        // Limpa filtros aplicados na pesquisa
         function clearFilters() {
             const searchInput = document.getElementById('course-search');
             const categorySelect = document.getElementById('category-select');
@@ -656,93 +954,26 @@
             } catch (e) { return file; }
         }
 
-        function getPrefix() {
-            const path = window.location.pathname.toLowerCase();
-            if (path.includes('/artigos/')) {
-                return '../';
-            }
-            return '';
-        }
-
-        function adjustAndCleanLinks(placeholderId) {
-            const container = document.getElementById(placeholderId);
-            if (!container) return;
-            const prefix = getPrefix();
-            
-            if (prefix !== '') {
-                container.querySelectorAll('a').forEach(link => {
-                    let href = link.getAttribute('href');
-                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
-                        if (!href.startsWith('../')) {
-                            link.setAttribute('href', prefix + href);
-                        }
-                    }
-                });
-                container.querySelectorAll('img').forEach(img => {
-                    let src = img.getAttribute('src');
-                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
-                        img.setAttribute('src', prefix + src);
-                    }
-                });
-            }
-
-            container.querySelectorAll('a').forEach(link => {
-                let href = link.getAttribute('href');
-                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
-                    if (href.endsWith('.html')) {
-                        link.setAttribute('href', href.slice(0, -5));
-                    } else if (href.includes('.html?')) {
-                        link.setAttribute('href', href.replace('.html?', '?'));
-                    } else if (href.includes('.html#')) {
-                        link.setAttribute('href', href.replace('.html#', '#'));
-                    }
-                }
-            });
-        }
-
         async function loadComponents() {
-            const prefix = getPrefix();
             try {
-                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
-                if (!navResp.ok) {
-                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
-                }
+                let navResp = await fetch(getSafePath('menu.html') + '?v=1.0.3');
                 if (navResp.ok) {
                     document.getElementById('nav-placeholder').innerHTML = await navResp.text();
-                    adjustAndCleanLinks('nav-placeholder');
                 }
-
-                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
-                if (!footResp.ok) {
-                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
-                }
+                let footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.3');
                 if (footResp.ok) {
                     document.getElementById('footer-placeholder').innerHTML = await footResp.text();
-                    adjustAndCleanLinks('footer-placeholder');
                 }
-                updateCartUI();
             } catch (e) { 
-                console.warn("Modo offline."); 
+                console.warn("Modo offline ativo."); 
             }
-        }
-
-        function updateCartUI() {
-            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const total = items.reduce((s, i) => s + i.quantity, 0);
-            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
-                if (el) { 
-                    el.textContent = total; 
-                    el.classList.toggle('opacity-0', total === 0); 
-                }
-            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             loadComponents();
+            popularDropdownCursos();
             filterCourses();
         });
     </script>
-    <!-- GoatCounter Analytics Tracker -->
-    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
