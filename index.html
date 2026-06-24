@@ -412,7 +412,7 @@
                                 </div>
                                 
                                 <div class="h-auto mb-1.5 sm:mb-4 flex items-center">
-                                    <p class="font-classic text-[13px] xs:text-sm sm:text-xl lg:text-2xl text-gray-650 italic leading-relaxed">
+                                    <p class="font-classic text-[13px] xs:text-sm sm:text-xl lg:text-2xl text-gray-655 italic leading-relaxed">
                                         Uma fundamentação bíblica, histórica e patrística irrebatível sobre a presença real de Cristo no Santíssimo Sacramento.
                                     </p>
                                 </div>
@@ -1014,22 +1014,43 @@
             }
         }
 
-        /* --- TRATAMENTO DA SUBSCRICAO DA NEWSLETTER --- */
+        /* --- TRATAMENTO DA SUBSCRICAO DA NEWSLETTER (INTEGRAÇÃO MAILERLITE) --- */
         function handleNewsletterSubmit(event) {
             event.preventDefault();
             const emailInput = document.getElementById('newsletter-email');
             if (!emailInput || !emailInput.value.trim()) return;
 
-            const email = emailInput.value.trim();
-            const recipient = "editorajeronimo@gmail.com";
-            const subject = encodeURIComponent("Subscrição de Newsletter");
-            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever a newsletter com o e-mail: " + email);
+            // CONFIGURAÇÃO MAILERLITE (IDs ATUALIZADOS)
+            const accountId = "2468444"; 
+            const formId = "191175533290063317";       
 
-            window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+            // 1. Criar um iframe oculto dinamicamente para processar o envio sem sair da página
+            let iframe = document.getElementById('ml-hidden-iframe');
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.id = 'ml-hidden-iframe';
+                iframe.name = 'ml-hidden-iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+            }
 
+            // 2. Configurar o formulário atual para apontar para o MailerLite através do iframe oculto
+            const form = event.target;
+            form.action = `https://assets.mailerlite.com/jsonp/${accountId}/forms/${formId}/subscribe`;
+            form.method = 'POST';
+            form.target = 'ml-hidden-iframe';
+
+            // 3. Garantir que o campo de e-mail usa o nome interno exigido pelo MailerLite
+            emailInput.name = 'fields[email]';
+
+            // 4. Submeter o formulário de forma silenciosa
+            form.submit();
+
+            // 5. Ativar a tua mensagem de sucesso nativa que já está no HTML
             const successMsg = document.getElementById('newsletter-success-msg');
             if (successMsg) {
                 successMsg.classList.remove('hidden');
+                emailInput.value = ''; // Limpa o campo para o utilizador
                 setTimeout(() => {
                     successMsg.classList.add('hidden');
                 }, 8000);
