@@ -37,7 +37,7 @@
 
     <style>
         * { font-style: normal !important; }
-        body { font-family: 'Roboto', sans-serif; color: #333333; }
+        body { font-family: 'Roboto', sans-serif; color: #333333; background-color: #F8F8F8; }
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
         .font-lora { font-family: 'Lora', serif; }
 
@@ -102,15 +102,11 @@
         .suggestion-card:hover {
             background-color: rgba(255,255,255,0.1);
         }
-
-        .menu-drawer-scroll::-webkit-scrollbar { width: 3px; }
-        .menu-drawer-scroll::-webkit-scrollbar-track { background: transparent; }
-        .menu-drawer-scroll::-webkit-scrollbar-thumb { background: #cfaf5c; border-radius: 10px; }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- Modal Vista Rápida (Apenas Imagem) -->
+    <!-- Modal Vista Rápida -->
     <div id="quickview-modal" class="fixed inset-0 z-[120] bg-black bg-opacity-95 hidden items-center justify-center p-4 cursor-pointer" onclick="closeQuickView()">
         <button onclick="closeQuickView()" class="absolute top-6 right-6 z-30 text-white hover:text-brand-gold transition-colors">
             <i class="fas fa-times text-3xl"></i>
@@ -133,8 +129,8 @@
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-green-600 mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
             <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center">Encomenda recebida!</h3>
-            <p id="success-modal-msg" class="text-gray-650 mb-6 font-sans text-sm text-center">Obrigado pela sua preferência. Enviaremos um email de confirmação para o seu endereço.</p>
-            <a href="/" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg text-center">Voltar ao Início</a>
+            <p id="success-modal-msg" class="text-gray-650 mb-6 font-sans text-sm text-center">Obrigado pela sua preferência. Enviaremos um email de confirmação para o seu endereço de e-mail de imediato.</p>
+            <a href="/" class="inline-block w-full bg-brand-accent-red text-white py-3 rounded-lg font-bold hover:bg-red-900 transition-colors shadow-lg text-center font-sans text-sm uppercase tracking-wider">Voltar ao Início</a>
         </div>
     </div>
 
@@ -143,11 +139,10 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-red-600 mb-4"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
             <h3 class="text-2xl font-bold font-serif text-brand-accent-red mb-2 text-center">Erro no envio</h3>
             <p class="text-gray-600 mb-6 font-sans text-sm text-center" id="error-message">Ocorreu um problema ao processar a sua encomenda. Verifique a sua ligação.</p>
-            <button onclick="document.getElementById('error-modal').classList.add('hidden')" class="w-full bg-brand-accent-blue text-white py-3 rounded-lg font-bold hover:bg-black transition-colors">Tentar novamente</button>
+            <button onclick="document.getElementById('error-modal').classList.add('hidden')" class="w-full bg-brand-accent-blue text-white py-3 rounded-lg font-bold hover:bg-black transition-colors font-sans text-sm uppercase tracking-wider">Tentar novamente</button>
         </div>
     </div>
 
-    <!-- CONTENTOR DO MENU (Carregado dinamicamente do GitHub) -->
     <div id="nav-placeholder" class="mb-24"></div>
 
     <main class="flex-grow pt-8 pb-12">
@@ -156,15 +151,11 @@
 
             <div class="flex flex-col lg:flex-row gap-8">
                 
-                <!-- COLUNA ESQUERDA: FORMULÁRIOS -->
+                <!-- COLUNA ESQUERDA: Dados do Utilizador e Pagamento -->
                 <div class="lg:w-7/12 order-2 lg:order-1">
-                    
                     <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg mb-8 border border-gray-150">
                         <div class="flex justify-between items-center border-b pb-2 mb-1">
                             <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red">1. Detalhes de Envio</h2>
-                            <span id="morada-opcional-badge" class="hidden text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded bg-blue-50 text-brand-accent-blue border border-blue-100 font-sans">
-                                Entrega Digital Directa
-                            </span>
                         </div>
                         
                         <form id="shipping-form" class="space-y-5 mt-6">
@@ -183,7 +174,7 @@
                                 <input type="text" id="nif" name="nif" class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50">
                             </div>
                             
-                            <!-- Container de morada física - Totalmente ocultável para compras digitais -->
+                            <!-- Morada física (Sempre obrigatória agora que checkout é apenas físico) -->
                             <div id="physical-address-fields" class="space-y-5">
                                 <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
                                     <div class="md:col-span-3">
@@ -213,21 +204,21 @@
                                         <option value="EU_Econ">Europa (Entrega Económica)</option>
                                     </select>
                                 </div>
+                                
                                 <div class="pt-6 border-t border-gray-100 mt-4">
                                     <span class="block text-sm font-medium text-gray-700 mb-3">A morada de facturação é igual à de envio?</span>
                                     <div class="flex items-center space-x-8">
                                         <label class="flex items-center space-x-2 cursor-pointer">
                                             <input type="radio" name="billing-choice" id="choice-sim" value="sim" class="radio-small" onchange="handleBillingChoice()" checked>
-                                            <span class="text-sm text-gray-700 font-medium">Sim</span>
+                                            <span class="text-sm text-gray-700 font-medium font-sans">Sim</span>
                                         </label>
                                         <label class="flex items-center space-x-2 cursor-pointer">
                                             <input type="radio" name="billing-choice" id="choice-nao" value="nao" class="radio-small" onchange="handleBillingChoice()">
-                                            <span class="text-sm text-gray-700 font-medium">Não</span>
+                                            <span class="text-sm text-gray-700 font-medium font-sans">Não</span>
                                         </label>
                                     </div>
                                 </div>
 
-                                <!-- Morada de Facturação -->
                                 <div id="billing-address-container" class="hidden space-y-5 pt-6 border-t border-gray-100 mt-4 fade-in bg-gray-50/50 p-4 rounded-lg">
                                     <h3 class="text-lg font-bold text-brand-text mb-4 underline font-serif">Morada de Facturação</h3>
                                     <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
@@ -263,7 +254,7 @@
                             <div class="border rounded-lg overflow-hidden shadow-sm">
                                 <label class="flex items-center space-x-3 p-4 cursor-pointer hover:bg-gray-50">
                                     <input type="radio" name="payment-method" id="payment-mbway" value="mbway" checked class="radio-small" onchange="updatePaymentDetails()">
-                                    <span class="text-gray-800 font-bold">MB WAY</span>
+                                    <span class="text-gray-800 font-bold font-sans">MB WAY</span>
                                 </label>
                                 <div id="mbway-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white">
                                     <div class="payment-info-box mb-4">
@@ -274,12 +265,12 @@
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-start w-full">
-                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight">Anexe o comprovativo após envio via MB WAY *:</p>
+                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight font-sans">Anexe o comprovativo após envio via MB WAY *:</p>
                                         <input type="file" id="proof-file-mbway" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('mbway')" />
-                                        <label for="proof-file-mbway" class="btn-attach">
+                                        <label for="proof-file-mbway" class="btn-attach font-sans uppercase tracking-wider text-xs">
                                             <i class="fas fa-upload mr-2"></i> Anexar comprovativo
                                         </label>
-                                        <div id="file-display-mbway" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100">
+                                        <div id="file-display-mbway" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
                                             <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway" class="truncate max-w-[200px]"></span>
                                         </div>
                                     </div>
@@ -289,7 +280,7 @@
                             <div class="border rounded-lg overflow-hidden shadow-sm">
                                 <label class="flex items-center space-x-3 p-4 cursor-pointer hover:bg-gray-50">
                                     <input type="radio" name="payment-method" id="payment-transfer" value="bank-transfer" class="radio-small" onchange="updatePaymentDetails()">
-                                    <span class="text-gray-800 font-bold">Transferência Bancária</span>
+                                    <span class="text-gray-800 font-bold font-sans">Transferência Bancária</span>
                                 </label>
                                 <div id="transfer-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white hidden">
                                     <div class="payment-info-box mb-4">
@@ -300,12 +291,12 @@
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-start w-full">
-                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight">Anexe o comprovativo da transferência *:</p>
+                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight font-sans">Anexe o comprovativo da transferência *:</p>
                                         <input type="file" id="proof-file-transfer" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('transfer')" />
-                                        <label for="proof-file-transfer" class="btn-attach">
+                                        <label for="proof-file-transfer" class="btn-attach font-sans uppercase tracking-wider text-xs">
                                             <i class="fas fa-upload mr-2"></i> Anexar comprovativo
                                         </label>
-                                        <div id="file-display-transfer" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100">
+                                        <div id="file-display-transfer" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
                                             <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer" class="truncate max-w-[200px]"></span>
                                         </div>
                                     </div>
@@ -315,26 +306,23 @@
                     </section>
                 </div>
 
-                <!-- COLUNA DIREITA: SUMÁRIO DO CARRINHO -->
+                <!-- COLUNA DIREITA: Resumo da Encomenda Física -->
                 <div class="lg:w-5/12 order-1 lg:order-2 h-fit lg:sticky lg:top-24">
                     <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10">
                         <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2">Carrinho de Compras</h2>
                         
                         <div id="summary-list" class="space-y-5 mb-6 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar"></div>
 
-                        <!-- Secção de Sugestões de Artigos -->
                         <div id="suggestions-container" class="mt-4 pt-4 border-t border-white/10 hidden">
-                            <h3 id="suggestions-header" class="text-[9px] font-bold uppercase tracking-wider text-brand-gold mb-3 flex items-center">
+                            <h3 id="suggestions-header" class="text-[9px] font-bold uppercase tracking-wider text-brand-gold mb-3 flex items-center font-sans">
                                 <i class="fas fa-plus-circle mr-2"></i> Complete a sua encomenda
                             </h3>
-                            <div id="suggestions-list" class="flex gap-4 overflow-x-auto pb-4 suggestions-scroll">
-                                <!-- Preenchido via JS -->
-                            </div>
+                            <div id="suggestions-list" class="flex gap-4 overflow-x-auto pb-4 suggestions-scroll font-sans"></div>
                         </div>
 
-                        <div class="space-y-2 pt-4 border-t border-white/20 text-sm">
+                        <div class="space-y-2 pt-4 border-t border-white/20 text-sm font-sans">
                             <div class="flex justify-between opacity-80">
-                                <span>Subtotal (Produtos):</span>
+                                <span>Subtotal (Livros/Postais):</span>
                                 <span id="summary-subtotal">€ 0,00</span>
                             </div>
                             <div class="flex flex-col items-end">
@@ -348,11 +336,10 @@
 
                         <div class="flex justify-between items-center mt-5 pt-3 border-t border-brand-gold mb-4">
                             <span class="font-serif text-xl font-bold">Total:</span>
-                            <span id="summary-total" class="text-2xl md:text-3xl font-extrabold text-brand-gold">€ 0,00</span>
+                            <span id="summary-total" class="text-2xl md:text-3xl font-extrabold text-brand-gold font-sans">€ 0,00</span>
                         </div>
 
-                        <!-- SECÇÃO RGPD / POLÍTICA DE PRIVACIDADE (OPT-IN ACTIVO) -->
-                        <div class="mt-4 pt-4 border-t border-white/15 text-xs text-left">
+                        <div class="mt-4 pt-4 border-t border-white/15 text-xs text-left font-sans">
                             <div class="flex items-start space-x-2">
                                 <input type="checkbox" id="privacy-policy" class="mt-1 rounded border-white/30 text-brand-accent-red focus:ring-brand-gold bg-white/10 cursor-pointer w-4 h-4" onchange="validateFinalButton()">
                                 <label for="privacy-policy" class="text-white/90 leading-relaxed cursor-pointer select-none">
@@ -364,7 +351,7 @@
                             </p>
                         </div>
 
-                        <button id="place-order-button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-all shadow-xl text-lg md:text-xl disabled:bg-gray-500 disabled:cursor-not-allowed" disabled>
+                        <button id="place-order-button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-all shadow-xl text-lg md:text-xl disabled:bg-gray-500 disabled:cursor-not-allowed font-sans uppercase tracking-wider" disabled>
                             Confirmar e Pagar
                         </button>
                     </section>
@@ -373,16 +360,13 @@
         </div>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ (Carregado dinamicamente do GitHub) -->
     <div id="footer-placeholder"></div>
 
     <script>
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec"; 
-
-        const SHIPPING_MARGIN = 19; 
+        var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec"; 
+        var SHIPPING_MARGIN = 19; 
         
-        // Base de dados de livros perfeitamente unificada e atualizada com os novos IDs oficiais
-        const bookData = [
+        var bookData = [
             { id: 1, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
             { id: 2, title: "A Eucaristia é mesmo Jesus", price: 13.50, weight: 254 },
             { id: 3, title: "Eis a Tua Mãe", price: 19.50, weight: 534 },
@@ -397,16 +381,16 @@
         ];
 
         function getSafePath(file) {
-            const currentUrl = window.location.href;
+            var currentUrl = window.location.href;
             if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
             try { 
-                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                var baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
                 return new URL(file, baseUrl).href; 
             } catch (e) { return file; }
         }
 
         function openQuickView(id) {
-            const product = bookData.find(b => String(b.id) === String(id));
+            var product = bookData.find(function(b) { return String(b.id) === String(id); });
             if (!product) return;
             document.getElementById('qv-image').src = product.image;
             document.getElementById('quickview-modal').classList.remove('hidden');
@@ -421,21 +405,21 @@
         }
 
         function handleBillingChoice() {
-            const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
-            const container = document.getElementById('billing-address-container');
+            var choiceInput = document.querySelector('input[name="billing-choice"]:checked');
+            var container = document.getElementById('billing-address-container');
             if (!choiceInput || !container) return;
-            const choice = choiceInput.value;
-            const fields = document.querySelectorAll('.billing-field');
+            var choice = choiceInput.value;
+            var fields = document.querySelectorAll('.billing-field');
             container.classList.remove('hidden');
             if (choice === 'sim') {
                 syncBillingAddress();
-                fields.forEach(f => {
+                fields.forEach(function(f) {
                     f.setAttribute('readonly', 'true');
                     f.classList.add('bg-gray-100', 'text-gray-400', 'cursor-not-allowed');
                     f.classList.remove('bg-white');
                 });
             } else {
-                fields.forEach(f => {
+                fields.forEach(function(f) {
                     f.value = ''; 
                     f.removeAttribute('readonly');
                     f.classList.remove('bg-gray-100', 'text-gray-400', 'cursor-not-allowed');
@@ -446,7 +430,7 @@
         }
 
         function syncBillingAddress() {
-            const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
+            var choiceInput = document.querySelector('input[name="billing-choice"]:checked');
             if (choiceInput && choiceInput.value === 'sim') {
                 document.getElementById('morada-fat').value = document.getElementById('morada').value;
                 document.getElementById('nr-andar-fat').value = document.getElementById('nr-andar').value;
@@ -455,23 +439,23 @@
             }
         }
 
-        ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'].forEach(id => {
-            const el = document.getElementById(id);
+        ['nome', 'email', 'morada', 'nr-andar', 'cod-postal', 'cidade'].forEach(function(id) {
+            var el = document.getElementById(id);
             if (el) {
-                el.addEventListener('input', () => {
-                    const choiceInput = document.querySelector('input[name="billing-choice"]:checked');
+                el.addEventListener('input', function() {
+                    var choiceInput = document.querySelector('input[name="billing-choice"]:checked');
                     if (choiceInput && choiceInput.value === 'sim') syncBillingAddress();
                     validateFinalButton();
                 });
             }
         });
 
-        document.querySelectorAll('.billing-field').forEach(field => {
+        document.querySelectorAll('.billing-field').forEach(function(field) {
             field.addEventListener('input', validateFinalButton);
         });
 
         function obterTarifa(peso, destino) {
-            const pesoKg = peso / 1000;
+            var pesoKg = peso / 1000;
             if (destino === 'PT') {
                 if (peso <= 100) return 0.312 + (pesoKg * 1.175);
                 if (peso <= 250) return 0.201 + (pesoKg * 2.250);
@@ -502,42 +486,36 @@
         }
 
         function loadCartSummary() {
-            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const list = document.getElementById('summary-list');
-            const destinoElement = document.getElementById('pais');
-            const destino = destinoElement ? destinoElement.value : 'PT';
-            let subtotal = 0, pesoTotal = 0, html = '';
+            var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             
-            const hasPhysicalItems = items.some(item => item.type !== 'curso');
-            const hasDigitalItems = items.some(item => item.type === 'curso');
+            // Filtra de imediato qualquer item de curso digital residual no carrinho geral do site
+            items = items.filter(function(item) { return item.type !== 'curso'; });
+            localStorage.setItem('cartItems', JSON.stringify(items));
 
-            items.forEach(item => {
-                const lineTotal = item.price * item.quantity;
+            var list = document.getElementById('summary-list');
+            var destinoElement = document.getElementById('pais');
+            var destino = destinoElement ? destinoElement.value : 'PT';
+            var subtotal = 0, pesoTotal = 0, html = '';
+
+            items.forEach(function(item) {
+                var lineTotal = item.price * item.quantity;
                 subtotal += lineTotal;
                 
-                const isDigital = item.type === 'curso';
-                const typeBadge = isDigital 
-                    ? `<span class="bg-blue-100 text-brand-accent-blue text-[9px] px-1.5 py-0.5 rounded font-bold uppercase ml-2 border border-blue-200">Acesso Digital</span>` 
-                    : ``;
-
-                const book = bookData.find(b => String(b.id) === String(item.id));
-                let itemWeight = 0;
+                var book = bookData.find(function(b) { return String(b.id) === String(item.id); });
+                var itemWeight = 272; // Peso base por defeito
                 
-                if (!isDigital) {
-                    itemWeight = 272; 
-                    if (book) {
-                        itemWeight = book.weight; 
-                    } else if (item.weight) {
-                        itemWeight = item.weight < 5 ? parseFloat(item.weight) * 1000 : parseFloat(item.weight);
-                    }
-                    pesoTotal += (itemWeight * item.quantity);
+                if (book) {
+                    itemWeight = book.weight; 
+                } else if (item.weight) {
+                    itemWeight = item.weight < 5 ? parseFloat(item.weight) * 1000 : parseFloat(item.weight);
                 }
+                pesoTotal += (itemWeight * item.quantity);
 
                 html += `
                     <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
                             <span class="font-lora text-sm text-brand-gold leading-tight flex-grow font-bold">
-                                ${item.title} ${typeBadge}
+                                ${item.title}
                             </span>
                             <span class="font-sans font-bold text-white text-sm">€ ${lineTotal.toFixed(2).replace('.', ',')}</span>
                         </div>
@@ -552,41 +530,20 @@
                     </div>`;
             });
             
-            let custoPortes = 0;
-            const badge = document.getElementById('otimizacao-badge');
-            const physicalAddressContainer = document.getElementById('physical-address-fields');
+            var custoPortes = 0;
+            var badge = document.getElementById('otimizacao-badge');
 
-            if (hasPhysicalItems && pesoTotal > 0) {
-                const pesoFinal = pesoTotal + SHIPPING_MARGIN;
-                let numPacotes = Math.ceil(pesoFinal / 5000), pesoPorPacote = pesoFinal / numPacotes;
-                for (let i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, destino);
+            if (items.length > 0 && pesoTotal > 0) {
+                var pesoFinal = pesoTotal + SHIPPING_MARGIN;
+                var numPacotes = Math.ceil(pesoFinal / 5000), pesoPorPacote = pesoFinal / numPacotes;
+                for (var i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, destino);
                 
                 if (badge) {
                     badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Envio Editorial CTT (Portes Físicos)</span>`;
                 }
-                
-                if (physicalAddressContainer) physicalAddressContainer.classList.remove('hidden');
-                document.getElementById('morada-opcional-badge').classList.add('hidden');
-                document.querySelectorAll('.shipping-input').forEach(el => el.setAttribute('required', 'true'));
             } else {
                 custoPortes = 0;
-                if (badge) {
-                    if (hasDigitalItems) {
-                        badge.innerHTML = `<span class="bg-blue-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Entrega Digital Gratuita</span>`;
-                    } else {
-                        badge.innerHTML = ``;
-                    }
-                }
-                
-                if (!hasPhysicalItems && hasDigitalItems) {
-                    if (physicalAddressContainer) physicalAddressContainer.classList.add('hidden');
-                    document.getElementById('morada-opcional-badge').classList.remove('hidden');
-                    document.querySelectorAll('.shipping-input').forEach(el => {
-                        el.removeAttribute('required');
-                    });
-                } else if (!hasPhysicalItems && !hasDigitalItems) {
-                    if (physicalAddressContainer) physicalAddressContainer.classList.add('hidden');
-                }
+                if (badge) badge.innerHTML = ``;
             }
             
             list.innerHTML = html || '<p class="text-center py-4 font-lora opacity-50 text-white">O seu carrinho está vazio</p>';
@@ -594,13 +551,9 @@
             document.getElementById('summary-shipping').textContent = `€ ${custoPortes.toFixed(2).replace('.', ',')}`;
             document.getElementById('summary-total').textContent = `€ ${(subtotal + custoPortes).toFixed(2).replace('.', ',')}`;
             
-            const successMsg = document.getElementById('success-modal-msg');
+            var successMsg = document.getElementById('success-modal-msg');
             if (successMsg) {
-                if (hasDigitalItems && !hasPhysicalItems) {
-                    successMsg.innerHTML = `O seu pagamento foi simulado com sucesso. O vídeo e o acesso digital do curso foram processados e enviados para o email: <strong>${document.getElementById('email').value || 'indicado'}</strong>.`;
-                } else {
-                    successMsg.textContent = "Obrigado pela sua preferência. Enviaremos um email com a confirmação da encomenda e detalhes de envio de imediato.";
-                }
+                successMsg.textContent = "Obrigado pela sua preferência. Enviaremos um email com a confirmação da encomenda e detalhes de envio de imediato.";
             }
 
             renderSuggestions(items);
@@ -608,10 +561,12 @@
         }
 
         function renderSuggestions(currentItems) {
-            const container = document.getElementById('suggestions-container');
-            const list = document.getElementById('suggestions-list');
+            var container = document.getElementById('suggestions-container');
+            var list = document.getElementById('suggestions-list');
             
-            const suggestions = bookData.filter(b => [101, 103].includes(b.id) && !currentItems.some(item => String(item.id) === String(b.id)));
+            var suggestions = bookData.filter(function(b) {
+                return [101, 103].includes(b.id) && !currentItems.some(function(item) { return String(item.id) === String(b.id); });
+            });
             
             if (suggestions.length === 0) {
                 container.classList.add('hidden');
@@ -619,9 +574,9 @@
             }
             
             container.classList.remove('hidden');
-            let html = '';
+            var html = '';
             
-            suggestions.forEach(s => {
+            suggestions.forEach(function(s) {
                 html += `
                     <div class="flex-shrink-0 w-40 bg-white/5 rounded-xl p-3 border border-white/10 flex flex-col items-center text-center suggestion-card">
                         <div class="relative group cursor-pointer" onclick="openQuickView('${s.id}')">
@@ -631,7 +586,7 @@
                             </div>
                         </div>
                         <p class="text-[9px] font-bold text-white uppercase tracking-wider leading-tight h-8 overflow-hidden mb-2">Postal: ${s.title}</p>
-                        <div class="flex items-center justify-between w-full mt-auto">
+                        <div class="flex items-center justify-between w-full mt-auto font-sans">
                             <span class="text-[15px] text-brand-gold font-bold">€ ${s.price.toFixed(2).replace('.', ',')}</span>
                             <button onclick="quickAdd('${s.id}')" class="bg-brand-gold text-brand-accent-blue rounded-full w-7 h-7 flex items-center justify-center hover:bg-yellow-500 transition-colors shadow-sm">
                                 <i class="fas fa-plus text-[10px]"></i>
@@ -654,11 +609,11 @@
         }
 
         function quickAdd(productId) {
-            const product = bookData.find(b => String(b.id) === String(productId));
+            var product = bookData.find(function(b) { return String(b.id) === String(productId); });
             if (!product) return;
-            let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             
-            const existingIndex = items.findIndex(item => String(item.id) === String(product.id));
+            var existingIndex = items.findIndex(function(item) { return String(item.id) === String(product.id); });
             if (existingIndex > -1) {
                 items[existingIndex].quantity += 1;
             } else {
@@ -678,8 +633,8 @@
         }
 
         function changeQuantity(id, delta) {
-            let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const idx = items.findIndex(i => String(i.id) === String(id));
+            var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            var idx = items.findIndex(function(i) { return String(i.id) === String(id); });
             if (idx > -1) {
                 items[idx].quantity = Math.max(1, items[idx].quantity + delta);
                 localStorage.setItem('cartItems', JSON.stringify(items));
@@ -688,33 +643,33 @@
         }
 
         function removeItem(id) {
-            let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            localStorage.setItem('cartItems', JSON.stringify(items.filter(i => String(i.id) !== String(id))));
+            var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            localStorage.setItem('cartItems', JSON.stringify(items.filter(function(i) { return String(i.id) !== String(id); })));
             loadCartSummary();
         }
 
         function updatePaymentDetails() {
-            const method = document.querySelector('input[name="payment-method"]:checked')?.value;
+            var method = document.querySelector('input[name="payment-method"]:checked')?.value;
             document.getElementById('transfer-details').classList.toggle('hidden', method !== 'bank-transfer');
             document.getElementById('mbway-details').classList.toggle('hidden', method !== 'mbway');
             validateFinalButton();
         }
 
         async function fileToBase64(file) {
-            return new Promise((resolve) => {
-                const reader = new FileReader();
+            return new Promise(function(resolve) {
+                var reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onload = (event) => {
+                reader.onload = function(event) {
                     if (file.type === 'application/pdf') { resolve(event.target.result); return; }
-                    const img = new Image();
+                    var img = new Image();
                     img.src = event.target.result;
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        const MAX_WIDTH = 1200;
-                        let width = img.width, height = img.height;
+                    img.onload = function() {
+                        var canvas = document.createElement('canvas');
+                        var MAX_WIDTH = 1200;
+                        var width = img.width, height = img.height;
                         if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
                         canvas.width = width; canvas.height = height;
-                        const ctx = canvas.getContext('2d');
+                        var ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, width, height);
                         resolve(canvas.toDataURL('image/jpeg', 0.7)); 
                     };
@@ -723,9 +678,9 @@
         }
 
         function updateFileName(type) {
-            const input = document.getElementById(`proof-file-${type}`);
-            const display = document.getElementById(`file-display-${type}`);
-            const nameSpan = document.getElementById(`file-name-${type}`);
+            var input = document.getElementById(`proof-file-${type}`);
+            var display = document.getElementById(`file-display-${type}`);
+            var nameSpan = document.getElementById(`file-name-${type}`);
             if (input && input.files.length > 0) {
                 nameSpan.textContent = input.files[0].name;
                 display.classList.remove('hidden'); display.classList.add('flex');
@@ -734,36 +689,31 @@
         }
 
         function validateFinalButton() {
-            const method = document.querySelector('input[name="payment-method"]:checked')?.value;
-            const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
-            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            
-            const privacyChecked = document.getElementById('privacy-policy')?.checked;
-            
-            const hasPhysicalItems = cartItems.some(item => item.type !== 'curso');
+            var method = document.querySelector('input[name="payment-method"]:checked')?.value;
+            var fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
+            var cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            var privacyChecked = document.getElementById('privacy-policy')?.checked;
 
-            const nomeVal = document.getElementById('nome')?.value.trim();
-            const emailVal = document.getElementById('email')?.value.trim();
-            let inputsValid = nomeVal && emailVal;
+            var nomeVal = document.getElementById('nome')?.value.trim();
+            var emailVal = document.getElementById('email')?.value.trim();
+            var inputsValid = nomeVal && emailVal;
 
-            if (hasPhysicalItems) {
-                const requiredEnvio = ['morada', 'nr-andar', 'cod-postal', 'cidade'];
-                requiredEnvio.forEach(id => { 
-                    const el = document.getElementById(id);
+            var requiredEnvio = ['morada', 'nr-andar', 'cod-postal', 'cidade'];
+            requiredEnvio.forEach(function(id) { 
+                var el = document.getElementById(id);
+                if (el && !el.value.trim()) inputsValid = false; 
+            });
+
+            var isDifferentBilling = document.getElementById('choice-nao').checked;
+            if (isDifferentBilling) {
+                var requiredBilling = ['morada-fat', 'nr-andar-fat', 'cod-postal-fat', 'cidade-fat'];
+                requiredBilling.forEach(function(id) { 
+                    var el = document.getElementById(id);
                     if (el && !el.value.trim()) inputsValid = false; 
                 });
-
-                const isDifferentBilling = document.getElementById('choice-nao').checked;
-                if (isDifferentBilling) {
-                    const requiredBilling = ['morada-fat', 'nr-andar-fat', 'cod-postal-fat', 'cidade-fat'];
-                    requiredBilling.forEach(id => { 
-                        const el = document.getElementById(id);
-                        if (el && !el.value.trim()) inputsValid = false; 
-                    });
-                }
             }
 
-            const btn = document.getElementById('place-order-button');
+            var btn = document.getElementById('place-order-button');
             if (btn) {
                 btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid || !privacyChecked;
             }
@@ -771,47 +721,40 @@
 
         async function placeOrder(e) {
             e.preventDefault();
-            const overlay = document.getElementById('loading-overlay');
-            const loadText = document.getElementById('loading-text');
-            const progress = document.getElementById('progress-fill');
+            var overlay = document.getElementById('loading-overlay');
+            var loadText = document.getElementById('loading-text');
+            var progress = document.getElementById('progress-fill');
             overlay.classList.remove('hidden');
             loadText.textContent = "A preparar ficheiros...";
             progress.style.width = "20%";
-            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const method = document.querySelector('input[name="payment-method"]:checked')?.value;
-            const fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
             
-            const hasPhysicalItems = cartItems.some(item => item.type !== 'curso');
+            var cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            var method = document.querySelector('input[name="payment-method"]:checked')?.value;
+            var fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
 
             try {
-                let base64File = "";
+                var base64File = "";
                 if (fileInput && fileInput.files.length > 0) {
                     loadText.textContent = "A enviar comprovativo...";
                     progress.style.width = "40%";
                     base64File = await fileToBase64(fileInput.files[0]);
                 }
                 
-                const payload = {
+                var payload = {
                     type: 'order',
                     cliente: {
                         nome: document.getElementById('nome').value,
                         email: document.getElementById('email').value,
                         nif: document.getElementById('nif')?.value || "N/A"
                     },
-                    envio: hasPhysicalItems ? {
+                    envio: {
                         morada: document.getElementById('morada').value,
                         nr_andar: document.getElementById('nr-andar').value,
                         cod_postal: document.getElementById('cod-postal').value,
                         cidade: document.getElementById('cidade').value,
                         pais: document.getElementById('pais').value
-                    } : {
-                        morada: "Entrega Digital (Email)",
-                        nr_andar: "N/A",
-                        cod_postal: "N/A",
-                        cidade: "N/A",
-                        pais: "N/A"
                     },
-                    faturacao: (hasPhysicalItems && document.getElementById('choice-nao').checked) ? {
+                    faturacao: document.getElementById('choice-nao').checked ? {
                         morada: document.getElementById('morada-fat').value,
                         nr_andar: document.getElementById('nr-andar-fat').value,
                         cod_postal: document.getElementById('cod-postal-fat').value,
@@ -828,14 +771,19 @@
                         fileBase64: base64File,
                         fileName: fileInput.files[0].name
                     },
-                    itens: cartItems.map(i => ({ titulo: i.title, qtd: i.quantity, preco_unit: i.price, tipo: i.type || "físico" }))
+                    itens: cartItems.map(function(i) {
+                        return { titulo: i.title, qtd: i.quantity, preco_unit: i.price, tipo: "físico" };
+                    })
                 };
+                
                 loadText.textContent = "A enviar dados à Editora...";
                 progress.style.width = "70%";
                 await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+                
                 loadText.textContent = "Concluído!";
                 progress.style.width = "100%";
-                setTimeout(() => {
+                
+                setTimeout(function() {
                     overlay.classList.add('hidden');
                     document.getElementById('success-modal').classList.remove('hidden');
                     localStorage.removeItem('cartItems');
@@ -847,23 +795,25 @@
         }
 
         function updateCartUI() {
-            const count = JSON.parse(localStorage.getItem('cartItems') || '[]').reduce((s, i) => s + i.quantity, 0);
-            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+            var count = JSON.parse(localStorage.getItem('cartItems') || '[]').reduce(function(s, i) {
+                return s + i.quantity;
+            }, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(function(el) {
                 if (el) { el.textContent = count; el.classList.toggle('opacity-0', count === 0); }
             });
         }
 
         async function loadComponents() {
             try {
-                const navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
+                var navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
                 if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
-                const footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                var footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
                 if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 updateCartUI();
             } catch (e) { console.warn("Modo offline."); }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
             loadComponents();
             loadCartSummary();
             handleBillingChoice();
@@ -871,7 +821,6 @@
     </script>
 
     <!-- GoatCounter Analytics Tracker -->
-    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
-            async src="//gc.zgo.at/count.js"></script>
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
