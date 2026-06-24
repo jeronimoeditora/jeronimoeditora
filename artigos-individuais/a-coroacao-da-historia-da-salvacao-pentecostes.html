@@ -56,7 +56,13 @@
     </script>
 
     <style>
-        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+        html, body { 
+            scroll-behavior: auto !important;
+            overflow-x: hidden; 
+            width: 100%; 
+            background-color: #F8F8F8; 
+        }
+        * { box-sizing: border-box; }
 
         .text-readable-article {
             line-height: 1.85;
@@ -176,7 +182,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Nova Lei:</strong> No entanto, enquanto a Lei de Moisés foi inscrita em tábuas de pedra (Êx 31,18), o Pentecostes Cristão celebra a nova lei do Espírito (Rm 8,2), selando a Nova Aliança trazida por Jesus, que é escrita não em pedra, mas nos corações dos crentes, tal como os profetas prometeram (Jr 31,31-34; 2Cor 3,4-6). Como afirma São Tomás de Aquino na sua Suma Teológica, <i>«A nova lei é principalmente a própria graça do Espírito Santo»</i>.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Nova Lei:</strong> No entanto, enquanto a Lei de Moisés foi inscrita em tábuas de pedra (Êx 31,18), o Pentecostes Criador celebra a nova lei do Espírito (Rm 8,2), selando a Nova Aliança trazida por Jesus, que é escrita não em pedra, mas nos corações dos crentes, tal como os profetas prometeram (Jr 31,31-34; 2Cor 3,4-6). Como afirma São Tomás de Aquino na sua Suma Teológica, <i>«A nova lei é principalmente a própria graça do Espírito Santo»</i>.
                 </p>
 
                 <p>
@@ -192,7 +198,7 @@
                 </p>
 
                 <p>
-                    Nesta unificação, o papel de São Pedro e da sua pregação é crucial. O sucessor de Pedro permanece a figura central do Cristianismo mundial e o grande unificador da família de Deus ungida pelo Espírito; sem a sua liderança, a família divide-se em várias denominações (At 2,14-42). O objectivo final desta efusão do Espírito culmina no Baptismo e no perdão dos pecados (At 2,38), inserindo os crentes numa vida de adoração litúrgica contínua que espelha exactamente a nossa Santa Missa: o ensino dos apóstolos, a comunhão, a fracção do pão e as orações (At 2,42).
+                    Nesta unificação, o papel de São Pedro e da sua pregação é crucial. O sucessor de Pedro permanece a figura central do Cristianismo mundial e o grande unificador da família de Deus ungida pelo Espírito; sem a sua liderança, a família divide-se em várias denominações (At 2,14-42). O objectivo final desta efusão do Espírito culminu no Baptismo e no perdão dos pecados (At 2,38), inserindo os crentes numa vida de adoração litúrgica contínua que espelha exactamente a nossa Santa Missa: o ensino dos apóstolos, a comunhão, a fracção do pão e as orações (At 2,42).
                 </p>
 
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4">Salmo Responsorial (Salmo 103/104): A Glória da Nova Criação</h3>
@@ -206,7 +212,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Sopro Criador:</strong> O salmista fala do Espírito como o «sopro de vida» que Deus infunde nas criaturas para as tornar seres vivos (Gn 2,7). A fé Cristã reconhece que a criação é uma obra da Santíssima Trindade, não apenas do Pai, mas também do Filho e do Espírito Santo (CIC 291-292; 703-704).
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Sopro Criador:</strong> O salmista fala do Espírito como o «sopro de vida» que Deus infunde nas criaturas para as tornar seres vivos (Gn 2,7). A fé Criadora reconhece que a criação é uma obra da Santíssima Trindade, não apenas do Pai, mas também do Filho e do Espírito Santo (CIC 291-292; 703-704).
                 </p>
 
                 <p>
@@ -278,7 +284,7 @@
             </div>
 
             <!-- Secção de Fontes -->
-            <section class="mt-12 pt-6 border-t border-gray-150">
+            <section id="fontes-section" class="mt-12 pt-6 border-t border-gray-150">
                 <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4">Fontes</h4>
                 <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2 font-inter">
                     <li><i>Ignatius Catholic Study Bible: Old and New Testament</i>, Ignatius Press, 2024.</li>
@@ -366,14 +372,27 @@
               };
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
-        // Inicialização de Serviços
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+        // Inicialização de Serviços com Tratamento de Erros
+        let app, auth, db;
+        let useFirebase = false;
+
+        try {
+            if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "mock-placeholder-key") {
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                useFirebase = true;
+            }
+        } catch (err) {
+            console.warn("Falha ao inicializar o Firebase. Ativando fallback de armazenamento local:", err);
+            useFirebase = false;
+        }
 
         // Sessão de Utilizador Local
         let currentUser = null;
         let isAdminSession = false;
+        let commentsLoaded = false;
+        let currentCommentsList = [];
 
         // Gerar ou detetar Token Único de Autor (localStorage)
         let authorToken = localStorage.getItem('jeronimo_author_token');
@@ -390,8 +409,46 @@
             return articleId;
         }
 
+        // Métodos de Armazenamento Local Auxiliares (Fallback de segurança)
+        function getLocalComments() {
+            try {
+                const data = localStorage.getItem('comments_fallback_' + getArticleId());
+                return data ? JSON.parse(data) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveLocalComments(comments) {
+            try {
+                localStorage.setItem('comments_fallback_' + getArticleId(), JSON.stringify(comments));
+            } catch (e) {
+                console.error("Erro ao guardar comentários locais:", e);
+            }
+        }
+
+        // Ativação do Fallback em 2 segundos caso o Firebase demore a responder ou falhe
+        const fallbackTimeout = setTimeout(() => {
+            if (!commentsLoaded) {
+                console.warn("A ligação ao Firebase excedeu o tempo limite. A carregar armazenamento local...");
+                useFirebase = false;
+                commentsLoaded = true;
+                const localComments = getLocalComments();
+                currentCommentsList = localComments;
+                renderCommentsUI(localComments);
+            }
+        }, 2000);
+
         // --- AUTHENTICATION FLOW (RULE 3) ---
         const initAuth = async () => {
+            if (!useFirebase) {
+                clearTimeout(fallbackTimeout);
+                commentsLoaded = true;
+                const localComments = getLocalComments();
+                currentCommentsList = localComments;
+                renderCommentsUI(localComments);
+                return;
+            }
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                     await signInWithCustomToken(auth, __initial_auth_token);
@@ -399,35 +456,40 @@
                     await signInAnonymously(auth);
                 }
             } catch (err) {
-                console.error("Auth initialization failed:", err);
+                console.error("Erro de autenticação no Firebase:", err);
+                useFirebase = false;
+                clearTimeout(fallbackTimeout);
+                commentsLoaded = true;
+                const localComments = getLocalComments();
+                currentCommentsList = localComments;
+                renderCommentsUI(localComments);
             }
         };
 
         initAuth();
 
-        onAuthStateChanged(auth, (user) => {
-            currentUser = user;
-            if (user) {
-                // Escuta comentários assim que autenticação estiver pronta
-                loadCommentsRealtime();
-            }
-        });
+        if (useFirebase) {
+            onAuthStateChanged(auth, (user) => {
+                currentUser = user;
+                if (user) {
+                    loadCommentsRealtime();
+                }
+            });
+        }
 
         // --- SISTEMA DE COMENTÁRIOS FIRESTORE (RULES 1 & 2) ---
-        let currentCommentsList = [];
-
         function loadCommentsRealtime() {
-            if (!currentUser) return;
+            if (!currentUser || !useFirebase) return;
 
-            // Coleção seguindo estritamente a RULE 1 (artifacts/{appId}/public/data/{collectionName})
             const commentsCollection = collection(db, 'artifacts', appId, 'public', 'data', 'comments');
 
-            // Escuta em tempo real com callback de sucesso e erro (Obrigatório)
             onSnapshot(commentsCollection, (snapshot) => {
+                commentsLoaded = true;
+                clearTimeout(fallbackTimeout);
+
                 const fetched = [];
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    // RULE 2: Filtragem em memória (sem clausula where no Firestore)
                     if (data.articleId === getArticleId()) {
                         fetched.push({
                             id: doc.id,
@@ -436,24 +498,23 @@
                     }
                 });
 
-                // RULE 2: Ordenação em memória (data ascendente)
                 fetched.sort((a, b) => a.createdAt - b.createdAt);
                 currentCommentsList = fetched;
-                
                 renderCommentsUI(fetched);
             }, (error) => {
                 console.error("Erro Firestore ao ler comentários:", error);
-                showSystemToast("Erro de Rede", "Incapaz de atualizar os comentários em tempo real.", true);
+                useFirebase = false;
+                clearTimeout(fallbackTimeout);
+                commentsLoaded = true;
+                const localComments = getLocalComments();
+                currentCommentsList = localComments;
+                renderCommentsUI(localComments);
             });
         }
 
-        // Submeter comentário à base de dados
+        // Submeter comentário
         async function handleCommentSubmit(event) {
             event.preventDefault();
-            if (!currentUser) {
-                showSystemToast("Aguarde", "A estabelecer ligação segura à base de dados...", true);
-                return;
-            }
 
             const authorInput = document.getElementById('comm-author');
             const textInput = document.getElementById('comm-text');
@@ -463,17 +524,33 @@
             if (!messageText) return;
 
             try {
-                const commentsCollection = collection(db, 'artifacts', appId, 'public', 'data', 'comments');
-                await addDoc(commentsCollection, {
-                    author: authorName,
-                    text: messageText,
-                    articleId: getArticleId(),
-                    authorToken: authorToken,
-                    createdAt: Date.now()
-                });
-
+                if (useFirebase && currentUser) {
+                    const commentsCollection = collection(db, 'artifacts', appId, 'public', 'data', 'comments');
+                    await addDoc(commentsCollection, {
+                        author: authorName,
+                        text: messageText,
+                        articleId: getArticleId(),
+                        authorToken: authorToken,
+                        createdAt: Date.now()
+                    });
+                    showSystemToast("Enviado", "O seu comentário foi publicado com sucesso!");
+                } else {
+                    const newComment = {
+                        id: 'local_' + Date.now(),
+                        author: authorName,
+                        text: messageText,
+                        articleId: getArticleId(),
+                        authorToken: authorToken,
+                        createdAt: Date.now()
+                    };
+                    const localComments = getLocalComments();
+                    localComments.push(newComment);
+                    saveLocalComments(localComments);
+                    currentCommentsList = localComments;
+                    renderCommentsUI(localComments);
+                    showSystemToast("Enviado", "O seu comentário local foi guardado com sucesso!");
+                }
                 textInput.value = '';
-                showSystemToast("Enviado", "O seu comentário foi publicado com sucesso!");
             } catch (err) {
                 console.error("Erro ao submeter comentário:", err);
                 showSystemToast("Erro", "Incapaz de guardar o comentário neste momento.", true);
@@ -482,10 +559,8 @@
 
         document.getElementById('comment-form').addEventListener('submit', handleCommentSubmit);
 
-        // Eliminar comentário (Autor ou Admin)
+        // Eliminar comentário
         async function deleteComment(id) {
-            if (!currentUser) return;
-
             const confirmed = await showCustomModal({
                 title: "Eliminar Comentário",
                 desc: "Tem a certeza que deseja eliminar permanentemente este comentário?",
@@ -495,8 +570,16 @@
             if (!confirmed) return;
 
             try {
-                const commentRef = doc(db, 'artifacts', appId, 'public', 'data', 'comments', id);
-                await deleteDoc(commentRef);
+                if (useFirebase && currentUser && !id.startsWith('local_')) {
+                    const commentRef = doc(db, 'artifacts', appId, 'public', 'data', 'comments', id);
+                    await deleteDoc(commentRef);
+                } else {
+                    let localComments = getLocalComments();
+                    localComments = localComments.filter(c => c.id !== id);
+                    saveLocalComments(localComments);
+                    currentCommentsList = localComments;
+                    renderCommentsUI(localComments);
+                }
                 showSystemToast("Eliminado", "Comentário removido com sucesso.");
             } catch (err) {
                 console.error("Erro ao eliminar comentário:", err);
@@ -504,10 +587,8 @@
             }
         }
 
-        // Editar comentário (Autor ou Admin)
+        // Editar comentário
         async function editComment(id, currentText) {
-            if (!currentUser) return;
-
             const newText = await showCustomModal({
                 title: "Editar Comentário",
                 desc: "Altere a sua mensagem abaixo:",
@@ -521,10 +602,21 @@
             if (!textTrimmed) return;
 
             try {
-                const commentRef = doc(db, 'artifacts', appId, 'public', 'data', 'comments', id);
-                await updateDoc(commentRef, {
-                    text: textTrimmed
-                });
+                if (useFirebase && currentUser && !id.startsWith('local_')) {
+                    const commentRef = doc(db, 'artifacts', appId, 'public', 'data', 'comments', id);
+                    await updateDoc(commentRef, {
+                        text: textTrimmed
+                    });
+                } else {
+                    const localComments = getLocalComments();
+                    const target = localComments.find(c => c.id === id);
+                    if (target) {
+                        target.text = textTrimmed;
+                        saveLocalComments(localComments);
+                        currentCommentsList = localComments;
+                        renderCommentsUI(localComments);
+                    }
+                }
                 showSystemToast("Atualizado", "Comentário editado com sucesso.");
             } catch (err) {
                 console.error("Erro ao atualizar comentário:", err);
@@ -548,7 +640,6 @@
             if (hash === "fae1136bdf2cbdf82e6d5e16ec3cb653fcbc27993092b7754b79cf66191f6d90") {
                 isAdminSession = true;
                 showSystemToast("Autenticado", "Sessão de Administrador ativada!");
-                // Re-renderizar comentários agora com ações de admin desbloqueadas
                 renderCommentsUI(currentCommentsList);
             } else {
                 showSystemToast("Negado", "PIN de moderação incorreto.", true);
@@ -807,9 +898,43 @@
 
         /* --- CONTROLO DO PROGRESSO DE LEITURA (SCROLL PERCENTAGE) --- */
         window.addEventListener('scroll', () => {
-            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = height > 0 ? Math.round((winScroll / height) * 100) : 0;
+            const winScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+            
+            const targetEl = document.getElementById('fontes-section');
+            let scrolled = 0;
+            
+            if (targetEl) {
+                // Obter a posição vertical absoluta da secção de Fontes
+                const absoluteTop = targetEl.getBoundingClientRect().top + winScroll;
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                
+                // O progresso atinge 100% exatamente quando o início da secção "Fontes" entra no campo de leitura (30% da altura da janela)
+                const maxScroll = absoluteTop - (winHeight * 0.3);
+                
+                if (maxScroll > 0) {
+                    scrolled = Math.round((winScroll / maxScroll) * 100);
+                } else {
+                    scrolled = 100;
+                }
+            } else {
+                // Fallback para o fundo do documento se o elemento não existir
+                const docHeight = Math.max(
+                    document.body.scrollHeight, 
+                    document.documentElement.scrollHeight,
+                    document.body.offsetHeight, 
+                    document.documentElement.offsetHeight,
+                    document.body.clientHeight, 
+                    document.documentElement.clientHeight
+                );
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const totalScrollable = docHeight - winHeight;
+                if (totalScrollable > 0) {
+                    scrolled = Math.round((winScroll / totalScrollable) * 100);
+                }
+            }
+            
+            // Garantir que a percentagem fica estritamente no intervalo de 0% a 100%
+            scrolled = Math.min(Math.max(scrolled, 0), 100);
             
             const bar = document.getElementById('scroll-progress-bar');
             const percentLabel = document.getElementById('scroll-percentage');
