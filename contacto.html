@@ -165,17 +165,29 @@
                 </figure>            
             </div>
             
-            <section class="bg-white p-6 md:p-12 rounded-2xl shadow-xl border border-gray-100 max-w-4xl mx-auto">
-                <h2 id="form-title" class="font-serif text-3xl font-bold text-brand-accent-blue mb-6 border-b border-brand-accent-blue/10 pb-4 text-center">Deixe a sua mensagem</h2>
+            <section class="bg-white p-6 md:p-12 rounded-2xl shadow-xl border border-gray-100 max-w-4xl mx-auto text-left">
+                
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-brand-accent-blue/10 pb-4 mb-6">
+                    <h2 id="form-title" class="font-serif text-3xl font-bold text-brand-accent-blue">Deixe a sua mensagem</h2>
+                    <a href="palestras" id="btn-ver-mais-palestras" class="hidden bg-brand-gold hover:bg-yellow-600 text-brand-accent-blue font-sans font-bold text-xs uppercase tracking-wider px-4 py-2.5 rounded-lg shadow-sm transition-all flex items-center gap-2">
+                        Ver + sobre Palestras <i class="fas fa-arrow-right text-[9px]"></i>
+                    </a>
+                </div>
                 
                 <!-- Seletores de Abas em Estilo Premium Unificado (Azul da Marca) -->
                 <div class="flex flex-col sm:flex-row gap-3 justify-center mb-8">
-                    <button type="button" id="tab-geral" onclick="switchContactTab('geral')" class="flex-1 py-3 px-4 bg-brand-accent-blue text-white font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-brand-accent-blue">
+                    <button type="button" id="tab-geral" onclick="switchContactTab('geral')" class="flex-1 py-3.5 px-4 bg-brand-accent-blue text-white font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-brand-accent-blue">
                         Mensagem Geral / Dúvida / Sugestão
                     </button>
-                    <button type="button" id="tab-palestra" onclick="switchContactTab('palestra')" class="flex-1 py-3 px-4 bg-white text-brand-accent-blue hover:border-brand-accent-blue font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-gray-200">
+                    <button type="button" id="tab-palestra" onclick="switchContactTab('palestra')" class="flex-1 py-3.5 px-4 bg-white text-brand-accent-blue hover:border-brand-accent-blue font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-gray-200">
                         Pedido de Agendamento de Palestra
                     </button>
+                </div>
+
+                <!-- Notificação de Erros Integrada (Message Box) -->
+                <div id="form-error-box" class="hidden mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm font-sans rounded-r-xl flex items-center gap-3">
+                    <i class="fas fa-exclamation-triangle text-lg"></i>
+                    <span id="form-error-msg">Por favor, verifique os campos obrigatórios.</span>
                 </div>
 
                 <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-6">
@@ -184,25 +196,26 @@
 
                     <div class="grid md:grid-cols-2 gap-6">
                         <input type="text" name="nome" id="contact-name" placeholder="Nome" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
-                        <input type="email" name="email" id="contact-email" placeholder="E-mail *" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
+                        <input type="email" name="email" id="contact-email" placeholder="E-mail" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
                     </div>
 
                     <!-- Campos Dinâmicos (Surgem apenas quando "Agendar Palestra" está ativo) -->
                     <div id="palestra-extra-fields" class="hidden space-y-4 pt-4 border-t border-dashed border-gray-200">
-                        <div>
-                            <input type="text" id="contact-org" placeholder="Paróquia / Organização *" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <input type="text" id="contact-org" placeholder="Paróquia / Organização" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
+                            </div>
+                            <div>
+                                <input type="tel" id="contact-tel" placeholder="Contacto telefónico" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
+                            </div>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <input type="text" id="contact-date" placeholder="Data Proposta (Ex: DD/MM/AAAA ou época)" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans">
                             </div>
                             <div>
-                                <select id="contact-theme" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans cursor-pointer text-gray-500">
-                                    <option value="" disabled selected>Escolha o tema pretendido... *</option>
-                                    <option value="Conhecer a Missa">Conhecer a Missa</option>
-                                    <option value="Os Profetas Maiores">Os Profetas Maiores</option>
-                                    <option value="A Missa e o Mystério da Sagrada Liturgia">A Missa e o Mistério da Sagrada Liturgia</option>
-                                    <option value="Nossa Senhora no Advento e Natal">Nossa Senhora no Advento e Natal</option>
+                                <select id="contact-theme" class="w-full p-4 border rounded-xl bg-gray-50 outline-none font-sans cursor-pointer text-gray-500 bg-white">
+                                    <option value="" disabled selected>Escolha o tema pretendido...</option>
                                     <option value="Outro Tema / Sugestão Livre">Outro Tema / Sugestão Livre</option>
                                 </select>
                             </div>
@@ -210,7 +223,7 @@
                     </div>
 
                     <div>
-                        <textarea name="mensagem" id="contact-msg" placeholder="Mensagem *" rows="5" required class="w-full p-4 border rounded-xl bg-gray-50 outline-none resize-none font-sans"></textarea>
+                        <textarea name="mensagem" id="contact-msg" placeholder="Mensagem" rows="5" class="w-full p-4 border rounded-xl bg-gray-50 outline-none resize-none font-sans"></textarea>
                     </div>
 
                     <button type="submit" id="submit-button" class="w-full bg-brand-accent-blue text-white font-bold py-5 rounded-xl shadow-lg hover:bg-[#001730] transition-all text-lg tracking-widest font-sans uppercase">Enviar mensagem</button>
@@ -224,49 +237,191 @@
     <script>
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec'; 
 
-        // Alternador de Abas Dinâmico com alteração de estilos para o Azul da Marca
+        // Alternador de Abas Dinâmico
         function switchContactTab(type) {
             const btnGeral = document.getElementById('tab-geral');
             const btnPalestra = document.getElementById('tab-palestra');
             const extraFields = document.getElementById('palestra-extra-fields');
             const typeInput = document.getElementById('contact-type');
             const formTitle = document.getElementById('form-title');
-            
-            const orgInput = document.getElementById('contact-org');
-            const themeSelect = document.getElementById('contact-theme');
+            const btnVerMais = document.getElementById('btn-ver-mais-palestras');
+            const errorBox = document.getElementById('form-error-box');
 
             if (!btnGeral || !btnPalestra || !extraFields || !typeInput) return;
 
             typeInput.value = type;
+            if (errorBox) errorBox.classList.add('hidden'); // Oculta erros anteriores ao mudar de aba
 
             if (type === 'palestra') {
-                // Altera as cores das abas para Azul
-                btnPalestra.className = "flex-1 py-3 px-4 bg-brand-accent-blue text-white font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-brand-accent-blue";
-                btnGeral.className = "flex-1 py-3 px-4 bg-white text-brand-accent-blue hover:border-brand-accent-blue font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-gray-200";
+                btnPalestra.className = "flex-1 py-3.5 px-4 bg-brand-accent-blue text-white font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-brand-accent-blue";
+                btnGeral.className = "flex-1 py-3.5 px-4 bg-white text-brand-accent-blue hover:border-brand-accent-blue font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-gray-200";
                 
-                // Mostra campos extra e torna os obrigatórios
                 extraFields.classList.remove('hidden');
-                orgInput.setAttribute('required', 'true');
-                themeSelect.setAttribute('required', 'true');
+                if (btnVerMais) btnVerMais.classList.remove('hidden');
                 
-                if (formTitle) {
-                    formTitle.textContent = "Pedido de Palestra";
-                    formTitle.className = "font-serif text-3xl font-bold text-brand-accent-blue mb-6 border-b border-brand-accent-blue/10 pb-4 text-center";
+                if (formTitle) formTitle.textContent = "Pedido de Palestras";
+            } else {
+                btnGeral.className = "flex-1 py-3.5 px-4 bg-brand-accent-blue text-white font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-brand-accent-blue";
+                btnPalestra.className = "flex-1 py-3.5 px-4 bg-white text-brand-accent-blue hover:border-brand-accent-blue font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-gray-200";
+                
+                extraFields.classList.add('hidden');
+                if (btnVerMais) btnVerMais.classList.add('hidden');
+                
+                if (formTitle) formTitle.textContent = "Deixe a sua mensagem";
+            }
+        }
+
+        // Função para extrair dinamicamente os temas definidos no ficheiro palestras.html
+        async function loadDynamicThemes() {
+            try {
+                const response = await fetch(getSafePath('palestras.html') + '?v=' + Date.now());
+                if (!response.ok) return;
+
+                const htmlText = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, 'text/html');
+                const themeTitles = doc.querySelectorAll('.theme-card h4');
+                const themeSelect = document.getElementById('contact-theme');
+
+                if (themeSelect && themeTitles.length > 0) {
+                    themeSelect.innerHTML = '<option value="" disabled selected>Escolha o tema pretendido...</option>';
+                    
+                    themeTitles.forEach(h4 => {
+                        const themeName = h4.textContent.trim();
+                        const opt = document.createElement('option');
+                        opt.value = themeName;
+                        opt.textContent = themeName;
+                        themeSelect.appendChild(opt);
+                    });
+
+                    // Adiciona a opção padrão de sugestão no fim da lista
+                    const defaultOpt = document.createElement('option');
+                    defaultOpt.value = "Outro Tema / Sugestão Livre";
+                    defaultOpt.textContent = "Outro Tema / Sugestão Livre";
+                    themeSelect.appendChild(defaultOpt);
+                }
+            } catch (e) {
+                console.warn("Modo local ou erro ao carregar os temas de palestras:", e);
+            }
+        }
+
+        // Submissão do Formulário com Validação Customizada Segura
+        async function handleContactSubmit(event) {
+            event.preventDefault(); 
+            const errorBox = document.getElementById('form-error-box');
+            const errorMsg = document.getElementById('form-error-msg');
+            const button = document.getElementById('submit-button');
+            const type = document.getElementById('contact-type').value;
+
+            if (errorBox) errorBox.classList.add('hidden');
+
+            const nome = document.getElementById('contact-name').value.trim() || "Não preenchido";
+            const email = document.getElementById('contact-email').value.trim();
+            const msgOriginal = document.getElementById('contact-msg').value.trim();
+
+            // 1. Validação Manual Conforme o Tipo de Formulário
+            if (type === 'palestra') {
+                const tel = document.getElementById('contact-tel').value.trim();
+                const org = document.getElementById('contact-org').value.trim();
+                const theme = document.getElementById('contact-theme').value;
+
+                if (!email && !tel) {
+                    showError("Por favor, preencha o E-mail ou o Contacto telefónico para podermos responder.");
+                    return;
+                }
+                if (!org) {
+                    showError("Por favor, indique a Paróquia / Organização do evento.");
+                    return;
+                }
+                if (!theme) {
+                    showError("Por favor, escolha um dos temas disponíveis.");
+                    return;
                 }
             } else {
-                // Altera as cores das abas para Azul
-                btnGeral.className = "flex-1 py-3 px-4 bg-brand-accent-blue text-white font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-brand-accent-blue";
-                btnPalestra.className = "flex-1 py-3 px-4 bg-white text-brand-accent-blue hover:border-brand-accent-blue font-bold rounded-xl shadow-sm transition-all text-xs uppercase tracking-wider font-sans border-2 border-gray-200";
-                
-                // Esconde campos extra e remove a obrigatoriedade
-                extraFields.classList.add('hidden');
-                orgInput.removeAttribute('required');
-                themeSelect.removeAttribute('required');
-                
-                if (formTitle) {
-                    formTitle.textContent = "Deixe a sua mensagem";
-                    formTitle.className = "font-serif text-3xl font-bold text-brand-accent-blue mb-6 border-b border-brand-accent-blue/10 pb-4 text-center";
+                if (!email) {
+                    showError("Por favor, preencha o campo de E-mail para podermos responder.");
+                    return;
                 }
+            }
+
+            if (!msgOriginal) {
+                showError("Por favor, escreva o texto da sua mensagem.");
+                return;
+            }
+
+            button.disabled = true; 
+            button.textContent = 'A processar...';
+            button.classList.add('sending');
+
+            let finalMessage = msgOriginal;
+
+            // Compila os dados adicionais da palestra para a caixa de mensagem única do Code.gs
+            if (type === 'palestra') {
+                const org = document.getElementById('contact-org').value.trim();
+                const tel = document.getElementById('contact-tel').value.trim() || "Não fornecido";
+                const date = document.getElementById('contact-date').value.trim() || "Não especificada";
+                const theme = document.getElementById('contact-theme').value;
+
+                finalMessage = `PEDIDO DE AGENDAMENTO DE PALESTRA\n` +
+                               `--------------------------------------------------\n` +
+                               `Paróquia / Organização: ${org}\n` +
+                               `Contacto Telefónico: ${tel}\n` +
+                               `Data Proposta: ${date}\n` +
+                               `Tema Selecionado: ${theme}\n` +
+                               `--------------------------------------------------\n\n` +
+                               `Mensagem / Observações:\n${msgOriginal}`;
+            }
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000); 
+
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify({
+                        type: 'contact_message',
+                        nome: nome,
+                        email: email || "Contacto Telefónico Registado",
+                        mensagem: finalMessage
+                    }),
+                    signal: controller.signal
+                });
+
+                event.target.reset();
+                switchContactTab('geral'); 
+
+                const modalTitle = document.getElementById('modal-success-title');
+                const modalText = document.getElementById('modal-success-text');
+                
+                if (type === 'palestra') {
+                    if (modalTitle) modalTitle.textContent = "Pedido de Palestra Enviado!";
+                    if (modalText) modalText.textContent = "Obrigado pela sua proposta de agendamento. Iremos avaliar a sua mensagem com a maior brevidade possível.";
+                } else {
+                    if (modalTitle) modalTitle.textContent = "Obrigado pela sua mensagem.";
+                    if (modalText) modalText.textContent = "A sua mensagem foi enviada com sucesso à Jerónimo Editora.";
+                }
+
+                document.getElementById('message-modal').classList.remove('hidden');
+            } catch (error) {
+                event.target.reset();
+                switchContactTab('geral');
+                document.getElementById('message-modal').classList.remove('hidden');
+            } finally {
+                clearTimeout(timeoutId);
+                button.disabled = false; 
+                button.textContent = 'Enviar mensagem';
+                button.classList.remove('sending');
+            }
+        }
+
+        function showError(msg) {
+            const errorBox = document.getElementById('form-error-box');
+            const errorMsg = document.getElementById('form-error-msg');
+            if (errorBox && errorMsg) {
+                errorMsg.textContent = msg;
+                errorBox.classList.remove('hidden');
+                errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
 
@@ -294,6 +449,15 @@
             }
         }
 
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
         async function loadComponents() {
             try {
                 const nav = await fetch('menu?v=1.0.2'); 
@@ -306,82 +470,6 @@
             }
         }
 
-        async function handleContactSubmit(event) {
-            event.preventDefault(); 
-            const button = document.getElementById('submit-button');
-            const type = document.getElementById('contact-type').value;
-            
-            const nome = document.getElementById('contact-name').value.trim() || "Não preenchido";
-            const email = document.getElementById('contact-email').value.trim();
-            const msgOriginal = document.getElementById('contact-msg').value.trim();
-            
-            button.disabled = true; 
-            button.textContent = 'A processar...';
-            button.classList.add('sending');
-
-            let finalMessage = msgOriginal;
-
-            // Se for pedido de palestra, compilamos os dados na mensagem para não quebrar o Code.gs
-            if (type === 'palestra') {
-                const org = document.getElementById('contact-org').value.trim();
-                const date = document.getElementById('contact-date').value.trim() || "Não especificada";
-                const theme = document.getElementById('contact-theme').value || "Não especificado";
-
-                finalMessage = `PEDIDO DE AGENDAMENTO DE PALESTRA\n` +
-                               `--------------------------------------------------\n` +
-                               `Paróquia / Organização: ${org}\n` +
-                               `Data Proposta: ${date}\n` +
-                               `Tema Selecionado: ${theme}\n` +
-                               `--------------------------------------------------\n\n` +
-                               `Mensagem / Observações:\n${msgOriginal}`;
-            }
-
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000); 
-
-            try {
-                // Enviamos para o script existente usando a mesma rota contact_message
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: JSON.stringify({
-                        type: 'contact_message',
-                        nome: nome,
-                        email: email,
-                        mensagem: finalMessage
-                    }),
-                    signal: controller.signal
-                });
-
-                event.target.reset();
-                switchContactTab('geral'); // Restaura o formulário para a aba inicial
-
-                // Personaliza o modal de sucesso com base na aba submetida
-                const modalTitle = document.getElementById('modal-success-title');
-                const modalText = document.getElementById('modal-success-text');
-                
-                if (type === 'palestra') {
-                    if (modalTitle) modalTitle.textContent = "Pedido de Palestra Enviado!";
-                    if (modalText) modalText.textContent = "Obrigado pela sua proposta de agendamento. Iremos avaliar a sua mensagem com a maior brevidade possível.";
-                } else {
-                    if (modalTitle) modalTitle.textContent = "Obrigado pela sua mensagem.";
-                    if (modalText) modalText.textContent = "A sua mensagem foi enviada com sucesso à Jerónimo Editora.";
-                }
-
-                document.getElementById('message-modal').classList.remove('hidden');
-            } catch (error) {
-                // Fallback amigável de sucesso caso o fetch seja cortado localmente
-                event.target.reset();
-                switchContactTab('geral');
-                document.getElementById('message-modal').classList.remove('hidden');
-            } finally {
-                clearTimeout(timeoutId);
-                button.disabled = false; 
-                button.textContent = 'Enviar mensagem';
-                button.classList.remove('sending');
-            }
-        }
-
         function updateCartUI() {
             const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             const total = items.reduce((s, i) => s + i.quantity, 0);
@@ -390,11 +478,10 @@
             });
         }
 
-        // Carregamento de componentes e ativação de aba por parâmetro URL
         window.onload = async function() {
             await loadComponents();
+            await loadDynamicThemes();
             
-            // Lê se há uma aba definida no URL (?tab=palestra)
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('tab') === 'palestra') {
                 switchContactTab('palestra');
@@ -407,7 +494,6 @@
     </script>
 
     <!-- GoatCounter Analytics Tracker -->
-    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
-            async src="//gc.zgo.at/count.js"></script>
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
