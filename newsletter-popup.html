@@ -1,0 +1,186 @@
+<div id="newsletter-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <!-- Fundo desfocado com transição suave -->
+    <div id="newsletter-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity duration-500 opacity-0" onclick="dismissNewsletterPopup()"></div>
+    
+    <!-- Caixa do Popup -->
+    <div id="newsletter-content" class="bg-white rounded-3xl overflow-hidden w-full max-w-lg relative z-10 shadow-2xl border border-gray-100 transform translate-y-8 scale-95 opacity-0 transition-all duration-500 font-inter">
+        
+        <!-- Botão de Fechar -->
+        <button onclick="dismissNewsletterPopup()" class="absolute top-4 right-4 text-gray-400 hover:text-brand-accent-blue hover:bg-gray-100 p-2 rounded-full transition-all z-20" aria-label="Fechar">
+            <i class="fas fa-times text-lg"></i>
+        </button>
+
+        <div class="p-6 sm:p-8 flex flex-col items-center text-center">
+            <!-- Icon/Estética de Editora Clássica -->
+            <div class="w-16 h-16 rounded-full bg-brand-gold-light border-2 border-brand-gold flex items-center justify-center text-brand-gold-dark text-2xl mb-4 shadow-inner">
+                <i class="fas fa-envelope-open-text"></i>
+            </div>
+
+            <span class="text-brand-accent-orange text-[10px] font-extrabold uppercase tracking-[0.2em] mb-2 block">Novidades & Formação</span>
+            <h3 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue leading-tight mb-3">
+                Newsletter Jerónimo <br>& Hugo Bacelo
+            </h3>
+            
+            <p class="text-sm text-gray-650 leading-relaxed mb-6 font-sans">
+                Subscreva gratuitamente para receber os próximos artigos teológicos, cursos de formação e novidades exclusivas de lançamentos diretamente no seu e-mail.
+            </p>
+
+            <!-- Formulário -->
+            <form id="popup-newsletter-form" onsubmit="handlePopupSubscribe(event)" class="w-full space-y-3">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
+                        <i class="far fa-envelope"></i>
+                    </span>
+                    <input type="email" id="popup-sub-email" required placeholder="O seu endereço de e-mail..." class="w-full pl-10 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans text-gray-700">
+                </div>
+                
+                <button type="submit" class="w-full py-3.5 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-sans shadow-md hover:-translate-y-0.5 active:translate-y-0">
+                    Subscrever Gratuitamente
+                </button>
+
+                <div class="flex items-start justify-center gap-2 pt-2">
+                    <input type="checkbox" id="popup-privacy" required class="accent-brand-gold rounded h-4 w-4 mt-0.5">
+                    <label for="popup-privacy" class="text-[10px] text-gray-400 text-left leading-tight font-sans">
+                        Concordo em receber novidades e aceito a <a href="politica-privacidade" class="underline hover:text-brand-accent-blue transition-colors">Política de Privacidade</a>.
+                    </label>
+                </div>
+            </form>
+
+            <!-- Mensagem de Sucesso (Será mostrada dinamicamente) -->
+            <div id="popup-success-message" class="hidden w-full p-4 bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm rounded-xl font-sans font-medium flex items-center gap-2.5">
+                <i class="fas fa-check-circle text-lg"></i>
+                <div class="text-left leading-tight">
+                    A iniciar o seu cliente de e-mail para processar a subscrição!
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Configurações do Popup
+    const TIME_DELAY = 7000; // Tempo em milissegundos para o popup aparecer (7 segundos)
+    const SCROLL_TRIGGER = 0.4; // Percentagem de scroll para acionar o popup (40% de descida na página)
+    const COOKIE_EXPIRATION_DAYS = 30; // Dias para o popup não voltar a incomodar após ser fechado
+    
+    let isPopupTriggered = false;
+
+    // Inicialização segura
+    function initNewsletterPopup() {
+        // Se o leitor já subscreveu ou fechou nos últimos 30 dias, não fazemos nada
+        if (localStorage.getItem('jeronimo_newsletter_dismissed')) {
+            return;
+        }
+
+        // Acionador 1: Tempo na página
+        setTimeout(() => {
+            triggerNewsletterPopup();
+        }, TIME_DELAY);
+
+        // Acionador 2: Scroll na página
+        window.addEventListener('scroll', handleNewsletterScroll, { passive: true });
+    }
+
+    function handleNewsletterScroll() {
+        if (isPopupTriggered) return;
+
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (totalHeight <= 0) return;
+
+        const scrolled = window.scrollY / totalHeight;
+        if (scrolled >= SCROLL_TRIGGER) {
+            triggerNewsletterPopup();
+            window.removeEventListener('scroll', handleNewsletterScroll);
+        }
+    }
+
+    // Mostrar o Popup com animações fluidas
+    function triggerNewsletterPopup() {
+        if (isPopupTriggered || localStorage.getItem('jeronimo_newsletter_dismissed')) return;
+        isPopupTriggered = true;
+
+        const modal = document.getElementById('newsletter-modal');
+        const overlay = document.getElementById('newsletter-overlay');
+        const content = document.getElementById('newsletter-content');
+
+        if (!modal || !overlay || !content) return;
+
+        // Ativa exibição
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Evita scroll ao ler o popup
+
+        // Animação Fade-in & Scale-up
+        setTimeout(() => {
+            overlay.classList.remove('opacity-0');
+            overlay.classList.add('opacity-100');
+            
+            content.classList.remove('translate-y-8', 'scale-95', 'opacity-0');
+            content.classList.add('translate-y-0', 'scale-100', 'opacity-100');
+        }, 50);
+    }
+
+    // Fechar o Popup e guardar decisão por 30 dias
+    window.dismissNewsletterPopup = function(saveDismiss = true) {
+        const modal = document.getElementById('newsletter-modal');
+        const overlay = document.getElementById('newsletter-overlay');
+        const content = document.getElementById('newsletter-content');
+
+        if (!modal || !overlay || !content) return;
+
+        // Animações inversas
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0');
+        
+        content.classList.remove('translate-y-0', 'scale-100', 'opacity-100');
+        content.classList.add('translate-y-8', 'scale-95', 'opacity-0');
+
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // Devolve o controlo do scroll
+            
+            if (saveDismiss) {
+                // Guarda marca temporal no navegador do cliente
+                const expireDate = new Date();
+                expireDate.setDate(expireDate.getDate() + COOKIE_EXPIRATION_DAYS);
+                localStorage.setItem('jeronimo_newsletter_dismissed', expireDate.getTime().toString());
+            }
+        }, 500);
+    };
+
+    // Subscrição Premium (Mailto nativo adaptável a outras integrações futuramente)
+    window.handlePopupSubscribe = function(e) {
+        e.preventDefault();
+        const emailInput = document.getElementById('popup-sub-email');
+        const form = document.getElementById('popup-newsletter-form');
+        const successMsg = document.getElementById('popup-success-msg');
+
+        if (!emailInput || !emailInput.value.trim()) return;
+
+        const email = emailInput.value.trim();
+        const recipient = "editorajeronimo@gmail.com";
+        const subject = encodeURIComponent("Subscrição de Newsletter");
+        const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos e novidades com o e-mail: " + email);
+
+        // Dispara o cliente de e-mail nativo
+        window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+
+        // Feedback visual premium no modal
+        if (form && successMsg) {
+            form.classList.add('hidden');
+            successMsg.classList.remove('hidden');
+        }
+
+        // Guarda que o leitor já subscreveu para nunca mais incomodar com o pop-up
+        localStorage.setItem('jeronimo_author_subscribed', 'true');
+        localStorage.setItem('jeronimo_author_token', 'subscriber_' + Math.random().toString(36).substring(2, 10));
+
+        // Fecha após 5 segundos
+        setTimeout(() => {
+            dismissNewsletterPopup(true);
+        }, 5000);
+    };
+
+    // Iniciar
+    initNewsletterPopup();
+</script>
