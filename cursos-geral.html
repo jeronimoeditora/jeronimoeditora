@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Cursos de Formação | Jerónimo Editora</title>
+    
+    <!-- Favicons e Ícones (Desktop, Mobile e Apple) - Com parâmetro de versão contra Cache -->
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="Imagens/favicon.png?v=1.0.0">
+
+    <script>
+        // Limpeza estética do URL removendo a extensão .html na barra de pesquisa (GitHub Pages)
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    <!-- Google Fonts unificadas com suporte a pesos de leitura premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'], // Menu, filtros e botões
+                        inter: ['"Inter"', 'sans-serif'], // Corpo de leitura
+                        serif: ['"Playfair Display"', 'serif'], // Títulos elegantes
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .course-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(0, 33, 71, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <!-- Contentor do Menu Dinâmico -->
+    <div id="nav-placeholder"></div>
+
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
+        <div class="max-w-6xl mx-auto px-6 fade-in">
+            
+            <!-- Título Principal da Secção de Cursos (Simplificado) -->
+            <div class="text-center mb-10">
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Cursos</h1>
+                <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
+            </div>
+
+            <!-- Painel de Pesquisa e Filtros Reativos -->
+            <div class="bg-white p-4 sm:p-6 rounded-2xl border border-gray-150 shadow-xs max-w-4xl mx-auto mb-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 items-center">
+                    
+                    <div class="lg:col-span-5 relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                            <i class="fas fa-search text-gray-400 text-sm"></i>
+                        </span>
+                        <input type="text" id="course-search" onkeyup="filterCourses()" placeholder="Pesquise cursos por palavra-chave..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans">
+                    </div>
+                    
+                    <div class="lg:col-span-3">
+                        <select id="category-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
+                            <option value="all">Todas as Categorias</option>
+                            <option value="Liturgia">Liturgia</option>
+                            <option value="Formação Bíblica">Formação Bíblica</option>
+                        </select>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <select id="sort-select" onchange="filterCourses()" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-sans cursor-pointer text-gray-700">
+                            <option value="date-desc">Mais Recentes</option>
+                            <option value="date-asc">Mais Antigos</option>
+                            <option value="az">Título A-Z</option>
+                        </select>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <button onclick="clearFilters()" class="w-full bg-brand-accent-blue text-white hover:bg-brand-accent-orange font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-sans">
+                            Limpar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Botões de Informação e Atendimento -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-3 mb-12 max-w-2xl mx-auto px-4">
+                <button onclick="abrirModalInfo()" class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-brand-accent-orange hover:bg-brand-accent-blue text-white text-xs font-extrabold uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300">
+                    <i class="fas fa-question-circle"></i> Como funciona?
+                </button>
+                <a href="sobreHB" class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-brand-accent-blue hover:bg-[#001730] text-white text-xs font-extrabold uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 duration-300">
+                    <i class="fas fa-user-tie"></i> Formador Hugo Bacelo
+                </a>
+            </div>
+
+            <!-- Sem Resultados -->
+            <div id="no-results" class="hidden text-center py-16">
+                <i class="fas fa-video-slash text-gray-300 text-5xl mb-4"></i>
+                <h3 class="font-serif text-2xl text-brand-accent-blue font-bold">Nenhum curso encontrado</h3>
+                <p class="text-gray-500 font-sans mt-1">Experimente alterar os termos de pesquisa ou os filtros seleccionados.</p>
+            </div>
+
+            <!-- Grelha de Cursos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto" id="courses-grid">
+                <!-- Preenchido dinamicamente por Javascript -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal Informativo: Como Funciona o Acesso Digital -->
+    <div id="info-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl p-6 md:p-8 relative border-t-4 border-brand-accent-orange transform scale-95 transition-transform duration-300" id="info-modal-content">
+            <button onclick="fecharModalInfo()" class="absolute top-4 right-4 text-gray-455 hover:text-gray-700 focus:outline-none">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-brand-accent-orange flex-shrink-0 border border-orange-100">
+                    <i class="fas fa-info-circle text-lg"></i>
+                </div>
+                <h3 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-blue">Como funciona?</h3>
+            </div>
+            
+            <div class="space-y-4 text-sm text-gray-655 font-sans leading-relaxed text-left">
+                <div class="flex gap-3 items-start">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5 font-sans">1</span>
+                    <p class="text-gray-700 font-medium">Escolha o curso e clique em <strong>Adquirir Acesso</strong> para avançar para o Checkout.</p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5 font-sans">2</span>
+                    <p class="text-gray-700 font-medium">Efectue o pagamento seguro e anexe o respectivo comprovativo.</p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5 font-sans">3</span>
+                    <p class="text-gray-700 font-medium">Após validação administrativa, receberá a sua <strong>Chave de Acesso</strong> por correio electrónico.</p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5 font-sans">4</span>
+                    <p class="text-gray-700 font-medium">Introduza a chave na página do curso correspondente para desbloquear o player e assistir.</p>
+                </div>
+                
+                <div class="bg-orange-50 border border-orange-100 p-4 rounded-xl font-semibold text-brand-accent-orange flex gap-3 mt-4">
+                    <i class="fas fa-clock mt-0.5 text-lg flex-shrink-0"></i>
+                    <span class="text-xs leading-normal font-sans">Terá 10 dias para assistir livremente aos módulos após a primeira validação da sua chave.</span>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <button onclick="fecharModalInfo()" class="w-full bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider transition font-sans text-center block shadow-md">
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contentor do Rodapé Dinâmico -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Dados de Cursos estruturados com indicação do número de vídeos
+        const coursesData = [
+            {
+                id: "curso_missa",
+                title: "Conhecer a Missa",
+                category: "Liturgia",
+                date: "2026-05-15",
+                status: "Disponível",
+                price: 16.90,
+                badgeClass: "bg-emerald-600",
+                image: "Imagens/missa.png",
+                url: "cursos-individuais/conhecer-a-missa",
+                videos: "4 vídeos",
+                description: "O mistério eucarístico revelado em detalhe. Adquira acesso ao módulo completo que aborda desde a preparação litúrgica até à bênção e envio final."
+            },
+            {
+                id: "curso_profetas",
+                title: "Os Profetas Maiores",
+                category: "Formação Bíblica",
+                date: "2026-07-01",
+                status: "Em breve",
+                price: 27.90,
+                badgeClass: "bg-amber-600",
+                image: "Imagens/profetas.png",
+                url: "cursos-individuais/os-profetas-maiores",
+                videos: "5 vídeos",
+                description: "A voz de Deus ao longo da história de Israel. Explore a teologia e a mensagem profética tradicional através de um estudo bíblico aprofundado."
+            }
+        ];
+
+        // Sincronização do Contador do Carrinho (Páginas do mesmo domínio)
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        // Adiciona o curso em formato digital ao localStorage e encaminha imediatamente para o checkout
+        function adquirirAcessoCurso(id, title, price) {
+            let items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            
+            // Remove instâncias duplicadas do mesmo curso para evitar chaves redundantes
+            items = items.filter(i => String(i.id) !== String(id));
+            
+            items.push({
+                id: id,
+                title: title,
+                price: parseFloat(price),
+                quantity: 1,
+                type: 'curso',
+                weight: 0
+            });
+            
+            localStorage.setItem('cartItems', JSON.stringify(items));
+            updateCartUI();
+            window.location.href = 'checkout';
+        }
+
+        // Filtra e organiza os cursos na grelha de exibição
+        function filterCourses() {
+            const searchInput = document.getElementById('course-search');
+            const categorySelect = document.getElementById('category-select');
+            const sortSelect = document.getElementById('sort-select');
+
+            const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+            const selectedCategory = categorySelect ? categorySelect.value : 'all';
+            const selectedSort = sortSelect ? sortSelect.value : 'date-desc';
+            
+            let filtered = coursesData.filter(course => {
+                const matchesSearch = course.title.toLowerCase().includes(searchTerm) || 
+                                      course.description.toLowerCase().includes(searchTerm) ||
+                                      course.category.toLowerCase().includes(searchTerm);
+                const matchesCategory = selectedCategory === 'all' || course.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            if (selectedSort === 'az') {
+                filtered.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (selectedSort === 'date-asc') {
+                filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+            } else if (selectedSort === 'date-desc') {
+                filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+            }
+
+            renderCourses(filtered);
+        }
+
+        // Gera o HTML das frações de cursos na grelha com exibição de número de vídeos
+        function renderCourses(courses) {
+            const grid = document.getElementById('courses-grid');
+            const noResults = document.getElementById('no-results');
+            
+            if (!grid) return;
+            grid.innerHTML = '';
+            
+            if (courses.length === 0) {
+                if (noResults) noResults.classList.remove('hidden');
+                return;
+            }
+            
+            if (noResults) noResults.classList.add('hidden');
+            
+            courses.forEach(course => {
+                const isAvailable = course.status === "Disponível";
+                
+                const actionBtnHtml = isAvailable 
+                    ? `<button onclick="adquirirAcessoCurso('${course.id}', '${course.title}', ${course.price})" class="w-full bg-brand-accent-blue text-white hover:bg-brand-accent-orange font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-sans shadow-xs flex items-center justify-center gap-2">
+                            <i class="fas fa-shopping-cart text-[11px]"></i> Adquirir Acesso
+                       </button>`
+                    : `<button disabled class="w-full bg-gray-250 text-gray-400 font-bold text-xs uppercase py-3.5 rounded-xl tracking-wider font-sans flex items-center justify-center gap-2 cursor-not-allowed">
+                            <i class="fas fa-clock text-[11px]"></i> Em Breve
+                       </button>`;
+
+                const imageLinkAction = `href="${course.url}"`;
+
+                grid.innerHTML += `
+                    <div class="course-card bg-white border border-gray-150 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between text-left">
+                        <div class="p-6 space-y-4">
+                            <!-- Miniatura do Curso -->
+                            <a ${imageLinkAction} class="block h-44 overflow-hidden rounded-xl border border-gray-100 bg-gray-50 relative">
+                                <img src="${course.image}" alt="${course.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x335/002147/ffffff?text=${encodeURIComponent(course.title)}';">
+                            </a>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-white ${course.badgeClass} px-2.5 py-1 rounded font-sans">
+                                    ${course.status}
+                                </span>
+                                <span class="text-sm font-extrabold text-brand-accent-blue font-sans">
+                                    ${course.price.toFixed(2).replace('.', ',')}€
+                                </span>
+                            </div>
+                            
+                            <div>
+                                <h2 class="font-inter text-xl font-bold text-brand-accent-blue leading-tight tracking-tight hover:text-brand-accent-orange transition-colors duration-200">
+                                    <a ${imageLinkAction}>${course.title}</a>
+                                </h2>
+                                <div class="flex justify-between items-center text-xs text-brand-accent-orange font-bold uppercase tracking-wider font-sans mt-1.5">
+                                    <span>${course.category}</span>
+                                    <span class="text-gray-450 font-medium normal-case flex items-center gap-1.5">
+                                        <i class="fas fa-video text-[10px]"></i> ${course.videos}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <p class="text-sm text-gray-655 leading-relaxed font-light font-sans">
+                                ${course.description}
+                            </p>
+
+                            <div class="pt-2 flex flex-col sm:flex-row gap-2">
+                                <a ${imageLinkAction} class="w-full sm:w-1/3 bg-gray-100 hover:bg-gray-200 text-brand-accent-blue font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-sans text-center flex items-center justify-center gap-1">
+                                    Saber Mais
+                                </a>
+                                <div class="flex-grow">
+                                    ${actionBtnHtml}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Funções de Controlo dos Modais Informativos
+        function abrirModalInfo() {
+            const modal = document.getElementById('info-modal');
+            const content = document.getElementById('info-modal-content');
+            if (modal && content) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    content.classList.remove('scale-95');
+                    content.classList.add('scale-100');
+                }, 20);
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Fecha o modal explicativo
+        function fecharModalInfo() {
+            const modal = document.getElementById('info-modal');
+            const content = document.getElementById('info-modal-content');
+            if (modal && content) {
+                content.classList.remove('scale-100');
+                content.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 150);
+                document.body.style.overflow = '';
+            }
+        }
+
+        function clearFilters() {
+            const searchInput = document.getElementById('course-search');
+            const categorySelect = document.getElementById('category-select');
+            const sortSelect = document.getElementById('sort-select');
+
+            if (searchInput) searchInput.value = '';
+            if (categorySelect) categorySelect.value = 'all';
+            if (sortSelect) sortSelect.value = 'date-desc';
+
+            filterCourses();
+        }
+
+        // Limpeza estética de links dinâmicos no servidor
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId);
+            if (!container) return;
+            
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    }
+                }
+            });
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        // Injeção de Componentes do Servidor (Menu & Rodapé)
+        async function loadComponents() {
+            try {
+                let navResp = await fetch(getSafePath('menu.html') + '?v=1.0.3');
+                if (navResp.ok) {
+                    const htmlText = await navResp.text();
+                    const placeholder = document.getElementById('nav-placeholder');
+                    placeholder.innerHTML = htmlText;
+                    adjustAndCleanLinks('nav-placeholder');
+                    
+                    // Força a ativação de eventuais scripts dentro do menu injetado
+                    const scripts = placeholder.getElementsByTagName('script');
+                    for (let i = 0; i < scripts.length; i++) {
+                        const scriptNode = document.createElement('script');
+                        if (scripts[i].src) {
+                            scriptNode.src = scripts[i].src;
+                        } else {
+                            scriptNode.textContent = scripts[i].textContent;
+                        }
+                        document.head.appendChild(scriptNode).parentNode.removeChild(scriptNode);
+                    }
+                }
+                let footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.3');
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                    adjustAndCleanLinks('footer-placeholder');
+                }
+                
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline ativo.", e); 
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            filterCourses();
+        });
+    </script>
+</body>
+</html>
