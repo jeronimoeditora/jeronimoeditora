@@ -1,4 +1,4 @@
-~<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
@@ -97,13 +97,21 @@
             <div id="video-stage" class="w-full lg:w-[72%] h-[250px] sm:h-[400px] lg:h-full bg-black relative flex flex-col justify-center items-center p-6 text-center">
                 
                 <!-- Botão de Maximizar (Ecrã Inteiro) - Ocultado até validação -->
-                <button id="fullscreen-btn" onclick="maximizarVideo()" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 bg-black/60 hover:bg-black/90 border border-white/10 text-white rounded-xl px-3.5 py-2 text-xs transition-all flex items-center gap-1.5 hidden shadow-lg cursor-pointer">
+                <button id="fullscreen-btn" onclick="maximizarVideo()" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-50 bg-black/60 hover:bg-black/90 border border-white/10 text-white rounded-xl px-3.5 py-2 text-xs transition-all flex items-center gap-1.5 hidden shadow-lg cursor-pointer">
                     <i class="fas fa-expand"></i> <span>Ecrã Inteiro</span>
                 </button>
 
                 <!-- Marca d'Água Leve e Discreta com link do site (Ocultada até validação) -->
-                <div id="video-watermark" class="absolute bottom-4 left-4 z-40 text-[9px] sm:text-xs font-mono tracking-widest text-white/30 pointer-events-none select-none uppercase hidden">
+                <div id="video-watermark" class="absolute bottom-12 left-4 z-40 text-[10px] sm:text-xs font-mono tracking-widest text-white/30 pointer-events-none select-none uppercase hidden font-bold">
                     www.editorajeronimo.pt
+                </div>
+
+                <!-- Overlays de Protecção Invisíveis contra cliques e abertura de YouTube (Ocultados até validação) -->
+                <div id="protection-overlays" class="absolute inset-0 w-full h-full pointer-events-none hidden z-30">
+                    <!-- Faixa Superior: Bloqueia clique no Título do Vídeo e botão Partilhar -->
+                    <div class="absolute top-0 left-0 w-full h-[60px] bg-transparent pointer-events-auto cursor-default"></div>
+                    <!-- Canto Inferior Direito: Bloqueia clique no Logótipo YouTube e botão de abertura externa -->
+                    <div class="absolute bottom-0 right-0 w-[125px] h-[55px] bg-transparent pointer-events-auto cursor-default"></div>
                 </div>
 
                 <!-- Estado Inicial: Ecrã Bloqueado -->
@@ -447,13 +455,15 @@
             document.getElementById('lock-screen').classList.add('hidden');
             document.getElementById('active-player').classList.remove('hidden');
             
-            // Tornar o botão de maximizar (ecrã inteiro) visível
+            // Tornar o botão de maximizar (ecrã inteiro), marca d'água e proteções visíveis
             const fsBtn = document.getElementById('fullscreen-btn');
             if (fsBtn) fsBtn.classList.remove('hidden');
 
-            // Ativar a marca d'água do site
             const watermark = document.getElementById('video-watermark');
             if (watermark) watermark.classList.remove('hidden');
+
+            const overlays = document.getElementById('protection-overlays');
+            if (overlays) overlays.classList.remove('hidden');
 
             // Alterar o Estado da Subscrição na Coluna Direita (Antigo Acordo Ortográfico)
             const subStatus = document.getElementById('subscription-status');
@@ -495,7 +505,7 @@
                                    window.location.self !== window.top;
 
             if (isLocalSandbox) {
-                // Utiliza vídeo open-source educativo premium como simulação local
+                // Utiliza vídeo open-source educativo premium como simulação local sem alertas adicionais
                 playerStage.innerHTML = `
                     <video class="w-full h-full object-contain rounded-lg" autoplay controls controlsList="nodownload" oncontextmenu="return false;">
                         <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
@@ -503,13 +513,13 @@
                     <div class="absolute inset-0 bg-transparent" style="pointer-events: none;"></div>
                 `;
             } else {
-                // Carrega o link do YouTube especificado para todos os vídeos deste curso
+                // Carrega o link do YouTube especificado (desativando o fs do iframe para forçar o nosso botão de ecrã inteiro e overlays de proteção)
                 playerStage.innerHTML = `
                     <iframe class="w-full h-full rounded-lg" 
-                            src="https://www.youtube-nocookie.com/embed/${part.videoId}?rel=0&modestbranding=1&controls=1&autoplay=1&fs=1" 
+                            src="https://www.youtube-nocookie.com/embed/${part.videoId}?rel=0&modestbranding=1&controls=1&autoplay=1&fs=0&disablekb=1" 
                             title="Player Jerónimo Editora" 
                             frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen></iframe>
                 `;
             }
