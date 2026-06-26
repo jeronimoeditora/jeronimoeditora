@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+~<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
@@ -100,6 +100,11 @@
                 <button id="fullscreen-btn" onclick="maximizarVideo()" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 bg-black/60 hover:bg-black/90 border border-white/10 text-white rounded-xl px-3.5 py-2 text-xs transition-all flex items-center gap-1.5 hidden shadow-lg cursor-pointer">
                     <i class="fas fa-expand"></i> <span>Ecrã Inteiro</span>
                 </button>
+
+                <!-- Marca d'Água Leve e Discreta com link do site (Ocultada até validação) -->
+                <div id="video-watermark" class="absolute bottom-4 left-4 z-40 text-[9px] sm:text-xs font-mono tracking-widest text-white/30 pointer-events-none select-none uppercase hidden">
+                    www.editorajeronimo.pt
+                </div>
 
                 <!-- Estado Inicial: Ecrã Bloqueado -->
                 <div id="lock-screen" class="max-w-md mx-auto space-y-4 fade-in w-full px-2">
@@ -239,7 +244,7 @@
                 </div>
 
                 <div class="pt-4 border-t border-gray-100 flex flex-col gap-2">
-                    <a href="../cursos-geral" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-sans font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-xs text-center flex items-center justify-center gap-2">
+                    <a href="../curso-geral" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-sans font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-xs text-center flex items-center justify-center gap-2">
                         <i class="fas fa-chevron-left text-[10px]"></i> Voltar a Cursos
                     </a>
                 </div>
@@ -299,10 +304,10 @@
             id: "curso_missa",
             prefix: "JRN1",
             parts: [
-                { title: "I - Antes e Ritos Iniciais", videoId: "OwL0LrOL214", available: true },
-                { title: "II - Liturgia da Palavra", videoId: "OwL0LrOL214", available: true },
-                { title: "III - Liturgia Eucarística", videoId: "OwL0LrOL214", available: true },
-                { title: "IV - Ritos Finais e Envio", videoId: "OwL0LrOL214", available: true }
+                { title: "I - Antes e Ritos Iniciais", videoId: "wOgqGq4yNQw", available: true },
+                { title: "II - Liturgia da Palavra", videoId: "wOgqGq4yNQw", available: true },
+                { title: "III - Liturgia Eucarística", videoId: "wOgqGq4yNQw", available: true },
+                { title: "IV - Ritos Finais e Envio", videoId: "wOgqGq4yNQw", available: true }
             ],
             resources: [
                 { title: "Manual do Curso - Módulo I & II", size: "1.8 MB", type: "PDF • Guia de Ritos", url: "#" },
@@ -446,6 +451,10 @@
             const fsBtn = document.getElementById('fullscreen-btn');
             if (fsBtn) fsBtn.classList.remove('hidden');
 
+            // Ativar a marca d'água do site
+            const watermark = document.getElementById('video-watermark');
+            if (watermark) watermark.classList.remove('hidden');
+
             // Alterar o Estado da Subscrição na Coluna Direita (Antigo Acordo Ortográfico)
             const subStatus = document.getElementById('subscription-status');
             if (subStatus) {
@@ -492,9 +501,6 @@
                         <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
                     </video>
                     <div class="absolute inset-0 bg-transparent" style="pointer-events: none;"></div>
-                    <div class="absolute top-16 left-3 bg-slate-950/90 border border-brand-accent-orange/45 rounded-lg px-2.5 py-1 text-[8px] sm:text-[9px] text-white font-bold select-none flex items-center gap-1.5 tracking-wider">
-                        <span class="w-2 h-2 rounded-full bg-brand-accent-orange animate-ping"></span> MODO DE SIMULAÇÃO ACTIVADO
-                    </div>
                 `;
             } else {
                 // Carrega o link do YouTube especificado para todos os vídeos deste curso
@@ -570,11 +576,11 @@
             } catch (e) { return file; }
         }
 
+        // Subpasta /cursos-individuais/ requer que as imagens e links sem http apontem para a pasta mãe ../
         function adjustAndCleanLinks(placeholderId) {
             const container = document.getElementById(placeholderId);
             if (!container) return;
             
-            // Subpasta /cursos-individuais/ requer que as imagens e links sem http apontem para a pasta mãe ../
             container.querySelectorAll('a').forEach(link => {
                 let href = link.getAttribute('href');
                 if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('#') && !href.startsWith('javascript:')) {
