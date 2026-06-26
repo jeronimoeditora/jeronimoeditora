@@ -147,33 +147,50 @@
                     </div>
                 </div>
 
-                <!-- Coluna Direita: Painel Premium Laranja-Suave com Grelha de 3 Imagens -->
+                <!-- Coluna Direita: Painel Premium Laranja-Suave com Grelha Dynamic-Masonry de 5 Imagens -->
                 <div class="lg:col-span-7 bg-[#fdf6f0] border border-brand-accent-orange/10 rounded-3xl p-5 sm:p-8 shadow-sm space-y-6 text-left">
                     <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accent-orange block border-b border-brand-accent-orange/10 pb-4">Galeria</span>
                     
-                    <!-- Grelha Assimétrica de 3 Fotos Sem Legenda -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+                    <!-- Grelha Assimétrica de Duas Colunas Fluida para 5 Fotos -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
                         
-                        <!-- Coluna 1: Foto Vertical (Esquerda) -->
-                        <div class="bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs flex flex-col justify-center h-full">
-                            <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-72 md:h-96 relative">
-                                <img src="Imagens/aprendizes_vertical.png" alt="aprendizes_vertical" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/400x600/002147/cfaf5c?text=Reuni%C3%A3o+Aprendizes';">
-                            </div>
-                        </div>
-                        
-                        <!-- Coluna 2: Duas Fotos Horizontais (Direita) -->
-                        <div class="grid grid-rows-2 gap-4">
-                            <!-- Foto Horizontal 1 -->
+                        <!-- Coluna 1 (Esquerda) -->
+                        <div class="flex flex-col gap-4">
+                            <!-- Foto Principal: Hugo e Cristiana Bacelo (Vertical Otimizada) -->
                             <div class="bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs flex flex-col justify-center">
-                                <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-40 md:h-[190px] relative">
-                                    <img src="Imagens/aprendizes_h1.png" alt="aprendizes_h1" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/600x400/002147/cfaf5c?text=Estudo+B%C3%ADblico';">
+                                <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden relative">
+                                    <img src="Imagens/aprendizes_bacelos.png" alt="Hugo e Cristiana Bacelo" class="w-full h-auto object-cover rounded-lg gallery-photo" onerror="this.onerror=null; this.src='https://placehold.co/400x900/002147/cfaf5c?text=Hugo+e+Cristiana+Bacelo';">
                                 </div>
                             </div>
-                            
-                            <!-- Foto Horizontal 2 -->
+
+                            <!-- Cartaz da Semana Bíblica de Braga (Quadrada) -->
+                            <div class="bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs flex flex-col justify-center">
+                                <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden relative">
+                                    <img src="Imagens/semana-biblica.png" alt="Semana Bíblica Braga" class="w-full h-auto object-cover rounded-lg gallery-photo" onerror="this.onerror=null; this.src='https://placehold.co/500x500/002147/cfaf5c?text=Semana+B%C3%ADblica+Braga';">
+                                </div>
+                            </div>
+
+                            <!-- Reunião dos Aprendizes (Horizontal/Landscape 1) -->
+                            <div class="bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs flex flex-col justify-center">
+                                <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-40 md:h-[190px] relative">
+                                    <img src="Imagens/aprendizes_h1.png" alt="Estudo Bíblico" class="absolute inset-0 w-full h-full object-cover rounded-lg gallery-photo" onerror="this.onerror=null; this.src='https://placehold.co/600x400/002147/cfaf5c?text=Estudo+B%C3%ADblico';">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Coluna 2 (Direita) -->
+                        <div class="flex flex-col gap-4">
+                            <!-- Cartaz do Jubileu, Bíblia e Igreja (Vertical) -->
+                            <div class="bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs flex flex-col justify-center">
+                                <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden relative">
+                                    <img src="Imagens/jubileu.png" alt="Jubileu, Bíblia e Igreja" class="w-full h-auto object-cover rounded-lg gallery-photo" onerror="this.onerror=null; this.src='https://placehold.co/400x600/002147/cfaf5c?text=Jubileu,+B%C3%ADblia+e+Igreja';">
+                                </div>
+                            </div>
+
+                            <!-- Reunião dos Aprendizes (Horizontal/Landscape 2) -->
                             <div class="bg-white p-2 rounded-2xl border border-gray-200/50 shadow-xs flex flex-col justify-center">
                                 <div class="bg-brand-accent-blue/5 rounded-xl overflow-hidden h-32 md:h-[180px] relative">
-                                    <img src="Imagens/aprendizes_h2.png" alt="aprendizes_h2" class="absolute inset-0 w-full h-full object-cover gallery-photo" onerror="this.src='https://placehold.co/600x400/002147/cfaf5c?text=Ora%C3%A7%C3%A3o+Comunit%C3%A1ria';">
+                                    <img src="Imagens/aprendizes_h2.png" alt="Oração Comunitária" class="absolute inset-0 w-full h-full object-cover rounded-lg gallery-photo" onerror="this.onerror=null; this.src='https://placehold.co/600x400/002147/cfaf5c?text=Ora%C3%A7%C3%A3o+Comunit%C3%A1ria';">
                                 </div>
                             </div>
                         </div>
