@@ -14,22 +14,22 @@
         animation: fadeInMenu 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* Custom scrollbar para o menu lateral se for muito longo */
+    /* Mba'ereko scrollbar pe drawer lateral rehegua tuichaitereírõ */
     .menu-drawer-scroll::-webkit-scrollbar { width: 3px; }
     .menu-drawer-scroll::-webkit-scrollbar-track { background: transparent; }
     .menu-drawer-scroll::-webkit-scrollbar-thumb { background: #cfaf5c; border-radius: 10px; }
 </style>
 
-<!-- Navbar Fixa -->
+<!-- Navbar Oñemopytasova -->
 <nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 z-50 font-sans">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
-        <!-- Logo -->
+        <!-- Ta'anga Rehegua -->
         <a href="/" class="flex items-center space-x-2">
             <img src="Imagens/Logo J.png" alt="Logótipo Jerónimo Editora" class="h-8 md:h-10 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
             <span class="font-serif text-xl md:text-2xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors duration-200 hidden sm:inline">Jerónimo Editora</span>
         </a>
         
-        <!-- Menu Desktop -->
+        <!-- Mba'erechaha Desktop-pe guarã -->
         <div class="hidden md:flex items-center space-x-5 lg:space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700">
             <a href="/" class="hover:text-brand-accent-red transition-colors">Início</a>
             <a href="/#sobre" class="hover:text-brand-accent-red transition-colors">Editora</a>
@@ -43,13 +43,13 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 
-                <!-- Caixa Dropdown Principal -->
+                <!-- Mba'yru Dropdown Guasu -->
                 <div class="absolute left-0 top-full pt-1 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                     <div class="bg-white border border-gray-100 shadow-xl rounded-lg flex flex-col py-2 text-[13px] normal-case tracking-normal font-medium text-gray-700">
-                        <a href="sobreHB" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Sobre HB</a>
+                        <a href="sobreHB" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Sobre</a>
                         <a href="artigos-geral" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Artigos</a>
 
-                        <!-- Submenu: Formação -->
+                        <!-- Submenu: Tekombo'e -->
                         <div class="relative group/formacao">
                             <div class="px-5 py-3 hover:bg-gray-50 transition-colors cursor-pointer flex justify-between items-center hover:text-brand-accent-red">
                                 <span>Formação</span>
@@ -57,20 +57,20 @@
                             </div>
                             <div class="absolute left-full top-0 pl-1 w-64 opacity-0 invisible group-hover/formacao:opacity-100 group-hover/formacao:visible transition-all duration-300">
                                 <div class="bg-white border border-gray-100 shadow-xl rounded-lg flex flex-col py-2">
-                                    <a href="cursos" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Cursos</a>
-                                    <a href="palestras" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Palestras (Agendar presença)</a>
+                                    <a href="curso-geral" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Cursos</a>
+                                    <a href="palestras" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Agendar Palestra</a>
                                 </div>
                             </div>
                         </div>
 
-                        <a href="aprendizesdoverbo" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors border-t border-gray-50 mt-1">Comunidade: Aprendizes do Verbo</a>
+                        <a href="aprendizesdoverbo" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors border-t border-gray-50 mt-1">Aprendizes do Verbo</a>
                     </div>
                 </div>
             </div>
 
             <a href="contacto" class="hover:text-brand-accent-red transition-colors">Contactos</a>
             
-            <!-- Carrinho Tradicional -->
+            <!-- Mba'yru Ñemu rehegua -->
             <div class="pl-4 lg:pl-6 border-l border-gray-200">
                 <a href="checkout" class="relative text-gray-800 hover:text-brand-accent-red transition-colors flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -83,7 +83,7 @@
             </div>
         </div>
         
-        <!-- Botão Menu Mobile com ícones vetoriais estáveis -->
+        <!-- Mbotoveha Ñembohemitã Celular-pe guarã -->
         <div class="flex items-center md:hidden space-x-5">
             <a href="checkout" class="relative text-gray-800">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -100,13 +100,13 @@
     </div>
 </nav>
 
-<!-- Backdrop Escuro -->
+<!-- Mba'erechaha Pytũva -->
 <div id="menu-backdrop" class="fixed inset-0 bg-black/40 z-[55] hidden opacity-0 transition-opacity duration-300 ease-in-out" onclick="toggleMenu()"></div>
 
-<!-- Drawer Lateral (Desliza suavemente a partir da direita) -->
+<!-- Drawer Lateral (Oñembongu'e mbeguekatúva akatúgui) -->
 <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[290px] xs:w-[340px] bg-white z-[60] shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between font-sans">
     
-    <!-- Cabeçalho do Drawer -->
+    <!-- Drawer Akã rehegua -->
     <div class="p-6 border-b border-gray-100 flex items-center justify-between flex-shrink-0">
         <div class="flex items-center space-x-2">
             <img src="Imagens/Logo J.png" class="h-8 w-auto" alt="Logo">
@@ -117,43 +117,43 @@
         </button>
     </div>
     
-    <!-- Links de Navegação com Scroll Interno Seguro -->
+    <!-- Ñembohemitã Joajuha rehegua -->
     <div class="flex-grow overflow-y-auto px-6 py-6 space-y-5 menu-drawer-scroll">
         <a href="/" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Início</a>
         <a href="/#sobre" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Editora</a>
         <a href="catalogo-completo" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Catálogo</a>
         <a href="produtos" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Produtos</a>
         
-        <!-- Accordion Mobile: Hugo Bacelo -->
+        <!-- Accordion Celular-pe guarã: Hugo Bacelo -->
         <details class="w-full border-b border-gray-50 pb-2 group/hb [&::-webkit-details-marker]:hidden">
             <summary class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic cursor-pointer list-none flex items-center justify-between outline-none">
                 <span>Hugo Bacelo</span>
                 <svg class="w-4 h-4 transition-transform group-open/hb:rotate-180 text-brand-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </summary>
             <div class="flex flex-col space-y-4 pl-3 mt-4 text-sm text-gray-700">
-                <a href="sobreHB" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()">Sobre HB</a>
+                <a href="sobreHB" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()">Sobre</a>
                 <a href="artigos-geral" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()">Artigos</a>
 
-                <!-- Sub Accordion: Formação -->
+                <!-- Sub Accordion: Tekombo'e -->
                 <details class="w-full group/form [&::-webkit-details-marker]:hidden">
                     <summary class="hover:text-brand-accent-red transition-colors cursor-pointer list-none flex items-center justify-between outline-none py-1">
                         <span>Formação</span> 
                         <svg class="w-3.5 h-3.5 transition-transform group-open/form:rotate-180 text-brand-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </summary>
                     <div class="flex flex-col space-y-3 pl-3 mt-2 text-xs text-gray-500 border-l border-gray-100">
-                        <a href="cursos" class="hover:text-brand-accent-red transition-colors block" onclick="toggleMenu()">Cursos</a>
-                        <a href="palestras" class="hover:text-brand-accent-red transition-colors block" onclick="toggleMenu()">Palestras (Agendar presença)</a>
+                        <a href="curso-geral" class="hover:text-brand-accent-red transition-colors block" onclick="toggleMenu()">Cursos</a>
+                        <a href="palestras" class="hover:text-brand-accent-red transition-colors block" onclick="toggleMenu()">Agendar Palestra</a>
                     </div>
                 </details>
 
-                <a href="aprendizesdoverbo" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()">Comunidade: Aprendizes do Verbo</a>
+                <a href="aprendizesdoverbo" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()">Aprendizes do Verbo</a>
             </div>
         </details>
         
         <a href="contacto" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block" onclick="toggleMenu()">Contactos</a>
     </div>
     
-    <!-- Rodapé do Drawer -->
+    <!-- Drawer Py rehegua -->
     <div class="p-6 border-t border-gray-50 text-center flex-shrink-0 bg-gray-50/50">
         <p class="text-[9px] uppercase tracking-[0.4em] text-gray-400 font-bold">Jerónimo Editora</p>
     </div>
