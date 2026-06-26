@@ -305,9 +305,9 @@
             courses.forEach(course => {
                 const isAvailable = course.status === "Disponível";
                 
-                // Botão Adquirir Acesso agora sempre com cor verde-esmeralda sólida e sem variação no hover
+                // Botão Adquirir Acesso agora com cor verde-esmeralda sólida, com animação de levitação (sem mudar de cor)
                 const actionBtnHtml = isAvailable 
-                    ? `<button onclick="adquirirAcessoCurso('${course.id}', '${course.title}', ${course.price})" class="w-full bg-emerald-600 text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-sans shadow-xs flex items-center justify-center gap-2">
+                    ? `<button onclick="adquirirAcessoCurso('${course.id}', '${course.title}', ${course.price})" class="w-full bg-emerald-600 text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-all transform hover:-translate-y-0.5 duration-300 tracking-wider font-sans shadow-xs hover:shadow-md flex items-center justify-center gap-2">
                             <i class="fas fa-shopping-cart text-[11px]"></i> Adquirir Acesso
                        </button>`
                     : `<button disabled class="w-full bg-gray-255 text-gray-400 font-bold text-xs uppercase py-3.5 rounded-xl tracking-wider font-sans flex items-center justify-center gap-2 cursor-not-allowed">
@@ -350,8 +350,8 @@
                             </p>
 
                             <div class="pt-2 flex flex-col sm:flex-row gap-2">
-                                <!-- Botão Saber Mais sempre em cor de laranja forte e sem variação no hover -->
-                                <a ${imageLinkAction} class="w-full sm:w-1/3 bg-brand-accent-orange text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-all tracking-wider font-sans text-center flex items-center justify-center gap-1">
+                                <!-- Botão Saber Mais em cor de laranja forte, sem variação de cor mas com movimento de elevação e incremento de sombra no hover -->
+                                <a ${imageLinkAction} class="w-full sm:w-1/3 bg-brand-accent-orange text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-all transform hover:-translate-y-0.5 duration-300 tracking-wider font-sans text-center flex items-center justify-center gap-1 shadow-sm hover:shadow-md">
                                     Saber Mais
                                 </a>
                                 <div class="flex-grow">
