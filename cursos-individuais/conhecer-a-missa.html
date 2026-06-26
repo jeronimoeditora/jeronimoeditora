@@ -83,6 +83,9 @@
             user-select: none;
         }
     </style>
+    
+    <!-- API de Iframe do YouTube carregada estaticamente para garantir funcionamento imediato -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen" oncontextmenu="return false;">
 
@@ -96,24 +99,6 @@
             <!-- Janela do Player de Vídeo (72% de largura) -->
             <div id="video-stage" class="w-full lg:w-[72%] h-[250px] sm:h-[400px] lg:h-full bg-black relative flex flex-col justify-center items-center p-6 text-center">
                 
-                <!-- Botão de Maximizar (Ecrã Inteiro) - Ocultado até validação -->
-                <button id="fullscreen-btn" onclick="maximizarVideo()" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-50 bg-black/60 hover:bg-black/90 border border-white/10 text-white rounded-xl px-3.5 py-2 text-xs transition-all flex items-center gap-1.5 hidden shadow-lg cursor-pointer">
-                    <i class="fas fa-expand"></i> <span>Ecrã Inteiro</span>
-                </button>
-
-                <!-- Marca d'Água Leve e Discreta com link do site (Ocultada até validação) -->
-                <div id="video-watermark" class="absolute bottom-12 left-4 z-40 text-[10px] sm:text-xs font-mono tracking-widest text-white/30 pointer-events-none select-none uppercase hidden font-bold">
-                    www.editorajeronimo.pt
-                </div>
-
-                <!-- Overlays de Protecção Invisíveis contra cliques e abertura de YouTube (Ocultados até validação) -->
-                <div id="protection-overlays" class="absolute inset-0 w-full h-full pointer-events-none hidden z-30">
-                    <!-- Faixa Superior: Bloqueia clique no Título do Vídeo e botão Partilhar -->
-                    <div class="absolute top-0 left-0 w-full h-[60px] bg-transparent pointer-events-auto cursor-default"></div>
-                    <!-- Canto Inferior Direito: Bloqueia clique no Logótipo YouTube e botão de abertura externa -->
-                    <div class="absolute bottom-0 right-0 w-[125px] h-[55px] bg-transparent pointer-events-auto cursor-default"></div>
-                </div>
-
                 <!-- Estado Inicial: Ecrã Bloqueado -->
                 <div id="lock-screen" class="max-w-md mx-auto space-y-4 fade-in w-full px-2">
                     <div class="w-14 h-14 bg-white/5 rounded-full border border-brand-gold flex items-center justify-center mx-auto text-brand-gold text-lg shadow-lg animate-pulse">
@@ -138,7 +123,42 @@
                 </div>
 
                 <!-- Stage do Player Activo (Ocultado até validação correcta da chave) -->
-                <div id="active-player" class="hidden w-full h-full"></div>
+                <div id="active-player" class="hidden w-full h-full relative overflow-hidden rounded-lg">
+                    <!-- Destino de carregamento do Player API do YouTube (Sem eventos de rato directos) -->
+                    <div id="yt-player" class="w-full h-full pointer-events-none rounded-lg"></div>
+
+                    <!-- Camada Invisível de Protecção que cobre todo o player contra cliques directos no YouTube, partilhas e abertura externa -->
+                    <div onclick="togglePlayback()" oncontextmenu="return false;" class="absolute inset-0 bg-transparent z-20 cursor-pointer"></div>
+
+                    <!-- Botão Customizado de Maximizar (Ecrã Inteiro) -->
+                    <button id="fullscreen-btn" onclick="maximizarVideo()" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-40 bg-black/60 hover:bg-black/90 border border-white/10 text-white rounded-xl px-3.5 py-2 text-xs transition-all flex items-center gap-1.5 shadow-lg cursor-pointer">
+                        <i id="fullscreen-icon" class="fas fa-expand"></i> <span>Ecrã Inteiro</span>
+                    </button>
+
+                    <!-- Marca d'Água Leve e Discreta com link do site -->
+                    <div id="video-watermark" class="absolute bottom-16 left-4 z-40 text-[10px] sm:text-xs font-mono tracking-widest text-white/30 pointer-events-none select-none uppercase font-bold">
+                        www.editorajeronimo.pt
+                    </div>
+
+                    <!-- Painel de Controlo de Vídeo Premium (Não abre links, não permite cópias do URL) -->
+                    <div id="custom-controls" class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/95 to-transparent p-4 flex items-center gap-3 z-30 transition-opacity duration-300">
+                        <!-- Play / Pause -->
+                        <button onclick="togglePlayback()" class="text-white hover:text-brand-gold transition-all text-sm sm:text-base outline-none shrink-0 w-9 h-9 flex items-center justify-center bg-white/10 rounded-full hover:scale-105 transform">
+                            <i id="play-pause-icon" class="fas fa-play"></i>
+                        </button>
+
+                        <!-- Scrubber / Barra de Progresso Reactiva -->
+                        <input type="range" id="progress-bar" min="0" max="100" value="0" class="flex-grow accent-brand-accent-orange bg-white/20 h-1.5 rounded-lg appearance-none cursor-pointer outline-none" oninput="onProgressSeek(this.value)">
+
+                        <!-- Display de Tempo Corrente / Duração -->
+                        <span id="time-display" class="text-[11px] sm:text-xs font-mono font-medium text-white/80 shrink-0">00:00 / 00:00</span>
+
+                        <!-- Botão Mute / Unmute -->
+                        <button onclick="toggleMute()" class="text-white hover:text-brand-gold transition-all text-sm sm:text-base outline-none shrink-0 w-9 h-9 flex items-center justify-center bg-white/10 rounded-full hover:scale-105 transform">
+                            <i id="mute-icon" class="fas fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
                 
             </div>
 
@@ -209,14 +229,21 @@
                     </blockquote>
                 </div>
 
-                <!-- Conteúdo de Aba: Formador (Simplificado Radicalmente) -->
+                <!-- Conteúdo de Aba: Formador -->
                 <div id="pane-formador" class="hidden text-left flex flex-col sm:flex-row gap-6 items-center sm:items-start bg-white p-6 rounded-2xl border border-gray-150 shadow-xs fade-in">
                     <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold overflow-hidden flex-shrink-0 shadow-sm">
                         <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150/ECE6D9/002147?text=HB';">
                     </div>
                     <div class="space-y-3 flex-grow flex flex-col justify-center">
-                        <h4 class="font-serif text-2xl font-bold text-brand-accent-blue leading-none">Hugo Bacelo</h4>
+                        <h4 class="font-serif text-xl font-bold text-brand-accent-blue leading-none">Hugo Bacelo</h4>
                         
+                        <!-- Texto Biográfico Curto e Elegante (Máximo 5 linhas) -->
+                        <div class="text-sm text-gray-655 leading-relaxed font-light font-sans">
+                            <p>
+                                Natural de Ermesinde e residente em Braga, o seu percurso espiritual é marcado por uma conversão pessoal do ateísmo ao catolicismo, influenciado por Jordan Peterson e C. S. Lewis. Estudioso do St. Paul Center e da Ignatius Catholic Study Bible, é o Fundador da Jerónimo Editora e dinamizador do movimento Aprendizes do Verbo, dedicando-se a formar comunidades activas com literatura católica sólida.
+                            </p>
+                        </div>
+
                         <!-- Botão Directo de Ligação Biográfica "Ver mais" -->
                         <div class="pt-1">
                             <a href="../sobreHB" class="inline-flex items-center gap-2 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-sans font-bold text-xs uppercase tracking-widest px-5 py-3 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md">
@@ -239,7 +266,7 @@
                     </p>
                 </div>
                 
-                <div class="text-xs text-gray-500 leading-relaxed bg-slate-50 border border-gray-150 rounded-xl p-4 space-y-2">
+                <div class="text-xs text-gray-550 leading-relaxed bg-slate-50 border border-gray-150 rounded-xl p-4 space-y-2">
                     <p class="font-bold text-gray-700 flex items-center gap-1.5">
                         <i class="fas fa-info-circle text-brand-accent-orange text-sm"></i> Notas do Sistema
                     </p>
@@ -252,7 +279,7 @@
                 </div>
 
                 <div class="pt-4 border-t border-gray-100 flex flex-col gap-2">
-                    <a href="../cursos-geral" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-sans font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-xs text-center flex items-center justify-center gap-2">
+                    <a href="../curso-geral" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-sans font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-xs text-center flex items-center justify-center gap-2">
                         <i class="fas fa-chevron-left text-[10px]"></i> Voltar a Cursos
                     </a>
                 </div>
@@ -397,7 +424,7 @@
             } else {
                 tabRecursos.className = "flex-1 py-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-widest border-b-2 border-brand-accent-orange text-brand-accent-orange transition-all outline-none";
                 tabAulas.className = "flex-1 py-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-widest border-b-2 border-transparent text-gray-400 hover:text-white transition-all outline-none";
-                paneAulas.add('hidden');
+                paneAulas.classList.add('hidden');
                 paneRecursos.classList.remove('hidden');
             }
         }
@@ -455,15 +482,9 @@
             document.getElementById('lock-screen').classList.add('hidden');
             document.getElementById('active-player').classList.remove('hidden');
             
-            // Tornar o botão de maximizar (ecrã inteiro), marca d'água e proteções visíveis
-            const fsBtn = document.getElementById('fullscreen-btn');
-            if (fsBtn) fsBtn.classList.remove('hidden');
-
+            // Ativar a marca d'água do site
             const watermark = document.getElementById('video-watermark');
             if (watermark) watermark.classList.remove('hidden');
-
-            const overlays = document.getElementById('protection-overlays');
-            if (overlays) overlays.classList.remove('hidden');
 
             // Alterar o Estado da Subscrição na Coluna Direita (Antigo Acordo Ortográfico)
             const subStatus = document.getElementById('subscription-status');
@@ -479,7 +500,15 @@
             carregarModuloVideo(0);
         }
 
-        // Injeta o player com base na infraestrutura do ambiente activo (YouTube com os links correctos)
+        // Variáveis globais para controlo do YouTube Iframe API
+        var ytPlayer;
+        var playerState = -1;
+        var progressInterval;
+
+        // Função de retorno padrão quando a API do YouTube está carregada
+        function onYouTubeIframeAPIReady() {}
+
+        // Injeta o player com base na infraestrutura do YouTube API (Sem simulação de sim)
         function carregarModuloVideo(idx) {
             const playerStage = document.getElementById('active-player');
             if (!playerStage) return;
@@ -498,32 +527,138 @@
                 }
             });
 
-            // Deteta se está a correr no WebContainer / Sandbox / Localmente
-            const isLocalSandbox = window.location.protocol === 'file:' || 
-                                   window.location.hostname === 'localhost' || 
-                                   window.location.hostname === '' ||
-                                   window.location.self !== window.top;
+            // Estrutura customizada de visualização segura
+            playerStage.innerHTML = `
+                <!-- Elemento de ancoragem do player nativo (sem eventos de rato) -->
+                <div id="yt-player" class="w-full h-full pointer-events-none rounded-lg"></div>
 
-            if (isLocalSandbox) {
-                // Utiliza vídeo open-source educativo premium como simulação local sem alertas adicionais
-                playerStage.innerHTML = `
-                    <video class="w-full h-full object-contain rounded-lg" autoplay controls controlsList="nodownload" oncontextmenu="return false;">
-                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-transparent" style="pointer-events: none;"></div>
-                `;
+                <!-- Overlays de proteção invisíveis contra cliques directos no YouTube, partilhas e abertura externa -->
+                <div onclick="togglePlayback()" oncontextmenu="return false;" class="absolute inset-0 bg-transparent z-20 cursor-pointer"></div>
+
+                <!-- Marca d'Água Leve e Discreta com link do site -->
+                <div class="absolute bottom-16 left-4 z-40 text-[10px] sm:text-xs font-mono tracking-widest text-white/30 pointer-events-none select-none uppercase font-bold">
+                    www.editorajeronimo.pt
+                </div>
+
+                <!-- Painel de Controlo de Vídeo Premium (Não abre links, não permite cópias do URL) -->
+                <div id="custom-controls" class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/95 to-transparent p-4 flex items-center gap-3 z-30 transition-opacity duration-300">
+                    <!-- Play / Pause -->
+                    <button onclick="togglePlayback()" class="text-white hover:text-brand-gold transition-all text-sm sm:text-base outline-none shrink-0 w-9 h-9 flex items-center justify-center bg-white/10 rounded-full hover:scale-105 transform">
+                        <i id="play-pause-icon" class="fas fa-play"></i>
+                    </button>
+
+                    <!-- Scrubber / Barra de Progresso Reactiva -->
+                    <input type="range" id="progress-bar" min="0" max="100" value="0" class="flex-grow accent-brand-accent-orange bg-white/20 h-1.5 rounded-lg appearance-none cursor-pointer outline-none font-sans" oninput="onProgressSeek(this.value)">
+
+                    <!-- Display de Tempo Corrente / Duração -->
+                    <span id="time-display" class="text-[11px] sm:text-xs font-mono font-medium text-white/80 shrink-0">00:00 / 00:00</span>
+
+                    <!-- Botão Mute / Unmute -->
+                    <button onclick="toggleMute()" class="text-white hover:text-brand-gold transition-all text-sm sm:text-base outline-none shrink-0 w-9 h-9 flex items-center justify-center bg-white/10 rounded-full hover:scale-105 transform">
+                        <i id="mute-icon" class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+            `;
+
+            // Inicializa a instância do player de forma segura usando o script dinâmico carregado
+            if (window.YT && window.YT.Player) {
+                initYTPlayerInstance(part.videoId);
             } else {
-                // Carrega o link do YouTube especificado (desativando o fs do iframe para forçar o nosso botão de ecrã inteiro e overlays de proteção)
-                playerStage.innerHTML = `
-                    <iframe class="w-full h-full rounded-lg" 
-                            src="https://www.youtube-nocookie.com/embed/${part.videoId}?rel=0&modestbranding=1&controls=1&autoplay=1&fs=0&disablekb=1" 
-                            title="Player Jerónimo Editora" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen></iframe>
-                `;
+                setTimeout(() => {
+                    initYTPlayerInstance(part.videoId);
+                }, 500);
             }
         }
+
+        // Função para instanciar o player de forma segura com controlos nativos do YouTube desativados (impossível abrir links externos)
+        function initYTPlayerInstance(videoId) {
+            clearInterval(progressInterval);
+            
+            ytPlayer = new YT.Player('yt-player', {
+                height: '100%',
+                width: '100%',
+                videoId: videoId,
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0, // Desativa completamente os controlos originais do YouTube!
+                    'modestbranding': 1, // Remove o logo do YouTube na barra de progresso
+                    'rel': 0, // Não sugere vídeos de canais terceiros no fim
+                    'showinfo': 0, // Remove o cabeçalho com título
+                    'fs': 0, // Desativa o botão nativo de ecrã inteiro (usamos o nosso)
+                    'disablekb': 1, // Desativa atalhos de teclado no player
+                    'iv_load_policy': 3, // Oculta anotações no vídeo
+                    'origin': window.location.origin
+                },
+                events: {
+                    'onReady': onYTPlayerReady,
+                    'onStateChange': onYTPlayerStateChange
+                }
+            });
+        }
+
+        function onYTPlayerReady(event) {
+            event.target.playVideo();
+            startProgressTrackUpdate();
+        }
+
+        function onYTPlayerStateChange(event) {
+            playerState = event.data;
+            const playPauseIcon = document.getElementById('play-pause-icon');
+            if (playerState === YT.PlayerState.PLAYING) {
+                if (playPauseIcon) playPauseIcon.className = "fas fa-pause";
+                startProgressTrackUpdate();
+            } else {
+                if (playPauseIcon) playPauseIcon.className = "fas fa-play";
+                clearInterval(progressInterval);
+            }
+        }
+
+        function togglePlayback() {
+            if (!ytPlayer) return;
+            if (playerState === YT.PlayerState.PLAYING) {
+                ytPlayer.pauseVideo();
+            } else {
+                ytPlayer.playVideo();
+            }
+        }
+
+        function startProgressTrackUpdate() {
+            clearInterval(progressInterval);
+            progressInterval = setInterval(() => {
+                if (!ytPlayer || playerState !== YT.PlayerState.PLAYING) return;
+                
+                const current = ytPlayer.getCurrentTime() || 0;
+                const duration = ytPlayer.getDuration() || 0;
+                
+                if (duration > 0) {
+                    const percent = (current / duration) * 100;
+                    const progressBar = document.getElementById('progress-bar');
+                    if (progressBar) progressBar.value = percent;
+
+                    const timeDisplay = document.getElementById('time-display');
+                    if (timeDisplay) {
+                        timeDisplay.textContent = formatTimeDisplay(current) + " / " + formatTimeDisplay(duration);
+                    }
+                }
+            }, 500);
+        }
+
+        function formatTimeDisplay(seconds) {
+            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        // Permite ao utilizador navegar pela timeline usando o nosso slider customizado
+        window.addEventListener('input', (e) => {
+            if (e.target && e.target.id === 'active-player-progress') {
+                // não se aplica aqui por ser iframe, mas guardamos caso queiras range slider customizado
+            }
+        });
 
         // Função de maximizar vídeo (Ecrã Inteiro) via Web APIs nativas
         function maximizarVideo() {
@@ -559,6 +694,32 @@
         }
         document.addEventListener('fullscreenchange', handleFullscreenChange);
         document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+
+        // Controlos de áudio (Mute / Unmute)
+        var isMuted = false;
+        function toggleMute() {
+            if (!ytPlayer) return;
+            const muteIcon = document.getElementById('mute-icon');
+            if (isMuted) {
+                ytPlayer.unMute();
+                isMuted = false;
+                if (muteIcon) muteIcon.className = "fas fa-volume-up";
+            } else {
+                ytPlayer.mute();
+                isMuted = true;
+                if (muteIcon) muteIcon.className = "fas fa-volume-mute text-red-500";
+            }
+        }
+
+        // Seek manual via progress bar
+        function onProgressSeek(percentValue) {
+            if (!ytPlayer) return;
+            const duration = ytPlayer.getDuration() || 0;
+            if (duration > 0) {
+                const targetSeconds = (percentValue / 100) * duration;
+                ytPlayer.seekTo(targetSeconds, true);
+            }
+        }
 
         // Alternador Reativo de Separadores Inferiores (Abas) - Somente Resumo e Formador
         function switchTab(tabId) {
