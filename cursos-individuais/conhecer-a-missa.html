@@ -113,7 +113,7 @@
                     
                     <div class="flex flex-col gap-2 pt-2 w-full max-w-sm mx-auto">
                         <div class="flex flex-col sm:flex-row gap-2.5 w-full">
-                            <input type="text" id="key-input" placeholder="JRN1-AAAA-MM-DD-XXXX" onkeydown="if(event.key === 'Enter') validarChaveAcesso()" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl py-3 px-4 text-xs text-center font-mono uppercase tracking-wider text-white focus:outline-none focus:border-brand-gold transition-all">
+                            <input type="text" id="key-input" placeholder="Chave de Acesso" onkeydown="if(event.key === 'Enter') validarChaveAcesso()" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl py-3 px-4 text-xs text-center font-mono uppercase tracking-wider text-white focus:outline-none focus:border-brand-gold transition-all">
                             <button onclick="validarChaveAcesso()" class="bg-brand-accent-orange hover:bg-orange-700 py-3 px-6 text-xs font-bold uppercase rounded-xl transition-all tracking-wider shadow-md whitespace-nowrap">
                                 Desbloquear
                             </button>
@@ -132,17 +132,17 @@
             <!-- Painel Lateral: Módulos & Recursos Integrados com letra aumentada (28% de largura) -->
             <div class="w-full lg:w-[28%] h-[300px] lg:h-full bg-cinema-panel flex flex-col border-t lg:border-t-0 lg:border-l border-white/10 text-left">
                 
-                <!-- Abas Laterais: Aulas e Recursos Lado a Lado (Letra Aumentada) -->
+                <!-- Abas Laterais: Vídeos e Recursos Lado a Lado (Letra Aumentada) -->
                 <div class="flex border-b border-white/10 bg-cinema-dark/40 shrink-0">
                     <button onclick="switchSidebarTab('aulas')" id="sidebar-tab-aulas" class="flex-1 py-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-widest border-b-2 border-brand-accent-orange text-brand-accent-orange transition-all outline-none">
-                        <i class="fas fa-play-circle mr-1.5"></i> Aulas
+                        <i class="fas fa-play-circle mr-1.5"></i> Vídeos
                     </button>
                     <button onclick="switchSidebarTab('recursos')" id="sidebar-tab-recursos" class="flex-1 py-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-widest border-b-2 border-transparent text-gray-400 hover:text-white transition-all outline-none">
                         <i class="fas fa-folder-open mr-1.5"></i> Recursos
                     </button>
                 </div>
                 
-                <!-- Painel de Aulas -->
+                <!-- Painel de Vídeos -->
                 <div class="flex-grow overflow-y-auto p-3 space-y-2 parts-scroll" id="sidebar-pane-aulas">
                     <div id="modules-list" class="space-y-2 text-left">
                         <!-- Gerado dinamicamente por Javascript com botões maiores -->
@@ -196,31 +196,18 @@
                     </blockquote>
                 </div>
 
-                <!-- Conteúdo de Aba: Formador -->
+                <!-- Conteúdo de Aba: Formador (Simplificado Radicalmente) -->
                 <div id="pane-formador" class="hidden text-left flex flex-col sm:flex-row gap-6 items-center sm:items-start bg-white p-6 rounded-2xl border border-gray-150 shadow-xs fade-in">
                     <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold overflow-hidden flex-shrink-0 shadow-sm">
-                        <img src="../Imagens/HugoBacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150/ECE6D9/002147?text=HB';">
+                        <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150/ECE6D9/002147?text=HB';">
                     </div>
-                    <div class="space-y-3 flex-grow">
-                        <h4 class="font-serif text-xl font-bold text-brand-accent-blue">Hugo Bacelo</h4>
-                        <p class="text-xs text-brand-accent-orange font-bold uppercase tracking-wider font-sans">Investigador e Formador Teológico</p>
+                    <div class="space-y-3 flex-grow flex flex-col justify-center">
+                        <h4 class="font-serif text-2xl font-bold text-brand-accent-blue leading-none">Hugo Bacelo</h4>
                         
-                        <div class="text-sm text-gray-655 leading-relaxed font-light font-sans space-y-3">
-                            <p>
-                                Natural de <strong class="font-bold text-brand-accent-blue">Ermesinde</strong> (Porto) e residente na histórica cidade de <strong class="font-bold text-brand-accent-blue">Braga</strong>, o seu percurso intelectual e espiritual é marcado por uma profunda conversão pessoal do ateísmo até à fé católica, tendo os autores Jordan Peterson e C. S. Lewis como instrumentos providenciais nesta caminhada de vida.
-                            </p>
-                            <p>
-                                É aluno de formação avançada nos cursos do <strong class="font-bold">St. Paul Center</strong> e estudioso reatento da conceituada <strong class="font-bold">Ignatius Catholic Study Bible</strong>, referências académicas que aplica directamente ao seu trabalho de formação paroquial e litúrgica a nível nacional.
-                            </p>
-                            <p>
-                                Como Fundador da <strong class="font-bold">Jerónimo Editora</strong> e dinamizador do movimento paroquial <strong class="font-bold">Aprendizes do Verbo</strong>, Hugo Bacelo dedica a sua missão a formar comunidades activas e preparadas intelectualmente, munindo-as com as melhores fontes e literatura católica tradicional para responder com rigor aos desafios da contemporaneidade.
-                            </p>
-                        </div>
-
-                        <!-- Botão Directo de Ligação Biográfica -->
-                        <div class="pt-3">
+                        <!-- Botão Directo de Ligação Biográfica "Ver mais" -->
+                        <div class="pt-1">
                             <a href="../sobreHB" class="inline-flex items-center gap-2 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-sans font-bold text-xs uppercase tracking-widest px-5 py-3 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md">
-                                <span>Ver mais sobre Hugo Bacelo</span>
+                                <span>Ver mais</span>
                                 <i class="fas fa-arrow-right text-[10px]"></i>
                             </a>
                         </div>
@@ -253,7 +240,7 @@
 
                 <div class="pt-4 border-t border-gray-100 flex flex-col gap-2">
                     <a href="../curso-geral" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-sans font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-xs text-center flex items-center justify-center gap-2">
-                        <i class="fas fa-chevron-left text-[10px]"></i> Voltar ao Catálogo
+                        <i class="fas fa-chevron-left text-[10px]"></i> Voltar a Cursos
                     </a>
                 </div>
             </div>
@@ -291,7 +278,7 @@
                 (function() {
                     var gc = document.createElement('script'); gc.type = 'text/javascript'; gc.async = true;
                     gc.onload = __semio__onload; gc.defer = true; 
-                    gc.src = 'https://assets.mailerlite.com/jsonp/2468444/forms/191175533290063317/subscribe' ? 'https://assets.mailerlite.com/jsonp/2468444/forms/191175533290063317/subscribe' : ''; // mantendo padrões, mas chamando js do GC abaixo:
+                    gc.src = 'https://assets.mailerlite.com/jsonp/2468444/forms/191175533290063317/subscribe' ? 'https://assets.mailerlite.com/jsonp/2468444/forms/191175533290063317/subscribe' : '';
                     
                     // Script do GraphComment com carimbo temporal contra cache
                     var gc_actual = document.createElement('script'); gc_actual.type = 'text/javascript'; gc_actual.async = true;
@@ -307,15 +294,15 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // Metadados do curso de Missa
+        // Metadados do curso de Missa - Todos os módulos apontam directamente para os vídeos do YouTube
         const courseMetadata = {
             id: "curso_missa",
             prefix: "JRN1",
             parts: [
-                { title: "Parte I - Antes e Ritos Iniciais", videoId: "OwL0LrOL214", available: true },
-                { title: "Parte II - Liturgia da Palavra", videoId: "OwL0LrOL214", available: true },
-                { title: "Parte III - Liturgia Eucarística", videoId: "OwL0LrOL214", available: true },
-                { title: "Parte IV - Ritos Finais e Envio", videoId: "OwL0LrOL214", available: true }
+                { title: "I - Antes e Ritos Iniciais", videoId: "OwL0LrOL214", available: true },
+                { title: "II - Liturgia da Palavra", videoId: "OwL0LrOL214", available: true },
+                { title: "III - Liturgia Eucarística", videoId: "OwL0LrOL214", available: true },
+                { title: "IV - Ritos Finais e Envio", videoId: "OwL0LrOL214", available: true }
             ],
             resources: [
                 { title: "Manual do Curso - Módulo I & II", size: "1.8 MB", type: "PDF • Guia de Ritos", url: "#" },
@@ -371,7 +358,7 @@
                         <div onclick="alertarModuloBloqueado()" class="bg-white/5 p-4 rounded-xl border border-white/5 flex items-center justify-between text-left opacity-60 cursor-pointer hover:bg-white/10">
                             <div class="overflow-hidden mr-2">
                                 <h5 class="text-xs sm:text-sm font-bold text-gray-400 truncate">${r.title}</h5>
-                                <p class="text-[10px] sm:text-xs text-gray-500 mt-0.5">Trancado • Requer Chave</p>
+                                <p class="text-[10px] sm:text-xs text-gray-500 mt-0.5">Bloqueado • Requer chave de acesso</p>
                             </div>
                             <span class="text-xs sm:text-sm text-gray-500 shrink-0 p-1"><i class="fas fa-lock text-xs sm:text-sm"></i></span>
                         </div>
@@ -380,7 +367,7 @@
             });
         }
 
-        // Alternador de abas na barra lateral (Aulas / Recursos) - Fontes maiores e padding reforçado
+        // Alternador de abas na barra lateral (Vídeos / Recursos) - Fontes maiores e padding reforçado
         function switchSidebarTab(tab) {
             const tabAulas = document.getElementById('sidebar-tab-aulas');
             const tabRecursos = document.getElementById('sidebar-tab-recursos');
@@ -397,7 +384,7 @@
             } else {
                 tabRecursos.className = "flex-1 py-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-widest border-b-2 border-brand-accent-orange text-brand-accent-orange transition-all outline-none";
                 tabAulas.className = "flex-1 py-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-widest border-b-2 border-transparent text-gray-400 hover:text-white transition-all outline-none";
-                paneAulas.classList.add('hidden');
+                paneAulas.add('hidden');
                 paneRecursos.classList.remove('hidden');
             }
         }
@@ -406,7 +393,7 @@
         function alertarModuloBloqueado() {
             const errorElement = document.getElementById('error-msg');
             if (errorElement) {
-                errorElement.textContent = "Introduza e valide a sua chave para poder assistir aos módulos e descarregar os recursos!";
+                errorElement.textContent = "Introduza e valide a sua chave para poder assistir aos vídeos e descarregar os recursos!";
                 errorElement.classList.remove('hidden');
             }
         }
@@ -473,7 +460,7 @@
             carregarModuloVideo(0);
         }
 
-        // Injeta o player com base na infraestrutura do ambiente activo (YouTube vs Simulação Local)
+        // Injeta o player com base na infraestrutura do ambiente activo (YouTube com os links correctos)
         function carregarModuloVideo(idx) {
             const playerStage = document.getElementById('active-player');
             if (!playerStage) return;
@@ -499,7 +486,7 @@
                                    window.location.self !== window.top;
 
             if (isLocalSandbox) {
-                // Utiliza vídeo open-source educativo premium como simulação
+                // Utiliza vídeo open-source educativo premium como simulação local
                 playerStage.innerHTML = `
                     <video class="w-full h-full object-contain rounded-lg" autoplay controls controlsList="nodownload" oncontextmenu="return false;">
                         <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
@@ -510,6 +497,7 @@
                     </div>
                 `;
             } else {
+                // Carrega o link do YouTube especificado para todos os vídeos deste curso
                 playerStage.innerHTML = `
                     <iframe class="w-full h-full rounded-lg" 
                             src="https://www.youtube-nocookie.com/embed/${part.videoId}?rel=0&modestbranding=1&controls=1&autoplay=1&fs=1" 
