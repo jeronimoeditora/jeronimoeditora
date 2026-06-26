@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Arquivo de Artigos | Jerónimo Editora</title>
+    <title>Artigos | Jerónimo Editora</title>
     
     <!-- Favicons e Ícones (Desktop, Mobile e Apple) - Com parâmetro para evitar Cache -->
     <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="Imagens/favicon.png?v=1.0.0">
     <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="Imagens/favicon.png?v=1.0.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="Imagens/favicon.png?v=1.0.0">
-    <link rel="shortcut icon" href="Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="Imagens/favicon.png?v=1.0.0">
 
     <script>
         // Limpeza estética do URL removendo a extensão .html na barra de pesquisa (GitHub Pages)
@@ -78,11 +78,9 @@
     <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
         <div class="max-w-6xl mx-auto px-6 fade-in">
             
-            <!-- Título Principal do Arquivo de Artigos -->
+            <!-- Título Principal do Arquivo de Artigos (Simplificado e Limpo) -->
             <div class="text-center mb-10">
-                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-2">Escritos & Formação</span>
-                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Arquivo de Artigos</h1>
-                <p class="font-sans text-gray-500 max-w-2xl mx-auto text-base sm:text-lg font-medium">"Investigar com paciência, crer com convicção e reter com sabedoria."</p>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">Artigos</h1>
                 <div class="h-1 w-16 bg-brand-accent-orange mx-auto mt-4"></div>
             </div>
 
@@ -127,14 +125,14 @@
                 </div>
             </div>
 
-            <!-- Secção Newsletter Estática (Fundo azul claro #ecf3fa com o texto correto restaurado) -->
+            <!-- Secção Newsletter Estática (Com texto de proximidade "Recebe" e "teu endereço") -->
             <div class="bg-[#ecf3fa] p-6 sm:p-8 rounded-2xl border border-brand-accent-blue/10 shadow-xs max-w-4xl mx-auto mb-12 text-center">
                 <p class="font-serif text-lg sm:text-2xl text-brand-accent-blue font-bold mb-4">
-                    Receba <span class="underline decoration-brand-accent-orange decoration-2 underline-offset-4 font-bold">gratuitamente</span> a nossa newsletter e fica a par das novidades
+                    Recebe <span class="underline decoration-brand-accent-orange decoration-2 underline-offset-4 font-bold">gratuitamente</span> a nossa newsletter e fica a par das novidades
                 </p>
                 <form id="articles-newsletter-form" onsubmit="handleArticlesNewsletterSubmit(event)" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 mt-4">
                     <div class="flex-grow">
-                        <input type="email" id="articles-newsletter-email" required placeholder="O seu endereço de e-mail" aria-label="Endereço de e-mail" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-brand-text placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent-orange focus:border-transparent transition-all text-sm font-sans">
+                        <input type="email" id="articles-newsletter-email" required placeholder="o teu endereço de e-mail" aria-label="Endereço de e-mail" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-brand-text placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent-orange focus:border-transparent transition-all text-sm font-sans">
                     </div>
                     <button type="submit" class="bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold uppercase text-xs tracking-wider px-6 py-3.5 rounded-xl transition-all shadow-sm hover:-translate-y-0.5 active:translate-y-0 font-sans">
                         Subscrever
@@ -167,7 +165,7 @@
         </div>
         <div class="flex-grow">
             <p class="text-xs text-brand-accent-blue font-bold uppercase tracking-wider">Aviso de Disponibilidade</p>
-            <p class="text-sm text-gray-650 font-medium font-sans">Este artigo estará disponível online brevemente.</p>
+            <p class="text-sm text-gray-655 font-medium font-sans">Este artigo estará disponível online brevemente.</p>
         </div>
     </div>
 
@@ -176,7 +174,7 @@
 
     <script>
         // Base de dados contendo os 8 artigos, ordenados por data de forma decrescente
-        // Todos os tempos de leitura de fallback foram mapeados para bater certo com a contagem exata de palavras de cada artigo
+        // Corrigida a imagem do artigo 1 (Como Não Ler a Bíblia) de Imagens/6.png para Imagens/1.png
         const articlesData = [
             {
                 id: 8,
@@ -248,7 +246,7 @@
                 date: "2025-08-27",
                 readingTime: "9 min",
                 url: "artigos-individuais/como-nao-ler-a-biblia-em-qualquer-seculo-1-de-3",
-                image: "Imagens/6.png"
+                image: "Imagens/1.png"
             }
         ];
 
