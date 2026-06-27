@@ -117,11 +117,11 @@
     <div id="nav-placeholder"></div>
 
     <!-- PALCO CINEMÁTICO DE STREAMING (INSPIRADO NO ST. PAUL CENTER) -->
-    <section class="bg-cinema-dark pt-24 md:pt-28 text-white w-full border-b border-white/5 shadow-2xl no-select">
+    <section class="bg-cinema-dark pt-28 sm:pt-32 md:pt-36 text-white w-full border-b border-white/5 shadow-2xl no-select">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row h-auto lg:h-[500px]">
             
-            <!-- Janela do Player de Vídeo (72% de largura) -->
-            <div id="video-stage" class="w-full lg:w-[72%] h-[250px] sm:h-[400px] lg:h-full bg-black relative flex flex-col justify-center items-center p-6 text-center">
+            <!-- Janela do Player de Vídeo (72% de largura) - Otimizado no mobile para conter o lock-screen e o player vertical com excelente dimensão -->
+            <div id="video-stage" class="w-full lg:w-[72%] h-[500px] sm:h-[400px] lg:h-full bg-black relative flex flex-col justify-center items-center p-6 text-center">
                 
                 <!-- Estado Inicial: Ecrã Bloqueado -->
                 <div id="lock-screen" class="max-w-md mx-auto space-y-4 fade-in w-full px-2">
@@ -147,7 +147,7 @@
                 </div>
 
                 <!-- Stage do Player Activo (Ocultado até validação correcta da chave) -->
-                <div id="active-player" class="hidden w-full h-full relative overflow-hidden rounded-lg">
+                <div id="active-player" class="hidden absolute inset-0 w-full h-full overflow-hidden rounded-lg bg-black">
                     <!-- Destino de carregamento do Player API do YouTube (Sem eventos de rato directos) -->
                     <div id="yt-player-container" class="w-full h-full rounded-lg">
                         <div id="yt-player" class="w-full h-full pointer-events-none rounded-lg"></div>
@@ -256,12 +256,12 @@
                 </div>
 
                 <!-- Conteúdo de Aba: Formador -->
-                <div id="pane-formador" class="hidden text-left flex flex-col sm:flex-row gap-6 items-center sm:items-start bg-white p-6 rounded-2xl border border-gray-150 shadow-xs fade-in font-sans">
+                <div id="pane-formador" class="hidden text-left flex flex-col sm:flex-row gap-6 items-center sm:items-start bg-white p-6 rounded-2xl border border-gray-150 shadow-xs fade-in">
                     <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold overflow-hidden flex-shrink-0 shadow-sm">
                         <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150/ECE6D9/002147?text=HB';">
                     </div>
                     <div class="space-y-3 flex-grow flex flex-col justify-center">
-                        <h4 class="font-serif text-xl font-bold text-brand-accent-blue leading-none font-bold">Hugo Bacelo</h4>
+                        <h4 class="font-serif text-xl font-bold text-brand-accent-blue leading-none">Hugo Bacelo</h4>
                         
                         <!-- Texto Biográfico Curto e Elegante (Máximo 5 linhas) -->
                         <div class="text-sm text-gray-655 leading-relaxed font-light font-sans">
@@ -285,11 +285,14 @@
             <!-- Coluna Direita: Estado e Painel de Aquisição (4 Colunas) -->
             <div class="lg:col-span-4 bg-white p-6 rounded-2xl border border-gray-150 shadow-xs text-left space-y-6">
                 <div>
-                    <h5 class="text-[10px] font-bold uppercase tracking-wider text-gray-400 font-sans">Estado da sua Subscrição</h5>
-                    <p id="subscription-status" class="text-base font-extrabold text-brand-accent-blue mt-1.5 flex items-center gap-2 font-sans">
-                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500 block animate-pulse"></span>
-                        Aguardando Activação
-                    </p>
+                    <h5 class="text-[10px] font-bold uppercase tracking-wider text-gray-400">Estado da sua Subscrição</h5>
+                    <!-- Elemento reestruturado para suportar quebras de linha limpas -->
+                    <div id="subscription-status" class="mt-1.5 flex flex-col gap-1 text-base font-extrabold text-brand-accent-blue">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500 block animate-pulse"></span>
+                            Aguardando Activação
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="text-xs text-gray-550 leading-relaxed bg-slate-50 border border-gray-150 rounded-xl p-4 space-y-2">
@@ -297,15 +300,15 @@
                         <i class="fas fa-info-circle text-brand-accent-orange text-sm"></i> Notas do Sistema
                     </p>
                     <p class="font-sans leading-relaxed">
-                        A sua chave é única, pessoal e intransmissível. Por favor, guarde-a em local seguro.
+                        A tua chave é única, pessoal e intransmissível. Por favor, guarda-a em local seguro.
                     </p>
-                    <p class="font-semibold text-brand-accent-blue pt-1 leading-snug font-sans">
-                        Terá 10 dias para assistir livremente ao curso após a primeira validação bem-sucedida.
+                    <p class="font-semibold text-brand-accent-blue pt-1 leading-snug">
+                        Terás 10 dias para assistir livremente ao curso após a primeira validação bem-sucedida.
                     </p>
                 </div>
 
-                <div class="pt-4 border-t border-gray-100 flex flex-col gap-2 font-sans">
-                    <a href="../curso-geral" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-sans font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-xs text-center flex items-center justify-center gap-2">
+                <div class="pt-4 border-t border-gray-100 flex flex-col gap-2">
+                    <a href="../cursos-geral" class="w-full bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-sans font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-xs text-center flex items-center justify-center gap-2">
                         <i class="fas fa-chevron-left text-[10px]"></i> Voltar a Cursos
                     </a>
                 </div>
@@ -313,12 +316,12 @@
 
         </div>
 
-        <!-- SECÇÃO DE COMENTÁRIOS (INTEGRAÇÃO GRAPHCOMMENT EXCLUSIVA - UID ESPECÍFICO) -->
-        <div class="mt-16 pt-10 border-t border-gray-200 text-left fade-in font-sans">
+        <!-- SECÇÃO DE COMENTÁRIOS (INTEGRAÇÃO GRAPHCOMMENT EXCLUSIVA) -->
+        <div class="mt-16 pt-10 border-t border-gray-200 text-left fade-in">
             <div class="mb-8">
                 <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-1">Espaço de Partilha</span>
                 <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold tracking-tight">Comentários & Dúvidas</h3>
-                <p class="text-xs sm:text-sm text-gray-500 mt-1">Colabore no debate doutrinário, partilhe as suas reflexões ou tire dúvidas directamente com o formador.</p>
+                <p class="text-xs sm:text-sm text-gray-500 mt-1">Colabora no debate doutrinário, partilha as tuas reflexões ou tira dúvidas directamente com o formador.</p>
                 <div class="h-1 w-12 bg-brand-accent-orange mt-3"></div>
             </div>
 
@@ -331,7 +334,7 @@
                     graphcommentId: "jeronimo-editora", // ID da sua conta registada no GraphComment
 
                     behaviour: {
-                        // Identificador exclusivo e estático para este curso específico!
+                        // Identificador exclusivo e estático para os comentários deste curso específico!
                         uid: "os-profetas-maiores", 
                     },
                 }
@@ -348,6 +351,7 @@
                     
                     // Script do GraphComment com carimbo temporal contra cache
                     var gc_actual = document.createElement('script'); gc_actual.type = 'text/javascript'; gc_actual.async = true;
+                    ytPlayer = null;
                     gc_actual.onload = __semio__onload; gc_actual.defer = true;
                     gc_actual.src = 'https://integration.graphcomment.com/gc_graphlogin.js?' + Date.now();
                     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(gc_actual);
@@ -360,7 +364,7 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // Metadados do curso de Profetas Maiores
+        // Metadados do curso de Profetas Maiores (Ativada a mesma infraestrutura premium)
         const courseMetadata = {
             id: "curso_profetas",
             prefix: "JRN2",
@@ -513,12 +517,15 @@
             const watermark = document.getElementById('video-watermark');
             if (watermark) watermark.classList.remove('hidden');
 
-            // Alterar o Estado da Subscrição na Coluna Direita (Antigo Acordo Ortográfico)
+            // Alterar o Estado da Subscrição na Coluna Direita (Antigo Acordo Ortográfico) com quebra de linha elegante
             const subStatus = document.getElementById('subscription-status');
             if (subStatus) {
                 subStatus.innerHTML = `
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 block"></span>
-                    Subscrição Activa (10 Dias Disponíveis)
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 block"></span>
+                        Subscrição Activa
+                    </div>
+                    <span class="text-xs text-gray-500 font-sans font-medium pl-4.5 mt-0.5">(10 Dias Disponíveis)</span>
                 `;
             }
 
@@ -606,7 +613,7 @@
                 </div>
             `;
 
-            // Inicializa a instância do player de forma segura usando o script dinâmico carregado
+            // Initialize YouTube player instance safely
             if (window.YT && window.YT.Player) {
                 initYTPlayerInstance(part.videoId);
             } else {
@@ -806,7 +813,7 @@
                 // Remove extensão .html dos links para manter o URL higienizado
                 href = link.getAttribute('href');
                 if (href && href.endsWith('.html')) {
-                    link.setAttribute('href', href.slice(0, -5));
+                    link.setAttribute('href', '../' + href.slice(0, -5));
                 }
             });
 
