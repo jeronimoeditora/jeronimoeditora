@@ -156,13 +156,13 @@
                     <!-- Camada Invisível de Protecção que cobre todo o player contra cliques directos no YouTube, partilhas e abertura externa -->
                     <div onclick="togglePlayback()" oncontextmenu="return false;" class="absolute inset-0 bg-transparent z-20 cursor-pointer"></div>
 
-                    <!-- Botão Customizado de Maximizar (Ecrã Inteiro) -->
-                    <button id="fullscreen-btn" onclick="maximizarVideo()" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-50 bg-black/60 hover:bg-black/90 border border-white/10 text-white rounded-xl px-3.5 py-2 text-xs transition-all flex items-center gap-1.5 shadow-lg cursor-pointer">
+                    <!-- Botão Customizado de Maximizar (Ecrã Inteiro com z-30 para deslizar debaixo do menu no scroll) -->
+                    <button id="fullscreen-btn" onclick="maximizarVideo()" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 bg-black/60 hover:bg-black/90 border border-white/10 text-white rounded-xl px-3.5 py-2 text-xs transition-all flex items-center gap-1.5 shadow-lg cursor-pointer">
                         <i id="fullscreen-icon" class="fas fa-expand"></i> <span>Ecrã Inteiro</span>
                     </button>
 
                     <!-- Marca d'Água Leve e Discreta com link do site -->
-                    <div id="video-watermark" class="absolute bottom-16 left-4 z-45 text-[10px] sm:text-xs font-mono tracking-widest text-white/30 pointer-events-none select-none uppercase font-bold">
+                    <div id="video-watermark" class="absolute bottom-16 left-4 z-40 text-[10px] sm:text-xs font-mono tracking-widest text-white/30 pointer-events-none select-none uppercase font-bold">
                         www.editorajeronimo.pt
                     </div>
 
@@ -238,7 +238,7 @@
                 </div>
 
                 <!-- Conteúdo de Aba: Resumo -->
-                <div id="pane-resumo" class="space-y-4 leading-relaxed font-sans text-gray-700 text-sm sm:text-base text-left fade-in font-light font-sans">
+                <div id="pane-resumo" class="space-y-4 leading-relaxed font-sans text-gray-700 text-sm sm:text-base text-left fade-in font-light">
                     <h1 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold tracking-tight">Conhecer a Missa</h1>
                     <span class="inline-block px-3 py-1 bg-amber-50 border border-amber-200 text-brand-accent-orange text-[10px] font-bold uppercase tracking-wider rounded-md">
                         Liturgia
@@ -450,7 +450,7 @@
             } else {
                 tabRecursos.className = "flex-1 py-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-widest border-b-2 border-brand-accent-orange text-brand-accent-orange transition-all outline-none";
                 tabAulas.className = "flex-1 py-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-widest border-b-2 border-transparent text-gray-400 hover:text-white transition-all outline-none";
-                paneAulas.add('hidden');
+                paneAulas.classList.add('hidden'); // Corrigido!
                 paneRecursos.classList.remove('hidden');
             }
         }
@@ -508,7 +508,7 @@
             document.getElementById('lock-screen').classList.add('hidden');
             document.getElementById('active-player').classList.remove('hidden');
             
-            // Ativar a marca d'água do site
+            // Tornar a marca d'água do site visível
             const watermark = document.getElementById('video-watermark');
             if (watermark) watermark.classList.remove('hidden');
 
@@ -555,16 +555,16 @@
 
             // Estrutura do player de vídeo e container do player do YouTube de forma estanque
             playerStage.innerHTML = `
-                <!-- Elemento de ancoragem do player nativo (sem eventos de rato directos) -->
+                <!-- Elemento de ancoragem do player nativo (sem eventos de rato) -->
                 <div id="yt-player-container" class="w-full h-full rounded-lg">
                     <div id="yt-player" class="w-full h-full pointer-events-none rounded-lg"></div>
                 </div>
 
-                <!-- Overlays de protecção invisíveis contra cliques directos no YouTube, partilhas e abertura externa -->
+                <!-- Camada Invisível de Protecção que cobre todo o player contra cliques directos no YouTube, partilhas e abertura externa -->
                 <div onclick="togglePlayback()" oncontextmenu="return false;" class="absolute inset-0 bg-transparent z-20 cursor-pointer"></div>
 
-                <!-- Botão Customizado de Maximizar (Ecrã Inteiro) -->
-                <button id="fullscreen-btn" onclick="maximizarVideo()" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-50 bg-black/60 hover:bg-black/90 border border-white/10 text-white rounded-xl px-3.5 py-2 text-xs transition-all flex items-center gap-1.5 shadow-lg cursor-pointer">
+                <!-- Botão Customizado de Maximizar (Ecrã Inteiro com z-30 para deslizar por baixo do menu no scroll) -->
+                <button id="fullscreen-btn" onclick="maximizarVideo()" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 bg-black/60 hover:bg-black/90 border border-white/10 text-white rounded-xl px-3.5 py-2 text-xs transition-all flex items-center gap-1.5 shadow-lg cursor-pointer">
                     <i id="fullscreen-icon" class="fas fa-expand"></i> <span>Ecrã Inteiro</span>
                 </button>
 
@@ -685,13 +685,6 @@
         function onPlayerReady(event) {
             event.target.playVideo();
         }
-
-        // Permite ao utilizador navegar pela timeline usando o nosso slider customizado
-        window.addEventListener('input', (e) => {
-            if (e.target && e.target.id === 'active-player-progress') {
-                // não se aplica aqui por ser iframe, mas guardamos caso queiras range slider customizado
-            }
-        });
 
         // Função de maximizar vídeo (Ecrã Inteiro) via Web APIs nativas
         function maximizarVideo() {
