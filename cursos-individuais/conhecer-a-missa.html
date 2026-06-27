@@ -120,7 +120,7 @@
     <section class="bg-cinema-dark pt-28 sm:pt-32 md:pt-36 text-white w-full border-b border-white/5 shadow-2xl no-select">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row h-auto lg:h-[500px]">
             
-            <!-- Janela do Player de Vídeo (72% de largura) -->
+            <!-- Janela do Player de Vídeo (72% de largura) - Otimizado no mobile para conter o lock-screen e o player -->
             <div id="video-stage" class="w-full lg:w-[72%] min-h-[390px] sm:h-[400px] lg:h-full bg-black relative flex flex-col justify-center items-center p-6 text-center">
                 
                 <!-- Estado Inicial: Ecrã Bloqueado -->
@@ -147,7 +147,7 @@
                 </div>
 
                 <!-- Stage do Player Activo (Ocultado até validação correcta da chave) -->
-                <div id="active-player" class="hidden w-full h-full relative overflow-hidden rounded-lg">
+                <div id="active-player" class="hidden absolute inset-0 w-full h-full overflow-hidden rounded-lg bg-black">
                     <!-- Destino de carregamento do Player API do YouTube (Sem eventos de rato directos) -->
                     <div id="yt-player-container" class="w-full h-full rounded-lg">
                         <div id="yt-player" class="w-full h-full pointer-events-none rounded-lg"></div>
@@ -244,10 +244,10 @@
                         Liturgia
                     </span>
                     <p class="pt-2 font-inter font-light">
-                        A Santa Missa é o centro e o cume de toda a vida cristã e o maior misterio espiritual legado por Nosso Senhor Jesus Cristo à Sua Igreja. No entanto, é comum participarmos no Santo Sacrificio sem compreender cabalmente os significados, as origens biblicas e as riquezas misticas que revestem cada momento litúrgico, oração e postura.
+                        A Santa Missa é o centro e o cume de toda a vida cristã e o maior mistério espiritual legado por Nosso Senhor Jesus Cristo à Sua Igreja. No entanto, é comum participarmos no Santo Sacrifício sem compreender cabalmente os significados, as origens bíblicas e as riquezas místicas que revestem cada momento litúrgico, oração e postura.
                     </p>
                     <p class="font-inter font-light">
-                        Dividido em quatro grandes blocos cronológicos, o formador Hugo Bacelo desconstrói metodicamente os ritos do Santo Sacrificio sob uma perspectiva teológica tradicional, à luz do Magistério permanente da Igreja. Do Introito ao Rito de Envio, este curso é um guia indispensável para todos os que desejam adorar a Deus em espírito e verdade, elevando a sua devoção activa a um patamar mais consciente.
+                        Dividido em quatro grandes blocos cronológicos, o formador Hugo Bacelo desconstrói metodicamente os ritos do Santo Sacrifício sob uma perspectiva teológica tradicional, à luz do Magistério permanente da Igreja. Do Introito ao Rito de Envio, este curso é um guia indispensável para todos os que desejam adorar a Deus in espírito e verdade, elevando a sua devoção activa a um patamar mais consciente.
                     </p>
                     <blockquote class="border-l-4 border-brand-gold pl-4 py-1 my-6 font-classic italic text-lg text-brand-accent-blue bg-white p-4 rounded-r-xl">
                         "Se compreendêssemos a Missa, morreríamos de amor."<br>
@@ -286,10 +286,13 @@
             <div class="lg:col-span-4 bg-white p-6 rounded-2xl border border-gray-150 shadow-xs text-left space-y-6">
                 <div>
                     <h5 class="text-[10px] font-bold uppercase tracking-wider text-gray-400">Estado da sua Subscrição</h5>
-                    <p id="subscription-status" class="text-base font-extrabold text-brand-accent-blue mt-1.5 flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500 block animate-pulse"></span>
-                        Aguardando Activação
-                    </p>
+                    <!-- Elemento reestruturado para suportar quebras de linha limpas -->
+                    <div id="subscription-status" class="mt-1.5 flex flex-col gap-1 text-base font-extrabold text-brand-accent-blue">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500 block animate-pulse"></span>
+                            Aguardando Activação
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="text-xs text-gray-550 leading-relaxed bg-slate-50 border border-gray-150 rounded-xl p-4 space-y-2">
@@ -512,12 +515,15 @@
             const watermark = document.getElementById('video-watermark');
             if (watermark) watermark.classList.remove('hidden');
 
-            // Alterar o Estado da Subscrição na Coluna Direita (Antigo Acordo Ortográfico)
+            // Alterar o Estado da Subscrição na Coluna Direita (Antigo Acordo Ortográfico) com quebra de linha elegante
             const subStatus = document.getElementById('subscription-status');
             if (subStatus) {
                 subStatus.innerHTML = `
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 block"></span>
-                    Subscrição Activa (10 Dias Disponíveis)
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 block"></span>
+                        Subscrição Activa
+                    </div>
+                    <span class="text-xs text-gray-500 font-sans font-medium pl-4.5 mt-0.5">(10 Dias Disponíveis)</span>
                 `;
             }
 
@@ -655,7 +661,6 @@
             }
         }
 
-        // Correção de temporizador para barra de progresso e exibição de tempo corrente/restante
         function startProgressTrackUpdate() {
             clearInterval(progressInterval);
             progressInterval = setInterval(() => {
@@ -794,7 +799,7 @@
                 // Remove extensão .html dos links para manter o URL higienizado
                 href = link.getAttribute('href');
                 if (href && href.endsWith('.html')) {
-                    link.setAttribute('href', href.slice(0, -5));
+                    link.setAttribute('href', '../' + href.slice(0, -5));
                 }
             });
 
@@ -850,7 +855,7 @@
                     }
                 });
             } catch (e) {
-                console.warn("Modo offline oñemba'apo.");
+                console.warn("Modo offline activo.");
             }
         }
 
