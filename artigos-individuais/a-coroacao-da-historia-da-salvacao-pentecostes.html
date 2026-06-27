@@ -18,6 +18,14 @@
         }
     </script>
     
+    <!-- Configuração de tradução e ocultação para o Cusdis (Mapeamento prioritário no head) -->
+    <script>
+        window.CUSDIS_LOCALE = {
+            "powered_by": " ", // Espaço em branco que limpa nativamente a linha de assinatura no widget
+            "nickname": "Nome" // Altera apenas o campo Nickname para Nome
+        };
+    </script>
+    
     <!-- GoatCounter Analytics -->
     <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
@@ -85,6 +93,12 @@
 
         .fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Contentor de comentários Cusdis estável e responsivo */
+        #cusdis_container {
+            width: 100% !important;
+            position: relative;
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
@@ -162,7 +176,7 @@
                 </p>
 
                 <p>
-                    Além de ser o cumprimento do Sinai, o Pentecostes é também a inversão da Torre de Babel.
+                    Além de ser o cumprimento do Sinai, o Pentecostes é também a inversion da Torre de Babel.
                 </p>
 
                 <p>
@@ -184,7 +198,7 @@
                 </h3>
                 
                 <p>
-                    O Salmo 104(103) é um hino de louvor que celebra a grandeza de Deus e as maravilhas da Sua criação. O foco deste salmo move-se através dos elementos do mundo criado, culminando na soberania do Senhor sobre a vida e a morte, sendo a criação apresentada como uma grande demonstração da Sabedoria e da Providência de Deus.
+                    O Salmo 104(103) é um hino de louvor que celebra a grandeza de Deus e as maravilhas da Sua criação. O foco deste salmo move-se através dos elementos do mundo criado, culminando na soberania do Senhor sobre a via e a morte, sendo a criação apresentada como uma grande demonstração da Sabedoria e da Providência de Deus.
                 </p>
 
                 <p>
@@ -196,7 +210,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>As Primícias da Nova Criação:</strong> Tal como no princípio o Espírito pairava como um vento impetuoso sobre as águas da terra jovem (Gn 1,2), no Pentecostes, o vento sopra novamente sobre os crentes reunidos em redor dos Apóstolos. Desta forma, a Igreja constitui o antegozo, ou as primícias, de uma nova criação. Nós possuímos um «pagamento inicial» do Espírito que renova todas as coisas, unindo-nos de forma misteriosa à criação que há-de vir na próxima era. Esta mesma realidade vitalícia foi profetizada na visão dos ossos secos de Ezequiel (c.37), onde o sopro do Espírito causa um acto de re-criação ou «ressurreição» do novo Israel, a Igreja.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>As Primícias da Nova Criação:</strong> Tal como no princípio o Espírito pairava como um vento impetuoso sobre as águas da terra jovem (Gn 1,2), no Pentecostes, o vento sopra novamente sobre os crentes reunidos em redor dos Apóstolos. Desta forma, a Igreja constitui o antegozo, ou as primícias, de uma nova criação. Nós possuímos um «pagamento inicial» do Espírito que renova todas as coisas, unindo-nos de forma misteriosa à criação que há-de vir na próxima era. Esta mesma realidade vitalícia foi profetizada na visão dos ossos secos de Ezequiel (c.37), onde o sopro do Espírito causa um acto de re-criação ou "ressurreição" do novo Israel, a Igreja.
                 </p>
 
                 <!-- Subtítulo 3 Reestruturado com Laranja, na linha abaixo e mais pequeno -->
@@ -293,17 +307,18 @@
                 </a>
             </div>
 
-            <!-- Caixa de Comentários Cusdis (Nativa, Estável e com URL fixo para evitar erros) -->
+            <!-- Caixa de Comentários Cusdis (Nativa, Estável e com URL estável) -->
             <section class="mt-8 pt-4">
                 <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-6">Comentários</h4>
-                <div id="cusdis_thread"
-                  data-host="https://cusdis.com"
-                  data-app-id="19d3fc79-f2c8-494b-ad0a-93ee2177f2f5"
-                  data-page-id="a-coroacao-da-historia-da-salvacao-pentecostes"
-                  data-page-url="https://editorajeronimo.com/artigos-individuais/a-coroacao-da-historia-da-salvacao-pentecostes"
-                  data-page-title="A Coroação da História da Salvação (Pentecostes) | Jerónimo Editora"
-                  data-lang="pt"
-                ></div>
+                <div id="cusdis_container">
+                    <div id="cusdis_thread"
+                      data-host="https://cusdis.com"
+                      data-app-id="19d3fc79-f2c8-494b-ad0a-93ee2177f2f5"
+                      data-page-id="a-coroacao-da-historia-da-salvacao-pentecostes"
+                      data-page-url="https://editorajeronimo.com/artigos-individuais/a-coroacao-da-historia-da-salvacao-pentecostes"
+                      data-page-title="A Coroação da História da Salvação (Pentecostes) | Jerónimo Editora"
+                    ></div>
+                </div>
                 <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
             </section>
 
