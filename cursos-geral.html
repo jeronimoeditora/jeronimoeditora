@@ -148,7 +148,7 @@
     <!-- Modal Informativo: Como Funciona o Acesso Digital -->
     <div id="info-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300">
         <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl p-6 md:p-8 relative border-t-4 border-brand-accent-orange transform scale-95 transition-transform duration-300" id="info-modal-content">
-            <button onclick="fecharModalInfo()" class="absolute top-4 right-4 text-gray-455 hover:text-gray-700 focus:outline-none">
+            <button onclick="fecharModalInfo()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none">
                 <i class="fas fa-times text-lg"></i>
             </button>
             
@@ -159,7 +159,7 @@
                 <h3 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-blue">Como funciona?</h3>
             </div>
             
-            <div class="space-y-4 text-sm text-gray-655 font-sans leading-relaxed text-left">
+            <div class="space-y-4 text-sm text-gray-600 font-sans leading-relaxed text-left">
                 <div class="flex gap-3 items-start">
                     <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-accent-blue text-white font-bold flex items-center justify-center text-xs mt-0.5 font-sans">1</span>
                     <p class="text-gray-700 font-medium">Escolhe o curso e clica em <strong>Adquirir Acesso</strong> para avançar para o Checkout.</p>
@@ -202,9 +202,9 @@
                 title: "Conhecer a Missa (Em breve)",
                 category: "Liturgia",
                 date: "2026-05-15",
-                status: "Disponível",
-                price: "A definir",
-                badgeClass: "bg-emerald-600",
+                status: "Em breve", // Alterado de "Disponível" para "Em breve"
+                price: null, // Alterado de 15.00 para null para exibir "A definir"
+                badgeClass: "bg-amber-600", // Alterado para laranja-âmbar consistente com "Em breve"
                 image: "Imagens/missa.png",
                 url: "cursos-individuais/conhecer-a-missa",
                 videos: "4 vídeos",
@@ -216,7 +216,7 @@
                 category: "Formação Bíblica",
                 date: "2026-07-01",
                 status: "Em breve",
-                price: "A definir",
+                price: null, // Mantém-se como planeamento (A definir)
                 badgeClass: "bg-amber-600",
                 image: "Imagens/profetas.png",
                 url: "cursos-individuais/os-profetas-maiores",
@@ -244,10 +244,12 @@
             // Remove instâncias duplicadas do mesmo curso para evitar chaves redundantes
             items = items.filter(i => String(i.id) !== String(id));
             
+            const parsedPrice = parseFloat(price);
+            
             items.push({
                 id: id,
                 title: title,
-                price: parseFloat(price),
+                price: isNaN(parsedPrice) ? 0 : parsedPrice,
                 quantity: 1,
                 type: 'curso',
                 weight: 0
@@ -305,12 +307,17 @@
             courses.forEach(course => {
                 const isAvailable = course.status === "Disponível";
                 
-                // Botão Adquirir Acesso agora com cor verde-esmeralda sólida, com animação de levitação (sem mudar de cor)
-                const actionBtnHtml = isAvailable 
+                // Formatação robusta de preços prevenindo erros de tipo
+                const formattedPrice = (typeof course.price === 'number' && course.price > 0)
+                    ? `${course.price.toFixed(2).replace('.', ',')}€`
+                    : "A definir";
+                
+                // Botão Adquirir Acesso com parâmetro numérico tratado com segurança
+                const actionBtnHtml = isAvailable && typeof course.price === 'number'
                     ? `<button onclick="adquirirAcessoCurso('${course.id}', '${course.title}', ${course.price})" class="w-full bg-emerald-600 text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-all transform hover:-translate-y-0.5 duration-300 tracking-wider font-sans shadow-xs hover:shadow-md flex items-center justify-center gap-2">
                             <i class="fas fa-shopping-cart text-[11px]"></i> Adquirir Acesso
                        </button>`
-                    : `<button disabled class="w-full bg-gray-255 text-gray-400 font-bold text-xs uppercase py-3.5 rounded-xl tracking-wider font-sans flex items-center justify-center gap-2 cursor-not-allowed">
+                    : `<button disabled class="w-full bg-gray-200 text-gray-400 font-bold text-xs uppercase py-3.5 rounded-xl tracking-wider font-sans flex items-center justify-center gap-2 cursor-not-allowed">
                             <i class="fas fa-clock text-[11px]"></i> Em Breve
                        </button>`;
 
@@ -329,7 +336,7 @@
                                     ${course.status}
                                 </span>
                                 <span class="text-sm font-extrabold text-brand-accent-blue font-sans">
-                                    ${course.price.toFixed(2).replace('.', ',')}€
+                                    ${formattedPrice}
                                 </span>
                             </div>
                             
@@ -339,7 +346,7 @@
                                 </h2>
                                 <div class="flex justify-between items-center text-xs text-brand-accent-orange font-bold uppercase tracking-wider font-sans mt-1.5">
                                     <span>${course.category}</span>
-                                    <span class="text-gray-455 font-medium normal-case flex items-center gap-1.5">
+                                    <span class="text-gray-500 font-medium normal-case flex items-center gap-1.5">
                                         <i class="fas fa-video text-[10px]"></i> ${course.videos}
                                     </span>
                                 </div>
@@ -350,7 +357,7 @@
                             </p>
 
                             <div class="pt-2 flex flex-col sm:flex-row gap-2">
-                                <!-- Botão Saber Mais em cor de laranja forte, sem variação de cor mas com movimento de elevação e incremento de sombra no hover -->
+                                <!-- Botão Saber Mais em cor de laranja forte -->
                                 <a ${imageLinkAction} class="w-full sm:w-1/3 bg-brand-accent-orange text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-all transform hover:-translate-y-0.5 duration-300 tracking-wider font-sans text-center flex items-center justify-center gap-1 shadow-sm hover:shadow-md">
                                     Saber Mais
                                 </a>
