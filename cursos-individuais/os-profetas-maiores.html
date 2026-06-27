@@ -12,7 +12,7 @@
     <link class="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
 
     <script>
-        // Limpeza estética do URL removendo a extensão .html na barra de pesquisa (GitHub Pages)
+        // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
@@ -129,7 +129,7 @@
                         <i class="fas fa-lock"></i>
                     </div>
                     <h3 class="font-serif text-lg sm:text-2xl font-bold tracking-tight text-white">Conteúdo Protegido</h3>
-                    <p class="text-xs sm:text-sm text-gray-455 font-sans leading-relaxed max-w-sm mx-auto">
+                    <p class="text-xs sm:text-sm text-gray-400 font-sans leading-relaxed max-w-sm mx-auto">
                         Este curso requer uma chave de acesso válida. Se já efectuou a compra, introduza a chave abaixo para desbloquear todos os módulos de streaming.
                     </p>
                     
@@ -188,7 +188,7 @@
                 
             </div>
 
-            <!-- Painel Lateral: Módulos & Recursos Integrados com letra aumentada (28% de largura) -->
+            <!-- Painel Lateral: Módulos & Recursos Integrados com tempo de aulas (28% de largura) -->
             <div class="w-full lg:w-[28%] h-[300px] lg:h-full bg-cinema-panel flex flex-col border-t lg:border-t-0 lg:border-l border-white/10 text-left">
                 
                 <!-- Abas Laterais: Vídeos e Recursos Lado a Lado (Letra Aumentada) -->
@@ -262,10 +262,6 @@
                     </div>
                     <div class="space-y-3 flex-grow flex flex-col justify-center">
                         <h4 class="font-serif text-xl font-bold text-brand-accent-blue leading-none">Hugo Bacelo</h4>
-                        
-                        <!-- Texto Biográfico Curto e Elegante (Máximo 5 linhas) -->
-                        <div class="text-sm text-gray-655 leading-relaxed font-light font-sans">
-                            <p>
                         <!-- Botão Directo de Ligação Biográfica "Ver mais" -->
                         <div class="pt-1">
                             <a href="../sobreHB" class="inline-flex items-center gap-2 bg-brand-accent-orange hover:bg-brand-accent-blue text-white font-sans font-bold text-xs uppercase tracking-widest px-5 py-3 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md">
@@ -278,28 +274,27 @@
 
             </div>
 
-            <!-- Coluna Direita: Estado e Painel de Aquisição (4 Colunas) -->
+            <!-- Coluna Direita: Painel de Aquisição (4 Colunas) -->
             <div class="lg:col-span-4 bg-white p-6 rounded-2xl border border-gray-150 shadow-xs text-left space-y-6">
                 <div>
-                    <h5 class="text-[10px] font-bold uppercase tracking-wider text-gray-400">Estado da sua Subscrição</h5>
                     <!-- Elemento reestruturado para suportar quebras de linha limpas -->
-                    <div id="subscription-status" class="mt-1.5 flex flex-col gap-1 text-base font-extrabold text-brand-accent-blue">
+                    <div id="subscription-status" class="flex flex-col gap-1 text-base font-extrabold text-brand-accent-blue">
                         <div class="flex items-center gap-2">
                             <span class="w-2.5 h-2.5 rounded-full bg-amber-500 block animate-pulse"></span>
-                            Aguardando Activação
+                            Aguardando Acesso
                         </div>
                     </div>
                 </div>
                 
-                <div class="text-xs text-gray-550 leading-relaxed bg-slate-50 border border-gray-150 rounded-xl p-4 space-y-2">
+                <div class="text-xs text-gray-500 leading-relaxed bg-slate-50 border border-gray-150 rounded-xl p-4 space-y-2">
                     <p class="font-bold text-gray-700 flex items-center gap-1.5">
                         <i class="fas fa-info-circle text-brand-accent-orange text-sm"></i> Notas do Sistema
                     </p>
                     <p class="font-sans leading-relaxed">
-                        A tua chave é única, pessoal e intransmissível. Por favor, guarda-a em local seguro.
+                        A tua chave é única, pessoal e intransmissível.
                     </p>
                     <p class="font-semibold text-brand-accent-blue pt-1 leading-snug">
-                        Terás 10 dias para assistir livremente ao curso após a primeira validação bem-sucedida.
+                        Terás 1 mês para assistir livremente ao curso após a primeira validação.
                     </p>
                 </div>
 
@@ -312,46 +307,31 @@
 
         </div>
 
-        <!-- SECÇÃO DE COMENTÁRIOS (INTEGRAÇÃO GRAPHCOMMENT EXCLUSIVA) -->
+        <!-- SECÇÃO DE COMENTÁRIOS (INTEGRAÇÃO CUSDIS) -->
         <div class="mt-16 pt-10 border-t border-gray-200 text-left fade-in">
             <div class="mb-8">
-                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-widest block mb-1">Espaço de Partilha</span>
-                <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold tracking-tight">Comentários & Dúvidas</h3>
-                <p class="text-xs sm:text-sm text-gray-500 mt-1">Colabora no debate doutrinário, partilha as tuas reflexões ou tira dúvidas directamente com o formador.</p>
+                <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold tracking-tight">Comentários</h3>
                 <div class="h-1 w-12 bg-brand-accent-orange mt-3"></div>
             </div>
 
-            <!-- Elemento de ancoragem para os comentários do GraphComment -->
-            <div id="graphcomment" class="bg-white p-4 sm:p-6 rounded-2xl border border-gray-150 shadow-xs"></div>
+            <!-- Elemento de ancoragem para os comentários do Cusdis (Estável com mini-scroll e ocultação de créditos) -->
+            <div id="cusdis_container">
+                <div id="cusdis_thread"
+                  data-host="https://cusdis.com"
+                  data-app-id="19d3fc79-f2c8-494b-ad0a-93ee2177f2f5"
+                  data-page-id="os-profetas-maiores"
+                  data-page-url="https://editorajeronimo.com/cursos-individuais/os-profetas-maiores"
+                  data-page-title="Curso: Os Profetas Maiores | Jerónimo Editora"
+                  data-lang="pt"
+                ></div>
+            </div>
 
-            <script type="text/javascript">
-                /* - - - CONFIGURATION VARIABLES - - - */
-                var __semio__params = {
-                    graphcommentId: "jeronimo-editora", // ID da sua conta registada no GraphComment
-
-                    behaviour: {
-                        // Identificador exclusivo e estático para os comentários deste curso específico!
-                        uid: "os-profetas-maiores", 
-                    },
-                }
-
-                /* - - - DON'T EDIT BELOW THIS LINE - - - */
-                function __semio__onload() {
-                    __semio__gc_graphlogin(__semio__params)
-                }
-
-                (function() {
-                    var gc = document.createElement('script'); gc.type = 'text/javascript'; gc.async = true;
-                    gc.onload = __semio__onload; gc.defer = true; 
-                    gc.src = 'https://assets.mailerlite.com/jsonp/2468444/forms/191175533290063317/subscribe' ? 'https://assets.mailerlite.com/jsonp/2468444/forms/191175533290063317/subscribe' : '';
-                    
-                    // Script do GraphComment com carimbo temporal contra cache
-                    var gc_actual = document.createElement('script'); gc_actual.type = 'text/javascript'; gc_actual.async = true;
-                    ytPlayer = null;
-                    gc_actual.onload = __semio__onload; gc_actual.defer = true;
-                    gc_actual.src = 'https://integration.graphcomment.com/gc_graphlogin.js?' + Date.now();
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(gc_actual);
-                })();
+            <script>
+                // Configuração das traduções e ocultação nativa Cusdis (Alinhada com Pentecostes)
+                window.CUSDIS_LOCALE = {
+                    "powered_by": " ", // Espaço em branco que limpa a linha de créditos nativamente
+                    "nickname": "Nome" // Altera apenas o campo Nickname para Nome
+                };
             </script>
         </div>
     </main>
@@ -413,7 +393,7 @@
                         <div class="bg-white/5 p-4 rounded-xl border border-white/10 flex items-center justify-between text-left fade-in">
                             <div class="overflow-hidden mr-2">
                                 <h5 class="text-xs sm:text-sm font-bold text-white truncate">${r.title}</h5>
-                                <p class="text-[10px] sm:text-xs text-gray-455 mt-0.5">${r.size} • PDF de Apoio</p>
+                                <p class="text-[10px] sm:text-xs text-gray-500 mt-0.5">${r.size} • PDF de Apoio</p>
                             </div>
                             <a href="${r.url}" class="text-xs sm:text-sm text-brand-gold hover:text-white font-bold uppercase shrink-0 transition-all p-1">
                                 <i class="fas fa-download text-sm sm:text-base"></i>
@@ -451,7 +431,7 @@
             } else {
                 tabRecursos.className = "flex-1 py-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-widest border-b-2 border-brand-accent-orange text-brand-accent-orange transition-all outline-none";
                 tabAulas.className = "flex-1 py-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-widest border-b-2 border-transparent text-gray-400 hover:text-white transition-all outline-none";
-                paneAulas.classList.add('hidden'); // Corrigido!
+                paneAulas.classList.add('hidden');
                 paneRecursos.classList.remove('hidden');
             }
         }
@@ -519,9 +499,8 @@
                 subStatus.innerHTML = `
                     <div class="flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 block"></span>
-                        Subscrição Activa
+                        Acesso Activo
                     </div>
-                    <span class="text-xs text-gray-500 font-sans font-medium pl-4.5 mt-0.5">(10 Dias Disponíveis)</span>
                 `;
             }
 
@@ -669,6 +648,38 @@
             } else {
                 ytPlayer.playVideo();
             }
+        }
+
+        // Script auxiliar estático de inicialização direta para garantir que o Cusdis resolve sempre
+        function initCusdis() {
+            const thread = document.getElementById('cusdis_thread');
+            if (!thread) return;
+
+            let pageUrl = window.location.href;
+            // Se for um URL local, blob ou sandbox do Canvas, injeta o URL oficial de produção para evitar "Not Found"
+            if (!pageUrl.startsWith('http') || pageUrl.includes('blob:') || pageUrl.includes('file:') || pageUrl.includes('localhost') || pageUrl.includes('127.0.0.1')) {
+                pageUrl = 'https://editorajeronimo.com/cursos-individuais/os-profetas-maiores';
+            }
+            
+            thread.setAttribute('data-page-url', pageUrl);
+
+            // Injeta o script oficial do Cusdis de forma assíncrona
+            const script = document.createElement('script');
+            script.src = "https://cusdis.com/js/cusdis.es.js";
+            script.async = true;
+            script.defer = true;
+
+            // MutationObserver focado em detetar a injeção do iframe para garantir que as propriedades de scroll nativas são preservadas
+            const observer = new MutationObserver((mutations) => {
+                const iframe = thread.querySelector('iframe');
+                if (iframe) {
+                    iframe.id = "cusdis_iframe";
+                    observer.disconnect();
+                }
+            });
+            observer.observe(thread, { childList: true });
+
+            document.head.appendChild(script);
         }
 
         function startProgressTrackUpdate() {
@@ -870,6 +881,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            initCusdis(); // Inicializa o Cusdis de forma limpa e estável
             loadComponents();
             renderModules(false); // Inicia bloqueado aguardando validação
             renderResources(false); // Recursos iniciam protegidos com cadeado
