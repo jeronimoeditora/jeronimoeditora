@@ -117,11 +117,11 @@
     <div id="nav-placeholder"></div>
 
     <!-- PALCO CINEMÁTICO DE STREAMING (INSPIRADO NO ST. PAUL CENTER) -->
-    <section class="bg-cinema-dark pt-24 md:pt-28 text-white w-full border-b border-white/5 shadow-2xl no-select">
+    <section class="bg-cinema-dark pt-28 sm:pt-32 md:pt-36 text-white w-full border-b border-white/5 shadow-2xl no-select">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row h-auto lg:h-[500px]">
             
             <!-- Janela do Player de Vídeo (72% de largura) -->
-            <div id="video-stage" class="w-full lg:w-[72%] h-[250px] sm:h-[400px] lg:h-full bg-black relative flex flex-col justify-center items-center p-6 text-center">
+            <div id="video-stage" class="w-full lg:w-[72%] min-h-[390px] sm:h-[400px] lg:h-full bg-black relative flex flex-col justify-center items-center p-6 text-center">
                 
                 <!-- Estado Inicial: Ecrã Bloqueado -->
                 <div id="lock-screen" class="max-w-md mx-auto space-y-4 fade-in w-full px-2">
@@ -156,7 +156,7 @@
                     <!-- Camada Invisível de Protecção que cobre todo o player contra cliques directos no YouTube, partilhas e abertura externa -->
                     <div onclick="togglePlayback()" oncontextmenu="return false;" class="absolute inset-0 bg-transparent z-20 cursor-pointer"></div>
 
-                    <!-- Botão Customizado de Maximizar (Ecrã Inteiro com z-30 para deslizar debaixo do menu no scroll) -->
+                    <!-- Botão Customizado de Maximizar (Ecrã Inteiro com z-30 para deslizar por baixo do menu no scroll) -->
                     <button id="fullscreen-btn" onclick="maximizarVideo()" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 bg-black/60 hover:bg-black/90 border border-white/10 text-white rounded-xl px-3.5 py-2 text-xs transition-all flex items-center gap-1.5 shadow-lg cursor-pointer">
                         <i id="fullscreen-icon" class="fas fa-expand"></i> <span>Ecrã Inteiro</span>
                     </button>
@@ -244,10 +244,10 @@
                         Liturgia
                     </span>
                     <p class="pt-2 font-inter font-light">
-                        A Santa Missa é o centro e o cume de toda a vida cristã e o maior mistério espiritual legado por Nosso Senhor Jesus Cristo à Sua Igreja. No entanto, é comum participarmos no Santo Sacrifício sem compreender cabalmente os significados, as origens bíblicas e as riquezas místicas que revestem cada momento litúrgico, oração e postura.
+                        A Santa Missa é o centro e o cume de toda a vida cristã e o maior misterio espiritual legado por Nosso Senhor Jesus Cristo à Sua Igreja. No entanto, é comum participarmos no Santo Sacrificio sem compreender cabalmente os significados, as origens biblicas e as riquezas misticas que revestem cada momento litúrgico, oração e postura.
                     </p>
                     <p class="font-inter font-light">
-                        Dividido em quatro grandes blocos cronológicos, o formador Hugo Bacelo desconstrói metodicamente os ritos do Santo Sacrifício sob uma perspectiva teológica tradicional, à luz do Magistério permanente da Igreja. Do Introito ao Rito de Envio, este curso é um guia indispensável para todos os que desejam adorar a Deus em espírito e verdade, elevando a sua devoção activa a um patamar mais consciente.
+                        Dividido em quatro grandes blocos cronológicos, o formador Hugo Bacelo desconstrói metodicamente os ritos do Santo Sacrificio sob uma perspectiva teológica tradicional, à luz do Magistério permanente da Igreja. Do Introito ao Rito de Envio, este curso é um guia indispensável para todos os que desejam adorar a Deus em espírito e verdade, elevando a sua devoção activa a um patamar mais consciente.
                     </p>
                     <blockquote class="border-l-4 border-brand-gold pl-4 py-1 my-6 font-classic italic text-lg text-brand-accent-blue bg-white p-4 rounded-r-xl">
                         "Se compreendêssemos a Missa, morreríamos de amor."<br>
@@ -655,6 +655,7 @@
             }
         }
 
+        // Correção de temporizador para barra de progresso e exibição de tempo corrente/restante
         function startProgressTrackUpdate() {
             clearInterval(progressInterval);
             progressInterval = setInterval(() => {
@@ -849,7 +850,7 @@
                     }
                 });
             } catch (e) {
-                console.warn("Modo offline activo.");
+                console.warn("Modo offline oñemba'apo.");
             }
         }
 
