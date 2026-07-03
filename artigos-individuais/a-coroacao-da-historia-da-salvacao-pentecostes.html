@@ -39,7 +39,7 @@
     <!-- GoatCounter Analytics -->
     <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
-    <!-- Google Fonts unificadas com suporte completo a pesos e itálicos de Playfair Display -->
+    <!-- Google Fonts unificadas com suporte completo a weights e itálicos de Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -416,8 +416,11 @@
                 // Saca o URL de tempo real dinamicamente
                 const fetchUrl = getFetchUrl();
                 
+                // ADICIONADO: credentials: "omit" para ignorar por completo as cookies de sessão ativas do Google.
+                // Isto garante que trocar de conta Google não interfere com o pedido HTTP público!
                 const response = await fetch(fetchUrl, {
                     cache: "no-store",
+                    credentials: "omit", 
                     headers: {
                         'Cache-Control': 'no-cache, no-store, must-revalidate',
                         'Pragma': 'no-cache',
