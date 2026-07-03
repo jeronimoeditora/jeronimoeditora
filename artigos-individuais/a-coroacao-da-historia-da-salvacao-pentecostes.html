@@ -250,7 +250,7 @@
                 </h3>
                 
                 <p>
-                    O Evangelho de São João situa-nos na tarde do Domingo de Páscoa. Jesus ressuscitado aparece aos discípulos no meio do medo e do isolamento, mostrando-lhes as Suas mãos e o Seu lado. Ele ergue-se carregando as marcas do Seu sacrifício terreno, sinais que transporta consigo até na Sua ascensão ao céu (CIC 645).
+                    O Gospel de São João situa-nos na tarde do Domingo de Páscoa. Jesus ressuscitado aparece aos discípulos no meio do medo e do isolamento, mostrando-lhes as Suas mãos e o Seu lado. Ele ergue-se carregando as marcas do Seu sacrifício terreno, sinais que transporta consigo até na Sua ascensão ao céu (CIC 645).
                 </p>
 
                 <p>
@@ -444,17 +444,25 @@
             }
         }
 
-        // Reconstrói a URL para tempo real se o utilizador colou o link de edição partilhado
+        // Reconstrói a URL para tempo real extraindo o ID da planilha e o gid diretamente para um export CSV puro e sem cache!
         function getFetchUrl() {
             let url = GOOGLE_SHEETS_TSV_URL.trim();
             
-            // Se for o link de edição tradicional, transforma-o no endpoint instantâneo do Google Visualization
+            // Se for o link de edição tradicional, transforma-o no endpoint instantâneo de exportação CSV direta (0 segundos de atraso!)
             if (url.includes('/spreadsheets/d/') && !url.includes('/pub?')) {
                 const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
                 if (matches && matches[1]) {
                     const sheetId = matches[1];
-                    // Endpoint direto (Google Charts Engine): Ignora a cache CDN de 5 min da Google!
-                    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&t=${new Date().getTime()}`;
+                    
+                    // Extrai o gid se existir na URL (pode vir como #gid= ou ?gid= ou &gid=)
+                    let gid = '0';
+                    const gidMatches = url.match(/[#?&]gid=([0-9]+)/);
+                    if (gidMatches && gidMatches[1]) {
+                        gid = gidMatches[1];
+                    }
+                    
+                    // O endpoint /export?format=csv força o Sheets a compilar e entregar o ficheiro de dados em tempo real absoluto
+                    return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}&t=${new Date().getTime()}`;
                 }
             }
             
@@ -486,14 +494,19 @@
             localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
         }
 
-        // Novo Parser Unificado capaz de ler dados separados por tabulação (TSV) ou vírgula (CSV)
+        // Novo Parser Unificado capaz de ler dados separados por tabulação (TSV), vírgula (CSV) ou ponto-e-vírgula (CSV Europeu)
         // Suporta nativamente aspas de escape e quebras de linha completas (RFC 4180) para impedir corrupção de textos multilinha!
         function parseDelimitedText(data) {
             if (!data.trim()) return [];
             
-            // Deteta dinamicamente o delimitador do ficheiro
+            // Deteta dinamicamente o delimitador do ficheiro para evitar quebras regionais (vírgula, ponto-e-vírgula ou tabulação)
             const firstLine = data.split('\n')[0];
-            const delimiter = firstLine.includes('\t') ? '\t' : ',';
+            let delimiter = ',';
+            if (firstLine.includes('\t')) {
+                delimiter = '\t';
+            } else if (firstLine.includes(';')) {
+                delimiter = ';';
+            }
             
             const rows = [];
             let currentRow = [];
