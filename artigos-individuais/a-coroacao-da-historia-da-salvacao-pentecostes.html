@@ -285,7 +285,7 @@
                     </button>
                 </form>
                 <div id="articles-newsletter-success-msg" class="hidden mt-4 p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-xl max-w-md mx-auto font-sans">
-                    Subscrição registada com sucesso! Obrigado por nos acompanhar.
+                    Subscrição registada com sucesso! Obrigado por nos acompanhão.
                 </div>
             </div>
 
@@ -532,7 +532,7 @@
                     <div class="flex flex-wrap items-center justify-between gap-2">
                         <div class="flex items-center gap-2">
                             <span class="font-sans font-bold text-gray-800 text-sm">${escapeHtml(comment.name)}</span>
-                            ${comment.isLocalPendente ? '<span class="bg-amber-50 text-amber-800 border border-amber-200 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-sans">Em moderação</span>' : ''}
+                            ${comment.isLocalPendente ? '<span class="bg-amber-50 text-amber-800 border border-amber-200 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-sans">Em Aprovação</span>' : ''}
                         </div>
                         <span class="text-xs text-gray-400 font-sans">${dateText}</span>
                     </div>
@@ -616,7 +616,7 @@
             }
         }
 
-        // Guardar o meu comentário em moderação localmente para não dar a sensação de que "desapareceu"
+        // Guardar o meu comentário em aprovação localmente para não dar a sensação de que "desapareceu"
         function saveLocalPendente(commentObj) {
             const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
             meusPendentes.push(commentObj);
