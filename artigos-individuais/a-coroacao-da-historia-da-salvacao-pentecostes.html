@@ -107,7 +107,7 @@
 
             <header class="border-b border-gray-150 pb-8 mb-8 text-center flex flex-col items-center">
                 <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3 text-center">Comentários às Leituras</span>
-                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4 text-center font-bold">
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4 text-center">
                     A Coroação da História da Salvação (Pentecostes)
                 </h1>
                 
@@ -240,7 +240,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Sopro da Nova Vida:</strong> De seguida, Jesus SOPRA sobre eles e diz: «Recebei o Espírito Santo». A acção de soprar ecoa os grandes momentos de criação no Antigo Testamento (Gn 2,7; Ez 37,9). Jesus, o Novo Adão, torna-se um «espírito vivificante» que sopra nova vida nos Apóstolos.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Sopro da Nova Vida:</strong> De seguida, Jesus SOPRA sobre eles e diz: «Recebei o Espírito Santo». A acção de soprar ecoa os grandes momentos de criação no Antigo Testamento (Gn 2,7; Ez 37,9). Jesus, the Novo Adão, torna-se um «espírito vivificante» que sopra nova vida nos Apóstolos.
                 </p>
 
                 <p>
@@ -248,14 +248,14 @@
                 </p>
 
                 <p>
-                    Celebrar as Leituras do Domingo de Pentecostes é reconhecer que a promessa de Cristo se cumpriu e continua a cumprir-se em nós. Fomos todos baptizados num só Espírito para constituirmos um só Corpo Místico, ricamente dotado de carismas destinados ao serviço e ao amor comum.
+                    Celebrar as Leituras do Domingo de Pentecostes é reconhecer que a promessa de Cristo se cumpriu e continua a cumprir-se in nós. Fomos todos baptizados num só Espírito para constituirmos um só Corpo Místico, ricamente dotado de carismas destinados ao serviço e ao amor comum.
                 </p>
 
             </div>
 
             <!-- Caixa de Newsletter que define o ponto de paragem de 100% no scroll -->
             <div id="newsletter-section" class="bg-[#ecf3fa] p-6 sm:p-8 rounded-2xl border border-brand-accent-blue/10 shadow-xs max-w-4xl mx-auto my-12 text-center">
-                <p class="font-serif text-lg sm:text-2xl text-brand-accent-blue font-bold mb-4 font-bold">
+                <p class="font-serif text-lg sm:text-2xl text-brand-accent-blue font-bold mb-4">
                     Recebe <span class="underline decoration-brand-accent-orange decoration-2 underline-offset-4 font-bold">gratuitamente</span> a nossa newsletter e fica a par das novidades
                 </p>
                 <form id="articles-newsletter-form" onsubmit="handleArticlesNewsletterSubmit(event)" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 mt-4">
@@ -310,8 +310,9 @@
                     <div>
                         <textarea id="comment-body-text" required rows="4" placeholder="Comentário" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors resize-y"></textarea>
                     </div>
-                    <div class="flex justify-end">
-                        <button type="submit" id="comment-submit-btn" class="border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-xs font-semibold px-4 py-2 rounded-md font-sans">
+                    <!-- NOVO: Alinhamento ao lado esquerdo (justify-start) e botão ligeiramente maior (text-sm, px-6, py-2.5) -->
+                    <div class="flex justify-start">
+                        <button type="submit" id="comment-submit-btn" class="border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-sm font-semibold px-6 py-2.5 rounded-md font-sans">
                             Enviar
                         </button>
                     </div>
@@ -331,13 +332,14 @@
 
             <!-- Cartão Biográfico do Autor -->
             <footer class="mt-12 pt-8 border-t border-gray-150 font-inter">
-                <div class="flex items-center gap-5 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs max-w-3xl mx-auto">
+                <!-- Otimizado para telemóveis: flex flex-col sm:flex-row e text-center sm:text-left evitam quebras feias de texto -->
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs max-w-3xl mx-auto text-center sm:text-left">
                     <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
                         <a href="../sobreHB" class="block w-full h-full">
                             <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
                         </a>
                     </div>
-                    <div class="flex flex-col items-start gap-1">
+                    <div class="flex flex-col items-center sm:items-start gap-1">
                         <span class="text-[10px] text-gray-400 font-sans font-bold uppercase tracking-wider block leading-none">Autor:</span>
                         <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-2 leading-tight">
                             <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
@@ -405,12 +407,15 @@
             }
 
             try {
-                // Sincroniza com a folha de cálculo publicada na Web em tempo real
+                // Sincroniza com a folha de cálculo publicada na Web em tempo real usando Timestamp para rebentar com cache local do browser
                 const response = await fetch(GOOGLE_SHEETS_TSV_URL + "&t=" + new Date().getTime());
                 if (!response.ok) throw new Error("Erro de rede.");
                 
                 const data = await response.text();
                 const parsedComments = parseTSV(data);
+                
+                // Sincroniza de forma automática e silenciosa os pendentes locais do browser contra os registos do Google Sheets
+                syncLocalPendentes(parsedComments);
                 
                 renderComments(parsedComments);
             } catch (error) {
@@ -419,6 +424,26 @@
             } finally {
                 loader.classList.add('hidden');
             }
+        }
+
+        // Limpa e sincroniza a cache local 'meus_pendentes' com base no conteúdo total do Google Sheets (100% automático)
+        function syncLocalPendentes(allParsedComments) {
+            let meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            if (meusPendentes.length === 0) return;
+
+            // Filtramos e mantemos apenas os rascunhos que AINDA NÃO existem na tabela Google.
+            // Se o comentário já lá está (independentemente de estar marcado como Sim, Não ou Pendente no Sheets),
+            // removemo-lo da nossa cache local pois já foi recebido com sucesso pela editora.
+            const novosPendentes = meusPendentes.filter(pLocal => {
+                const existeNaFolha = allParsedComments.some(cSheet => 
+                    cSheet.name === pLocal.name && 
+                    cSheet.text === pLocal.text && 
+                    cSheet.page === pLocal.page
+                );
+                return !existeNaFolha;
+            });
+
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
         }
 
         // Conversor simples e ultra-seguro de TSV (Tab-Separated Values) para evitar erros de vírgulas nos textos
