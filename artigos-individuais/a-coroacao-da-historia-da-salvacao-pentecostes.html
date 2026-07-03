@@ -188,7 +188,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>Uma Igreja Universal:</strong> A multidão presente em Jerusalém incluía Judeus piedosos e prosélitos (convertidos Gentios ao Judaísmo) provenientes de todas as nações que há debaixo do céu. Este ajuntamento internacional prefigura a aceitação internacional do Evangelho pelos Gentios de todo o mundo, mostrando que a Igreja tem o papel social e sociológico de reunir a raça humana como uma só família de Deus.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>Uma Igreja Universal:</strong> A multidão presente in Jerusalém incluía Judeus piedosos e prosélitos (convertidos Gentios ao Judaísmo) provenientes de todas as nações que há debaixo do céu. Este ajuntamento internacional prefigura a aceitação internacional do Evangelho pelos Gentios de todo o mundo, mostrando que a Igreja tem o papel social e sociológico de reunir a raça humana como uma só família de Deus.
                 </p>
 
                 <p>
@@ -214,7 +214,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>As Primícias da Nova Criação:</strong> Tal como no princípio o Espírito pairava como um vento impetuoso sobre as águas da terra jovem (Gn 1,2), no Pentecostes, o vento sobra novamente sobre os crentes reunidos em redor dos Apóstolos. Desta forma, a Igreja constitui o antegozo, ou as primícias, de uma nova criação. Nós possuímos um 'pagamento inicial' do Espírito que renova todas as coisas, unindo-nos de forma misteriosa à criação que há-de vir na próxima era. Esta mesma realidade vitalícia foi profetizada na visão dos ossos secos de Ezequiel (c.37), onde o sopro do Espírito causa um acto de re-criação ou "ressurreição" do novo Israel, a Igreja.
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>As Primícias da Nova Criação:</strong> Tal como no princípio o Espírito pairava como um vento impetuoso sobre as águas da terra jovem (Gn 1,2), no Pentecostes, o vento sobra novamente sobre os crentes reunidos em redor dos Apóstolos. Desta forma, a Igreja constitui o antegozo, ou as primícias, de uma nova criação. Nós possuímos um 'pagamento inicial' do Espírito que renova todas as coisas, unindo-nos de forma misteriosa à criação que há-de vir na próxima era. Esta mesma realidade vitalícia foi profetizada na visão dos ossos secos de Ezequiel (c.37), onde o sôpro do Espírito causa um acto de re-criação ou "ressurreição" do novo Israel, a Igreja.
                 </p>
 
                 <!-- Subtítulo 3 Reestruturado com Laranja, na linha abaixo e mais pequeno - Centrado -->
@@ -388,11 +388,14 @@
         const GOOGLE_ENTRY_COMENTARIO = "entry.964260973"; 
         const GOOGLE_ENTRY_PAGINA = "entry.788584228";     
 
-        // 3. O link da sua Folha de Cálculo do Google publicada na Web como TSV (Valores Separados por Tabulações)
-        const GOOGLE_SHEETS_TSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-y1uFqYIuyJwnthq5HPOVObRcV4s60qsz36GxJXMUd9cZUsmYefkMG7eKdaaVSasXnFZFs5O4NfqB/pub?output=tsv";
+        // 3. O link do seu Google Sheets. 
+        // TRUQUE INSTANTÂNEO EM TEMPO REAL: 
+        // Em vez do link de publicação ("pub?output=tsv"), cole aqui o link NORMAL de edição que está na sua barra de endereço.
+        // Exemplo: https://docs.google.com/spreadsheets/d/1lyjJzNOvwJtA0M6CgTXE66L1Yj74OJ49v-XD_mrQSnw/edit?usp=sharing
+        // Lembre-se de mudar a partilha da folha para "Qualquer pessoa com o link pode visualizar".
+        const GOOGLE_SHEETS_TSV_URL = "https://docs.google.com/spreadsheets/d/1qypNiIPv2n-Y1p-KWjHskPIDNx2tztd01mAPx5AQ9hA/edit?usp=sharing";
 
         // ID único deste artigo (detetado automaticamente para isolar as mensagens de cada artigo!)
-        // O valor de salvaguarda (fallback) foi ajustado para coincidir exatamente com o nome do ficheiro, garantindo consistência total!
         const pageId = window.location.pathname.split('/').pop().replace('.html', '') || 'a-coroacao-da-historia-da-salvacao-pentecostes';
 
         // Comentários de demonstração - Removidos para ficar vazio por defeito
@@ -403,7 +406,6 @@
             const listContainer = document.getElementById('comments-list-container');
             const loader = document.getElementById('comments-loading');
 
-            // Caso o utilizador ainda não tenha configurado a sua planilha
             if (GOOGLE_SHEETS_TSV_URL.includes("ExemploFolhaDeCalculoPublicada")) {
                 renderComments(fallbackComments);
                 loader.classList.add('hidden');
@@ -411,12 +413,21 @@
             }
 
             try {
-                // Sincroniza com a folha de cálculo publicada na Web em tempo real usando Timestamp para rebentar com cache local do browser
-                const response = await fetch(GOOGLE_SHEETS_TSV_URL + "&t=" + new Date().getTime());
+                // Saca o URL de tempo real dinamicamente
+                const fetchUrl = getFetchUrl();
+                
+                const response = await fetch(fetchUrl, {
+                    cache: "no-store",
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
                 if (!response.ok) throw new Error("Erro de rede.");
                 
                 const data = await response.text();
-                const parsedComments = parseTSV(data);
+                const parsedComments = parseDelimitedText(data);
                 
                 // Sincroniza de forma automática e silenciosa os pendentes locais do browser contra os registos do Google Sheets
                 syncLocalPendentes(parsedComments);
@@ -430,19 +441,41 @@
             }
         }
 
-        // Limpa e sincroniza a cache local 'meus_pendentes' com base no conteúdo total do Google Sheets (100% automático)
+        // Reconstrói a URL para tempo real se o utilizador colou o link de edição partilhado
+        function getFetchUrl() {
+            let url = GOOGLE_SHEETS_TSV_URL.trim();
+            
+            // Se for o link de edição tradicional, transforma-o no endpoint instantâneo do Google Visualization
+            if (url.includes('/spreadsheets/d/') && !url.includes('/pub?')) {
+                const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+                if (matches && matches[1]) {
+                    const sheetId = matches[1];
+                    // Endpoint direto (Google Charts Engine): Ignora a cache CDN de 5 min da Google!
+                    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&t=${new Date().getTime()}`;
+                }
+            }
+            
+            // Caso contrário, faz fallback para o publicado lento
+            return url + (url.includes('?') ? '&' : '?') + "t=" + new Date().getTime();
+        }
+
+        // Limpa e sincroniza a cache local 'meus_pendentes' com base no conteúdo total do Google Sheets (100% automático e inteligente)
         function syncLocalPendentes(allParsedComments) {
             let meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
             if (meusPendentes.length === 0) return;
 
-            // Filtramos e mantemos apenas os rascunhos que AINDA NÃO existem na tabela Google.
-            // Se o comentário já lá está (independentemente de estar marcado como Sim, Não ou Pendente no Sheets),
-            // removemo-lo da nossa cache local pois já foi recebido com sucesso pela editora.
+            // Constante de segurança: Qualquer rascunho local expira após 12 horas para nunca bloquear o ecrã
+            const MAX_AGE_MS = 12 * 60 * 60 * 1000; 
+
+            // Mantém os rascunhos que ainda não foram detetados na tabela (janela de tolerância temporal de 10 min)
             const novosPendentes = meusPendentes.filter(pLocal => {
+                const idade = Date.now() - pLocal.timestamp;
+                if (idade > MAX_AGE_MS) return false;
+
                 const existeNaFolha = allParsedComments.some(cSheet => 
-                    cSheet.name === pLocal.name && 
-                    cSheet.text === pLocal.text && 
-                    cSheet.page === pLocal.page
+                    cSheet.page === pLocal.page && 
+                    cSheet.name.toLowerCase() === pLocal.name.toLowerCase() &&
+                    Math.abs(cSheet.timestamp - pLocal.timestamp) < 10 * 60 * 1000 
                 );
                 return !existeNaFolha;
             });
@@ -450,30 +483,75 @@
             localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
         }
 
-        // Conversor simples e ultra-seguro de TSV (Tab-Separated Values) para evitar erros de vírgulas nos textos
-        function parseTSV(tsvText) {
-            const lines = tsvText.split('\n');
-            const comments = [];
+        // Novo Parser Unificado capaz de ler dados separados por tabulação (TSV) ou vírgula (CSV)
+        // Suporta nativamente aspas de escape e quebras de linha completas (RFC 4180) para impedir corrupção de textos multilinha!
+        function parseDelimitedText(data) {
+            if (!data.trim()) return [];
+            
+            // Deteta dinamicamente o delimitador do ficheiro
+            const firstLine = data.split('\n')[0];
+            const delimiter = firstLine.includes('\t') ? '\t' : ',';
+            
+            const rows = [];
+            let currentRow = [];
+            let currentField = '';
+            let insideQuotes = false;
 
-            // Identificar colunas dinamicamente com base nas respostas do Google
+            for (let i = 0; i < data.length; i++) {
+                const char = data[i];
+                const nextChar = data[i + 1];
+
+                if (insideQuotes) {
+                    if (char === '"') {
+                        if (nextChar === '"') {
+                            currentField += '"';
+                            i++; // ignora aspas duplicadas
+                        } else {
+                            insideQuotes = false;
+                        }
+                    } else {
+                        currentField += char;
+                    }
+                } else {
+                    if (char === '"') {
+                        insideQuotes = true;
+                    } else if (char === delimiter) {
+                        currentRow.push(currentField);
+                        currentField = '';
+                    } else if (char === '\n' || char === '\r') {
+                        currentRow.push(currentField);
+                        rows.push(currentRow);
+                        currentRow = [];
+                        currentField = '';
+                        if (char === '\r' && nextChar === '\n') {
+                            i++;
+                        }
+                    } else {
+                        currentField += char;
+                    }
+                }
+            }
+            if (currentField || currentRow.length > 0) {
+                currentRow.push(currentField);
+                rows.push(currentRow);
+            }
+
+            const comments = [];
             const timestampIdx = 0;
             const nameIdx = 1;
             const commentIdx = 2;
             const pageIdx = 3;
-            // Opcional: pode criar uma coluna à mão na sua folha de cálculo chamada "Aprovado" no final (coluna E / índice 4)
-            const approvedIdx = 4; 
+            const approvedIdx = 4;
 
-            for (let i = 1; i < lines.length; i++) {
-                if (!lines[i].trim()) continue;
-                const cols = lines[i].split('\t');
+            for (let i = 1; i < rows.length; i++) {
+                const cols = rows[i];
+                if (cols.length < 3) continue;
                 
                 const rawDate = cols[timestampIdx];
                 const name = cols[nameIdx] ? cols[nameIdx].trim() : "Anónimo";
                 const text = cols[commentIdx] ? cols[commentIdx].trim() : "";
                 const page = cols[pageIdx] ? cols[pageIdx].trim() : "";
                 
-                // Se não criou coluna de moderação, o padrão é aprovar automaticamente (Aprovado = true)
-                // Se escreveu "Não", "Nao" ou "Pendente" na última coluna, ela é ocultada
                 let approved = true;
                 if (cols[approvedIdx]) {
                     const status = cols[approvedIdx].trim().toLowerCase();
@@ -482,18 +560,39 @@
                     }
                 }
 
-                // Parser de data nativo do Google Forms
-                let timestamp = Date.now();
-                if (rawDate) {
-                    const parsedDate = Date.parse(rawDate.replace(/\//g, "-"));
-                    if (!isNaN(parsedDate)) timestamp = parsedDate;
-                }
-
+                const timestamp = parseGoogleDate(rawDate);
                 comments.push({ name, text, timestamp, page, approved });
             }
 
-            // Ordenar por data (mais recentes no topo)
             return comments.sort((a, b) => b.timestamp - a.timestamp);
+        }
+
+        // Parser de datas robusto e unificado para evitar bugs específicos do Safari / Chrome
+        function parseGoogleDate(rawDate) {
+            if (!rawDate) return Date.now();
+            const parts = rawDate.trim().split(/[\s/:\-]/);
+            if (parts.length >= 3) {
+                if (parts[0].length === 4) {
+                    // Formato: YYYY-MM-DD
+                    const y = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const d = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                } else {
+                    // Formato: DD/MM/YYYY
+                    const d = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const y = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                }
+            }
+            return Date.now();
         }
 
         // Renderizador de Ecran Minimalista Cusdis PT-PT
