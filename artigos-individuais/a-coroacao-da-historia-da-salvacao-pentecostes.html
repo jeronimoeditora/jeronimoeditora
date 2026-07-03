@@ -136,7 +136,7 @@
             <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto text-justify">
                 
                 <p class="dropcap">
-                    O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na via litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu poder transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raízes desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
+                    O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na via litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu poder transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raíces desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
                 </p>
 
                 <!-- Subtítulo 1 Reestruturado com Laranja, na linha abaixo e mais pequeno - Centrado -->
@@ -360,7 +360,7 @@
     <script>
         // =================----------------==================
         // CONFIGURAÇÃO DOS SEUS LINKS DO GOOGLE (FÁCIL E GRÁTIS!)
-        // =================----------------------------------
+        // =================----------------==================
         
         // 1. O link do formulário Google onde as respostas são submetidas (LIGADO AO SEU FORMULÁRIO REAL!)
         const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/1lyjJzNOvwJtA0M6CgTXE66L1Yj74OJ49v-XD_mrQSnw/formResponse";
@@ -374,25 +374,11 @@
         const GOOGLE_SHEETS_TSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-y1uFqYIuyJwnthq5HPOVObRcV4s60qsz36GxJXMUd9cZUsmYefkMG7eKdaaVSasXnFZFs5O4NfqB/pub?output=tsv";
 
         // ID único deste artigo (detetado automaticamente para isolar as mensagens de cada artigo!)
-        const pageId = window.location.pathname.split('/').pop().replace('.html', '') || 'pentecostes';
+        // O valor de salvaguarda (fallback) foi ajustado para coincidir exatamente com o nome do ficheiro, garantindo consistência total!
+        const pageId = window.location.pathname.split('/').pop().replace('.html', '') || 'a-coroacao-da-historia-da-salvacao-pentecostes';
 
-        // Comentários de demonstração (exibidos se ainda não configurou os seus links do Google)
-        let fallbackComments = [
-            {
-                name: 'Maria Silva',
-                text: 'Uma excelente reflexão sobre o Pentecostes. A ligação feita entre o Sinai e a inversão de Babel ajuda imenso a compreender a universalidade da Igreja.',
-                timestamp: Date.now() - 3600000 * 2, // Há 2h
-                page: pageId,
-                approved: true
-            },
-            {
-                name: 'João Fernandes',
-                text: 'A paz explicada sob o ponto de vista litúrgico e teológico fez-me compreender melhor a bênção sacerdotal na Missa. Fantástico artigo.',
-                timestamp: Date.now() - 3600000 * 24, // Ontem
-                page: pageId,
-                approved: true
-            }
-        ];
+        // Comentários de demonstração - Removidos para ficar vazio por defeito
+        let fallbackComments = [];
 
         // Carregar Comentários
         async function fetchComments() {
