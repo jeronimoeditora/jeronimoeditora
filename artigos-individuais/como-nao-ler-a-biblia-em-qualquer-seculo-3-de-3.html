@@ -3,28 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Como Não Ler a Bíblia em Qualquer Século (3 de 3) | Hugo Bacelo</title>
+    <title>Como Não Ler a Bíblia em Qualquer Século (3 de 3) | Jerónimo Editora</title>
+    
+    <!-- Meta Tags do Open Graph (Facebook, WhatsApp, etc.) -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Como Não Ler a Bíblia em Qualquer Século (3 de 3) | Jerónimo Editora">
+    <meta property="og:description" content="Crítica ao livro Ler a Bíblia no Século XXI escrito por Pe. Carreira das Neves da Editorial Presença (3 de 3)">
+    <meta property="og:url" content="https://www.editorajeronimo.pt/artigos-individuais/como-nao-ler-a-biblia-em-qualquer-seculo-3-de-3">
+    <meta property="og:image" content="https://www.editorajeronimo.pt/Imagens/3.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:site_name" content="Jerónimo Editora">
+
+    <!-- Meta Tags do Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Como Não Ler a Bíblia em Qualquer Século (3 de 3) | Jerónimo Editora">
+    <meta name="twitter:description" content="Crítica ao livro Ler a Bíblia no Século XXI escrito por Pe. Carreira das Neves da Editorial Presença (3 de 3)">
+    <meta name="twitter:image" content="https://www.editorajeronimo.pt/Imagens/3.png">
+    
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
     
     <script>
-        // Remove a extensão .html da barra de endereço para um aspeto limpo e profissional
+        // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
         }
     </script>
     
-    <!-- GoatCounter Analytics -->
     <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
-    <!-- Google Fonts unificadas com suporte a pesos e itálicos completos para Playfair Display e Roboto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -35,6 +54,7 @@
                         sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
                         inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
                         serif: ['"Playfair Display"', 'serif'],
+                        classic: ['"Crimson Text"', 'serif'],
                     },
                     colors: {
                         'brand-bg': '#F8F8F8',
@@ -50,12 +70,20 @@
     </script>
 
     <style>
-        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+        html, body { 
+            scroll-behavior: auto !important;
+            overflow-x: hidden; 
+            width: 100%; 
+            background-color: #F8F8F8; 
+        }
+        * { box-sizing: border-box; }
 
         .text-readable-article {
             line-height: 1.85;
             letter-spacing: -0.003em;
             word-spacing: 0.05em;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         .dropcap::first-letter {
@@ -76,27 +104,26 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100] pointer-events-none">
+        <div id="scroll-progress-bar" class="h-full bg-brand-accent-orange transition-all duration-75" style="width: 0%"></div>
+    </div>
+
+    <div id="scroll-percentage" class="fixed bottom-6 right-6 bg-brand-accent-blue text-white text-xs font-bold px-3 py-2 rounded-full shadow-xl z-50 opacity-0 transition-opacity duration-300 pointer-events-none flex items-center gap-1">
+        <i class="fas fa-book-open text-brand-gold"></i> <span id="scroll-percentage-text">0%</span>
+    </div>
+
     <div id="nav-placeholder"></div>
 
-    <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
     <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
         <article class="max-w-4xl mx-auto px-6 fade-in">
-            
-            <div class="mb-8">
-                <!-- Direcionado para a URL limpa de artigos -->
-                <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
-                    <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
-                </a>
-            </div>
 
-            <header class="border-b border-gray-150 pb-8 mb-8 text-center md:text-left">
-                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3">Crítica de Livros</span>
-                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center flex flex-col items-center">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3 text-center">Crítica de Livros</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4 text-center">
                     Como Não Ler a Bíblia em Qualquer Século (3 de 3)
                 </h1>
                 
-                <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500 font-medium">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-500 font-medium font-sans w-full">
                     <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 24 de Setembro de 2025</span>
                     <span class="hidden sm:inline text-gray-300">|</span>
                     <span class="flex items-center gap-1.5 font-inter">
@@ -104,76 +131,757 @@
                         <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
                     </span>
                     <span class="hidden sm:inline text-gray-300">|</span>
-                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">12</span> min de leitura</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">11</span> min de leitura</span>
                 </div>
             </header>
 
-            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-xs relative bg-gray-100">
-                <img src="../Imagens/3.png" alt="Como Não Ler a Bíblia em Qualquer Século (3 de 3)" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Como+N%C3%A3o+Ler+a+B%C3%ADblia+3';">
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden border border-gray-200 shadow-xs relative bg-gray-100 mb-8">
+                <img src="../Imagens/3.png" alt="Como Não Ler a Bíblia em Qualquer Século" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Como+N%C3%A3o+Ler+a+B%C3%ADblia';">
             </div>
 
-<p>
-Em breve
-</p>
-                <!-- Secção de Comentários (Livre de dados e comentários inventados) -->
-                <section class="mt-12 pt-8 border-t border-gray-150">
-                    <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-6">Comentários</h4>
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto text-center font-classic">
+                    Crítica ao livro <i>Ler a Bíblia no Século XXI</i> escrito por Pe. Carreira das Neves da Editorial Presença (3 de 3).
+                </p>
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto text-justify">
+                
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    Doutrina e Magistério
+                </h2>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-2 block text-center">
+                    <span class="text-brand-accent-orange text-sm sm:text-base font-sans font-extrabold tracking-wider block mb-1 text-center">Vaticano II e Hermenêutica da Continuidade</span>
+                </h3>
+
+                <p class="dropcap">
+                    Como vimos, o autor não é fã da hermenêutica da continuidade ao afirmar que o Deus dos Patriarcas era «errante, maneirinho, sempre ao dispor dos seus fiéis crentes» (p. 125) assim como quando concordou com Frederico Lourenço que o verdadeiro Deus tem que ser muito diferente daquilo que os autores da Bíblia imaginaram. Esta posição é reforçada quando diz que «o mundo […] da fé eclesial-bíblica não pode ser uma barragem de energia concentrada para gáudio do meu egoísmo religioso» e que «um Deus de nostalgia religiosa, sempre a olhar para trás, em retrospectiva dogmática fundamentalista, ritualista, de verdade absoluta, é um Deus sem vida, sem presente, isto é, sem presença activa, diária, amigo, de mãos dadas com o seu crente» (p. 130). Aqui os dogmas, fundamentos, rituais e verdade parecem estar a ser rejeitados. Reforçando esta sensação o autor diz que «tudo, neste mundo, é relativo» (p. 157). Há uma grande defesa de ruptura com o passado, quando considerada necessária, pois até é afirmado que «a Igreja Católica, em tempos passados, assim apresentava também toda a Bíblia» (p. 77) e, portanto, defendendo que agora apresenta de forma diferente. O bode expiatório desta posição é, sem surpresas, o Concílio Vaticano II: «mas as coisas mudaram muito depois do Concílio Vaticano II» (p. 59).
+                </p>
+
+                <p>
+                    Esta visão ignora a própria natureza da fé Católica que é uma religião de continuidade viva. O Concílio Vaticano II nunca se apresentou como ruptura, mas sim como renovação em fidelidade à Tradição e à imutável Palavra Inspirada. Bento XVI advertiu contra a «hermenêutica da descontinuidade e da ruptura» e explicou que a chave correcta é a «hermenêutica da reforma, da renovação na continuidade do único sujeito-Igreja»<sup>i</sup>.
+                </p>
+
+                <p>
+                    Ao caricaturar o Deus dos Patriarcas como «maneirinho» e «ao dispor dos fiéis», o autor esquece que esse mesmo Deus é proclamado por Jesus como o Deus vivo e verdadeiro (Mt 22, 31–32). A Igreja afirma que «os Cristãos veneram o Antigo Testamento como verdadeira Palavra de Deus» e «combateu sempre vigorosamente a ideia de rejeitar o Antigo Testamento, sob o pretexto de que o Novo o teria feito caducar» (CIC 123).
+                </p>
+
+                <p>
+                    Rejeitar os dogmas e a verdade absoluta é igualmente problemático. A fé Católica assenta na convicção de que Deus revelou a Verdade de forma definitiva em Cristo: «a economia cristã, como nova e definitiva aliança, jamais passará, e já não se há-de esperar nenhuma nova revelação pública antes da gloriosa manifestação de nosso Senhor Jesus Cristo» (CIC 66). Os dogmas não são «nostalgia religiosa», mas sim a formulação fiel dessa mesma verdade revelada (CIC 88–90).
+                </p>
+
+                <p>
+                    Finalmente, a ideia de que «tudo é relativo» (p. 157) contradiz o próprio Evangelho: «Conhecereis a verdade e a verdade vos libertará» (Jo 8, 32). A Igreja pode aprofundar a sua compreensão da Revelação ao longo da história, mas não pode alterar o seu conteúdo. O desenvolvimento autêntico da doutrina Cristã deve ser «consolidada pelos anos, ampliada com o tempo, aprimorada pela idade e, contudo, permanecer incorrupta e intacta, completa e perfeita em todas as dimensões das suas partes e, por assim dizer, em todos os seus membros e sentidos próprios, não admitindo alteração, nem perda da sua propriedade distintiva, nem variação nos seus limites»<sup>ii</sup>.
+                </p>
+
+                <p>
+                    Logo, a posição do autor projecta sobre o Concílio Vaticano II uma falsa hermenêutica de ruptura. O próprio Concílio, em continuidade com toda a Tradição, reafirma que a Palavra de Deus é única e definitiva, que a Revelação é imutável e que o Deus de Abraão é o mesmo Deus que nos fala em Cristo.
+                </p>
+
+		<h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue pt-4 block text-center">
+                Pecado Original
+                </h2>
+
+
+                <p>
+                    Apesar de ter sido sacerdote da Igreja Católica, o Pe. Carreira das Neves rejeitava explicitamente doutrinas centrais da fé. Sobre o Pecado Original, afirma que a interpretação tradicional da Igreja, durante séculos, a partir de Génesis 3 «não tem qualquer fundamento porque estamos perante uma narrativa “mítica-simbólica” e não “histórica”. Semelhante “pecado original” nunca existiu, nem existe. Nenhum bebé é fruto dum “pecado original” e nenhum “baptismo” tem em vista limpar qualquer pecado original» (p. 140). Ora, esta posição contradiz frontalmente a Escritura e o Magistério.
+                </p>
+
+                <p>
+                    A narrativa da Queda em Génesis 3 usa «uma linguagem feita de imagens, mas <i>afirma</i> um acontecimento primordial, um <i>facto</i> que teve lugar no princípio da história do homem» (CIC 390, ênfase acrescentada). Tal como o Génesis o apresenta, os efeitos imediatos da transgressão do homem e da mulher contra a aliança original transmitem-se a toda a família humana.<sup>iii</sup> O <i>Catecismo</i> insiste que «Todos os homens estão implicados no pecado de Adão» (CIC 402), apelando à autoridade de São Paulo quando este escreveu de forma inspirada aos Romanos (5, 12.18–19). Contudo, não se tratava de uma inovação de Paulo: o Antigo Testamento já registava a ideia (Sl 50, 7; Sb 2, 24).
+                </p>
+
+                <p>
+                    A doutrina da Igreja sobre a transmissão do pecado original foi definida sobretudo no segundo Concílio de Orange em 529 e no Concílio de Trento em 1546 (CIC 406). A doutrina sustenta que todos os descendentes de Adão nascem no mundo em estado de morte espiritual e em necessidade desesperada de salvação. Esta condição propaga-se, não por <i>imitação</i> (i.e., cometer o mesmo erro que Adão), mas por <i>propagação</i> (em virtude da nossa ligação genealógica com Adão).<sup>iv</sup> A salvação necessária é, precisamente, o Baptismo, tal como São Pedro afirma que o «batismo que agora vos salva» (1Pd 3, 21) e como recorda o <i>Catecismo</i> dizendo que pelo Baptismo o pecado original é perdoado, fazendo o neófito uma nova criatura (CIC 1263, 1265).
+                </p>
+
+                <p>
+                    Negar o Pecado Original equivale a esvaziar o próprio sentido do Baptismo e da Redenção realizada por Cristo. Sem ele, o Baptismo perde o seu significado, a cruz perde o seu poder e a graça perde a sua urgência.
+                </p>
+
+		<h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue pt-4 block text-center">
+                Encarnação e Ressurreição
+                </h2>
+
+
+                <p>
+                    Outras posições argumentadas neste livro parecem desvalorizar a encarnação e a ressurreição. Sobre as duas Tábuas da Lei recebidas por Moisés de Deus e escritas por Ele (Ex 31, 18; 34, 1.28), o autor afirma que podemos saber que, «à luz da história real», não foi Deus quem as escreveu pois «não tem nem mãos nem língua como nós temos» (p. 34). Tal relato da escrita das Tábuas da Lei por Deus trata-se de um <i>antropomorfismo</i> que a «Bíblia usa continuamente». Adiante, comentando a narrativa do Dilúvio, refere que é «fácil compreender que o escritor fala de Deus de maneira antropomórfica: “o seu coração sofreu amargamente” ao contemplar a maldade e a corrupção» (p. 118).
+                </p>
+
+                <p>
+                    É verdade que a Escritura recorre a antropomorfismos para exprimir o mistério de Deus em linguagem humana. Todavia, a própria revelação culmina na Encarnação: «E a Palavra fez-se carne: estabeleceu a tenda entre nós» (Jo 1, 14). Se tudo fosse apenas «figura» ou «antropomorfismo», a Encarnação de Cristo seria impossível, mas a fé Cristã proclama precisamente que o Filho de Deus «fez-Se verdadeiro homem, permanecendo verdadeiro Deus» (CIC 464). Deus, que «não tem mãos nem língua» como os homens, assumiu realmente mãos, língua e coração em Jesus Cristo. Negar isto seria dissolver o centro do Cristianismo.
+                </p>
+
+                <p>
+                    A ressurreição também parece ser desconstruída. O autor reconta a conversão de São Paulo, que «não conheceu o Jesus histórico», «conheceu a “heroicidade” dos Cristãos de Damasco e Antioquia, que o levaram a repensar a sua fé Judaica aberta às expectativas messiânicas» (p. 49). [Isto é que é <i>midrash</i>!]
+                </p>
+
+                <p>
+                    O próprio Paulo testemunha repetidas vezes que a sua mudança se deveu a um encontro pessoal com o Ressuscitado: «Não vi Jesus, nosso Senhor?» (1Cor 9, 1); «apareceu-me também a mim» (1Cor 15, 8). Lucas confirma em três relatos dos Actos (At 9; 22; 26) que Paulo não se converteu por admiração sociológica, mas sim por uma intervenção directa do Senhor glorioso.
+                </p>
+
+                <p>
+                    Além disso, a ressurreição é definida como algo que não é a ressurreição dos mortos, mas meramente a morte. Morrer é ressuscitar, segundo o autor: «o morto ressuscita no acto de morrer. Encontra-se com Deus. A este encontro chamamos ressurreição» (p. 248). A ressurreição não é um eufemismo para a morte, mas a vitória sobre ela: «Se Cristo não ressuscitou, é vã a nossa fé» (1Cor 15, 14). São Paulo, mais adiante, afirma explicitamente que aqueles que pertencem a Cristo irão ressuscitar aquando o Seu retorno (1Cor 15, 22–23; cf. 1Ts 4, 15–17). O Apóstolo explica ainda que a ressurreição deve ser entendida como uma transformação para um novo tipo de existência física espiritualizada (Rm 8, 11; 1Cor 15, 35–57; 2Cor 5, 1–5).
+                </p>
+
+                <blockquote class="border-l-4 border-brand-accent-orange pl-4 italic my-4 text-gray-600 font-classic">
+                    «E esta Ressurreição não é um mero símbolo, nem uma “ressurreição da fé pascal” apenas subjectiva e espiritual, ou qualquer outro subterfúgio insensato semelhante. As palavras Gregas para “a ressurreição dos mortos” são <i>anástasis nekrôn</i>, que significam “o erguer-se do cadáver”! Negar a Ressurreição literal, segundo a Palavra de Deus, é negar Cristo, negar a fé.»<sup>v</sup>
+                </blockquote>
+
+                <p>
+                    Mais ainda, se «o morto ressucita no acto de morrer» significa que os mortos são os ressuscitados. Como tal, no Credo em vez de dizermos que esperamos a «ressurreição dos mortos» poderíamos dizer que esperamos a «ressurreição dos ressuscitados». Trata-se, pois, de um argumento totalmente privado de lógica.
+                </p>
+
+                <p>
+                    Ter esperança na morte não nos é muito reconfortante, visto que todos sabemos que a morte é inevitável; ter esperança em algo inevitável é redundante. Em contrapartida, a esperança na ressurreição é uma das âncoras do Cristão, que sabe que irá ser libertado dessa consequência do Pecado Original que é a morte.
+                </p>
+
+                <p>
+                    A leitura apresentada pelo autor dissolve os dois pilares do Cristianismo: a Encarnação e a Ressurreição. De forma oposta, a fé da Igreja proclama que o Filho eterno de Deus entrou na história, assumindo carne verdadeira, e venceu a morte, inaugurando a vida eterna para todos os que crêem n’Ele.
+                </p>
+
+		<h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue pt-4 block text-center">
+                Purgatório e Indulgências
+                </h2>
+
+                <p>
+                    Do mesmo modo, o autor menciona de passagem que «no meu livro, <i>Saudades de Deus</i>, provei que o “Purgatório” é uma criação da Igreja do séc. XII» (p. 248). Uma vez que isto se trata de uma referência a um outro livro que não aquele que estamos aqui a analisar, gostaria apenas de brevemente contrapor a posição do autor. De seguida, enumero onde podemos encontrar o Purgatório na Bíblia:
+                </p>
+
+                <p>
+                    (a) <strong>1Cor 3, 12–15:</strong> As obras dos Cristãos são provadas pelo «fogo» no juízo, e os Cristãos podem «sofrer perda»;
+                </p>
+
+                <p>
+                    (b) <strong>Heb 12, 14; Ap 21, 27:</strong> A necessidade de purificação para habitar no céu implica purgação antes de entrar na presença celeste de Deus;
+                </p>
+
+                <p>
+                    (c) <strong>2Tim 1, 15–18:</strong> Oração pelo defunto Onesíforo, implicando a possibilidade de purificação após a morte;
+                </p>
+
+                <p>
+                    (d) <strong>2Mac 12, 39–45:</strong> Orações pelos mortos e libertação pós-morte dos pecados;
+                </p>
+
+                <p>
+                    (e) <strong>Heb 12, 6–11.23:</strong> Pena temporal como disciplina conducente à purificação;
+                </p>
+
+                <p>
+                    (f) <strong>Mt 5, 25–26; 12, 32; Lc 12, 58:</strong> Pena temporal pelo pecado.
+                </p>
+
+                <p>
+                    Enfim, a doutrina do Purgatório é sumamente explicada no <i>Catecismo</i> como a purificação sofrida depois da morte daqueles que morreram na graça e na amizade de Deus, mas não de todo purificados, embora seguros da sua salvação eterna, a fim de entrar na alegria do céu (CIC 1030).
+                </p>
+
+                <p>
+                    Por outro lado, o autor parece estar convencido que «o que estava em causa [na questão das indulgências] era a salvação final» (p. 192), afirmando também que «as indulgências vendidas [serviam] para a salvação das almas do purgatório» (p. 195). Esta posição assenta numa compreensão errada da doutrina Católica. Nenhuma alma, aqui ou no Purgatório, é salva pelas Indulgências.
+                </p>
+
+                <p>
+                    A salvação eterna provém unicamente da Paixão de Cristo, que é suficiente e superabundante como recorda São Tomás de Aquino.<sup>vi</sup> O ensinamento Católico sempre distinguiu entre a graça gratuita da salvação e o auxílio espiritual concedido pela Igreja no alívio das penas temporais. Uma indulgência é, portanto, a remissão da pena temporal ainda devida por pecados já perdoados. O Papa Paulo VI definiu indulgência precisamente como «a remissão, diante de Deus, da pena temporal devida pelos pecados já perdoados quanto à culpa»<sup>vii</sup>. As indulgências podem ser aplicadas em sufrágio pelas almas do Purgatório, para que estas alcancem mais rapidamente a visão beatífica.
+                </p>
+
+                <p>
+                    As Indulgências estão alicerçadas nos seguintes princípios bíblicos:<sup>viii</sup>
+                </p>
+
+                <p>
+                    (i) <strong>O pecado gera culpa e pena:</strong> Quem peca adquire tanto a culpa como a obrigação de cumprir uma pena. «Ainda que os vossos pecados sejam como a escarlata, tornar-se-ão brancos como a neve» (Is 1, 18). «Deus há-de trazer a juízo toda a obra, até o que está escondido» (Ecl 12, 14);
+                </p>
+
+                <p>
+                    (ii) <strong>As penas podem ser eternas ou temporais:</strong> Algumas penas duram para sempre, outras são temporais. «Uns despertarão para a vida eterna, outros para vergonha e horror eterno» (Dn 12, 2). «Multiplicarei os sofrimentos da tua gravidez» (Gn 3, 16);
+                </p>
+
+                <p>
+                    (iii) <strong>As penas temporais podem permanecer mesmo após o perdão:</strong> Deus perdoa a culpa e a pena eterna, mas deixa consequências temporais. «O Senhor já perdoou o teu pecado; não morrerás. Mas o filho que te nasceu morrerá» (2Sm 12, 13–14). Mesmo os perdoados sofrem a morte física (Gn 3, 22–24; Rm 5, 12);
+                </p>
+
+                <p>
+                    (iv) <strong>Deus abençoa uns em favor de outros:</strong> A bênção pode ser concedida a alguém em recompensa da fé de outrem. «Vendo a fé deles, Jesus disse ao paralítico: “Filho, os teus pecados estão perdoados”» (Mt 9, 2). Deus pouparia Sodoma se encontrasse justos na cidade (Gn 18, 16–33);
+                </p>
+
+                <p>
+                    (v) <strong>Deus remite penas temporais através da Igreja:</strong> Cristo deu à Igreja autoridade para perdoar e administrar penas. «Se perdoardes os pecados a alguém, serão perdoados» (Jo 20, 23). «Tudo o que ligardes na terra será ligado no céu» (Mt 18, 18);
+                </p>
+
+                <p>
+                    (vi) <strong>As indulgências podem aplicar-se aos defuntos:</strong> A oração e sufrágios pelos mortos apressam a sua entrada na glória. «Fez este sacrifício expiatório pelos mortos, para que fossem libertos do pecado» (2Mac 12, 43.46).
+                </p>
+
+                <p>
+                    Portanto, o que está em causa nas Indulgências não é a «salvação final» nem estas servem para «a salvação das almas do Purgatório» — tais afirmações são caricaturas. Na verdade, trata-se de uma graça espiritual enraizada na Escritura, na Tradição e na autoridade infalível da Igreja, que nunca prometeu com elas a salvação eterna, mas sim a libertação das penas temporais ligadas ao pecado já perdoado.
+                </p>
+
+		<h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue pt-4 block text-center">
+                Nova Criação
+                </h2>
+
+
+                <p>
+                    Finalmente, gostaria de esclarecer um ponto sobre escatologia. No livro é casualmente afirmado que «Orígenes defendia […] a “apocatástase” ou “palingenesia”, isto é, a ideia de um mundo completamente novo, na terra, depois do juízo final» (p. 87). Aqui também encontramos uma incompreensão de conceitos.
+                </p>
+
+                <p>
+                    Por um lado, a apocatástase defendida por Orígenes é uma forma de universalismo escatológico, isto é, a crença que todas as criaturas (inclusive demónios e Satanás) serão derradeiramente reconciliadas com Deus; o conceito não é propriamente sobre a terra renovada, mas sobre a reconciliação universal com Deus. Por outro, a palingenesia, embora possa remeter para uma renovação cósmica, não é sinónima exacto de apocatástase pois é usada mais amplamente, aparecendo em Mt 19, 28 e Tt 3, 5. Além disso, a afirmação do autor falha em não sublinhar o aspecto crucial da universalidade da salvação, essencial na teologia Origenista.
+                </p>
+
+                <p>
+                    Na verdade, o universalismo escatológico é uma heresia, contudo a crença na renovação da Criação após o juízo final, uma espécie de Criação 2.0, faz parta da Ortodoxia Católica. Tal renovação está profundamente enraizada na Ressurreição de Cristo que é o primogénito da nova Criação (Cl 1, 18; 1Cor 15, 20–28). Isto implica um novo céu e uma nova terra (Ap 21, 1; 2Pd 3, 13), a ressurreição dos corpos (1Cor 15), e a Criação libertada da corrupção para participar na glória dos filhos de Deus (Rm 8, 18–23). Este é o sentido Católico de «palingenesia» no sentido de «renovação cósmica», com discernimento escatológico e sem universalismo.
+                </p>
+
+                <p>
+                    Como tal, o erro de Orígenes foi defender a salvação universal e não a renovação escatológica da Criação. Não são sinónimos: devemos acreditar na palingenesia e não na apocatástase. «O nosso Senhor ensinou repetidamente que o Inferno existe, que Satanás e os seus capangas estão lá, que algumas pessoas (mesmo muitas) serão condenadas a ele, e que durará por toda a eternidade»<sup>ix</sup>.
+                </p>
+
+
+		<h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue pt-4 block text-center">
+                Conclusão
+                </h2>
+
+                <blockquote class="border-l-4 border-brand-accent-orange pl-4 italic my-4 text-gray-600 font-classic">
+                    «A Escritura morreu uma morte silenciosa na Cristandade Ocidental algures no século XVI. Durante mais de um milénio, os Cristãos do Ocidente leram e veneraram a Bíblia Cristã como Escritura — uma antologia unificada e autoritativa, pertencente à Igreja. A Bíblia, enquanto Escritura, não se reduzia a um simples “texto” escrito, nem era inteligível fora de uma economia divina de sentido. Não era apenas o alicerce da teologia académica da Igreja; fornecia também o seu universo moral, moldava os seus questionamentos filosóficos e estruturava as suas liturgias. […] Como o livro central da Cristandade Ocidental, a Bíblia funcionava verdadeiramente como Escritura.» — Michael C. Legaspi, <i>The Death of Scripture and the Rise of Biblical Studies</i> (Oxford University Press, 2010), 3–4.
+                </blockquote>
+
+                <p>
+                    A análise ao livro do Pe. Carreira das Neves mostrou como uma leitura da Bíblia desligada da fé e da Igreja conduz inevitavelmente a reduções, dúvidas e à defesa contradições artificiais. A Escritura, para o crente, não é um simples «texto antigo»: é a Palavra viva de Deus, inspirada pelo Espírito Santo e confiada à Igreja como tesouro seguro para todas as gerações. Quando se esquece o Autor divino, o risco é cair numa hermenêutica de suspeita que dissolve a verdade revelada em mera opinião crítica.
+                </p>
+
+                <p>
+                    Segundo a metodologia do autor, reduz-se Moisés a mito, Paulo a contraditor de si próprio, Jesus a profeta enredado em especulações teológicas, e a própria Palavra inspirada a meros textos manipulados por comunidades anónimas. Contra isso, a fé Católica proclama que a Escritura tem um Autor divino, que Cristo é verdadeiro Deus e verdadeiro homem, que a Ressurreição é acontecimento real e que os Apóstolos transmitiram fielmente o Evangelho.
+                </p>
+
+                <p>
+                    Gostaria de notar que nem tudo no livro é mau. De facto, aprendi algumas interpretações plausíveis: o facto de «ver a nudez do pai» ser um eufemismo para relações sexuais com a esposa do pai, explicando assim a maldição do filho de Cam, filho de Noé, por ter sido fruto de incesto (Gn 9, 18–27), e a questão da Última Ceia ter sido realizada numa Terça-feira à noite por fazer mais sentido histórica, textual e temporalmente. Além disso, também aprendi uma série de pormenores sobre a história dos Manuscritos do Mar Morto, entre outras coisas. Contudo, aquilo que julguei serem erros foram suficientes para produzir estes três longos ensaios, deixando praticamente nenhum espaço para abordar os aspectos positivos.
+                </p>
+
+                <p>
+                    Hoje, mais do que nunca, é urgente recuperar a atitude dos primeiros Cristãos, que liam a Escritura como Palavra viva, capaz de formar a Igreja, iluminar a liturgia e orientar a vida moral. Não podemos aceitar que a Bíblia seja reduzida a literatura anónima ou a projecções culturais de épocas passadas.
+                </p>
+
+                <p>
+                    Assim, a verdadeira leitura da Bíblia no século XXI, e em qualquer século, não é a da descontinuidade nem da suspeita, mas a da continuidade e da confiança: acolher a Escritura no coração da Tradição viva, guiados pelo Magistério. Só assim a Palavra se torna para nós luz segura, que ilumina a história e conduz à comunhão eterna com o Deus vivo, Pai, Filho e Espírito Santo. Como disse São Jerónimo: «A ignorância das Escrituras é ignorância de Cristo». Mas ignorar a fé da Igreja é, igualmente, ignorar Aquele que nela vive e fala.
+                </p>
+
+                <p>
+                    Que esta crítica não seja apenas uma defesa teórica, mas um convite concreto a voltarmos à leitura crente da Sagrada Escritura, na Igreja e com a Igreja, para nela encontrarmos sempre o Deus vivo que fala, salva e conduz a história para a sua plenitude em Cristo.
+                </p>
+
+            </div>
+
+            <!-- Caixa de Newsletter que define o ponto de paragem de 100% no scroll -->
+            <div id="newsletter-section" class="bg-[#ecf3fa] p-6 sm:p-8 rounded-2xl border border-brand-accent-blue/10 shadow-xs max-w-4xl mx-auto my-12 text-center">
+                <p class="font-serif text-lg sm:text-2xl text-brand-accent-blue font-bold mb-4">
+                    Recebe <span class="underline decoration-brand-accent-orange decoration-2 underline-offset-4 font-bold">gratuitamente</span> a nossa newsletter e fica a par das novidades
+                </p>
+                <form id="articles-newsletter-form" onsubmit="handleArticlesNewsletterSubmit(event)" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 mt-4">
+                    <div class="flex-grow">
+                        <input type="email" id="articles-newsletter-email" required placeholder="o teu endereço de e-mail" aria-label="Endereço de e-mail" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-brand-text placeholder-gray-455 focus:outline-none focus:ring-2 focus:ring-brand-accent-orange focus:border-transparent transition-all text-sm font-sans">
+                    </div>
+                    <button type="submit" class="bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold uppercase text-xs tracking-wider px-6 py-3.5 rounded-xl transition-all shadow-sm hover:-translate-y-0.5 active:translate-y-0 font-sans">
+                        Subscrever
+                    </button>
+                </form>
+                <div id="articles-newsletter-success-msg" class="hidden mt-4 p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-xl max-w-md mx-auto font-sans">
+                    Subscrição registada com sucesso! Obrigado por nos acompanhar.
+                </div>
+            </div>
+
+            <section id="fontes-section" class="mt-12 pt-6 border-t border-gray-150 text-justify font-inter text-sm text-gray-500">
+    <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4">Referências</h4>
+    
+    <div class="space-y-2">
+        <div><span class="font-bold w-6 inline-block">i.</span> Bento XVI (2005) <i>Discurso do Papa Bento XVI aos Cardeais, Arcebispos e Prelados da Cúria Romana à Apresentação dos Votos de Natal</i>.</div>
+        <div><span class="font-bold w-6 inline-block">ii.</span> São Vicente de Lérins (ca. 434) <i>Commonitory</i>, 56.</div>
+        <div><span class="font-bold w-6 inline-block">iii.</span> Hahn, S. & Mitch J. (2024) <i>Ignatius Catholic Study Bible: Old and New Testament – Comentário sobre Gn 3, 1–24</i>. Ignatius Press, São Francisco.</div>
+        <div><span class="font-bold w-6 inline-block">iv.</span> Hahn, S. & Mitch J. (2024) <i>Idem</i> – Comentário sobre Rm 5, 12. Ignatius Press, São Francisco.</div>
+        <div><span class="font-bold w-6 inline-block">v.</span> Kreeft, P. (2005) <i>You Can Understand The Bible: A Practical Guide To Each Book In The Bible</i>. Ignatius Press, São Francisco.</div>
+        <div><span class="font-bold w-6 inline-block">vi.</span> São Tomás de Aquino (1265–1274) <i>Summa Theologica</i>, III, 48:2.</div>
+        <div><span class="font-bold w-6 inline-block">vii.</span> Paulo VI (1967) <i>Constituição Apostólica Indulgentiarum Doctrina</i>, Norma 1.</div>
+        <div><span class="font-bold w-6 inline-block">viii.</span> <i>Primer on Indulgences</i>. Catholic Answers. catholic.com/tract/primer-on-indulgences</div>
+        <div><span class="font-bold w-6 inline-block">ix.</span> Keating, K. <i>Why wasn’t Origen, the most prolific writer of Christian antiquity, canonized?</i> Catholic Answers. catholic.com/qa/why-wasnt-origen-the-most-prolific-writer-of-christian-antiquity-canonized</div>
+    </div>
+</section>
+
+            <!-- Botões de Navegação -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-12 border-t border-b border-gray-150 py-8 font-inter text-xs uppercase tracking-wider font-bold">
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all text-center font-sans">
+                    <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                </a>
+                <a href="../catalogo-completo" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all text-center font-sans">
+                    Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                </a>
+                <a href="nascimento-de-jesus-belem-ou-nazare" class="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-xl transition-all text-center flex items-center justify-center gap-1.5 font-sans">
+                    Próximo Artigo <i class="fas fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- SECCÃO DE COMENTÁRIOS ESTILO CUSDIS (PORTUGUÊS, MINIMALISTA, GOOGLE SHEETS AS BACKEND) -->
+            <section class="mt-12 pt-6 border-t border-gray-200">
+                
+                <!-- Título Simples -->
+                <div class="mb-6">
+                    <h4 class="font-sans text-lg font-bold text-gray-800">Comentários</h4>
+                </div>
+
+                <!-- Alerta Superior de Feedback de Erros ou Informações -->
+                <div id="comment-alert" class="hidden mb-4 p-4 rounded-md text-xs font-sans"></div>
+
+                <!-- Formulário Minimalista Cusdis-style -->
+                <form id="comment-form" onsubmit="handleCommentSubmit(event)" class="space-y-4 mb-8">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="w-full sm:w-1/3">
+                            <input type="text" id="comment-author-name" required placeholder="Nome" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors">
+                        </div>
+                    </div>
+                    <div>
+                        <textarea id="comment-body-text" required rows="4" placeholder="Comentário" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors resize-y"></textarea>
+                    </div>
                     
-                    <div class="space-y-4 mb-8 font-inter" id="comments-box">
-                        <!-- Sem comentários automáticos inventados -->
+                    <!-- Botão de Envio Simples e Minimalista -->
+                    <div class="flex items-center">
+                        <button type="submit" id="comment-submit-btn" class="w-full sm:w-auto border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-sm font-semibold px-6 py-2.5 rounded-md font-sans text-center">
+                            Enviar
+                        </button>
                     </div>
+                </form>
 
-                    <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl font-inter">
-                        <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
-                        <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
-                            </div>
-                            <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter resize-none"></textarea>
-                            <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
-                            <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter">
-                                Enviar Comentário
-                            </button>
-                        </form>
-                    </div>
-                </section>
+                <!-- Div de Carregamento (Loading) -->
+                <div id="comments-loading" class="py-6 text-center text-gray-400">
+                    <i class="fas fa-circle-notch fa-spin text-gray-455 text-xl mb-1"></i>
+                    <p class="text-[10px] font-sans">A carregar comentários...</p>
+                </div>
 
-            </div>
+                <!-- Lista de Comentários Cusdis-style -->
+                <div id="comments-list-container" class="space-y-6 pt-2">
+                    <!-- Gerado de forma ultra-limpa por JS -->
+                </div>
+            </section>
 
-            <!-- Rodapé do Artigo -->
-            <footer class="mt-16 pt-8 border-t border-gray-150 font-inter">
-                <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
+            <!-- Cartão Biográfico do Autor -->
+            <footer class="mt-12 pt-8 border-t border-gray-150 font-inter">
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs max-w-3xl mx-auto text-center sm:text-left">
                     <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
                         <a href="../sobreHB" class="block w-full h-full">
                             <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
                         </a>
                     </div>
-                    <div class="text-center sm:text-left">
-                        <h4 class="font-serif text-lg font-bold text-brand-accent-blue">
+                    <div class="flex flex-col items-center sm:items-start gap-1">
+                        <span class="text-[10px] text-gray-400 font-sans font-bold uppercase tracking-wider block leading-none">Autor:</span>
+                        <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-2 leading-tight">
                             <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
                         </h4>
-                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
-                        <p class="text-sm text-gray-650 leading-relaxed font-inter">
-                            Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
-                        </p>
+                        <a href="../sobreHB" class="inline-block px-5 py-2.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all font-sans font-bold text-xs uppercase tracking-wider text-center shadow-xs hover:-translate-y-0.5 active:translate-y-0 mt-1">
+                            Ver Mais <i class="fas fa-chevron-right ml-1 text-[9px]"></i>
+                        </a>
                     </div>
-                </div>
-
-                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-inter text-xs uppercase tracking-wider font-bold">
-                    <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
-                        <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
-                    </a>
-                    <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
-                        Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
-                    </a>
                 </div>
             </footer>
 
         </article>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado assincronamente do GitHub) -->
     <div id="footer-placeholder"></div>
+
+    <!-- Script de Gestão Inteligente dos Comentários (Sem Firebase, via Google Sheets) -->
+    <script>
+        // =================----------------==================
+        // CONFIGURAÇÃO DOS SEUS LINKS DO GOOGLE
+        // =================----------------==================
+        
+        // 1. O link do formulário Google onde as respostas são submetidas
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/1lyjJzNOvwJtA0M6CgTXE66L1Yj74OJ49v-XD_mrQSnw/formResponse";
+        
+        // 2. Os IDs dos campos do seu formulário Google
+        const GOOGLE_ENTRY_NOME = "entry.2046871302";       
+        const GOOGLE_ENTRY_COMENTARIO = "entry.964260973"; 
+        const GOOGLE_ENTRY_PAGINA = "entry.788584228";     
+
+        // 3. O link do seu Google Sheets (Necessita de estar público como "Qualquer pessoa com o link" -> "Leitor")
+        const GOOGLE_SHEETS_TSV_URL = "https://docs.google.com/spreadsheets/d/1qypNiIPv2n-Y1p-KWjHskPIDNx2tztd01mAPx5AQ9hA/edit?usp=sharing";
+
+        // Função para normalizar os IDs de página de forma uniforme
+        function normalizePageId(id) {
+            if (!id) return "como-nao-ler-a-biblia-em-qualquer-seculo-3-de-3";
+            return id.trim()
+                     .toLowerCase()
+                     .replace(/\.html$/, '')
+                     .split('/')
+                     .filter(Boolean)
+                     .pop() || "como-nao-ler-a-biblia-em-qualquer-seculo-3-de-3";
+        }
+
+        // ID único deste artigo
+        const rawPageId = window.location.pathname.split('/').pop().replace('.html', '') || 'como-nao-ler-a-biblia-em-qualquer-seculo-3-de-3';
+        const pageId = normalizePageId(rawPageId);
+
+        let fallbackComments = [];
+
+        // Carregar Comentários de forma totalmente automática usando a API oficial do Google Visualization
+        async function fetchComments() {
+            const listContainer = document.getElementById('comments-list-container');
+            const loader = document.getElementById('comments-loading');
+
+            if (GOOGLE_SHEETS_TSV_URL.includes("ExemploFolhaDeCalculoPublicada")) {
+                renderComments(fallbackComments);
+                loader.classList.add('hidden');
+                return;
+            }
+
+            try {
+                // Constrói URL dinâmico com parâmetro anti-cache
+                const fetchUrl = getFetchUrl();
+                
+                // Pedido nativo limpo sem cabeçalhos customizados HTTP para assegurar compatibilidade CORS total
+                const response = await fetch(fetchUrl, {
+                    method: "GET",
+                    credentials: "omit",
+                    cache: "no-store"
+                });
+                if (!response.ok) throw new Error("Erro ao obter dados.");
+                
+                const data = await response.text();
+
+                // Validação de privacidade do arquivo
+                if (data.trim().startsWith('<html') || data.trim().startsWith('<!DOCTYPE') || data.includes('<meta')) {
+                    throw new Error("A folha de cálculo está configurada como Privada no Google Drive.");
+                }
+
+                const parsedComments = parseGVizData(data);
+                
+                // Limpeza e remoção automática de comentários locais pendentes já aprovados na folha
+                syncLocalPendentes(parsedComments);
+                
+                renderComments(parsedComments);
+            } catch (error) {
+                console.warn("Problema ao importar dados do Google Sheets:", error);
+                renderComments(fallbackComments);
+            } finally {
+                loader.classList.add('hidden');
+            }
+        }
+
+        // Reconstrói a URL para tempo real extraindo o ID da planilha e o gid diretamente para o endpoint gviz/tq (Sem CDN cache)
+        function getFetchUrl() {
+            let url = GOOGLE_SHEETS_TSV_URL.trim();
+            const salt = `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+            
+            if (url.includes('/spreadsheets/d/')) {
+                const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+                if (matches && matches[1]) {
+                    const sheetId = matches[1];
+                    
+                    let gid = '0';
+                    const gidMatches = url.match(/[#?&]gid=([0-9]+)/);
+                    if (gidMatches && gidMatches[1]) {
+                        gid = gidMatches[1];
+                    }
+                    
+                    // Endpoint da Google Visualization API - sem cache e suporte nativo a CORS
+                    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${gid}&tqx=out:json&t=${salt}`;
+                }
+            }
+            return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
+        }
+
+        // Normalização de strings para comparação confiável
+        function cleanCompare(str) {
+            if (!str) return "";
+            return str.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        // Sincroniza e limpa o localStorage quando o comentário já tiver sido marcado como "Sim" no Google Sheets
+        function syncLocalPendentes(allParsedComments) {
+            let meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            if (meusPendentes.length === 0) return;
+
+            const MAX_AGE_MS = 24 * 60 * 60 * 1000; // 24 horas de validade máxima para pendentes locais
+
+            const novosPendentes = meusPendentes.filter(pLocal => {
+                const idade = Date.now() - pLocal.timestamp;
+                if (idade > MAX_AGE_MS) return false;
+
+                // Remove o rascunho apenas se ele já existir aprovado ("Sim") na base de dados online
+                const aprovadoNaFolha = allParsedComments.some(cSheet => 
+                    cSheet.approved &&
+                    normalizePageId(cSheet.page) === normalizePageId(pLocal.page) && 
+                    cleanCompare(cSheet.name) === cleanCompare(pLocal.name) &&
+                    cleanCompare(cSheet.text) === cleanCompare(pLocal.text)
+                );
+                
+                return !aprovadoNaFolha;
+            });
+
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
+        }
+
+        // Processador oficial de dados GViz JSON do Google Sheets
+        function parseGVizData(responseText) {
+            try {
+                const jsonStart = responseText.indexOf('{');
+                const jsonEnd = responseText.lastIndexOf('}');
+                if (jsonStart === -1 || jsonEnd === -1) return [];
+                
+                const jsonStr = responseText.substring(jsonStart, jsonEnd + 1);
+                const gvizData = JSON.parse(jsonStr);
+                
+                if (!gvizData || !gvizData.table || !gvizData.table.rows) return [];
+                
+                const table = gvizData.table;
+                const cols = table.cols || [];
+                
+                // Mapeamento dinâmico e inteligente das colunas pelos cabeçalhos/rótulos
+                let timestampIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('carimbo') || c.label.toLowerCase().includes('time') || c.label.toLowerCase().includes('data')));
+                let nameIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('nome') || c.label.toLowerCase().includes('autor') || c.label.toLowerCase().includes('user') || c.label.toLowerCase().includes('name')));
+                let commentIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('coment') || c.label.toLowerCase().includes('texto') || c.label.toLowerCase().includes('mensagem') || c.label.toLowerCase().includes('body') || c.label.toLowerCase().includes('comment')));
+                let pageIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('pág') || c.label.toLowerCase().includes('pag') || c.label.toLowerCase().includes('artigo') || c.label.toLowerCase().includes('url') || c.label.toLowerCase().includes('id')));
+                let approvedIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('aprov') || c.label.toLowerCase().includes('status') || c.label.toLowerCase().includes('moder') || c.label.toLowerCase().includes('aceit') || c.label.toLowerCase().includes('visto')));
+
+                // Fallbacks estruturais para a ordenação canónica (Colunas A, B, C, D, E)
+                if (timestampIdx === -1) timestampIdx = 0;
+                if (nameIdx === -1) nameIdx = 1;
+                if (commentIdx === -1) commentIdx = 2;
+                if (pageIdx === -1) pageIdx = 3;
+                if (approvedIdx === -1) approvedIdx = 4;
+
+                const comments = [];
+                table.rows.forEach(row => {
+                    if (!row.c || row.c.length < 3) return;
+                    
+                    const rawDate = row.c[timestampIdx]?.f || row.c[timestampIdx]?.v || "";
+                    const name = (row.c[nameIdx] && row.c[nameIdx].v !== undefined && row.c[nameIdx].v !== null) ? String(row.c[nameIdx].v).trim() : "Anónimo";
+                    const text = (row.c[commentIdx] && row.c[commentIdx].v !== undefined && row.c[commentIdx].v !== null) ? String(row.c[commentIdx].v).trim() : "";
+                    const page = (row.c[pageIdx] && row.c[pageIdx].v !== undefined && row.c[pageIdx].v !== null) ? String(row.c[pageIdx].v).trim() : "";
+                    const approvedVal = (row.c[approvedIdx] && row.c[approvedIdx].v !== undefined && row.c[approvedIdx].v !== null) ? String(row.c[approvedIdx].v).trim().toLowerCase() : "";
+
+                    // Moderação simplificada: apenas aprova se a coluna tiver exatamente o valor "Sim"
+                    const approved = approvedVal === 'sim';
+
+                    let timestamp = Date.now();
+                    if (rawDate) {
+                        if (typeof rawDate === 'string' && rawDate.startsWith('Date(')) {
+                            try {
+                                const match = rawDate.match(/Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+),(\d+))?\)/);
+                                if (match) {
+                                    const y = parseInt(match[1], 10);
+                                    const m = parseInt(match[2], 10); // Os meses na API gviz iniciam no índice 0
+                                    const d = parseInt(match[3], 10);
+                                    const hr = match[4] ? parseInt(match[4], 10) : 0;
+                                    const min = match[5] ? parseInt(match[5], 10) : 0;
+                                    const sec = match[6] ? parseInt(match[6], 10) : 0;
+                                    timestamp = new Date(y, m, d, hr, min, sec).getTime();
+                                }
+                            } catch(e) {}
+                        } else {
+                            timestamp = parseGoogleDate(rawDate);
+                        }
+                    }
+
+                    comments.push({ name, text, timestamp, page, approved });
+                });
+
+                return comments.sort((a, b) => b.timestamp - a.timestamp);
+            } catch (err) {
+                console.error("Falha ao analisar a tabela GViz:", err);
+                return [];
+            }
+        }
+
+        // Conversor de datas para assegurar total compatibilidade entre navegadores
+        function parseGoogleDate(rawDate) {
+            if (!rawDate) return Date.now();
+            const parts = rawDate.trim().split(/[\s/:\-]/);
+            if (parts.length >= 3) {
+                if (parts[0].length === 4) {
+                    // Formato: YYYY-MM-DD
+                    const y = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const d = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                } else {
+                    // Formato: DD/MM/YYYY
+                    const d = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const y = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                }
+            }
+            return Date.now();
+        }
+
+        // Renderizador estrutural e estético de comentários
+        function renderComments(commentsArray) {
+            const listContainer = document.getElementById('comments-list-container');
+            listContainer.innerHTML = '';
+
+            const currentPageNormalized = normalizePageId(pageId);
+
+            // Filtrar comentários correspondentes ao ID deste artigo
+            const activeComments = commentsArray.filter(c => {
+                const commentPageNormalized = normalizePageId(c.page);
+                return commentPageNormalized === currentPageNormalized && c.approved;
+            });
+
+            // Recupera e injeta temporariamente os rascunhos em aprovação enviados por este navegador
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+
+            meusPendentes.forEach(p => {
+                if (!activeComments.some(c => cleanCompare(c.text) === cleanCompare(p.text) && cleanCompare(c.name) === cleanCompare(p.name))) {
+                    activeComments.unshift(p);
+                }
+            });
+
+            if (activeComments.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-left py-4 font-sans text-gray-400 text-sm italic">
+                        Não existem comentários de momento. Seja o primeiro a comentar.
+                    </div>
+                `;
+                return;
+            }
+
+            activeComments.forEach(comment => {
+                const dateText = formatCustomDate(comment.timestamp);
+                const commentEl = document.createElement('div');
+                commentEl.className = `py-4 border-b border-gray-150 transition-all space-y-1.5`;
+                
+                commentEl.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-sans font-bold text-gray-800 text-sm">${escapeHtml(comment.name)}</span>
+                            ${comment.isLocalPendente ? '<span class="bg-amber-50 text-amber-800 border border-amber-200 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-sans">Em Aprovação</span>' : ''}
+                        </div>
+                        <span class="text-xs text-gray-400 font-sans">${dateText}</span>
+                    </div>
+                    <div class="text-gray-700 font-sans text-sm leading-relaxed whitespace-pre-wrap">${escapeHtml(comment.text)}</div>
+                `;
+                listContainer.appendChild(commentEl);
+            });
+        }
+
+        // Submissão transparente e segura via AJAX/no-cors para o Google Forms
+        async function handleCommentSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('comment-submit-btn');
+            const nameInput = document.getElementById('comment-author-name');
+            const textInput = document.getElementById('comment-body-text');
+
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+
+            if (!name || !text) return;
+
+            btn.disabled = true;
+            btn.textContent = "A enviar...";
+
+            if (GOOGLE_FORM_URL.includes("ExemploID")) {
+                const novoMock = {
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    page: pageId,
+                    approved: false,
+                    isLocalPendente: true
+                };
+                
+                saveLocalPendente(novoMock);
+                showAlert("✨ Comentário submetido com sucesso! Ficará visível assim que for aprovado pela editora.", "bg-emerald-50 text-emerald-800 border border-emerald-200");
+                textInput.value = '';
+                nameInput.value = '';
+                btn.disabled = false;
+                btn.textContent = "Enviar";
+                renderComments(fallbackComments);
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append(GOOGLE_ENTRY_NOME, name);
+            formData.append(GOOGLE_ENTRY_COMENTARIO, text);
+            formData.append(GOOGLE_ENTRY_PAGINA, pageId);
+
+            try {
+                await fetch(GOOGLE_FORM_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                saveLocalPendente({
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    page: pageId,
+                    approved: false,
+                    isLocalPendente: true
+                });
+
+                showAlert("✨ Comentário submetido com sucesso! Ficará visível assim que for aprovado pela editora.", "bg-emerald-50 text-emerald-800 border border-emerald-150 font-semibold");
+                textInput.value = '';
+                nameInput.value = '';
+            } catch (error) {
+                console.error("Erro na submissão:", error);
+                showAlert("Ocorreu um erro ao submeter o comentário. Tente novamente.", "bg-red-50 text-red-800 border border-red-200");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Enviar";
+                fetchComments(); 
+            }
+        }
+
+        // Armazena rascunho localmente
+        function saveLocalPendente(commentObj) {
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            meusPendentes.push(commentObj);
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(meusPendentes));
+        }
+
+        // Sistema de alertas visuais minimalistas
+        function showAlert(msg, bgClasses) {
+            const alertBox = document.getElementById('comment-alert');
+            alertBox.className = `p-4 rounded-md text-xs font-sans ${bgClasses}`;
+            alertBox.innerHTML = msg;
+            alertBox.classList.remove('hidden');
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 8000);
+        }
+
+        // Sanitização de entradas contra vulnerabilidades XSS
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Formatação cronológica de comentários
+        function formatCustomDate(timestamp) {
+            if (!timestamp) return 'Agora';
+            const diff = Date.now() - timestamp;
+            if (diff < 60000) return 'Agora mesmo';
+            if (diff < 3600000) return `Há ${Math.round(diff / 60000)} min`;
+            if (diff < 86400000) return `Há ${Math.round(diff / 3600000)} horas`;
+            
+            const d = new Date(timestamp);
+            return d.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        // Inicialização automática dos comentários sem cache
+        document.addEventListener('DOMContentLoaded', fetchComments);
+    </script>
 
     <script>
         function getPrefix() {
@@ -302,50 +1010,107 @@ Em breve
             readingTimeElement.textContent = readingTime;
         }
 
-        function addLocalComment(e) {
-            e.preventDefault();
-            const author = document.getElementById('comm-author').value.trim() || "Anónimo";
-            const message = document.getElementById('comm-text').value.trim();
-            if (!message) return;
-
-            const commentsBox = document.getElementById('comments-box');
-            const today = new Date();
-            const options = { day: 'numeric', month: 'long', year: 'numeric' };
-            const formattedDate = today.toLocaleDateString('pt-PT', options);
-
-            const commentElement = document.createElement('div');
-            commentElement.className = "bg-white p-5 rounded-2xl border border-gray-100 shadow-xs fade-in";
-            commentElement.innerHTML = `
-                <div class="flex items-center justify-between gap-4 mb-2">
-                    <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
-                    <span class="text-xs text-gray-400">${formattedDate}</span>
-                </div>
-                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
-            `;
-
-            commentsBox.appendChild(commentElement);
-            document.getElementById('comment-form').reset();
-        }
-
-        function handleSubscribe(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('sub-email');
+        // =================----------------==================
+        // SISTEMA REAL DE SUBSCRICAO DE NEWSLETTER (MAILERLITE)
+        // =================--------------------------------==
+        function handleArticlesNewsletterSubmit(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('articles-newsletter-email');
             if (!emailInput || !emailInput.value.trim()) return;
 
-            const userEmail = emailInput.value.trim();
-            const recipient = "editorajeronimo@gmail.com";
-            const subject = encodeURIComponent("nova subscrição");
-            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
+            // CONFIGURAÇÃO MAILERLITE (Mesmos IDs de Produção Ativos no index.html)
+            const accountId = "2468444"; 
+            const formId = "191175533290063317";       
 
-            window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+            // 1. Criar um iframe oculto dinamicamente para processar o envio de forma transparente
+            let iframe = document.getElementById('ml-hidden-iframe');
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.id = 'ml-hidden-iframe';
+                iframe.name = 'ml-hidden-iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+            }
 
-            const container = e.target;
-            container.innerHTML = `
-                <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
-                    <i class="fas fa-check-circle"></i> A iniciar o seu cliente de e-mail para processar a subscrição!
-                </div>
-            `;
+            // 2. Configurar o formulário atual para apontar para o MailerLite usando o iframe oculto
+            const form = event.target;
+            form.action = `https://assets.mailerlite.com/jsonp/${accountId}/forms/${formId}/subscribe`;
+            form.method = 'POST';
+            form.target = 'ml-hidden-iframe';
+
+            // 3. Renomear o campo de input de e-mail para o padrão interno exigido pelo MailerLite
+            emailInput.name = 'fields[email]';
+
+            // 4. Submeter o formulário de forma silenciosa
+            form.submit();
+
+            // 5. Ativar a mensagem de sucesso visual na página
+            const successMsg = document.getElementById('articles-newsletter-success-msg');
+            if (successMsg) {
+                successMsg.classList.remove('hidden');
+                emailInput.value = ''; // Limpa o campo
+                setTimeout(() => {
+                    successMsg.classList.add('hidden');
+                }, 8000);
+            }
         }
+
+        // Monitorização de Scroll para a Barra de Progresso Superior e Percentagem Flutuante
+        window.addEventListener('scroll', () => {
+            const winScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+            const targetEl = document.getElementById('newsletter-section');
+            let scrolled = 0;
+            
+            if (targetEl) {
+                const elementOffsetTop = targetEl.getBoundingClientRect().top + window.scrollY;
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const maxScroll = elementOffsetTop - winHeight + 100;
+                
+                if (maxScroll > 0) {
+                    scrolled = Math.round((winScroll / maxScroll) * 100);
+                } else {
+                    scrolled = 100;
+                }
+            } else {
+                const docHeight = Math.max(
+                    document.body.scrollHeight, 
+                    document.documentElement.scrollHeight,
+                    document.body.offsetHeight, 
+                    document.documentElement.offsetHeight,
+                    document.body.clientHeight, 
+                    document.documentElement.clientHeight
+                );
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const totalScrollable = docHeight - winHeight;
+                if (totalScrollable > 0) {
+                    scrolled = Math.round((winScroll / totalScrollable) * 100);
+                }
+            }
+            
+            if (scrolled > 100) scrolled = 100;
+            if (scrolled < 0) scrolled = 0;
+
+            const progressBar = document.getElementById('scroll-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
+
+            const scrollPercentageText = document.getElementById('scroll-percentage-text');
+            if (scrollPercentageText) {
+                scrollPercentageText.textContent = scrolled + '%';
+            }
+
+            const scrollPercentageDiv = document.getElementById('scroll-percentage');
+            if (scrollPercentageDiv) {
+                if (winScroll > 150) {
+                    scrollPercentageDiv.classList.remove('opacity-0');
+                    scrollPercentageDiv.classList.add('opacity-100');
+                } else {
+                    scrollPercentageDiv.classList.remove('opacity-100');
+                    scrollPercentageDiv.classList.add('opacity-0');
+                }
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             loadComponents();
