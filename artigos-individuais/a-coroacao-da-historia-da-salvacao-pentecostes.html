@@ -303,15 +303,12 @@
             <!-- SECCÃO DE COMENTÁRIOS ESTILO CUSDIS (PORTUGUÊS, MINIMALISTA, GOOGLE SHEETS AS BACKEND) -->
             <section class="mt-12 pt-6 border-t border-gray-200">
                 
-                <!-- Título com Botão de Sincronização e Atualização Invisível/Elegante -->
-                <div class="flex items-center justify-between mb-6">
+                <!-- Título Simples -->
+                <div class="mb-6">
                     <h4 class="font-sans text-lg font-bold text-gray-800">Comentários</h4>
-                    <button type="button" id="refresh-comments-btn" onclick="forceRefreshComments()" title="Atualizar comentários" class="text-gray-400 hover:text-brand-accent-orange p-2 rounded-full hover:bg-gray-100 transition-all flex items-center justify-center" aria-label="Atualizar Comentários">
-                        <i id="refresh-icon" class="fas fa-sync-alt text-sm"></i>
-                    </button>
                 </div>
 
-                <!-- Alerta Superior de Feedback -->
+                <!-- Alerta Superior de Feedback de Erros ou Informações -->
                 <div id="comment-alert" class="hidden mb-4 p-4 rounded-md text-xs font-sans"></div>
 
                 <!-- Formulário Minimalista Cusdis-style -->
@@ -406,7 +403,7 @@
         let fallbackComments = [];
 
         // Carregar Comentários de forma totalmente automática e ignorando a cache do browser por padrão
-        async function fetchComments(forceFresh = true) {
+        async function fetchComments() {
             const listContainer = document.getElementById('comments-list-container');
             const loader = document.getElementById('comments-loading');
 
@@ -417,8 +414,8 @@
             }
 
             try {
-                // Saca o URL de tempo real dinamicamente
-                const fetchUrl = getFetchUrl(forceFresh);
+                // Saca o URL de tempo real dinamicamente com cache-buster ativo
+                const fetchUrl = getFetchUrl();
                 
                 const response = await fetch(fetchUrl, {
                     cache: "no-store",
@@ -432,6 +429,12 @@
                 if (!response.ok) throw new Error("Erro de rede.");
                 
                 const data = await response.text();
+
+                // Verificação crítica de Folha Privada
+                if (data.trim().startsWith('<html') || data.trim().startsWith('<!DOCTYPE') || data.includes('<meta')) {
+                    throw new Error("A folha de cálculo está configurada como Privada no Google Drive.");
+                }
+
                 const parsedComments = parseDelimitedText(data);
                 
                 // Sincroniza de forma automática e silenciosa os pendentes locais do browser contra os registos do Google Sheets
@@ -439,49 +442,17 @@
                 
                 renderComments(parsedComments);
             } catch (error) {
-                console.warn("A usar dados locais (Modo desenvolvimento/Offline):", error);
+                console.warn("Problema ao importar dados do Google Sheets:", error);
                 renderComments(fallbackComments);
             } finally {
                 loader.classList.add('hidden');
             }
         }
 
-        // Função ativada pelo botão de refresh invisível/elegante (ícone circular).
-        // Limpa forçadamente o estado pendente local, ignora cache e puxa em tempo real a tabela da Google de forma silenciosa.
-        function forceRefreshComments() {
-            const btnIcon = document.getElementById('refresh-icon');
-            const btn = document.getElementById('refresh-comments-btn');
-
-            if (btnIcon && btn) {
-                btn.disabled = true;
-                btnIcon.className = "fas fa-sync-alt fa-spin text-brand-accent-orange text-sm";
-            }
-
-            // Remove todos os comentários marcados localmente como pendentes para este artigo
-            localStorage.removeItem(`meus_pendentes_${pageId}`);
-            
-            // Limpa o ecrã atual dos comentários para dar feedback visual instantâneo
-            document.getElementById('comments-list-container').innerHTML = '';
-            
-            // Exibe o carregador visível
-            document.getElementById('comments-loading').classList.remove('hidden');
-
-            // Executa o fetch silencioso sem emitir alertas textuais intrusivos no ecrã
-            setTimeout(async () => {
-                await fetchComments(true);
-                
-                // Restaura o aspeto inicial do botão
-                if (btnIcon && btn) {
-                    btn.disabled = false;
-                    btnIcon.className = "fas fa-sync-alt text-sm";
-                }
-            }, 800);
-        }
-
         // Reconstrói a URL para tempo real extraindo o ID da planilha e o gid diretamente para um export CSV puro e sem cache!
-        function getFetchUrl(forceFresh = true) {
+        function getFetchUrl() {
             let url = GOOGLE_SHEETS_TSV_URL.trim();
-            const salt = forceFresh ? `${Date.now()}_${Math.floor(Math.random() * 100000)}` : Date.now();
+            const salt = `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
             
             // Se for o link de edição tradicional, transforma-o no endpoint instantâneo de exportação CSV direta (0 segundos de atraso!)
             if (url.includes('/spreadsheets/d/')) {
@@ -500,7 +471,6 @@
                 }
             }
             
-            // Caso contrário, faz fallback para o publicado lento com parâmetro anti-cache
             return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
         }
 
@@ -529,6 +499,7 @@
         }
 
         // Parser unificado de CSV/TSV em conformidade com o padrão RFC 4180 com mapeamento dinâmico inteligente
+        // Suporta estritamente valores de moderação de aprovação "Sim" e "Não"
         function parseDelimitedText(data) {
             if (!data.trim()) return [];
             
@@ -612,21 +583,11 @@
                 const text = cols[commentIdx] ? cols[commentIdx].trim() : "";
                 const page = cols[pageIdx] ? cols[pageIdx].trim() : "";
                 
-                // SISTEMA INTELIGENTE DE MODERAÇÃO (Compatibilidade com qualquer ordem de colunas)
-                let approved = true;
-                if (approvedIdx !== -1 && approvedIdx !== timestampIdx && approvedIdx !== nameIdx && approvedIdx !== commentIdx && approvedIdx !== pageIdx) {
-                    if (approvedIdx < cols.length && cols[approvedIdx] !== undefined) {
-                        const status = cols[approvedIdx].trim().toLowerCase();
-                        if (status === 'não' || status === 'nao' || status === 'pendente' || status === 'rejeitado' || status === 'espera') {
-                            approved = false;
-                        } else if (status === '') {
-                            approved = false; // Vazio = Pendente por padrão
-                        } else if (status === 'sim' || status === 'aprovado' || status === 'ok' || status === 'yes' || status === 's') {
-                            approved = true; // Aprovado de forma explícita
-                        }
-                    } else {
-                        // Se a folha tem coluna de moderação no cabeçalho mas a linha está truncada sem valores finais
-                        approved = false;
+                // SISTEMA ULTRA-LEVE DE MODERAÇÃO: Aceita estritamente "Sim" para aprovar
+                let approved = false;
+                if (approvedIdx !== -1 && approvedIdx < cols.length && cols[approvedIdx]) {
+                    if (cols[approvedIdx].trim() === 'Sim') {
+                        approved = true;
                     }
                 }
 
@@ -672,7 +633,7 @@
 
             const currentPageNormalized = normalizePageId(pageId);
 
-            // Filtrar apenas comentários deste artigo específico (com comparação robusta e normalizada)
+            // Filtrar apenas comentários deste artigo específico
             const activeComments = commentsArray.filter(c => {
                 const commentPageNormalized = normalizePageId(c.page);
                 return commentPageNormalized === currentPageNormalized && c.approved;
@@ -786,7 +747,7 @@
             } finally {
                 btn.disabled = false;
                 btn.textContent = "Enviar";
-                fetchComments(true); // Recarrega os comentários atualizados furando a cache
+                fetchComments(); // Recarrega os comentários atualizados
             }
         }
 
@@ -831,8 +792,8 @@
             return d.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
         }
 
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', () => fetchComments(true));
+        // Inicialização automática dos comentários sem cache
+        document.addEventListener('DOMContentLoaded', fetchComments);
     </script>
 
     <script>
@@ -960,6 +921,41 @@
             const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
             const readingTime = Math.ceil(words / 200);
             readingTimeElement.textContent = readingTime;
+        }
+
+        function handleArticlesNewsletterSubmit(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('articles-newsletter-email');
+            if (!emailInput || !emailInput.value.trim()) return;
+
+            const accountId = "2468444"; 
+            const formId = "191175533290063317";       
+
+            let iframe = document.getElementById('ml-hidden-iframe-articles');
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.id = 'ml-hidden-iframe-articles';
+                iframe.name = 'ml-hidden-iframe-articles';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+            }
+
+            const form = event.target;
+            form.action = `https://assets.mailerlite.com/jsonp/${accountId}/forms/${formId}/subscribe`;
+            form.method = 'POST';
+            form.target = 'ml-hidden-iframe-articles';
+
+            emailInput.name = 'fields[email]';
+            form.submit();
+
+            const successMsg = document.getElementById('articles-newsletter-success-msg');
+            if (successMsg) {
+                successMsg.classList.remove('hidden');
+                emailInput.value = ''; 
+                setTimeout(() => {
+                    successMsg.classList.add('hidden');
+                }, 8000);
+            }
         }
 
         // Monitorização de Scroll para a Barra de Progresso Superior e Percentagem Flutuante
