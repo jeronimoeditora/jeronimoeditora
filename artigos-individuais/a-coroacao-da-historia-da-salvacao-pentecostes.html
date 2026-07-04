@@ -147,7 +147,7 @@
             <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto text-justify">
                 
                 <p class="dropcap">
-                    O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na via litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu poder transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raíces desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
+                    O dom do Espírito Santo ao novo povo de Deus coroa os actos poderosos do Pai na história da salvação. O Pentecostes é uma festa de vital importância na via litúrgica da Igreja, marcando a culminação da obra salvífica de Cristo. A missão do Espírito Santo na liturgia da Igreja é preparar a assembleia para o encontro com Cristo, recordar e manifestar Cristo à fé da assembleia, tornar a obra salvífica de Cristo presente e activa pelo Seu power transformador, e fazer o dom da comunhão dar fruto na Igreja (CIC 1112). Compreender as leituras da Missa do Dia de Pentecostes exige que olhemos para trás, para as raíces desta festa no Antigo Testamento, de modo a compreendermos a verdadeira maravilha daquilo que celebramos.
                 </p>
 
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
@@ -156,7 +156,7 @@
                 </h3>
                 
                 <p>
-                    A Primeira Leitura narra o relato do próprio Pentecostes Criador. Para compreendermos o seu impacto, devemos recordar que o Pentecostes era, originalmente, uma das três festas de peregrinação que exigiam que os homens adults de Israel viajassem para Jerusalém (Dt 16,16). Inicialmente, era um festival de colheita celebrado substituindo cinquenta dias após a Páscoa, dedicated à oferta das primícias do trigo ao Senhor (Lv 23,15-17). Com o tempo, acrescentou-se um profundo significado teológico ao seu foco agrícola: o Pentecostes tornou-se uma celebração da Lei (Torá) dada a Israel no Monte Sinai.
+                    A Primeira Leitura narra o relato do próprio Pentecostes Criador. Para compreendermos o seu impacto, devemos recordar que o Pentecostes era, originalmente, uma das três festas de peregrinação que exigiam que os homens adults de Israel viajassem para Jerusalém (Dt 16,16). Inicialmente, era um festival de colheita celebrado substituindo prejuízos cinquenta dias após a Páscoa, dedicated à oferta das primícias do trigo ao Senhor (Lv 23,15-17). Com o tempo, acrescentou-se um profundo significado teológico ao seu foco agrícola: o Pentecostes tornou-se uma celebração da Lei (Torá) dada a Israel no Monte Sinai.
                 </p>
 
                 <p>
@@ -184,7 +184,7 @@
                 </p>
 
                 <p>
-                    Nesta unificação, o papel de São Pedro e da sua pregação é crucial. O successor de Pedro permanece a figura central do Cristianismo mundial e o grande unificador da família de Deus ungida pelo Espírito; sem a sua liderança, a família divide-se in várias denominações (At 2,14-42). O objectivo final desta efusão do Espírito culminou no Baptismo e no perdão dos pecados (At 2,38), inserindo os crentes numa via de adoração litúrgica contínua que espelha exactamente a nossa Santa Missa: o ensino dos apóstolos, a comunhão, a fracção do pão e as orações (At 2,42).
+                    Nesta unificação, o papel de São Pedro e da sua pregação é crucial. O successor de Pedro permanece a figura central do Cristianismo mundial e o grande unificador da família de Deus ungida pelo Espírito; sem a sua liderança, a família divide-se in várias denominações (At 2,14-42). O objectivo final desta efusão do Espírito culminou no Baptismo e no perdão dos pecados (At 2,38), inserindo os crentes numa via de adoração litúrgica contínua que espelha exatamente a nossa Santa Missa: o ensino dos apóstolos, a comunhão, a fracção do pão e as orações (At 2,42).
                 </p>
 
                 <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
@@ -324,7 +324,7 @@
                             Enviar
                         </button>
                         <button type="button" id="refresh-comments-btn" onclick="forceRefreshComments()" class="w-full sm:w-auto border border-gray-300 text-gray-650 hover:text-brand-accent-orange hover:border-brand-accent-orange transition-all text-sm font-semibold px-6 py-2.5 rounded-md font-sans flex items-center justify-center gap-2">
-                            <i class="fas fa-sync-alt text-xs"></i> Ver comentários
+                            <i id="refresh-icon" class="fas fa-sync-alt text-xs"></i> <span id="refresh-btn-text">Ver comentários</span>
                         </button>
                     </div>
                 </form>
@@ -390,7 +390,7 @@
         let fallbackComments = [];
 
         // Carregar Comentários
-        async function fetchComments() {
+        async function fetchComments(forceFresh = false) {
             const listContainer = document.getElementById('comments-list-container');
             const loader = document.getElementById('comments-loading');
 
@@ -402,7 +402,7 @@
 
             try {
                 // Saca o URL de tempo real dinamicamente
-                const fetchUrl = getFetchUrl();
+                const fetchUrl = getFetchUrl(forceFresh);
                 
                 const response = await fetch(fetchUrl, {
                     cache: "no-store",
@@ -431,17 +431,44 @@
         }
 
         // Função ativada pelo botão "Ver comentários". 
-        // Limpa forçadamente o estado pendente local e puxa em tempo real a tabela da Google.
+        // Limpa forçadamente o estado pendente local, ignora cache e puxa em tempo real a tabela da Google de forma silenciosa.
         function forceRefreshComments() {
+            const btnText = document.getElementById('refresh-btn-text');
+            const btnIcon = document.getElementById('refresh-icon');
+            const btn = document.getElementById('refresh-comments-btn');
+
+            if (btnText && btnIcon && btn) {
+                btn.disabled = true;
+                btnText.textContent = "A atualizar...";
+                btnIcon.className = "fas fa-sync-alt fa-spin text-xs";
+            }
+
+            // Remove todos os comentários marcados localmente como pendentes para este artigo
             localStorage.removeItem(`meus_pendentes_${pageId}`);
+            
+            // Limpa o ecrã atual dos comentários
             document.getElementById('comments-list-container').innerHTML = '';
+            
+            // Exibe o carregador visível
             document.getElementById('comments-loading').classList.remove('hidden');
-            fetchComments();
+
+            // Executa o fetch silencioso sem emitir alertas textuais intrusivos no ecrã
+            setTimeout(async () => {
+                await fetchComments(true);
+                
+                // Restaura o aspeto inicial do botão
+                if (btnText && btnIcon && btn) {
+                    btn.disabled = false;
+                    btnText.textContent = "Ver comentários";
+                    btnIcon.className = "fas fa-sync-alt text-xs";
+                }
+            }, 1000);
         }
 
         // Reconstrói a URL para tempo real extraindo o ID da planilha e o gid diretamente para um export CSV puro e sem cache!
-        function getFetchUrl() {
+        function getFetchUrl(forceFresh = false) {
             let url = GOOGLE_SHEETS_TSV_URL.trim();
+            const salt = forceFresh ? `${Date.now()}_${Math.floor(Math.random() * 100000)}` : Date.now();
             
             // Se for o link de edição tradicional, transforma-o no endpoint instantâneo de exportação CSV direta (0 segundos de atraso!)
             if (url.includes('/spreadsheets/d/')) {
@@ -456,12 +483,12 @@
                         gid = gidMatches[1];
                     }
                     
-                    return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}&t=${new Date().getTime()}`;
+                    return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}&t=${salt}`;
                 }
             }
             
-            // Caso contrário, faz fallback para o publicado lento
-            return url + (url.includes('?') ? '&' : '?') + "t=" + new Date().getTime();
+            // Caso contrário, faz fallback para o publicado lento com parâmetro anti-cache
+            return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
         }
 
         // Limpa e sincroniza a cache local 'meus_pendentes' com base no conteúdo total do Google Sheets (100% automático e inteligente)
@@ -623,7 +650,7 @@
 
             if (activeComments.length === 0) {
                 listContainer.innerHTML = `
-                    <div class="text-left py-2 font-sans text-gray-400 text-sm italic">
+                    <div class="text-left py-4 font-sans text-gray-400 text-sm italic">
                         Não existem comentários de momento. Seja o primeiro a comentar.
                     </div>
                 `;
@@ -719,7 +746,7 @@
             } finally {
                 btn.disabled = false;
                 btn.textContent = "Enviar";
-                fetchComments(); // Recarrega os comentários atualizados
+                fetchComments(true); // Recarrega os comentários atualizados furando a cache
             }
         }
 
@@ -765,7 +792,7 @@
         }
 
         // Inicialização
-        document.addEventListener('DOMContentLoaded', fetchComments);
+        document.addEventListener('DOMContentLoaded', () => fetchComments(false));
     </script>
 
     <script>
