@@ -181,6 +181,24 @@
         // Base de dados contendo os 8 artigos, ordenados por data de forma decrescente
         // Atualizado o tempo de leitura de Pentecostes (ID 6) para "6 min" de forma a coincidir com o cálculo dinâmico
         const articlesData = [
+             {
+                id: 10,
+                title: "Breve Guia para a Santa Missa (Parte 2 de 2)",
+                category: "Liturgia",
+                date: "2026-07-11",
+                readingTime: "1 min",
+                url: "artigos-individuais/breve-guia-para-a-santa-missa-parte-2-de-2",
+                image: "Imagens/10.png"
+            },
+            {
+                id: 9,
+                title: "São João Baptista: Quem foi realmente?",
+                category: "Comentário às Leituras",
+                date: "2026-06-22",
+                readingTime: "10 min",
+                url: "artigos-individuais/sao-joao-baptista-quem-foi-realmente",
+                image: "Imagens/9.png"
+            },
             {
                 id: 8,
                 title: "O coração que arde contra o arco-íris roubado",
@@ -325,7 +343,7 @@
             renderPaginationControls(totalPages);
         }
 
-        // Renderiza visualmente o HTML dos artigos na grelha (Mantido o título estritamente azul em hover)
+        // Renderiza visualmente o HTML dos artigos na grelha (Alinhamento dos títulos centralizado)
         function renderArticles(articles) {
             const grid = document.getElementById('articles-grid');
             const noResults = document.getElementById('no-results');
@@ -362,23 +380,23 @@
                 }
 
                 grid.innerHTML += `
-                    <div class="article-card bg-white p-6 rounded-3xl border border-gray-150 shadow-xs flex flex-col justify-between">
-                        <div>
-                            <span class="text-brand-accent-orange text-[10px] font-extrabold uppercase tracking-widest block mb-3 font-inter">${art.category}</span>
-                            <!-- h3 título mantido azul sem classe laranja no hover -->
-                            <h3 class="font-inter text-lg sm:text-xl font-bold text-brand-accent-blue leading-snug mb-3 transition-colors duration-200">
-                                <a ${linkAction} class="text-brand-accent-blue hover:text-brand-accent-blue">${art.title}</a>
+                    <div class="article-card bg-white p-6 rounded-3xl border border-gray-150 shadow-xs flex flex-col justify-between text-center">
+                        <div class="flex flex-col items-center text-center">
+                            <span class="text-brand-accent-orange text-[10px] font-extrabold uppercase tracking-widest block mb-3 font-inter text-center w-full">${art.category}</span>
+                            <!-- h3 título centralizado em CSS sem classe laranja no hover -->
+                            <h3 class="font-inter text-lg sm:text-xl font-bold text-brand-accent-blue leading-snug mb-3 transition-colors duration-200 text-center w-full">
+                                <a ${linkAction} class="text-brand-accent-blue hover:text-brand-accent-blue block text-center">${art.title}</a>
                             </h3>
-                            <span class="text-xs text-gray-400 font-inter block mb-4 font-medium flex flex-wrap items-center gap-1.5">
+                            <span class="text-xs text-gray-400 font-inter block mb-4 font-medium flex flex-wrap items-center justify-center gap-1.5 w-full">
                                 <i class="far fa-calendar text-gray-400"></i> ${formattedDate}
                                 <span class="text-gray-300">|</span>
-                                <span class="inline-flex items-center gap-1">
+                                <span class="inline-flex items-center justify-center gap-1">
                                     <i class="far fa-clock text-gray-400"></i> <span id="reading-time-${art.id}">${art.readingTime}</span>
                                 </span>
                             </span>
                             ${imageHtml}
                         </div>
-                        <div class="pt-5 border-t border-gray-100 mt-2 flex justify-between items-center">
+                        <div class="pt-5 border-t border-gray-100 mt-2 flex justify-between items-center w-full">
                             <a ${linkAction} class="text-xs text-brand-accent-blue font-extrabold uppercase tracking-widest flex items-center gap-1.5 hover:text-brand-accent-orange transition-colors font-inter">
                                 Ler Artigo <i class="fas fa-chevron-right text-[10px] text-brand-accent-orange"></i>
                             </a>
