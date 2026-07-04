@@ -214,7 +214,7 @@
                 </h3>
                 
                 <p>
-                    Na Epístola aos Coríntios, São Paulo afirma categoricamente que «Ninguém pode dizer “Jesus é o Senhor” a não ser pela ação do Espírito Santo». O título «Senhor» (em Grego, Kyrios) ressoa com o Antigo Testamento, pois era o termo usado para traduzir o nome divino de Deus, Javé. Assim, a confissão de Jesus como Senhor identifica-O com o Deus de Israel. O Espírito capacita-nos a proclamar esta verdade com convicção e a vivê-la através da conversão (CIC 449, 683).
+                    Na Epístola aos Coríntios, São Paulo afirma categoricamente que «Ninguém pode dizer “Jesus é o Senhor” a não ser pela ação do Espírito Santo». O título «Senhor» (em Grego, Kyrios) ressoa com o Antigo Testamento, pois era o termo usado para traduzir o nome divino de Deus, Javé. Assim, a confession de Jesus como Senhor identifica-O com o Deus de Israel. O Espírito capacita-nos a proclamar esta verdade com convicção e a vivê-la através da conversão (CIC 449, 683).
                 </p>
 
                 <p>
@@ -474,24 +474,26 @@
             return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
         }
 
-        // Limpa e sincroniza a cache local 'meus_pendentes' com base no conteúdo total do Google Sheets (100% automático e inteligente)
+        // Limpa e sincroniza a cache local 'meus_pendentes' com base no conteúdo total do Google Sheets
         function syncLocalPendentes(allParsedComments) {
             let meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
             if (meusPendentes.length === 0) return;
 
-            // Constante de segurança: Qualquer rascunho local expira após 12 horas para nunca bloquear o ecrã
-            const MAX_AGE_MS = 12 * 60 * 60 * 1000; 
+            // Rascunhos expiram após 24 horas por segurança
+            const MAX_AGE_MS = 24 * 60 * 60 * 1000; 
 
-            // Mantém os rascunhos que ainda não foram detetados na tabela (janela de segurança de 10 min)
             const novosPendentes = meusPendentes.filter(pLocal => {
                 const idade = Date.now() - pLocal.timestamp;
                 if (idade > MAX_AGE_MS) return false;
 
+                // COMPARAÇÃO ROBUSTA POR CONTEÚDO (Isenta de problemas com fuso horário ou milissegundos do Google)
                 const existeNaFolha = allParsedComments.some(cSheet => 
                     normalizePageId(cSheet.page) === normalizePageId(pLocal.page) && 
-                    cSheet.name.toLowerCase() === pLocal.name.toLowerCase() &&
-                    Math.abs(cSheet.timestamp - pLocal.timestamp) < 10 * 60 * 1000 
+                    cSheet.name.toLowerCase().trim() === pLocal.name.toLowerCase().trim() &&
+                    cSheet.text.toLowerCase().trim() === pLocal.text.toLowerCase().trim()
                 );
+                
+                // Se o comentário já se encontra fisicamente na folha do Google, removemo-lo da cache pendente
                 return !existeNaFolha;
             });
 
@@ -557,7 +559,7 @@
 
             if (rows.length === 0) return [];
 
-            // MAPEAMENTO DINÂMICO DE CABEÇALHOS
+            // MAPEAMENTO DINÂMICO DE CABEÇALHOS (Identifica automaticamente as colunas pelo nome)
             const headers = rows[0].map(h => h.trim().toLowerCase());
             let timestampIdx = headers.findIndex(h => h.includes('carimbo') || h.includes('timestamp') || h.includes('data'));
             let nameIdx = headers.findIndex(h => h.includes('nome') || h.includes('autor') || h.includes('user') || h.includes('name'));
@@ -565,7 +567,7 @@
             let pageIdx = headers.findIndex(h => h.includes('pág') || h.includes('pag') || h.includes('id') || h.includes('url') || h.includes('artigo'));
             let approvedIdx = headers.findIndex(h => h.includes('aprov') || h.includes('status') || h.includes('moder') || h.includes('aceit') || h.includes('revis') || h.includes('visto'));
 
-            // Fallbacks caso as colunas manuais ou do form não batam certo
+            // Fallbacks caso as colunas do form não batam certo (A, B, C, D, E)
             if (timestampIdx === -1) timestampIdx = 0;
             if (nameIdx === -1) nameIdx = 1;
             if (commentIdx === -1) commentIdx = 2;
@@ -583,10 +585,10 @@
                 const text = cols[commentIdx] ? cols[commentIdx].trim() : "";
                 const page = cols[pageIdx] ? cols[pageIdx].trim() : "";
                 
-                // SISTEMA ULTRA-LEVE DE MODERAÇÃO: Aceita estritamente "Sim" para aprovar
+                // SISTEMA ULTRA-LEVE DE MODERAÇÃO: Aceita estritamente "Sim" (case-insensitive) para aprovar
                 let approved = false;
                 if (approvedIdx !== -1 && approvedIdx < cols.length && cols[approvedIdx]) {
-                    if (cols[approvedIdx].trim() === 'Sim') {
+                    if (cols[approvedIdx].trim().toLowerCase() === 'sim') {
                         approved = true;
                     }
                 }
