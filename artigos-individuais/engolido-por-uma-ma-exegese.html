@@ -3,28 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Engolido por uma má exegese | Hugo Bacelo</title>
+    <title>Engolido por uma Má Exegese | Jerónimo Editora</title>
+    
+    <!-- Meta Tags do Open Graph (Facebook, WhatsApp, etc.) -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Engolido por uma Má Exegese | Jerónimo Editora">
+    <meta property="og:description" content="Uma análise crítica à historicidade do livro de Jonas.">
+    <meta property="og:url" content="https://www.editorajeronimo.pt/artigos-individuais/engolido-por-uma-ma-exegese">
+    <meta property="og:image" content="https://www.editorajeronimo.pt/Imagens/5.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:site_name" content="Jerónimo Editora">
+
+    <!-- Meta Tags do Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Engolido por uma Má Exegese | Jerónimo Editora">
+    <meta name="twitter:description" content="Uma análise crítica à historicidade do livro de Jonas.">
+    <meta name="twitter:image" content="https://www.editorajeronimo.pt/Imagens/5.png">
+    
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
     
     <script>
-        // Remove a extensão .html da barra de endereço para um aspeto limpo e profissional
+        // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
         }
     </script>
     
-    <!-- GoatCounter Analytics -->
     <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
-    <!-- Google Fonts unificadas com suporte a pesos e itálicos completos para Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -50,12 +69,20 @@
     </script>
 
     <style>
-        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+        html, body { 
+            scroll-behavior: auto !important;
+            overflow-x: hidden; 
+            width: 100%; 
+            background-color: #F8F8F8; 
+        }
+        * { box-sizing: border-box; }
 
         .text-readable-article {
             line-height: 1.85;
             letter-spacing: -0.003em;
             word-spacing: 0.05em;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         .dropcap::first-letter {
@@ -76,27 +103,26 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100] pointer-events-none">
+        <div id="scroll-progress-bar" class="h-full bg-brand-accent-orange transition-all duration-75" style="width: 0%"></div>
+    </div>
+
+    <div id="scroll-percentage" class="fixed bottom-6 right-6 bg-brand-accent-blue text-white text-xs font-bold px-3 py-2 rounded-full shadow-xl z-50 opacity-0 transition-opacity duration-300 pointer-events-none flex items-center gap-1">
+        <i class="fas fa-book-open text-brand-gold"></i> <span id="scroll-percentage-text">0%</span>
+    </div>
+
     <div id="nav-placeholder"></div>
 
-    <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
     <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
         <article class="max-w-4xl mx-auto px-6 fade-in">
-            
-            <div class="mb-8">
-                <!-- Direcionado para a URL limpa de artigos -->
-                <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
-                    <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
-                </a>
-            </div>
 
-            <header class="border-b border-gray-150 pb-8 mb-8 text-center md:text-left">
-                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3">Resposta a Artigos</span>
-                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">
-                    Engolido por uma má exegese
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center flex flex-col items-center">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3 text-center">Resposta a Artigos</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4 text-center">
+                    Engolido por uma Má Exegese
                 </h1>
                 
-                <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500 font-medium">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-500 font-medium font-sans w-full">
                     <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 23 de Abril de 2026</span>
                     <span class="hidden sm:inline text-gray-300">|</span>
                     <span class="flex items-center gap-1.5 font-inter">
@@ -104,75 +130,803 @@
                         <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
                     </span>
                     <span class="hidden sm:inline text-gray-300">|</span>
-                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">22</span> min de leitura</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">12</span> min de leitura</span>
                 </div>
             </header>
 
-            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-xs relative bg-gray-100">
-                <img src="../Imagens/5.png" alt="Engolido por uma má exegese" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Engolido+por+uma+m%C3%A1+exegese';">
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden border border-gray-200 shadow-xs relative bg-gray-100 mb-8">
+                <img src="../Imagens/5.png" alt="Engolido por uma Má Exegese" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Engolido+por+uma+M%C3%A1+Exegese';">
             </div>
 
-<p>
-Em breve
-</p>
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto text-center">
+                    Uma análise crítica à tese de desmistificação histórica do Livro de Jonas.
+                </p>
+            </div>
 
-            <!-- Secção de Comentários (Livre de dados inventados de terceiros) -->
-            <section class="mt-12 pt-8 border-t border-gray-150">
-                <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-6">Comentários</h4>
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto text-justify">
                 
-                <div class="space-y-4 mb-8 font-inter" id="comments-box">
-                    <!-- Sem comentários automáticos inventados -->
+                <p class="dropcap">
+                    O Livro de Jonas ocupa um lugar singular no imaginário bíblico, oscilando, na percepção popular e académica, entre a crónica histórica e a narrativa parabólica. Recentemente, o <strong> Pe. Ariel Álvarez Valdés </strong>, no artigo de capa da revista <strong> Bíblica N.º 414 (Setembro/Outubro 2024)</strong>, relançou o debate ao questionar a historicidade do profeta e a veracidade do episódio do «grande peixe». Sob o título «O Profeta Jonas foi engolido por uma baleia?», o autor propõe que o texto é um «romance» tardio, repleto de imprecisões que invalidariam qualquer pretensão de factualidade.
+                </p>
+
+                <p>
+                    O presente ensaio propõe uma análise crítica desta tese. Sem ignorar os desafios que a exegese moderna coloca ao texto, procuraremos demonstrar que muitos dos «erros» apontados pelo Pe. Ariel resultam de uma leitura que impõe categorias literárias modernas ao mundo antigo e que a pressuposição da não-historicidade pode, por vezes, servir mais como uma «saída de emergência» para o racionalismo do que como uma conclusão científica inevitável. Mais do que resolver o enigma biológico do cetáceo, importa resgatar a integridade do texto e a profundidade da sua mensagem teológica.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Erros, Incoerências e Fantasias</span>
+                </h3>
+                
+                <p>
+                    O Pe. Ariel afirma, logo à partida, que uma «análise cuidadosa do livro revela que a história contém tantos erros, incoerências e fantasias que não pode ser o Jonas histórico». Que espécie de análise é esta que categoriza um documento como não-histórico apenas por conter supostas imprecisões? Um historiador da Antiguidade não estaria sujeito a lapsos ou ao uso de convenções literárias da sua época? Como é evidente, a ausência de erros históricos numa fábula contemporânea não a transmutaria em documento historiográfico; porquê, então, exigir que a presença de imprecisões desqualifique, por si só, a historicidade de um relato antigo? A historicidade de um texto bíblico prende-se com a sua intenção teológica e a sua recepção canónica, não com a exactidão de um guia turístico moderno. Analisemos, então, os referidos «erros, incoerências e fantasias».
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Qual Jonas?</span>
+                </h3>
+                
+                <p>
+                    1. <em>«O Jonas do século VIII a.C. foi um profeta glorioso, que a Bíblia recorda com admiração (2Rs 14,25–27). O profeta deste livro, pelo contrário, é uma personagem ridícula e grotesca, que, com uma mentalidade infantil, tenta fazer o contrário do que Deus lhe pede.»</em>
+                </p>
+
+                <p>
+                    O Pe. Ariel contrapõe o Jonas do 2 Reis, que classifica como «glorioso» e «admirado», ao Jonas do livro homónimo, que descreve como «ridículo e grotesco». Esta é uma dicotomia forçada. Concordo com a descrição do profeta do Livro de Jonas, mas julgo a descrição do Jonas do 2 Reis sem fundamento. O texto de Reis limita-se a registar que Jonas foi um «servo do Senhor» que anunciou a restauração de fronteiras ao Rei de Israel, como vemos abaixo.
+                </p>
+
+                <blockquote class="border-l-4 border-brand-accent-orange pl-4 italic my-4 text-gray-600">
+                    No décimo quinto ano do reinado de Amacias, filho de Joás, rei de Judá, Jeroboão, filho de Joás, começou a reinar sobre Israel, na Samaria. Reinou quarenta e um anos. Fez o mal aos olhos do Senhor, e não se afastou dos pecados de Jeroboão, filho de Nabat, que fizera pecar Israel. <strong> Restabeleceu as fronteiras de Israel, desde a entrada para Hamat até ao mar da planície, conforme o Senhor anunciara pela boca do seu servo Jonas, filho de Amitai, natural de Gat-Héfer.</strong> (2Rs 14,23–25)
+                </blockquote>
+
+                <p>
+                    Como pode ser esta passagem suficiente para afirmar que «a Bíblia recorda Jonas com admiração», fazendo-o «um profeta glorioso»? Acaso ser servo de Deus imuniza o homem contra a rebeldia ou a mesquinhez? A Bíblia está repleta de figuras que alternam entre a glória e a miséria espiritual (veja-se o Rei David ou o Apóstolo Pedro). Sugerir que o protagonista do Livro de Jonas não pode ser o mesmo de 2 Reis apenas porque um texto foca na sua profecia política e o outro na sua crise espiritual é ignorar a complexidade da alma humana que a Escritura tão bem retrata. Parece-me, portanto, exagerado usar esta passagem como se fosse evidência suficiente para concluir que o protagonista do Livro de Jonas não possa ser a mesma pessoa de que o profeta Jonas mencionado em 2 Rs 14.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Capital do Reino e Títulos Reais</span>
+                </h3>
+
+                <p>
+                   2. <em> «No tempo do profeta Jonas, a capital da Assiria não era Ninive, como diz o livro, mas Assur. Portanto, não havia nenhum rei na cidade de Ninive naquela época que pudesse ordenar a conversão dos ninivitas.»</em>
+                </p>
+
+                <p>
+                    O «rei de Nínive» seria, possivelmente, o rei da Assíria que, na época da carreira de Jonas, seria provavelmente Salmanaser IV (782–773 a.C.) ou Assurdã III (772–755 a.C.). Contudo, dado que o termo Hebraico para «rei» (<em>melek</em>) pode também designar um «governante» menor, a expressão poderá referir-se a um governador provincial sediado em Nínive.<sup>i</sup> De facto, <em>melek</em> aparece na Bíblia mais de 2000 vezes, referindo-se a todas as categorias de governantes, desde os pequenos chefes tribais ao Rei dos reis escatológico.
+                </p>
+
+                <p>
+                   3. <em> «Na época de Jonas, o rei não se chamava “rei de Nínive”, como diz o relato, mas “rei da Assíria” (como lemos em 2 Rs 18,17–35). É claro que quando o livro de Jonas foi escrito, muitos séculos depois, o seu autor já não se lembrava do título oficial do monarca.»</em>
+                </p>
+
+                <p>
+                    Confirmo que na passagem bíblica indicada pelo autor o título do rei é «rei da Assíria». Todavia, isso de nada serve. Como observou Bento XVI na sua obra <em>Jesus de Nazaré: A Infância de Jesus</em>, os títulos dependem do sujeito que os profere. Os Magos do Oriente perguntam pelo «Rei dos Judeus», «uma expressão tipicamente não-Judaica; em ambiente Judaica ter-se-ia dito “Rei de Israel”».<sup>ii</sup> Que um autor Israelita se refira ao monarca Assírio como «Rei de Nínive», cidade que personificava o pecado e o poder opressor, pode simplesmente significar uma escolha literária e teológica perfeitamente coerente. Além disso, se o livro tivesse sido escrito séculos depois (como Ariel defende), o autor teria acesso aos Livros dos Reis e saberia o título dito «oficial». Se usou outro, fê-lo por intenção, não por amnésia histórica.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>O Silêncio da História</span>
+                </h3>
+
+                <p>
+                    4. <em> «É impossível que, no século VIII, um profeta de Israel pudesse ter entrado tão livremente na capital assíria e pregado contra ela e seus deuses.»</em>
+                </p>
+
+                <p>
+                   5. <em> «O livro diz que todos os habitantes de Nínive, desde o rei até ao último súbdito, se converteram a Deus. Mas que um povo sanguinário e feroz como a Assíria se tivesse convertido ao Deus de Israel seria inaudito, e teria deixado vestígios nos documentos assírios, ou noutros livros da Bíblia, o que não aconteceu.»</em>
+                </p>
+
+                <p>
+                    Aqui, o Pe. Ariel toca no seu único argumento robusto. É verdade que não há registos extrabíblicos de uma conversão nacional Assíria. Contudo, o argumento do silêncio é perigoso. A ausência de evidência não é evidência de ausência, especialmente num povo cujos anais serviam quase exclusivamente para a auto-exaltação dos seus soberanos. Uma humilhação colectiva perante um Deus estrangeiro seria o último facto que um escriba de Nínive registaria.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>A Hiperbolização do Tamanho</span>
+                </h3>
+
+                <p>
+                   6. <em> «O livro diz que Nínive “era tão grande que eram necessários três dias de viagem para atravessá-la” (Jn 3,3). Isso significa, segundo cálculos arqueológicos, que a cidade devia ter cerca de 45 quilómetros de diâmetro. Mas hoje os arqueólogos que escavaram Nínive mostraram que o perímetro das suas muralhas era de apenas 12 quilómetros.»</em>
+                </p>
+
+                <p>
+                    Neste caso, força-se um literalismo matemático sobre uma expressão idiomática. De facto, o significado preciso da expressão é disputado. Se um contemporâneo diz estar com «mil e um problemas», não o acusamos de mentira se tiver apenas dez. Portanto, tal expressão hiperbólica não obriga a conclusão que o autor bíblico seja mentiroso ou ignorante relativamente à dimensão histórica de Nínive. Por outro lado, o autor poderá querer dizer que Jonas precisará de três dias para pregar a mensagem do Senhor em todos os distritos e bairros da cidade e, talvez, até nos subúrbios.<sup>iii</sup>
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>A Armadilha do «Romance» e a Apologética Cristã</span>
+                </h3>
+
+                <p>
+                    Após apresentar estes seis «erros», o Pe. Ariel conclui que «isto levou os biblistas a considerarem hoje o livro de Jonas não como um relato histórico, mas como um pequeno romance, uma narrativa imaginária». Primeiro, é importante referir que não existe uma unidade homogénea de seu nome «biblistas». Raramente existe consenso total e pleno entre eles. O debate História vs. Ficção sobre o Livro de Jonas não é excepção e existem bons argumentos para ambos os lados (como veremos mais adiante), pelo que seria imprudente declarar o debate como encerrado.
+                </p>
+
+                <p>
+                    Segundo, a insistência do Pe. Ariel em classificar Jonas como um «romance» (termo que usa cinco vezes) é, do ponto de vista apologético, um tiro no pé. O conceito de romance é uma invenção literária dos séculos XVIII e XIX. Ao projectar esta categoria sobre um texto do Antigo Testamento, o Pe. Ariel dá armas ao cepticismo ateu que, usando a mesma lógica anacrónica, tenta classificar os Evangelhos como romances ficcionais. O comum contra-argumento Cristão é precisamente alertar que o conceito de romance seria totalmente desconhecido para os Evangelistas.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>O Grande Peixe: Uma Falsa Dificuldade</span>
+                </h3>
+
+                <p>
+                    Tomando como ponto de partida a categorização do Livro de Jonas como romance, o Pe. Ariel parte para uma exegese que empobrece grandemente a leitura deste livro bíblico.
+                </p>
+
+                <blockquote class="border-l-4 border-brand-accent-orange pl-4 italic my-4 text-gray-600">
+                    Este famoso peixe causou muitos problemas aos antigos intérpretes da Bíblia, que durante séculos se interrogaram: que animal marinho seria aquele? Como é que Jonas conseguiu sobreviver no ventre daquele monstro? Como é que saiu ileso? Mas agora que estamos a lidar com um romance, essas dificuldades desapareceram. É por isso que também não temos problemas em aceitar que, do ventre do peixe, Jonas faça uma bela oração a Deus, pedindo-lhe que o salve (Jn 2,3-11).
+                </blockquote>
+
+                <p>
+                    A primeira questão, «que animal marinho seria aquele?», desvia o foco do leitor para um detalhe irrelevante, cujo debate é mera curiosidade e não afecta o teor teológico do livro. O Hebraico (<em>gadol dag</em>) não é específico quanto à espécie de animal marinho em questão; especifica apenas o seu grande tamanho. A versão Grega dos LXX (Septuaginta) traduz como <em>kētos</em>, que significa «monstro marinho» ou, possivelmente, «baleia». Portanto, o foco deverá ser sobre o significado teológico do «grande peixe», o qual pode ser entendido não como um instrumento de morte, mas o meio pelo qual Deus salva Jonas de se afogar e lhe concede uma segunda oportunidade para cumprir a sua missão profética.<sup>iv</sup>
+                </p>
+
+                <p>
+                    As outras questões, «como Jonas sobreviveu?» e «como saiu ileso?», convidam o leitor à falta de fé, pois aquilo que aos homens é impossível, é possível para Deus (cf. Mc 10,27). São Cirilo de Jerusalém desafia o cepticismo com uma lógica implacável: «Consideremos qual destas coisas é a mais difícil: se um homem ressuscitar depois de ser sepultado, ou se um homem escapar à corrupção no calor do ventre de uma baleia. Se uma não é credível, também a outra o não é. Jonas foi preservado, dado que todas as coisas são possíveis para Deus, e Cristo foi, da mesma forma, ressuscitado dos mortos».<sup>v</sup> Como tal, não é verdade que as dificuldades desaparecem por estarmos «a lidar com um romance»; as dificuldades nem sequer surgem para o leitor crente.
+                </p>
+
+                <p>
+                    Atrevo-me a especular que os «erros, incoerências e fantasias» não são os alicerces para a conclusão de não-historicidade do Livro de Jonas do Pe. Ariel. Ao invés disso, parece-me que a motivação foi resolver o «problema» do grande peixe, indo à procura de razões para nem sequer considerar como literal o episódio com o monstro marinho. Ou seja, a categorização como romance serve de cómoda «saída de emergência» para evitar o escândalo da intervenção sobrenatural de Deus na história. Se for esse o caso, Peter Kreeft adverte-nos: quem encara o Livro de Jonas desta forma
+                </p>
+
+                <blockquote class="border-l-4 border-brand-accent-blue pl-4 italic my-4 text-gray-600">
+                    é um modernista, pois a sua premissa escondida é que os milagres não podem acontecer na história real. Esta premissa é (1) herética, (2) irracional e, muitas vezes, até (3) desonesta. É herética porque a essência do Cristianismo é milagrosa (criação, Encarnação, Ressurreição). É irracional porque um Deus suficientemente grande para criar o universo do nada é certamente suficientemente grande para conservar um homem vivo dentro de um peixe. E é muitas vezes desonesta porque a verdadeira razão para interpretar uma passagem de forma não histórica raramente é explicitada pelo teólogo modernista; é simplesmente assumida de modo suave, introduzida sorrateiramente, como um mágico que mete uma carta na manga.<sup>vi</sup>
+                </blockquote>
+
+                <p>
+                    Se partirmos do pressuposto de que Deus existe e é o Criador do universo, a questão da «impossibilidade» do milagre torna-se irrelevante. Defender a impossíbilidade da sobrevivência de Jonas é, no fundo, um argumento contra a omnipotência divina disfarçado de exegese.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Oração a Partir do Ventre do Grande Peixe: Outra Falsa Dificuldade</span>
+                </h3>
+
+                <p>
+                    O Pe. Ariel também considera que a oração de Jonas a partir do ventre do peixe levanta «muitas dificuldades» e, por conseguinte, conclui que se trata de um «acrescento tardio».
+                </p>
+
+                <blockquote class="border-l-4 border-brand-accent-orange pl-4 italic my-4 text-gray-600">
+                    Esta oração levanta, de facto, muitas dificuldades. Em primeiro lugar, não menciona o peixe, e Jonas parece estar no fundo do mar (Jn 2,6–7), não no ventre do cetáceo. Além disso, não faz alusão à sua missão, que foi a causa de todos os seus problemas. Finalmente, Jonas agradece a Deus por o ter salvo (Jn 2,10) enquanto ainda está no estômago do animal (Jn 2,11). Por isso, os estudiosos defendem que esta oração é um salmo que não fazia parte da história original e que foi acrescentado mais tarde para tornar Jonas um pouco mais piedoso e aceitável para os leitores.
+                </blockquote>
+
+                <p>
+                    Por um lado, o facto de Jonas não mencionar o peixe nem a sua missão é prova de nada pois se trata do argumento falacioso do silêncio: como a oração não menciona as circunstâncias não pode ter sido proferida por alguém que estava inserido nelas. Tal raciocínio não é lógico. Por outro lado, a oração é precedida pela afirmação que Jonas a proferiu a partir do ventre do peixe (Jn 2,1), pelo que não compreendo o comentário que «Jonas parece estar no fundo do mar, não no ventre do cetáceo». Será pela expressão «raízes das montanhas» que significava as profundidades do mar<sup>vii</sup>? Mas se Jonas foi engolido pelo grande peixe, para onde é que este o havia de levar!? Jonas pode estar simultaneamente no ventre do grande peixe e no fundo mar!
+                </p>
+
+                <p>
+                    Além disso, o Pe. Ariel considera uma dificuldade Jonas agradecer a salvação de Deus antes d’Ele o ter salvo. Tal facto não é uma dificuldade se interpretamos o grande peixe, como já referido, como instrumento de salvação de Deus. Rezando a partir do interior do grande peixe, Jonas recorda o seu clamor a Deus enquanto se afundava no mar. Isto poderá ter sido (i) uma experiência de quase-morte da qual foi salvo no último instante ou (ii) uma experiência real de morte por afogamento da qual foi reanimado. De qualquer forma, o Senhor salvou-o de uma sepultura aquática ao enviar um peixe para o engolir e devolvê-lo a terra firme. Jonas faz o voto de oferecer um sacrifício em gratidão pela sua libertação de afogamento. Note-se que Jonas recita uma oração de acção de graças pelo seu resgate do ventre do Sheol; ele não está a recitar uma oração de súplica para ser resgatado do ventre do peixe.<sup>viii</sup>
+                </p>
+
+                <p>
+                    Jonas faz o voto de realizar uma oferta de acção de graças no Templo, momento em que relatará a estória do seu livramento aos seus companheiros de adoração.<sup>ix</sup> Com este detalhe final, percebemos que a oração de Jonas encaixa na estrutura dos Salmos de Acção de Graçs (Hb. Todah). Os salmos de acção de graças seguem um enredo típico que se move do infortúnio para o louvor. Eram cantados ou recitados nos átrios do Templo, onde a gratidão era expressa numa liturgia de culto divino, mas olham retrospectivamente para uma crise do passado e avançam para uma celebração de como Deus a resolveu. Os elementos básicos são os seguintes:<sup>x</sup>
+                </p>
+
+                <p>
+                    (a) O Salmista lamenta um tempo passado em que se encontrou em sérias dificuldades (e.g., perseguições hostis, doenças terminais e traição violenta, etc.);
+                </p>
+
+                <p>
+                    (b) No meio da sua angústia, o Salmista clamou ao Senhor por ajuda e, confiando no poder de Deus para salvar, fez o voto de levar um sacrifício de acção de graças ao Templo e de proclamar a bondade do Senhor perante os outros;
+                </p>
+
+                <p>
+                    (c) Se Deus respondesse à sua oração, o Salmista cumpria o seu voto apresentando uma oferta pacífica ao Senhor: um animal sacrificado em acção de graças, juntamente com bolos de farinha e pães (cf. Lv 7,12–14);
+                </p>
+
+                <p>
+                    (d) O Salmista oferecia então um banquete de todah com a família, amigos e companheiros de adoração, no qual todos comiam a carne e o pão do sacrifício em celebração da libertação concedido por Deus ao anfitrião;
+                </p>
+
+                <p>
+                    (e) Durante a refeição, o Salmista recitava, sobre um cálice de vinho, a estória de como o Senhor atendeu à sua oração e o resgatou da sua provação lancinante. Era um acto de testemunho que louvava a Deus por ser um Salvador poderoso, que encorajava os outros a confiarem n’Ele nos seus próprios tempos de necessidade, e era uma forma de rejubilar no dom da vida dado pelo Senhor após um encontro terrível com a morte.
+                </p>
+
+                <p>
+                    Em suma, não há motivo nenhum, tanto no próprio texto como no contexto cultural e litúrgico, que encaminhe o leitor para uma conclusão razoável que a oração se trata de um acrescento tardio.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Propondo uma Exegese Mais Robusta<sup>xi</sup></span>
+                </h3>
+
+                <p>
+                    A questão do género literário do Livro de Jonas constitui um dos eixos fundamentais da exegese bíblica contemporânea. Durante séculos, a vasta maioria dos intérpretes Judeus e Cristãos leu esta obra como uma crónica de história profética, alicerçada em eventos reais. Todavia, a modernidade trouxe consigo uma mudança de paradigma, sugerindo que o livro possa ser uma obra de ficção didáctica ou uma parábola expandida. O debate não reside na negação da mensagem espiritual, o alcance da misericórdia divina, mas sim na intenção original do autor: teria ele pretendido registar factos históricos ou ensinar verdades religiosas através de uma narrativa ficcional?
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Os Argumentos a Favor da Leitura Ficcional</span>
+                </h3>
+
+                <p>
+                    A perspectiva de que o Livro de Jonas é uma obra de ficção, parábola ou alegoria baseia-se, fundamentalmente, em quatro pilares críticos:
+                </p>
+
+                <p>
+                    Primeiramente, aponta-se a <strong>escassez de detalhes históricos.</strong> Embora 2 Reis 14,25 identifique Jonas como um profeta do século VIII a.C., sob o reinado de Jeroboão II, o livro de Jonas omite estas referências temporais e políticas. Esta vagueza é característica das narrativas de cariz didáctico ou folclórico, onde a lição moral prevalece sobre a precisão cronológica que seria expectável num relato que pretendesse ser estritamente historiográfico.
+                </p>
+
+                <p>
+                    Em segundo lugar, a obra faz um uso extensivo da <strong> caricatura, da ironia e da sátira.</strong> Jonas, a única personagem humana com nome próprio, surge como uma figura quase grotesca de um profeta relutante, cujas peripécias são marcadas por reviravoltas irónicas que parecem ridicularizá-lo. Para muitos intérpretes, este nível de licença artística e caracterização satírica é incompatível com a redacção de um relato histórico directo, sugerindo antes uma construção literária deliberada.
+                </p>
+
+                <p>
+                    Em terceiro lugar, o texto está repleto de <strong>elementos fantásticos e maravilhas ad hoc.</strong> Sem negar a possibilidade de milagres, os críticos notam que os prodígios aqui descritos — a conversão instantânea de toda a população de Nínive após um único dia de pregação, os animais a participar em actos de penitência vestidos de saco, ou a planta que cresce numa só noite — parecem desenhados para acentuar a ironia da estória. O facto de tais eventos não terem paralelo em registos contemporâneos fora da Bíblia reforça a ideia de que a sua função é literária e teológica, e não factual.
+                </p>
+
+                <p>
+                    Por último, os estudiosos identificam <strong>paralelos mitológicos</strong> do Médio Oriente. A permanência de três dias de Jonas no peixe (1,17), descrita como uma descida ao reino dos mortos (2,1-6), assemelha-se a contos mitológicos sobre viagens ao submundo. Desta forma, mesmo que exista um núcleo histórico, este teria sido amplamente enriquecido com elementos ficcionais para enfatizar o tema teológico.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Os Argumentos a Favor da Leitura Histórica</span>
+                </h3>
+
+                <p>
+                    Em contrapartida, a defesa da historicidade do livro assenta em evidências internas e na força da tradição:
+                </p>
+
+                <p>
+                    O argumento inicial refere-se à <strong> identidade do protagonista.</strong> Jonas, filho de Amitai, é uma figura histórica atestada em 2 Reis 14,25. Seria invulgar na literatura bíblica a criação de uma ficção pura em torno de um profeta real e identificado. Além disso, as <strong>localizações geográficas </strong>mencionadas — Jafa, Társis e Nínive — são lugares reais do mundo bíblico, e não topónimos imaginários de um contador de estórias.
+                </p>
+
+                <p>
+                    A <strong>tradição interpretativa</strong> antiga é outro factor de peso. O historiador Flávio Josefo incluiu as aventuras de Jonas ao lado de outros eventos históricos do século VIII a.C. Do mesmo modo, os Padres da Igreja, como S. Jerónimo, S. Agostinho e S. Cirilo de Jerusalém, consideraram o livro histórico. Embora se deleitassem na interpretação tipológica, vendo em Jonas uma prefiguração de Cristo, nunca puseram em causa a realidade dos factos que serviam de base a essa prefiguração.
+                </p>
+
+                <p>
+                    Um ponto de distinção importante é que, embora Israel usasse parábolas frequentemente, não existem exemplos claros fora de Jonas onde uma <strong>parábola envolva milagres desta magnitude.</strong> Isto sugere que o autor não estava a escrever no género parabolístico habitual.
+                </p>
+
+                <p>
+                    Finalmente, o argumento mais robusto para muitos crentes é a <strong>perspectiva de Jesus Cristo.</strong> No Evangelho de Mateus (12,40–41), Jesus não só compara a Sua sepultura aos três dias de Jonas no peixe, como afirma que «os homens de Nínive se levantarão no Juízo com esta geração e a condenarão, porque se arrependeram com a pregação de Jonas». Ao passar da comparação ilustrativa para a profecia escatológica, Jesus parece referir-se a pessoas reais que agiram na história real. Se os Ninivitas fossem personagens puramente ficcionais, a crítica de Jesus à incredulidade da Sua própria geração perderia o seu fundamento lógico e ético.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Posição da Igreja</span>
+                </h3>
+
+                <p>
+                    Em suma, o debate entre a leitura ficcional e a histórica permanece aberto. Por um lado, não há objecção teológica à utilização da ficção como veículo de verdade espiritual, técnica que os próprios profetas e Jesus utilizaram. Por outro lado, o peso da tradição Judaica e Cristã não deve ser ignorado levemente.
+                </p>
+
+                <p>
+                    A Igreja Católica não assumiu uma posição oficial e definitiva sobre a historicidade ou o género literário de Jonas. Os intérpretes gozam de liberdade para investigar estas questões, desde que reconheçam que ambos os géneros podem ser instrumentos da revelação divina. Independentemente de se considerar Jonas como história ou ficção didáctica, a mensagem central — o amor universal de Deus e o apelo ao arrependimento — permanece límpida e inalterada, transcendendo as fronteiras da discussão académica sobre a sua forma literária.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Ponto de Convergência</span>
+                </h3>
+
+                <p>
+                    Nesta análise, é imperativo reconhecer que a minha divergência quanto à exegese sobre a historicidade da narrativa não impede uma profunda convergência com o Pe. Ariel no que concerne à intenção teológica da obra. Ambos identificamos no Livro de Jonas um manifesto vibrante contra o exclusivismo de Israel. Como bem observa o Pe. Ariel, a mensagem central é a revelação de um Deus que ama inclusivamente os opressores, neste caso os Ninivitas, que arruinaram a vida nacional do povo eleito.
+                </p>
+
+                <p>
+                    A fuga de Jonas não é motivada pelo medo da violência dos inimigos, mas sim pelo receio da misericórdia de Deus. Ele conhece o carácter «clemente e compassivo» do Senhor e teme, acima de tudo, que os adversários de Israel sejam perdoados. Há uma ironia sublime no facto do profeta mais relutante, xenófobo e irritável da Escritura ser, simultaneamente, o mais bem-sucedido de toda a Bíblia: com apenas cinco palavras, ele converte uma metrópole inteira. Este sucesso improvável é a prova máxima de que a salvação é uma obra de Deus e não do homem.
+                </p>
+
+                <p>
+                    Esta crítica divina a Jonas é uma censura a todo o sistema religioso que se torna funcionalista e egoísta. Convergo, pois, com o Pe. Ariel na ideia de que o livro é um hino à misericórdia de limites insuspeitados. É esta universalidade radical, operada através de instrumentos imperfeitos e cenários de uma «comédia divina», como a imagem de um profeta a pingar resíduos gástricos enquanto resmunga uma profecia que desejaria ver falhar, que torna o Livro de Jonas uma obra perene e teologicamente inesgotável.
+                </p>
+		<hr style="border: none; height: 3px; background-color: #CC5500; width: 50%; margin: 30px auto; border-radius: 2px;">
+                <p>
+                    Em última análise, a desconstrução operada pelo Pe. Ariel Álvarez Valdés, embora ecoe tendências comuns na exegese contemporânea, parece pecar por um certo anacronismo ao rotular o Livro de Jonas como um «romance», uma categoria estranha ao horizonte semântico do Antigo Testamento. Ao tentar «salvar» o texto das suas supostas incoerências históricas, a análise corre o risco de sacrificar a dimensão do maravilhoso e a omnipotência divina no altar de um literalismo geográfico e matemático que o próprio autor bíblico talvez nunca tenha pretendido satisfazer.
+                </p>
+
+                <p>
+                    Todavia, esta divergência não deve obscurecer o ponto de convergência fundamental: a mensagem central de Jonas é uma das mais belas e radicais de toda a Escritura. Quer leiamos o livro como o relato de uma intervenção milagrosa na história, quer como uma parábola magistralmente construída, o escândalo da misericórdia de Deus para com os «outros» permanece intacto. No fim, Jonas, o profeta que foge, que se irrita e que se molha, continua a ser o espelho de uma humanidade que teima em limitar o amor de Deus, enquanto o Senhor, através de grandes peixes ou de plantas efémeras, insiste em expandir as fronteiras da Sua graça a todos os habitantes de todas as Nínives da história.
+                </p>
+
+            </div>
+
+            <!-- Caixa de Newsletter que define o ponto de paragem de 100% no scroll -->
+            <div id="newsletter-section" class="bg-[#ecf3fa] p-6 sm:p-8 rounded-2xl border border-brand-accent-blue/10 shadow-xs max-w-4xl mx-auto my-12 text-center">
+                <p class="font-serif text-lg sm:text-2xl text-brand-accent-blue font-bold mb-4">
+                    Recebe <span class="underline decoration-brand-accent-orange decoration-2 underline-offset-4 font-bold">gratuitamente</span> a nossa newsletter e fica a par das novidades
+                </p>
+                <form id="articles-newsletter-form" onsubmit="handleArticlesNewsletterSubmit(event)" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 mt-4">
+                    <div class="flex-grow">
+                        <input type="email" id="articles-newsletter-email" required placeholder="o teu endereço de e-mail" aria-label="Endereço de e-mail" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-brand-text placeholder-gray-455 focus:outline-none focus:ring-2 focus:ring-brand-accent-orange focus:border-transparent transition-all text-sm font-sans">
+                    </div>
+                    <button type="submit" class="bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold uppercase text-xs tracking-wider px-6 py-3.5 rounded-xl transition-all shadow-sm hover:-translate-y-0.5 active:translate-y-0 font-sans">
+                        Subscrever
+                    </button>
+                </form>
+                <div id="articles-newsletter-success-msg" class="hidden mt-4 p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-xl max-w-md mx-auto font-sans">
+                    Subscrição registada com sucesso! Obrigado por nos acompanhar.
+                </div>
+            </div>
+
+            <!-- Fontes & Referências como Notas de Fim de Página -->
+            <section id="fontes-section" class="mt-12 pt-6 border-t border-gray-150 text-justify">
+                <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4 text-justify">Fontes & Referências</h4>
+                <ol class="list-decimal pl-5 text-sm text-gray-500 space-y-2 font-inter text-justify">
+                    <p><sup>i</sup> Ignatius Catholic Study Bible: Old and New Testament</i>, nota sobre Jn 3,8. 2024, Ignatius Press.</p>
+                    <p><sup>ii</sup>Bento XVI, <i>Jesus de Nazaré: Prólogo — A Infância de Jesus</i>. 2012, Princípia, pág. 87.</p>
+                    <p><sup>iii</sup>Ignatius Catholic Study Bible: Old and New Testament</i>, nota sobre Jn 3,3. 2024, Ignatius Press.</p>
+                    <p><sup>iv</sup>idem</i>, nota sobre Jn 1,7. Ignatius Press.</p>
+                    <p><sup>v</sup>S. Cirilo de Jerusalém, <i>Catequese 14, 18</i>.</p>
+                    <p><sup>vi</sup>Peter Kreeft, <i>Tu Podes Compreender a Bíblia</i>. Parte Um, Cap. 22. 2026, Jerónimo Editora.</p>
+                    <p><sup>vii</sup>Bíblia dos Franciscanos Capuchinhos</i>, nota sobre Jn 2,7. 2021, Difusora Bíblica.</p>
+                    <p><sup>viii</sup>Ignatius Catholic Study Bible: Old and New Testament</i>, nota sobre Jn 2,1–9. 2024, Ignatius Press.</p>
+                    <p><sup>ix</sup>idem</i>, nota sobre Jn 2,9.</p>
+                    <p><sup>x</sup>idem</i>, ensaio «Thanksgiving Psalms».</p>
+                    <p><sup>xi</sup>idem</i>, «Introduction to Jonah: Literary Genre».</p>
+                </ol>
+            </section>
+
+            <!-- Botões de Navegação -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-12 border-t border-b border-gray-150 py-8 font-inter text-xs uppercase tracking-wider font-bold">
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all text-center">
+                    <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                </a>
+                <a href="../catalogo-completo" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all text-center">
+                    Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                </a>
+                <a href="a-coroacao-da-historia-da-salvacao-pentecostes" class="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-xl transition-all text-center flex items-center justify-center gap-1.5">
+                    Próximo Artigo <i class="fas fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- SECCÃO DE COMENTÁRIOS ESTILO CUSDIS (PORTUGUÊS, MINIMALISTA, GOOGLE SHEETS AS BACKEND) -->
+            <section class="mt-12 pt-6 border-t border-gray-200">
+                
+                <!-- Título Simples -->
+                <div class="mb-6">
+                    <h4 class="font-sans text-lg font-bold text-gray-800">Comentários</h4>
                 </div>
 
-                <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl font-inter">
-                    <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
-                    <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                <!-- Alerta Superior de Feedback de Erros ou Informações -->
+                <div id="comment-alert" class="hidden mb-4 p-4 rounded-md text-xs font-sans"></div>
+
+                <!-- Formulário Minimalista Cusdis-style -->
+                <form id="comment-form" onsubmit="handleCommentSubmit(event)" class="space-y-4 mb-8">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="w-full sm:w-1/3">
+                            <input type="text" id="comment-author-name" required placeholder="Nome" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors">
                         </div>
-                        <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter resize-none"></textarea>
-                        <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
-                        <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter">
-                            Enviar Comentário
+                    </div>
+                    <div>
+                        <textarea id="comment-body-text" required rows="4" placeholder="Comentário" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors resize-y"></textarea>
+                    </div>
+                    
+                    <!-- Botão de Envio Simples e Minimalista -->
+                    <div class="flex items-center">
+                        <button type="submit" id="comment-submit-btn" class="w-full sm:w-auto border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-sm font-semibold px-6 py-2.5 rounded-md font-sans text-center">
+                            Enviar
                         </button>
-                    </form>
+                    </div>
+                </form>
+
+                <!-- Div de Carregamento (Loading) -->
+                <div id="comments-loading" class="py-6 text-center text-gray-400">
+                    <i class="fas fa-circle-notch fa-spin text-gray-455 text-xl mb-1"></i>
+                    <p class="text-[10px] font-sans">A carregar comentários...</p>
+                </div>
+
+                <!-- Lista de Comentários Cusdis-style -->
+                <div id="comments-list-container" class="space-y-6 pt-2">
+                    <!-- Gerado de forma ultra-limpa por JS -->
                 </div>
             </section>
 
-            <!-- Rodapé do Artigo -->
-            <footer class="mt-16 pt-8 border-t border-gray-150 font-inter">
-                <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
+            <!-- Cartão Biográfico do Autor -->
+            <footer class="mt-12 pt-8 border-t border-gray-150 font-inter">
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs max-w-3xl mx-auto text-center sm:text-left">
                     <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
                         <a href="../sobreHB" class="block w-full h-full">
                             <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
                         </a>
                     </div>
-                    <div class="text-center sm:text-left">
-                        <h4 class="font-serif text-lg font-bold text-brand-accent-blue">
+                    <div class="flex flex-col items-center sm:items-start gap-1">
+                        <span class="text-[10px] text-gray-400 font-sans font-bold uppercase tracking-wider block leading-none">Autor:</span>
+                        <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-2 leading-tight">
                             <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
                         </h4>
-                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
-                        <p class="text-sm text-gray-650 leading-relaxed font-inter">
-                            Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
-                        </p>
+                        <a href="../sobreHB" class="inline-block px-5 py-2.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all font-sans font-bold text-xs uppercase tracking-wider text-center shadow-xs hover:-translate-y-0.5 active:translate-y-0 mt-1">
+                            Ver Mais <i class="fas fa-chevron-right ml-1 text-[9px]"></i>
+                        </a>
                     </div>
-                </div>
-
-                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-inter text-xs uppercase tracking-wider font-bold">
-                    <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
-                        <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
-                    </a>
-                    <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
-                        Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
-                    </a>
                 </div>
             </footer>
 
         </article>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado assincronamente do GitHub) -->
     <div id="footer-placeholder"></div>
+
+    <!-- Script de Gestão Inteligente dos Comentários (Sem Firebase, via Google Sheets) -->
+    <script>
+        // =================----------------==================
+        // CONFIGURAÇÃO DOS SEUS LINKS DO GOOGLE
+        // =================----------------==================
+        
+        // 1. O link do formulário Google onde as respostas são submetidas
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/1lyjJzNOvwJtA0M6CgTXE66L1Yj74OJ49v-XD_mrQSnw/formResponse";
+        
+        // 2. Os IDs dos campos do seu formulário Google
+        const GOOGLE_ENTRY_NOME = "entry.2046871302";       
+        const GOOGLE_ENTRY_COMENTARIO = "entry.964260973"; 
+        const GOOGLE_ENTRY_PAGINA = "entry.788584228";     
+
+        // 3. O link do seu Google Sheets (Necessita de estar público como "Qualquer pessoa com o link" -> "Leitor")
+        const GOOGLE_SHEETS_TSV_URL = "https://docs.google.com/spreadsheets/d/1qypNiIPv2n-Y1p-KWjHskPIDNx2tztd01mAPx5AQ9hA/edit?usp=sharing";
+
+        // Função para normalizar os IDs de página de forma uniforme
+        function normalizePageId(id) {
+            if (!id) return "engolido-por-uma-ma-exegese";
+            return id.trim()
+                     .toLowerCase()
+                     .replace(/\.html$/, '')
+                     .split('/')
+                     .filter(Boolean)
+                     .pop() || "engolido-por-uma-ma-exegese";
+        }
+
+        // ID único deste artigo
+        const rawPageId = window.location.pathname.split('/').pop().replace('.html', '') || 'engolido-por-uma-ma-exegese';
+        const pageId = normalizePageId(rawPageId);
+
+        let fallbackComments = [];
+
+        // Carregar Comentários de forma totalmente automática usando a API oficial do Google Visualization
+        async function fetchComments() {
+            const listContainer = document.getElementById('comments-list-container');
+            const loader = document.getElementById('comments-loading');
+
+            if (GOOGLE_SHEETS_TSV_URL.includes("ExemploFolhaDeCalculoPublicada")) {
+                renderComments(fallbackComments);
+                loader.classList.add('hidden');
+                return;
+            }
+
+            try {
+                // Constrói URL dinâmico com parâmetro anti-cache
+                const fetchUrl = getFetchUrl();
+                
+                // Pedido nativo limpo sem cabeçalhos customizados HTTP para assegurar compatibilidade CORS total
+                const response = await fetch(fetchUrl, {
+                    method: "GET",
+                    credentials: "omit",
+                    cache: "no-store"
+                });
+                if (!response.ok) throw new Error("Erro ao obter dados.");
+                
+                const data = await response.text();
+
+                // Validação de privacidade do arquivo
+                if (data.trim().startsWith('<html') || data.trim().startsWith('<!DOCTYPE') || data.includes('<meta')) {
+                    throw new Error("A folha de cálculo está configurada como Privada no Google Drive.");
+                }
+
+                const parsedComments = parseGVizData(data);
+                
+                // Limpeza e remoção automática de comentários locais pendentes já aprovados na folha
+                syncLocalPendentes(parsedComments);
+                
+                renderComments(parsedComments);
+            } catch (error) {
+                console.warn("Problema ao importar dados do Google Sheets:", error);
+                renderComments(fallbackComments);
+            } finally {
+                loader.classList.add('hidden');
+            }
+        }
+
+        // Reconstrói a URL para tempo real extraindo o ID da planilha e o gid diretamente para o endpoint gviz/tq (Sem CDN cache)
+        function getFetchUrl() {
+            let url = GOOGLE_SHEETS_TSV_URL.trim();
+            const salt = `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+            
+            if (url.includes('/spreadsheets/d/')) {
+                const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+                if (matches && matches[1]) {
+                    const sheetId = matches[1];
+                    
+                    let gid = '0';
+                    const gidMatches = url.match(/[#?&]gid=([0-9]+)/);
+                    if (gidMatches && gidMatches[1]) {
+                        gid = gidMatches[1];
+                    }
+                    
+                    // Endpoint da Google Visualization API - sem cache e suporte nativo a CORS
+                    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${gid}&tqx=out:json&t=${salt}`;
+                }
+            }
+            return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
+        }
+
+        // Normalização de strings para comparação confiável
+        function cleanCompare(str) {
+            if (!str) return "";
+            return str.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        // Sincroniza e limpa o localStorage quando o comentário já tiver sido marcado como "Sim" no Google Sheets
+        function syncLocalPendentes(allParsedComments) {
+            let meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            if (meusPendentes.length === 0) return;
+
+            const MAX_AGE_MS = 24 * 60 * 60 * 1000; // 24 horas de validade máxima para pendentes locais
+
+            const novosPendentes = meusPendentes.filter(pLocal => {
+                const idade = Date.now() - pLocal.timestamp;
+                if (idade > MAX_AGE_MS) return false;
+
+                // Remove o rascunho apenas se ele já existir aprovado ("Sim") na base de dados online
+                const aprovadoNaFolha = allParsedComments.some(cSheet => 
+                    cSheet.approved &&
+                    normalizePageId(cSheet.page) === normalizePageId(pLocal.page) && 
+                    cleanCompare(cSheet.name) === cleanCompare(pLocal.name) &&
+                    cleanCompare(cSheet.text) === cleanCompare(pLocal.text)
+                );
+                
+                return !aprovadoNaFolha;
+            });
+
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
+        }
+
+        // Processador oficial de dados GViz JSON do Google Sheets
+        function parseGVizData(responseText) {
+            try {
+                const jsonStart = responseText.indexOf('{');
+                const jsonEnd = responseText.lastIndexOf('}');
+                if (jsonStart === -1 || jsonEnd === -1) return [];
+                
+                const jsonStr = responseText.substring(jsonStart, jsonEnd + 1);
+                const gvizData = JSON.parse(jsonStr);
+                
+                if (!gvizData || !gvizData.table || !gvizData.table.rows) return [];
+                
+                const table = gvizData.table;
+                const cols = table.cols || [];
+                
+                // Mapeamento dinâmico e inteligente das colunas pelos cabeçalhos/rótulos
+                let timestampIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('carimbo') || c.label.toLowerCase().includes('time') || c.label.toLowerCase().includes('data')));
+                let nameIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('nome') || c.label.toLowerCase().includes('autor') || c.label.toLowerCase().includes('user') || c.label.toLowerCase().includes('name')));
+                let commentIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('coment') || c.label.toLowerCase().includes('texto') || c.label.toLowerCase().includes('mensagem') || c.label.toLowerCase().includes('body') || c.label.toLowerCase().includes('comment')));
+                let pageIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('pág') || c.label.toLowerCase().includes('pag') || c.label.toLowerCase().includes('artigo') || c.label.toLowerCase().includes('url') || c.label.toLowerCase().includes('id')));
+                let approvedIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('aprov') || c.label.toLowerCase().includes('status') || c.label.toLowerCase().includes('moder') || c.label.toLowerCase().includes('aceit') || c.label.toLowerCase().includes('visto')));
+
+                // Fallbacks estruturais para a ordenação canónica (Colunas A, B, C, D, E)
+                if (timestampIdx === -1) timestampIdx = 0;
+                if (nameIdx === -1) nameIdx = 1;
+                if (commentIdx === -1) commentIdx = 2;
+                if (pageIdx === -1) pageIdx = 3;
+                if (approvedIdx === -1) approvedIdx = 4;
+
+                const comments = [];
+                table.rows.forEach(row => {
+                    if (!row.c || row.c.length < 3) return;
+                    
+                    const rawDate = row.c[timestampIdx]?.f || row.c[timestampIdx]?.v || "";
+                    const name = (row.c[nameIdx] && row.c[nameIdx].v !== undefined && row.c[nameIdx].v !== null) ? String(row.c[nameIdx].v).trim() : "Anónimo";
+                    const text = (row.c[commentIdx] && row.c[commentIdx].v !== undefined && row.c[commentIdx].v !== null) ? String(row.c[commentIdx].v).trim() : "";
+                    const page = (row.c[pageIdx] && row.c[pageIdx].v !== undefined && row.c[pageIdx].v !== null) ? String(row.c[pageIdx].v).trim() : "";
+                    const approvedVal = (row.c[approvedIdx] && row.c[approvedIdx].v !== undefined && row.c[approvedIdx].v !== null) ? String(row.c[approvedIdx].v).trim().toLowerCase() : "";
+
+                    // Moderação simplificada: apenas aprova se a coluna tiver exatamente o valor "Sim"
+                    const approved = approvedVal === 'sim';
+
+                    let timestamp = Date.now();
+                    if (rawDate) {
+                        if (typeof rawDate === 'string' && rawDate.startsWith('Date(')) {
+                            try {
+                                const match = rawDate.match(/Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+),(\d+))?\)/);
+                                if (match) {
+                                    const y = parseInt(match[1], 10);
+                                    const m = parseInt(match[2], 10); // Os meses na API gviz iniciam no índice 0
+                                    const d = parseInt(match[3], 10);
+                                    const hr = match[4] ? parseInt(match[4], 10) : 0;
+                                    const min = match[5] ? parseInt(match[5], 10) : 0;
+                                    const sec = match[6] ? parseInt(match[6], 10) : 0;
+                                    timestamp = new Date(y, m, d, hr, min, sec).getTime();
+                                }
+                            } catch(e) {}
+                        } else {
+                            timestamp = parseGoogleDate(rawDate);
+                        }
+                    }
+
+                    comments.push({ name, text, timestamp, page, approved });
+                });
+
+                return comments.sort((a, b) => b.timestamp - a.timestamp);
+            } catch (err) {
+                console.error("Falha ao analisar a tabela GViz:", err);
+                return [];
+            }
+        }
+
+        // Conversor de datas para assegurar total compatibilidade entre navegadores
+        function parseGoogleDate(rawDate) {
+            if (!rawDate) return Date.now();
+            const parts = rawDate.trim().split(/[\s/:\-]/);
+            if (parts.length >= 3) {
+                if (parts[0].length === 4) {
+                    // Formato: YYYY-MM-DD
+                    const y = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const d = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                } else {
+                    // Formato: DD/MM/YYYY
+                    const d = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const y = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                }
+            }
+            return Date.now();
+        }
+
+        // Renderizador estrutural e estético de comentários
+        function renderComments(commentsArray) {
+            const listContainer = document.getElementById('comments-list-container');
+            listContainer.innerHTML = '';
+
+            const currentPageNormalized = normalizePageId(pageId);
+
+            // Filtrar comentários correspondentes ao ID deste artigo
+            const activeComments = commentsArray.filter(c => {
+                const commentPageNormalized = normalizePageId(c.page);
+                return commentPageNormalized === currentPageNormalized && c.approved;
+            });
+
+            // Recupera e injeta temporariamente os rascunhos em aprovação enviados por este navegador
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+
+            meusPendentes.forEach(p => {
+                if (!activeComments.some(c => cleanCompare(c.text) === cleanCompare(p.text) && cleanCompare(c.name) === cleanCompare(p.name))) {
+                    activeComments.unshift(p);
+                }
+            });
+
+            if (activeComments.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-left py-4 font-sans text-gray-400 text-sm italic">
+                        Não existem comentários de momento. Seja o primeiro a comentar.
+                    </div>
+                `;
+                return;
+            }
+
+            activeComments.forEach(comment => {
+                const dateText = formatCustomDate(comment.timestamp);
+                const commentEl = document.createElement('div');
+                commentEl.className = `py-4 border-b border-gray-150 transition-all space-y-1.5`;
+                
+                commentEl.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-sans font-bold text-gray-800 text-sm">${escapeHtml(comment.name)}</span>
+                            ${comment.isLocalPendente ? '<span class="bg-amber-50 text-amber-800 border border-amber-200 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-sans">Em Aprovação</span>' : ''}
+                        </div>
+                        <span class="text-xs text-gray-400 font-sans">${dateText}</span>
+                    </div>
+                    <div class="text-gray-700 font-sans text-sm leading-relaxed whitespace-pre-wrap">${escapeHtml(comment.text)}</div>
+                `;
+                listContainer.appendChild(commentEl);
+            });
+        }
+
+        // Submissão transparente e segura via AJAX/no-cors para o Google Forms
+        async function handleCommentSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('comment-submit-btn');
+            const nameInput = document.getElementById('comment-author-name');
+            const textInput = document.getElementById('comment-body-text');
+
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+
+            if (!name || !text) return;
+
+            btn.disabled = true;
+            btn.textContent = "A enviar...";
+
+            if (GOOGLE_FORM_URL.includes("ExemploID")) {
+                const novoMock = {
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    page: pageId,
+                    approved: false,
+                    isLocalPendente: true
+                };
+                
+                saveLocalPendente(novoMock);
+                showAlert("✨ Comentário submetido com sucesso! Ficará visível assim que for aprovado pela editora.", "bg-emerald-50 text-emerald-800 border border-emerald-200");
+                textInput.value = '';
+                nameInput.value = '';
+                btn.disabled = false;
+                btn.textContent = "Enviar";
+                renderComments(fallbackComments);
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append(GOOGLE_ENTRY_NOME, name);
+            formData.append(GOOGLE_ENTRY_COMENTARIO, text);
+            formData.append(GOOGLE_ENTRY_PAGINA, pageId);
+
+            try {
+                await fetch(GOOGLE_FORM_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                saveLocalPendente({
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    page: pageId,
+                    approved: false,
+                    isLocalPendente: true
+                });
+
+                showAlert("✨ Comentário submetido com sucesso! Ficará visível assim que for aprovado pela editora.", "bg-emerald-50 text-emerald-800 border border-emerald-150 font-semibold");
+                textInput.value = '';
+                nameInput.value = '';
+            } catch (error) {
+                console.error("Erro na submissão:", error);
+                showAlert("Ocorreu um erro ao submeter o comentário. Tente novamente.", "bg-red-50 text-red-800 border border-red-200");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Enviar";
+                fetchComments(); 
+            }
+        }
+
+        // Armazena rascunho localmente
+        function saveLocalPendente(commentObj) {
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            meusPendentes.push(commentObj);
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(meusPendentes));
+        }
+
+        // Sistema de alertas visuais minimalistas
+        function showAlert(msg, bgClasses) {
+            const alertBox = document.getElementById('comment-alert');
+            alertBox.className = `p-4 rounded-md text-xs font-sans ${bgClasses}`;
+            alertBox.innerHTML = msg;
+            alertBox.classList.remove('hidden');
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 8000);
+        }
+
+        // Sanitização de entradas contra vulnerabilidades XSS
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Formatação cronológica de comentários
+        function formatCustomDate(timestamp) {
+            if (!timestamp) return 'Agora';
+            const diff = Date.now() - timestamp;
+            if (diff < 60000) return 'Agora mesmo';
+            if (diff < 3600000) return `Há ${Math.round(diff / 60000)} min`;
+            if (diff < 86400000) return `Há ${Math.round(diff / 3600000)} horas`;
+            
+            const d = new Date(timestamp);
+            return d.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        // Inicialização automática dos comentários sem cache
+        document.addEventListener('DOMContentLoaded', fetchComments);
+    </script>
 
     <script>
         function getPrefix() {
@@ -301,50 +1055,62 @@ Em breve
             readingTimeElement.textContent = readingTime;
         }
 
-        function addLocalComment(e) {
-            e.preventDefault();
-            const author = document.getElementById('comm-author').value.trim() || "Anónimo";
-            const message = document.getElementById('comm-text').value.trim();
-            if (!message) return;
+        // Monitorização de Scroll para a Barra de Progresso Superior e Percentagem Flutuante
+        window.addEventListener('scroll', () => {
+            const winScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+            const targetEl = document.getElementById('newsletter-section');
+            let scrolled = 0;
+            
+            if (targetEl) {
+                const elementOffsetTop = targetEl.getBoundingClientRect().top + window.scrollY;
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const maxScroll = elementOffsetTop - winHeight + 100;
+                
+                if (maxScroll > 0) {
+                    scrolled = Math.round((winScroll / maxScroll) * 100);
+                } else {
+                    scrolled = 100;
+                }
+            } else {
+                const docHeight = Math.max(
+                    document.body.scrollHeight, 
+                    document.documentElement.scrollHeight,
+                    document.body.offsetHeight, 
+                    document.documentElement.offsetHeight,
+                    document.body.clientHeight, 
+                    document.documentElement.clientHeight
+                );
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const totalScrollable = docHeight - winHeight;
+                if (totalScrollable > 0) {
+                    scrolled = Math.round((winScroll / totalScrollable) * 100);
+                }
+            }
+            
+            if (scrolled > 100) scrolled = 100;
+            if (scrolled < 0) scrolled = 0;
 
-            const commentsBox = document.getElementById('comments-box');
-            const today = new Date();
-            const options = { day: 'numeric', month: 'long', year: 'numeric' };
-            const formattedDate = today.toLocaleDateString('pt-PT', options);
+            const progressBar = document.getElementById('scroll-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
 
-            const commentElement = document.createElement('div');
-            commentElement.className = "bg-white p-5 rounded-2xl border border-gray-100 shadow-xs fade-in";
-            commentElement.innerHTML = `
-                <div class="flex items-center justify-between gap-4 mb-2">
-                    <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
-                    <span class="text-xs text-gray-400">${formattedDate}</span>
-                </div>
-                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
-            `;
+            const scrollPercentageText = document.getElementById('scroll-percentage-text');
+            if (scrollPercentageText) {
+                scrollPercentageText.textContent = scrolled + '%';
+            }
 
-            commentsBox.appendChild(commentElement);
-            document.getElementById('comment-form').reset();
-        }
-
-        function handleSubscribe(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('sub-email');
-            if (!emailInput || !emailInput.value.trim()) return;
-
-            const userEmail = emailInput.value.trim();
-            const recipient = "editorajeronimo@gmail.com";
-            const subject = encodeURIComponent("nova subscrição");
-            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
-
-            window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
-
-            const container = e.target;
-            container.innerHTML = `
-                <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
-                    <i class="fas fa-check-circle"></i> A iniciar o seu cliente de e-mail para processar a subscrição!
-                </div>
-            `;
-        }
+            const scrollPercentageDiv = document.getElementById('scroll-percentage');
+            if (scrollPercentageDiv) {
+                if (winScroll > 150) {
+                    scrollPercentageDiv.classList.remove('opacity-0');
+                    scrollPercentageDiv.classList.add('opacity-100');
+                } else {
+                    scrollPercentageDiv.classList.remove('opacity-100');
+                    scrollPercentageDiv.classList.add('opacity-0');
+                }
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             loadComponents();
