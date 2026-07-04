@@ -416,7 +416,7 @@
 
             </div>
 
-            <!-- Caixa de Newsletter que define o ponto de paragem de 100% no scroll -->
+           <!-- Caixa de Newsletter que define o ponto de paragem de 100% no scroll -->
             <div id="newsletter-section" class="bg-[#ecf3fa] p-6 sm:p-8 rounded-2xl border border-brand-accent-blue/10 shadow-xs max-w-4xl mx-auto my-12 text-center">
                 <p class="font-serif text-lg sm:text-2xl text-brand-accent-blue font-bold mb-4">
                     Recebe <span class="underline decoration-brand-accent-orange decoration-2 underline-offset-4 font-bold">gratuitamente</span> a nossa newsletter e fica a par das novidades
@@ -434,33 +434,32 @@
                 </div>
             </div>
 
-            <!-- Fontes & Referências como Notas de Fim de Página -->
             <section id="fontes-section" class="mt-12 pt-6 border-t border-gray-150 text-justify">
                 <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4 text-justify">Fontes & Referências</h4>
                 <ol class="list-decimal pl-5 text-sm text-gray-500 space-y-2 font-inter text-justify">
-                    <p><sup>i</sup> Ignatius Catholic Study Bible: Old and New Testament</i>, nota sobre Jn 3,8. 2024, Ignatius Press.</p>
-                    <p><sup>ii</sup>Bento XVI, <i>Jesus de Nazaré: Prólogo — A Infância de Jesus</i>. 2012, Princípia, pág. 87.</p>
-                    <p><sup>iii</sup>Ignatius Catholic Study Bible: Old and New Testament</i>, nota sobre Jn 3,3. 2024, Ignatius Press.</p>
-                    <p><sup>iv</sup>idem</i>, nota sobre Jn 1,7. Ignatius Press.</p>
-                    <p><sup>v</sup>S. Cirilo de Jerusalém, <i>Catequese 14, 18</i>.</p>
-                    <p><sup>vi</sup>Peter Kreeft, <i>Tu Podes Compreender a Bíblia</i>. Parte Um, Cap. 22. 2026, Jerónimo Editora.</p>
-                    <p><sup>vii</sup>Bíblia dos Franciscanos Capuchinhos</i>, nota sobre Jn 2,7. 2021, Difusora Bíblica.</p>
-                    <p><sup>viii</sup>Ignatius Catholic Study Bible: Old and New Testament</i>, nota sobre Jn 2,1–9. 2024, Ignatius Press.</p>
-                    <p><sup>ix</sup>idem</i>, nota sobre Jn 2,9.</p>
-                    <p><sup>x</sup>idem</i>, ensaio «Thanksgiving Psalms».</p>
-                    <p><sup>xi</sup>idem</i>, «Introduction to Jonah: Literary Genre».</p>
+                    <li><i>Ignatius Catholic Study Bible: Old and New Testament</i>, nota sobre Jn 3,8. 2024, Ignatius Press.</li>
+                    <li>Bento XVI, <i>Jesus de Nazaré: Prólogo — A Infância de Jesus</i>. 2012, Princípia, pág. 87.</li>
+                    <li><i>Ignatius Catholic Study Bible: Old and New Testament</i>, nota sobre Jn 3,3. 2024, Ignatius Press.</li>
+                    <li><i>idem</i>, nota sobre Jn 1,7. Ignatius Press.</li>
+                    <li>S. Cirilo de Jerusalém, <i>Catequese 14, 18</i>.</li>
+                    <li>Peter Kreeft, <i>Tu Podes Compreender a Bíblia</i>. Parte Um, Cap. 22. 2026, Jerónimo Editora.</li>
+                    <li><i>Bíblia dos Franciscanos Capuchinhos</i>, nota sobre Jn 2,7. 2021, Difusora Bíblica.</li>
+                    <li><i>Ignatius Catholic Study Bible: Old and New Testament</i>, nota sobre Jn 2,1–9. 2024, Ignatius Press.</li>
+                    <li><i>idem</i>, nota sobre Jn 2,9.</li>
+                    <li><i>idem</i>, ensaio «Thanksgiving Psalms».</li>
+                    <li><i>idem</i>, «Introduction to Jonah: Literary Genre».</li>
                 </ol>
             </section>
 
             <!-- Botões de Navegação -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-12 border-t border-b border-gray-150 py-8 font-inter text-xs uppercase tracking-wider font-bold">
-                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all text-center">
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all text-center font-sans">
                     <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
                 </a>
-                <a href="../catalogo-completo" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all text-center">
+                <a href="../catalogo-completo" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all text-center font-sans">
                     Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
                 </a>
-                <a href="a-coroacao-da-historia-da-salvacao-pentecostes" class="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-xl transition-all text-center flex items-center justify-center gap-1.5">
+                <a href="nascimento-de-jesus-belem-ou-nazare" class="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-xl transition-all text-center flex items-center justify-center gap-1.5 font-sans">
                     Próximo Artigo <i class="fas fa-arrow-right text-[10px]"></i>
                 </a>
             </div>
@@ -1053,6 +1052,51 @@
             const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
             const readingTime = Math.ceil(words / 200);
             readingTimeElement.textContent = readingTime;
+        }
+
+        // =================----------------==================
+        // SISTEMA REAL DE SUBSCRICAO DE NEWSLETTER (MAILERLITE)
+        // =================----------------==================
+        function handleArticlesNewsletterSubmit(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('articles-newsletter-email');
+            if (!emailInput || !emailInput.value.trim()) return;
+
+            // CONFIGURAÇÃO MAILERLITE (Mesmos IDs de Produção Ativos no index.html)
+            const accountId = "2468444"; 
+            const formId = "191175533290063317";       
+
+            // 1. Criar um iframe oculto dinamicamente para processar o envio de forma transparente
+            let iframe = document.getElementById('ml-hidden-iframe');
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.id = 'ml-hidden-iframe';
+                iframe.name = 'ml-hidden-iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+            }
+
+            // 2. Configurar o formulário atual para apontar para o MailerLite usando o iframe oculto
+            const form = event.target;
+            form.action = `https://assets.mailerlite.com/jsonp/${accountId}/forms/${formId}/subscribe`;
+            form.method = 'POST';
+            form.target = 'ml-hidden-iframe';
+
+            // 3. Renomear o campo de input de e-mail para o padrão interno exigido pelo MailerLite
+            emailInput.name = 'fields[email]';
+
+            // 4. Submeter o formulário de forma silenciosa
+            form.submit();
+
+            // 5. Ativar a mensagem de sucesso visual na página
+            const successMsg = document.getElementById('articles-newsletter-success-msg');
+            if (successMsg) {
+                successMsg.classList.remove('hidden');
+                emailInput.value = ''; // Limpa o campo
+                setTimeout(() => {
+                    successMsg.classList.add('hidden');
+                }, 8000);
+            }
         }
 
         // Monitorização de Scroll para a Barra de Progresso Superior e Percentagem Flutuante

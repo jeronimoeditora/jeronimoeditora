@@ -262,8 +262,7 @@
                 </p>
 
             </div>
-
-            <!-- Caixa de Newsletter que define o ponto de paragem de 100% no scroll -->
+          <!-- Caixa de Newsletter que define o ponto de paragem de 100% no scroll -->
             <div id="newsletter-section" class="bg-[#ecf3fa] p-6 sm:p-8 rounded-2xl border border-brand-accent-blue/10 shadow-xs max-w-4xl mx-auto my-12 text-center">
                 <p class="font-serif text-lg sm:text-2xl text-brand-accent-blue font-bold mb-4">
                     Recebe <span class="underline decoration-brand-accent-orange decoration-2 underline-offset-4 font-bold">gratuitamente</span> a nossa newsletter e fica a par das novidades
@@ -282,14 +281,14 @@
             </div>
 
             <section id="fontes-section" class="mt-12 pt-6 border-t border-gray-150 text-justify">
-    <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4 text-justify">Fontes & Referências</h4>
-    <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2 font-inter text-justify">
-        <li><i>Ignatius Catholic Study Bible: Old and New Testament</i>, Ignatius Press, 2024.</li>
-        <li>Scott Hahn & Ken Ogorek, <i>Breaking the Bread: A Biblical Devotional for Catholics – Year A</i>, Emmaus Road Publishing, 2025.</li>
-        <li>John Bergsma, <i>The Word of the Lord: Reflections on the Sunday Mass Readings for Year A</i>, Emmaus Road Publishing, 2022.</li>
-        <li>John Bergsma, <i>The Word of the Lord: Reflections on the Mass Readings for Solemnities and Feasts</i>, Emmaus Road Publishing, 2021.</li>
-    </ul>
-	    </section>
+                <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4 text-justify">Fontes & Referências</h4>
+                <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2 font-inter text-justify">
+                    <li><i>Ignatius Catholic Study Bible: Old and New Testament</i>, Ignatius Press, 2024.</li>
+                    <li>Scott Hahn & Ken Ogorek, <i>Breaking the Bread: A Biblical Devotional for Catholics – Year A</i>, Emmaus Road Publishing, 2025.</li>
+                    <li>John Bergsma, <i>The Word of the Lord: Reflections on the Sunday Mass Readings for Year A</i>, Emmaus Road Publishing, 2022.</li>
+                    <li>John Bergsma, <i>The Word of the Lord: Reflections on the Mass Readings for Solemnities and Feasts</i>, Emmaus Road Publishing, 2021.</li>
+                </ul>
+            </section>
 
             <!-- Botões de Navegação -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-12 border-t border-b border-gray-150 py-8 font-inter text-xs uppercase tracking-wider font-bold">
@@ -894,6 +893,51 @@
             readingTimeElement.textContent = readingTime;
         }
 
+        // =================----------------==================
+        // SISTEMA REAL DE SUBSCRICAO DE NEWSLETTER (MAILERLITE)
+        // =================----------------==================
+        function handleArticlesNewsletterSubmit(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('articles-newsletter-email');
+            if (!emailInput || !emailInput.value.trim()) return;
+
+            // CONFIGURAÇÃO MAILERLITE (Mesmos IDs de Produção Ativos no index.html)
+            const accountId = "2468444"; 
+            const formId = "191175533290063317";       
+
+            // 1. Criar um iframe oculto dinamicamente para processar o envio de forma transparente
+            let iframe = document.getElementById('ml-hidden-iframe');
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.id = 'ml-hidden-iframe';
+                iframe.name = 'ml-hidden-iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+            }
+
+            // 2. Configurar o formulário atual para apontar para o MailerLite usando o iframe oculto
+            const form = event.target;
+            form.action = `https://assets.mailerlite.com/jsonp/${accountId}/forms/${formId}/subscribe`;
+            form.method = 'POST';
+            form.target = 'ml-hidden-iframe';
+
+            // 3. Renomear o campo de input de e-mail para o padrão interno exigido pelo MailerLite
+            emailInput.name = 'fields[email]';
+
+            // 4. Submeter o formulário de forma silenciosa
+            form.submit();
+
+            // 5. Ativar a mensagem de sucesso visual na página
+            const successMsg = document.getElementById('articles-newsletter-success-msg');
+            if (successMsg) {
+                successMsg.classList.remove('hidden');
+                emailInput.value = ''; // Limpa o campo
+                setTimeout(() => {
+                    successMsg.classList.add('hidden');
+                }, 8000);
+            }
+        }
+
         // Monitorização de Scroll para a Barra de Progresso Superior e Percentagem Flutuante
         window.addEventListener('scroll', () => {
             const winScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
@@ -958,3 +1002,4 @@
     </script>
 </body>
 </html>
+ 
