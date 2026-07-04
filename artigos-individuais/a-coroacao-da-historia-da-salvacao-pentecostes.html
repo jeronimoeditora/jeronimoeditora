@@ -214,11 +214,11 @@
                 </h3>
                 
                 <p>
-                    Na Epístola aos Coríntios, São Paulo afirma categoricamente que «Ninguém pode dizer “Jesus é o Senhor” a não ser pela ação do Espírito Santo». O título «Senhor» (em Grego, Kyrios) ressoa com o Antigo Testamento, pois era o termo usado para traduzir o nome divino de Deus, Javé. Assim, a confession de Jesus como Senhor identifica-O com o Deus de Israel. O Espírito capacita-nos a proclamar esta verdade com convicção e a vivê-la através da conversão (CIC 449, 683).
+                    Na Epístola aos Coríntios, São Paulo afirma categoricamente que «Ninguém pode dizer “Jesus é o Senhor” a não ser pela ação do Espírito Santo». O título «Senhor» (em Grego, Kyrios) ressoa with o Antigo Testamento, pois era o termo usado para traduzir o nome divino de Deus, Javé. Assim, a confession de Jesus como Senhor identifica-O com o Deus de Israel. O Espírito capacita-nos a proclamar esta verdade com convicção e a vivê-la através da conversão (CIC 449, 683).
                 </p>
 
                 <p>
-                    São Paulo ensina-nos sobre a unidade e a diversidade na Igreja, baseadas no modelo divino da Santíssima Trindade.
+                    São Paulo teaches-nos sobre a unidade e a diversidade na Igreja, baseadas no modelo divino da Santíssima Trindade.
                 </p>
 
                 <p>
@@ -402,7 +402,7 @@
         // Comentários de demonstração - Removidos para ficar vazio por defeito
         let fallbackComments = [];
 
-        // Carregar Comentários de forma totalmente automática e ignorando a cache do browser por padrão
+        // Carregar Comentários de forma totalmente automática e sem cabeçalhos restritos CORS
         async function fetchComments() {
             const listContainer = document.getElementById('comments-list-container');
             const loader = document.getElementById('comments-loading');
@@ -414,17 +414,13 @@
             }
 
             try {
-                // Saca o URL de tempo real dinamicamente com cache-buster ativo
+                // Saca o URL de tempo real dinamicamente com cache-buster ativo no URL
                 const fetchUrl = getFetchUrl();
                 
+                // Fetch puro sem cabeçalhos customizados para evitar erros de CORS Preflight (OPTIONS)
                 const response = await fetch(fetchUrl, {
                     cache: "no-store",
-                    credentials: "omit", 
-                    headers: {
-                        'Cache-Control': 'no-cache, no-store, must-revalidate',
-                        'Pragma': 'no-cache',
-                        'Expires': '0'
-                    }
+                    credentials: "omit"
                 });
                 if (!response.ok) throw new Error("Erro de rede.");
                 
@@ -474,6 +470,12 @@
             return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
         }
 
+        // Normalização agressiva e limpa de textos para comparar sem problemas de formatação/espaços ou quebras de linha
+        function cleanCompare(str) {
+            if (!str) return "";
+            return str.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
         // Limpa e sincroniza a cache local 'meus_pendentes' com base no conteúdo total do Google Sheets
         function syncLocalPendentes(allParsedComments) {
             let meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
@@ -486,22 +488,22 @@
                 const idade = Date.now() - pLocal.timestamp;
                 if (idade > MAX_AGE_MS) return false;
 
-                // COMPARAÇÃO ROBUSTA POR CONTEÚDO (Isenta de problemas com fuso horário ou milissegundos do Google)
-                const existeNaFolha = allParsedComments.some(cSheet => 
+                // Só removemos o rascunho local se ele já estiver na folha E estiver aprovado
+                const aprovadoNaFolha = allParsedComments.some(cSheet => 
+                    cSheet.approved &&
                     normalizePageId(cSheet.page) === normalizePageId(pLocal.page) && 
-                    cSheet.name.toLowerCase().trim() === pLocal.name.toLowerCase().trim() &&
-                    cSheet.text.toLowerCase().trim() === pLocal.text.toLowerCase().trim()
+                    cleanCompare(cSheet.name) === cleanCompare(pLocal.name) &&
+                    cleanCompare(cSheet.text) === cleanCompare(pLocal.text)
                 );
                 
-                // Se o comentário já se encontra fisicamente na folha do Google, removemo-lo da cache pendente
-                return !existeNaFolha;
+                return !aprovadoNaFolha;
             });
 
             localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
         }
 
-        // Parser unificado de CSV/TSV em conformidade com o padrão RFC 4180 com mapeamento dinâmico inteligente
-        // Suporta estritamente valores de moderação de aprovação "Sim" e "Não"
+        // Parser unificado de CSV/TSV em conformidade com o padrão RFC 4180
+        // Suporta estritamente valores de moderação de aprovação "Sim" e "Não" utilizando indexes estáticos fiáveis
         function parseDelimitedText(data) {
             if (!data.trim()) return [];
             
@@ -557,28 +559,20 @@
                 rows.push(currentRow);
             }
 
-            if (rows.length === 0) return [];
+            if (rows.length <= 1) return [];
 
-            // MAPEAMENTO DINÂMICO DE CABEÇALHOS (Identifica automaticamente as colunas pelo nome)
-            const headers = rows[0].map(h => h.trim().toLowerCase());
-            let timestampIdx = headers.findIndex(h => h.includes('carimbo') || h.includes('timestamp') || h.includes('data'));
-            let nameIdx = headers.findIndex(h => h.includes('nome') || h.includes('autor') || h.includes('user') || h.includes('name'));
-            let commentIdx = headers.findIndex(h => h.includes('coment') || h.includes('texto') || h.includes('body') || h.includes('comment') || h.includes('mensagem'));
-            let pageIdx = headers.findIndex(h => h.includes('pág') || h.includes('pag') || h.includes('id') || h.includes('url') || h.includes('artigo'));
-            let approvedIdx = headers.findIndex(h => h.includes('aprov') || h.includes('status') || h.includes('moder') || h.includes('aceit') || h.includes('revis') || h.includes('visto'));
-
-            // Fallbacks caso as colunas do form não batam certo (A, B, C, D, E)
-            if (timestampIdx === -1) timestampIdx = 0;
-            if (nameIdx === -1) nameIdx = 1;
-            if (commentIdx === -1) commentIdx = 2;
-            if (pageIdx === -1) pageIdx = 3;
-            if (approvedIdx === -1) approvedIdx = 4;
+            // INDEXAÇÃO ESTÁTICA BLINDADA E PREVISÍVEL (Colunas A, B, C, D, E)
+            const timestampIdx = 0;
+            const nameIdx = 1;
+            const commentIdx = 2;
+            const pageIdx = 3;
+            const approvedIdx = 4;
 
             const comments = [];
 
             for (let i = 1; i < rows.length; i++) {
                 const cols = rows[i];
-                if (cols.length < 3) continue;
+                if (cols.length < 4) continue; // Precisa de ter pelo menos Timestamp, Nome, Comentário e Página
                 
                 const rawDate = cols[timestampIdx];
                 const name = cols[nameIdx] ? cols[nameIdx].trim() : "Anónimo";
@@ -587,7 +581,7 @@
                 
                 // SISTEMA ULTRA-LEVE DE MODERAÇÃO: Aceita estritamente "Sim" (case-insensitive) para aprovar
                 let approved = false;
-                if (approvedIdx !== -1 && approvedIdx < cols.length && cols[approvedIdx]) {
+                if (cols.length > approvedIdx && cols[approvedIdx]) {
                     if (cols[approvedIdx].trim().toLowerCase() === 'sim') {
                         approved = true;
                     }
@@ -635,7 +629,7 @@
 
             const currentPageNormalized = normalizePageId(pageId);
 
-            // Filtrar apenas comentários deste artigo específico
+            // Filtrar apenas comentários deste artigo específico que estejam aprovados
             const activeComments = commentsArray.filter(c => {
                 const commentPageNormalized = normalizePageId(c.page);
                 return commentPageNormalized === currentPageNormalized && c.approved;
@@ -646,7 +640,7 @@
 
             // Adicionar temporariamente os meus pendentes locais para que eu os veja no meu PC
             meusPendentes.forEach(p => {
-                if (!activeComments.some(c => c.text === p.text && c.name === p.name)) {
+                if (!activeComments.some(c => cleanCompare(c.text) === cleanCompare(p.text) && cleanCompare(c.name) === cleanCompare(p.name))) {
                     activeComments.unshift(p);
                 }
             });
@@ -923,41 +917,6 @@
             const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
             const readingTime = Math.ceil(words / 200);
             readingTimeElement.textContent = readingTime;
-        }
-
-        function handleArticlesNewsletterSubmit(event) {
-            event.preventDefault();
-            const emailInput = document.getElementById('articles-newsletter-email');
-            if (!emailInput || !emailInput.value.trim()) return;
-
-            const accountId = "2468444"; 
-            const formId = "191175533290063317";       
-
-            let iframe = document.getElementById('ml-hidden-iframe-articles');
-            if (!iframe) {
-                iframe = document.createElement('iframe');
-                iframe.id = 'ml-hidden-iframe-articles';
-                iframe.name = 'ml-hidden-iframe-articles';
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
-            }
-
-            const form = event.target;
-            form.action = `https://assets.mailerlite.com/jsonp/${accountId}/forms/${formId}/subscribe`;
-            form.method = 'POST';
-            form.target = 'ml-hidden-iframe-articles';
-
-            emailInput.name = 'fields[email]';
-            form.submit();
-
-            const successMsg = document.getElementById('articles-newsletter-success-msg');
-            if (successMsg) {
-                successMsg.classList.remove('hidden');
-                emailInput.value = ''; 
-                setTimeout(() => {
-                    successMsg.classList.add('hidden');
-                }, 8000);
-            }
         }
 
         // Monitorização de Scroll para a Barra de Progresso Superior e Percentagem Flutuante
