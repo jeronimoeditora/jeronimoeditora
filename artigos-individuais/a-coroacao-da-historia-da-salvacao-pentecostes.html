@@ -176,7 +176,7 @@
                 </p>
 
                 <p>
-                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Inversão de Babel:</strong> No livro do Génesis, a oposição a Deus levou à confusão das línguas e à consequente dispersão da família humana, pois os homens deixaram de se compreender uns aos outros (Gn 11,1-9). No Pentecostes, a confusão dá-se exatamente pelo motivo oposto: todos se compreendem. O Espírito Santo usa múltiplas línguas para a comunicação do Evangelho e reunir de novo a família de Deus (At 2,11).
+                    <span class="text-brand-accent-orange mr-1.5">•</span><strong>A Inversão de Babel:</strong> No livro do Génesis, a oposição a Deus levou à confusão das línguas e à consequente dispersão da família humana, pois os homens deixaram de se compreender uns altenados (Gn 11,1-9). No Pentecostes, a confusão dá-se exatamente pelo motivo oposto: todos se compreendem. O Espírito Santo usa múltiplas línguas para a comunicação do Evangelho e reunir de novo a família de Deus (At 2,11).
                 </p>
 
                 <p>
@@ -214,7 +214,7 @@
                 </h3>
                 
                 <p>
-                    Na Epístola aos Coríntios, São Paulo afirma categoricamente que «Ninguém pode dizer “Jesus é o Senhor” a não ser pela ação do Espírito Santo». O título «Senhor» (em Grego, Kyrios) ressoa with o Antigo Testamento, pois era o termo usado para traduzir o nome divino de Deus, Javé. Assim, a confession de Jesus como Senhor identifica-O com o Deus de Israel. O Espírito capacita-nos a proclamar esta verdade com convicção e a vivê-la através da conversão (CIC 449, 683).
+                    Na Epístola aos Coríntios, São Paulo afirma categoricamente que «Ninguém pode dizer “Jesus é o Senhor” a não ser pela ação do Espírito Santo». O título «Senhor» (em Grego, Kyrios) ressoa com o Antigo Testamento, pois era o termo usado para traduzir o nome divino de Deus, Javé. Assim, a confession de Jesus como Senhor identifica-O com o Deus de Israel. O Espírito capacita-nos a proclamar esta verdade com convicção e a vivê-la através da conversão (CIC 449, 683).
                 </p>
 
                 <p>
@@ -419,8 +419,9 @@
                 
                 // Fetch puro sem cabeçalhos customizados para evitar erros de CORS Preflight (OPTIONS)
                 const response = await fetch(fetchUrl, {
-                    cache: "no-store",
-                    credentials: "omit"
+                    method: "GET",
+                    credentials: "omit",
+                    cache: "no-store"
                 });
                 if (!response.ok) throw new Error("Erro de rede.");
                 
@@ -445,24 +446,25 @@
             }
         }
 
-        // Reconstrói a URL para tempo real extraindo o ID da planilha e o gid diretamente para um export CSV puro e sem cache!
+        // Reconstrói a URL para tempo real extraindo o ID da planilha e o gid diretamente (Usando o export direto, sem preflight CORS)
         function getFetchUrl() {
             let url = GOOGLE_SHEETS_TSV_URL.trim();
             const salt = `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
             
-            // Se for o link de edição tradicional, transforma-o no endpoint instantâneo de exportação CSV direta (0 segundos de atraso!)
+            // Se for o link tradicional do Sheets, transforma-o no endpoint de exportação direta CSV (CORS limpo e imediato)
             if (url.includes('/spreadsheets/d/')) {
                 const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
                 if (matches && matches[1]) {
                     const sheetId = matches[1];
                     
-                    // Extrai o gid se existir na URL (pode vir como #gid= ou ?gid= o &gid=)
+                    // Extrai o gid se existir na URL
                     let gid = '0';
                     const gidMatches = url.match(/[#?&]gid=([0-9]+)/);
                     if (gidMatches && gidMatches[1]) {
                         gid = gidMatches[1];
                     }
                     
+                    // Endpoint nativo de exportação sem CORS Preflight
                     return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}&t=${salt}`;
                 }
             }
@@ -470,7 +472,7 @@
             return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
         }
 
-        // Normalização agressiva e limpa de textos para comparar sem problemas de formatação/espaços ou quebras de linha
+        // Normalização agressiva e limpa de textos para comparar sem problemas de fuso horário ou espaços em branco
         function cleanCompare(str) {
             if (!str) return "";
             return str.toLowerCase().replace(/\s+/g, ' ').trim();
@@ -488,7 +490,7 @@
                 const idade = Date.now() - pLocal.timestamp;
                 if (idade > MAX_AGE_MS) return false;
 
-                // Só removemos o rascunho local se ele já estiver na folha E estiver aprovado
+                // Só removemos o rascunho local se ele já estiver na folha E estiver aprovado com "Sim"
                 const aprovadoNaFolha = allParsedComments.some(cSheet => 
                     cSheet.approved &&
                     normalizePageId(cSheet.page) === normalizePageId(pLocal.page) && 
@@ -503,7 +505,7 @@
         }
 
         // Parser unificado de CSV/TSV em conformidade com o padrão RFC 4180
-        // Suporta estritamente valores de moderação de aprovação "Sim" e "Não" utilizando indexes estáticos fiáveis
+        // Suporta estritamente valores de moderação de aprovação "Sim" utilizando indexes estáticos fiáveis
         function parseDelimitedText(data) {
             if (!data.trim()) return [];
             
