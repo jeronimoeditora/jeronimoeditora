@@ -3,28 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Como Não Ler a Bíblia em Qualquer Século (2 de 3) | Hugo Bacelo</title>
+    <title>Como Não Ler a Bíblia em Qualquer Século (2 de 3) | Jerónimo Editora</title>
+    
+    <!-- Meta Tags do Open Graph (Facebook, WhatsApp, etc.) -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Como Não Ler a Bíblia em Qualquer Século (2 de 3) | Jerónimo Editora">
+    <meta property="og:description" content="Crítica ao livro Ler a Bíblia no Século XXI escrito por Pe. Carreira das Neves da Editorial Presença (2 de 3)">
+    <meta property="og:url" content="https://www.editorajeronimo.pt/artigos-individuais/como-nao-ler-a-biblia-em-qualquer-seculo-2-de-3">
+    <meta property="og:image" content="https://www.editorajeronimo.pt/Imagens/2.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:site_name" content="Jerónimo Editora">
+
+    <!-- Meta Tags do Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Como Não Ler a Bíblia em Qualquer Século (2 de 3) | Jerónimo Editora">
+    <meta name="twitter:description" content="Crítica ao livro Ler a Bíblia no Século XXI escrito por Pe. Carreira das Neves da Editorial Presença (2 de 3)">
+    <meta name="twitter:image" content="https://www.editorajeronimo.pt/Imagens/2.png">
+    
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
     
     <script>
-        // Remove a extensão .html da barra de endereço para um aspeto limpo e profissional
+        // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
         }
     </script>
     
-    <!-- GoatCounter Analytics -->
     <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
-    <!-- Google Fonts unificadas com suporte a pesos e itálicos completos para Playfair Display e Roboto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -35,6 +54,7 @@
                         sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
                         inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
                         serif: ['"Playfair Display"', 'serif'],
+                        classic: ['"Crimson Text"', 'serif'],
                     },
                     colors: {
                         'brand-bg': '#F8F8F8',
@@ -50,12 +70,20 @@
     </script>
 
     <style>
-        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+        html, body { 
+            scroll-behavior: auto !important;
+            overflow-x: hidden; 
+            width: 100%; 
+            background-color: #F8F8F8; 
+        }
+        * { box-sizing: border-box; }
 
         .text-readable-article {
             line-height: 1.85;
             letter-spacing: -0.003em;
             word-spacing: 0.05em;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         .dropcap::first-letter {
@@ -76,27 +104,26 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100] pointer-events-none">
+        <div id="scroll-progress-bar" class="h-full bg-brand-accent-orange transition-all duration-75" style="width: 0%"></div>
+    </div>
+
+    <div id="scroll-percentage" class="fixed bottom-6 right-6 bg-brand-accent-blue text-white text-xs font-bold px-3 py-2 rounded-full shadow-xl z-50 opacity-0 transition-opacity duration-300 pointer-events-none flex items-center gap-1">
+        <i class="fas fa-book-open text-brand-gold"></i> <span id="scroll-percentage-text">0%</span>
+    </div>
+
     <div id="nav-placeholder"></div>
 
-    <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
     <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
         <article class="max-w-4xl mx-auto px-6 fade-in">
-            
-            <div class="mb-8">
-                <!-- Direcionado para a URL limpa de artigos -->
-                <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
-                    <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
-                </a>
-            </div>
 
-            <header class="border-b border-gray-150 pb-8 mb-8 text-center md:text-left">
-                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3">Crítica de Livros</span>
-                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center flex flex-col items-center">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3 text-center">Crítica de Livros</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4 text-center">
                     Como Não Ler a Bíblia em Qualquer Século (2 de 3)
                 </h1>
                 
-                <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500 font-medium">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-500 font-medium font-sans w-full">
                     <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 10 de Setembro de 2025</span>
                     <span class="hidden sm:inline text-gray-300">|</span>
                     <span class="flex items-center gap-1.5 font-inter">
@@ -108,72 +135,878 @@
                 </div>
             </header>
 
-            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-xs relative bg-gray-100">
-                <img src="../Imagens/2.png" alt="Como Não Ler a Bíblia em Qualquer Século" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Como+N%C3%A3o+Ler+a+B%C3%ADblia';">
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden border border-gray-200 shadow-xs relative bg-gray-100 mb-8">
+                <img src="../Imagens/2.png" alt="Como Não Ler a Bíblia em Qualquer Século (2 de 3)" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Como+N%C3%A3o+Ler+a+B%C3%ADblia';">
             </div>
 
-<p>
-Em breve
-</p>
-                <!-- Secção de Comentários (Livre de dados e comentários inventados) -->
-                <section class="mt-12 pt-8 border-t border-gray-150">
-                    <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-6">Comentários</h4>
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto text-center font-classic">
+                    Crítica ao livro <i>Ler a Bíblia no Século XXI</i> escrito por Pe. Carreira das Neves da Editorial Presença (2 de 3).
+                </p>
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto text-justify">
+                
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    Cristologia e Ministério de Jesus
+                </h2>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-2 block text-center">
+                    <span class="text-brand-accent-orange text-sm sm:text-base font-sans font-extrabold tracking-wider block mb-1 text-center">A Procura do «Jesus Histórico»</span>
+                </h3>
+
+                <p class="dropcap">
+                    A análise bíblica do Pe. Carreira das Neves revela-se defeituosa em grande parte por se apoiar na procura do chamado «Jesus histórico» e no método de exegese que está na sua base: o método histórico-crítico ou crítica histórica. Os axiomas da crítica histórica são <strong>(1)</strong> o princípio da analogia, segundo o qual o passado se assemelha sempre ao presente; <strong>(2)</strong> a ideia de correlação, que consiste em procurar sempre causas naturais por detrás de qualquer acontecimento que se estude; e <strong>(3)</strong> o princípio da crítica, que implica uma desconfiança sistemática em relação aos relatos da tradição e, sobretudo, da autoridade.<sup>i</sup>
+                </p>
+
+                <p>
+                    Este método, desenvolvido nos últimos dois a três séculos, pode ser útil como instrumento auxiliar para compreender melhor o contexto histórico e literário da Escritura. No entanto, quando usado de forma exclusiva e desligado da fé, conduz inevitavelmente a uma leitura redutiva e céptica.
+                </p>
+
+                <p>
+                    O próprio Magistério da Igreja advertiu para este perigo: Pio XII, na encíclica <i>Divino Afflante Spiritu</i> (1943), encorajou o estudo crítico mas sempre no quadro da inspiração divina e «condenou as acções daqueles que “ousaram restringir a verdade da Sagrada Escritura apenas a questões de fé e moral”, e disse também que o Papa Leão XIII tinha “justa e correctamente condenado estes erros” em <i>Providentissimus Deus</i> (1893)».<sup>ii</sup>
+                </p>
+
+                <p>
+                    Além disso, a Comissão Bíblica Pontifícia afirmou que embora «o método histórico-crítico é o método indispensável para o estudo científico do sentido dos textos antigos», este método «não pode pretender o monopólio. Ele deve ser consciente de seus limites, assim como dos perigos que o espreitam».<sup>iii</sup> Na sua conferência Erasmus de 1988, o Cardeal Ratzinger apelou à necessidade de uma «crítica dos críticos» — e do uso indevido que estes faziam do método histórico-crítico.<sup>iv</sup>
+                </p>
+
+                <p>
+                    Mais tarde, aquando Papa, Bento XVI, escreveu o seu <i>magnum opus</i> de três volumes <i>Jesus de Nazaré</i> precisamente com o propósito de pintar um retrato do Jesus real que fosse além do Jesus histórico como produto do método histórico-crítico. Aí, ele escreveu que quando a cissão entre o «Jesus histórico» e o «Cristo da fé» se torna ampla impera questionar «que significado poderia ter a fé em Jesus Cristo, em Jesus Filho do Deus vivo, se depois o homem Jesus tivesse sido tão diverso da forma como O apresentam os evangelistas e do modo como a Igreja, partindo dos evangelhos, O anuncia?».<sup>v</sup>
+                </p>
+
+                <p>
+                    Tal como Scott Hahn explica, a questão é que a crítica histórica é, por natureza e por definição, incapaz de provar que um acontecimento sobrenatural.<sup>vi</sup> Logo, um fiel nunca poderá usar tal método de forma isolada. Infelizmente, o autor faz precisamente isso, chegando a conclusões bizarras.
+                </p>
+
+                <p>
+                    Por exemplo, defende que o Evangelho de João «está muito longe do verdadeiro Jesus de Nazaré» porque nele «não é apresentada uma única parábola nem um único exorcismo» (p. 80). Contudo, se o próprio método histórico-crítico envolve a premissa de que o evangelista escreve com uma intenção teológica e pastoral, não faz sentido descartar a historicidade de um Evangelho inteiro por não incluir determinados géneros literários.
+                </p>
+
+                <p>
+                    Do mesmo modo, considera como referência o padre J.P. Meier, que estabeleceu critérios para identificar quais parábolas seriam autênticas. A conclusão é surpreendente: apenas quatro parábolas (do semeador, dos vinhateiros homicidas, do grande banquete e dos talentos) poderiam ser atribuídas ao Jesus histórico, por se encontrarem nos três Sinópticos. As restantes seriam duvidosas.
+                </p>
+
+                <p>
+                    O próprio autor chega a afirmar que a parábola do filho pródigo e a do bom samaritano, embora sejam «as que mais me tocam», possivelmente «foram postas na boca de Jesus pelo redator de Lucas» (p. 229) e, consequentemente, afirma que não as pode considerar quando delibera sobre a parábola mais importante. A procura histórico-crítica do Jesus histórico não serve meramente para calcular probabilidades da autenticidade dos ditos de Jesus, mas para ignorar aqueles ditos que o método considera pouco provavelmente autênticos.
+                </p>
+
+                <p>
+                    Esta forma de pensar reduz os Evangelhos a colagens literárias de intenções subjectivas, em contradição directa com a fé da Igreja (CIC 126, citando <i>DV</i> 19). O método histórico-crítico, quando usado assim, tem duas consequências negativas. Em primeiro lugar, introduz uma hermenêutica de suspeita, levando o exegeta a desconfiar de tudo o que está escrito, como se os evangelistas fossem manipuladores ideológicos e não testemunhas fiéis. Em segundo lugar, leva ao esquecimento da autoria divina da Escritura. Mesmo que se discutisse a redacção concreta de certas parábolas, o crente nunca pode esquecer que «a Sagrada Escritura deve ser lida e interpretada com o mesmo Espírito com que foi escrita» (<i>DV</i> 12).
+                </p>
+
+                <p>
+                    No fundo, todas as parábolas são autênticas, porque todas são ditas pelo Espírito Santo; e, rejeitando a suspeita, podemos afirmar que provavelmente Jesus as proferiu de facto, pois seria contrário à verdade divina que o Espírito inspirasse uma mentira sobre a Pessoa do Filho.
+                </p>
+
+                <p>
+                    Para além disso, é seguro considerar os Evangelhos como documentos históricos fiáveis por três razões:<sup>vii</sup>
+                </p>
+
+                <p>
+                    <strong>(1)</strong> os Evangelistas tinham a <strong>capacidade</strong> de escrever história fiável pois foram testemunhas oculares ou discípulos de testemunhas, escreveram pouco tempo após os acontecimentos (no máximo 35 anos depois), e os discípulos de Jesus ouviram os seus ensinamentos durante três anos e recitaram-nos repetidamente ao longo das décadas seguintes, garantindo que ainda estivessem frescos nas suas memórias aquando da redacção do Evangelhos;
+                </p>
+
+                <p>
+                    <strong>(2)</strong> os Evangelistas tinham a <strong>intenção</strong> de escrever história fiável pois inseriram dados concretos verificáveis (lugares e pessoas históricas), declaram explicitamente o propósito de transmistir factos reais (Jo 13, 35; Lc 1, 1–4), a forma literária dos Evangelhos corresponde ao género de biografia antiga com genealogias, estrutura tripla (nascimento, vida pública, morte), e selecção parcial de acontecimentos, e o estilo aproxima-se dos historiadores clássicos;
+                </p>
+
+                <p>
+                    <strong>(3)</strong> os Evangelistas escreveram, <strong>de facto</strong>, história fiável pois os relatos cumprem os critérios históricos de múltipla atestação (p.ex., morte de Jesus reportada dentro e fora da Bíblia), de embaraço (p.ex., mulheres como primeiras testemunhas) e de coêrencia (p.ex., pena de morte por blasfémia a quem se declarava como Filho de Deus). A arqueologia confirma detalhes (piscina de Betzatá, ossário de Caifás, etc.), e fontes não-Cristãs (Josefo, Tácito) confirmam a existência de Jesus, João Baptista, Tiago e a crucifixão sob Pilatos.
+                </p>
+
+                <p>
+                    Em síntese, o problema não é o método histórico-crítico em si, mas a sua absolutização. Enquanto instrumento, pode iluminar aspectos importantes do texto bíblico; mas quando usado como única chave, destrói a confiança no Evangelho, conduz a um cepticismo corrosivo e esquece que o verdadeiro Autor da Escritura é o Espírito Santo. «A Bíblia é plenamente divina na sua inspiração e plenamente humana na sua composição, isenta de erro e escrita para que sejamos salvos do pecado.»<sup>viii</sup> Portanto, devemos abandonar a hermenêutica de suspeita e adoptar a hermenêutica de fé.<sup>ix</sup>
+                </p>
+
+		<h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue pt-4 block text-center">
+                Contradições entre Evangelistas
+                </h2>
+
+                <p>
+                    Apesar disso, o autor insiste em encontrar contradições entre os Evangelhos sinópticos, detendo-se especialmente na relação de Jesus com a sua família. Em Mc 3, 20–21 lemos que «os seus familiares» ouviram falar da agitação que Jesus estava a provocar e «saíram para o deterem, pois diziam: “Está fora de si!” [i.e., está louco, perdeu a cabeça]». Mais adiante no mesmo capítulo (vv. 31–35) aparece um novo episódio: «Chegaram, então, a sua mãe e os seus irmãos e, permanecendo fora, mandaram chamá-lo». Jesus então pronuncia as célebres palavras: «“Quem é a minha mãe e os meus irmãos?” E, olhando em redor para os que estavam sentados em círculo à sua volta, disse: “Eis a minha mãe e os meus irmãos! Pois aquele que fizer a vontade de Deus, esse é meu irmão, minha irmã e minha mãe”».
+                </p>
+
+                <p>
+                    Com base neste texto, o autor conclui que «em Marcos, a mãe de Jesus e os seus familiares são descritos em confronto com Jesus» e que Ele «se distancia da sua família de sangue» (p. 211). Em contraste, defende que Lucas 8, 19–21 apresenta o mesmo episódio de forma mais «suave», sem qualquer indício de oposição: «Vieram ter com Ele a sua mãe e os seus irmãos mas não conseguiam chegar junto dele por causa da multidão. Foram, então, informá-lo: “A tua mãe e os teus irmãos estão lá fora e querem ver-te”. Mas Ele respondeu-lhes: “A minha mãe e os meus irmãos são aqueles que ouvem a palavra de Deus e a põem em prática”». Em Mateus 12, 46–50, segundo o autor, Maria e os parentes vão ao encontro de Jesus não para O repreender, mas «para O escutarem juntamente com os demais» (p. 214) e, desta forma, também contrastando com Marcos.
+                </p>
+
+                <p>
+                    O problema desta análise é que nasce de uma confusão de conceitos. Marcos fala primeiro de «os seus familiares» (em Grego, <i>par’ autou</i>), que pode significar simplesmente conhecidos, conterrâneos ou pessoas próximas e não necessariamente parentes de sangue. Por isso, várias traduções optam por «amigos» ou «a sua gente». Já nos vv. 31–35 Marcos usa termos precisos para designar «mãe» e «irmãos». É altamente improvável que, a poucas linhas de distância, Marcos tivesse utilizado vocabulário diferente para referir o mesmo grupo de pessoas. Concluir que «familiares» e «mãe e irmãos» são exactamente os mesmos é fruto da chamada hermenêutica de suspeita.
+                </p>
+
+                <p>
+                    A partir dessa hipótese, o método histórico-crítico traça uma narrativa evolutiva: em Marcos, Jesus teria rejeitado a sua família por O considerar louco; depois Mateus e Lucas teriam «corrigido» ou suavizado o relato para proteger a figura de Maria e adaptá-lo à sensibilidade das comunidades Cristãs posteriores ou outra qualquer especulada intenção escondida. Porém, esta reconstrução é um castelo de cartas: assenta numa premissa linguística errada e num preconceito contra a veracidade dos Evangelhos. Além disso, tudo isto também depende que Marcos é o Evangelho mais antigo, algo que, como vimos, ainda é discutido.
+                </p>
+
+                <p>
+                    Na realidade, não existe contradição entre os Evangelistas. Todos eles testemunham a mesma verdade: Jesus ensina que a verdadeira pertença à sua família não depende da carne e do sangue, mas da obediência à vontade de Deus, ou seja, a sua verdadeira família é de ordem espiritual. Cristo alarga o âmbito da sua família espiritual para incluir os seus discípulos, não para excluir a sua Mãe ou os seus parentes biológicos. Não se trata de uma repreensão à sua Mãe e restantes familiares visto que não é dito, por nenhum Evangelista, que Jesus rejeitou recebê-los depois do seu ensinamento; afirmar que isso aconteceu é puramente conjectura.
+                </p>
+
+                <blockquote class="border-l-4 border-brand-accent-orange pl-4 italic my-4 text-gray-600 font-classic">
+                    «Longe de diminuir o papel de Maria, Jesus revela a verdadeira grandeza da sua maternidade divina. Afinal, ela não foi apenas sua mãe natural pela geração, mas tornou-se Mãe de Deus precisamente por ter abraçado a vontade do Pai (Lc 1, 38.43). A sua relação com Jesus — tanto física como espiritual — é, assim, enaltecida pela afirmação do próprio Jesus.»<sup>x</sup>
+                </blockquote>
+
+                <p>
+                    O Catecismo resume assim: «Maria é, ao mesmo tempo, Virgem e Mãe, porque é a figura e a mais perfeita realização da Igreja» (CIC 507); e «o que a fé Católica, crê a respeito de Maria, funda-se no que crê a respeito de Cristo» (CIC 487). É, portanto, contrário à fé da Igreja transformar este episódio num confronto entre Jesus e a Sua Mãe.
+                </p>
+
+                <p>
+                    Uma vez corrigida a confusão terminológica, percebe-se a harmonia entre os três Evangelhos e a coerência do ensinamento. Jesus convida todos os crentes a fazer parte da sua família através da submissão à vontade do Pai, e Maria é o exemplo por excelência do cumprimento desse requisito.
+                </p>
+
+
+		<h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue pt-4 block text-center">
+                Narrativas da Infância de Jesus
+                </h2>
+
+                <p>
+                    Os «evangelhos da infância» — os dois primeiros capítulos de Mateus e Lucas — também são tratados com desconfiança. Afirma-se que estes textos «não são uma narrativa de história factual, de crónica, mas uma interpretação <i>midráshica</i> [explicarei adiante] arrancada a textos do AT [Antigo Testamento], que se traduzem, agora, na estória da infância de Jesus. Não se trata de uma lenda, de um mito, mas de um “conto” <i>midráshico</i>. E por detrás de todo o conto há uma memória histórica» (p. 216). O autor reconhece a «memória histórica», todavia não é claro quão fielmente histórica é essa memória. Por outro lado, defende que os evangelistas tinham uma agenda, uma intenção «puramente teológica ao afirmar que se trata de cumprir a palavra do profeta: <i>Do Egipto chamei o meu filho</i>» (p. 220). Esta análise textual que rejeita quase totalmente a historicidade parte do pressuposto que as narrativas da infância de Jesus em Mateus e Lucas são <i>midrash</i>. «Realmente, não se trata de uma crónica, mas de uma história narrativa <i>midráshica</i> em função de uma outra história comandada pela profecia e pelo Jesus <i>real</i> do Reino de Deus, morte e ressurreição» (p. 221). Será esse pressuposto razoável?
+                </p>
+
+                <p>
+                    Antes de mais, temos que definir <i>midrash</i>. Trata-se de um termo Hebraico que significa «interpretação» ou «comentário» e usado para descrever escritos Judaicos comuns após 200 d.C. Mais notoriamente, o <i>midrash</i> é conhecido por recontar histórias bíblicas e embelezá-las com detalhes ficcionais. Tal rótulo não encaixa em Mt 1–2 pelos seguintes motivos:
+                </p>
+
+                <p>
+                    (i) O texto é estilisticamente diferente de <i>midrash</i> não tendo como base um texto do Antigo Testamento, isto é, não reconta uma história já escrita mas sim uma história totalmente nova que se sustenta por si só;
+                </p>
+
+                <p>
+                    (ii) A ligação entre as antigas profecias e os acontecimentos da infância de Jesus só faz sentido se estes realmente ocorreram, cumprindo assim as promessas do Antigo Testamento, caso contrário o evangelista estaria apenas a enganar-se a si próprio;
+                </p>
+
+                <p>
+                    (iii) O Antigo Testamento não é tratado como um guião pré-escrito da vida Jesus, citando textos pouco óbvios ou obscuros, dando-lhes um sentido novo à luz de Cristo, e sugerindo que a história vivida por Jesus é que molda a leitura da Escritura e não o inverso;
+                </p>
+
+                <p>
+                    (iv) Os relatos de Mateus sobre a infância de Jesus estão em sintonia com dados históricos externos (e.g., a presença de comunidades judaicas no Egipto, a existência de magos persas interessados em astrologia e a crueldade de Herodes confirmada por outras fontes);
+                </p>
+
+                <p>
+                    (v) A Pontifícia Comissão Bíblica, em 1911, após análise detalhada, concluiu que as críticas à historicidade Mt 1–2 carecem de fundamento sólido.
+                </p>
+
+                <p>
+                    A narrativa da infância em Mateus é simultaneamente teológica e histórica. O evangelista cita o Antigo Testamento como confirmação, não como base da história. Jesus inaugura o cumprimento de todas as promessas divinas, e os factos narrados devem ser lidos como reais. Assim, a historicidade de Mt 1–2 é coerente com a Tradição Católica e com princípios válidos de estudo bíblico e histórico.<sup>xi</sup> Argumentos semelhantes poderiam ser feitos sobre Lc 1–2.
+                </p>
+
+                <p>
+                    Além da defesa do suposto <i>midrash</i> destas passagens, o autor também defende a existência de «contradições históricas e geográficas entre Lucas e Mateus e entre o que está escrito sobre Quirino e Herodes» (p. 221). Além disso, o nascimento de Jesus em Belém também parece ser posto em causa visto «que, segundo Lucas, é fruto de um recenseamento que, historicamente, não aconteceu naquele ano» (p. 220). Tais alegadas incongruências e imprecisões históricas são comummente usadas por Ateus como arma de arremesso contra a Bíblia e a fé Cristã.
+                </p>
+
+                <p>
+                    Por um lado, é incerto quais «contradições históricas e geográficas» o que autor se refere. Como tal, reuni as acusações mais comuns de contradições entre Mt 1–2 e Lc 1–2, , juntamente com a sua resolução, de forma elucidativa na seguinte tabela:<sup>xii,xiii</sup>
+                </p>
+
+                <!-- Tabela de Harmonização de Mateus e Lucas -->
+                <div class="overflow-x-auto my-6 border border-gray-200 rounded-xl shadow-xs">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-brand-accent-blue text-white">
+                                <th class="p-4 font-serif font-bold">Tema</th>
+                                <th class="p-4 font-serif font-bold">Mateus</th>
+                                <th class="p-4 font-serif font-bold">Lucas</th>
+                                <th class="p-4 font-serif font-bold">Resolução</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-150">
+                            <tr class="hover:bg-gray-50/55 transition-colors">
+                                <td class="p-4 font-bold text-brand-accent-blue">Residência inicial</td>
+                                <td class="p-4">Dá a entender que já viviam em Belém.</td>
+                                <td class="p-4">Família vivia em Nazaré e viajou a Belém por causa do recenseamento.</td>
+                                <td class="p-4 italic">"Mateus omite a viagem, mas não a exclui; Lucas fornece o detalhe."</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/55 transition-colors">
+                                <td class="p-4 font-bold text-brand-accent-blue">Local do nascimento</td>
+                                <td class="p-4">"Jesus é encontrado numa casa (2, 11)."</td>
+                                <td class="p-4">"Jesus nasce numa manjedoura (2, 7)."</td>
+                                <td class="p-4 italic">Nasceu numa manjedoura; mais tarde a família instalou-se numa casa. Os Magos chegaram 1–2 anos depois.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/55 transition-colors">
+                                <td class="p-4 font-bold text-brand-accent-blue">Visitantes</td>
+                                <td class="p-4">Magos do Oriente (muito depois do nascimento).</td>
+                                <td class="p-4">Pastores na noite do nascimento.</td>
+                                <td class="p-4 italic">"Dois episódios diferentes em tempos distintos: pastores no nascimento, Magos mais tarde."</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/55 transition-colors">
+                                <td class="p-4 font-bold text-brand-accent-blue">Destino após nascimento</td>
+                                <td class="p-4">Após visita dos Magos &rarr; Egipto &rarr; depois Nazaré.</td>
+                                <td class="p-4">Após purificação no Templo (40 dias) &rarr; Nazaré.</td>
+                                <td class="p-4 italic">Lucas omite a fuga ao Egipto. Ambos concordam que acabaram por fixar-se em Nazaré.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/55 transition-colors">
+                                <td class="p-4 font-bold text-brand-accent-blue">Lugar da visita dos Magos</td>
+                                <td class="p-4">Magos enviados a Belém e encontram Jesus numa casa.</td>
+                                <td class="p-4">Após 40 dias a família já estava em Nazaré.</td>
+                                <td class="p-4 italic">O texto não diz que a «casa» era em Belém; a estrela pode tê-los guiado até Nazaré.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    As diferenças não são contradições, mas sim complementaridades de perspectiva. Mateus destaca José, a dimensão régia e profética (Herodes, Magos, fuga para o Egipto) e Lucas centra-se em Maria, a humildade e a universalidade da salvação (anúncio aos pastores, cânticos, apresentação no Templo). Ambos convergem no essencial: Jesus nasceu em Belém, de Maria Virgem, com José como pai legal, concebido por obra do Espírito Santo, e cresceu em Nazaré.
+                </p>
+
+                <p>
+                    Por outro lado, a historicidade do Censo de Quirino tem sido considerado por muitos como problemática, mas investigações recentes oferecem explicações plausíveis:
+                </p>
+
+                <p>
+                    (a) <strong>Data da morte de Herodes:</strong> A visão convencional situa-a em 4 a.C., o que levaria o nascimento de Jesus para 6–4 a.C. No entanto, estudos recentes defendem 1 a.C. como a data da morte de Herodes, em conformidade com o testemunho de vários Padres da Igreja (Irineu, Clemente, Tertuliano, Orígenes, Hipólito, Eusébio, Epifânio), que colocam a Natividade entre 3 e 2 a.C;
+                </p>
+
+                <p>
+                    (b) <strong>O decreto de César Augusto:</strong> Costuma-se pensar que foi um recenseamento fiscal impossível durante o reinado de Herodes. Porém, há evidências históricas e arqueológicas de que, por volta de 3 a.C., se exigiu um juramento público de lealdade a Augusto em todo o império. Isto corresponde bem ao que Lucas descreve e ao que mais tarde relata Orósio (séc. V), confirmando que não se tratava de impostos, mas de fidelidade ao imperador;
+                </p>
+
+                <p>
+                    (c) <strong>O papel de Quirino:</strong> É sabido que ele conduziu um censo fiscal em 6 d.C., mas Lucas pode referir-se a uma função administrativa anterior. Justino Mártir afirma que Quirino era «procurador» na Judeia no tempo de Jesus, e Tertuliano acrescenta que o legado da Síria nessa altura era outro (Saturnino). Assim, Quirino pode ter supervisionado a inscrição de juramento em 3 a.C., anos antes de se tornar legado da Síria.
+                </p>
+
+                <p>
+                    Revendo estes três pontos — a morte de Herodes, a natureza do decreto de César e o cargo de Quirino —, torna-se plausível situar o nascimento de Jesus entre 3 e 2 a.C. Maria e José teriam ido a Belém para se inscreverem num registo de lealdade ao imperador, organizado na Judeia sob Quirino. Embora permaneçam lacunas, esta reconstrução reduz as aparentes contradições e confirma a fiabilidade histórica de Lucas e da tradição cristã primitiva.<sup>xiv</sup>
+                </p>
+
+                <p>
+                    A tentativa de opor Mateus e Lucas ou de reduzir os relatos a <i>midrash</i> ignora, mais uma vez, o dado fundamental: o Espírito Santo é o Autor divino da Escritura (CIC 136), e não inspiraria um «conto fictício» para apresentar a Encarnação do Verbo. Para o crente, as narrativas da infância não são parábolas literárias, mas parte do único Evangelho, onde Deus Se revela em Jesus Cristo, «nascido de uma mulher, nascido sujeito à Lei» (Gl 4, 4).
+                </p>
+
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue pt-6 block text-center">
+                    Teologia de Paulo e Escritos Apostólicos
+                </h2>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-2 block text-center">
+                    <span class="text-brand-accent-orange text-sm sm:text-base font-sans font-extrabold tracking-wider block mb-1 text-center">Contradições entre Paulo e os Evangelhos</span>
+                </h3>
+
+                <p>
+                    Também encontramos neste livro uma tentativa de fundamentar uma oposição entre as Cartas Paulinas e os Evangelhos a partir da sua própria datação tardia dos textos, colocando a redacção de todos os Evangelhos após a morte de Paulo. Escreve: «Ao ler os quatro evangelhos […] não nos lembramos de Paulo. […] dá a impressão que os autores dos evangelhos, que escreveram depois de Paulo, não conheciam a teologia cristológica de Paulo» (p. 74). Mais ainda, especula: «Se S. Paulo tivesse conhecido os quatro evangelhos […] teria escrito as suas cartas da mesma maneira?» (p. 206). Assim, passa a ideia de que as Cartas Paulinas, reconhecidas pela Igreja como inspiradas pelo Espírito Santo, careceriam de correcção. Esta tese é infundada por várias razões.
+                </p>
+
+                <p>
+                    Primeiro, Paulo não precisava de «conhecer os Evangelhos escritos» para partilhar o mesmo conteúdo. Ele conheceu directamente a Tradição apostólica e pregou-a desde cedo, tal como o próprio afirma: «transmiti-vos, em primeiro lugar, o que também recebi: que Cristo morreu pelos nossos pecados segundo as Escrituras, foi sepultado e ressuscitou ao terceiro dia segundo as Escrituras, apareceu a Cefas e depois aos Doze» (1Cor 15, 3–5). Estes elementos são o núcleo dos Evangelhos e mostram que Paulo já transmitia o mesmo Evangelho pregado pelos Apóstolos.
+                </p>
+
+                <p>
+                    Segundo, a ideia de que Paulo «jamais conheceu o drama de Jesus narrado nos quatro evangelhos pelo simples facto, como sabemos de os não conhecer» (p. 205) é logicamente circular: assume-se uma datação tardia e depois usa-se essa mesma hipótese como prova da conclusão. Em contrapartida, assumindo uma datação mais conservadora, que coloca a redacção dos Sinópticos entre a década de 50 e o início da década de 60, torna plausível que São Paulo tivesse de facto conhecido e lido esses textos. Seja como for, é verdadeiro dizer que Paulo conheceu o «Jesus histórico» não só pela Tradição apostólica recebida, mas também pelo encontro pessoal com o Ressuscitado (1Cor 9, 1).
+                </p>
+
+                <p>
+                    Terceiro, há uma miríade de evidentes pontos de contacto entre Paulo e os Evangelhos, tal como indicado pelo Papa Bento XVI em 2008:<sup>xv</sup>
+                </p>
+
+                <p>
+                    (1) <strong>Sermão da Montanha reflectido em Paulo:</strong> Rm 12, 9–21 é «quase um reflexo fiel» de Mt 5–7 (amar os inimigos, vencer o mal com o bem, viver em paz com todos);
+                </p>
+
+                <p>
+                    (2) <strong>Preceitos matrimoniais:</strong> 1Cor 7, 10–11 cita o mandamento do Senhor sobre a indissolubilidade do matrimónio (Mc 10, 11–12);
+                </p>
+
+                <p>
+                    (3) <strong>Sustento dos pregadores:</strong> 1Cor 9, 14 recorda o ensinamento de Jesus: «O trabalhador merece o seu salário» (Lc 10, 7);
+                </p>
+
+                <p>
+                    (4) <strong>Eucaristia:</strong> 1Cor 11, 23–25 transmite fielmente as palavras e gestos de Jesus na Última Ceia (Lc 22, 19–20);
+                </p>
+
+                <p>
+                    (5) <strong>Publicanos e pecadores:</strong> A doutrina Paulina da misericórdia de Deus pelos pecadores (Rm 5, 8; Ef 2, 3–5) corresponde às palavras de Jesus que os Publicanos e prostitutas precedem os Fariseus no Reino (Mt 21, 31; Lc 7, 36–50; 15, 1–2).
+                </p>
+
+                <p>
+                    (6) <strong>Abbá, Pai:</strong> Jesus dirige-se a Deus como «Abbá» (Mc 14, 36); Paulo ensina que o Espírito de Cristo nos faz clamar «Abbá, Pai» (Gl 4, 6; Rm 8, 15).
+                </p>
+
+                <p>
+                    (7) <strong>Cristo como resgate:</strong> Jesus disse que daria a vida «em resgate por muitos» (Mc 10, 45; Mt 20, 28); o reflexo desta ideia sobressai na doutrina Paulina sobre a morte de Jesus como resgate (1 Cor 6, 20), como redenção (Rm 3, 24), como libertação (Gl 5, 1) e como reconciliação (Rm 5, 10; 2 Cor 5, 18–20).
+                </p>
+
+                <p>
+                    Portanto, qualquer oposição entre São Paulo e os Evangelhos é apenas aparente. Os Evangelhos trazem-nos as palavras e actos de Jesus; as cartas Paulinas ajudam-nos a compreender o sentido salvífico dessas palavras e actos para a Igreja nascente e para o mundo gentio. Parafraseando Bento XVI, Paulo conhecia certamente a grande tradição da vida, palavras, morte e ressurreição de Jesus. Deste modo, não há «Jesus de Nazaré vs. Paulo de Tarso» na fé Católica, mas sim Jesus Cristo Senhor anunciado por diferentes vozes e em diferentes circunstâncias em perfeita consonância. Colocar uns contra os outros é criar uma falsa oposição que nem a história, nem a fé da Igreja, sustentam.
+                </p>
+
+
+		<h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue pt-4 block text-center">
+                Contradições Internas nas Cartas Paulinas
+                </h2>
+
+                <p>
+                    Além de contradições entre Paulo e os Evangelhos, também são alegadas contradições internas nas Cartas Paulinas. A defesa desta posição é o facto de se tratarem de cartas pseudopaulinas, isto é, quando é encontrada uma contradição entre cartas assume-se que uma delas, normalmente a que tem a passagem que não agrada ao histórico-crítico, não foi escrita por Paulo.
+                </p>
+
+                <p>
+                    Daí considerar-se pseudopaulinas as cartas a Tito e Timóteo por se dirigiram a comunidades Cristãs «com bispos, presbíteros e diáconos, escravos e livres, com éticas familiares hierarquizadas» e pela «proibição das mulheres se manifestarem nas reuniões de oração (1Tm 2, 11–15)», e as cartas aos Efésios e Colossenses pois defende-se «a estrutura classista dos escravos que se devem submeter aos seus donos (Ef 6, 5–9; Cl 3, 22–4, 1)» assim como a «obrigação das mulheres se submeterem aos seus maridos como ética familiar (Ef 5, 22–23; Cl 3, 18)» (p. 185).
+                </p>
+
+                <p>
+                    <strong>Tito e Timóteo:</strong> Sobre o silêncio das mulheres na Primeira a Timóteo, é afirmado que isso contraria o que «Paulo escreve na primeira aos Coríntios 11, 5». Contudo, o próprio autor menciona que na mesma carta (1Cor), que ele considera autêntica de Paulo, é também defendida a mesma ideia sobre o silêncio das mulheres (14, 33b–35), rotulando esta passagem de «texto estranho ou paradoxal» (p. 185). Trata-se de um claro caso de um exegeta escolher a passagem que gosta como autêntica e a passagem que lhe faz torcer o nariz como «estranha ou paradoxal».
+                </p>
+
+                <p>
+                    Poderia-se perfeitamente concluir que em 1Tm 2, 11–15 e 1Cor 14, 33b–35 se encontram ensinamentos análogos e, consequentemente, que é totalmente plausível partilharem o mesmo autor ou que o autor de uma das passagens concordaria com o conteúdo da outra. Tal não acontece, pois há uma passagem da Bíblia que <i>a priori</i> se quer rejeitar e é preciso encontrar <i>a posteriori</i> argumentos para essa rejeição.
+                </p>
+
+                <p>
+                    Na verdade, Paulo impõe, em 1Cor 14, 34–35 e 1Tm 2, 12, o silêncio às mulheres Cristãs no culto público. Todavia, não se trata de uma restrição absoluta aplicável a todas as circunstâncias, mas uma exclusão das mulheres do ministério de ensino exercido pelos clérigos ordenados, na qualidade oficial de pastor ou de pregador. As mulheres podem legitimamente orar e profetizar na assembleia litúrgica (1Cor 11, 5), são encorajadas a ensinar noutros contextos (Tt 2, 3-4), e Paulo não nega a igual dignidade de homens e mulheres em Cristo (Gl 3, 28). Segundo o ensinamento da Igreja, Paulo proíbe as mulheres de exercer a função oficial de ensino na assembleia cristã (Sagrada Congregação para a Doutrina da Fé, <i>Inter insigniores</i> [1976], 4).<sup>xvi</sup> «Criados à imagem do Deus único, dotados duma idêntica alma racional, todos os homens têm a mesma natureza e a mesma origem» (CIC 1934, cf. 791).
+                </p>
+
+                <p>
+                    <strong>Efésios e Colossenses:</strong> A Carta aos Colossenses apresenta-nos «uma ética familiar e social (pais, filhos, mulher submetida ao marido, escravos submissos aos donos, em 3, 18–22)» que contradiz aquilo que encontramos «nas cartas aos Coríntios e Gálatas, onde não há diferença alguma entre homem e mulher, judeus e não judeus, escravos e livres» (p. 187). A justificação, segundo o autor, apelando ao trabalho de James Dunn, é que Colossenses é «de Paulo e Timóteo. Paulo assina o que Timóteo, com toda a liberdade, escreveu» e, assim, «compreendemos o paradoxo de 3, 11 comparados com 3, 18–22» (p. 187).
+                </p>
+
+                <p>
+                    A suposta contradição entre afirmações de igualdade (Gl 3, 28; Cl 3, 11) e exortações disciplinares sobre família e escravidão (Ef 5, 22–6, 9; Cl 3, 18–4, 1) dissolve-se quando se analisa os distintos contextos das distintas passagens. Por um lado, Paulo defende que todos, independentemente da raça, sexo, ou classe social, são iguais candidatos à salvação e à filiação em Cristo, o que não significa, de todo, que «não há diferença alguma entre homem e mulher, judeus e não judeus, escravos e livres». Por outro, «Paulo desafia cada lar a ser transformado pela «paz de Cristo» (Cl 3, 15). A visão do apóstolo para a vida doméstica contrasta fortemente com a impiedade da sociedade Pagã, em especial com a tirania de maridos e pais, assim como com o tratamento desumano dos escravos da casa».<sup>xvii</sup>
+                </p>
+
+                <p>
+                    De facto, o Grego sugere que a submissão das esposas é livre e voluntária, não degradante, servil ou coerciva enquanto a missão do marido é edificar o seu matrimónio e a sua família, não dominá-los nem rebaixá-los por fins egoístas, defendendo o matrimónio como uma parceria amorosa entre esposos de igual dignidade. Mais ainda, Paulo sublinha a igual dignidade escravos e senhores diante de Deus, tentando melhorar a relação entre eles para que os escravos sirvam os seus senhores de forma voluntária e honesta e os senhores respeitem os seus servos e abstenham-se de tratamentos duros.<sup>xviii</sup> Nada disto é «machismo» ou «classismo».
+                </p>
+
+                <p>
+                    <strong>Tessalonicenses:</strong> Também é defendido que as cartas aos Tessalonicenses se contradizem explicitamente: «encontramos [em 2Ts], na questão da parusia ou segunda vinda do Senhor, uma doutrinação <i>oposta</i> à da primeira [1Ts]. […] [2Ts 2, 1–3a] é, pura e simplesmente, uma negação da primeira carta com Paulo como autor. […] Para o autor da segunda carta é preciso apagar o passado sobre este assunto» (p. 183).
+                </p>
+
+                <p>
+                    Apenas uma leitura superficial poderia levar a tal conclusão pois parte pressuposto <i>errado</i> de que Paulo afirma em 1Ts que a Parusia está para breve. Tal não se verifica. Em 1Ts 13–18, Paulo descreve a parusia detalhando sobre o que acontecerá aos vivos e aos mortos durante esse acontecimento. Ora, Paulo estava vivo quando escreveu isto e, por isso, quando fala dos vivos usa o pronome «nós». Isto é suficiente para alguns inferirem que Paulo acreditava que a Parusia iria acontecer ainda durante a sua vida.
+                </p>
+
+                <p>
+                    O próprio autor partilha essa posição pois diz que que São Paulo «esperava a parusia para os seus dias históricos de acordo com o que escreve na primeira carta aos Tessalonicenses e, frequentemente, nas demais cartas sobre a vinda de “o Dia do Senhor”» (p. 73). Em contrapartida, outras passagens indicam que Paulo considerava a sua morte como uma possibilidade real (Fl 3, 10–11; 2Tm 4, 6) e que se incluía entre aqueles que iriam ressuscitar (1Cor 6, 14; 2Cor 4, 14), contrariando a posição do autor.
+                </p>
+
+                <p>
+                    Além disso, imediatamente a seguir, em 1Ts 5, 1–6, Paulo insiste que o «Dia do Senhor» virá de forma inesperada e, como tal, os fiéis devem permanecer vigilantes. As suas palavras desencorajam as tentativas de especular sobre o momento preciso do regresso de Cristo (CIC 672–673, 1849). Em 2Ts, ele corrige uma interpretação errada que teria surgido: precisamente a ideia de que a Parusia era para breve. Por isso, adverte que «não vos perturbeis […] como se o dia do Senhor fosse iminente» (2Ts 2, 2), reforçando assim a mesma ideia que transmitiu na carta precedente.<sup>xix</sup> «A partir da ascensão, a vinda de Cristo na glória está iminente» (CIC 673).
+                </p>
+
+                <p>
+                    Em suma, Paulo não se contradiz: adapta o ensinamento às circunstâncias pastorais de cada comunidade.
+                </p>
+
+<p>Continua <a href="https://www.editorajeronimo.pt/artigos-individuais/como-nao-ler-a-biblia-em-qualquer-seculo-3-de-3" style="text-decoration: underline;"><em>aqui</em></a>.</p>
+
+            </div>
+
+            <!-- Caixa de Newsletter que define o ponto de paragem de 100% no scroll -->
+            <div id="newsletter-section" class="bg-[#ecf3fa] p-6 sm:p-8 rounded-2xl border border-brand-accent-blue/10 shadow-xs max-w-4xl mx-auto my-12 text-center">
+                <p class="font-serif text-lg sm:text-2xl text-brand-accent-blue font-bold mb-4">
+                    Recebe <span class="underline decoration-brand-accent-orange decoration-2 underline-offset-4 font-bold">gratuitamente</span> a nossa newsletter e fica a par das novidades
+                </p>
+                <form id="articles-newsletter-form" onsubmit="handleArticlesNewsletterSubmit(event)" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 mt-4">
+                    <div class="flex-grow">
+                        <input type="email" id="articles-newsletter-email" required placeholder="o teu endereço de e-mail" aria-label="Endereço de e-mail" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-brand-text placeholder-gray-455 focus:outline-none focus:ring-2 focus:ring-brand-accent-orange focus:border-transparent transition-all text-sm font-sans">
+                    </div>
+                    <button type="submit" class="bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold uppercase text-xs tracking-wider px-6 py-3.5 rounded-xl transition-all shadow-sm hover:-translate-y-0.5 active:translate-y-0 font-sans">
+                        Subscrever
+                    </button>
+                </form>
+                <div id="articles-newsletter-success-msg" class="hidden mt-4 p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-xl max-w-md mx-auto font-sans">
+                    Subscrição registada com sucesso! Obrigado por nos acompanhar.
+                </div>
+            </div>
+
+            <div class="space-y-2">
+        <div><span class="font-bold w-8 inline-block">i.</span> Keating, K. & Hahn, S. (1996) <i>Scott Hahn on the Politicized Bible</i>. Catholic Answers. catholic.com/magazine/print-edition/scott-hahn-on-the-politicized-bible</div>
+        <div><span class="font-bold w-8 inline-block">ii.</span> Horn, T. (2016) <i>Hard Sayings: A Catholic Approach to Answering Bible Difficulties</i>. Catholic Answers, Inc., Califórnia.</div>
+        <div><span class="font-bold w-8 inline-block">iii.</span> Pontifícia Comissão Bíblica (1993) <i>A Interpretação da Bíblia na Igreja</i>, § I, A, 1 e Conclusão.</div>
+        <div><span class="font-bold w-8 inline-block">iv.</span> Keating & Hahn (1996). <i>Idem</i>.</div>
+        <div><span class="font-bold w-8 inline-block">v.</span> Bento XVI (2008) <i>Jesus de Nazaré: Do Baptismo no Jordão até à Transfiguração</i>. A Esfera dos Livros, Lisboa.</div>
+        <div><span class="font-bold w-8 inline-block">vi.</span> Keating & Hahn (1996). <i>Idem</i>.</div>
+        <div><span class="font-bold w-8 inline-block">vii.</span> Broussard, K. (2021) <i>The Reliability of the Gospels</i>. Catholic Answers. catholic.com/magazine/print-edition/the-reliability-of-the-gospels</div>
+        <div><span class="font-bold w-8 inline-block">viii.</span> Horn, T. (2017) <i>Why We’re Catholic: Our Reasons for Faith, Hope, and Love</i>. Catholic Answers Inc., Califórnia.</div>
+        <div><span class="font-bold w-8 inline-block">ix.</span> Cardeal Ratzinger, J. (1988) <i>Biblical Interpretation in Crisis: The 1988 Erasmus Lecture</i>. Nova Iorque.</div>
+        <div><span class="font-bold w-8 inline-block">x.</span> Hahn, S. & Mitch J. (2024) <i>Ignatius Catholic Study Bible: Old and New Testament – Comentário sobre Mt 12, 50</i>. Ignatius Press, São Francisco.</div>
+        <div><span class="font-bold w-8 inline-block">xi.</span> Hahn, S. & Mitch J. (2024) <i>Idem</i> – Topical Essay: Is Matthew’s Infancy Narrative Historical?</div>
+        <div><span class="font-bold w-8 inline-block">xii.</span> Staples, T. (2014) <i>Do the Infancy Narratives of Matthew and Luke Contradict Each Other?</i> Catholic Answers. catholic.com/magazine/online-edition/do-the-infancy-narratives-of-matthew-and-luke-contradict-each-other</div>
+        <div><span class="font-bold w-8 inline-block">xiii.</span> Akin, J. <i>How the Accounts of Jesus’ Childhood Fit Together</i>. jimmyakin.com/how-the-accounts-of-jesus-childhood-fit-together</div>
+        <div><span class="font-bold w-8 inline-block">xiv.</span> Hahn, S. & Mitch J. (2024). <i>Idem</i> – Topical Essay: The Census of Quirinius.</div>
+        <div><span class="font-bold w-8 inline-block">xv.</span> Bento XVI (2008) <i>Audiência Geral: São Paulo (7) – A relação com o Jesus histórico</i>.</div>
+        <div><span class="font-bold w-8 inline-block">xvi.</span> Hahn, S. & Mitch J. (2024) <i>Idem</i> – Comentários sobre 1Cor 14, 34–35 e 2Tm 2, 12.</div>
+        <div><span class="font-bold w-8 inline-block">xvii.</span> Hahn, S. & Mitch J. (2024) <i>Idem</i> – Comentários sobre Gl 3, 18; Cl 3, 11 e Cl 3, 18–4, 1.</div>
+        <div><span class="font-bold w-8 inline-block">xviii.</span> Hahn, S. & Mitch J. (2024) <i>Idem</i> – Comentários sobre Ef 5, 22.25 e Ef 6, 5.</div>
+        <div><span class="font-bold w-8 inline-block">xix.</span> Hahn, S. & Mitch J. (2024) <i>Idem</i> – Comentários sobre 1Ts 4, 15; 5, 1–11 e 2Ts 2, 1–12.</div>
+    </div>
+</section>
+
+            <!-- Botões de Navegação -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-12 border-t border-b border-gray-150 py-8 font-inter text-xs uppercase tracking-wider font-bold">
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all text-center font-sans">
+                    <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                </a>
+                <a href="../catalogo-completo" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all text-center font-sans">
+                    Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                </a>
+                <a href="como-nao-ler-a-biblia-em-qualquer-seculo-3-de-3" class="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-xl transition-all text-center flex items-center justify-center gap-1.5 font-sans">
+                    Próximo Artigo <i class="fas fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- SECCÃO DE COMENTÁRIOS ESTILO CUSDIS (PORTUGUÊS, MINIMALISTA, GOOGLE SHEETS AS BACKEND) -->
+            <section class="mt-12 pt-6 border-t border-gray-200">
+                
+                <!-- Título Simples -->
+                <div class="mb-6">
+                    <h4 class="font-sans text-lg font-bold text-gray-800">Comentários</h4>
+                </div>
+
+                <!-- Alerta Superior de Feedback de Erros ou Informações -->
+                <div id="comment-alert" class="hidden mb-4 p-4 rounded-md text-xs font-sans"></div>
+
+                <!-- Formulário Minimalista Cusdis-style -->
+                <form id="comment-form" onsubmit="handleCommentSubmit(event)" class="space-y-4 mb-8">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="w-full sm:w-1/3">
+                            <input type="text" id="comment-author-name" required placeholder="Nome" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors">
+                        </div>
+                    </div>
+                    <div>
+                        <textarea id="comment-body-text" required rows="4" placeholder="Comentário" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors resize-y"></textarea>
+                    </div>
                     
-                    <div class="space-y-4 mb-8 font-inter" id="comments-box">
-                        <!-- Sem comentários automáticos inventados -->
+                    <!-- Botão de Envio Simples e Minimalista -->
+                    <div class="flex items-center">
+                        <button type="submit" id="comment-submit-btn" class="w-full sm:w-auto border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-sm font-semibold px-6 py-2.5 rounded-md font-sans text-center">
+                            Enviar
+                        </button>
                     </div>
+                </form>
 
-                    <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl font-inter">
-                        <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
-                        <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
-                            </div>
-                            <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter resize-none"></textarea>
-                            <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
-                            <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter">
-                                Enviar Comentário
-                            </button>
-                        </form>
-                    </div>
-                </section>
+                <!-- Div de Carregamento (Loading) -->
+                <div id="comments-loading" class="py-6 text-center text-gray-400">
+                    <i class="fas fa-circle-notch fa-spin text-gray-455 text-xl mb-1"></i>
+                    <p class="text-[10px] font-sans">A carregar comentários...</p>
+                </div>
 
-            </div>
+                <!-- Lista de Comentários Cusdis-style -->
+                <div id="comments-list-container" class="space-y-6 pt-2">
+                    <!-- Gerado de forma ultra-limpa por JS -->
+                </div>
+            </section>
 
-            <!-- Rodapé do Artigo -->
-            <footer class="mt-16 pt-8 border-t border-gray-150 font-inter">
-                <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
+            <!-- Cartão Biográfico do Autor -->
+            <footer class="mt-12 pt-8 border-t border-gray-150 font-inter">
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs max-w-3xl mx-auto text-center sm:text-left">
                     <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
                         <a href="../sobreHB" class="block w-full h-full">
                             <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
                         </a>
                     </div>
-                    <div class="text-center sm:text-left">
-                        <h4 class="font-serif text-lg font-bold text-brand-accent-blue">
+                    <div class="flex flex-col items-center sm:items-start gap-1">
+                        <span class="text-[10px] text-gray-400 font-sans font-bold uppercase tracking-wider block leading-none">Autor:</span>
+                        <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-2 leading-tight">
                             <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
                         </h4>
-                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
-                        <p class="text-sm text-gray-650 leading-relaxed font-inter">
-                            Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
-                        </p>
+                        <a href="../sobreHB" class="inline-block px-5 py-2.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all font-sans font-bold text-xs uppercase tracking-wider text-center shadow-xs hover:-translate-y-0.5 active:translate-y-0 mt-1">
+                            Ver Mais <i class="fas fa-chevron-right ml-1 text-[9px]"></i>
+                        </a>
                     </div>
-                </div>
-
-                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-inter text-xs uppercase tracking-wider font-bold">
-                    <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
-                        <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
-                    </a>
-                    <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
-                        Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
-                    </a>
                 </div>
             </footer>
 
         </article>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado assincronamente do GitHub) -->
     <div id="footer-placeholder"></div>
+
+    <!-- Script de Gestão Inteligente dos Comentários (Sem Firebase, via Google Sheets) -->
+    <script>
+        // =================----------------==================
+        // CONFIGURAÇÃO DOS SEUS LINKS DO GOOGLE
+        // =================----------------==================
+        
+        // 1. O link do formulário Google onde as respostas são submetidas
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/1lyjJzNOvwJtA0M6CgTXE66L1Yj74OJ49v-XD_mrQSnw/formResponse";
+        
+        // 2. Os IDs dos campos do seu formulário Google
+        const GOOGLE_ENTRY_NOME = "entry.2046871302";       
+        const GOOGLE_ENTRY_COMENTARIO = "entry.964260973"; 
+        const GOOGLE_ENTRY_PAGINA = "entry.788584228";     
+
+        // 3. O link do seu Google Sheets (Necessita de estar público como "Qualquer pessoa com o link" -> "Leitor")
+        const GOOGLE_SHEETS_TSV_URL = "https://docs.google.com/spreadsheets/d/1qypNiIPv2n-Y1p-KWjHskPIDNx2tztd01mAPx5AQ9hA/edit?usp=sharing";
+
+        // Função para normalizar os IDs de página de forma uniforme
+        function normalizePageId(id) {
+            if (!id) return "como-nao-ler-a-biblia-em-qualquer-seculo-2-de-3";
+            return id.trim()
+                     .toLowerCase()
+                     .replace(/\.html$/, '')
+                     .split('/')
+                     .filter(Boolean)
+                     .pop() || "como-nao-ler-a-biblia-em-qualquer-seculo-2-de-3";
+        }
+
+        // ID único deste artigo
+        const rawPageId = window.location.pathname.split('/').pop().replace('.html', '') || 'como-nao-ler-a-biblia-em-qualquer-seculo-2-de-3';
+        const pageId = normalizePageId(rawPageId);
+
+        let fallbackComments = [];
+
+        // Carregar Comentários de forma totalmente automática usando a API oficial do Google Visualization
+        async function fetchComments() {
+            const listContainer = document.getElementById('comments-list-container');
+            const loader = document.getElementById('comments-loading');
+
+            if (GOOGLE_SHEETS_TSV_URL.includes("ExemploFolhaDeCalculoPublicada")) {
+                renderComments(fallbackComments);
+                loader.classList.add('hidden');
+                return;
+            }
+
+            try {
+                // Constrói URL dinâmico com parâmetro anti-cache
+                const fetchUrl = getFetchUrl();
+                
+                // Pedido nativo limpo sem cabeçalhos customizados HTTP para assegurar compatibilidade CORS total
+                const response = await fetch(fetchUrl, {
+                    method: "GET",
+                    credentials: "omit",
+                    cache: "no-store"
+                });
+                if (!response.ok) throw new Error("Erro ao obter dados.");
+                
+                const data = await response.text();
+
+                // Validação de privacidade do arquivo
+                if (data.trim().startsWith('<html') || data.trim().startsWith('<!DOCTYPE') || data.includes('<meta')) {
+                    throw new Error("A folha de cálculo está configurada como Privada no Google Drive.");
+                }
+
+                const parsedComments = parseGVizData(data);
+                
+                // Limpeza e remoção automática de comentários locais pendentes já aprovados na folha
+                syncLocalPendentes(parsedComments);
+                
+                renderComments(parsedComments);
+            } catch (error) {
+                console.warn("Problema ao importar dados do Google Sheets:", error);
+                renderComments(fallbackComments);
+            } finally {
+                loader.classList.add('hidden');
+            }
+        }
+
+        // Reconstrói a URL para tempo real extraindo o ID da planilha e o gid diretamente para o endpoint gviz/tq (Sem CDN cache)
+        function getFetchUrl() {
+            let url = GOOGLE_SHEETS_TSV_URL.trim();
+            const salt = `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+            
+            if (url.includes('/spreadsheets/d/')) {
+                const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+                if (matches && matches[1]) {
+                    const sheetId = matches[1];
+                    
+                    let gid = '0';
+                    const gidMatches = url.match(/[#?&]gid=([0-9]+)/);
+                    if (gidMatches && gidMatches[1]) {
+                        gid = gidMatches[1];
+                    }
+                    
+                    // Endpoint da Google Visualization API - sem cache e suporte nativo a CORS
+                    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${gid}&tqx=out:json&t=${salt}`;
+                }
+            }
+            return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
+        }
+
+        // Normalização de strings para comparação confiável
+        function cleanCompare(str) {
+            if (!str) return "";
+            return str.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        // Sincroniza e limpa o localStorage quando o comentário já tiver sido marcado como "Sim" no Google Sheets
+        function syncLocalPendentes(allParsedComments) {
+            let meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            if (meusPendentes.length === 0) return;
+
+            const MAX_AGE_MS = 24 * 60 * 60 * 1000; // 24 horas de validade máxima para pendentes locais
+
+            const novosPendentes = meusPendentes.filter(pLocal => {
+                const idade = Date.now() - pLocal.timestamp;
+                if (idade > MAX_AGE_MS) return false;
+
+                // Remove o rascunho apenas se ele já existir aprovado ("Sim") na base de dados online
+                const aprovadoNaFolha = allParsedComments.some(cSheet => 
+                    cSheet.approved &&
+                    normalizePageId(cSheet.page) === normalizePageId(pLocal.page) && 
+                    cleanCompare(cSheet.name) === cleanCompare(pLocal.name) &&
+                    cleanCompare(cSheet.text) === cleanCompare(pLocal.text)
+                );
+                
+                return !aprovadoNaFolha;
+            });
+
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
+        }
+
+        // Processador oficial de dados GViz JSON do Google Sheets
+        function parseGVizData(responseText) {
+            try {
+                const jsonStart = responseText.indexOf('{');
+                const jsonEnd = responseText.lastIndexOf('}');
+                if (jsonStart === -1 || jsonEnd === -1) return [];
+                
+                const jsonStr = responseText.substring(jsonStart, jsonEnd + 1);
+                const gvizData = JSON.parse(jsonStr);
+                
+                if (!gvizData || !gvizData.table || !gvizData.table.rows) return [];
+                
+                const table = gvizData.table;
+                const cols = table.cols || [];
+                
+                // Mapeamento dinâmico e inteligente das colunas pelos cabeçalhos/rótulos
+                let timestampIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('carimbo') || c.label.toLowerCase().includes('time') || c.label.toLowerCase().includes('data')));
+                let nameIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('nome') || c.label.toLowerCase().includes('autor') || c.label.toLowerCase().includes('user') || c.label.toLowerCase().includes('name')));
+                let commentIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('coment') || c.label.toLowerCase().includes('texto') || c.label.toLowerCase().includes('mensagem') || c.label.toLowerCase().includes('body') || c.label.toLowerCase().includes('comment')));
+                let pageIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('pág') || c.label.toLowerCase().includes('pag') || c.label.toLowerCase().includes('artigo') || c.label.toLowerCase().includes('url') || c.label.toLowerCase().includes('id')));
+                let approvedIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('aprov') || c.label.toLowerCase().includes('status') || c.label.toLowerCase().includes('moder') || c.label.toLowerCase().includes('aceit') || c.label.toLowerCase().includes('visto')));
+
+                // Fallbacks estruturais para a ordenação canónica (Colunas A, B, C, D, E)
+                if (timestampIdx === -1) timestampIdx = 0;
+                if (nameIdx === -1) nameIdx = 1;
+                if (commentIdx === -1) commentIdx = 2;
+                if (pageIdx === -1) pageIdx = 3;
+                if (approvedIdx === -1) approvedIdx = 4;
+
+                const comments = [];
+                table.rows.forEach(row => {
+                    if (!row.c || row.c.length < 3) return;
+                    
+                    const rawDate = row.c[timestampIdx]?.f || row.c[timestampIdx]?.v || "";
+                    const name = (row.c[nameIdx] && row.c[nameIdx].v !== undefined && row.c[nameIdx].v !== null) ? String(row.c[nameIdx].v).trim() : "Anónimo";
+                    const text = (row.c[commentIdx] && row.c[commentIdx].v !== undefined && row.c[commentIdx].v !== null) ? String(row.c[commentIdx].v).trim() : "";
+                    const page = (row.c[pageIdx] && row.c[pageIdx].v !== undefined && row.c[pageIdx].v !== null) ? String(row.c[pageIdx].v).trim() : "";
+                    const approvedVal = (row.c[approvedIdx] && row.c[approvedIdx].v !== undefined && row.c[approvedIdx].v !== null) ? String(row.c[approvedIdx].v).trim().toLowerCase() : "";
+
+                    // Moderação simplificada: apenas aprova se a coluna tiver exatamente o valor "Sim"
+                    const approved = approvedVal === 'sim';
+
+                    let timestamp = Date.now();
+                    if (rawDate) {
+                        if (typeof rawDate === 'string' && rawDate.startsWith('Date(')) {
+                            try {
+                                const match = rawDate.match(/Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+),(\d+))?\)/);
+                                if (match) {
+                                    const y = parseInt(match[1], 10);
+                                    const m = parseInt(match[2], 10); // Os meses na API gviz iniciam no índice 0
+                                    const d = parseInt(match[3], 10);
+                                    const hr = match[4] ? parseInt(match[4], 10) : 0;
+                                    const min = match[5] ? parseInt(match[5], 10) : 0;
+                                    const sec = match[6] ? parseInt(match[6], 10) : 0;
+                                    timestamp = new Date(y, m, d, hr, min, sec).getTime();
+                                }
+                            } catch(e) {}
+                        } else {
+                            timestamp = parseGoogleDate(rawDate);
+                        }
+                    }
+
+                    comments.push({ name, text, timestamp, page, approved });
+                });
+
+                return comments.sort((a, b) => b.timestamp - a.timestamp);
+            } catch (err) {
+                console.error("Falha ao analisar a tabela GViz:", err);
+                return [];
+            }
+        }
+
+        // Conversor de datas para assegurar total compatibilidade entre navegadores
+        function parseGoogleDate(rawDate) {
+            if (!rawDate) return Date.now();
+            const parts = rawDate.trim().split(/[\s/:\-]/);
+            if (parts.length >= 3) {
+                if (parts[0].length === 4) {
+                    // Formato: YYYY-MM-DD
+                    const y = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const d = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                } else {
+                    // Formato: DD/MM/YYYY
+                    const d = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const y = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                }
+            }
+            return Date.now();
+        }
+
+        // Renderizador estrutural e estético de comentários
+        function renderComments(commentsArray) {
+            const listContainer = document.getElementById('comments-list-container');
+            listContainer.innerHTML = '';
+
+            const currentPageNormalized = normalizePageId(pageId);
+
+            // Filtrar comentários correspondentes ao ID deste artigo
+            const activeComments = commentsArray.filter(c => {
+                const commentPageNormalized = normalizePageId(c.page);
+                return commentPageNormalized === currentPageNormalized && c.approved;
+            });
+
+            // Recupera e injeta temporariamente os rascunhos em aprovação enviados por este navegador
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+
+            meusPendentes.forEach(p => {
+                if (!activeComments.some(c => cleanCompare(c.text) === cleanCompare(p.text) && cleanCompare(c.name) === cleanCompare(p.name))) {
+                    activeComments.unshift(p);
+                }
+            });
+
+            if (activeComments.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-left py-4 font-sans text-gray-400 text-sm italic">
+                        Não existem comentários de momento. Seja o primeiro a comentar.
+                    </div>
+                `;
+                return;
+            }
+
+            activeComments.forEach(comment => {
+                const dateText = formatCustomDate(comment.timestamp);
+                const commentEl = document.createElement('div');
+                commentEl.className = `py-4 border-b border-gray-150 transition-all space-y-1.5`;
+                
+                commentEl.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-sans font-bold text-gray-800 text-sm">${escapeHtml(comment.name)}</span>
+                            ${comment.isLocalPendente ? '<span class="bg-amber-50 text-amber-800 border border-amber-200 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-sans">Em Aprovação</span>' : ''}
+                        </div>
+                        <span class="text-xs text-gray-400 font-sans">${dateText}</span>
+                    </div>
+                    <div class="text-gray-700 font-sans text-sm leading-relaxed whitespace-pre-wrap">${escapeHtml(comment.text)}</div>
+                `;
+                listContainer.appendChild(commentEl);
+            });
+        }
+
+        // Submissão transparente e segura via AJAX/no-cors para o Google Forms
+        async function handleCommentSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('comment-submit-btn');
+            const nameInput = document.getElementById('comment-author-name');
+            const textInput = document.getElementById('comment-body-text');
+
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+
+            if (!name || !text) return;
+
+            btn.disabled = true;
+            btn.textContent = "A enviar...";
+
+            if (GOOGLE_FORM_URL.includes("ExemploID")) {
+                const novoMock = {
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    page: pageId,
+                    approved: false,
+                    isLocalPendente: true
+                };
+                
+                saveLocalPendente(novoMock);
+                showAlert("✨ Comentário submetido com sucesso! Ficará visível assim que for aprovado pela editora.", "bg-emerald-50 text-emerald-800 border border-emerald-200");
+                textInput.value = '';
+                nameInput.value = '';
+                btn.disabled = false;
+                btn.textContent = "Enviar";
+                renderComments(fallbackComments);
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append(GOOGLE_ENTRY_NOME, name);
+            formData.append(GOOGLE_ENTRY_COMENTARIO, text);
+            formData.append(GOOGLE_ENTRY_PAGINA, pageId);
+
+            try {
+                await fetch(GOOGLE_FORM_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                saveLocalPendente({
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    page: pageId,
+                    approved: false,
+                    isLocalPendente: true
+                });
+
+                showAlert("✨ Comentário submetido com sucesso! Ficará visível assim que for aprovado pela editora.", "bg-emerald-50 text-emerald-800 border border-emerald-150 font-semibold");
+                textInput.value = '';
+                nameInput.value = '';
+            } catch (error) {
+                console.error("Erro na submissão:", error);
+                showAlert("Ocorreu um erro ao submeter o comentário. Tente novamente.", "bg-red-50 text-red-800 border border-red-200");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Enviar";
+                fetchComments(); 
+            }
+        }
+
+        // Armazena rascunho localmente
+        function saveLocalPendente(commentObj) {
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            meusPendentes.push(commentObj);
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(meusPendentes));
+        }
+
+        // Sistema de alertas visuais minimalistas
+        function showAlert(msg, bgClasses) {
+            const alertBox = document.getElementById('comment-alert');
+            alertBox.className = `p-4 rounded-md text-xs font-sans ${bgClasses}`;
+            alertBox.innerHTML = msg;
+            alertBox.classList.remove('hidden');
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 8000);
+        }
+
+        // Sanitização de entradas contra vulnerabilidades XSS
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Formatação cronológica de comentários
+        function formatCustomDate(timestamp) {
+            if (!timestamp) return 'Agora';
+            const diff = Date.now() - timestamp;
+            if (diff < 60000) return 'Agora mesmo';
+            if (diff < 3600000) return `Há ${Math.round(diff / 60000)} min`;
+            if (diff < 86400000) return `Há ${Math.round(diff / 3600000)} horas`;
+            
+            const d = new Date(timestamp);
+            return d.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        // Inicialização automática dos comentários sem cache
+        document.addEventListener('DOMContentLoaded', fetchComments);
+    </script>
 
     <script>
         function getPrefix() {
@@ -302,50 +1135,107 @@ Em breve
             readingTimeElement.textContent = readingTime;
         }
 
-        function addLocalComment(e) {
-            e.preventDefault();
-            const author = document.getElementById('comm-author').value.trim() || "Anónimo";
-            const message = document.getElementById('comm-text').value.trim();
-            if (!message) return;
-
-            const commentsBox = document.getElementById('comments-box');
-            const today = new Date();
-            const options = { day: 'numeric', month: 'long', year: 'numeric' };
-            const formattedDate = today.toLocaleDateString('pt-PT', options);
-
-            const commentElement = document.createElement('div');
-            commentElement.className = "bg-white p-5 rounded-2xl border border-gray-100 shadow-xs fade-in";
-            commentElement.innerHTML = `
-                <div class="flex items-center justify-between gap-4 mb-2">
-                    <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
-                    <span class="text-xs text-gray-400">${formattedDate}</span>
-                </div>
-                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
-            `;
-
-            commentsBox.appendChild(commentElement);
-            document.getElementById('comment-form').reset();
-        }
-
-        function handleSubscribe(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('sub-email');
+        // =================----------------==================
+        // SISTEMA REAL DE SUBSCRICAO DE NEWSLETTER (MAILERLITE)
+        // =================--------------------------------==
+        function handleArticlesNewsletterSubmit(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('articles-newsletter-email');
             if (!emailInput || !emailInput.value.trim()) return;
 
-            const userEmail = emailInput.value.trim();
-            const recipient = "editorajeronimo@gmail.com";
-            const subject = encodeURIComponent("nova subscrição");
-            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
+            // CONFIGURAÇÃO MAILERLITE (Mesmos IDs de Produção Ativos no index.html)
+            const accountId = "2468444"; 
+            const formId = "191175533290063317";       
 
-            window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+            // 1. Criar um iframe oculto dinamicamente para processar o envio de forma transparente
+            let iframe = document.getElementById('ml-hidden-iframe');
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.id = 'ml-hidden-iframe';
+                iframe.name = 'ml-hidden-iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+            }
 
-            const container = e.target;
-            container.innerHTML = `
-                <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
-                    <i class="fas fa-check-circle"></i> A iniciar o seu cliente de e-mail para processar a subscrição!
-                </div>
-            `;
+            // 2. Configurar o formulário atual para apontar para o MailerLite usando o iframe oculto
+            const form = event.target;
+            form.action = `https://assets.mailerlite.com/jsonp/${accountId}/forms/${formId}/subscribe`;
+            form.method = 'POST';
+            form.target = 'ml-hidden-iframe';
+
+            // 3. Renomear o campo de input de e-mail para o padrão interno exigido pelo MailerLite
+            emailInput.name = 'fields[email]';
+
+            // 4. Submeter o formulário de forma silenciosa
+            form.submit();
+
+            // 5. Ativar a mensagem de sucesso visual na página
+            const successMsg = document.getElementById('articles-newsletter-success-msg');
+            if (successMsg) {
+                successMsg.classList.remove('hidden');
+                emailInput.value = ''; // Limpa o campo
+                setTimeout(() => {
+                    successMsg.classList.add('hidden');
+                }, 8000);
+            }
         }
+
+        // Monitorização de Scroll para a Barra de Progresso Superior e Percentagem Flutuante
+        window.addEventListener('scroll', () => {
+            const winScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+            const targetEl = document.getElementById('newsletter-section');
+            let scrolled = 0;
+            
+            if (targetEl) {
+                const elementOffsetTop = targetEl.getBoundingClientRect().top + window.scrollY;
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const maxScroll = elementOffsetTop - winHeight + 100;
+                
+                if (maxScroll > 0) {
+                    scrolled = Math.round((winScroll / maxScroll) * 100);
+                } else {
+                    scrolled = 100;
+                }
+            } else {
+                const docHeight = Math.max(
+                    document.body.scrollHeight, 
+                    document.documentElement.scrollHeight,
+                    document.body.offsetHeight, 
+                    document.documentElement.offsetHeight,
+                    document.body.clientHeight, 
+                    document.documentElement.clientHeight
+                );
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const totalScrollable = docHeight - winHeight;
+                if (totalScrollable > 0) {
+                    scrolled = Math.round((winScroll / totalScrollable) * 100);
+                }
+            }
+            
+            if (scrolled > 100) scrolled = 100;
+            if (scrolled < 0) scrolled = 0;
+
+            const progressBar = document.getElementById('scroll-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
+
+            const scrollPercentageText = document.getElementById('scroll-percentage-text');
+            if (scrollPercentageText) {
+                scrollPercentageText.textContent = scrolled + '%';
+            }
+
+            const scrollPercentageDiv = document.getElementById('scroll-percentage');
+            if (scrollPercentageDiv) {
+                if (winScroll > 150) {
+                    scrollPercentageDiv.classList.remove('opacity-0');
+                    scrollPercentageDiv.classList.add('opacity-100');
+                } else {
+                    scrollPercentageDiv.classList.remove('opacity-100');
+                    scrollPercentageDiv.classList.add('opacity-0');
+                }
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             loadComponents();
