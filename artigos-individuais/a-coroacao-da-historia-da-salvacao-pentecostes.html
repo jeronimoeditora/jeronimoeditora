@@ -197,10 +197,6 @@
                 </p>
 
                 <p>
-                    O refrão que cantamos («Enviai, Senhor, o vosso Espírito e renovai a face da terra») é virtualmente o tema do decenário do Espírito que rezamos desde a Ascensão até ao Pentecostes.
-                </p>
-
-                <p>
                     <span class="text-brand-accent-orange mr-1.5">•</span><strong>O Sopro Criador:</strong> O salmista fala do Espírito como o «sopro de vida» que Deus infunde nas criaturas para as tornar seres vivos (Gn 2,7). A fé Criadora reconhece que a criação é uma obra da Santíssima Trindade, não apenas do Pai, mas também do Filho e do Espírito Santo (CIC 291-292; 703-704).
                 </p>
 
@@ -432,7 +428,7 @@
                     throw new Error("A folha de cálculo está configurada como Privada no Google Drive.");
                 }
 
-                const parsedComments = parseDelimitedText(data);
+                const parsedComments = parseGVizData(data);
                 
                 // Sincroniza de forma automática e silenciosa os pendentes locais do browser contra os registos do Google Sheets
                 syncLocalPendentes(parsedComments);
@@ -446,29 +442,26 @@
             }
         }
 
-        // Reconstrói a URL para tempo real extraindo o ID da planilha e o gid diretamente (Usando o export direto, sem preflight CORS)
+        // Reconstrói a URL para tempo real extraindo o ID da planilha e o gid diretamente para o endpoint gviz/tq (Seguro contra cache e CORS)
         function getFetchUrl() {
             let url = GOOGLE_SHEETS_TSV_URL.trim();
             const salt = `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
             
-            // Se for o link tradicional do Sheets, transforma-o no endpoint de exportação direta CSV (CORS limpo e imediato)
             if (url.includes('/spreadsheets/d/')) {
                 const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
                 if (matches && matches[1]) {
                     const sheetId = matches[1];
                     
-                    // Extrai o gid se existir na URL
                     let gid = '0';
                     const gidMatches = url.match(/[#?&]gid=([0-9]+)/);
                     if (gidMatches && gidMatches[1]) {
                         gid = gidMatches[1];
                     }
                     
-                    // Endpoint nativo de exportação sem CORS Preflight
-                    return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}&t=${salt}`;
+                    // Utilizamos gviz/tq que é o endpoint oficial de API com suporte CORS nativo perfeito e resposta direta sem lags da CDN do Google
+                    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${gid}&tqx=out:json&t=${salt}`;
                 }
             }
-            
             return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
         }
 
@@ -504,96 +497,82 @@
             localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
         }
 
-        // Parser unificado de CSV/TSV em conformidade com o padrão RFC 4180
-        // Suporta estritamente valores de moderação de aprovação "Sim" utilizando indexes estáticos fiáveis
-        function parseDelimitedText(data) {
-            if (!data.trim()) return [];
-            
-            const firstLine = data.split('\n')[0];
-            let delimiter = ',';
-            if (firstLine.includes('\t')) {
-                delimiter = '\t';
-            } else if (firstLine.includes(';')) {
-                delimiter = ';';
-            }
-            
-            const rows = [];
-            let currentRow = [];
-            let currentField = '';
-            let insideQuotes = false;
+        // Processador de dados GViz JSON que extrai e converte a resposta com total suporte CORS
+        function parseGVizData(responseText) {
+            try {
+                const jsonStart = responseText.indexOf('{');
+                const jsonEnd = responseText.lastIndexOf('}');
+                if (jsonStart === -1 || jsonEnd === -1) return [];
+                
+                const jsonStr = responseText.substring(jsonStart, jsonEnd + 1);
+                const gvizData = JSON.parse(jsonStr);
+                
+                if (!gvizData || !gvizData.table || !gvizData.table.rows) return [];
+                
+                const table = gvizData.table;
+                const cols = table.cols || [];
+                
+                // Mapeamento dinâmico inteligente de colunas por correspondência de rótulos
+                let timestampIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('carimbo') || c.label.toLowerCase().includes('time') || c.label.toLowerCase().includes('data')));
+                let nameIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('nome') || c.label.toLowerCase().includes('autor') || c.label.toLowerCase().includes('user') || c.label.toLowerCase().includes('name')));
+                let commentIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('coment') || c.label.toLowerCase().includes('texto') || c.label.toLowerCase().includes('mensagem') || c.label.toLowerCase().includes('body') || c.label.toLowerCase().includes('comment')));
+                let pageIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('pág') || c.label.toLowerCase().includes('pag') || c.label.toLowerCase().includes('artigo') || c.label.toLowerCase().includes('url') || c.label.toLowerCase().includes('id')));
+                let approvedIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('aprov') || c.label.toLowerCase().includes('status') || c.label.toLowerCase().includes('moder') || c.label.toLowerCase().includes('aceit') || c.label.toLowerCase().includes('visto')));
 
-            for (let i = 0; i < data.length; i++) {
-                const char = data[i];
-                const nextChar = data[i + 1];
+                // Fallbacks baseados na ordenação padrão (A: 0, B: 1, C: 2, D: 3, E: 4)
+                if (timestampIdx === -1) timestampIdx = 0;
+                if (nameIdx === -1) nameIdx = 1;
+                if (commentIdx === -1) commentIdx = 2;
+                if (pageIdx === -1) pageIdx = 3;
+                if (approvedIdx === -1) approvedIdx = 4;
 
-                if (insideQuotes) {
-                    if (char === '"') {
-                        if (nextChar === '"') {
-                            currentField += '"';
-                            i++; // ignora aspas duplicadas
+                const comments = [];
+                table.rows.forEach(row => {
+                    if (!row.c || row.c.length < 3) return;
+                    
+                    // Extração ultra-segura prevenindo valores indefinidos ou nulos
+                    const rawDate = row.c[timestampIdx]?.f || row.c[timestampIdx]?.v || "";
+                    const name = (row.c[nameIdx] && row.c[nameIdx].v !== undefined && row.c[nameIdx].v !== null) ? String(row.c[nameIdx].v).trim() : "Anónimo";
+                    const text = (row.c[commentIdx] && row.c[commentIdx].v !== undefined && row.c[commentIdx].v !== null) ? String(row.c[commentIdx].v).trim() : "";
+                    const page = (row.c[pageIdx] && row.c[pageIdx].v !== undefined && row.c[pageIdx].v !== null) ? String(row.c[pageIdx].v).trim() : "";
+                    const approvedVal = (row.c[approvedIdx] && row.c[approvedIdx].v !== undefined && row.c[approvedIdx].v !== null) ? String(row.c[approvedIdx].v).trim().toLowerCase() : "";
+
+                    // Moderação simplificada: só aprova se contiver estritamente "Sim"
+                    const approved = approvedVal === 'sim';
+
+                    let timestamp = Date.now();
+                    if (rawDate) {
+                        if (typeof rawDate === 'string' && rawDate.startsWith('Date(')) {
+                            try {
+                                const match = rawDate.match(/Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+),(\d+))?\)/);
+                                if (match) {
+                                    const y = parseInt(match[1], 10);
+                                    const m = parseInt(match[2], 10); // Meses em GViz JSON são baseados em index 0
+                                    const d = parseInt(match[3], 10);
+                                    const hr = match[4] ? parseInt(match[4], 10) : 0;
+                                    const min = match[5] ? parseInt(match[5], 10) : 0;
+                                    const sec = match[6] ? parseInt(match[6], 10) : 0;
+                                    timestamp = new Date(y, m, d, hr, min, sec).getTime();
+                                }
+                            } catch(e) {}
                         } else {
-                            insideQuotes = false;
+                            timestamp = parseGoogleDate(rawDate);
                         }
-                    } else {
-                        currentField += char;
                     }
-                } else {
-                    if (char === '"') {
-                        insideQuotes = true;
-                    } else if (char === delimiter) {
-                        currentRow.push(currentField);
-                        currentField = '';
-                    } else if (char === '\n' || char === '\r') {
-                        currentRow.push(currentField);
-                        rows.push(currentRow);
-                        currentRow = [];
-                        currentField = '';
-                        if (char === '\r' && nextChar === '\n') {
-                            i++;
-                        }
-                    } else {
-                        currentField += char;
-                    }
-                }
+
+                    comments.push({ name, text, timestamp, page, approved });
+                });
+
+                return comments.sort((a, b) => b.timestamp - a.timestamp);
+            } catch (err) {
+                console.error("Falha ao analisar a tabela GViz:", err);
+                return [];
             }
-            if (currentField || currentRow.length > 0) {
-                currentRow.push(currentField);
-                rows.push(currentRow);
-            }
+        }
 
-            if (rows.length <= 1) return [];
-
-            // INDEXAÇÃO ESTÁTICA BLINDADA E PREVISÍVEL (Colunas A, B, C, D, E)
-            const timestampIdx = 0;
-            const nameIdx = 1;
-            const commentIdx = 2;
-            const pageIdx = 3;
-            const approvedIdx = 4;
-
-            const comments = [];
-
-            for (let i = 1; i < rows.length; i++) {
-                const cols = rows[i];
-                if (cols.length < 4) continue; // Precisa de ter pelo menos Timestamp, Nome, Comentário e Página
-                
-                const rawDate = cols[timestampIdx];
-                const name = cols[nameIdx] ? cols[nameIdx].trim() : "Anónimo";
-                const text = cols[commentIdx] ? cols[commentIdx].trim() : "";
-                const page = cols[pageIdx] ? cols[pageIdx].trim() : "";
-                
-                // SISTEMA ULTRA-LEVE DE MODERAÇÃO: Aceita estritamente "Sim" (case-insensitive) para aprovar
-                let approved = false;
-                if (cols.length > approvedIdx && cols[approvedIdx]) {
-                    if (cols[approvedIdx].trim().toLowerCase() === 'sim') {
-                        approved = true;
-                    }
-                }
-
-                const timestamp = parseGoogleDate(rawDate);
-                comments.push({ name, text, timestamp, page, approved });
-            }
-
-            return comments.sort((a, b) => b.timestamp - a.timestamp);
+        // Parser unificado de CSV/TSV clássico para redundância
+        function parseDelimitedText(data) {
+            return []; // Desativado a favor do parseGVizData direto para estabilidade CORS absoluta
         }
 
         // Parser de datas robusto e unificado para evitar bugs específicos do Safari / Chrome
