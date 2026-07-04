@@ -3,7 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Nascimento de Jesus: Belém ou Nazaré? | Hugo Bacelo</title>
+    <title>Nascimento de Jesus: Belém ou Nazaré? | Jerónimo Editora</title>
+    
+    <!-- Meta Tags do Open Graph (Facebook, WhatsApp, etc.) -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Nascimento de Jesus: Belém ou Nazaré? | Jerónimo Editora">
+    <meta property="og:description" content="O debate sobre a historicidade do local de nascimento de Jesus Cristo permanece um tema central na exegese bíblica contemporânea...">
+    <meta property="og:url" content="https://www.editorajeronimo.pt/artigos-individuais/nascimento-de-jesus-belem-ou-nazare">
+    <meta property="og:image" content="https://www.editorajeronimo.pt/Imagens/4.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:site_name" content="Jerónimo Editora">
+
+    <!-- Meta Tags do Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nascimento de Jesus: Belém ou Nazaré? | Jerónimo Editora">
+    <meta name="twitter:description" content="O debate sobre a historicidade do local de nascimento de Jesus Cristo permanece um tema central na exegese bíblica contemporânea...">
+    <meta name="twitter:image" content="https://www.editorajeronimo.pt/Imagens/4.png">
+    
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
     
     <script>
         // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
@@ -13,18 +36,14 @@
         }
     </script>
     
-    <!-- GoatCounter Analytics -->
     <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
-    <!-- Google Fonts unificadas -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -33,7 +52,7 @@
                 extend: {
                     fontFamily: {
                         sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
-                        inter: ['"Inter"', 'sans-serif'], // Leitura premium de artigos
+                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
                         serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
@@ -50,12 +69,20 @@
     </script>
 
     <style>
-        body { font-family: 'Roboto', sans-serif; color: #2d3748; background-color: #F8F8F8; }
+        html, body { 
+            scroll-behavior: auto !important;
+            overflow-x: hidden; 
+            width: 100%; 
+            background-color: #F8F8F8; 
+        }
+        * { box-sizing: border-box; }
 
         .text-readable-article {
             line-height: 1.85;
             letter-spacing: -0.003em;
             word-spacing: 0.05em;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         .dropcap::first-letter {
@@ -76,27 +103,26 @@
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100] pointer-events-none">
+        <div id="scroll-progress-bar" class="h-full bg-brand-accent-orange transition-all duration-75" style="width: 0%"></div>
+    </div>
+
+    <div id="scroll-percentage" class="fixed bottom-6 right-6 bg-brand-accent-blue text-white text-xs font-bold px-3 py-2 rounded-full shadow-xl z-50 opacity-0 transition-opacity duration-300 pointer-events-none flex items-center gap-1">
+        <i class="fas fa-book-open text-brand-gold"></i> <span id="scroll-percentage-text">0%</span>
+    </div>
+
     <div id="nav-placeholder"></div>
 
-    <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
     <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
         <article class="max-w-4xl mx-auto px-6 fade-in">
-            
-            <div class="mb-8">
-                <!-- Direcionado para a URL limpa de artigos -->
-                <a href="../artigos-geral" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-accent-orange hover:text-brand-accent-blue transition-colors group">
-                    <i class="fas fa-chevron-left transition-transform group-hover:-translate-x-1"></i> Voltar ao arquivo de Artigos
-                </a>
-            </div>
 
-            <header class="border-b border-gray-150 pb-8 mb-8 text-center md:text-left">
-                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3">Resposta a Artigos</span>
-                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4">
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center flex flex-col items-center">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3 text-center">Resposta a Artigos</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4 text-center">
                     Nascimento de Jesus: Belém ou Nazaré?
                 </h1>
                 
-                <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500 font-medium">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-500 font-medium font-sans w-full">
                     <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 3 de Fevereiro de 2026</span>
                     <span class="hidden sm:inline text-gray-300">|</span>
                     <span class="flex items-center gap-1.5 font-inter">
@@ -108,70 +134,629 @@
                 </div>
             </header>
 
-            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-xs relative bg-gray-100">
-                <img src="../Imagens/4.png" alt="Nascimento de Jesus: Belém ou Nazaré?" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Bel%C3%A9m+ou+Nazar%C3%A9%3F';">
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden border border-gray-200 shadow-xs relative bg-gray-100 mb-8">
+                <img src="../Imagens/4.png" alt="Nascimento de Jesus: Belém ou Nazaré?" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Nascimento+de+Jesus';">
             </div>
 
-           <p>
-Em breve
-</p>
-            <!-- Secção de Comentários (Livre de dados e comentários inventados) -->
-            <section class="mt-12 pt-8 border-t border-gray-150">
-                <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-6">Comentários</h4>
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto text-center">
+                    Uma análise e resposta à tese do Pe. Ariel Álvarez Valdés sobre a historicidade do local do nascimento do Messias.
+                </p>
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto text-justify">
                 
-                <div class="space-y-4 mb-8 font-inter" id="comments-box">
-                    <!-- Sem comentários automáticos inventados -->
+                <p class="dropcap">
+                    O debate sobre a historicidade do local de nascimento de Jesus Cristo permanece um tema central na exegese bíblica contemporânea, apesar de ser afirmado explicitamente por São Mateus e São Lucas que Jesus nasceu em Belém (é preciso desencantar temas para teses de doutoramento em Teologia). O presente ensaio analisa a tese proposta pelo <strong>Pe. Ariel Álvarez Valdés</strong> no artigo de capa da revista <strong>Bíblica N.º 415 de Novembro/Dezembro 2024.</strong> O biblista defende que o nascimento em Belém é um «facto teológico» e não um «facto histórico», sustentando que as evidências apontam para Nazaré como o verdadeiro berço de Jesus.
+                </p>
+
+                <p>
+                    Esta argumentação assenta em quatro pilares fundamentais: <strong>(1)</strong> a defesa da não-historicidade dos relatos da infância de Jesus em Mateus e Lucas; <strong>(2)</strong> a afirmação de Marcos que a pátria de Jesus é Nazaré e a ausência de correcção da multidão em João quando esta rejeita Jesus por não ser de Belém; <strong>(3)</strong> a identificação sistemática de Jesus como «o Nazareno» ou «de Nazaré» ao longo do Novo Testamento; e <strong>(4)</strong> o silêncio dos restantes escritos do Novo Testamento, especialmente nos de São Paulo, sobre o assunto. Desta argumentação resulta a tese que Mateus e Lucas «adaptaram» o relato do nascimento como tendo acontecido em Belém, cidade de David, e não na insignificante Nazaré, para o tornar menos «escandaloso» aos seus destinatários.
+                </p>
+
+                <p>
+                    Contudo, este trabalho visa demonstrar que a separação entre a teologia e a história é artificial, uma vez que a mensagem dos Evangelistas se alicerça em acontecimentos concretos. Através da harmonização dos relatos de Mateus e Lucas e do escrutínio das supostas contradições literárias, argumentar-se-á que o cumprimento das profecias messiânicas não exigiu a invenção de uma narrativa, mas antes o reconhecimento de que os factos históricos se alinham com o Plano Divino. Depois, o ensaio procura refutar os restantes três pilares da argumentação do Pe. Ariel, apontando para a inexistência de evidências bíblicas contra o nascimento de Jesus em Belém.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Harmonização dos Relatos da Infância de Jesus (Mt 1–2 e Lc 1–2)</span>
+                </h3>
+                
+                <p>
+                    Antes de mais, temos que começar com o óbvio. Se a questão é «Onde nasceu Jesus?», a primeira coisa a fazer é averiguar se no Novo Testamento existe alguma afirmação directa e explícita sobre o local de nascimento de Jesus. Tal averiguação terminaria com resultado positivo: Mateus e Lucas afirmam, nos respectivos relatos da infância (dois primeiros capítulos dos seus evangelhos), que Jesus nasceu em Belém. O local de nascimento não é abordado em mais lado nenhum. Assim, a questão é respondida e o caso fica encerrado.
+                </p>
+
+                <p>
+                    Alguns estudiosos da Bíblia discordam desta linha de argumentação, tal como o autor do nosso ensaio a analisar, o Pe. Ariel. Porquê? Porque rejeitam a historicidade dos relatos da infância de Mateus e Lucas. E por que motivo haveriam de fazer tal coisa? Porque defendem que «os relatos de Mateus e Lucas se contradizem em vários pontos». Uma refutação mais abrangente desta posição pode ser encontrada <a href="https://www.editorajeronimo.pt/artigos-individuais/como-nao-ler-a-biblia-em-qualquer-seculo-2-de-3" style="text-decoration: underline;">nesta secção de um ensaio mais longo</a>, pelo que aqui seremos mais breves.
+                </p>
+
+                <p>
+                    O autor aponta os seguintes detalhes contraditórios entre Mt e Lc que enfraquecem a historicidade do relato, nomeadamente: <strong>(a)</strong> residência inicial: segundo Mt, vivia em Belém, numa casa; segundo Lc, vivia em Nazaré e foi a Belém pelo recenseamento; <strong>(b)</strong> tempo em Belém: segundo Mt: ficou quase dois anos; segundo Lc, ficou cerca de mês e meio; <strong>(c)</strong> motivo da ida para Nazaré após o Egipto: segundo Mt, José teve medo do governador Arquelau; segundo Lc, porque era a sua [Jesus] cidade. Na verdade, os relatos de Mt e Lc são complementares e as divergências são apenas omissões literárias deliberadas, selecionando acontecimentos para servir os seus temas.
+                </p>
+
+                <p>
+                    <strong>(a)</strong> A menção de uma «casa» em Mt 2,11 em vez de uma manjedoura não é uma contradicção, mas indica que a visita dos Magos ocorreu meses ou até dois anos após o nascimento. Aquando o nascimento de Jesus, Maria e José não encontraram lugar na «sala de hóspedes» pelo que tiveram que ficar na «sala dos animais». Aquando a visita dos Magos, uma data completamente diferente à do nascimento, estes encontram o Menino numa casa, indicando que a Sagrada Família terá temporariamente vivido em Belém após o nascimento de Jesus.
+                </p>
+
+                <p>
+                    <strong>(b)</strong> <a href="https://jimmyakin.com/how-the-accounts-of-jesus-childhood-fit-together" style="text-decoration: underline;">O Jimmy Akin propõe uma cronologia coerente</a>, aqui sumariada: Viagem de Nazaré até Belém → Nascimento em Belém → Apresentação no Templo (40 dias após o nascimento) → Breve regresso a Nazaré (referido em Lc 2,39) → Fixação posterior em Belém numa «casa» (onde os Magos os encontram) → Fuga para o Egipto → Regresso definitivo a Nazaré.
+                </p>
+
+                <p>
+                    <strong>(c)</strong> Aquilo que o autor afirma aqui como sendo uma contradicção simplesmente não o é: José não regressou a Belém onde se tinham fixado antes da fuga para o Egipto porque teve medo do governador e regressou a Nazaré pois era a cidade onde já tinham vivido (e que se tornou a cidade de Jesus).
+                </p>
+
+                <p>
+                    No fundo, as contradicções dissipam-se quando consideramos o factor tempo. Existem múltiplas cronologias hipotéticas que tornam os relatos de Mt e Lc totalmente complementares. O facto do Pe. Ariel escolher uma cronologia que torna os relatos contraditórios é mais revelador da sua capacidade exegética do que a fiabilidade dos relatos. Mesmo assim, haverá alguma coisa no restante Novo Testamento que contradiga Mt e Lc e prove que Jesus não nasceu em Belém?
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Marcos e João e o Local de Nascimento de Jesus</span>
+                </h3>
+
+                <p>
+                    Marcos e João, nos seus evangelhos, não fazem nenhuma afirmação sobre o local de nascimento de Jesus. Contudo, segundo o Pe. Ariel, para estes dois evangelistas «não há dúvidas» que Jesus tenha nascido em Nazaré. Porquê? Primeiro, Marcos «dá a entender que Jesus nasceu em Nazaré» pois «[…] quando Jesus visita Nazaré, diz que “foi para a sua pátria” (Mc 6,1); e pátria (grego: patris) significa “a terra natal”, “o lugar de nascimento”». No entanto, o termo Grego patris transmite mais do que geografia; engloba ideias de linhagem familiar, identidade cívica e tradições herdadas. Na cultura Mediterrânica do primeiro século, a pátria de uma pessoa era o centro dos laços de parentesco, da vida na sinagoga local e da posição social. Presumia-se que a lealdade, a honra e a credibilidade seriam maiores ali, um pressuposto que o Novo Testamento refuta repetidamente no caso de Jesus.
+                </p>
+
+                <p>
+                    Segundo, João «afirma expressamente que Jesus era de Nazaré» ao citar pessoas que duvidam de Jesus por este ser da Galileia (Jo 7,41–42), região onde ficava Nazaré, e «ninguém, neste debate, se encarrega de explicar que Jesus era de Belém». Mas a ausência aqui de menção de Belém é irrelevante; Belém é mencionada onde faz sentido: nos relatos do nascimento de Jesus. O Pe. Ariel simplesmente pressupõe que dizer que alguém é de certo lugar significa que nasceu nesse lugar. Mas será essa pressuposição razoável?
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Jesus de Nazaré ou Jesus, o Nazareno</span>
+                </h3>
+
+                <p>
+                    O Pe. Ariel argumenta que as cerca de vinte menções à «origem Nazarena», tanto «Jesus de Nazaré» como «Jesus o Nazareno», são prova do Seu nascimento em Nazaré. Aliás, afirma que «na Bíblia, quando uma cidade é mencionada depois do nome de uma pessoa, trata-se do seu lugar de nascimento», exemplificando com «Paulo de Tarso (Act 9,1), José de Arimateia (Mc 15,43), Simão de Cirene (Mc 15,21), Lázaro de Betânia (Jo 11,1) ou Amós de Tecoa (Am 1,1)» apesar da Bíblia não conter nenhuma declaração sobre o local de nascimento sobre os homens citados; que as cidades mencionadas sejam o local de nascimento de cada um deles é mera especulação do autor.
+                </p>
+
+                <p>
+                    De facto, a designação de uma cidade junto ao nome indica a origem social e o local onde a pessoa era conhecida, podendo ou não coincidir com o local de nascimento. O autor sugere que, na entrada triunfal em Jerusalém, Jesus deveria ter sido recebido como «Jesus de Belém»: «teria sido muito mais apropriado […] pois teria sido um argumento muito forte para confirmar o messianismo de Jesus aos seus leitores de origem judaica». Mas Jesus viveu cerca de 30 anos em Nazaré; seria absurdo que a multidão Lhe chamasse «Jesus de Belém». Na verdade, o Novo Testamento mantém a tensão entre as duas cidades, mostrando que Jesus cumpre tanto a origem Davídica (Belém) quanto a obscuridade do «Ramo» (Netzer) de Jessé associada a Nazaré.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>O Argumento do Silêncio</span>
+                </h3>
+
+                <p>
+                    Por fim, o biblista recorre a uma falácia clássica para defender a sua tese. «Em nenhum outro lugar há uma única palavra sobre o assunto. [Estará o Pe. Ariel a reconhecer que Marcos e João nada afirmam sobre o local de nascimento após ter afirmado que para estes dois evangelistas «não há dúvidas» que Jesus nasceu em Nazaré?] Nem mesmo São Paulo, que teve de argumentar com os leitores das suas cartas para os convencer de que Jesus era o Messias, e que poderia ter usado o argumento da origem belemita de Jesus, parece conhecer esta informação.»
+                </p>
+
+                <p>
+                    O silêncio de Paulo sobre Belém é uma evidência fraca e logicamente falível, pois ausência de menção sobre o nascimento em Belém não é prova que o nascimento não tenha acontecido em Belém. (É um falácia lógica: ausência de prova não é prova de ausência.) Paulo foca-se no kerygma (ministério, morte e ressurreição de Jesus), escrevendo cartas ocasionais para resolver problemas doutrinários específicos, não biografias completas. O seu silêncio, assim como dos restantes autores do Novo Testamento, sobre o local de nascimento é irrelevante para a veracidade do facto.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Crítica à Tese da «Adaptação» e do Público-Alvo</span>
+                </h3>
+
+                <p>
+                    Se o nascimento histórico ocorreu em Nazaré, por que razão Mateus e Lucas escreveram que foi em Belém? O Pe. Ariel explica que se trata de uma necessidade messiânica. O profeta Miqueias (séc. VIII a.C.) anunciou em Mq 5,2 que de Belém sairia um governante justo (o autor rejeita que esta profecia seja uma referência ao nascimento de Jesus e afirma que os profetas «[a]nunciavam uma mensagem, que diziam receber de Deus»). Originalmente, este era um apelo para que a monarquia voltasse à simplicidade das origens de David. No tempo de Jesus, muitos Judeus acreditavam que o Messias tinha de nascer literalmente em Belém para ser um sucessor legítimo de David. Para provar que Jesus era o Messias aos leitores de origem Judaica, as primeiras comunidades adaptaram o relato do Seu nascimento à geografia das profecias para «contá-lo como tendo ocorrido na cidade de Belém» pois «[…] o facto de o Messias Jesus ter nascido ali [Nazaré] era escandaloso para o povo».
+                </p>
+
+                <p>
+                    Ora, se os evangelistas quisessem tornar o relato menos escandaloso certamente registaram um relato glorioso sem detalhes difíceis e embaraçosos tais como o facto da Sagrada Família apenas ter encontrado lugar na «sala dos animais» para passar a noite, o local de repouso do Menino ser uma manjedoura e visitado por pobres pastores que estavam na vigília da noite. Certo? Além disso, os argumentos do autor são contraditórios. Se de facto Mt e Lc tivessem a intenção de ocultar Nazaré como local de nascimento, porque é que o título «Jesus de Nazaré» é usado por esses mesmos dois evangelistas quando relatam a vida adulta de Jesus, algo que Pe. Ariel defende que prova que Ele nasceu em Nazaré?
+                </p>
+
+                <p>
+                    O próprio autor reconhece isso mesmo, sem nunca detectar a ilogicidade da sua posição: «estes dois evangelistas [Mt e Lc], embora digam que Jesus nasceu em Belém, quando o apresentam na sua vida adulta, mudam de opinião e chamam-lhe “Jesus de Nazaré”». A teoria do autor, então, é a seguinte: Mt e Lc mentiram sobre o local de nascimento de Jesus para o tornar «messiânico» e, mais à frente nos mesmos pergaminhos, usam várias vezes o título «Jesus de Nazaré», revelando assim que Jesus afinal nasceu em Nazaré. Portanto, Mt e Lc não só são mentirosos como são idiotas!
+                </p>
+
+                <p>
+                    Além disso, se Lucas estivesse a inventar um mito, não escolheria um detalhe tão complexo e politicamente carregado como um recenseamento Romano, que envolvia questões fiscais e administrativas conhecidas. A inclusão de um dado histórico tão específico (e difícil de harmonizar) sugere que ele está a tentar integrar um facto recebido, e não a criar uma fábula conveniente.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>A História ao Serviço da Teologia</span>
+                </h3>
+
+                <p>
+                    O autor conclui que Belém representa uma verdade espiritual: Jesus é o Messias que escolhe a humildade e a fragilidade em vez do poder e da arrogância. Celebrar o Natal em Belém continua a ser válido como uma afirmação de fé na natureza da missão de Jesus, mesmo que a história aponte para Nazaré. «Na realidade, o nascimento de Jesus em Belém é mais um facto teológico do que um facto histórico. O que Mateus e Lucas pretendiam transmitir era uma ideia religiosa, enunciada sob a forma de um relato histórico, para deixar um ensinamento.»
+                </p>
+
+                <p>
+                    Todavia, apesar das aparentes «boas intenções» do Pe. Ariel, separar o «facto teológico» do «facto histórico» é um anacronismo moderno. O cumprimento da profecia de Miqueias, assim como qualquer profecia do Antigo Testamento, não exigia a invenção de uma estória, mas sim o reconhecimento de que os acontecimentos históricos se alinhavam com o Plano Divino. Para os Evangelistas, a Teologia não é o substituto da História, mas a sua hermenêutica. Inventar um Messias sem base factual seria, para a mentalidade apostólica, uma construção sobre areia, invalidando o próprio kerygma que pretendiam anunciar.
+                </p>
+
+                <p>
+                    Se não lemos o Antigo Testamento procurando perceber de que forma cada passagem aponta para Cristo, lemos sem fé n’Ele, ou seja, lemos como os Judeus. Nós, os de Cristo, devemos ler com plena confiança que tudo lá incluído aponta para Cristo; tal atitude é meramente a consequência lógica da nossa fé em Jesus, O qual cumpriu plenamente a Lei e os Profetas.
+                </p>
+
+            </div>
+
+            <!-- Caixa de Newsletter que define o ponto de paragem de 100% no scroll -->
+            <div id="newsletter-section" class="bg-[#ecf3fa] p-6 sm:p-8 rounded-2xl border border-brand-accent-blue/10 shadow-xs max-w-4xl mx-auto my-12 text-center">
+                <p class="font-serif text-lg sm:text-2xl text-brand-accent-blue font-bold mb-4">
+                    Recebe <span class="underline decoration-brand-accent-orange decoration-2 underline-offset-4 font-bold">gratuitamente</span> a nossa newsletter e fica a par das novidades
+                </p>
+                <form id="articles-newsletter-form" onsubmit="handleArticlesNewsletterSubmit(event)" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 mt-4">
+                    <div class="flex-grow">
+                        <input type="email" id="articles-newsletter-email" required placeholder="o teu endereço de e-mail" aria-label="Endereço de e-mail" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-brand-text placeholder-gray-455 focus:outline-none focus:ring-2 focus:ring-brand-accent-orange focus:border-transparent transition-all text-sm font-sans">
+                    </div>
+                    <button type="submit" class="bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold uppercase text-xs tracking-wider px-6 py-3.5 rounded-xl transition-all shadow-sm hover:-translate-y-0.5 active:translate-y-0 font-sans">
+                        Subscrever
+                    </button>
+                </form>
+                <div id="articles-newsletter-success-msg" class="hidden mt-4 p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-xl max-w-md mx-auto font-sans">
+                    Subscrição registada com sucesso! Obrigado por nos acompanhar.
+                </div>
+            </div>
+
+            <!-- Botões de Navegação -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-12 border-t border-b border-gray-150 py-8 font-inter text-xs uppercase tracking-wider font-bold">
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all text-center">
+                    <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                </a>
+                <a href="../catalogo-completo" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all text-center">
+                    Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                </a>
+                <a href="engolido-por-uma-ma-exegese" class="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-xl transition-all text-center flex items-center justify-center gap-1.5">
+                    Próximo Artigo <i class="fas fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- SECCÃO DE COMENTÁRIOS ESTILO CUSDIS (PORTUGUÊS, MINIMALISTA, GOOGLE SHEETS AS BACKEND) -->
+            <section class="mt-12 pt-6 border-t border-gray-200">
+                
+                <!-- Título Simples -->
+                <div class="mb-6">
+                    <h4 class="font-sans text-lg font-bold text-gray-800">Comentários</h4>
                 </div>
 
-                <div class="bg-[#ecf3fa] border border-[#d8e5f0] p-6 rounded-2xl font-inter">
-                    <h5 class="font-serif text-base font-bold text-brand-accent-blue mb-4">Deixe o seu comentário</h5>
-                    <form id="comment-form" onsubmit="addLocalComment(event)" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <input type="text" id="comm-author" placeholder="Nome" class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter">
+                <!-- Alerta Superior de Feedback de Erros ou Informações -->
+                <div id="comment-alert" class="hidden mb-4 p-4 rounded-md text-xs font-sans"></div>
+
+                <!-- Formulário Minimalista Cusdis-style -->
+                <form id="comment-form" onsubmit="handleCommentSubmit(event)" class="space-y-4 mb-8">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="w-full sm:w-1/3">
+                            <input type="text" id="comment-author-name" required placeholder="Nome" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors">
                         </div>
-                        <textarea id="comm-text" required rows="4" placeholder="Escreva o seu comentário..." class="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-accent-orange transition-all font-inter resize-none"></textarea>
-                        <textarea style="display: none;" id="comm-dummy-desc"></textarea> <!-- Dummy fallback -->
-                        <button type="submit" class="px-5 py-3 bg-brand-accent-blue hover:bg-brand-accent-orange text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all font-inter">
-                            Enviar Comentário
+                    </div>
+                    <div>
+                        <textarea id="comment-body-text" required rows="4" placeholder="Comentário" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors resize-y"></textarea>
+                    </div>
+                    
+                    <!-- Botão de Envio Simples e Minimalista -->
+                    <div class="flex items-center">
+                        <button type="submit" id="comment-submit-btn" class="w-full sm:w-auto border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-sm font-semibold px-6 py-2.5 rounded-md font-sans text-center">
+                            Enviar
                         </button>
-                    </form>
+                    </div>
+                </form>
+
+                <!-- Div de Carregamento (Loading) -->
+                <div id="comments-loading" class="py-6 text-center text-gray-400">
+                    <i class="fas fa-circle-notch fa-spin text-gray-455 text-xl mb-1"></i>
+                    <p class="text-[10px] font-sans">A carregar comentários...</p>
+                </div>
+
+                <!-- Lista de Comentários Cusdis-style -->
+                <div id="comments-list-container" class="space-y-6 pt-2">
+                    <!-- Gerado de forma ultra-limpa por JS -->
                 </div>
             </section>
 
-            <!-- Rodapé do Artigo -->
-            <footer class="mt-16 pt-8 border-t border-gray-150 font-inter">
-                <div class="flex flex-col sm:flex-row items-center gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
+            <!-- Cartão Biográfico do Autor -->
+            <footer class="mt-12 pt-8 border-t border-gray-150 font-inter">
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs max-w-3xl mx-auto text-center sm:text-left">
                     <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
                         <a href="../sobreHB" class="block w-full h-full">
                             <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
                         </a>
                     </div>
-                    <div class="text-center sm:text-left">
-                        <h4 class="font-serif text-lg font-bold text-brand-accent-blue">
+                    <div class="flex flex-col items-center sm:items-start gap-1">
+                        <span class="text-[10px] text-gray-400 font-sans font-bold uppercase tracking-wider block leading-none">Autor:</span>
+                        <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-2 leading-tight">
                             <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
                         </h4>
-                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Fundador da Jerónimo Editora</p>
-                        <p class="text-sm text-gray-650 leading-relaxed font-inter">
-                            Natural de Ermesinde e residente em Braga, dedica o seu percurso à formação bíblica tradicional.
-                        </p>
+                        <a href="../sobreHB" class="inline-block px-5 py-2.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all font-sans font-bold text-xs uppercase tracking-wider text-center shadow-xs hover:-translate-y-0.5 active:translate-y-0 mt-1">
+                            Ver Mais <i class="fas fa-chevron-right ml-1 text-[9px]"></i>
+                        </a>
                     </div>
-                </div>
-
-                <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-inter text-xs uppercase tracking-wider font-bold">
-                    <a href="../artigos-geral" class="px-5 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all">
-                        <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
-                    </a>
-                    <a href="../catalogo-completo" class="px-5 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all">
-                        Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
-                    </a>
                 </div>
             </footer>
 
         </article>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ DINÂMICO (Carregado assincronamente do GitHub) -->
     <div id="footer-placeholder"></div>
+
+    <!-- Script de Gestão Inteligente dos Comentários (Sem Firebase, via Google Sheets) -->
+    <script>
+        // =================----------------==================
+        // CONFIGURAÇÃO DOS SEUS LINKS DO GOOGLE
+        // =================----------------==================
+        
+        // 1. O link do formulário Google onde as respostas são submetidas
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/1lyjJzNOvwJtA0M6CgTXE66L1Yj74OJ49v-XD_mrQSnw/formResponse";
+        
+        // 2. Os IDs dos campos do seu formulário Google
+        const GOOGLE_ENTRY_NOME = "entry.2046871302";       
+        const GOOGLE_ENTRY_COMENTARIO = "entry.964260973"; 
+        const GOOGLE_ENTRY_PAGINA = "entry.788584228";     
+
+        // 3. O link do seu Google Sheets (Necessita de estar público como "Qualquer pessoa com o link" -> "Leitor")
+        const GOOGLE_SHEETS_TSV_URL = "https://docs.google.com/spreadsheets/d/1qypNiIPv2n-Y1p-KWjHskPIDNx2tztd01mAPx5AQ9hA/edit?usp=sharing";
+
+        // Função para normalizar os IDs de página de forma uniforme
+        function normalizePageId(id) {
+            if (!id) return "nascimento-de-jesus-belem-ou-nazare";
+            return id.trim()
+                     .toLowerCase()
+                     .replace(/\.html$/, '')
+                     .split('/')
+                     .filter(Boolean)
+                     .pop() || "nascimento-de-jesus-belem-ou-nazare";
+        }
+
+        // ID único deste artigo
+        const rawPageId = window.location.pathname.split('/').pop().replace('.html', '') || 'nascimento-de-jesus-belem-ou-nazare';
+        const pageId = normalizePageId(rawPageId);
+
+        let fallbackComments = [];
+
+        // Carregar Comentários de forma totalmente automática usando a API oficial do Google Visualization
+        async function fetchComments() {
+            const listContainer = document.getElementById('comments-list-container');
+            const loader = document.getElementById('comments-loading');
+
+            if (GOOGLE_SHEETS_TSV_URL.includes("ExemploFolhaDeCalculoPublicada")) {
+                renderComments(fallbackComments);
+                loader.classList.add('hidden');
+                return;
+            }
+
+            try {
+                // Constrói URL dinâmico com parâmetro anti-cache
+                const fetchUrl = getFetchUrl();
+                
+                // Pedido nativo limpo sem cabeçalhos customizados HTTP para assegurar compatibilidade CORS total
+                const response = await fetch(fetchUrl, {
+                    method: "GET",
+                    credentials: "omit",
+                    cache: "no-store"
+                });
+                if (!response.ok) throw new Error("Erro ao obter dados.");
+                
+                const data = await response.text();
+
+                // Validação de privacidade do arquivo
+                if (data.trim().startsWith('<html') || data.trim().startsWith('<!DOCTYPE') || data.includes('<meta')) {
+                    throw new Error("A folha de cálculo está configurada como Privada no Google Drive.");
+                }
+
+                const parsedComments = parseGVizData(data);
+                
+                // Limpeza e remoção automática de comentários locais pendentes já aprovados na folha
+                syncLocalPendentes(parsedComments);
+                
+                renderComments(parsedComments);
+            } catch (error) {
+                console.warn("Problema ao importar dados do Google Sheets:", error);
+                renderComments(fallbackComments);
+            } finally {
+                loader.classList.add('hidden');
+            }
+        }
+
+        // Reconstrói a URL para tempo real extraindo o ID da planilha e o gid diretamente para o endpoint gviz/tq (Sem CDN cache)
+        function getFetchUrl() {
+            let url = GOOGLE_SHEETS_TSV_URL.trim();
+            const salt = `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+            
+            if (url.includes('/spreadsheets/d/')) {
+                const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+                if (matches && matches[1]) {
+                    const sheetId = matches[1];
+                    
+                    let gid = '0';
+                    const gidMatches = url.match(/[#?&]gid=([0-9]+)/);
+                    if (gidMatches && gidMatches[1]) {
+                        gid = gidMatches[1];
+                    }
+                    
+                    // Endpoint da Google Visualization API - sem cache e suporte nativo a CORS
+                    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${gid}&tqx=out:json&t=${salt}`;
+                }
+            }
+            return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
+        }
+
+        // Normalização de strings para comparação confiável
+        function cleanCompare(str) {
+            if (!str) return "";
+            return str.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        // Sincroniza e limpa o localStorage quando o comentário já tiver sido marcado como "Sim" no Google Sheets
+        function syncLocalPendentes(allParsedComments) {
+            let meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            if (meusPendentes.length === 0) return;
+
+            const MAX_AGE_MS = 24 * 60 * 60 * 1000; // 24 horas de validade máxima para pendentes locais
+
+            const novosPendentes = meusPendentes.filter(pLocal => {
+                const idade = Date.now() - pLocal.timestamp;
+                if (idade > MAX_AGE_MS) return false;
+
+                // Remove o rascunho apenas se ele já existir aprovado ("Sim") na base de dados online
+                const aprovadoNaFolha = allParsedComments.some(cSheet => 
+                    cSheet.approved &&
+                    normalizePageId(cSheet.page) === normalizePageId(pLocal.page) && 
+                    cleanCompare(cSheet.name) === cleanCompare(pLocal.name) &&
+                    cleanCompare(cSheet.text) === cleanCompare(pLocal.text)
+                );
+                
+                return !aprovadoNaFolha;
+            });
+
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
+        }
+
+        // Processador oficial de dados GViz JSON do Google Sheets
+        function parseGVizData(responseText) {
+            try {
+                const jsonStart = responseText.indexOf('{');
+                const jsonEnd = responseText.lastIndexOf('}');
+                if (jsonStart === -1 || jsonEnd === -1) return [];
+                
+                const jsonStr = responseText.substring(jsonStart, jsonEnd + 1);
+                const gvizData = JSON.parse(jsonStr);
+                
+                if (!gvizData || !gvizData.table || !gvizData.table.rows) return [];
+                
+                const table = gvizData.table;
+                const cols = table.cols || [];
+                
+                // Mapeamento dinâmico e inteligente das colunas pelos cabeçalhos/rótulos
+                let timestampIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('carimbo') || c.label.toLowerCase().includes('time') || c.label.toLowerCase().includes('data')));
+                let nameIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('nome') || c.label.toLowerCase().includes('autor') || c.label.toLowerCase().includes('user') || c.label.toLowerCase().includes('name')));
+                let commentIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('coment') || c.label.toLowerCase().includes('texto') || c.label.toLowerCase().includes('mensagem') || c.label.toLowerCase().includes('body') || c.label.toLowerCase().includes('comment')));
+                let pageIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('pág') || c.label.toLowerCase().includes('pag') || c.label.toLowerCase().includes('artigo') || c.label.toLowerCase().includes('url') || c.label.toLowerCase().includes('id')));
+                let approvedIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('aprov') || c.label.toLowerCase().includes('status') || c.label.toLowerCase().includes('moder') || c.label.toLowerCase().includes('aceit') || c.label.toLowerCase().includes('visto')));
+
+                // Fallbacks estruturais para a ordenação canónica (Colunas A, B, C, D, E)
+                if (timestampIdx === -1) timestampIdx = 0;
+                if (nameIdx === -1) nameIdx = 1;
+                if (commentIdx === -1) commentIdx = 2;
+                if (pageIdx === -1) pageIdx = 3;
+                if (approvedIdx === -1) approvedIdx = 4;
+
+                const comments = [];
+                table.rows.forEach(row => {
+                    if (!row.c || row.c.length < 3) return;
+                    
+                    const rawDate = row.c[timestampIdx]?.f || row.c[timestampIdx]?.v || "";
+                    const name = (row.c[nameIdx] && row.c[nameIdx].v !== undefined && row.c[nameIdx].v !== null) ? String(row.c[nameIdx].v).trim() : "Anónimo";
+                    const text = (row.c[commentIdx] && row.c[commentIdx].v !== undefined && row.c[commentIdx].v !== null) ? String(row.c[commentIdx].v).trim() : "";
+                    const page = (row.c[pageIdx] && row.c[pageIdx].v !== undefined && row.c[pageIdx].v !== null) ? String(row.c[pageIdx].v).trim() : "";
+                    const approvedVal = (row.c[approvedIdx] && row.c[approvedIdx].v !== undefined && row.c[approvedIdx].v !== null) ? String(row.c[approvedIdx].v).trim().toLowerCase() : "";
+
+                    // Moderação simplificada: apenas aprova se a coluna tiver exatamente o valor "Sim"
+                    const approved = approvedVal === 'sim';
+
+                    let timestamp = Date.now();
+                    if (rawDate) {
+                        if (typeof rawDate === 'string' && rawDate.startsWith('Date(')) {
+                            try {
+                                const match = rawDate.match(/Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+),(\d+))?\)/);
+                                if (match) {
+                                    const y = parseInt(match[1], 10);
+                                    const m = parseInt(match[2], 10); // Os meses na API gviz iniciam no índice 0
+                                    const d = parseInt(match[3], 10);
+                                    const hr = match[4] ? parseInt(match[4], 10) : 0;
+                                    const min = match[5] ? parseInt(match[5], 10) : 0;
+                                    const sec = match[6] ? parseInt(match[6], 10) : 0;
+                                    timestamp = new Date(y, m, d, hr, min, sec).getTime();
+                                }
+                            } catch(e) {}
+                        } else {
+                            timestamp = parseGoogleDate(rawDate);
+                        }
+                    }
+
+                    comments.push({ name, text, timestamp, page, approved });
+                });
+
+                return comments.sort((a, b) => b.timestamp - a.timestamp);
+            } catch (err) {
+                console.error("Falha ao analisar a tabela GViz:", err);
+                return [];
+            }
+        }
+
+        // Conversor de datas para assegurar total compatibilidade entre navegadores
+        function parseGoogleDate(rawDate) {
+            if (!rawDate) return Date.now();
+            const parts = rawDate.trim().split(/[\s/:\-]/);
+            if (parts.length >= 3) {
+                if (parts[0].length === 4) {
+                    // Formato: YYYY-MM-DD
+                    const y = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const d = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                } else {
+                    // Formato: DD/MM/YYYY
+                    const d = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const y = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                }
+            }
+            return Date.now();
+        }
+
+        // Renderizador estrutural e estético de comentários
+        function renderComments(commentsArray) {
+            const listContainer = document.getElementById('comments-list-container');
+            listContainer.innerHTML = '';
+
+            const currentPageNormalized = normalizePageId(pageId);
+
+            // Filtrar comentários correspondentes ao ID deste artigo
+            const activeComments = commentsArray.filter(c => {
+                const commentPageNormalized = normalizePageId(c.page);
+                return commentPageNormalized === currentPageNormalized && c.approved;
+            });
+
+            // Recupera e injeta temporariamente os rascunhos em aprovação enviados por este navegador
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+
+            meusPendentes.forEach(p => {
+                if (!activeComments.some(c => cleanCompare(c.text) === cleanCompare(p.text) && cleanCompare(c.name) === cleanCompare(p.name))) {
+                    activeComments.unshift(p);
+                }
+            });
+
+            if (activeComments.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-left py-4 font-sans text-gray-400 text-sm italic">
+                        Não existem comentários de momento. Seja o primeiro a comentar.
+                    </div>
+                `;
+                return;
+            }
+
+            activeComments.forEach(comment => {
+                const dateText = formatCustomDate(comment.timestamp);
+                const commentEl = document.createElement('div');
+                commentEl.className = `py-4 border-b border-gray-150 transition-all space-y-1.5`;
+                
+                commentEl.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-sans font-bold text-gray-800 text-sm">${escapeHtml(comment.name)}</span>
+                            ${comment.isLocalPendente ? '<span class="bg-amber-50 text-amber-800 border border-amber-200 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-sans">Em Aprovação</span>' : ''}
+                        </div>
+                        <span class="text-xs text-gray-400 font-sans">${dateText}</span>
+                    </div>
+                    <div class="text-gray-700 font-sans text-sm leading-relaxed whitespace-pre-wrap">${escapeHtml(comment.text)}</div>
+                `;
+                listContainer.appendChild(commentEl);
+            });
+        }
+
+        // Submissão transparente e segura via AJAX/no-cors para o Google Forms
+        async function handleCommentSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('comment-submit-btn');
+            const nameInput = document.getElementById('comment-author-name');
+            const textInput = document.getElementById('comment-body-text');
+
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+
+            if (!name || !text) return;
+
+            btn.disabled = true;
+            btn.textContent = "A enviar...";
+
+            if (GOOGLE_FORM_URL.includes("ExemploID")) {
+                const novoMock = {
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    page: pageId,
+                    approved: false,
+                    isLocalPendente: true
+                };
+                
+                saveLocalPendente(novoMock);
+                showAlert("✨ Comentário submetido com sucesso! Ficará visível assim que for aprovado pela editora.", "bg-emerald-50 text-emerald-800 border border-emerald-200");
+                textInput.value = '';
+                nameInput.value = '';
+                btn.disabled = false;
+                btn.textContent = "Enviar";
+                renderComments(fallbackComments);
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append(GOOGLE_ENTRY_NOME, name);
+            formData.append(GOOGLE_ENTRY_COMENTARIO, text);
+            formData.append(GOOGLE_ENTRY_PAGINA, pageId);
+
+            try {
+                await fetch(GOOGLE_FORM_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                saveLocalPendente({
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    page: pageId,
+                    approved: false,
+                    isLocalPendente: true
+                });
+
+                showAlert("✨ Comentário submetido com sucesso! Ficará visível assim que for aprovado pela editora.", "bg-emerald-50 text-emerald-800 border border-emerald-150 font-semibold");
+                textInput.value = '';
+                nameInput.value = '';
+            } catch (error) {
+                console.error("Erro na submissão:", error);
+                showAlert("Ocorreu um erro ao submeter o comentário. Tente novamente.", "bg-red-50 text-red-800 border border-red-200");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Enviar";
+                fetchComments(); 
+            }
+        }
+
+        // Armazena rascunho localmente
+        function saveLocalPendente(commentObj) {
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            meusPendentes.push(commentObj);
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(meusPendentes));
+        }
+
+        // Sistema de alertas visuais minimalistas
+        function showAlert(msg, bgClasses) {
+            const alertBox = document.getElementById('comment-alert');
+            alertBox.className = `p-4 rounded-md text-xs font-sans ${bgClasses}`;
+            alertBox.innerHTML = msg;
+            alertBox.classList.remove('hidden');
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 8000);
+        }
+
+        // Sanitização de entradas contra vulnerabilidades XSS
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Formatação cronológica de comentários
+        function formatCustomDate(timestamp) {
+            if (!timestamp) return 'Agora';
+            const diff = Date.now() - timestamp;
+            if (diff < 60000) return 'Agora mesmo';
+            if (diff < 3600000) return `Há ${Math.round(diff / 60000)} min`;
+            if (diff < 86400000) return `Há ${Math.round(diff / 3600000)} horas`;
+            
+            const d = new Date(timestamp);
+            return d.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        // Inicialização automática dos comentários sem cache
+        document.addEventListener('DOMContentLoaded', fetchComments);
+    </script>
 
     <script>
         function getPrefix() {
@@ -300,50 +885,62 @@ Em breve
             readingTimeElement.textContent = readingTime;
         }
 
-        function addLocalComment(e) {
-            e.preventDefault();
-            const author = document.getElementById('comm-author').value.trim() || "Anónimo";
-            const message = document.getElementById('comm-text').value.trim();
-            if (!message) return;
+        // Monitorização de Scroll para a Barra de Progresso Superior e Percentagem Flutuante
+        window.addEventListener('scroll', () => {
+            const winScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+            const targetEl = document.getElementById('newsletter-section');
+            let scrolled = 0;
+            
+            if (targetEl) {
+                const elementOffsetTop = targetEl.getBoundingClientRect().top + window.scrollY;
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const maxScroll = elementOffsetTop - winHeight + 100;
+                
+                if (maxScroll > 0) {
+                    scrolled = Math.round((winScroll / maxScroll) * 100);
+                } else {
+                    scrolled = 100;
+                }
+            } else {
+                const docHeight = Math.max(
+                    document.body.scrollHeight, 
+                    document.documentElement.scrollHeight,
+                    document.body.offsetHeight, 
+                    document.documentElement.offsetHeight,
+                    document.body.clientHeight, 
+                    document.documentElement.clientHeight
+                );
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const totalScrollable = docHeight - winHeight;
+                if (totalScrollable > 0) {
+                    scrolled = Math.round((winScroll / totalScrollable) * 100);
+                }
+            }
+            
+            if (scrolled > 100) scrolled = 100;
+            if (scrolled < 0) scrolled = 0;
 
-            const commentsBox = document.getElementById('comments-box');
-            const today = new Date();
-            const options = { day: 'numeric', month: 'long', year: 'numeric' };
-            const formattedDate = today.toLocaleDateString('pt-PT', options);
+            const progressBar = document.getElementById('scroll-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
 
-            const commentElement = document.createElement('div');
-            commentElement.className = "bg-white p-5 rounded-2xl border border-gray-100 shadow-xs fade-in";
-            commentElement.innerHTML = `
-                <div class="flex items-center justify-between gap-4 mb-2">
-                    <span class="font-bold text-brand-accent-blue text-sm">${author}</span>
-                    <span class="text-xs text-gray-400">${formattedDate}</span>
-                </div>
-                <p class="text-sm text-gray-650 font-sans leading-relaxed">${message}</p>
-            `;
+            const scrollPercentageText = document.getElementById('scroll-percentage-text');
+            if (scrollPercentageText) {
+                scrollPercentageText.textContent = scrolled + '%';
+            }
 
-            commentsBox.appendChild(commentElement);
-            document.getElementById('comment-form').reset();
-        }
-
-        function handleSubscribe(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('sub-email');
-            if (!emailInput || !emailInput.value.trim()) return;
-
-            const userEmail = emailInput.value.trim();
-            const recipient = "editorajeronimo@gmail.com";
-            const subject = encodeURIComponent("nova subscrição");
-            const body = encodeURIComponent("Olá,\n\nGostaria de subscrever os próximos artigos com o e-mail: " + userEmail);
-
-            window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
-
-            const container = e.target;
-            container.innerHTML = `
-                <div class="text-emerald-600 font-bold text-sm flex items-center gap-2 py-3 px-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fade-in w-full">
-                    <i class="fas fa-check-circle"></i> A iniciar o seu cliente de e-mail para processar a subscrição!
-                </div>
-            `;
-        }
+            const scrollPercentageDiv = document.getElementById('scroll-percentage');
+            if (scrollPercentageDiv) {
+                if (winScroll > 150) {
+                    scrollPercentageDiv.classList.remove('opacity-0');
+                    scrollPercentageDiv.classList.add('opacity-100');
+                } else {
+                    scrollPercentageDiv.classList.remove('opacity-100');
+                    scrollPercentageDiv.classList.add('opacity-0');
+                }
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             loadComponents();
