@@ -6,10 +6,10 @@
     <title>Jerónimo Editora | Início</title>
     
     <!-- Favicons e Ícones (Desktop, Mobile e Apple) - Com parâmetro para evitar Cache -->
-    <link rel="icon" type="image/png" sizes="32x32" href="Imagens/favicon.png?v=1.0.0">
-    <link rel="icon" type="image/png" sizes="16x16" href="Imagens/favicon.png?v=1.0.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="Imagens/favicon.png?v=1.0.0">
-    <link rel="shortcut icon" href="Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="Imagens/favicon.png?v=1.0.0">
     
     <script>
         // Limpeza estética do URL removendo a extensão .html na barra de pesquisa (GitHub Pages)
@@ -86,10 +86,11 @@
             background-color: #fff;
         }
 
+        /* Cor de fundo atualizada com o novo gradiente quente e de melhor contraste (#f6f2e9) */
         .hero-bg-accent {
             position: absolute;
             top: 0; right: 0; width: 42%; height: 100%;
-            background: linear-gradient(135deg, #f9f6f0 0%, #f2eee4 100%);
+            background: linear-gradient(135deg, #f6f2e9 0%, #f2eee4 100%);
             z-index: 0; 
             clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
         }
@@ -265,7 +266,7 @@
                                 </div>
                                 
                                 <div class="h-auto mb-1.5 sm:mb-4 flex items-center">
-                                    <p class="font-classic text-[13px] xs:text-sm sm:text-xl lg:text-2xl text-gray-600 italic leading-relaxed">
+                                    <p class="font-classic text-[13px] xs:text-sm sm:text-xl lg:text-2xl text-gray-655 italic leading-relaxed">
                                         Uma obra esclarecedora sobre as passagens difíceis e desafiadoras da Sagrada Escritura.
                                     </p>
                                 </div>
@@ -277,7 +278,7 @@
                                         </div>
                                         <div class="text-left">
                                             <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none">Trent Horn</span>
+                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none font-bold">Trent Horn</span>
                                             <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5 leading-none">27,90€</span>
                                         </div>
                                     </a>
@@ -314,7 +315,7 @@
                                 </div>
                                 
                                 <div class="h-auto mb-1.5 sm:mb-4 flex items-center">
-                                    <p class="font-classic text-[13px] xs:text-sm sm:text-xl lg:text-2xl text-gray-600 italic leading-relaxed">
+                                    <p class="font-classic text-[13px] xs:text-sm sm:text-xl lg:text-2xl text-gray-650 italic leading-relaxed">
                                         Descubra como a Igreja Católica recebeu, preservou e definiu as Sagradas Escrituras ao longo dos séculos.
                                     </p>
                                 </div>
@@ -326,7 +327,7 @@
                                         </div>
                                         <div class="text-left">
                                             <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none">Jimmy Akin</span>
+                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none font-bold">Jimmy Akin</span>
                                             <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5 leading-none">17,50€</span>
                                         </div>
                                     </a>
@@ -334,7 +335,7 @@
 
                                 <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[32px] xs:h-[38px] sm:h-[48px] lg:h-[46px]">
                                     <button onclick="addToCart(4, 'A Bíblia é um Livro Católico', 17.50, 'Imagens/capablc1.png', 'detalhes/a-biblia-e-um-livro-catolico')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.45M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         Comprar
                                     </button>
                                     <a href="detalhes/a-biblia-e-um-livro-catolico" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
@@ -363,7 +364,7 @@
                                 </div>
                                 
                                 <div class="h-auto mb-1.5 sm:mb-4 flex items-center">
-                                    <p class="font-classic text-[13px] xs:text-sm sm:text-xl lg:text-2xl text-gray-600 italic leading-relaxed">
+                                    <p class="font-classic text-[13px] xs:text-sm sm:text-xl lg:text-2xl text-gray-655 italic leading-relaxed">
                                         Uma defesa bíblica e histórica formidável das doutrinas marianas que esclarece as principais objeções.
                                     </p>
                                 </div>
@@ -375,7 +376,7 @@
                                         </div>
                                         <div class="text-left">
                                             <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none">Tim Staples</span>
+                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none font-bold">Tim Staples</span>
                                             <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5">19,50€</span>
                                         </div>
                                     </a>
@@ -424,7 +425,7 @@
                                         </div>
                                         <div class="text-left">
                                             <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none">Joe Heschmeyer</span>
+                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none font-bold">Joe Heschmeyer</span>
                                             <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5 leading-none">13,50€</span>
                                         </div>
                                     </a>
@@ -461,7 +462,7 @@
                                 </div>
                                 
                                 <div class="h-auto mb-1.5 sm:mb-4 flex items-center">
-                                    <p class="font-classic text-[13px] xs:text-sm sm:text-xl lg:text-2xl text-gray-600 italic leading-relaxed">
+                                    <p class="font-classic text-[13px] xs:text-sm sm:text-xl lg:text-2xl text-gray-655 italic leading-relaxed">
                                         Um guia indispensável e prático para desvendar os mistérios e as riquezas das Sagradas Escrituras.
                                     </p>
                                 </div>
@@ -473,7 +474,7 @@
                                         </div>
                                         <div class="text-left">
                                             <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
-                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none">Peter Kreeft</span>
+                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none font-bold">Peter Kreeft</span>
                                             <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5">15,00€</span>
                                         </div>
                                     </a>
@@ -560,7 +561,7 @@
         </div>
 
         <!-- PRÓXIMOS LANÇAMENTOS -->
-        <section class="py-16 sm:py-24 bg-white border-t border-gray-100">
+        <section class="py-16 sm:py-24 bg-white border-t border-gray-150">
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-stretch">
@@ -663,7 +664,7 @@
                                 <span class="w-8 h-px bg-brand-accent-red/30"></span> Missão
                             </h3>
                             <div class="text-lg md:text-xl text-gray-700 leading-relaxed font-classic dropcap flex-grow">
-                                A Jerónimo Editora nasce com o propósito de enriquecer o panorama editorial Português, especializando-se em obras de formação bíblica Católica que primam pela profundidade teológica e fidelidade às fontes. O seu nome é uma homenagem a São Jerónimo, presbítero e Doutor da Igreja, padroeiro dos estudiosos da Sagrada Escritura, que nos recorda:
+                                A Jerónimo Editora nasce com o propósito de enriquecer o panorama editorial Português, especializando-se em obras de formation bíblica Católica que primam pela profundidade teológica e fidelidade às fontes. O seu nome é uma homenagem a São Jerónimo, presbítero e Doutor da Igreja, padroeiro dos estudiosos da Sagrada Escritura, que nos recorda:
                             </div>
                             <div class="pt-6 border-t border-brand-gold/20">
                                 <p class="text-xl md:text-2xl text-brand-accent-blue italic font-classic leading-tight">
@@ -714,61 +715,9 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    
-                    <!-- Artigo 1 (ID 8) -->
-                    <div class="bg-brand-bg rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col h-full group">
-                        <div class="h-48 overflow-hidden relative">
-                            <img src="Imagens/8.png" alt="O coração que arde contra o arco-íris roubado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/ECE6D9/002147?text=Apologetica';">
-                            <span class="absolute top-4 left-4 bg-brand-accent-blue text-brand-gold text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Apologética e Cultura</span>
-                        </div>
-                        <div class="p-6 flex-grow flex flex-col">
-                            <span class="text-xs text-gray-400 mb-2 block flex items-center gap-1"><i class="far fa-calendar"></i> 13 de Junho de 2026</span>
-                            <h3 class="font-serif text-xl text-brand-accent-blue font-bold mb-3 line-clamp-2">O coração que arde contra o arco-íris roubado</h3>
-                            <p class="text-sm text-gray-650 font-classic italic leading-relaxed mb-6 flex-grow">Uma profunda reflexão e crítica católica sobre a distorção dos símbolos e as respostas fiéis perante os desafios culturais hodiernos.</p>
-                            <span class="text-xs text-gray-400 block mb-4"><i class="far fa-clock"></i> 10 min de leitura</span>
-                            <a href="artigos-individuais/o-coracao-que-arde-contra-o-arco-iris-roubado" class="inline-flex items-center text-brand-accent-red font-bold text-sm hover:text-brand-accent-blue transition-colors group/link mt-auto">
-                                Ler Artigo
-                                <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Artigo 2 (ID 7) -->
-                    <div class="bg-brand-bg rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col h-full group">
-                        <div class="h-48 overflow-hidden relative">
-                            <img src="Imagens/7.png" alt="Breve Guia para a Santa Missa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/ECE6D9/002147?text=Liturgia';">
-                            <span class="absolute top-4 left-4 bg-brand-accent-blue text-brand-gold text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Liturgia</span>
-                        </div>
-                        <div class="p-6 flex-grow flex-col flex">
-                            <span class="text-xs text-gray-400 mb-2 block flex items-center gap-1"><i class="far fa-calendar"></i> 11 de Junho de 2026</span>
-                            <h3 class="font-serif text-xl text-brand-accent-blue font-bold mb-3 line-clamp-2">Breve Guia para a Santa Missa (Parte 1 de 2)</h3>
-                            <p class="text-sm text-gray-650 font-classic italic leading-relaxed mb-6 flex-grow">Aprofunde a sua participação litúrgica através deste precioso guia explicativo sobre as partes, os ritos e a mística do Santo Sacrifício.</p>
-                            <span class="text-xs text-gray-400 block mb-4"><i class="far fa-clock"></i> 7 min de leitura</span>
-                            <a href="artigos-individuais/breve-guia-para-a-santa-missa-parte-1-de-2" class="inline-flex items-center text-brand-accent-red font-bold text-sm hover:text-brand-accent-blue transition-colors group/link mt-auto">
-                                Ler Artigo
-                                <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Artigo 3 (ID 6) -->
-                    <div class="bg-brand-bg rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col h-full group">
-                        <div class="h-48 overflow-hidden relative">
-                            <img src="Imagens/6.png" alt="A Coroação da História da Salvação" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/ECE6D9/002147?text=Leituras';">
-                            <span class="absolute top-4 left-4 bg-brand-accent-blue text-brand-gold text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Comentários às Leituras</span>
-                        </div>
-                        <div class="p-6 flex-grow flex flex-col">
-                            <span class="text-xs text-gray-400 mb-2 block flex items-center gap-1"><i class="far fa-calendar"></i> 24 de Maio de 2026</span>
-                            <h3 class="font-serif text-xl text-brand-accent-blue font-bold mb-3 line-clamp-2">A Coroação da História da Salvação (Pentecostes)</h3>
-                            <p class="text-sm text-gray-650 font-classic italic leading-relaxed mb-6 flex-grow">O Pentecostes explicado à luz da Tradição: saiba como a efusão do Espírito Santo sela e coroa majestosamente toda a Aliança Divina.</p>
-                            <span class="text-xs text-gray-400 block mb-4"><i class="far fa-clock"></i> 8 min de leitura</span>
-                            <a href="artigos-individuais/a-coroacao-da-historia-da-salvacao-pentecostes" class="inline-flex items-center text-brand-accent-red font-bold text-sm hover:text-brand-accent-blue transition-colors group/link mt-auto">
-                                Ler Artigo
-                                <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
-                            </a>
-                        </div>
-                    </div>
+                <!-- Grelha de Artigos Dinâmica com Centralização Visual -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center" id="latest-articles-grid">
+                    <!-- Gerado de forma totalmente dinâmica via JavaScript -->
                 </div>
 
             </div>
@@ -1113,12 +1062,228 @@
             }
         }
 
+        /* --- BASE DE DADOS COMPLETA DE ARTIGOS --- */
+        const articlesData = [
+             {
+                id: 10,
+                title: "Breve Guia para a Santa Missa (Parte 2 de 2)",
+                category: "Liturgia",
+                date: "2026-07-11",
+                readingTime: "1 min",
+                url: "artigos-individuais/breve-guia-para-a-santa-missa-parte-2-de-2",
+                image: "Imagens/10.png"
+            },
+            {
+                id: 9,
+                title: "São João Baptista: Quem foi realmente?",
+                category: "Comentário às Leituras",
+                date: "2026-06-22",
+                readingTime: "10 min",
+                url: "artigos-individuais/sao-joao-baptista-quem-foi-realmente",
+                image: "Imagens/9.png"
+            },
+            {
+                id: 8,
+                title: "O coração que arde contra o arco-íris roubado",
+                category: "Apologética e Cultura",
+                date: "2026-06-13",
+                readingTime: "10 min",
+                url: "artigos-individuais/o-coracao-que-arde-contra-o-arco-iris-roubado",
+                image: "Imagens/8.png"
+            },
+            {
+                id: 7,
+                title: "Breve Guia para a Santa Missa (Parte 1 de 2)",
+                category: "Liturgia",
+                date: "2026-06-11",
+                readingTime: "7 min",
+                url: "artigos-individuais/breve-guia-para-a-santa-missa-parte-1-de-2",
+                image: "Imagens/7.png"
+            },
+            {
+                id: 6,
+                title: "A Coroação da História da Salvação (Pentecostes)",
+                category: "Comentário às Leituras",
+                date: "2026-05-24",
+                readingTime: "6 min",
+                url: "artigos-individuais/a-coroacao-da-historia-da-salvacao-pentecostes",
+                image: "Imagens/6.png"
+            },
+            {
+                id: 5,
+                title: "Engolido por uma má exegese",
+                category: "Resposta a Artigos",
+                date: "2026-04-23",
+                readingTime: "22 min",
+                url: "artigos-individuais/engolido-por-uma-ma-exegese",
+                image: "Imagens/5.png"
+            },
+            {
+                id: 4,
+                title: "Nascimento de Jesus: Belém ou Nazaré?",
+                category: "Resposta a Artigos",
+                date: "2026-02-03",
+                readingTime: "10 min",
+                url: "artigos-individuais/nascimento-de-jesus-belem-ou-nazare",
+                image: "Imagens/4.png"
+            },
+            {
+                id: 3,
+                title: "Como Não Ler a Bíblia em Qualquer Século (3 de 3)",
+                category: "Crítica de Livros",
+                date: "2025-09-24",
+                readingTime: "11 min",
+                url: "artigos-individuais/como-nao-ler-a-biblia-em-qualquer-seculo-3-de-3",
+                image: "Imagens/3.png"
+            },
+            {
+                id: 2,
+                title: "Como Não Ler a Bíblia em Qualquer Século (2 de 3)",
+                category: "Crítica de Livros",
+                date: "2025-09-10",
+                readingTime: "21 min",
+                url: "artigos-individuais/como-nao-ler-a-biblia-em-qualquer-seculo-2-de-3",
+                image: "Imagens/2.png"
+            },
+            {
+                id: 1,
+                title: "Como Não Ler a Bíblia em Qualquer Século (1 de 3)",
+                category: "Crítica de Livros",
+                date: "2025-08-27",
+                readingTime: "9 min",
+                url: "artigos-individuais/como-nao-ler-a-biblia-em-qualquer-seculo-1-de-3",
+                image: "Imagens/1.png"
+            }
+        ];
+
+        /* --- EXTRACÇÃO AUXILIAR DE SNIPPETS --- */
+        function getArticleSnippet(id) {
+            const snippets = {
+                10: "Análise teológica detalhada sobre a Liturgia Eucarística, explorando a mística, os ritos e a dimensão sacrificial da segunda metade da Missa.",
+                9: "Uma análise histórica e teológica sobre o Precursor, a sua ligação ao movimento Essénio e a relevância duradoura do seu testemunho de fé.",
+                8: "Uma profunda reflexão e crítica católica sobre a distorção dos símbolos e as respostas fiéis perante os desafios culturais hodiernos.",
+                7: "Aprofunde a sua participação litúrgica através deste precioso guia explicativo sobre as partes, os ritos e a mística do Santo Sacrifício.",
+                6: "O Pentecostes explicado à luz da Tradição: saiba como a efusão do Espírito Santo sela e coroa majestosamente toda a Aliança Divina.",
+                5: "Uma análise e crítica sobre a historicidade do profeta Jonas e do episódio do grande peixe no estômago do cetáceo.",
+                4: "Uma análise e resposta à tese do Pe. Ariel sobre a historicidade e o cumprimento teológico da profecia do nascimento de Cristo.",
+                3: "A terceira parte da análise crítica da obra bíblica do Pe. Carreira das Neves, abordando a Doutrina e o Magistério.",
+                2: "A segunda parte da crítica teológica, focando na Cristologia, no método histórico-crítico e no ministério público de Jesus.",
+                1: "A primeira parte da resposta crítica em torno da Revelação, Inspiração Bíblica, e a autenticidade literária dos textos sagrados."
+            };
+            return snippets[id] || "Leia a nossa reflexão teológica completa sobre as Sagradas Escrituras e a Tradição da Igreja.";
+        }
+
+        /* --- GERAÇÃO DINÂMICA DA SECÇÃO ÚLTIMOS ARTIGOS (CENTRALIZADOS) --- */
+        function renderLatestArticles() {
+            const grid = document.getElementById('latest-articles-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            // Filtrar os 3 artigos mais recentes da base de dados
+            const latest = [...articlesData]
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 3);
+
+            latest.forEach(art => {
+                const dateObj = new Date(art.date);
+                const formattedDate = dateObj.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
+                const linkAction = `href="${art.url}"`;
+
+                grid.innerHTML += `
+                    <div class="bg-brand-bg rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col h-full group text-center items-center">
+                        <div class="h-48 overflow-hidden relative w-full">
+                            <!-- Imagem Clicável com Link -->
+                            <a ${linkAction} class="block w-full h-full cursor-pointer">
+                                <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/ECE6D9/002147?text=Artigo';">
+                            </a>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col items-center justify-between w-full">
+                            <div class="flex flex-col items-center w-full">
+                                <!-- Elemento Categoria (Esquerda) e Tempo de Leitura (Direita) na mesma linha -->
+                                <div class="flex justify-between items-center w-full mb-3 text-[10px] font-extrabold font-inter uppercase tracking-widest">
+                                    <span class="text-brand-accent-orange text-left">${art.category}</span>
+                                    <span class="text-gray-400 font-sans tracking-normal normal-case font-semibold inline-flex items-center gap-1 text-right">
+                                        <i class="far fa-clock text-gray-400"></i> <span id="reading-time-latest-${art.id}">${art.readingTime}</span>
+                                    </span>
+                                </div>
+                                <span class="text-xs text-gray-400 mb-2 block flex items-center gap-1 justify-center"><i class="far fa-calendar"></i> ${formattedDate}</span>
+                                <!-- Título Clicável com Link e 100% Centralizado -->
+                                <h3 class="font-serif text-xl text-brand-accent-blue font-bold mb-3 line-clamp-2 text-center w-full">
+                                    <a ${linkAction} class="hover:text-brand-accent-orange transition-colors block text-center w-full font-bold">${art.title}</a>
+                                </h3>
+                                <p class="text-sm text-gray-655 font-classic italic leading-relaxed mb-6 text-center w-full">${getArticleSnippet(art.id)}</p>
+                            </div>
+                            <div class="w-full flex flex-col items-center">
+                                <a ${linkAction} class="inline-flex items-center text-brand-accent-red font-bold text-sm hover:text-brand-accent-blue transition-colors group/link font-sans justify-center">
+                                    Ler Artigo
+                                    <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        /* --- CARREGAMENTO DO TEMPO DE LEITURA REAL DOS ARTIGOS SELECIONADOS --- */
+        async function loadDynamicReadingTimesLatest() {
+            const prefix = getPrefix();
+            const fetchPromises = articlesData.slice(0, 3).map(async (art) => {
+                try {
+                    const path = getSafePath(prefix + art.url + '.html');
+                    const response = await fetch(path);
+                    if (!response.ok) return;
+
+                    const htmlText = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(htmlText, 'text/html');
+                    const contentElement = doc.getElementById('article-content');
+                    
+                    if (contentElement) {
+                        const text = contentElement.textContent || contentElement.innerText || "";
+                        const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+                        const readingTimeValue = Math.ceil(words / 200);
+                        
+                        art.readingTime = `${readingTimeValue} min`;
+                        
+                        const timeSpan = document.getElementById(`reading-time-latest-${art.id}`);
+                        if (timeSpan) {
+                            timeSpan.textContent = `${readingTimeValue} min`;
+                        }
+                    }
+                } catch (e) {
+                    console.warn(`Impossível calcular tempo de leitura real para o artigo ${art.id}:`, e);
+                }
+            });
+
+            await Promise.all(fetchPromises);
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
+                return '../';
+            }
+            return '';
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             loadComponent('nav-placeholder', 'menu');
             loadComponent('footer-placeholder', 'rodape');
             showSlide(0); 
             setupSwipeGestures(); 
             updateCartUI(); 
+            renderLatestArticles(); // Inicia a grelha de artigos mais recentes
+            loadDynamicReadingTimesLatest(); // Inicia o cálculo automático de tempo de leitura
             setTimeout(cleanAllInternalLinks, 500); 
         });
 
