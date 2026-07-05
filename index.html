@@ -83,14 +83,14 @@
             overflow: hidden;
             padding-top: 95px; /* Espaçamento no mobile para evitar sobreposição */
             padding-bottom: 40px;
-            background-color: #fff;
+            background-color: #f0eae1; /* Atualizado para tom pergaminho suave para destacar as páginas brancas */
         }
 
-        /* Cor de fundo atualizada com o novo gradiente quente e de melhor contraste (#f6f2e9) */
+        /* Cor de fundo atualizada com o novo tom bege/pergaminho ligeiramente mais escuro (#eae2d3 a #dfd7c5) */
         .hero-bg-accent {
             position: absolute;
             top: 0; right: 0; width: 42%; height: 100%;
-            background: linear-gradient(135deg, #f6f2e9 0%, #f2eee4 100%);
+            background: linear-gradient(135deg, #eae2d3 0%, #dfd7c5 100%);
             z-index: 0; 
             clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
         }
@@ -421,7 +421,7 @@
                                 <div class="h-auto min-h-[40px] sm:min-h-[100px] lg:min-h-[115px] flex items-center mb-1.5 lg:mb-4">
                                     <a href="detalhes/a-eucaristia-e-mesmo-jesus" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
                                         <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0">
-                                            <img src="Imagens/JoeHeschmeyer.png" alt="Joe Heschmeyer" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/ECE6D9/002147?text=JH';">
+                                            <img src="Imagens/JoeHeschmeyer.png" alt="JoeHeschmeyer" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/ECE6D9/002147?text=JH';">
                                         </div>
                                         <div class="text-left">
                                             <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
@@ -475,7 +475,7 @@
                                         <div class="text-left">
                                             <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
                                             <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none font-bold">Peter Kreeft</span>
-                                            <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5">15,00€</span>
+                                            <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5 font-bold">15,00€</span>
                                         </div>
                                     </a>
                                 </div>
@@ -500,7 +500,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-12 items-center mt-6 lg:mt-4 border-t border-gray-100 pt-3 gap-4">
+                <div class="grid grid-cols-12 items-center mt-6 lg:mt-4 border-t border-gray-150 pt-3 gap-4">
                     <div class="hidden sm:block sm:col-span-4"></div>
                     
                     <div class="col-span-12 sm:col-span-4 flex justify-center items-center gap-1">
@@ -680,7 +680,7 @@
                                 Valores <span class="w-8 h-px bg-brand-accent-red/30"></span>
                             </h3>
                             <div class="text-lg md:text-xl text-gray-700 leading-relaxed font-classic dropcap flex-grow">
-                                Guiamo-nos pela <strong>Fé</strong>, pela <strong>Verdade</strong> e pelo compromisso tanto pela <strong>ortodoxia</strong> como pela <strong>ortopraxia</strong>. Em cada projecto, aliamos o <strong>rigor</strong> editorial à <strong>excelência</strong> gráfica, crentes de que a <strong>Beleza</strong> de um livro é o primeiro convite à leitura que eleva a alma.
+                                Guiamo-nous pela <strong>Fé</strong>, pela <strong>Verdade</strong> e pelo compromisso tanto pela <strong>ortodoxia</strong> como pela <strong>ortopraxia</strong>. Em cada projecto, aliamos o <strong>rigor</strong> editorial à <strong>excelência</strong> gráfica, crentes de que a <strong>Beleza</strong> de um livro é o primeiro convite à leitura que eleva a alma.
                             </div>
                             <div class="pt-6 border-t border-brand-gold/20">
                                 <div class="flex flex-wrap justify-end md:justify-start gap-3">
@@ -742,7 +742,7 @@
 
                 <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="max-w-lg mx-auto flex flex-col sm:flex-row gap-3">
                     <div class="flex-grow">
-                        <input type="email" id="newsletter-email" required placeholder="O seu endereço de e-mail" aria-label="Endereço de e-mail" class="w-full px-5 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-450 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all">
+                        <input type="email" id="newsletter-email" required placeholder="O seu endereço de e-mail" aria-label="Endereço de e-mail" class="w-full px-5 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-455 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all">
                     </div>
                     <button type="submit" class="bg-brand-accent-red hover:bg-brand-accent-red/90 text-white font-bold uppercase text-xs tracking-wider px-8 py-4 sm:py-3.5 rounded-xl transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0">
                         Subscrever
@@ -1156,23 +1156,6 @@
             }
         ];
 
-        /* --- EXTRACÇÃO AUXILIAR DE SNIPPETS --- */
-        function getArticleSnippet(id) {
-            const snippets = {
-                10: "Análise teológica detalhada sobre a Liturgia Eucarística, explorando a mística, os ritos e a dimensão sacrificial da segunda metade da Missa.",
-                9: "Uma análise histórica e teológica sobre o Precursor, a sua ligação ao movimento Essénio e a relevância duradoura do seu testemunho de fé.",
-                8: "Uma profunda reflexão e crítica católica sobre a distorção dos símbolos e as respostas fiéis perante os desafios culturais hodiernos.",
-                7: "Aprofunde a sua participação litúrgica através deste precioso guia explicativo sobre as partes, os ritos e a mística do Santo Sacrifício.",
-                6: "O Pentecostes explicado à luz da Tradição: saiba como a efusão do Espírito Santo sela e coroa majestosamente toda a Aliança Divina.",
-                5: "Uma análise e crítica sobre a historicidade do profeta Jonas e do episódio do grande peixe no estômago do cetáceo.",
-                4: "Uma análise e resposta à tese do Pe. Ariel sobre a historicidade e o cumprimento teológico da profecia do nascimento de Cristo.",
-                3: "A terceira parte da análise crítica da obra bíblica do Pe. Carreira das Neves, abordando a Doutrina e o Magistério.",
-                2: "A segunda parte da crítica teológica, focando na Cristologia, no método histórico-crítico e no ministério público de Jesus.",
-                1: "A primeira parte da resposta crítica em torno da Revelação, Inspiração Bíblica, e a autenticidade literária dos textos sagrados."
-            };
-            return snippets[id] || "Leia a nossa reflexão teológica completa sobre as Sagradas Escrituras e a Tradição da Igreja.";
-        }
-
         /* --- GERAÇÃO DINÂMICA DA SECÇÃO ÚLTIMOS ARTIGOS (CENTRALIZADOS) --- */
         function renderLatestArticles() {
             const grid = document.getElementById('latest-articles-grid');
@@ -1206,12 +1189,12 @@
                                         <i class="far fa-clock text-gray-400"></i> <span id="reading-time-latest-${art.id}">${art.readingTime}</span>
                                     </span>
                                 </div>
-                                <span class="text-xs text-gray-400 mb-2 block flex items-center gap-1 justify-center"><i class="far fa-calendar"></i> ${formattedDate}</span>
                                 <!-- Título Clicável com Link e 100% Centralizado -->
-                                <h3 class="font-serif text-xl text-brand-accent-blue font-bold mb-3 line-clamp-2 text-center w-full">
+                                <h3 class="font-serif text-xl text-brand-accent-blue font-bold mb-2 line-clamp-2 text-center w-full">
                                     <a ${linkAction} class="hover:text-brand-accent-orange transition-colors block text-center w-full font-bold">${art.title}</a>
                                 </h3>
-                                <p class="text-sm text-gray-655 font-classic italic leading-relaxed mb-6 text-center w-full">${getArticleSnippet(art.id)}</p>
+                                <!-- Data de publicação movida para baixo do título -->
+                                <span class="text-xs text-gray-400 mb-4 block flex items-center gap-1 justify-center"><i class="far fa-calendar"></i> ${formattedDate}</span>
                             </div>
                             <div class="w-full flex flex-col items-center">
                                 <a ${linkAction} class="inline-flex items-center text-brand-accent-red font-bold text-sm hover:text-brand-accent-blue transition-colors group/link font-sans justify-center">
