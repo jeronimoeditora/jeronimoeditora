@@ -571,19 +571,6 @@
                     `;
                 }
 
-                var outOfStockNoticeHtml = '';
-                if (isItemOutOfStock) {
-                    outOfStockNoticeHtml = `
-                        <div class="mt-2.5 p-2.5 bg-amber-500/20 border border-amber-400/40 rounded-lg text-amber-200 text-xs flex items-start gap-2 font-sans">
-                            <i class="fas fa-exclamation-triangle text-amber-300 mt-0.5 flex-shrink-0"></i>
-                            <div>
-                                <p class="font-bold text-amber-300">Sem Stock Temporário</p>
-                                <p class="text-[11px] opacity-90 leading-tight mt-0.5">Pedimos desculpa pelo incómodo. Esperamos repor o stock em breve.</p>
-                            </div>
-                        </div>
-                    `;
-                }
-
                 html += `
                     <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans ${isItemOutOfStock ? 'bg-amber-950/20 p-2.5 rounded-lg border-amber-500/30' : ''}">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
@@ -596,7 +583,6 @@
                             ${quantitySelectorHtml}
                             <button onclick="removeItem('${item.id}')" class="text-gray-400 hover:text-white p-2" title="Remover do carrinho"><i class="fas fa-trash-alt"></i></button>
                         </div>
-                        ${outOfStockNoticeHtml}
                     </div>`;
             });
 
