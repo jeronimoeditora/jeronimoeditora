@@ -174,7 +174,7 @@
                                 <input type="text" id="nif" name="nif" class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50">
                             </div>
                             
-                            <!-- Morada física (Ocultada dinamicamente caso o carrinho contenha apenas cursos digitais) -->
+                            <!-- Morada física -->
                             <div id="physical-address-fields" class="space-y-5">
                                 <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
                                     <div class="md:col-span-3">
@@ -311,6 +311,17 @@
                     <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10">
                         <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2">Carrinho de Compras</h2>
                         
+                        <!-- Banner Global de Aviso de Falta de Stock -->
+                        <div id="out-of-stock-global-alert" class="hidden mb-4 p-3.5 bg-amber-900/60 border border-amber-400/50 rounded-xl text-amber-100 text-xs font-sans">
+                            <div class="flex items-center gap-2 font-bold text-amber-300 text-sm mb-1">
+                                <i class="fas fa-exclamation-triangle text-amber-400"></i>
+                                <span>Artigo Temporariamente Sem Stock</span>
+                            </div>
+                            <p class="leading-relaxed opacity-95">
+                                O livro <strong>"Tu podes compreender a Bíblia"</strong> encontra-se de momento esgotado. Pedimos desculpa pelo incómodo e esperamos repor o stock em breve. Por favor, remova este artigo para poder concluir a sua encomenda.
+                            </p>
+                        </div>
+
                         <div id="summary-list" class="space-y-5 mb-6 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar"></div>
 
                         <div id="suggestions-container" class="mt-4 pt-4 border-t border-white/10 hidden">
@@ -347,7 +358,6 @@
                                 </label>
                             </div>
                             
-                            <!-- Alerta de Privacidade Inline (Redimensionado e amigável) -->
                             <div id="privacy-error-box" class="hidden mt-3 p-3 bg-red-950/40 border border-red-500/30 text-red-200 text-xs rounded-lg font-sans">
                                 <i class="fas fa-exclamation-circle mr-1.5"></i> Por favor, aceite os Termos e Condições e a Política de Privacidade para avançar.
                             </div>
@@ -372,6 +382,9 @@
         var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec"; 
         var SHIPPING_MARGIN = 19; 
         
+        // Livro sem stock configurado
+        var OUT_OF_STOCK_IDS = [1]; 
+
         var bookData = [
             { id: 1, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
             { id: 2, title: "A Eucaristia é mesmo Jesus", price: 13.50, weight: 254 },
@@ -502,27 +515,24 @@
             var destinoElement = document.getElementById('pais');
             var destino = destinoElement ? destinoElement.value : 'PT';
             var subtotal = 0, pesoTotal = 0, html = '';
+            var hasOutOfStock = false;
 
-            // Detecção inteligente de carrinho contendo exclusivamente cursos digitais sob o Antigo Acordo Ortográfico
             var contemFisicos = items.some(function(item) { return item.type !== 'curso'; });
             var contemCursos = items.some(function(item) { return item.type === 'curso'; });
             var apenasCursos = items.length > 0 && !contemFisicos;
 
-            // Adapta a visibilidade dos campos de morada física
             var physicalArea = document.getElementById('physical-address-fields');
             var stepTitle = document.getElementById('billing-step-title');
             
             if (apenasCursos) {
                 if (physicalArea) physicalArea.classList.add('hidden');
                 if (stepTitle) stepTitle.textContent = "1. Detalhes de Contacto";
-                // Remove required das moradas para passar validação nativa do browser
                 document.querySelectorAll('.shipping-input').forEach(function(el) {
                     el.removeAttribute('required');
                 });
             } else {
                 if (physicalArea) physicalArea.classList.remove('hidden');
                 if (stepTitle) stepTitle.textContent = "1. Detalhes de Envio";
-                // Reatribui required aos campos de envio físico
                 document.querySelectorAll('.shipping-input').forEach(function(el) {
                     el.setAttribute('required', 'required');
                 });
@@ -542,7 +552,12 @@
                 }
                 pesoTotal += (itemWeight * item.quantity);
 
-                // Oculta os botões - 1 + para artigos digitais (Cursos)
+                // Verificação se o artigo está sem stock
+                var isItemOutOfStock = OUT_OF_STOCK_IDS.includes(Number(item.id)) || (item.title && item.title.toLowerCase().indexOf('compreender a bíblia') !== -1);
+                if (isItemOutOfStock) {
+                    hasOutOfStock = true;
+                }
+
                 var quantitySelectorHtml = '';
                 if (item.type === 'curso') {
                     quantitySelectorHtml = `<span class="text-brand-gold text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 bg-white/5 rounded-lg border border-white/10 font-sans flex items-center gap-1.5"><i class="fas fa-video"></i> Curso Digital</span>`;
@@ -556,8 +571,21 @@
                     `;
                 }
 
+                var outOfStockNoticeHtml = '';
+                if (isItemOutOfStock) {
+                    outOfStockNoticeHtml = `
+                        <div class="mt-2.5 p-2.5 bg-amber-500/20 border border-amber-400/40 rounded-lg text-amber-200 text-xs flex items-start gap-2 font-sans">
+                            <i class="fas fa-exclamation-triangle text-amber-300 mt-0.5 flex-shrink-0"></i>
+                            <div>
+                                <p class="font-bold text-amber-300">Sem Stock Temporário</p>
+                                <p class="text-[11px] opacity-90 leading-tight mt-0.5">Pedimos desculpa pelo incómodo. Esperamos repor o stock em breve.</p>
+                            </div>
+                        </div>
+                    `;
+                }
+
                 html += `
-                    <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
+                    <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans ${isItemOutOfStock ? 'bg-amber-950/20 p-2.5 rounded-lg border-amber-500/30' : ''}">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
                             <span class="font-lora text-sm text-brand-gold leading-tight flex-grow font-bold">
                                 ${item.title}
@@ -566,10 +594,21 @@
                         </div>
                         <div class="flex items-center justify-between">
                             ${quantitySelectorHtml}
-                            <button onclick="removeItem('${item.id}')" class="text-gray-400 hover:text-white p-2"><i class="fas fa-trash-alt"></i></button>
+                            <button onclick="removeItem('${item.id}')" class="text-gray-400 hover:text-white p-2" title="Remover do carrinho"><i class="fas fa-trash-alt"></i></button>
                         </div>
+                        ${outOfStockNoticeHtml}
                     </div>`;
             });
+
+            // Apresenta ou oculta o alerta global de falta de stock no topo do carrinho
+            var globalAlert = document.getElementById('out-of-stock-global-alert');
+            if (globalAlert) {
+                if (hasOutOfStock) {
+                    globalAlert.classList.remove('hidden');
+                } else {
+                    globalAlert.classList.add('hidden');
+                }
+            }
             
             var custoPortes = 0;
             var badge = document.getElementById('optimizacao-badge');
@@ -598,7 +637,6 @@
             document.getElementById('summary-shipping').textContent = `€ ${custoPortes.toFixed(2).replace('.', ',')}`;
             document.getElementById('summary-total').textContent = `€ ${(subtotal + custoPortes).toFixed(2).replace('.', ',')}`;
             
-            // Personaliza o ecrã de feedback de submissão se for exclusivamente cursos ou misto (Antigo Acordo Ortográfico)
             var successMsg = document.getElementById('success-modal-msg');
             if (successMsg) {
                 if (apenasCursos) {
@@ -763,7 +801,6 @@
             var contemFisicos = cartItems.some(function(item) { return item.type !== 'curso'; });
             var apenasCursos = cartItems.length > 0 && !contemFisicos;
 
-            // Se existirem artigos físicos, valida obrigatoriamente as moradas de envio
             if (!apenasCursos && inputsValid) {
                 var requiredEnvio = ['morada', 'nr-andar', 'cod-postal', 'cidade'];
                 requiredEnvio.forEach(function(id) { 
@@ -781,16 +818,26 @@
                 }
             }
 
+            // Impede a submissão se existir pelo menos um artigo sem stock no carrinho
+            var hasOutOfStock = cartItems.some(function(item) {
+                return OUT_OF_STOCK_IDS.includes(Number(item.id)) || (item.title && item.title.toLowerCase().indexOf('compreender a bíblia') !== -1);
+            });
+
             var btn = document.getElementById('place-order-button');
             if (btn) {
-                btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid;
+                if (hasOutOfStock) {
+                    btn.disabled = true;
+                    btn.textContent = "Remova o artigo sem stock";
+                } else {
+                    btn.textContent = "Confirmar e Pagar";
+                    btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid;
+                }
             }
         }
 
         async function placeOrder(e) {
             e.preventDefault();
             
-            // Verificação Inteligente da Política de Privacidade
             var privacyChecked = document.getElementById('privacy-policy')?.checked;
             var errorBox = document.getElementById('privacy-error-box');
             
@@ -819,7 +866,6 @@
             var contemCursos = cartItems.some(function(item) { return item.type === 'curso'; });
             var apenasCursos = cartItems.length > 0 && !contemFisicos;
 
-            // Lógica inteligente para definir o tipo de correio electrónico e instruções do script
             var tipoEncomenda = "fisica";
             var assuntoEmail = "Confirmação de Encomenda - Jerónimo Editora";
             var instrucoesEmail = "Encomenda constituída exclusivamente por artigos físicos. Proceder à expedição postal.";
