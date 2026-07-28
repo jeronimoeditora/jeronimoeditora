@@ -145,6 +145,28 @@
             transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             user-select: none;
         }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 65px;
+            height: 65px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s;
+            border: 1px solid rgba(255,255,255,0.15);
+            z-index: 100;
+        }
+        .lightbox-nav:hover {
+            background: #800000;
+            border-color: #800000;
+            transform: translateY(-50%) scale(1.1);
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen pt-20">
@@ -253,11 +275,22 @@
     </main>
 
     <!-- LIGHTBOX MODAL -->
-    <div id="lightbox-modal" onclick="closeLightbox()">
+    <div id="lightbox-modal">
         <button class="absolute top-8 right-8 text-white hover:text-brand-gold transition-colors z-[110]" onclick="closeLightbox()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
+
+        <div class="lightbox-nav left-8 md:left-16" onclick="event.stopPropagation(); changeImage(-1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </div>
+        
         <img id="lightbox-img" src="" alt="Ampliação" onclick="event.stopPropagation()">
+
+        <div class="lightbox-nav right-8 md:right-16" onclick="event.stopPropagation(); changeImage(1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
+
+        <div id="lightbox-counter" class="absolute bottom-12 text-white font-sans text-xs tracking-[0.3em] uppercase opacity-50"></div>
     </div>
 
     <div id="footer-placeholder"></div>
@@ -292,30 +325,107 @@
         function updateImage(index) {
             currentIndex = index;
             var mainImg = document.getElementById('main-image');
+            var lightboxImg = document.getElementById('lightbox-img');
+            var counter = document.getElementById('lightbox-counter');
+            
             mainImg.style.opacity = '0';
+            mainImg.style.transform = 'scale(0.98)';
+            
             setTimeout(function() {
-                mainImg.src = galleryImages[currentIndex];
-                mainImg.style.opacity = '1';
-                renderThumbs();
-            }, 250);
+                var newSrc = galleryImages[currentIndex];
+                var tempImg = new Image();
+                tempImg.src = newSrc;
+                tempImg.onload = function() {
+                    mainImg.src = newSrc;
+                    mainImg.style.opacity = '1';
+                    mainImg.style.transform = 'scale(1)';
+                    renderThumbs();
+
+                    var lightboxModal = document.getElementById('lightbox-modal');
+                    if (lightboxModal && lightboxModal.style.display === 'flex') {
+                        lightboxImg.style.opacity = '0';
+                        lightboxImg.style.transform = 'scale(0.95)';
+                        setTimeout(function() {
+                            lightboxImg.src = newSrc;
+                            lightboxImg.style.opacity = '1';
+                            lightboxImg.style.transform = 'scale(1)';
+                            if (counter) counter.textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
+                        }, 50);
+                    }
+                };
+            }, 300);
         }
 
         function changeImage(step) {
-            currentIndex = (currentIndex + step + galleryImages.length) % galleryImages.length;
-            updateImage(currentIndex);
+            var nextIndex = currentIndex + step;
+            if (nextIndex >= galleryImages.length) nextIndex = 0;
+            if (nextIndex < 0) nextIndex = galleryImages.length - 1;
+            updateImage(nextIndex);
         }
 
         function openLightbox() {
             var modal = document.getElementById('lightbox-modal');
             var lImg = document.getElementById('lightbox-img');
+            var counter = document.getElementById('lightbox-counter');
+            if (!modal || !lImg) return;
             lImg.src = galleryImages[currentIndex];
+            if (counter) counter.textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            
+            lImg.style.opacity = '0';
+            lImg.style.transform = 'scale(0.9)';
+            setTimeout(function() {
+                lImg.style.opacity = '1';
+                lImg.style.transform = 'scale(1)';
+            }, 50);
         }
 
         function closeLightbox() {
-            document.getElementById('lightbox-modal').style.display = 'none';
-            document.body.style.overflow = 'auto';
+            var modal = document.getElementById('lightbox-modal');
+            var lImg = document.getElementById('lightbox-img');
+            if (!modal || !lImg) return;
+            lImg.style.opacity = '0';
+            lImg.style.transform = 'scale(0.9)';
+            
+            setTimeout(function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                updateImage(0); 
+            }, 300);
+        }
+
+        function handleSwipe() {
+            var swipeDistance = touchEndX - touchStartX;
+            var threshold = 60;
+            if (swipeDistance > threshold) changeImage(-1);
+            else if (swipeDistance < -threshold) changeImage(1);
+        }
+
+        function initGestures() {
+            var containers = [
+                document.getElementById('main-image-container'),
+                document.getElementById('lightbox-modal')
+            ];
+
+            containers.forEach(function(el) {
+                if (!el) return;
+                el.addEventListener('touchstart', function(e) {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+
+                el.addEventListener('touchend', function(e) {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                }, { passive: true });
+            });
+            
+            var lightboxModal = document.getElementById('lightbox-modal');
+            if (lightboxModal) {
+                lightboxModal.addEventListener('click', function(e) {
+                    if (e.target.id === 'lightbox-modal') closeLightbox();
+                });
+            }
         }
 
         function correctPaths(container) {
@@ -360,23 +470,25 @@
                 }
 
                 updateCartUI();
+                renderThumbs();
+                initGestures();
             } catch (e) {
                 console.warn("Erro ao obter menu/rodape dinâmicos:", e);
                 updateCartUI();
+                renderThumbs();
+                initGestures();
             }
         }
 
         function showTab(tabId) {
-            document.getElementById('content-autor').classList.add('hidden');
-            document.getElementById('tab-autor').classList.remove('tab-active');
-            document.getElementById('tab-autor').classList.add('text-gray-400');
-            document.getElementById('content-ficha').classList.add('hidden');
-            document.getElementById('tab-ficha').classList.remove('tab-active');
-            document.getElementById('tab-ficha').classList.add('text-gray-400');
-            
+            ['autor', 'ficha'].forEach(function(id) {
+                var c = document.getElementById('content-' + id);
+                var b = document.getElementById('tab-' + id);
+                if (c) c.classList.add('hidden');
+                if (b) { b.classList.remove('tab-active'); b.classList.add('text-gray-400'); }
+            });
             document.getElementById('content-' + tabId).classList.remove('hidden');
             document.getElementById('tab-' + tabId).classList.add('tab-active');
-            document.getElementById('tab-' + tabId).removeProperty ? document.getElementById('tab-' + tabId).removeProperty('text-gray-400') : document.getElementById('tab-' + tabId).classList.remove('text-gray-400');
         }
 
         function addToCart(title, price) {
@@ -418,29 +530,16 @@
             });
         }
 
-        var container = document.getElementById('main-image-container');
-        if (container) {
-            container.addEventListener('touchstart', function(e) {
-                touchStartX = e.changedTouches[0].screenX;
-            }, {passive: true});
-            container.addEventListener('touchend', function(e) {
-                var touchEndX = e.changedTouches[0].screenX;
-                if (touchStartX - touchEndX > 50) changeImage(1);
-                if (touchStartX - touchEndX < -50) changeImage(-1);
-            }, {passive: true});
-        }
-
         window.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeLightbox();
             if (e.key === 'ArrowRight') changeImage(1);
             if (e.key === 'ArrowLeft') changeImage(-1);
         });
 
-        window.onload = function() {
+        window.addEventListener('DOMContentLoaded', function() {
             loadComponents();
-            renderThumbs();
             showTab('autor');
-        };
+        });
     </script>
 
     <!-- GoatCounter Analytics Tracker -->
