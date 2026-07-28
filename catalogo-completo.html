@@ -67,7 +67,6 @@
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- Modal Confirmação Carrinho -->
     <div id="add-to-cart-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-60 flex items-center justify-center hidden modal-overlay" onclick="closeCartConfirmation()">
         <div class="bg-white p-6 rounded-lg shadow-2xl max-w-md w-full mx-4 modal-content relative" onclick="event.stopPropagation()">
             <button onclick="closeCartConfirmation()" class="absolute top-4 right-4 text-gray-400 hover:text-brand-accent-red transition-colors">
@@ -82,7 +81,6 @@
         </div>
     </div>
 
-    <!-- Modal Detalhes (+Info) -->
     <div id="info-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-60 flex items-center justify-center hidden modal-overlay" onclick="closeInfoModal()">
         <div class="bg-white p-6 rounded-xl shadow-2xl max-w-md w-full mx-4 sm:max-w-lg max-h-[90vh] flex flex-col modal-content relative" onclick="event.stopPropagation()">
             <button onclick="closeInfoModal()" class="absolute top-4 right-4 text-gray-400 hover:text-brand-accent-red transition-colors">
@@ -110,7 +108,7 @@
                         <!-- Linha de Preço + Botão Detalhes -->
                         <div class="flex items-center justify-between mb-4">
                             <p class="font-bold text-brand-accent-red text-xl md:text-2xl font-classic" id="info-modal-price"></p>
-                            <a id="info-modal-details-link" href="#" class="inline-flex items-center justify-center bg-brand-accent-blue text-white px-4 md:px-7 py-2 rounded-lg font-bold text-sm hover:bg-brand-accent-red transition-all shadow-md">
+                            <a id="info-modal-details-link" href="#" target="_blank" class="inline-flex items-center justify-center bg-brand-accent-blue text-white px-4 md:px-7 py-2 rounded-lg font-bold text-sm hover:bg-brand-accent-red transition-all shadow-md">
                                 <span class="md:hidden text-lg">+</span>
                                 <span class="hidden md:inline">+ detalhes</span>
                             </a>
@@ -273,6 +271,19 @@
                 isComingSoon: true 
             }
         ];
+
+        /**
+         * Trata o clique com o botão direito (evento 'contextmenu') na imagem do livro.
+         * Abre a página de detalhes correspondente numa nova aba se existir detailsUrl.
+         */
+        function handleImageRightClick(event, bookId) {
+            const book = bookData.find(b => b.id === bookId);
+            if (book && book.detailsUrl && !book.isComingSoon) {
+                event.preventDefault(); // Impede o menu contextual padrão do navegador
+                event.stopPropagation(); // Evita que o evento de clique do card seja ativado
+                window.open(book.detailsUrl, '_blank');
+            }
+        }
 
         function getSafePath(file) {
             const currentUrl = window.location.href;
@@ -448,7 +459,11 @@
                     const imageClass = whiteCovers.some(c => b.image.includes(c)) ? 'white-cover-shadow' : '';
                     coverHtml = `
                         <div class="overflow-hidden rounded-lg mb-4 md:mb-6 flex justify-center py-4 md:py-6 bg-gray-50">
-                            <img src="${b.image}" class="w-24 h-36 md:w-36 md:h-52 object-contain transition-transform duration-500 group-hover:scale-105 ${imageClass}" onerror="this.onerror=null; this.src='https://placehold.co/400x600/f3f4f6/333333?text=${encodeURIComponent(b.title)}';" />
+                            <img src="${b.image}" 
+                                 title="Clique com o botão direito para abrir os detalhes numa nova aba" 
+                                 oncontextmenu="handleImageRightClick(event, ${b.id})" 
+                                 class="w-24 h-36 md:w-36 md:h-52 object-contain transition-transform duration-500 group-hover:scale-105 ${imageClass}" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x600/f3f4f6/333333?text=${encodeURIComponent(b.title)}';" />
                         </div>`;
                 } else {
                     coverHtml = `
