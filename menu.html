@@ -1,162 +1,270 @@
-<style>
-    @keyframes fadeInMenu {
-        from { 
-            opacity: 0; 
-            transform: scale(1.05); 
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jerónimo Editora | Menu de Navegação</title>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'],
+                        inter: ['"Inter"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#333333',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-gold': '#cfaf5c',
+                    },
+                    screens: {
+                        'xs': '400px',
+                    }
+                }
+            }
         }
-        to { 
-            opacity: 1; 
-            transform: scale(1); 
+    </script>
+
+    <style>
+        @keyframes fadeInMenu {
+            from { 
+                opacity: 0; 
+                transform: scale(1.03); 
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1); 
+            }
         }
-    }
 
-    .animate-menu-open {
-        animation: fadeInMenu 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
+        .animate-menu-open {
+            animation: fadeInMenu 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
 
-    /* Scrollbar personalizada para o menu lateral se for muito longo */
-    .menu-drawer-scroll::-webkit-scrollbar { width: 3px; }
-    .menu-drawer-scroll::-webkit-scrollbar-track { background: transparent; }
-    .menu-drawer-scroll::-webkit-scrollbar-thumb { background: #cfaf5c; border-radius: 10px; }
-</style>
+        /* Scrollbar personalizada para o menu lateral se for muito longo */
+        .menu-drawer-scroll::-webkit-scrollbar { width: 4px; }
+        .menu-drawer-scroll::-webkit-scrollbar-track { background: transparent; }
+        .menu-drawer-scroll::-webkit-scrollbar-thumb { background: #cfaf5c; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text font-sans antialiased min-h-screen flex flex-col">
 
-<!-- Navbar Fixa -->
-<nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 z-50 font-sans">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
-        <!-- Logo -->
-        <a href="/" class="flex items-center space-x-2">
-            <img src="Imagens/Logo J.png" alt="Logótipo Jerónimo Editora" class="h-8 md:h-10 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/40x40/cfaf5c/800000?text=J';">
-            <span class="font-serif text-xl md:text-2xl font-extrabold text-brand-text hover:text-brand-accent-red transition-colors duration-200 hidden sm:inline">Jerónimo Editora</span>
-        </a>
-        
-        <!-- Menu Desktop -->
-        <div class="hidden md:flex items-center space-x-5 lg:space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700">
-            <a href="/" class="hover:text-brand-accent-red transition-colors">Início</a>
-            <a href="/#sobre" class="hover:text-brand-accent-red transition-colors">Editora</a>
-            <a href="catalogo-completo" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
-            <a href="produtos" class="hover:text-brand-accent-red transition-colors">Produtos</a>
+    <!-- Navbar Fixa Superior -->
+    <nav class="w-full bg-white shadow-md border-b border-gray-100 py-4 px-6 fixed top-0 left-0 z-50 font-sans">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
             
-            <!-- Dropdown: Hugo Bacelo -->
-            <div class="relative group h-full flex items-center py-4 -my-4">
-                <button class="hover:text-brand-accent-red transition-colors flex items-center gap-1 outline-none uppercase font-bold">
-                    Hugo Bacelo
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-3 group">
+                <img src="Imagens/Logo J.png" alt="Logótipo Jerónimo Editora" class="h-8 md:h-10 w-auto transition-transform duration-200 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/40x40/002147/cfaf5c?text=J';">
+                <span class="font-serif text-xl md:text-2xl font-extrabold text-brand-text group-hover:text-brand-accent-red transition-colors duration-200 hidden sm:inline">Jerónimo Editora</span>
+            </a>
+            
+            <!-- Menu Desktop -->
+            <div class="hidden md:flex items-center space-x-5 lg:space-x-8 text-[14px] font-bold uppercase tracking-[0.15em] text-gray-700">
+                <a href="/" class="hover:text-brand-accent-red transition-colors">Início</a>
+                <a href="/#sobre" class="hover:text-brand-accent-red transition-colors">Editora</a>
+                <a href="catalogo-completo" class="hover:text-brand-accent-red transition-colors">Catálogo</a> 
+                <a href="produtos" class="hover:text-brand-accent-red transition-colors">Produtos</a>
                 
-                <!-- Caixa Dropdown Principal (Sem o wrapper intermédio Formação) -->
-                <div class="absolute left-0 top-full pt-1 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                    <div class="bg-white border border-gray-100 shadow-xl rounded-lg flex flex-col py-2 text-[13px] normal-case tracking-normal font-medium text-gray-700">
-                        <a href="sobreHB" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Sobre</a>
-                        <a href="artigos-geral" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Artigos</a>
-                        <a href="cursos-geral" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Cursos</a>
-                        <a href="palestras" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors">Agendar Palestra</a>
-                        <a href="aprendizesdoverbo" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors border-t border-gray-50 mt-1">Aprendizes do Verbo</a>
+                <!-- Dropdown: Hugo Bacelo -->
+                <div class="relative group h-full flex items-center py-4 -my-4">
+                    <button class="hover:text-brand-accent-red transition-colors flex items-center gap-1.5 outline-none uppercase font-bold cursor-pointer">
+                        Hugo Bacelo
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+                    </button>
+                    
+                    <!-- Caixa Dropdown Principal -->
+                    <div class="absolute left-0 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <div class="bg-white border border-gray-100 shadow-2xl rounded-xl flex flex-col py-2 text-[13px] normal-case tracking-normal font-medium text-gray-700">
+                            <a href="sobreHB" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors flex items-center justify-between">
+                                <span>Sobre</span>
+                                <i class="fas fa-user-circle text-gray-300 text-xs"></i>
+                            </a>
+                            <a href="artigos-geral" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors flex items-center justify-between">
+                                <span>Artigos</span>
+                                <i class="fas fa-newspaper text-gray-300 text-xs"></i>
+                            </a>
+                            <a href="cursos-geral" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors flex items-center justify-between">
+                                <span>Cursos</span>
+                                <i class="fas fa-graduation-cap text-gray-300 text-xs"></i>
+                            </a>
+                            <a href="palestras" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors flex items-center justify-between">
+                                <span>Agendar Palestra</span>
+                                <i class="fas fa-microphone text-gray-300 text-xs"></i>
+                            </a>
+                            <a href="aprendizesdoverbo" class="px-5 py-3 hover:bg-gray-50 hover:text-brand-accent-red transition-colors border-t border-gray-100 mt-1 flex items-center justify-between font-bold text-brand-accent-blue">
+                                <span>Aprendizes do Verbo</span>
+                                <i class="fas fa-book-open text-brand-gold text-xs"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <a href="contacto" class="hover:text-brand-accent-red transition-colors">Contactos</a>
+                <a href="contacto" class="hover:text-brand-accent-red transition-colors">Contactos</a>
+                
+                <!-- Carrinho Tradicional Desktop -->
+                <div class="pl-4 lg:pl-6 border-l border-gray-200">
+                    <a href="checkout" class="relative text-gray-800 hover:text-brand-accent-red transition-colors flex items-center" title="Ver Carrinho">
+                        <i class="fas fa-shopping-bag text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2.5 -right-2.5 bg-brand-accent-red text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-sans font-black shadow-sm border-2 border-white">2</span>
+                    </a>
+                </div>
+            </div>
             
-            <!-- Carrinho Tradicional -->
-            <div class="pl-4 lg:pl-6 border-l border-gray-200">
-                <a href="checkout" class="relative text-gray-800 hover:text-brand-accent-red transition-colors flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="9" cy="21" r="1"></circle>
-                        <circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-accent-red text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full opacity-0 transition-all font-sans font-black shadow-sm border border-white">0</span>
+            <!-- Botão Menu Mobile -->
+            <div class="flex items-center md:hidden space-x-5">
+                <a href="checkout" class="relative text-gray-800" title="Ver Carrinho">
+                    <i class="fas fa-shopping-bag text-xl"></i>
+                    <span id="cart-count-mobile" class="absolute -top-2.5 -right-2.5 bg-brand-accent-red text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-sans font-black shadow-sm border-2 border-white">2</span>
                 </a>
+                <button class="text-xl text-brand-text focus:outline-none p-2 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center w-10 h-10 hover:bg-gray-100 transition-colors cursor-pointer" onclick="toggleMenu()" aria-label="Abrir Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
+    </nav>
+
+    <!-- Backdrop Escuro para Mobile -->
+    <div id="menu-backdrop" class="fixed inset-0 bg-black/50 z-[55] hidden opacity-0 transition-opacity duration-300 ease-in-out" onclick="toggleMenu()"></div>
+
+    <!-- Drawer Lateral Mobile (Desliza suavemente da direita) -->
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[290px] xs:w-[340px] bg-white z-[60] shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between font-sans">
         
-        <!-- Botão Menu Mobile com ícones vetoriais estáveis -->
-        <div class="flex items-center md:hidden space-x-5">
-            <a href="checkout" class="relative text-gray-800">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                </svg>
-                <span id="cart-count-mobile" class="absolute -top-2 -right-2 bg-brand-accent-red text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full opacity-0 font-sans font-black shadow-sm border border-white">0</span>
-            </a>
-            <button class="text-xl text-brand-text focus:outline-none p-2 rounded-lg bg-gray-50 border border-gray-150 flex items-center justify-center w-10 h-10 hover:bg-gray-100 transition-colors" onclick="toggleMenu()" aria-label="Abrir Menu">
-                <i class="fas fa-bars"></i>
+        <!-- Cabeçalho do Drawer -->
+        <div class="p-6 border-b border-gray-100 flex items-center justify-between flex-shrink-0">
+            <div class="flex items-center space-x-3">
+                <img src="Imagens/Logo J.png" class="h-8 w-auto" alt="Logo" onerror="this.onerror=null; this.src='https://placehold.co/40x40/002147/cfaf5c?text=J';">
+                <span class="font-serif text-lg font-bold text-brand-text">Jerónimo Editora</span>
+            </div>
+            <button class="text-lg text-brand-accent-blue focus:outline-none p-2 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center w-9 h-9 hover:bg-gray-100 transition-colors cursor-pointer" onclick="toggleMenu()" aria-label="Fechar Menu">
+                <i class="fas fa-times"></i>
             </button>
         </div>
-    </div>
-</nav>
-
-<!-- Backdrop Escuro -->
-<div id="menu-backdrop" class="fixed inset-0 bg-black/40 z-[55] hidden opacity-0 transition-opacity duration-300 ease-in-out" onclick="toggleMenu()"></div>
-
-<!-- Drawer Lateral (Desliza suavemente a partir da direita) -->
-<div id="mobile-menu" class="fixed top-0 right-0 h-full w-[290px] xs:w-[340px] bg-white z-[60] shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between font-sans">
-    
-    <!-- Cabeçalho do Drawer -->
-    <div class="p-6 border-b border-gray-100 flex items-center justify-between flex-shrink-0">
-        <div class="flex items-center space-x-2">
-            <img src="Imagens/Logo J.png" class="h-8 w-auto" alt="Logo">
-            <span class="font-serif text-lg font-bold text-brand-text">Jerónimo</span>
+        
+        <!-- Links de Navegação Mobile -->
+        <div class="flex-grow overflow-y-auto px-6 py-6 space-y-5 menu-drawer-scroll">
+            <a href="/" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Início</a>
+            <a href="/#sobre" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Editora</a>
+            <a href="catalogo-completo" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Catálogo</a>
+            <a href="produtos" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Produtos</a>
+            
+            <!-- Accordion Mobile: Hugo Bacelo -->
+            <details class="w-full border-b border-gray-50 pb-2 group/hb [&::-webkit-details-marker]:hidden">
+                <summary class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic cursor-pointer list-none flex items-center justify-between outline-none">
+                    <span>Hugo Bacelo</span>
+                    <i class="fas fa-chevron-down text-xs transition-transform group-open/hb:rotate-180 text-brand-accent-blue"></i>
+                </summary>
+                <div class="flex flex-col space-y-3.5 pl-3 mt-4 text-sm text-gray-700">
+                    <a href="sobreHB" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()"><i class="fas fa-user-circle mr-2 text-brand-gold"></i> Sobre</a>
+                    <a href="artigos-geral" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()"><i class="fas fa-newspaper mr-2 text-brand-gold"></i> Artigos</a>
+                    <a href="cursos-geral" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()"><i class="fas fa-graduation-cap mr-2 text-brand-gold"></i> Cursos</a>
+                    <a href="palestras" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()"><i class="fas fa-microphone mr-2 text-brand-gold"></i> Agendar Palestra</a>
+                    <a href="aprendizesdoverbo" class="hover:text-brand-accent-red transition-colors block py-1 font-bold text-brand-accent-blue" onclick="toggleMenu()"><i class="fas fa-book-open mr-2 text-brand-gold"></i> Aprendizes do Verbo</a>
+                </div>
+            </details>
+            
+            <a href="contacto" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block" onclick="toggleMenu()">Contactos</a>
         </div>
-        <button class="text-xl text-brand-accent-blue focus:outline-none p-2 rounded-lg bg-gray-50 border border-gray-150 flex items-center justify-center w-10 h-10 hover:bg-gray-100 transition-colors" onclick="toggleMenu()" aria-label="Fechar Menu">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    
-    <!-- Links de Navegação com Scroll Interno Seguro -->
-    <div class="flex-grow overflow-y-auto px-6 py-6 space-y-5 menu-drawer-scroll">
-        <a href="/" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Início</a>
-        <a href="/#sobre" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Editora</a>
-        <a href="catalogo-completo" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Catálogo</a>
-        <a href="produtos" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block border-b border-gray-50 pb-2" onclick="toggleMenu()">Produtos</a>
         
-        <!-- Accordion Mobile: Hugo Bacelo (Sem o bloco secundário de Formação) -->
-        <details class="w-full border-b border-gray-50 pb-2 group/hb [&::-webkit-details-marker]:hidden">
-            <summary class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic cursor-pointer list-none flex items-center justify-between outline-none">
-                <span>Hugo Bacelo</span>
-                <svg class="w-4 h-4 transition-transform group-open/hb:rotate-180 text-brand-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </summary>
-            <div class="flex flex-col space-y-4 pl-3 mt-4 text-sm text-gray-700">
-                <a href="sobreHB" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()">Sobre</a>
-                <a href="artigos-geral" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()">Artigos</a>
-                <a href="cursos-geral" class="hover:text-brand-accent-red transition-colors block" onclick="toggleMenu()">Cursos</a>
-                <a href="palestras" class="hover:text-brand-accent-red transition-colors block" onclick="toggleMenu()">Agendar Palestra</a>
-                <a href="aprendizesdoverbo" class="hover:text-brand-accent-red transition-colors block py-1" onclick="toggleMenu()">Aprendizes do Verbo</a>
-            </div>
-        </details>
-        
-        <a href="contacto" class="font-serif text-xl text-brand-accent-blue hover:text-brand-accent-red transition-colors italic block" onclick="toggleMenu()">Contactos</a>
+        <!-- Rodapé do Drawer -->
+        <div class="p-6 border-t border-gray-100 text-center flex-shrink-0 bg-gray-50/80">
+            <p class="text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold">Jerónimo Editora • 2026</p>
+        </div>
     </div>
-    
-    <!-- Rodapé do Drawer -->
-    <div class="p-6 border-t border-gray-50 text-center flex-shrink-0 bg-gray-50/50">
-        <p class="text-[9px] uppercase tracking-[0.4em] text-gray-400 font-bold">Jerónimo Editora</p>
-    </div>
-</div>
 
-<script>
-    window.toggleMenu = function() {
-        const menu = document.getElementById('mobile-menu');
-        const backdrop = document.getElementById('menu-backdrop');
-        if (!menu || !backdrop) return;
-        
-        if (menu.classList.contains('translate-x-full')) {
-            backdrop.classList.remove('hidden');
-            setTimeout(() => {
-                backdrop.classList.remove('opacity-0');
-                backdrop.classList.add('opacity-100');
-                menu.classList.remove('translate-x-full');
-            }, 20);
-            document.body.style.overflow = 'hidden';
-        } else {
-            menu.classList.add('translate-x-full');
-            backdrop.classList.remove('opacity-100');
-            backdrop.classList.add('opacity-0');
-            setTimeout(() => {
-                backdrop.classList.add('hidden');
-            }, 300);
-            document.body.style.overflow = '';
-        }
-    }
-</script>
+    <!-- Conteúdo de Exemplo para Testar a Visualização no Editor -->
+    <main class="flex-grow pt-32 pb-16 px-6 max-w-4xl mx-auto w-full text-center">
+        <div class="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-200 mt-6 space-y-6">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold rounded-full uppercase tracking-wider">
+                <i class="fas fa-check-circle text-amber-600"></i> Componente de Navegação Ativo
+            </div>
+            
+            <h1 class="font-serif text-3xl md:text-5xl font-bold text-brand-accent-blue leading-tight">
+                Menu Principal & Injeção de Favicon
+            </h1>
+            
+            <p class="text-gray-600 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+                Este ficheiro representa o componente <strong>`menu.html`</strong>. Ao ser carregado em qualquer página do site, ele disponibiliza a barra de navegação, o menu desdobrável e injeta automaticamente o <strong>favicon.png</strong> no separador do navegador.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left pt-4 border-t border-gray-100 text-xs text-gray-500">
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
+                    <p class="font-bold text-brand-accent-blue text-sm mb-1"><i class="fas fa-magic text-brand-gold mr-1"></i> Injeção de Favicon</p>
+                    <p>Deteta se a página está na raiz ou numa subpasta (ex: `/detalhes/`) e ajusta o caminho para `Imagens/favicon.png` automaticamente.</p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
+                    <p class="font-bold text-brand-accent-blue text-sm mb-1"><i class="fas fa-mobile-alt text-brand-gold mr-1"></i> Totalmente Responsivo</p>
+                    <p>Substitui os menus em ecrãs pequenos por uma gaveta lateral fluida com suporte a toque e animações.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts do Menu e Injeção do Favicon -->
+    <script>
+        // Função para abrir / fechar a gaveta do menu móvel
+        window.toggleMenu = function() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden';
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = '';
+            }
+        };
+
+        // INJEÇÃO AUTOMÁTICA DE FAVICON EM TODAS AS PÁGINAS
+        (function injectFaviconGlobally() {
+            // Deteta se a página está numa subpasta (ex: /detalhes/ ou /artigos-individuais/)
+            const path = window.location.pathname.toLowerCase();
+            const isSubfolder = path.includes('/detalhes/') || path.includes('/artigos-individuais/') || path.includes('/artigos/');
+            const prefix = isSubfolder ? '../' : '';
+            const faviconUrl = prefix + 'Imagens/favicon.png?v=2.0.0';
+
+            // Procura por favicons existentes
+            let icons = document.querySelectorAll('link[rel*="icon"]');
+
+            if (icons.length > 0) {
+                // Atualiza os links existentes garantindo a imagem e caminho corretos
+                icons.forEach(function(icon) {
+                    icon.href = faviconUrl;
+                });
+            } else {
+                // Cria e insere o link do favicon se a página não tiver nenhum
+                const link = document.createElement('link');
+                link.rel = 'icon';
+                link.type = 'image/png';
+                link.href = faviconUrl;
+                document.head.appendChild(link);
+            }
+        })();
+    </script>
+</body>
+</html>
