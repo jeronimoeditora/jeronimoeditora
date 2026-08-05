@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>A Transfiguração do Senhor | Jerónimo Editora</title>
+    
+    <!-- Meta Tags do Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="A Transfiguração do Senhor | Jerónimo Editora">
+    <meta property="og:description" content="A Glória de Cristo Revelada no Monte">
+    <meta property="og:url" content="https://www.editorajeronimo.pt/artigos-individuais/a-transfiguracao-do-senhor">
+    <meta property="og:image" content="https://www.editorajeronimo.pt/Imagens/11.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:site_name" content="Jerónimo Editora">
+
+    <!-- Meta Tags do Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Transfiguração do Senhor | Jerónimo Editora">
+    <meta name="twitter:description" content="A Glória de Cristo Revelada no Monte">
+    <meta name="twitter:image" content="https://www.editorajeronimo.pt/Imagens/11.png">
+    
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
+    
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'],
+                        inter: ['"Inter"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        classic: ['"Crimson Text"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body { scroll-behavior: auto !important; overflow-x: hidden; width: 100%; background-color: #F8F8F8; }
+        * { box-sizing: border-box; }
+        .text-readable-article { line-height: 1.85; letter-spacing: -0.003em; word-spacing: 0.05em; text-align: justify; text-justify: inter-word; }
+        .dropcap::first-letter { float: left; font-size: 4rem; line-height: 0.8; padding-top: 4px; padding-right: 8px; padding-left: 2px; color: #e05300; font-weight: 800; font-family: 'Playfair Display', serif; }
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100] pointer-events-none">
+        <div id="scroll-progress-bar" class="h-full bg-brand-accent-orange transition-all duration-75" style="width: 0%"></div>
+    </div>
+    <div id="scroll-percentage" class="fixed bottom-6 right-6 bg-brand-accent-blue text-white text-xs font-bold px-3 py-2 rounded-full shadow-xl z-50 opacity-0 transition-opacity duration-300 pointer-events-none flex items-center gap-1">
+        <i class="fas fa-book-open text-brand-gold"></i> <span id="scroll-percentage-text">0%</span>
+    </div>
+    <div id="nav-placeholder"></div>
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
+        <article class="max-w-4xl mx-auto px-6 fade-in">
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center flex flex-col items-center">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3 text-center">Comentário às Leituras</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4 text-center">A Transfiguração do Senhor (Ano A)</h1>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-500 font-medium font-sans w-full">
+                    <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 6 de Agosto de 2026</span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5 font-inter"><i class="far fa-user"></i> Escrito por <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a></span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">10</span> min de leitura</span>
+                </div>
+            </header>
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden border border-gray-200 shadow-xs relative bg-gray-100 mb-8">
+                <img src="../Imagens/11.png" alt="A Transfiguração do Senhor" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=A%20Transfigura%C3%A7%C3%A3o%20do%20Senhor';">
+            </div>
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto text-center font-classic">A Glória de Cristo Revelada no Monte</p>
+            </div>
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto text-justify">
+
+                <p class="dropcap">
+                    No dia 6 de Agosto, a Igreja celebra a Transfiguração do Senhor. Ainda que esta festa caia habitualmente num dia de semana e passe, por isso, um pouco mais despercebida, o seu relato é-nos proposto todos os anos no Segundo Domingo da Quaresma, o que revela bem a importância que a Tradição lhe atribui. No Ano A, a Igreja lê o relato de São Mateus (17,1–9), que é acompanhado por três outras leituras — Daniel 7, o Salmo 97 e a Segunda Carta de Pedro — cujas imagens e temas iluminam, de formas muito precisas, o episódio evangélico. Este artigo procura ler o relato de Mateus à luz dessas três leituras, seguindo os grandes temas que atravessam o acontecimento do Tabor.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>O Filho do Homem que Vem sobre as Nuvens</span>
+                </h3>
+
+                <p>
+                    A profecia de Daniel 7 apresenta uma visão em que o «Ancião de Dias» — figura claramente divina, sentado num trono de chamas, de onde brota um rio de fogo — recebe diante de si «alguém semelhante a um filho de homem», que vem «sobre as nuvens do céu». Ora, vir sobre as nuvens era, no mundo antigo, uma prerrogativa exclusivamente divina: era assim que se representavam Júpiter, Zeus, Ba’al ou Thor, os deuses supremos dos panteões pagãos. Que seja precisamente «alguém semelhante a um filho de homem» quem vem sobre as nuvens é, portanto, um sinal claro da sua divindade. Este «Filho do Homem» recebe do Ancião de Dias um domínio eterno sobre todos os povos, o que a leitura Cristã reconhece como o momento em que o Pai concede ao Filho a soberania sobre o céu e a terra. Não admira que o próprio Jesus aplique este título a si mesmo em momentos decisivos do seu ministério, sobretudo perante o sumo sacerdote e no discurso escatológico: ao chamar-se «Filho do Homem», Jesus não está a sublinhar a sua humildade ou a sua condição humana, mas antes a reivindicar para si a identidade do Salvador divino anunciado por Daniel.
+                </p>
+
+                <p>
+                    É precisamente esta figura que reaparece no Tabor: Jesus transfigura-se de modo a assemelhar-se ao próprio Ancião de Dias: o Filho conformado à imagem do Pai. A brancura da sua veste e o brilho do seu rosto são, por isso, muito mais do que um efeito luminoso: são a manifestação visível de que este homem é também o Filho do Homem de que fala Daniel, sentado à direita do Poder e destinado a um reino que não terá fim.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Moisés e Elias: a Lei e os Profetas Diante do Senhor</span>
+                </h3>
+
+                <p>
+                    No relato de Mateus, dois vultos conversam com Jesus: Moisés e Elias. A sua presença tem um duplo significado. Por um lado, representam respectivamente a Lei e os Profetas (cf. Mt 5,17; 7,12) — ou seja, todo o Antigo Testamento — colocados agora em diálogo com Jesus, que é a Nova Aliança em pessoa. Por outro lado, tanto Moisés como Elias eram, na tradição Israelita, figuras que já se encontravam junto de Deus: Elias fora arrebatado num redemoinho (2Rs 2,11), e a própria disputa em torno do corpo de Moisés, referida na Carta de Judas (v. 9), testemunha a antiga convicção de que também ele fora assumido ao céu. Sendo já figuras celestiais, podiam, por isso, aparecer a conversar com Jesus.
+                </p>
+
+                <p>
+                    Há ainda um outro elo: Moisés e Elias estão ambos ligados a um monte — o Sinai, também chamado Horeb — onde Deus se manifestou a cada um deles com poder e lhes falou de viva voz (Ex 24,18; 1Rs 19,8–18). Agora, Pedro, Tiago e João vêem Deus (em Jesus) e ouvem a voz do Pai exactamente do mesmo modo. O próprio «monte alto» a que Jesus conduz os discípulos recorda o Sinai, mas também o monte elevado onde o profeta Ezequiel contemplou o novo Templo (Ez 40,2). Sendo o corpo de Jesus o novo Templo, os três discípulos contemplam, tal como Ezequiel, a glória desse Templo novo. E assim como Moisés subiu ao Sinai levando consigo o trio sacerdotal de Aarão, Nadab e Abiú (Ex 24,9), também Jesus leva consigo Pedro, Tiago e João como o novo trio sacerdotal.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>A Nuvem Luminosa e a Realeza Divina do Salmo 96(97)</span>
+                </h3>
+
+                <p>
+                    Quando, no relato de Mateus, «uma nuvem luminosa os cobriu com a sua sombra», estamos perante uma imagem que atravessa todo o Pentateuco: foi de uma nuvem que Deus falou a Moisés no Sinai, foi numa nuvem que a sua glória encheu o tabernáculo, e foi por uma coluna de nuvem que conduziu o seu povo pelo deserto; uma nuvem «luminosa» porque, de noite, se manifestava como fogo (Nm 9,16).
+                </p>
+
+                <p>
+                    É esta mesma soberania divina, exercida sobre as nuvens e as tempestades, que o Salmo 96 celebra: «Ao seu redor, nuvens e trevas. O salmo faz parte de um pequeno grupo de salmos (92–98) inteiramente dedicados à realeza de Deus, e o contexto é significativo: no final do Livro III do Saltério, a monarquia Davídica desmorona-se, na sequência da destruição de Jerusalém. Perante o fracasso do trono de David, o salmista volta-se para a realeza de Deus como consolação, e é, no fundo, essa mesma realeza divina que virá a salvar a promessa feita a David, quando um dos seus descendentes for também Deus. Não é por acaso que, no Evangelho, Jesus acalma a tempestade no lago da Galileia: um gesto que só ao Senhor, Rei sobre toda a terra, pertence. Jesus é, pois, ao mesmo tempo o Filho de David e o Deus a quem o Salmo 96 se dirige e é isso mesmo que a Transfiguração vem confirmar aos três discípulos.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>«Este é o Meu Filho Muito Amado»: Ecos de Isaac, David e do Servo</span>
+                </h3>
+
+                <p>
+                    A voz que fala da nuvem — «Este é o meu Filho muito amado, escutai-O» — recolhe três figuras centrais do Antigo Testamento. Recorda, primeiro, Isaac, chamado por três vezes «filho amado» de Abraão no livro do Génesis (c. 22); recorda, depois, David, cujo próprio nome significa «amado» e que se tornou «filho de Deus» por aliança (Sl 88,20.26–27); e recorda, por fim, o Servo do Senhor anunciado por Isaías, de quem Deus diz: «Eis o meu servo, a quem sustento, o meu escolhido, em quem me comprazo» (Is 42,1). Jesus cumpre estas três figuras em simultâneo: é o novo Isaac, que oferecerá a vida no lenho do sacrifício; é o novo David, que restaura o reino e a aliança prometidos; e é o Servo ungido, que inaugura a era messiânica prometida por Isaías.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Testemunhas Oculares da Majestade</span>
+                </h3>
+
+                <p>
+                    Se o relato de Mateus narra o acontecimento, a Segunda Carta de Pedro dá-nos o testemunho pessoal de quem esteve presente. O Apóstolo insiste em que não seguiu «fábulas ilusórias», mas que foi testemunha ocular da majestade de Cristo, tendo ouvido, com os seus próprios ouvidos, a voz que vinha do céu «no monte santo». Este testemunho directo confere ao acontecimento um peso histórico que a carta contrapõe deliberadamente às fábulas dos falsos mestres. Para Pedro, a memória da Transfiguração não é uma simples recordação, mas «uma lâmpada que brilha num lugar escuro»: uma luz que sustenta os crentes nas travessias de escuridão que a vida terrena por vezes impõe, à espera de que «desponte o dia e nasça em vossos corações a estrela da manhã».
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Prostrados de Medo, Levantados pela Mão de Jesus</span>
+                </h3>
+
+                <p>
+                    Diante da voz que vem da nuvem, os discípulos «caíram de rosto por terra e assustaram-se muito», reacção típica perante a revelação da divindade, semelhante à dos fiéis que se prostravam no Templo quando o sumo sacerdote pronunciava o Nome divino. É Jesus quem os levanta, dizendo «levantai-vos e não temais», palavras que ecoam as respostas de Deus a quantos, no Antigo Testamento, se viam confrontados com uma teofania (p.ex., Jz 6,22–23).
+                </p>
+
+                <p>
+                    O próprio pedido de Pedro — construir três tendas, uma para Jesus, outra para Moisés, outra para Elias — revela o seu equívoco: tratar Jesus como mais um grande profeta, ao lado dos outros dois. Mas o desaparecimento de Moisés e Elias, ficando os discípulos a «não ver mais ninguém, senão Jesus», vem corrigir esse engano: Jesus não é comparável a Moisés e a Elias, é o próprio Filho do Homem, Rei do universo ainda que, ao mesmo tempo, seja também o novo Moisés (novo legislador) e o novo Elias (novo profeta de grandes obras).
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Do Tabor ao Calvário</span>
+                </h3>
+
+                <p>
+                    Por fim, Jesus ordena aos três que nada digam do que viram até à sua ressurreição. Trata-se de uma estratégia deliberada: revelar a sua identidade por indirectas, através de gestos e palavras que vão convencendo gradualmente os discípulos, em vez de proclamar abertamente a sua divindade. A Transfiguração é, assim, o ponto de viragem de todo o Evangelho: forma, por um lado, um par com o Baptismo, os dois momentos em que a voz do Pai proclama Jesus como «Filho muito amado», encerrando a fase inicial do ministério; e forma, por outro lado, um par com o Calvário, como dois extremos da segunda parte da vida de Jesus, a caminho da Paixão. No Tabor, Jesus é glorificado de modo visível; no Calvário, é glorificado aos olhos da fé; e o sacrifício de amor da cruz é, na realidade, uma manifestação de divindade tão ou mais profunda do que a própria Transfiguração. Vemos no Tabor a glória que, no Calvário, permanece velada em mistério. E se antes da Ressurreição os Apóstolos tinham de guardar silêncio, agora que o Filho do Homem ressuscitou, cabe-nos anunciar a todos que Jesus de Nazaré é Deus feito carne.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Fontes</span>
+                </h3>
+
+                <p><li>
+                    Bergsma, John S., <i>The Word of the Lord: Reflections on the Mass Readings for Solemnities and Feasts</i>. Emmaus Road Publishing, 2021
+                </p></li>
+
+                <p><li>
+                    Hahn, Scott, e Mitch, Curtis, <i>Ignatius Catholic Study Bible: Old and New Testament</i> (notas de rodapé). Ignatius Press, 2024.
+                </p></li>
+
+            </div>
+            <!-- Cartão Biográfico do Autor -->
+            <div id="author-section" class="flex flex-col sm:flex-row items-center sm:items-start gap-5 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs max-w-3xl mx-auto my-12 text-center sm:text-left">
+                <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
+                    <a href="../sobreHB" class="block w-full h-full">
+                        <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
+                    </a>
+                </div>
+                <div class="flex flex-col items-center sm:items-start gap-1">
+                    <span class="text-[10px] text-gray-400 font-sans font-bold uppercase tracking-wider block leading-none">Autor:</span>
+                    <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-2 leading-tight">
+                        <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
+                    </h4>
+                    <a href="../sobreHB" class="inline-block px-5 py-2.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all font-sans font-bold text-xs uppercase tracking-wider text-center shadow-xs hover:-translate-y-0.5 active:translate-y-0 mt-1">
+                        Ver Mais <i class="fas fa-chevron-right ml-1 text-[9px]"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-12 border-t border-b border-gray-150 py-8 font-inter text-xs uppercase tracking-wider font-bold">
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all text-center"><i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos</a>
+                <a href="../catalogo-completo" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all text-center">Visitar o Catálogo <i class="fas fa-book-open ml-1.5"></i></a>
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-xl transition-all text-center flex items-center justify-center gap-1.5">Próximo Artigo <i class="fas fa-arrow-right text-[10px]"></i></a>
+            </div>
+            <!-- SECÇÃO DE COMENTÁRIOS ESTILO CUSDIS -->
+            <section class="mt-12 pt-6 border-t border-gray-200">
+                <div class="mb-6"><h4 class="font-sans text-lg font-bold text-gray-800">Comentários</h4></div>
+                <div id="comment-alert" class="hidden mb-4 p-4 rounded-md text-xs font-sans"></div>
+                <form id="comment-form" onsubmit="handleCommentSubmit(event)" class="space-y-4 mb-8">
+                    <div class="flex flex-col sm:flex-row gap-4"><div class="w-full sm:w-1/3"><input type="text" id="comment-author-name" required placeholder="Nome" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors"></div></div>
+                    <div><textarea id="comment-body-text" required rows="4" placeholder="Comentário" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors resize-y"></textarea></div>
+                    <div class="flex items-center"><button type="submit" id="comment-submit-btn" class="w-full sm:w-auto border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-sm font-semibold px-6 py-2.5 rounded-md font-sans text-center">Enviar</button></div>
+                </form>
+                <div id="comments-loading" class="py-6 text-center text-gray-400"><i class="fas fa-circle-notch fa-spin text-gray-455 text-xl mb-1"></i><p class="text-[10px] font-sans">A carregar comentários...</p></div>
+                <div id="comments-list-container" class="space-y-6 pt-2"></div>
+            </section>
+        </article>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script>
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/1lyjJzNOvwJtA0M6CgTXE66L1Yj74OJ49v-XD_mrQSnw/formResponse";
+        const GOOGLE_ENTRY_NOME = "entry.2046871302";
+        const GOOGLE_ENTRY_COMENTARIO = "entry.964260973";
+        const GOOGLE_ENTRY_PAGINA = "entry.788584228";
+        const GOOGLE_SHEETS_TSV_URL = "https://docs.google.com/spreadsheets/d/1qypNiIPv2n-Y1p-KWjHskPIDNx2tztd01mAPx5AQ9hA/edit?usp=sharing";
+        function normalizePageId(id) { if (!id) return "a-transfiguracao-do-senhor-ano-a"; return id.trim().toLowerCase().replace(/\.html$/, '').split('/').filter(Boolean).pop() || "a-transfiguracao-do-senhor-ano-a"; }
+        const rawPageId = window.location.pathname.split('/').pop().replace('.html', '') || 'a-transfiguracao-do-senhor-ano-a';
+        const pageId = normalizePageId(rawPageId);
+        let fallbackComments = [];
+        async function fetchComments() {
+            const loader = document.getElementById('comments-loading');
+            try {
+                const response = await fetch(getFetchUrl(), { method: "GET", credentials: "omit", cache: "no-store" });
+                if (!response.ok) throw new Error("Erro");
+                const data = await response.text();
+                const parsedComments = parseGVizData(data);
+                syncLocalPendentes(parsedComments);
+                renderComments(parsedComments);
+            } catch (e) { renderComments(fallbackComments); } finally { if (loader) loader.classList.add('hidden'); }
+        }
+        function getFetchUrl() {
+            let url = GOOGLE_SHEETS_TSV_URL.trim(); const salt = `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+            if (url.includes('/spreadsheets/d/')) {
+                const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+                if (matches && matches[1]) {
+                    let gid = '0'; const gidMatches = url.match(/[#?&]gid=([0-9]+)/); if (gidMatches && gidMatches[1]) gid = gidMatches[1];
+                    return `https://docs.google.com/spreadsheets/d/${matches[1]}/gviz/tq?gid=${gid}&tqx=out:json&t=${salt}`;
+                }
+            }
+            return url;
+        }
+        function cleanCompare(str) { return str ? str.toLowerCase().replace(/\s+/g, ' ').trim() : ""; }
+        function syncLocalPendentes(all) {
+            let meus = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]'); if (!meus.length) return;
+            const novos = meus.filter(p => (Date.now() - p.timestamp < 86400000) && !all.some(c => c.approved && normalizePageId(c.page) === normalizePageId(p.page) && cleanCompare(c.name) === cleanCompare(p.name) && cleanCompare(c.text) === cleanCompare(p.text)));
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novos));
+        }
+        function parseGVizData(responseText) {
+            try {
+                const jsonStart = responseText.indexOf('{'); const jsonEnd = responseText.lastIndexOf('}'); if (jsonStart === -1 || jsonEnd === -1) return [];
+                const gvizData = JSON.parse(responseText.substring(jsonStart, jsonEnd + 1)); if (!gvizData || !gvizData.table || !gvizData.table.rows) return [];
+                const table = gvizData.table; const cols = table.cols || [];
+                let timestampIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('carimbo') || c.label.toLowerCase().includes('time') || c.label.toLowerCase().includes('data')));
+                let nameIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('nome') || c.label.toLowerCase().includes('autor') || c.label.toLowerCase().includes('user') || c.label.toLowerCase().includes('name')));
+                let commentIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('coment') || c.label.toLowerCase().includes('texto') || c.label.toLowerCase().includes('mensagem') || c.label.toLowerCase().includes('body') || c.label.toLowerCase().includes('comment')));
+                let pageIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('pág') || c.label.toLowerCase().includes('pag') || c.label.toLowerCase().includes('artigo') || c.label.toLowerCase().includes('url') || c.label.toLowerCase().includes('id')));
+                let approvedIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('aprov') || c.label.toLowerCase().includes('status') || c.label.toLowerCase().includes('moder') || c.label.toLowerCase().includes('aceit') || c.label.toLowerCase().includes('visto')));
+                if (timestampIdx === -1) timestampIdx = 0; if (nameIdx === -1) nameIdx = 1; if (commentIdx === -1) commentIdx = 2; if (pageIdx === -1) pageIdx = 3; if (approvedIdx === -1) approvedIdx = 4;
+                const comments = [];
+                table.rows.forEach(row => {
+                    if (!row.c || row.c.length < 3) return;
+                    const rawDate = row.c[timestampIdx]?.f || row.c[timestampIdx]?.v || "";
+                    const name = (row.c[nameIdx] && row.c[nameIdx].v !== undefined) ? String(row.c[nameIdx].v).trim() : "Anónimo";
+                    const text = (row.c[commentIdx] && row.c[commentIdx].v !== undefined) ? String(row.c[commentIdx].v).trim() : "";
+                    const page = (row.c[pageIdx] && row.c[pageIdx].v !== undefined) ? String(row.c[pageIdx].v).trim() : "";
+                    const approvedVal = (row.c[approvedIdx] && row.c[approvedIdx].v !== undefined) ? String(row.c[approvedIdx].v).trim().toLowerCase() : "";
+                    const approved = approvedVal === 'sim';
+                    let timestamp = Date.now();
+                    comments.push({ name, text, timestamp, page, approved });
+                });
+                return comments.sort((a, b) => b.timestamp - a.timestamp);
+            } catch (err) { return []; }
+        }
+        function renderComments(commentsArray) {
+            const listContainer = document.getElementById('comments-list-container'); listContainer.innerHTML = '';
+            const currentPageNormalized = normalizePageId(pageId);
+            const activeComments = commentsArray.filter(c => normalizePageId(c.page) === currentPageNormalized && c.approved);
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            meusPendentes.forEach(p => { if (!activeComments.some(c => cleanCompare(c.text) === cleanCompare(p.text) && cleanCompare(c.name) === cleanCompare(p.name))) activeComments.unshift(p); });
+            if (activeComments.length === 0) { listContainer.innerHTML = '<div class="text-left py-4 font-sans text-gray-400 text-sm italic">Não existem comentários de momento. Seja o primeiro a comentar.</div>'; return; }
+            activeComments.forEach(comment => {
+                const commentEl = document.createElement('div'); commentEl.className = 'py-4 border-b border-gray-150 space-y-1.5';
+                commentEl.innerHTML = `<div class="flex items-center justify-between"><span class="font-bold text-gray-800 text-sm">${escapeHtml(comment.name)}</span></div><div class="text-gray-700 text-sm whitespace-pre-wrap">${escapeHtml(comment.text)}</div>`;
+                listContainer.appendChild(commentEl);
+            });
+        }
+        async function handleCommentSubmit(e) {
+            e.preventDefault(); const btn = document.getElementById('comment-submit-btn'); const nameInput = document.getElementById('comment-author-name'); const textInput = document.getElementById('comment-body-text');
+            const name = nameInput.value.trim(); const text = textInput.value.trim(); if (!name || !text) return;
+            btn.disabled = true; btn.textContent = "A enviar...";
+            const formData = new FormData(); formData.append(GOOGLE_ENTRY_NOME, name); formData.append(GOOGLE_ENTRY_COMENTARIO, text); formData.append(GOOGLE_ENTRY_PAGINA, pageId);
+            try { await fetch(GOOGLE_FORM_URL, { method: 'POST', body: formData, mode: 'no-cors' }); saveLocalPendente({ name, text, timestamp: Date.now(), page: pageId, approved: false, isLocalPendente: true }); textInput.value = ''; nameInput.value = ''; } catch (err) {} finally { btn.disabled = false; btn.textContent = "Enviar"; fetchComments(); }
+        }
+        function saveLocalPendente(obj) { const meus = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]'); meus.push(obj); localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(meus)); }
+        function escapeHtml(text) { return text ? text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : ""; }
+        document.addEventListener('DOMContentLoaded', fetchComments);
+    </script>
+    <script>
+        function getPrefix() { const path = window.location.pathname.toLowerCase(); return (path.includes('/artigos/') || path.includes('/artigos-individuais/')) ? '../' : ''; }
+        function getSafePath(file) { try { return new URL(file, window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)).href; } catch (e) { return file; } }
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId); if (!container) return; const prefix = getPrefix();
+            if (prefix !== '') { container.querySelectorAll('a').forEach(l => { let h = l.getAttribute('href'); if (h && !h.startsWith('http') && !h.startsWith('/') && !h.startsWith('#')) l.setAttribute('href', prefix + h); }); }
+        }
+        async function loadComponents() {
+            const prefix = getPrefix();
+            try {
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
+                if (!navResp.ok) navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
+                if (navResp.ok) { document.getElementById('nav-placeholder').innerHTML = await navResp.text(); adjustAndCleanLinks('nav-placeholder'); }
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
+                if (!footResp.ok) footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
+                if (footResp.ok) { document.getElementById('footer-placeholder').innerHTML = await footResp.text(); adjustAndCleanLinks('footer-placeholder'); }
+            } catch (e) {}
+        }
+        function calculateReadingTime() {
+            const el = document.getElementById('article-content'); const target = document.getElementById('reading-time'); if (!el || !target) return;
+            const words = (el.innerText || el.textContent).trim().split(/\s+/).filter(w => w.length > 0).length;
+            target.textContent = Math.ceil(words / 200);
+        }
+        window.addEventListener('scroll', () => {
+            const winScroll = window.scrollY || document.documentElement.scrollTop;
+            const targetEl = document.getElementById('author-section');
+            let scrolled = 0;
+            if (targetEl) {
+                const maxScroll = (targetEl.getBoundingClientRect().top + window.scrollY) - window.innerHeight + 100;
+                scrolled = maxScroll > 0 ? Math.round((winScroll / maxScroll) * 100) : 100;
+            }
+            if (scrolled > 100) scrolled = 100; if (scrolled < 0) scrolled = 0;
+            const bar = document.getElementById('scroll-progress-bar'); if (bar) bar.style.width = scrolled + '%';
+            const txt = document.getElementById('scroll-percentage-text'); if (txt) txt.textContent = scrolled + '%';
+            const div = document.getElementById('scroll-percentage'); if (div) { if (winScroll > 150) div.classList.remove('opacity-0'); else div.classList.add('opacity-0'); }
+        });
+        document.addEventListener('DOMContentLoaded', () => { loadComponents(); calculateReadingTime(); });
+    </script>
+</body>
+</html>
