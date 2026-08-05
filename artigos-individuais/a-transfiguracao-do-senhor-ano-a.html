@@ -322,9 +322,43 @@
         function getPrefix() { const path = window.location.pathname.toLowerCase(); return (path.includes('/artigos/') || path.includes('/artigos-individuais/')) ? '../' : ''; }
         function getSafePath(file) { try { return new URL(file, window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)).href; } catch (e) { return file; } }
         function adjustAndCleanLinks(placeholderId) {
-            const container = document.getElementById(placeholderId); if (!container) return; const prefix = getPrefix();
-            if (prefix !== '') { container.querySelectorAll('a').forEach(l => { let h = l.getAttribute('href'); if (h && !h.startsWith('http') && !h.startsWith('/') && !h.startsWith('#')) l.setAttribute('href', prefix + h); }); }
+    const container = document.getElementById(placeholderId);
+    if (!container) return;
+    const prefix = getPrefix();
+    
+    if (prefix !== '') {
+        // Ajusta links de navegação
+        container.querySelectorAll('a').forEach(link => {
+            let href = link.getAttribute('href');
+            if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                if (!href.startsWith('../')) {
+                    link.setAttribute('href', prefix + href);
+                }
+            }
+        });
+        // Ajusta caminhos das imagens (resolve o problema do logótipo/placeholder)
+        container.querySelectorAll('img').forEach(img => {
+            let src = img.getAttribute('src');
+            if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                img.setAttribute('src', prefix + src);
+            }
+        });
+    }
+
+    // Limpa a extensão .html das URLs dos links
+    container.querySelectorAll('a').forEach(link => {
+        let href = link.getAttribute('href');
+        if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+            if (href.endsWith('.html')) {
+                link.setAttribute('href', href.slice(0, -5));
+            } else if (href.includes('.html?')) {
+                link.setAttribute('href', href.replace('.html?', '?'));
+            } else if (href.includes('.html#')) {
+                link.setAttribute('href', href.replace('.html#', '#'));
+            }
         }
+    });
+}
         async function loadComponents() {
             const prefix = getPrefix();
             try {
