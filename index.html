@@ -978,138 +978,83 @@
             }
         }
 
-        /* --- BASE DE DADOS COMPLETA DE ARTIGOS --- */
-        const articlesData = [
-             {
-                id: 10,
-                title: "Breve Guia para a Santa Missa (Parte 2 de 2)",
-                category: "Liturgia",
-                date: "2026-07-11",
-                readingTime: "1 min",
-                url: "artigos-individuais/breve-guia-para-a-santa-missa-parte-2-de-2",
-                image: "Imagens/10.png"
-            },
-            {
-                id: 9,
-                title: "São João Baptista: Quem foi realmente?",
-                category: "Comentário às Leituras",
-                date: "2026-06-22",
-                readingTime: "10 min",
-                url: "artigos-individuais/sao-joao-baptista-quem-foi-realmente",
-                image: "Imagens/9.png"
-            },
-            {
-                id: 8,
-                title: "O coração que arde contra o arco-íris roubado",
-                category: "Apologética e Cultura",
-                date: "2026-06-13",
-                readingTime: "10 min",
-                url: "artigos-individuais/o-coracao-que-arde-contra-o-arco-iris-roubado",
-                image: "Imagens/8.png"
-            },
-            {
-                id: 7,
-                title: "Breve Guia para a Santa Missa (Parte 1 de 2)",
-                category: "Liturgia",
-                date: "2026-06-11",
-                readingTime: "7 min",
-                url: "artigos-individuais/breve-guia-para-a-santa-missa-parte-1-de-2",
-                image: "Imagens/7.png"
-            },
-            {
-                id: 6,
-                title: "A Coroação da História da Salvação (Pentecostes)",
-                category: "Comentário às Leituras",
-                date: "2026-05-24",
-                readingTime: "6 min",
-                url: "artigos-individuais/a-coroacao-da-historia-da-salvacao-pentecostes",
-                image: "Imagens/6.png"
-            },
-            {
-                id: 5,
-                title: "Engolido por uma má exegese",
-                category: "Resposta a Artigos",
-                date: "2026-04-23",
-                readingTime: "22 min",
-                url: "artigos-individuais/engolido-por-uma-ma-exegese",
-                image: "Imagens/5.png"
-            },
-            {
-                id: 4,
-                title: "Nascimento de Jesus: Belém ou Nazaré?",
-                category: "Resposta a Artigos",
-                date: "2026-02-03",
-                readingTime: "10 min",
-                url: "artigos-individuais/nascimento-de-jesus-belem-ou-nazare",
-                image: "Imagens/4.png"
-            },
-            {
-                id: 3,
-                title: "Como Não Ler a Bíblia em Qualquer Século (3 de 3)",
-                category: "Crítica de Livros",
-                date: "2025-09-24",
-                readingTime: "11 min",
-                url: "artigos-individuais/como-nao-ler-a-biblia-em-qualquer-seculo-3-de-3",
-                image: "Imagens/3.png"
-            },
-            {
-                id: 2,
-                title: "Como Não Ler a Bíblia em Qualquer Século (2 de 3)",
-                category: "Crítica de Livros",
-                date: "2025-09-10",
-                readingTime: "21 min",
-                url: "artigos-individuais/como-nao-ler-a-biblia-em-qualquer-seculo-2-de-3",
-                image: "Imagens/2.png"
-            },
-            {
-                id: 1,
-                title: "Como Não Ler a Bíblia em Qualquer Século (1 de 3)",
-                category: "Crítica de Livros",
-                date: "2025-08-27",
-                readingTime: "9 min",
-                url: "artigos-individuais/como-nao-ler-a-biblia-em-qualquer-seculo-1-de-3",
-                image: "Imagens/1.png"
-            }
+        /* --- BASE DE DADOS LOCAL DE RESERVA (FALLBACK) --- */
+        const fallbackArticlesData = [
+            { id: 11, title: "A Transfiguração do Senhor (Ano A)", category: "Comentário às Leituras", date: "2026-08-06", readingTime: "1 min", url: "artigos-individuais/a-transfiguracao-do-senhor-ano-a", image: "Imagens/11.png" },
+            { id: 10, title: "Breve Guia para a Santa Missa (Parte 2 de 2)", category: "Liturgia", date: "2026-07-11", readingTime: "1 min", url: "artigos-individuais/breve-guia-para-a-santa-missa-parte-2-de-2", image: "Imagens/10.png" },
+            { id: 9, title: "São João Baptista: Quem foi realmente?", category: "Comentário às Leituras", date: "2026-06-22", readingTime: "10 min", url: "artigos-individuais/sao-joao-baptista-quem-foi-realmente", image: "Imagens/9.png" }
         ];
 
-        /* --- GERAÇÃO DINÂMICA DA SECÇÃO ÚLTIMOS ARTIGOS (CENTRALIZADOS) --- */
-        function renderLatestArticles() {
+        /* --- OBTENÇÃO AUTOMÁTICA DA LISTA EM TEMPO REAL DE ARTIGOS-GERAL.HTML --- */
+        async function fetchArticlesFromGeral() {
+            try {
+                const prefix = getPrefix();
+                // Tenta carregar o ficheiro artigos-geral (ou artigos-geral.html)
+                let resp = await fetch(getSafePath(prefix + 'artigos-geral') + '?v=' + Date.now());
+                if (!resp.ok) {
+                    resp = await fetch(getSafePath(prefix + 'artigos-geral.html') + '?v=' + Date.now());
+                }
+                
+                if (resp.ok) {
+                    const htmlText = await resp.text();
+                    // Extrai a variável const articlesData do ficheiro artigos-geral.html via Expressão Regular
+                    const match = htmlText.match(/const\s+articlesData\s*=\s*(\[\s*\{[\s\S]*?\}\s*\]);/);
+                    if (match && match[1]) {
+                        // Interpreta o array de objetos JavaScript dinamicamente
+                        const dynamicData = new Function('return ' + match[1])();
+                        if (Array.isArray(dynamicData) && dynamicData.length > 0) {
+                            return dynamicData;
+                        }
+                    }
+                }
+            } catch (err) {
+                console.warn("Não foi possível ler os artigos de artigos-geral.html dinamicamente. A usar lista local de reserva.", err);
+            }
+            return fallbackArticlesData;
+        }
+
+        /* --- GERAÇÃO DINÂMICA DA SECÇÃO ÚLTIMOS ARTIGOS (AUTOMÁTICA) --- */
+        async function renderLatestArticles() {
             const grid = document.getElementById('latest-articles-grid');
             if (!grid) return;
             grid.innerHTML = '';
 
-            // Filtrar os 3 artigos mais recentes da base de dados
-            const latest = [...articlesData]
+            // Obtém sempre a lista mais recente do artigos-geral.html (artigos 12, 13, 14...)
+            const articles = await fetchArticlesFromGeral();
+
+            // Ordena os artigos por data decrescente e extrai os 3 primeiros
+            const latest = [...articles]
                 .sort((a, b) => new Date(b.date) - new Date(a.date))
                 .slice(0, 3);
 
             latest.forEach(art => {
                 const dateObj = new Date(art.date);
-                const formattedDate = dateObj.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
+                const rawDate = dateObj.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
+                const parts = rawDate.split(' de ');
+                if (parts.length === 3) {
+                    parts[1] = parts[1].charAt(0).toUpperCase() + parts[1].slice(1); 
+                }
+                const formattedDate = parts.join(' de ');
                 const linkAction = `href="${art.url}"`;
 
                 grid.innerHTML += `
                     <div class="bg-brand-bg rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col h-full group text-center items-center">
                         <div class="h-48 overflow-hidden relative w-full">
-                            <!-- Imagem Clicável com Link -->
                             <a ${linkAction} class="block w-full h-full cursor-pointer">
                                 <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/ECE6D9/002147?text=Artigo';">
                             </a>
                         </div>
                         <div class="p-6 flex-grow flex flex-col items-center justify-between w-full">
                             <div class="flex flex-col items-center w-full">
-                                <!-- Elemento Categoria (Esquerda) e Tempo de Leitura (Direita) na mesma linha -->
                                 <div class="flex justify-between items-center w-full mb-3 text-[10px] font-extrabold font-inter uppercase tracking-widest">
                                     <span class="text-brand-accent-orange text-left">${art.category}</span>
                                     <span class="text-gray-400 font-sans tracking-normal normal-case font-semibold inline-flex items-center gap-1 text-right">
-                                        <i class="far fa-clock text-gray-400"></i> <span id="reading-time-latest-${art.id}">${art.readingTime}</span>
+                                        <i class="far fa-clock text-gray-400"></i> <span id="reading-time-latest-${art.id}">${art.readingTime || '1 min'}</span>
                                     </span>
                                 </div>
-                                <!-- Título Clicável com Link e 100% Centralizado -->
                                 <h3 class="font-serif text-xl text-brand-accent-blue font-bold mb-2 line-clamp-2 text-center w-full">
                                     <a ${linkAction} class="hover:text-brand-accent-orange transition-colors block text-center w-full font-bold">${art.title}</a>
                                 </h3>
-                                <!-- Data de publicação movida para baixo do título -->
                                 <span class="text-xs text-gray-400 mb-4 block flex items-center gap-1 justify-center"><i class="far fa-calendar"></i> ${formattedDate}</span>
                             </div>
                             <div class="w-full flex flex-col items-center">
@@ -1122,12 +1067,16 @@
                     </div>
                 `;
             });
+
+            // Calcula o tempo de leitura real para esses 3 artigos apresentados
+            loadDynamicReadingTimesLatest(latest);
         }
 
         /* --- CARREGAMENTO DO TEMPO DE LEITURA REAL DOS ARTIGOS SELECIONADOS --- */
-        async function loadDynamicReadingTimesLatest() {
+        async function loadDynamicReadingTimesLatest(articlesToCalculate) {
+            if (!articlesToCalculate || articlesToCalculate.length === 0) return;
             const prefix = getPrefix();
-            const fetchPromises = articlesData.slice(0, 3).map(async (art) => {
+            const fetchPromises = articlesToCalculate.map(async (art) => {
                 try {
                     const path = getSafePath(prefix + art.url + '.html');
                     const response = await fetch(path);
@@ -1181,8 +1130,7 @@
             showSlide(0); 
             setupSwipeGestures(); 
             updateCartUI(); 
-            renderLatestArticles(); // Inicia a grelha de artigos mais recentes
-            loadDynamicReadingTimesLatest(); // Inicia o cálculo automático de tempo de leitura
+            renderLatestArticles(); // Inicia a grelha de artigos mais recentes dinamicamente
             setTimeout(cleanAllInternalLinks, 500); 
         });
 
