@@ -166,7 +166,7 @@
                 id: 11,
                 title: "A Transfiguração do Senhor (Ano A)",
                 category: "Comentário às Leituras",
-                date: "2026-08-05",
+                date: "2026-08-06",
                 readingTime: "1 min",
                 url: "artigos-individuais/a-transfiguracao-do-senhor-ano-a",
                 image: "Imagens/11.png"
@@ -348,7 +348,13 @@
             
             articles.forEach(art => {
                 const dateObj = new Date(art.date);
-                const formattedDate = dateObj.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
+                const rawDate = dateObj.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
+const parts = rawDate.split(' de '); // Divide a data num array de 3 partes: ["5", "agosto", "2026"]
+if (parts.length === 3) {
+    // Pega na 1.ª letra do mês ("a"), converte em maiúscula ("A") e junta com o resto da palavra ("gosto")
+    parts[1] = parts[1].charAt(0).toUpperCase() + parts[1].slice(1); 
+}
+const formattedDate = parts.join(' de '); // Reúne as 3 partes com " de ": "5 de Agosto de 2026"
                 const linkAction = art.url !== '#' 
                     ? `href="${art.url}"` 
                     : `href="javascript:void(0)" onclick="triggerToastNotice()"` ;
