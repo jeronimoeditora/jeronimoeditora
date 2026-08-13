@@ -311,14 +311,14 @@
                     <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10">
                         <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2">Carrinho de Compras</h2>
                         
-                        <!-- Banner Global de Aviso de Falta de Stock -->
+                        <!-- Banner Global de Aviso de Falta de Stock (Ajustável Dinamicamente) -->
                         <div id="out-of-stock-global-alert" class="hidden mb-4 p-3.5 bg-amber-900/60 border border-amber-400/50 rounded-xl text-amber-100 text-xs font-sans">
                             <div class="flex items-center gap-2 font-bold text-amber-300 text-sm mb-1">
                                 <i class="fas fa-exclamation-triangle text-amber-400"></i>
-                                <span>Artigo Temporariamente Sem Stock</span>
+                                <span>Artigo(s) Temporariamente Sem Stock</span>
                             </div>
-                            <p class="leading-relaxed opacity-95">
-                                O livro <strong>"Tu podes compreender a Bíblia"</strong> encontra-se de momento esgotado. Pedimos desculpa pelo incómodo e esperamos repor o stock em breve. Por favor, remova este artigo para poder concluir a sua encomenda.
+                            <p id="out-of-stock-text-content" class="leading-relaxed opacity-95">
+                                O artigo selecionado encontra-se de momento esgotado. Pedimos desculpa pelo incómodo e esperamos repor o stock em breve. Por favor, remova este artigo para poder concluir a sua encomenda.
                             </p>
                         </div>
 
@@ -382,8 +382,8 @@
         var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec"; 
         var SHIPPING_MARGIN = 19; 
         
-        // Livro sem stock configurado
-        var OUT_OF_STOCK_IDS = [1]; 
+        // Livros sem stock configurados (1: "Tu podes compreender a Bíblia", 2: "A Eucaristia é mesmo Jesus")
+        var OUT_OF_STOCK_IDS = [1, 2]; 
 
         var bookData = [
             { id: 1, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
@@ -515,7 +515,7 @@
             var destinoElement = document.getElementById('pais');
             var destino = destinoElement ? destinoElement.value : 'PT';
             var subtotal = 0, pesoTotal = 0, html = '';
-            var hasOutOfStock = false;
+            var outOfStockTitles = [];
 
             var contemFisicos = items.some(function(item) { return item.type !== 'curso'; });
             var contemCursos = items.some(function(item) { return item.type === 'curso'; });
@@ -552,10 +552,16 @@
                 }
                 pesoTotal += (itemWeight * item.quantity);
 
-                // Verificação se o artigo está sem stock
-                var isItemOutOfStock = OUT_OF_STOCK_IDS.includes(Number(item.id)) || (item.title && item.title.toLowerCase().indexOf('compreender a bíblia') !== -1);
+                // Verificação se o artigo está sem stock (por ID ou por título)
+                var titleLower = item.title ? item.title.toLowerCase() : '';
+                var isItemOutOfStock = OUT_OF_STOCK_IDS.includes(Number(item.id)) || 
+                                       titleLower.indexOf('compreender a bíblia') !== -1 ||
+                                       titleLower.indexOf('eucaristia é mesmo jesus') !== -1;
+                
                 if (isItemOutOfStock) {
-                    hasOutOfStock = true;
+                    if (outOfStockTitles.indexOf(item.title) === -1) {
+                        outOfStockTitles.push(item.title);
+                    }
                 }
 
                 var quantitySelectorHtml = '';
@@ -572,9 +578,10 @@
                 }
 
                 html += `
-                    <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans ${isItemOutOfStock ? 'bg-amber-950/20 p-2.5 rounded-lg border-amber-500/30' : ''}">
+                    <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans ${isItemOutOfStock ? 'bg-amber-950/20 p-2.5 rounded-lg border border-amber-500/30' : ''}">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
-                            <span class="font-lora text-sm text-brand-gold leading-tight flex-grow font-bold">
+                            <span class="font-lora text-sm text-brand-gold leading-tight flex-grow font-bold flex items-center gap-1.5">
+                                ${isItemOutOfStock ? '<i class="fas fa-exclamation-triangle text-amber-400 text-xs" title="Sem stock"></i>' : ''}
                                 ${item.title}
                             </span>
                             <span class="font-sans font-bold text-white text-sm">€ ${lineTotal.toFixed(2).replace('.', ',')}</span>
@@ -588,9 +595,19 @@
 
             // Apresenta ou oculta o alerta global de falta de stock no topo do carrinho
             var globalAlert = document.getElementById('out-of-stock-global-alert');
+            var textContent = document.getElementById('out-of-stock-text-content');
+
             if (globalAlert) {
-                if (hasOutOfStock) {
+                if (outOfStockTitles.length > 0) {
                     globalAlert.classList.remove('hidden');
+                    if (textContent) {
+                        var titlesFormatted = outOfStockTitles.map(function(t) { return '<strong>"' + t + '"</strong>'; }).join(' e ');
+                        if (outOfStockTitles.length === 1) {
+                            textContent.innerHTML = 'O livro ' + titlesFormatted + ' encontra-se de momento esgotado. Pedimos desculpa pelo incómodo e esperamos repor o stock em breve. Por favor, remova este artigo para poder concluir a sua encomenda.';
+                        } else {
+                            textContent.innerHTML = 'Os livros ' + titlesFormatted + ' encontram-se de momento esgotados. Pedimos desculpa pelo incómodo e esperamos repor o stock em breve. Por favor, remova estes artigos para poder concluir a sua encomenda.';
+                        }
+                    }
                 } else {
                     globalAlert.classList.add('hidden');
                 }
@@ -805,15 +822,21 @@
             }
 
             // Impede a submissão se existir pelo menos um artigo sem stock no carrinho
-            var hasOutOfStock = cartItems.some(function(item) {
-                return OUT_OF_STOCK_IDS.includes(Number(item.id)) || (item.title && item.title.toLowerCase().indexOf('compreender a bíblia') !== -1);
+            var outOfStockCount = 0;
+            cartItems.forEach(function(item) {
+                var titleLower = item.title ? item.title.toLowerCase() : '';
+                if (OUT_OF_STOCK_IDS.includes(Number(item.id)) || 
+                    titleLower.indexOf('compreender a bíblia') !== -1 ||
+                    titleLower.indexOf('eucaristia é mesmo jesus') !== -1) {
+                    outOfStockCount++;
+                }
             });
 
             var btn = document.getElementById('place-order-button');
             if (btn) {
-                if (hasOutOfStock) {
+                if (outOfStockCount > 0) {
                     btn.disabled = true;
-                    btn.textContent = "Remova o artigo sem stock";
+                    btn.textContent = outOfStockCount > 1 ? "Remova os artigos sem stock" : "Remova o artigo sem stock";
                 } else {
                     btn.textContent = "Confirmar e Pagar";
                     btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid;
