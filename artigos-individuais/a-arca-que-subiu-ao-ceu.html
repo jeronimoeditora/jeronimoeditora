@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>A Arca que Subiu ao Céu | Jerónimo Editora</title>
+    
+    <!-- Meta Tags do Open Graph (Facebook, WhatsApp, etc.) -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="A Arca que Subiu ao Céu | Jerónimo Editora">
+    <meta property="og:description" content="Um Comentário às Leituras da Solenidade da Assunção">
+    <meta property="og:url" content="https://www.editorajeronimo.pt/artigos-individuais/a-arca-que-subiu-ao-ceu">
+    <meta property="og:image" content="https://www.editorajeronimo.pt/Imagens/12.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:site_name" content="Jerónimo Editora">
+
+    <!-- Meta Tags do Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Arca que Subiu ao Céu | Jerónimo Editora">
+    <meta name="twitter:description" content="Um Comentário às Leituras da Solenidade da Assunção">
+    <meta name="twitter:image" content="https://www.editorajeronimo.pt/Imagens/12.png">
+    
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
+    
+    <script>
+        // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
+                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
+                        serif: ['"Playfair Display"', 'serif'],
+                        classic: ['"Crimson Text"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body { 
+            scroll-behavior: auto !important;
+            overflow-x: hidden; 
+            width: 100%; 
+            background-color: #F8F8F8; 
+        }
+        * { box-sizing: border-box; }
+
+        .text-readable-article {
+            line-height: 1.85;
+            letter-spacing: -0.003em;
+            word-spacing: 0.05em;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 2px;
+            color: #e05300;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100] pointer-events-none">
+        <div id="scroll-progress-bar" class="h-full bg-brand-accent-orange transition-all duration-75" style="width: 0%"></div>
+    </div>
+
+    <div id="scroll-percentage" class="fixed bottom-6 right-6 bg-brand-accent-blue text-white text-xs font-bold px-3 py-2 rounded-full shadow-xl z-50 opacity-0 transition-opacity duration-300 pointer-events-none flex items-center gap-1">
+        <i class="fas fa-book-open text-brand-gold"></i> <span id="scroll-percentage-text">0%</span>
+    </div>
+
+    <div id="nav-placeholder"></div>
+
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
+        <article class="max-w-4xl mx-auto px-6 fade-in">
+
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center flex flex-col items-center">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3 text-center">Comentário às Leituras</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4 text-center">A Arca que Subiu ao Céu</h1>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-500 font-medium font-sans w-full">
+                    <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 15 de Agosto de 2026</span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5 font-inter">
+                        <i class="far fa-user"></i> Escrito por 
+                        <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">10</span> min de leitura</span>
+                </div>
+            </header>
+
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden border border-gray-200 shadow-xs relative bg-gray-100 mb-8">
+                <img src="../Imagens/12.png" alt="A Arca que Subiu ao Céu" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=A%20Arca%20que%20Subiu%20ao%20C%C3%A9u';">
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto text-center font-classic">Um Comentário às Leituras da Solenidade da Assunção</p>
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto text-justify">
+
+                <p class="dropcap">
+                    A Solenidade da Assunção da Virgem Santa Maria, celebrada a 15 de Agosto, é uma das festas Marianas mais ricas do calendário litúrgico não apenas pela sua antiguidade e pela sua ligação profunda à piedade popular, mas também pela densidade teológica das leituras que a Igreja nos propõe, tanto na Missa da Vigília como na Missa do Dia. Longe de ser uma devoção sem fundamento escriturístico, como tantas vezes se ouve dizer, a Assunção de Maria emerge das leituras deste dia como o ponto culminante de uma longa e coerente teologia bíblica: a teologia da Arca da Aliança, da Rainha-Mãe Davídica e da vitória definitiva sobre a morte.
+                </p>
+
+                <p>
+                    Neste artigo, propomo-nos percorrer as leituras da Vigília e da Missa do Dia para mostrar como todas elas convergem, de modos distintos mas complementares, na mesma verdade: Maria, Mãe do Senhor, foi elevada em corpo e alma à glória celeste. E, a propósito, aproveitamos para recomendar aos leitores interessados em aprofundar esta matéria a obra <i>Eis a Tua Mãe: Uma Defesa Bíblica e Histórica das Doutrinas Marianas</i>, de Tim Staples, cujos capítulos 10 e 11 — dedicados precisamente à Assunção — servem de base a boa parte da reflexão apologética que aqui apresentamos.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Maria, a Nova Arca da Aliança</span>
+                </h3>
+
+                <p>
+                    Se há um fio condutor que atravessa as leituras dos dois dias, é a tipologia da Arca da Aliança. A Primeira Leitura da Vigília (1Cr 15,3-4.15-16; 16,1-2) recorda-nos como o rei David reuniu todo o Israel para transportar a arca do Senhor até Jerusalém, com os Levitas a transportá-la aos ombros, com cânticos, harpas, liras e címbalos. Os Livros das Crónicas oferecem uma releitura da estória de Israel voltada para a liturgia e para o culto, ao ponto de o reino de David, tal como ali é descrito, poder ser entendido como uma espécie de «império litúrgico»: um antecipar do próprio «reino de Deus» que Jesus haveria de pregar. É significativo, aliás, que a expressão «reino do Senhor» só apareça nas Crónicas (1Cr 28,5; 2Cr 13,8), referindo-se precisamente ao reino de David.
+                </p>
+
+                <p>
+                    A arca, recorde-se, era a caixa que continha as tábuas da Lei, o vaso do maná e a vara de Aarão: sinais concretos da presença de Deus no meio do seu povo, com os querubins a formar, sobre ela, um trono para essa mesma presença. Ora, é exactamente esta imagem que a tradição Cristã aplica a Maria: no seu ventre, ela transportou Jesus, que é a Palavra de Deus (as tábuas da Lei), o novo Sumo Sacerdote (a vara de Aarão) e o Pão do Céu (o maná). Maria foi, e continua a ser, o ponto focal da presença de Deus entre os homens.
+                </p>
+
+                <p>
+                    A ligação entre a arca e Maria não fica pela tipologia veterotestamentária: o próprio Livro do Apocalipse a confirma de modo explícito. Como recorda Tim Staples em <i>Eis a Tua Mãe</i>, praticamente no mesmo versículo em que se revela que «se abriu no céu o templo de Deus e foi vista a Arca da aliança» (Ap 11,19), surge, sem quebra de continuidade narrativa, a visão da «mulher vestida de sol» (Ap 12,1). Como bem observa Scott Hahn, citado por Staples, «João mostrou-nos a Arca da Aliança — e ela é uma mulher». A associação entre a arca e a mulher espelha, aliás, uma construção literária paralela à do capítulo 21 do mesmo livro, onde a noiva aparece como cidade: também ali duas imagens diferentes remetem para a mesma realidade, a Igreja. No caso da arca e da mulher, ambas as imagens remetem para Maria.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>O Salmo da Ascensão da Arca</span>
+                </h3>
+
+                <p>
+                    O Salmo responsorial da Vigília (Sl 131[132],6-7.9-10.13-14) é, neste contexto, particularmente iluminador. Trata-se de um Salmo das Subidas, um antigo cântico de peregrinação entoado por quem subia a Jerusalém para adorar diante da arca no Templo: «Entremos no seu santuário, prostremo-nos a seus pés [escabelo]». Maria é justamente esse «escabelo» de Deus, sobretudo no mistério da Encarnação, quando o Filho de Deus repousou no seu ventre; não vamos à Missa para adorar «o escabelo», mas para adorar junto dele.
+                </p>
+
+                <p>
+                    O refrão do salmo — «Levantai-Vos, Senhor, e entrai no vosso repouso, Vós e a arca da vossa majestade» — foi lido, desde a Antiguidade Cristã, como figura profética da Assunção corporal de Maria. Ludwig Ott, autor clássico da teologia dogmática, é claro a este respeito: «os Padres [da Igreja Primitiva] […] referem passagens como o Salmo 131(132),8 num sentido típico ao mistério da assunção corporal». E o próprio Papa Pio XII, na constituição apostólica <i>Munificentissimus Deus</i> (1950), recorda que teólogos e pregadores «usaram com certa liberdade factos e dizeres da Sagrada Escritura», entre os quais precisamente as palavras do salmista, para ver na Arca da Aliança — feita de madeira incorruptível e colocada no templo do Senhor — «uma figura do corpo puríssimo da Virgem Maria, preservado de toda a corrupção do sepulcro e elevado a tamanha glória no céu». Esta noção da incorruptibilidade da arca, aliás, remonta a uma tradição Israelita pré-Cristã bem atestada: o próprio Flávio Josefo escreve que a arca foi feita «de madeira que era naturalmente forte e não podia corromper-se», e a Septuaginta traduz mesmo Êxodo 25,10 falando de uma «arca do testemunho de madeira incorruptível». Se a figura era incorruptível, quanto mais o seu cumprimento antitípico, o corpo imaculado de Maria?
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>A Peregrinação da Arca: das Campinas de Jaar à Casa de Isabel</span>
+                </h3>
+
+                <p>
+                    Há ainda um segundo movimento na tipologia da arca que as leituras do Dia trazem à luz: o da <i>peregrinação</i>. No Evangelho da Missa do Dia (Lc 1,39-56), Maria «pôs-se a caminho e dirigiu-se apressadamente para a montanha, em direção a uma cidade de Judá», exactamente como David, em 2 Samuel 6 e em 1 Crónicas 15 — a nossa Primeira Leitura da Vigília —, sobe com a arca até à região montanhosa de Judá, até Jerusalém. Mais: assim como David dança e salta diante da arca vestido com um éfode sacerdotal, também João Baptista, ainda no ventre de Isabel, salta de alegria à chegada de Maria. Tanto David como João Baptista assumem um papel sacerdotal de exultação perante a chegada da arca da aliança, o lugar da presença de Deus.
+                </p>
+
+                <p>
+                    A saudação de Isabel — «Bendita és tu entre as mulheres» — não é uma simples fórmula de cortesia: trata-se de um Hebraísmo que ecoa palavras outrora dirigidas a Jael e a Judite (Jz 5,24-27; Jt 13,18), mulheres louvadas pela sua coragem heróica em livrar Israel de exércitos inimigos, ao ferirem mortalmente os seus comandantes. Maria seguirá os passos destas figuras, ainda que de modo superior: tanto o inimigo derrotado como a vitória alcançada serão maiores, pois é ela quem dá à luz o Salvador que esmaga a cabeça do pecado, da morte e do demónio. E quando Isabel exclama «donde me é dado que venha ter comigo a Mãe do meu Senhor?», está a tratar Maria como se trata uma Rainha-Mãe: o título «mãe do meu Senhor» é, precisamente, a designação técnica da <i>gebirah</i>, a rainha-mãe da corte Davídica.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>A Rainha que Está à Direita do Rei</span>
+                </h3>
+
+                <p>
+                    Este tema da realeza materna de Maria é desenvolvido de forma explícita no Salmo responsorial da Missa do Dia (Sl 44[45],10-12.16), o «Salmo do Casamento Real». O Salmo 44 é único no saltério pela sua proximidade estilística ao Cântico dos Cânticos, e nele desfilam duas figuras femininas: a rainha-mãe, que «está à direita» do rei, «adornada de ouro de Ofir», e a princesa-noiva, a quem se dirige o convite: «Ouve, minha filha, vê e presta atenção, esquece o teu povo e a casa de teu pai». Ambas as figuras, prefiguram Maria: a rainha-mãe corresponde a Maria como Mãe do Rei do universo; a princesa-noiva, por seu lado, representa também todo o Cristão chamado a entrar em relação nupcial com Cristo Rei, ainda que não glorificado como a «amada Rainha-Mãe Maria».
+                </p>
+
+                <p>
+                    Tim Staples recorda que este mesmo salmo é explicitamente aplicado a Cristo em Hebreus 1,8-9, o que confirma o seu carácter messiânico e profético, e que o Papa Pio XII, na já citada <i>Munificentissimus Deus</i>, associa também este texto à Assunção, ao falar de teólogos que descreveram Maria «como a Rainha que entra triunfante na régia mansão do céu e se senta à direita do divino Redentor». Se o Rei está entronizado «à direita da Majestade nas alturas» (Hb 1,3), não seria de esperar menos do que a sua Mãe-Rainha, de pé à sua direita, gloriosamente vestida de trajes reais.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>A Vitória sobre a Morte: as Duas Leituras de Coríntios</span>
+                </h3>
+
+                <p>
+                    Tanto a Vigília como a Missa do Dia recorrem à Primeira Carta aos Coríntios — a Vigília com 1 Cor 15,54b-57, a Missa do Dia com 1 Cor 15,20-27 — e, lidas em conjunto, as duas passagens formam um só argumento sobre a vitória de Cristo, e de Maria n'Ele, sobre a morte. Na leitura da Vigília, Paulo proclama: «A morte foi absorvida na vitória. Ó morte, onde está a tua vitória? Ó morte, onde está o teu aguilhão?». O aguilhão da morte é o pecado, e o poder do pecado é a lei, não apenas a lei Mosaica, mas a própria lei da aliança criacional, segundo a qual a morte é consequência do pecado (Gn 2-3). Ora, tendo sido concebida sem pecado, Maria nunca conheceu essa privação do Espírito Santo que está na raiz da morte; por isso, «a morte não teve para ela vitória nem aguilhão»: ela adormeceu (a Dormição) e o seu corpo foi assumido.
+                </p>
+
+                <p>
+                    Já a leitura da Missa do Dia proclama Cristo como «primícias dos que morreram», acrescentando que, «do mesmo modo que em Adão todos morreram, assim também em Cristo serão todos restituídos à vida. Cada qual, porém, na sua ordem». Se Cristo é as primícias, a Assunção da Bem-aventurada Mãe é, por assim dizer, as «segundas primícias». E, tal como a morte veio por um homem, Adão, também veio por uma mulher, Eva; do mesmo modo, se a ressurreição vem por um homem, Jesus Cristo, também vem por uma mulher, Maria. podendo reformular-se a frase de Paulo: «assim como em Eva todos morrem, também em Maria todos serão vivificados».
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>A Mulher Vestida de Sol</span>
+                </h3>
+
+                <p>
+                    A Primeira Leitura da Missa do Dia (Ap 11,19a; 12,1-6a.10ab) é porventura o texto mais discutido — e mais rico — de toda a Solenidade. A «mulher vestida de sol, com a lua debaixo dos pés e uma coroa de doze estrelas sobre a cabeça» retoma a imagética nupcial do Cântico dos Cânticos (Ct 6,10); as doze estrelas remetem para as doze tribos de Israel, fazendo de Maria Rainha de Israel e Mãe real da Casa de David, mas também, pela roupagem cósmica que veste, Rainha do universo.
+                </p>
+
+                <p>
+                    Esta mulher é simultaneamente pessoa individual e símbolo colectivo: é Maria, Mãe do Messias e mãe espiritual dos discípulos (Jo 19,26-27), mas representa também o Israel fiel que geme pelo Messias e a Igreja perseguida pelo demónio. As dores de parto não são físicas pois a tradição sustenta que Maria foi poupada dessas dores, mas antes a dor interior de participar no nascimento do Corpo Místico de Cristo, a Igreja. O dragão cor de fogo representa Satanás, mas também o sistema do Império Romano que, através da dinastia Herodiana, tentou destruir a Igreja nascente e o próprio Menino Jesus. Quanto ao filho «levado para junto de Deus e do seu trono», trata-se claramente da Ascensão.
+                </p>
+
+                <p>
+                    Sobre a natureza corpórea desta visão, notamos um contraste subtil mas decisivo: por toda a parte no Apocalipse, os santos já falecidos aparecem como «almas dos que tinham sido mortos» (Ap 6,9) ou «espíritos dos justos» (Hb 12,23) porque aguardam ainda a ressurreição final dos corpos. A mulher de Apocalipse 12, pelo contrário, aparece com «a lua debaixo dos pés» e «uma coroa de doze estrelas na cabeça» (12,1), dando à luz o Messias (12,5) e, mais tarde, todos os que «observam os mandamentos de Deus» (12,17): é, portanto, uma excepção notória à regra, presente no céu não apenas como alma, mas corporalmente.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>«Bem-aventurada quem Ouviu a Palavra»</span>
+                </h3>
+
+                <p>
+                    O Evangelho da Vigília (Lc 11,27-28) é, à primeira vista, o texto mais difícil para uma leitura Mariana e, por isso mesmo, o mais instrutivo. Quando uma mulher da multidão exclama «Feliz Aquela que Te trouxe no seu ventre e te amamentou ao seu peito», Jesus responde: «Mais felizes são os que ouvem a palavra de Deus e a põem em prática». Os Protestantes pensam que este texto como prova de que Jesus relativizava a honra devida a Maria, mas isso é um erro de leitura apressada: Jesus não nega que o ventre e os seios que o geraram e alimentaram fossem bem-aventurados, antes explica <i>por que razão</i> são bem-aventurados: porque ouviram a Palavra de Deus e a guardaram. E é o próprio evangelista Lucas quem apresenta Maria como a discípula modelo por excelência em Lc 1,26-38.
+                </p>
+
+                <p>
+                    É melhor pertencer à família espiritual de Jesus do que à sua família terrena; ora, Maria é bem-aventurada em ambos os títulos, por ser a mãe biológica de Cristo e o exemplo por excelência de quem ouve e guarda a palavra do Senhor. E é precisamente esta obediência perfeita — o «faça-se em mim segundo a tua palavra» de Lc 1,38 — que a tradição vê como o fundamento da sua santidade sem mácula e, por conseguinte, da sua vitória sobre a morte celebrada na Assunção.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>O <i>Magnificat</i>: uma Teóloga Bíblica</span>
+                </h3>
+
+                <p>
+                    No <i>Magnificat </i>(Lc 1,46-55), Maria revela-se «uma boa teóloga bíblica»: sabe que traz no seu ventre a «descendência» prometida a Abraão (Gn 22,15-18), reconhecendo-se parte do cumprimento das promessas de Deus ao longo de milénios. O cântico ecoa deliberadamente o Cântico de Ana (1Sm 2,1-10) não por acaso, pois Ana, cujo nome significa «graça», concebeu milagrosamente um filho destinado ao sacerdócio e à salvação do seu povo, tal como Maria, «cheia de graça», repete essa mesma sequência. A humildade que professa — «pois olhou para a humildade da sua serva» — situa-a na linhagem da «mulher forte» de Provérbios 31, aquela cujos filhos «se levantam e lhe chamam bem-aventurada».
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Objecções Históricas e a Antiguidade do Dogma</span>
+                </h3>
+
+                <p>
+                    Não sendo este o lugar para repetir de forma exaustiva a rica argumentação apologética de Tim Staples, vale a pena assinalar, ainda que de passagem, como o autor de <i>Eis a Tua Mãe</i> desmonta a objecção mais comum contra a Assunção: a de que se trataria de uma invenção tardia, sem qualquer testemunho escrito anterior ao século VI. Staples recorda que S. Gregório de Tours, já no ano 590, regista nos seus <i>Oito Livros de Milagres</i> uma tradição segundo a qual, tendo Maria terminado o curso da sua vida terrena, o Senhor Jesus, rodeado de anjos, tomou a sua alma e a entregou ao Arcanjo Miguel, ordenando depois que o seu corpo santo fosse levado numa nuvem para o paraíso. Mas, como nota o autor, esta não é sequer a testemunha mais antiga: fragmentos Siríacos das chamadas «Estórias de Passagem» sobre o fim da vida de Maria têm vindo a ser datados, segundo estudiosos citados por Staples, até ao século III e talvez mais recuados ainda. A ausência de qualquer relíquia do corpo de Maria, apesar do fervor com que a Igreja antiga procurava e venerava relíquias de santos e apóstolos, é também um indício silencioso mas eloquente a favor da Assunção.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Conclusão</span>
+                </h3>
+
+                <p>
+                    Vistas em conjunto, as leituras da Vigília e da Missa do Dia da Assunção compõem uma verdadeira teologia bíblica em miniatura: Maria como Arca da Nova Aliança, subindo definitivamente ao seu lugar de repouso; Maria como Rainha-Mãe, entronizada à direita do Rei; Maria como «segundas primícias» da vitória de Cristo sobre a morte; Maria como a mulher vestida de sol, ao mesmo tempo pessoa e símbolo do povo de Deus; e Maria, finalmente, como a discípula perfeita, bem-aventurada não só pelo ventre que gerou o Salvador, mas por ter ouvido e guardado a Palavra de Deus. A Assunção, longe de ser uma flor tardia e sem raiz na Escritura, revela-se como o fruto maduro de uma longa semeadura bíblica e uma fonte inesgotável de esperança para todo o Cristão que, tal como Maria, aspira a ser «fiel até à morte» (Ap 2,10).
+                </p>
+
+                <p>
+                    Para quem deseje aprofundar esta e outras questões Marianas com o rigor bíblico, histórico e patrístico que aqui apenas pudemos esboçar, recomendamos vivamente a leitura de <i>Eis a Tua Mãe: Uma Defesa Bíblica e Histórica das Doutrinas Marianas</i>, de Tim Staples, publicado pela Jerónimo Editora, em particular os capítulos 10 («Elevada por Amor: Provas para o Quarto Dogma Mariano») e 11 («Respostas a Objecções»), que desenvolvem com grande detalhe muitos dos argumentos aqui apresentados.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Fontes</span>
+                </h3>
+
+                <p>
+                    <span class="text-brand-accent-orange mr-1.5">•</span>John S. Bergsma, <i>The World of the Lord: Reflections on the Mass Readings for Solemnities and Feasts</i> (<b>Emmaus Road Publishing</b>, 2021).<br><span class="text-brand-accent-orange mr-1.5">•</span>Scott Hahn e Curtis Mitch, <i>Ignatius Catholic Study Bible: Old and New Testament</i> (notas de rodapé) (<b>Ignatius Press</b>, 2024).<br><span class="text-brand-accent-orange mr-1.5">•</span>Tim Staples, <i>Eis a Tua Mãe: Uma Defesa Bíblica e Histórica das Doutrinas Marianas</i> (<b>Jerónimo Editora</b>, 2026), capítulos 10 e 11.<br><span class="text-brand-accent-orange mr-1.5">•</span>Scott Hahn, <i>Ave, Salve Rainha Santíssima: A Mãe de Deus no Mundo de Deus</i> (<b>PAULUS Editora</b>, 2025).<br><span class="text-brand-accent-orange mr-1.5">•</span>Brant Pitre, <i>Jesus e as Raízes Judaicas de Nossa Senhora: Quem é a Mãe do Messias?</i> (<b>Lucerna</b>, 2022).
+                </p>
+
+            </div>
+
+            <!-- Cartão Biográfico do Autor -->
+            <div id="author-section" class="flex flex-col sm:flex-row items-center sm:items-start gap-5 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs max-w-3xl mx-auto my-12 text-center sm:text-left">
+                <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
+                    <a href="../sobreHB" class="block w-full h-full">
+                        <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
+                    </a>
+                </div>
+                <div class="flex flex-col items-center sm:items-start gap-1">
+                    <span class="text-[10px] text-gray-400 font-sans font-bold uppercase tracking-wider block leading-none">Autor:</span>
+                    <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-2 leading-tight">
+                        <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
+                    </h4>
+                    <a href="../sobreHB" class="inline-block px-5 py-2.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all font-sans font-bold text-xs uppercase tracking-wider text-center shadow-xs hover:-translate-y-0.5 active:translate-y-0 mt-1">
+                        Ver Mais <i class="fas fa-chevron-right ml-1 text-[9px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Botões de Navegação -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-12 border-t border-b border-gray-150 py-8 font-inter text-xs uppercase tracking-wider font-bold">
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all text-center">
+                    <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                </a>
+                <a href="../catalogo-completo" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all text-center">
+                    Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                </a>
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-xl transition-all text-center flex items-center justify-center gap-1.5">
+                    Próximo Artigo <i class="fas fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- SECCÃO DE COMENTÁRIOS ESTILO CUSDIS (PORTUGUÊS, MINIMALISTA, GOOGLE SHEETS AS BACKEND) -->
+            <section class="mt-12 pt-6 border-t border-gray-200">
+                
+                <!-- Título Simples -->
+                <div class="mb-6">
+                    <h4 class="font-sans text-lg font-bold text-gray-800">Comentários</h4>
+                </div>
+
+                <!-- Alerta Superior de Feedback de Erros ou Informações -->
+                <div id="comment-alert" class="hidden mb-4 p-4 rounded-md text-xs font-sans"></div>
+
+                <!-- Formulário Minimalista Cusdis-style -->
+                <form id="comment-form" onsubmit="handleCommentSubmit(event)" class="space-y-4 mb-8">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="w-full sm:w-1/3">
+                            <input type="text" id="comment-author-name" required placeholder="Nome" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors">
+                        </div>
+                    </div>
+                    <div>
+                        <textarea id="comment-body-text" required rows="4" placeholder="Comentário" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors resize-y"></textarea>
+                    </div>
+                    
+                    <!-- Botão de Envio Simples e Minimalista -->
+                    <div class="flex items-center">
+                        <button type="submit" id="comment-submit-btn" class="w-full sm:w-auto border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-sm font-semibold px-6 py-2.5 rounded-md font-sans text-center">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Div de Carregamento (Loading) -->
+                <div id="comments-loading" class="py-6 text-center text-gray-400">
+                    <i class="fas fa-circle-notch fa-spin text-gray-455 text-xl mb-1"></i>
+                    <p class="text-[10px] font-sans">A carregar comentários...</p>
+                </div>
+
+                <!-- Lista de Comentários Cusdis-style -->
+                <div id="comments-list-container" class="space-y-6 pt-2">
+                    <!-- Gerado de forma ultra-limpa por JS -->
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Script 1: Gestão de Comentários (Google Forms & Google Sheets) -->
+    <script>
+        // 1. O link do formulário Google onde as respostas são submetidas
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfa3Q0IRcH04CukIjG2MkiVgWFsUsg2UhxPtZAI7NZaqh7WLw/formResponse";
+        
+        // 2. Os IDs dos campos do seu formulário Google
+        const GOOGLE_ENTRY_NOME = "entry.291667979";       
+        const GOOGLE_ENTRY_COMENTARIO = "entry.1902103085"; 
+        const GOOGLE_ENTRY_PAGINA = "entry.1583473753";     
+
+        // 3. O link do seu Google Sheets (Necessita de estar público como "Qualquer pessoa com o link" -> "Leitor")
+        const GOOGLE_SHEETS_TSV_URL = "https://docs.google.com/spreadsheets/d/1XcepyAixWdIbTaOxalKsJ2--D-SMxf-XPHY-2Lw4hbU/edit?usp=sharing";
+
+        // Função para normalizar os IDs de página de forma uniforme
+        function normalizePageId(id) {
+            if (!id) return "a-arca-que-subiu-ao-ceu";
+            return id.trim()
+                     .toLowerCase()
+                     .replace(/\.html$/, '')
+                     .split('/')
+                     .filter(Boolean)
+                     .pop() || "a-arca-que-subiu-ao-ceu";
+        }
+
+        // ID único deste artigo
+        const rawPageId = window.location.pathname.split('/').pop().replace('.html', '') || 'a-arca-que-subiu-ao-ceu';
+        const pageId = normalizePageId(rawPageId);
+
+        let fallbackComments = [];
+
+        // Carregar Comentários de forma totalmente automática usando a API oficial do Google Visualization
+        async function fetchComments() {
+            const listContainer = document.getElementById('comments-list-container');
+            const loader = document.getElementById('comments-loading');
+
+            try {
+                const fetchUrl = getFetchUrl();
+                
+                const response = await fetch(fetchUrl, {
+                    method: "GET",
+                    credentials: "omit",
+                    cache: "no-store"
+                });
+                if (!response.ok) throw new Error("Erro ao obter dados.");
+                
+                const data = await response.text();
+
+                if (data.trim().startsWith('<html') || data.trim().startsWith('<!DOCTYPE') || data.includes('<meta')) {
+                    throw new Error("A folha de cálculo está configurada como Privada no Google Drive.");
+                }
+
+                const parsedComments = parseGVizData(data);
+                
+                syncLocalPendentes(parsedComments);
+                renderComments(parsedComments);
+            } catch (error) {
+                console.warn("Problema ao importar dados do Google Sheets:", error);
+                renderComments(fallbackComments);
+            } finally {
+                if (loader) loader.classList.add('hidden');
+            }
+        }
+
+        function getFetchUrl() {
+            let url = GOOGLE_SHEETS_TSV_URL.trim();
+            const salt = `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+            
+            if (url.includes('/spreadsheets/d/')) {
+                const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+                if (matches && matches[1]) {
+                    const sheetId = matches[1];
+                    
+                    let gid = '0';
+                    const gidMatches = url.match(/[#?&]gid=([0-9]+)/);
+                    if (gidMatches && gidMatches[1]) {
+                        gid = gidMatches[1];
+                    }
+                    
+                    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${gid}&tqx=out:json&t=${salt}`;
+                }
+            }
+            return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
+        }
+
+        function cleanCompare(str) {
+            if (!str) return "";
+            return str.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        function syncLocalPendentes(allParsedComments) {
+            let meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            if (meusPendentes.length === 0) return;
+
+            const MAX_AGE_MS = 24 * 60 * 60 * 1000;
+
+            const novosPendentes = meusPendentes.filter(pLocal => {
+                const idade = Date.now() - pLocal.timestamp;
+                if (idade > MAX_AGE_MS) return false;
+
+                const aprovadoNaFolha = allParsedComments.some(cSheet => 
+                    cSheet.approved &&
+                    normalizePageId(cSheet.page) === normalizePageId(pLocal.page) && 
+                    cleanCompare(cSheet.name) === cleanCompare(pLocal.name) &&
+                    cleanCompare(cSheet.text) === cleanCompare(pLocal.text)
+                );
+                
+                return !aprovadoNaFolha;
+            });
+
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
+        }
+
+        function parseGVizData(responseText) {
+            try {
+                const jsonStart = responseText.indexOf('{');
+                const jsonEnd = responseText.lastIndexOf('}');
+                if (jsonStart === -1 || jsonEnd === -1) return [];
+                
+                const jsonStr = responseText.substring(jsonStart, jsonEnd + 1);
+                const gvizData = JSON.parse(jsonStr);
+                
+                if (!gvizData || !gvizData.table || !gvizData.table.rows) return [];
+                
+                const table = gvizData.table;
+                const cols = table.cols || [];
+                
+                let timestampIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('carimbo') || c.label.toLowerCase().includes('time') || c.label.toLowerCase().includes('data')));
+                let nameIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('nome') || c.label.toLowerCase().includes('autor') || c.label.toLowerCase().includes('user') || c.label.toLowerCase().includes('name')));
+                let commentIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('coment') || c.label.toLowerCase().includes('texto') || c.label.toLowerCase().includes('mensagem') || c.label.toLowerCase().includes('body') || c.label.toLowerCase().includes('comment')));
+                let pageIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('pág') || c.label.toLowerCase().includes('pag') || c.label.toLowerCase().includes('artigo') || c.label.toLowerCase().includes('url') || c.label.toLowerCase().includes('id')));
+                let approvedIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('aprov') || c.label.toLowerCase().includes('status') || c.label.toLowerCase().includes('moder') || c.label.toLowerCase().includes('aceit') || c.label.toLowerCase().includes('visto')));
+
+                if (timestampIdx === -1) timestampIdx = 0;
+                if (nameIdx === -1) nameIdx = 1;
+                if (commentIdx === -1) commentIdx = 2;
+                if (pageIdx === -1) pageIdx = 3;
+                if (approvedIdx === -1) approvedIdx = 4;
+
+                const comments = [];
+                table.rows.forEach(row => {
+                    if (!row.c || row.c.length < 3) return;
+                    
+                    const rawDate = row.c[timestampIdx]?.f || row.c[timestampIdx]?.v || "";
+                    const name = (row.c[nameIdx] && row.c[nameIdx].v !== undefined && row.c[nameIdx].v !== null) ? String(row.c[nameIdx].v).trim() : "Anónimo";
+                    const text = (row.c[commentIdx] && row.c[commentIdx].v !== undefined && row.c[commentIdx].v !== null) ? String(row.c[commentIdx].v).trim() : "";
+                    const page = (row.c[pageIdx] && row.c[pageIdx].v !== undefined && row.c[pageIdx].v !== null) ? String(row.c[pageIdx].v).trim() : "";
+                    const approvedVal = (row.c[approvedIdx] && row.c[approvedIdx].v !== undefined && row.c[approvedIdx].v !== null) ? String(row.c[approvedIdx].v).trim().toLowerCase() : "";
+
+                    const approved = approvedVal === 'sim';
+
+                    let timestamp = Date.now();
+                    if (rawDate) {
+                        if (typeof rawDate === 'string' && rawDate.startsWith('Date(')) {
+                            try {
+                                const match = rawDate.match(/Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+),(\d+))?\)/);
+                                if (match) {
+                                    const y = parseInt(match[1], 10);
+                                    const m = parseInt(match[2], 10);
+                                    const d = parseInt(match[3], 10);
+                                    const hr = match[4] ? parseInt(match[4], 10) : 0;
+                                    const min = match[5] ? parseInt(match[5], 10) : 0;
+                                    const sec = match[6] ? parseInt(match[6], 10) : 0;
+                                    timestamp = new Date(y, m, d, hr, min, sec).getTime();
+                                }
+                            } catch(e) {}
+                        } else {
+                            timestamp = parseGoogleDate(rawDate);
+                        }
+                    }
+
+                    comments.push({ name, text, timestamp, page, approved });
+                });
+
+                return comments.sort((a, b) => b.timestamp - a.timestamp);
+            } catch (err) {
+                console.error("Falha ao analisar a tabela GViz:", err);
+                return [];
+            }
+        }
+
+        function parseGoogleDate(rawDate) {
+            if (!rawDate) return Date.now();
+            const parts = rawDate.trim().split(/[\s/:\-]/);
+            if (parts.length >= 3) {
+                if (parts[0].length === 4) {
+                    const y = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const d = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                } else {
+                    const d = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const y = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                }
+            }
+            return Date.now();
+        }
+
+        function renderComments(commentsArray) {
+            const listContainer = document.getElementById('comments-list-container');
+            listContainer.innerHTML = '';
+
+            const currentPageNormalized = normalizePageId(pageId);
+
+            const activeComments = commentsArray.filter(c => {
+                const commentPageNormalized = normalizePageId(c.page);
+                return commentPageNormalized === currentPageNormalized && c.approved;
+            });
+
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+
+            meusPendentes.forEach(p => {
+                if (!activeComments.some(c => cleanCompare(c.text) === cleanCompare(p.text) && cleanCompare(c.name) === cleanCompare(p.name))) {
+                    activeComments.unshift(p);
+                }
+            });
+
+            if (activeComments.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-left py-4 font-sans text-gray-400 text-sm italic">
+                        Não existem comentários de momento. Seja o primeiro a comentar.
+                    </div>
+                `;
+                return;
+            }
+
+            activeComments.forEach(comment => {
+                const dateText = formatCustomDate(comment.timestamp);
+                const commentEl = document.createElement('div');
+                commentEl.className = `py-4 border-b border-gray-150 transition-all space-y-1.5`;
+                
+                commentEl.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-sans font-bold text-gray-800 text-sm">${escapeHtml(comment.name)}</span>
+                            ${comment.isLocalPendente ? '<span class="bg-amber-50 text-amber-800 border border-amber-200 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-sans">Em Aprovação</span>' : ''}
+                        </div>
+                        <span class="text-xs text-gray-400 font-sans">${dateText}</span>
+                    </div>
+                    <div class="text-gray-700 font-sans text-sm leading-relaxed whitespace-pre-wrap">${escapeHtml(comment.text)}</div>
+                `;
+                listContainer.appendChild(commentEl);
+            });
+        }
+
+        async function handleCommentSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('comment-submit-btn');
+            const nameInput = document.getElementById('comment-author-name');
+            const textInput = document.getElementById('comment-body-text');
+
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+
+            if (!name || !text) return;
+
+            btn.disabled = true;
+            btn.textContent = "A enviar...";
+
+            const formData = new FormData();
+            formData.append(GOOGLE_ENTRY_NOME, name);
+            formData.append(GOOGLE_ENTRY_COMENTARIO, text);
+            formData.append(GOOGLE_ENTRY_PAGINA, pageId);
+
+            try {
+                await fetch(GOOGLE_FORM_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                saveLocalPendente({
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    page: pageId,
+                    approved: false,
+                    isLocalPendente: true
+                });
+
+                showAlert("✨ Comentário submetido com sucesso! Ficará visível assim que for aprovado pela editora.", "bg-emerald-50 text-emerald-800 border border-emerald-150 font-semibold");
+                textInput.value = '';
+                nameInput.value = '';
+            } catch (error) {
+                console.error("Erro na submissão:", error);
+                showAlert("Ocorreu um erro ao submeter o comentário. Tente novamente.", "bg-red-50 text-red-800 border border-red-200");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Enviar";
+                fetchComments(); 
+            }
+        }
+
+        function saveLocalPendente(commentObj) {
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            meusPendentes.push(commentObj);
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(meusPendentes));
+        }
+
+        function showAlert(msg, bgClasses) {
+            const alertBox = document.getElementById('comment-alert');
+            if (!alertBox) return;
+            alertBox.className = `p-4 rounded-md text-xs font-sans ${bgClasses}`;
+            alertBox.innerHTML = msg;
+            alertBox.classList.remove('hidden');
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 8000);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function formatCustomDate(timestamp) {
+            if (!timestamp) return 'Agora';
+            const diff = Date.now() - timestamp;
+            if (diff < 60000) return 'Agora mesmo';
+            if (diff < 3600000) return `Há ${Math.round(diff / 60000)} min`;
+            if (diff < 86400000) return `Há ${Math.round(diff / 3600000)} horas`;
+            
+            const d = new Date(timestamp);
+            return d.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchComments);
+    </script>
+
+    <!-- Script 2: Navegação, Menu Mobile, Carrinho e Leitura -->
+    <script>
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
+                return '../';
+            }
+            return '';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId);
+            if (!container) return;
+            const prefix = getPrefix();
+            
+            if (prefix !== '') {
+                container.querySelectorAll('a').forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        if (!href.startsWith('../')) {
+                            link.setAttribute('href', prefix + href);
+                        }
+                    }
+                });
+                container.querySelectorAll('img').forEach(img => {
+                    let src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                        img.setAttribute('src', prefix + src);
+                    }
+                });
+            }
+
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
+                }
+            });
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            const prefix = getPrefix();
+            try {
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    adjustAndCleanLinks('nav-placeholder');
+                }
+
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                    adjustAndCleanLinks('footer-placeholder');
+                }
+
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        function calculateReadingTime() {
+            const contentElement = document.getElementById('article-content');
+            const readingTimeElement = document.getElementById('reading-time');
+            if (!contentElement || !readingTimeElement) return;
+
+            const text = contentElement.innerText || contentElement.textContent;
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+            const readingTime = Math.ceil(words / 200);
+            readingTimeElement.textContent = readingTime;
+        }
+
+        // Monitorização de Scroll para a Barra de Progresso Superior e Percentagem Flutuante
+        window.addEventListener('scroll', () => {
+            const winScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+            const targetEl = document.getElementById('author-section');
+            let scrolled = 0;
+            
+            if (targetEl) {
+                const elementOffsetTop = targetEl.getBoundingClientRect().top + window.scrollY;
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const maxScroll = elementOffsetTop - winHeight + 100;
+                
+                if (maxScroll > 0) {
+                    scrolled = Math.round((winScroll / maxScroll) * 100);
+                } else {
+                    scrolled = 100;
+                }
+            } else {
+                const docHeight = Math.max(
+                    document.body.scrollHeight, 
+                    document.documentElement.scrollHeight,
+                    document.body.offsetHeight, 
+                    document.documentElement.offsetHeight,
+                    document.body.clientHeight, 
+                    document.documentElement.clientHeight
+                );
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const totalScrollable = docHeight - winHeight;
+                if (totalScrollable > 0) {
+                    scrolled = Math.round((winScroll / totalScrollable) * 100);
+                }
+            }
+            
+            if (scrolled > 100) scrolled = 100;
+            if (scrolled < 0) scrolled = 0;
+
+            const progressBar = document.getElementById('scroll-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
+
+            const scrollPercentageText = document.getElementById('scroll-percentage-text');
+            if (scrollPercentageText) {
+                scrollPercentageText.textContent = scrolled + '%';
+            }
+
+            const scrollPercentageDiv = document.getElementById('scroll-percentage');
+            if (scrollPercentageDiv) {
+                if (winScroll > 150) {
+                    scrollPercentageDiv.classList.remove('opacity-0');
+                    scrollPercentageDiv.classList.add('opacity-100');
+                } else {
+                    scrollPercentageDiv.classList.remove('opacity-100');
+                    scrollPercentageDiv.classList.add('opacity-0');
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            calculateReadingTime();
+        });
+    </script>
+</body>
+</html>
