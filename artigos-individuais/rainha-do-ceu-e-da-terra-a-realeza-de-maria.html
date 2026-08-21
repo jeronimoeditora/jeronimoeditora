@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Rainha do Céu e da Terra: a realeza de Maria | Jerónimo Editora</title>
+    
+    <!-- Meta Tags do Open Graph (Facebook, WhatsApp, etc.) -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Rainha do Céu e da Terra: a realeza de Maria | Jerónimo Editora">
+    <meta property="og:description" content="A propósito da memória obrigatória de 22 de Agosto: Virgem Santa Maria, Rainha">
+    <meta property="og:url" content="https://www.editorajeronimo.pt/artigos-individuais/rainha-do-ceu-e-da-terra-a-realeza-de-maria">
+    <meta property="og:image" content="https://www.editorajeronimo.pt/Imagens/13.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:site_name" content="Jerónimo Editora">
+
+    <!-- Meta Tags do Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rainha do Céu e da Terra: a realeza de Maria | Jerónimo Editora">
+    <meta name="twitter:description" content="A propósito da memória obrigatória de 22 de Agosto: Virgem Santa Maria, Rainha">
+    <meta name="twitter:image" content="https://www.editorajeronimo.pt/Imagens/13.png">
+    
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
+    
+    <script>
+        // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
+                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
+                        serif: ['"Playfair Display"', 'serif'],
+                        classic: ['"Crimson Text"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body { 
+            scroll-behavior: auto !important;
+            overflow-x: hidden; 
+            width: 100%; 
+            background-color: #F8F8F8; 
+        }
+        * { box-sizing: border-box; }
+
+        .text-readable-article {
+            line-height: 1.85;
+            letter-spacing: -0.003em;
+            word-spacing: 0.05em;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 2px;
+            color: #e05300;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100] pointer-events-none">
+        <div id="scroll-progress-bar" class="h-full bg-brand-accent-orange transition-all duration-75" style="width: 0%"></div>
+    </div>
+
+    <div id="scroll-percentage" class="fixed bottom-6 right-6 bg-brand-accent-blue text-white text-xs font-bold px-3 py-2 rounded-full shadow-xl z-50 opacity-0 transition-opacity duration-300 pointer-events-none flex items-center gap-1">
+        <i class="fas fa-book-open text-brand-gold"></i> <span id="scroll-percentage-text">0%</span>
+    </div>
+
+    <div id="nav-placeholder"></div>
+
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
+        <article class="max-w-4xl mx-auto px-6 fade-in">
+
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center flex flex-col items-center">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3 text-center">Apologética Mariana</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4 text-center">Rainha do Céu e da Terra: a realeza de Maria</h1>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-500 font-medium font-sans w-full">
+                    <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 22 de Agosto de 2026</span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5 font-inter">
+                        <i class="far fa-user"></i> Escrito por 
+                        <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">10</span> min de leitura</span>
+                </div>
+            </header>
+
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden border border-gray-200 shadow-xs relative bg-gray-100 mb-8">
+                <img src="../Imagens/13.png" alt="Rainha do Céu e da Terra: a realeza de Maria" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Rainha%20do%20C%C3%A9u%20e%20da%20Terra%3A%20a%20realeza%20de%20Maria';">
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto text-center font-classic">A propósito da memória obrigatória de 22 de Agosto: Virgem Santa Maria, Rainha</p>
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto text-justify">
+
+                <p class="dropcap">
+                    Todos os anos, a 22 de Agosto, a Igreja Católica celebra uma memória que, à primeira vista, poderá surpreender o leitor menos familiarizado com a Tradição: a Virgem Santa Maria, Rainha. Para muitos Cristãos fora da Igreja, o título soa a excesso devocional. Mas, como demonstra Tim Staples no seu livro <i>Eis a Tua Mãe: Uma Defesa Bíblica e Histórica das Doutrinas Marianas</i> — agora disponível em Português pela Jerónimo Editora —, a realeza de Maria não é um ornamento piedoso acrescentado pela devoção popular. É, antes, uma conclusão lógica e bíblica que nasce directamente do facto central do Evangelho: Jesus é Rei.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Se Jesus é Rei, quem é a Rainha?</span>
+                </h3>
+
+                <p>
+                    O Papa Pio XII resumiu o argumento central com admirável precisão: a dignidade régia de Maria funda-se, «sem dúvida», na sua maternidade divina, pois o Filho que dela nasceu «reinará na casa de Jacob eternamente». Se Maria é «a Mãe do Senhor», e o Senhor é Rei, segue-se que ela é rainha, não por mérito próprio, mas, como escreveu S. João Damasceno, por se ter «tornado verdadeiramente senhora de toda a criação» no instante em que se tornou Mãe do Criador.
+Staples recorda-nos ainda a visão de Apocalipse 12: a Mulher «vestida de Sol», com «uma coroa de doze estrelas na cabeça», que dá à luz Aquele que há-de «governar todas as nações com ceptro de ferro». Poucas imagens bíblicas são tão explícitas quanto a coroa desta Mulher celeste.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>A <i>gebirah</i>: a rainha-mãe de Israel</span>
+                </h3>
+
+                <p>
+                    Onde o livro verdadeiramente ilumina o leitor cético é na recuperação da tipologia veterotestamentária da <i>gebirah</i>, a «grande senhora» do antigo Israel. Staples explica, citando Scott Hahn, que nas monarquias polígamas do Próximo Oriente antigo não era a esposa do rei quem recebia as honras de rainha, mas sim a sua mãe. Por isso, sempre que havia rei em Israel, havia também rainha-mãe: Atália, Maaca, e sobretudo Betsabé, mãe de Salomão.
+O caso de Betsabé é particularmente instrutivo. Enquanto esposa de David, tinha de se prostrar perante o rei para lhe fazer um pedido, com a ajuda do profeta Natan. Mas, tornada mãe do novo rei, tudo muda: o próprio Salomão «levantou-se e veio ao seu encontro, prostrando-se diante dela», mandando colocar-lhe um trono à sua direita. Como observa Staples, este episódio antecipa e ilumina o poder de intercessão que Maria exerce junto do seu Filho — visível, por exemplo, nas Bodas de Caná —, com a diferença essencial de que Maria «nunca pedirá ao seu Filho nada que seja contrário à vontade d’Ele».
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Uma rainha profetizada e uma objecção respondida</span>
+                </h3>
+
+                <p>
+                    O Salmo 45 profetiza não só o Rei («o teu trono […] é eterno e duradouro»), mas também, poucos versículos depois, uma rainha «ornada com ouro de Ofir», colocada «à direita» do rei, cujo nome os povos «hão-de louvar para sempre». Staples pergunta, com toda a legitimidade: que esposa de Salomão corresponderia a semelhante profecia? Só Maria, que anunciou que «todas as gerações» a chamariam bem-aventurada, preenche verdadeiramente estas palavras.
+O livro não evita, porém, a objecção Protestante mais citada: Jeremias 7,18, onde o profeta condena as tortas oferecidas «à Rainha do céu». Staples explica com clareza que esse texto visa a deusa Mesopotâmica Astarte, condenando <i>sacrifícios</i> idolátricos, algo que a Igreja Católica jamais ensinou dever-se a Maria. A existência de uma falsa rainha do céu na Antiguidade não anula, antes pressupõe por contraste, a realidade da verdadeira Rainha do reino de Deus.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Uma coroa de espinhos antes da coroa de estrelas</span>
+                </h3>
+
+                <p>
+                    Um dos aspectos mais belos da argumentação de Staples é a forma como liga a realeza de Maria ao caminho da cruz. Tal como Cristo, que sendo Rei se fez <i>doulos</i> (servo), também Maria, que se proclamou «a serva do Senhor», foi chamada a permanecer junto da cruz antes de ser coroada Rainha do Céu e da Terra em Apocalipse 12. Não há coroa de estrelas sem a partilha, primeiro, da coroa de espinhos.
+O livro dedica ainda um apêndice à figura de Ester, rainha Persa que intercedeu pelo seu povo condenado à morte. Como recordava o Bispo Frederick Justus Knecht, citado por Staples, «Ester é um tipo da sempre Bem-aventurada Virgem Maria»: assim como Ester foi a única isenta da lei severa do rei, Maria é a única isenta da mancha do pecado original; e assim como Ester intercedeu e foi ouvida, Maria «vai perante o trono de Deus para interceder pelo seu povo».
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Uma leitura para esta memória</span>
+                </h3>
+
+                <p>
+                    Nesta memória de 22 de Agosto, propomos uma leitura atenta e serena, mas também apaixonada, desta doutrina tantas vezes mal compreendida. <i>Eis a Tua Mãe</i> oferece exactamente isso: uma defesa bíblica, patrística e histórica que não pede ao leitor um salto de fé cego, mas antes um percurso lógico e escriturístico até à conclusão inevitável de que, se Cristo é Rei, Maria é Rainha.
+O livro de Tim Staples, publicado pela Jerónimo Editora, está disponível para quem deseje aprofundar não só esta, mas todas as grandes doutrinas Marianas — a Imaculada Conceição, a Maternidade Divina, a Virgindade Perpétua e a Assunção — com o rigor bíblico e histórico que caracteriza o autor. Uma leitura indispensável para Católicos que desejem saber dar razão da sua fé, e para todos os Cristãos de boa vontade que se interrogam, com honestidade, sobre o lugar real de Maria no Reino de Deus.
+                </p>
+
+            </div>
+
+            <!-- Cartão Biográfico do Autor -->
+            <div id="author-section" class="flex flex-col sm:flex-row items-center sm:items-start gap-5 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs max-w-3xl mx-auto my-12 text-center sm:text-left">
+                <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
+                    <a href="../sobreHB" class="block w-full h-full">
+                        <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
+                    </a>
+                </div>
+                <div class="flex flex-col items-center sm:items-start gap-1">
+                    <span class="text-[10px] text-gray-400 font-sans font-bold uppercase tracking-wider block leading-none">Autor:</span>
+                    <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-2 leading-tight">
+                        <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
+                    </h4>
+                    <a href="../sobreHB" class="inline-block px-5 py-2.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all font-sans font-bold text-xs uppercase tracking-wider text-center shadow-xs hover:-translate-y-0.5 active:translate-y-0 mt-1">
+                        Ver Mais <i class="fas fa-chevron-right ml-1 text-[9px]"></i>
+                    </a>
+                </div>
+            </div>
+
+
+            <!-- Botões de Navegação -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-12 border-t border-b border-gray-150 py-8 font-inter text-xs uppercase tracking-wider font-bold">
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all text-center">
+                    <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                </a>
+                <a href="../catalogo-completo" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all text-center">
+                    Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                </a>
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-xl transition-all text-center flex items-center justify-center gap-1.5">
+                    Próximo Artigo <i class="fas fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- SECCÃO DE COMENTÁRIOS ESTILO CUSDIS (PORTUGUÊS, MINIMALISTA, GOOGLE SHEETS AS BACKEND) -->
+            <section class="mt-12 pt-6 border-t border-gray-200">
+                
+                <!-- Título Simples -->
+                <div class="mb-6">
+                    <h4 class="font-sans text-lg font-bold text-gray-800">Comentários</h4>
+                </div>
+
+                <!-- Alerta Superior de Feedback de Erros ou Informações -->
+                <div id="comment-alert" class="hidden mb-4 p-4 rounded-md text-xs font-sans"></div>
+
+                <!-- Formulário Minimalista Cusdis-style -->
+                <form id="comment-form" onsubmit="handleCommentSubmit(event)" class="space-y-4 mb-8">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="w-full sm:w-1/3">
+                            <input type="text" id="comment-author-name" required placeholder="Nome" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors">
+                        </div>
+                    </div>
+                    <div>
+                        <textarea id="comment-body-text" required rows="4" placeholder="Comentário" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors resize-y"></textarea>
+                    </div>
+                    
+                    <!-- Botão de Envio Simples e Minimalista -->
+                    <div class="flex items-center">
+                        <button type="submit" id="comment-submit-btn" class="w-full sm:w-auto border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-sm font-semibold px-6 py-2.5 rounded-md font-sans text-center">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Div de Carregamento (Loading) -->
+                <div id="comments-loading" class="py-6 text-center text-gray-400">
+                    <i class="fas fa-circle-notch fa-spin text-gray-455 text-xl mb-1"></i>
+                    <p class="text-[10px] font-sans">A carregar comentários...</p>
+                </div>
+
+                <!-- Lista de Comentários Cusdis-style -->
+                <div id="comments-list-container" class="space-y-6 pt-2">
+                    <!-- Gerado de forma ultra-limpa por JS -->
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Script de Gestão Inteligente dos Comentários (Sem Firebase, via Google Sheets) -->
+    <script>
+        // 1. O link do formulário Google onde as respostas são submetidas
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfa3Q0IRcH04CukIjG2MkiVgWFsUsg2UhxPtZAI7NZaqh7WLw/formResponse";
+        
+        // 2. Os IDs dos campos do seu formulário Google
+        const GOOGLE_ENTRY_NOME = "entry.291667979";       
+        const GOOGLE_ENTRY_COMENTARIO = "entry.1902103085"; 
+        const GOOGLE_ENTRY_PAGINA = "entry.1583473753";     
+
+        // 3. O link do seu Google Sheets (Necessita de estar público como "Qualquer pessoa com o link" -> "Leitor")
+        const GOOGLE_SHEETS_TSV_URL = "https://docs.google.com/spreadsheets/d/1XcepyAixWdIbTaOxalKsJ2--D-SMxf-XPHY-2Lw4hbU/edit?usp=sharing";
+
+        // Função para normalizar os IDs de página de forma uniforme
+        function normalizePageId(id) {
+            if (!id) return "rainha-do-ceu-e-da-terra-a-realeza-de-maria";
+            return id.trim()
+                     .toLowerCase()
+                     .replace(/\.html$/, '')
+                     .split('/')
+                     .filter(Boolean)
+                     .pop() || "rainha-do-ceu-e-da-terra-a-realeza-de-maria";
+        }
+
+        // ID único deste artigo
+        const rawPageId = window.location.pathname.split('/').pop().replace('.html', '') || 'rainha-do-ceu-e-da-terra-a-realeza-de-maria';
+        const pageId = normalizePageId(rawPageId);
+
+        let fallbackComments = [];
+
+        // Carregar Comentários de forma totalmente automática usando a API oficial do Google Visualization
+        async function fetchComments() {
+            const listContainer = document.getElementById('comments-list-container');
+            const loader = document.getElementById('comments-loading');
+
+            if (GOOGLE_SHEETS_TSV_URL.includes("ExemploFolhaDeCalculoPublicada")) {
+                renderComments(fallbackComments);
+                if (loader) loader.classList.add('hidden');
+                return;
+            }
+
+            try {
+                const fetchUrl = getFetchUrl();
+                
+                const response = await fetch(fetchUrl, {
+                    method: "GET",
+                    credentials: "omit",
+                    cache: "no-store"
+                });
+                if (!response.ok) throw new Error("Erro ao obter dados.");
+                
+                const data = await response.text();
+
+                if (data.trim().startsWith('<html') || data.trim().startsWith('<!DOCTYPE') || data.includes('<meta')) {
+                    throw new Error("A folha de cálculo está configurada como Privada no Google Drive.");
+                }
+
+                const parsedComments = parseGVizData(data);
+                
+                syncLocalPendentes(parsedComments);
+                renderComments(parsedComments);
+            } catch (error) {
+                console.warn("Problema ao importar dados do Google Sheets:", error);
+                renderComments(fallbackComments);
+            } finally {
+                if (loader) loader.classList.add('hidden');
+            }
+        }
+
+        function getFetchUrl() {
+            let url = GOOGLE_SHEETS_TSV_URL.trim();
+            const salt = `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+            
+            if (url.includes('/spreadsheets/d/')) {
+                const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+                if (matches && matches[1]) {
+                    const sheetId = matches[1];
+                    
+                    let gid = '0';
+                    const gidMatches = url.match(/[#?&]gid=([0-9]+)/);
+                    if (gidMatches && gidMatches[1]) {
+                        gid = gidMatches[1];
+                    }
+                    
+                    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${gid}&tqx=out:json&t=${salt}`;
+                }
+            }
+            return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
+        }
+
+        function cleanCompare(str) {
+            if (!str) return "";
+            return str.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        function syncLocalPendentes(allParsedComments) {
+            let meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            if (meusPendentes.length === 0) return;
+
+            const MAX_AGE_MS = 24 * 60 * 60 * 1000;
+
+            const novosPendentes = meusPendentes.filter(pLocal => {
+                const idade = Date.now() - pLocal.timestamp;
+                if (idade > MAX_AGE_MS) return false;
+
+                const aprovadoNaFolha = allParsedComments.some(cSheet => 
+                    cSheet.approved &&
+                    normalizePageId(cSheet.page) === normalizePageId(pLocal.page) && 
+                    cleanCompare(cSheet.name) === cleanCompare(pLocal.name) &&
+                    cleanCompare(cSheet.text) === cleanCompare(pLocal.text)
+                );
+                
+                return !aprovadoNaFolha;
+            });
+
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
+        }
+
+        function parseGVizData(responseText) {
+            try {
+                const jsonStart = responseText.indexOf('{');
+                const jsonEnd = responseText.lastIndexOf('}');
+                if (jsonStart === -1 || jsonEnd === -1) return [];
+                
+                const jsonStr = responseText.substring(jsonStart, jsonEnd + 1);
+                const gvizData = JSON.parse(jsonStr);
+                
+                if (!gvizData || !gvizData.table || !gvizData.table.rows) return [];
+                
+                const table = gvizData.table;
+                const cols = table.cols || [];
+                
+                let timestampIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('carimbo') || c.label.toLowerCase().includes('time') || c.label.toLowerCase().includes('data')));
+                let nameIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('nome') || c.label.toLowerCase().includes('autor') || c.label.toLowerCase().includes('user') || c.label.toLowerCase().includes('name')));
+                let commentIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('coment') || c.label.toLowerCase().includes('texto') || c.label.toLowerCase().includes('mensagem') || c.label.toLowerCase().includes('body') || c.label.toLowerCase().includes('comment')));
+                let pageIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('pág') || c.label.toLowerCase().includes('pag') || c.label.toLowerCase().includes('artigo') || c.label.toLowerCase().includes('url') || c.label.toLowerCase().includes('id')));
+                let approvedIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('aprov') || c.label.toLowerCase().includes('status') || c.label.toLowerCase().includes('moder') || c.label.toLowerCase().includes('aceit') || c.label.toLowerCase().includes('visto')));
+
+                if (timestampIdx === -1) timestampIdx = 0;
+                if (nameIdx === -1) nameIdx = 1;
+                if (commentIdx === -1) commentIdx = 2;
+                if (pageIdx === -1) pageIdx = 3;
+                if (approvedIdx === -1) approvedIdx = 4;
+
+                const comments = [];
+                table.rows.forEach(row => {
+                    if (!row.c || row.c.length < 3) return;
+                    
+                    const rawDate = row.c[timestampIdx]?.f || row.c[timestampIdx]?.v || "";
+                    const name = (row.c[nameIdx] && row.c[nameIdx].v !== undefined && row.c[nameIdx].v !== null) ? String(row.c[nameIdx].v).trim() : "Anónimo";
+                    const text = (row.c[commentIdx] && row.c[commentIdx].v !== undefined && row.c[commentIdx].v !== null) ? String(row.c[commentIdx].v).trim() : "";
+                    const page = (row.c[pageIdx] && row.c[pageIdx].v !== undefined && row.c[pageIdx].v !== null) ? String(row.c[pageIdx].v).trim() : "";
+                    const approvedVal = (row.c[approvedIdx] && row.c[approvedIdx].v !== undefined && row.c[approvedIdx].v !== null) ? String(row.c[approvedIdx].v).trim().toLowerCase() : "";
+
+                    const approved = approvedVal === 'sim';
+
+                    let timestamp = Date.now();
+                    if (rawDate) {
+                        if (typeof rawDate === 'string' && rawDate.startsWith('Date(')) {
+                            try {
+                                const match = rawDate.match(/Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+),(\d+))?\)/);
+                                if (match) {
+                                    const y = parseInt(match[1], 10);
+                                    const m = parseInt(match[2], 10);
+                                    const d = parseInt(match[3], 10);
+                                    const hr = match[4] ? parseInt(match[4], 10) : 0;
+                                    const min = match[5] ? parseInt(match[5], 10) : 0;
+                                    const sec = match[6] ? parseInt(match[6], 10) : 0;
+                                    timestamp = new Date(y, m, d, hr, min, sec).getTime();
+                                }
+                            } catch(e) {}
+                        } else {
+                            timestamp = parseGoogleDate(rawDate);
+                        }
+                    }
+
+                    comments.push({ name, text, timestamp, page, approved });
+                });
+
+                return comments.sort((a, b) => b.timestamp - a.timestamp);
+            } catch (err) {
+                console.error("Falha ao analisar a tabela GViz:", err);
+                return [];
+            }
+        }
+
+        function parseGoogleDate(rawDate) {
+            if (!rawDate) return Date.now();
+            const parts = rawDate.trim().split(/[\s/:\-]/);
+            if (parts.length >= 3) {
+                if (parts[0].length === 4) {
+                    const y = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const d = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                } else {
+                    const d = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const y = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                }
+            }
+            return Date.now();
+        }
+
+        function renderComments(commentsArray) {
+            const listContainer = document.getElementById('comments-list-container');
+            const loader = document.getElementById('comments-loading');
+            if (loader) loader.classList.add('hidden');
+            listContainer.innerHTML = '';
+
+            const currentPageNormalized = normalizePageId(pageId);
+
+            const activeComments = commentsArray.filter(c => {
+                const commentPageNormalized = normalizePageId(c.page);
+                return commentPageNormalized === currentPageNormalized && c.approved;
+            });
+
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+
+            meusPendentes.forEach(p => {
+                if (!activeComments.some(c => cleanCompare(c.text) === cleanCompare(p.text) && cleanCompare(c.name) === cleanCompare(p.name))) {
+                    activeComments.unshift(p);
+                }
+            });
+
+            if (activeComments.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-left py-4 font-sans text-gray-400 text-sm italic">
+                        Não existem comentários de momento. Seja o primeiro a comentar.
+                    </div>
+                `;
+                return;
+            }
+
+            activeComments.forEach(comment => {
+                const dateText = formatCustomDate(comment.timestamp);
+                const commentEl = document.createElement('div');
+                commentEl.className = `py-4 border-b border-gray-150 transition-all space-y-1.5`;
+                
+                commentEl.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-sans font-bold text-gray-800 text-sm">${escapeHtml(comment.name)}</span>
+                            ${comment.isLocalPendente ? '<span class="bg-amber-50 text-amber-800 border border-amber-200 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-sans">Em Aprovação</span>' : ''}
+                        </div>
+                        <span class="text-xs text-gray-400 font-sans">${dateText}</span>
+                    </div>
+                    <div class="text-gray-700 font-sans text-sm leading-relaxed whitespace-pre-wrap">${escapeHtml(comment.text)}</div>
+                `;
+                listContainer.appendChild(commentEl);
+            });
+        }
+
+        async function handleCommentSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('comment-submit-btn');
+            const nameInput = document.getElementById('comment-author-name');
+            const textInput = document.getElementById('comment-body-text');
+
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+
+            if (!name || !text) return;
+
+            btn.disabled = true;
+            btn.textContent = "A enviar...";
+
+            const formData = new FormData();
+            formData.append(GOOGLE_ENTRY_NOME, name);
+            formData.append(GOOGLE_ENTRY_COMENTARIO, text);
+            formData.append(GOOGLE_ENTRY_PAGINA, pageId);
+
+            try {
+                await fetch(GOOGLE_FORM_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                saveLocalPendente({
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    page: pageId,
+                    approved: false,
+                    isLocalPendente: true
+                });
+
+                showAlert("✨ Comentário submetido com sucesso! Ficará visível assim que for aprovado pela editora.", "bg-emerald-50 text-emerald-800 border border-emerald-150 font-semibold");
+                textInput.value = '';
+                nameInput.value = '';
+            } catch (error) {
+                console.error("Erro na submissão:", error);
+                showAlert("Ocorreu um erro ao submeter o comentário. Tente novamente.", "bg-red-50 text-red-800 border border-red-200");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Enviar";
+                fetchComments(); 
+            }
+        }
+
+        function saveLocalPendente(commentObj) {
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            meusPendentes.push(commentObj);
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(meusPendentes));
+        }
+
+        function showAlert(msg, bgClasses) {
+            const alertBox = document.getElementById('comment-alert');
+            if (!alertBox) return;
+            alertBox.className = `p-4 rounded-md text-xs font-sans ${bgClasses}`;
+            alertBox.innerHTML = msg;
+            alertBox.classList.remove('hidden');
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 8000);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function formatCustomDate(timestamp) {
+            if (!timestamp) return 'Agora';
+            const diff = Date.now() - timestamp;
+            if (diff < 60000) return 'Agora mesmo';
+            if (diff < 3600000) return `Há ${Math.round(diff / 60000)} min`;
+            if (diff < 86400000) return `Há ${Math.round(diff / 3600000)} horas`;
+            
+            const d = new Date(timestamp);
+            return d.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchComments);
+    </script>
+
+    <!-- Script 2: Navegação, Menu Mobile, Carrinho e Leitura -->
+    <script>
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
+                return '../';
+            }
+            return '';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId);
+            if (!container) return;
+            const prefix = getPrefix();
+            
+            if (prefix !== '') {
+                container.querySelectorAll('a').forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        if (!href.startsWith('../')) {
+                            link.setAttribute('href', prefix + href);
+                        }
+                    }
+                });
+                container.querySelectorAll('img').forEach(img => {
+                    let src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                        img.setAttribute('src', prefix + src);
+                    }
+                });
+            }
+
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
+                }
+            });
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            const prefix = getPrefix();
+            try {
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    adjustAndCleanLinks('nav-placeholder');
+                }
+
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                    adjustAndCleanLinks('footer-placeholder');
+                }
+
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        function calculateReadingTime() {
+            const contentElement = document.getElementById('article-content');
+            const readingTimeElement = document.getElementById('reading-time');
+            if (!contentElement || !readingTimeElement) return;
+
+            const text = contentElement.innerText || contentElement.textContent;
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+            const readingTime = Math.ceil(words / 200);
+            readingTimeElement.textContent = readingTime;
+        }
+
+        // Monitorização de Scroll para a Barra de Progresso Superior e Percentagem Flutuante
+        window.addEventListener('scroll', () => {
+            const winScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+            const targetEl = document.getElementById('author-section');
+            let scrolled = 0;
+            
+            if (targetEl) {
+                const elementOffsetTop = targetEl.getBoundingClientRect().top + window.scrollY;
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const maxScroll = elementOffsetTop - winHeight + 100;
+                
+                if (maxScroll > 0) {
+                    scrolled = Math.round((winScroll / maxScroll) * 100);
+                } else {
+                    scrolled = 100;
+                }
+            } else {
+                const docHeight = Math.max(
+                    document.body.scrollHeight, 
+                    document.documentElement.scrollHeight,
+                    document.body.offsetHeight, 
+                    document.documentElement.offsetHeight,
+                    document.body.clientHeight, 
+                    document.documentElement.clientHeight
+                );
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const totalScrollable = docHeight - winHeight;
+                if (totalScrollable > 0) {
+                    scrolled = Math.round((winScroll / totalScrollable) * 100);
+                }
+            }
+            
+            if (scrolled > 100) scrolled = 100;
+            if (scrolled < 0) scrolled = 0;
+
+            const progressBar = document.getElementById('scroll-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
+
+            const scrollPercentageText = document.getElementById('scroll-percentage-text');
+            if (scrollPercentageText) {
+                scrollPercentageText.textContent = scrolled + '%';
+            }
+
+            const scrollPercentageDiv = document.getElementById('scroll-percentage');
+            if (scrollPercentageDiv) {
+                if (winScroll > 150) {
+                    scrollPercentageDiv.classList.remove('opacity-0');
+                    scrollPercentageDiv.classList.add('opacity-100');
+                } else {
+                    scrollPercentageDiv.classList.remove('opacity-100');
+                    scrollPercentageDiv.classList.add('opacity-0');
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            calculateReadingTime();
+        });
+    </script>
+</body>
+</html>
