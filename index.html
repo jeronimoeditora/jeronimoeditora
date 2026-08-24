@@ -68,7 +68,7 @@
     <style>
         /* --- ESTABILIDADE E PERFORMANCE --- */
         html, body { 
-            scroll-behavior: auto !important; /* Saltos puramente instantâneos para âncoras como #sobre */
+            scroll-behavior: auto !important;
             overflow-x: hidden; 
             width: 100%; 
             background-color: #F8F8F8; 
@@ -81,12 +81,11 @@
             display: flex;
             align-items: center;
             overflow: hidden;
-            padding-top: 95px; /* Espaçamento no mobile para evitar sobreposição */
+            padding-top: 95px;
             padding-bottom: 40px;
-            background-color: #f6f3eb; /* Atualizado para um tom marfim/linho muito claro e luminoso */
+            background-color: #f6f3eb;
         }
 
-        /* Cor de fundo atualizada com o novo tom marfim/pergaminho suave e claro */
         .hero-bg-accent {
             position: absolute;
             top: 0; right: 0; width: 42%; height: 100%;
@@ -97,16 +96,15 @@
 
         @media (max-width: 1024px) {
             .hero-bg-accent { width: 100%; clip-path: none; height: 100%; opacity: 0.25; }
-            .hero-section { min-height: auto; padding-top: 72px; padding-bottom: 12px; } /* Ajuste de espaçamento móvel para evitar áreas em branco desnecessárias */
+            .hero-section { min-height: auto; padding-top: 72px; padding-bottom: 12px; }
         }
 
-        /* Altura calculada adaptativa para portáteis e ecrãs grandes (Elimina sobreposições com a barra azul) */
         @media (min-width: 1024px) {
             .hero-section {
-                height: auto; /* Permite que o conteúdo e os controlos fluam sem transbordar */
-                min-height: 590px; /* Garante a proporção visual ideal em monitores grandes */
-                padding-top: 95px; /* Navbar de 80px + espaçamento estético de segurança */
-                padding-bottom: 25px; /* Afastamento confortável e dinâmico acima da faixa azul */
+                height: auto;
+                min-height: 590px;
+                padding-top: 95px;
+                padding-bottom: 25px;
             }
         }
 
@@ -116,12 +114,11 @@
             position: relative;
             z-index: 30; 
             display: flex;
-            justify-content: center; /* Centralização perfeita no mobile */
+            justify-content: center;
             align-items: center;
         }
 
         @media (min-width: 1024px) {
-            /* Posicionamento centrado do conjunto de capas (preenchendo o círculo vazio) */
             .hero-book-container { 
                 justify-content: center;
                 padding-left: 20px;
@@ -135,21 +132,18 @@
             transition: all 0.3s ease;
         }
 
-        /* Animação suave que flutua subtilmente para baixo de forma segura e elegante */
         .floating-element { animation: floatingHero 7s ease-in-out infinite; }
         @keyframes floatingHero { 
             0%, 100% { transform: translateY(0) rotate(-1.5deg); } 
             50% { transform: translateY(8px) rotate(-1.5deg); } 
         }
 
-        /* Tipografia de título adaptativa e elegante (UX amigável) - Aumentada ligeiramente */
         .hero-title { 
             font-size: clamp(1.15rem, 4.2vw, 3.1rem); 
             line-height: 1.15; 
             letter-spacing: -0.01em;
         }
 
-        /* --- BOTÕES COM DIMENSÕES OTIMIZADAS PARA ECRÃS PEQUENOS --- */
         .btn-premium-red { 
             background: #800000; color: white; padding: 0.6rem 1rem; border-radius: 10px; font-weight: 800; text-transform: uppercase; 
             transition: all 0.3s ease; text-align: center; font-size: 10px; display: inline-flex; align-items: center; justify-content: center;
@@ -168,7 +162,6 @@
         @media (min-width: 640px) { .btn-premium-outline { padding: 1rem 2.4rem; font-size: 15px; border-width: 2.5px; } }
         .btn-premium-outline:hover { background: #002147; color: white; transform: translateY(-2px); }
 
-        /* --- SÃO JERÓNIMO PARALLAX --- */
         .art-viewport {
             position: relative; width: 100%; height: 60vh; overflow: hidden; background-color: #000;
         }
@@ -189,7 +182,6 @@
 
         .text-glow-white { text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9); }
 
-        /* --- MARCA DE ÁGUA --- */
         .desktop-logo-watermark {
             position: absolute;
             top: 50%; left: 50%;
@@ -202,7 +194,6 @@
         }
         @media (min-width: 1024px) { .desktop-logo-watermark { display: block; } }
 
-        /* --- DESIGN EDITORIAL SOBRE & DROP-CAPS CLÁSSICOS --- */
         .about-card {
             background: white;
             border-radius: 1.5rem;
@@ -218,12 +209,10 @@
         }
         .about-card:hover { transform: translateY(-3px); }
 
-        /* Sombra natural do livro para grelhas */
         .book-shadow {
             box-shadow: 5px 12px 28px rgba(0,0,0,0.15), 1px 3px 8px rgba(0,0,0,0.1);
         }
 
-        /* Drop-cap editorial clássico e elegante */
         .dropcap::first-letter {
             float: left;
             font-size: 3.8rem;
@@ -231,7 +220,7 @@
             padding-top: 4px;
             padding-right: 8px;
             padding-left: 2px;
-            color: #800000; /* brand-accent-red */
+            color: #800000;
             font-weight: bold;
         }
     </style>
@@ -252,11 +241,60 @@
                     
                     <div id="carousel-track" class="flex w-full h-full transition-transform duration-700 ease-in-out" style="transform: translateX(0%);">
                         
-                        <!-- SLIDE 1: TRENT HORN (ID 5) -->
+                        <!-- SLIDE 0: FULTON J. SHEEN - VAI PARA O CÉU (ID 6) -->
                         <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-0">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
                                     <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold text-brand-accent-blue text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full animate-pulse-subtle">Novo Lançamento</span>
+                                </div>
+                                
+                                <div class="h-auto min-h-[50px] xs:min-h-[60px] sm:min-h-[100px] lg:min-h-[110px] mb-1 sm:mb-3 flex items-start pt-1 pb-1">
+                                    <h1 class="font-serif hero-title text-brand-accent-blue font-bold leading-tight">
+                                        Vai para o <br> <span class="text-brand-accent-red italic">Céu</span>
+                                    </h1>
+                                </div>
+                                
+                                <div class="h-auto mb-1.5 sm:mb-4 flex items-center">
+                                    <p class="font-classic text-[13px] xs:text-sm sm:text-xl lg:text-2xl text-gray-655 italic leading-relaxed">
+                                        O guia indispensável do Venerável Arcebispo Sheen sobre a salvação e a vida cristã.
+                                    </p>
+                                </div>
+                                
+                                <div class="h-auto min-h-[40px] sm:min-h-[100px] lg:min-h-[115px] flex items-center mb-1.5 lg:mb-4">
+                                    <a href="detalhes/vai-para-o-ceu" class="flex items-center gap-2 sm:gap-5 group hover:opacity-90 transition-all text-left">
+                                        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold bg-brand-gold-light overflow-hidden flex items-center justify-center flex-shrink-0">
+                                            <img src="Imagens/FultonSheen.png" alt="Fulton J. Sheen" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/ECE6D9/002147?text=FS';">
+                                        </div>
+                                        <div class="text-left">
+                                            <span class="block text-[7px] sm:text-xs text-gray-400 font-bold uppercase tracking-wider">Autor</span>
+                                            <span class="font-serif text-[10px] sm:text-xl lg:text-3xl font-bold text-brand-accent-blue leading-none font-bold">Fulton J. Sheen</span>
+                                            <span class="block font-sans font-bold text-[10px] sm:text-xl text-brand-accent-red mt-0.5 leading-none">17,90€</span>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="flex gap-2 sm:gap-3 w-full max-w-[140px] xs:max-w-[180px] sm:max-w-md h-[32px] xs:h-[38px] sm:h-[48px] lg:h-[46px]">
+                                    <button onclick="addToCart(6, 'Vai para o Céu', 17.90, 'Imagens/vpccapa.png', 'detalhes/vai-para-o-ceu')" class="btn-premium-red flex-1 gap-1.5 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                        Comprar
+                                    </button>
+                                    <a href="detalhes/vai-para-o-ceu" class="btn-premium-outline flex-1 text-[9px] sm:text-sm py-1 sm:py-3 rounded-lg sm:rounded-xl">Detalhes</a>
+                                </div>
+                            </div>
+                            
+                            <div class="col-span-5 sm:col-span-5 hero-book-container flex justify-center pr-2 sm:pr-8 lg:pr-12">
+                                <a href="detalhes/vai-para-o-ceu" class="relative w-full max-w-[110px] xs:max-w-[130px] sm:max-w-[200px] lg:max-w-[340px] h-[130px] xs:h-[150px] sm:h-[220px] lg:h-[350px] flex items-center justify-center group/cover block">
+                                    <img src="Imagens/vpccontracapa.png" alt="Contracapa" class="hidden lg:block absolute left-0 w-[55%] h-auto object-contain z-10 opacity-75 transform -translate-x-3 sm:-translate-x-6 translate-y-1 lg:translate-y-3 scale-95 rounded-sm" onerror="this.style.display='none';">
+                                    <img src="Imagens/vpccapa.png" alt="Capa" class="absolute w-[95%] lg:w-[65%] right-2 xs:right-4 sm:right-6 lg:right-8 h-auto object-contain z-20 rounded-sm floating-element group-hover/cover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/400x600/002147/cfaf5c?text=Vai+para+o+Ceu';">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- SLIDE 1: TRENT HORN - DURAS PALAVRAS (ID 5) -->
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-1">
+                            <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
+                                <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
+                                    <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Formação Bíblica</span>
                                 </div>
                                 
                                 <div class="h-auto min-h-[50px] xs:min-h-[60px] sm:min-h-[100px] lg:min-h-[110px] mb-1 sm:mb-3 flex items-start pt-1 pb-1">
@@ -301,8 +339,8 @@
                             </div>
                         </div>
 
-                        <!-- SLIDE 2: JIMMY AKIN (ID 4) -->
-                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-1">
+                        <!-- SLIDE 2: JIMMY AKIN - A BÍBLIA É UM LIVRO CATÓLICO (ID 4) -->
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-2">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
                                     <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Formação Bíblica</span>
@@ -350,8 +388,8 @@
                             </div>
                         </div>
 
-                        <!-- SLIDE 3: TIM STAPLES (ID 3) -->
-                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-2">
+                        <!-- SLIDE 3: TIM STAPLES - EIS A TUA MÃE (ID 3) -->
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-3">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
                                     <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Apolegética Mariana</span>
@@ -399,8 +437,8 @@
                             </div>
                         </div>
 
-                        <!-- SLIDE 4: JOE HESCHMEYER (ID 2) -->
-                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-3">
+                        <!-- SLIDE 4: JOE HESCHMEYER - A EUCARISTIA É MESMO JESUS (ID 2) -->
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-4">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
                                     <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Teologia Católica</span>
@@ -448,8 +486,8 @@
                             </div>
                         </div>
 
-                        <!-- SLIDE 5: PETER KREEFT (ID 1) -->
-                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-4">
+                        <!-- SLIDE 5: PETER KREEFT - TU PODES COMPREENDER A BÍBLIA (ID 1) -->
+                        <div class="hero-slide w-full h-full flex-shrink-0 grid grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center" id="slide-5">
                             <div class="col-span-7 sm:col-span-7 text-left flex flex-col items-start">
                                 <div class="h-auto py-1 pl-1 mt-1.5 lg:mt-0 mb-1 sm:mb-2 flex items-center">
                                     <span class="inline-block px-2.5 py-1 sm:px-4 sm:py-1.5 bg-brand-gold-light border border-brand-gold/30 text-brand-gold-dark text-[8px] sm:text-[11px] font-black uppercase tracking-widest rounded-full">Formação Bíblica</span>
@@ -519,6 +557,9 @@
                         <button class="w-7 h-7 flex items-center justify-center focus:outline-none transition-all duration-300" onclick="setSlide(4)" aria-label="Slide 5">
                             <span class="w-3.5 h-3.5 rounded-full bg-gray-300 transition-all duration-300" id="dot-4"></span>
                         </button>
+                        <button class="w-7 h-7 flex items-center justify-center focus:outline-none transition-all duration-300" onclick="setSlide(5)" aria-label="Slide 6">
+                            <span class="w-3.5 h-3.5 rounded-full bg-gray-300 transition-all duration-300" id="dot-5"></span>
+                        </button>
                     </div>
                     
                     <div class="col-span-12 sm:col-span-4 flex justify-center sm:justify-end gap-2 items-center">
@@ -581,18 +622,19 @@
                                         <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#b38e4a" stroke-width="1.2" stroke-linejoin="round" fill="#f0f0f0"/>
                                         <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#b38e4a" stroke-width="1.2" stroke-linecap="round"/>
                                         <line x1="28" y1="15" x2="28" y2="125" stroke="#b38e4a" stroke-width="0.5" stroke-dasharray="1 2"/>
-                                        <text x="79" y="62" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">VAI PARA</text>
-                                        <text x="79" y="80" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="13" letter-spacing="0.04em">O CÉU</text>
+                                        <text x="79" y="55" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="11" letter-spacing="0.04em">A SAGRADA</text>
+                                        <text x="79" y="73" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="11" letter-spacing="0.04em">ESCRITURA</text>
+                                        <text x="79" y="91" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="9" letter-spacing="0.02em">MAGISTÉRIO</text>
                                     </svg>
                                 </div>
 
-                                <img src="Imagens/Sheen.png" alt="Fulton J. Sheen" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold object-cover shadow-sm flex-shrink-0" onerror="this.src='https://placehold.co/150x150/002147/cfaf5c?text=FS';">
+                                <img src="Imagens/LaF.png" alt="Vários (Leão XIII a Francisco)" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold object-cover shadow-sm flex-shrink-0" onerror="this.src='https://placehold.co/150x150/ECE6D9/002147?text=Magisterio';">
                             </div>
                             
                             <div class="flex flex-col text-center sm:text-left">
-                                <span class="text-brand-gold-dark font-sans text-sm sm:text-base font-bold uppercase tracking-wider mb-1">Fulton J. Sheen</span>
-                                <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold mb-2">Vai para o Céu</h3>
-                                <p class="text-lg sm:text-xl text-gray-700 font-classic italic leading-relaxed">O guia indispensável do Venerável Arcebispo Sheen sobre a salvação e a vida cristã.</p>
+                                <span class="text-brand-gold-dark font-sans text-sm sm:text-base font-bold uppercase tracking-wider mb-1">Vários (Leão XIII a Francisco)</span>
+                                <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold mb-2">A Sagrada Escritura no Magistério da Igreja</h3>
+                                <p class="text-lg sm:text-xl text-gray-700 font-classic italic leading-relaxed">Compêndio de Documentos do Magistério sobre a Sagrada Escritura.</p>
                             </div>
                         </div>
                     </div>
@@ -609,22 +651,24 @@
                                 
                                 <div class="w-20 xs:w-24 sm:w-28 md:w-32 flex-shrink-0 flex items-center justify-center">
                                     <svg viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto max-h-[140px] drop-shadow-md group-hover:scale-105 transition-transform duration-300">
-                                        <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#b38e4a" stroke-width="1.2" stroke-linejoin="round" fill="#f0f0f0"/>
-                                        <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#b38e4a" stroke-width="1.2" stroke-linecap="round"/>
-                                        <line x1="28" y1="15" x2="28" y2="125" stroke="#b38e4a" stroke-width="0.5" stroke-dasharray="1 2"/>
-                                        <text x="79" y="55" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="11" letter-spacing="0.04em">A SAGRADA</text>
-                                        <text x="79" y="73" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="11" letter-spacing="0.04em">ESCRITURA</text>
-                                        <text x="79" y="91" text-anchor="middle" fill="#666666" font-family="Roboto" font-weight="900" font-size="9" letter-spacing="0.02em">MAGISTÉRIO</text>
+                                        <path d="M20 15H130V125H25C22.2386 125 20 127.239 20 130V15Z" stroke="#800000" stroke-width="1.2" stroke-linejoin="round" fill="#f0f0f0"/>
+                                        <path d="M20 130C20 132.761 22.2386 135 25 135H130" stroke="#800000" stroke-width="1.2" stroke-linecap="round"/>
+                                        <line x1="28" y1="15" x2="28" y2="125" stroke="#800000" stroke-width="0.5" stroke-dasharray="1 2"/>
+                                        <text x="79" y="60" text-anchor="middle" fill="#800000" font-family="Roboto" font-weight="900" font-size="12" letter-spacing="0.04em">VIVA</text>
+                                        <text x="79" y="80" text-anchor="middle" fill="#800000" font-family="Roboto" font-weight="900" font-size="12" letter-spacing="0.04em">CRISTO REI!</text>
                                     </svg>
                                 </div>
 
-                                <img src="Imagens/LaF.png" alt="Leão XIII a Francisco" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-gold object-cover shadow-sm flex-shrink-0" onerror="this.src='https://placehold.co/150x150/ECE6D9/002147?text=Magisterio';">
+                                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-brand-accent-red bg-brand-gold-light flex items-center justify-center shadow-sm flex-shrink-0 text-brand-accent-red font-serif font-bold text-2xl">
+                                    VCR
+                                </div>
                             </div>
                             
                             <div class="flex flex-col text-center sm:text-left">
-                                <span class="text-brand-gold-dark font-sans text-sm sm:text-base font-bold uppercase tracking-wider mb-1">Vários (Leão XIII a Francisco)</span>
-                                <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold mb-2">A Sagrada Escritura no Magistério Bíblico Contemporâneo</h3>
-                                <p class="text-lg sm:text-xl text-gray-700 font-classic italic leading-relaxed">Compêndio de Documentos do Magistério sobre a Sagrada Escritura.</p>
+                                <span class="text-brand-accent-red font-sans text-sm sm:text-base font-bold uppercase tracking-wider mb-1">Jesús Lorente Liarte</span>
+                                <h3 class="font-serif text-2xl sm:text-3xl text-brand-accent-blue font-bold mb-1">Viva Cristo Rei!</h3>
+                                <p class="text-sm font-sans font-bold text-brand-gold-dark mb-2">História das Guerras Cristeras Mexicanas (1926–1934)</p>
+                                <p class="text-base text-gray-600 font-classic italic leading-relaxed">Uma obra épica sobre a heroica defesa da fé no México contemporâneo.</p>
                             </div>
                         </div>
                     </div>
@@ -699,7 +743,6 @@
         <section class="py-16 sm:py-24 bg-white border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
                 
-                <!-- Cabeçalho Alinhado na Mesma Linha -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 pb-6 mb-12 gap-4">
                     <div>
                         <span class="text-brand-gold-dark font-sans text-xs font-bold uppercase tracking-[0.2em] block mb-1">Leituras de Formação</span>
@@ -715,7 +758,6 @@
                     </div>
                 </div>
 
-                <!-- Grelha de Artigos Dinâmica com Centralização Visual -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center" id="latest-articles-grid">
                     <!-- Gerado de forma totalmente dinâmica via JavaScript -->
                 </div>
@@ -724,7 +766,7 @@
         </section>
     </main>
 
-    <!-- TOAST DE CONFIRMAÇÃO DO CARRINHO (ALTAMENTE PREMIUM) -->
+    <!-- TOAST DE CONFIRMAÇÃO DO CARRINHO -->
     <div id="toast-cart" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-500 ease-out max-w-sm w-[90%] sm:w-full bg-white rounded-2xl shadow-2xl border border-brand-gold/30 p-4">
         <div class="flex items-center gap-4">
             <img id="toast-img" src="" alt="Capa" class="w-12 h-auto rounded shadow-sm object-cover">
@@ -747,23 +789,20 @@
     <script>
         /* --- LOGICA DO CARROSSEL HERO --- */
         let currentSlideIdx = 0;
-        const totalSlides = 5;
+        const totalSlides = 6;
         let slideInterval;
         let isPaused = false;
 
         function showSlide(index) {
-            // Garantir que fica dentro dos limites
             if (index >= totalSlides) currentSlideIdx = 0;
             else if (index < 0) currentSlideIdx = totalSlides - 1;
             else currentSlideIdx = index;
 
-            // Desliza a esteira horizontalmente
             const track = document.getElementById('carousel-track');
             if (track) {
                 track.style.transform = `translateX(-${currentSlideIdx * 100}%)`;
             }
 
-            // Atualiza os indicators visuais (dots)
             for (let i = 0; i < totalSlides; i++) {
                 const dot = document.getElementById(`dot-${i}`);
                 if (dot) {
@@ -779,26 +818,21 @@
                 }
             }
             
-            // Reinicia o temporizador automático ao mudar de slide
             resetAutoplay();
         }
 
-        // Seta para a direita
         function nextSlide() {
             showSlide(currentSlideIdx + 1);
         }
 
-        // Seta para a esquerda
         function prevSlide() {
             showSlide(currentSlideIdx - 1);
         }
 
-        // Clicar numa bolinha específica
         function setSlide(index) {
             showSlide(index);
         }
 
-        /* --- AUTOPLAY DO CARROSSEL --- */
         function startAutoplay() {
             clearInterval(slideInterval);
             if (isPaused) return;
@@ -811,7 +845,6 @@
             startAutoplay();
         }
 
-        /* ALTERNAR ESTADO DE PAUSA/PLAY */
         function togglePlayPause() {
             isPaused = !isPaused;
             const playIcon = document.getElementById('play-icon');
@@ -833,7 +866,6 @@
             }
         }
 
-        /* SUPORTE A GESTOS DESLIZAR (SWIPE) NO TELEMÓVEL */
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -867,6 +899,7 @@
             let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             
             const bookMeta = {
+                6: { author: 'Fulton J. Sheen', weight: 0.350, image: 'Imagens/vpccapa.png' },
                 5: { author: 'Trent Horn', weight: 0.681, image: 'Imagens/capadp1.png' },
                 4: { author: 'Jimmy Akin', weight: 0.272, image: 'Imagens/capablc1.png' },
                 3: { author: 'Tim Staples', weight: 0.534, image: 'Imagens/capaETM1.png' },
@@ -924,7 +957,6 @@
             }
         }
 
-        /* --- LIMPEZA DE LINKS INTERNOS (REMOVENDO .HTML) --- */
         function cleanAllInternalLinks() {
             document.querySelectorAll('a').forEach(link => {
                 let href = link.getAttribute('href');
@@ -940,7 +972,6 @@
             });
         }
 
-        /* --- COMPONENTES & CARRINHO --- */
         async function loadComponent(id, file) {
             try {
                 const response = await fetch(file + '?v=1.0.2');
@@ -953,7 +984,6 @@
             } catch (err) { console.warn('Ambiente local.'); }
         }
 
-        /* --- CONTROLO DO MENU OFF-CANVAS SLIDE-IN --- */
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             const backdrop = document.getElementById('menu-backdrop');
@@ -978,18 +1008,15 @@
             }
         }
 
-        /* --- BASE DE DADOS LOCAL DE RESERVA (FALLBACK) --- */
         const fallbackArticlesData = [
             { id: 11, title: "A Transfiguração do Senhor (Ano A)", category: "Comentário às Leituras", date: "2026-08-06", readingTime: "1 min", url: "artigos-individuais/a-transfiguracao-do-senhor-ano-a", image: "Imagens/11.png" },
             { id: 10, title: "Breve Guia para a Santa Missa (Parte 2 de 2)", category: "Liturgia", date: "2026-07-11", readingTime: "1 min", url: "artigos-individuais/breve-guia-para-a-santa-missa-parte-2-de-2", image: "Imagens/10.png" },
             { id: 9, title: "São João Baptista: Quem foi realmente?", category: "Comentário às Leituras", date: "2026-06-22", readingTime: "10 min", url: "artigos-individuais/sao-joao-baptista-quem-foi-realmente", image: "Imagens/9.png" }
         ];
 
-        /* --- OBTENÇÃO AUTOMÁTICA DA LISTA EM TEMPO REAL DE ARTIGOS-GERAL.HTML --- */
         async function fetchArticlesFromGeral() {
             try {
                 const prefix = getPrefix();
-                // Tenta carregar o ficheiro artigos-geral (ou artigos-geral.html)
                 let resp = await fetch(getSafePath(prefix + 'artigos-geral') + '?v=' + Date.now());
                 if (!resp.ok) {
                     resp = await fetch(getSafePath(prefix + 'artigos-geral.html') + '?v=' + Date.now());
@@ -997,10 +1024,8 @@
                 
                 if (resp.ok) {
                     const htmlText = await resp.text();
-                    // Extrai a variável const articlesData do ficheiro artigos-geral.html via Expressão Regular
                     const match = htmlText.match(/const\s+articlesData\s*=\s*(\[\s*\{[\s\S]*?\}\s*\]);/);
                     if (match && match[1]) {
-                        // Interpreta o array de objetos JavaScript dinamicamente
                         const dynamicData = new Function('return ' + match[1])();
                         if (Array.isArray(dynamicData) && dynamicData.length > 0) {
                             return dynamicData;
@@ -1008,21 +1033,18 @@
                     }
                 }
             } catch (err) {
-                console.warn("Não foi possível ler os artigos de artigos-geral.html dinamicamente. A usar lista local de reserva.", err);
+                console.warn("A usar lista local de reserva para artigos.", err);
             }
             return fallbackArticlesData;
         }
 
-        /* --- GERAÇÃO DINÂMICA DA SECÇÃO ÚLTIMOS ARTIGOS (AUTOMÁTICA) --- */
         async function renderLatestArticles() {
             const grid = document.getElementById('latest-articles-grid');
             if (!grid) return;
             grid.innerHTML = '';
 
-            // Obtém sempre a lista mais recente do artigos-geral.html (artigos 12, 13, 14...)
             const articles = await fetchArticlesFromGeral();
 
-            // Ordena os artigos por data decrescente e extrai os 3 primeiros
             const latest = [...articles]
                 .sort((a, b) => new Date(b.date) - new Date(a.date))
                 .slice(0, 3);
@@ -1068,11 +1090,9 @@
                 `;
             });
 
-            // Calcula o tempo de leitura real para esses 3 artigos apresentados
             loadDynamicReadingTimesLatest(latest);
         }
 
-        /* --- CARREGAMENTO DO TEMPO DE LEITURA REAL DOS ARTIGOS SELECIONADOS --- */
         async function loadDynamicReadingTimesLatest(articlesToCalculate) {
             if (!articlesToCalculate || articlesToCalculate.length === 0) return;
             const prefix = getPrefix();
@@ -1100,7 +1120,7 @@
                         }
                     }
                 } catch (e) {
-                    console.warn(`Impossível calcular tempo de leitura real para o artigo ${art.id}:`, e);
+                    console.warn(`Tempo de leitura calculado para ${art.id}`);
                 }
             });
 
@@ -1130,7 +1150,7 @@
             showSlide(0); 
             setupSwipeGestures(); 
             updateCartUI(); 
-            renderLatestArticles(); // Inicia a grelha de artigos mais recentes dinamicamente
+            renderLatestArticles();
             setTimeout(cleanAllInternalLinks, 500); 
         });
 
@@ -1147,7 +1167,6 @@
         }
     </script>
 
-    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count"
-            async src="//gc.zgo.at/count.js"></script>
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
