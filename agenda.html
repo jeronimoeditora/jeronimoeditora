@@ -236,22 +236,59 @@
             }
         ];
 
+        /**
+         * Processa o horário do evento:
+         * - Se tiver hora definida (ex: "15h"), agenda para esse horário específico com 2h de duração.
+         * - Se for "A definir", configura como Evento de Dia Inteiro (All-Day).
+         */
+        function parseEventTiming(dateIso, timeStr) {
+            const baseDate = new Date(dateIso);
+            let isAllDay = true;
+
+            if (timeStr && timeStr.toLowerCase().includes('h')) {
+                const hours = parseInt(timeStr.replace('h', '').trim());
+                if (!isNaN(hours)) {
+                    baseDate.setHours(hours, 0, 0, 0);
+                    isAllDay = false;
+                }
+            }
+
+            if (isAllDay) {
+                const y = baseDate.getFullYear();
+                const m = baseDate.getMonth();
+                const d = baseDate.getDate();
+                const startDay = new Date(y, m, d);
+                const endDay = new Date(y, m, d + 1);
+                return { isAllDay: true, startDay, endDay };
+            } else {
+                const endDate = new Date(baseDate.getTime() + 2 * 60 * 60 * 1000);
+                return { isAllDay: false, startDate: baseDate, endDate };
+            }
+        }
+
+        function formatDateYYYYMMDD(d) {
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${y}${m}${day}`;
+        }
+
         /* --- INTEGRAÇÃO COM GOOGLE CALENDAR --- */
         function addToGoogleCalendar(title, location, dateIso, timeStr) {
-            const startDate = new Date(dateIso);
-            let endHours = 2; // Duração padrão de 2 horas
-            if (timeStr && timeStr.includes('h')) {
-                const hours = parseInt(timeStr.replace('h', ''));
-                if (!isNaN(hours)) startDate.setHours(hours, 0, 0);
-            }
-            const endDate = new Date(startDate.getTime() + endHours * 60 * 60 * 1000);
-            const formatGDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, '');
+            const timing = parseEventTiming(dateIso, timeStr);
+            const eventTitle = title || `Encontro Jerónimo Editora ${location}`;
+            let datesParam = '';
 
-            const eventTitle = title || `Encontro em ${location}`;
+            if (timing.isAllDay) {
+                datesParam = `${formatDateYYYYMMDD(timing.startDay)}/${formatDateYYYYMMDD(timing.endDay)}`;
+            } else {
+                const formatGDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, '');
+                datesParam = `${formatGDate(timing.startDate)}/${formatGDate(timing.endDate)}`;
+            }
 
             const url = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
                 `&text=${encodeURIComponent(eventTitle)}` +
-                `&dates=${formatGDate(startDate)}/${formatGDate(endDate)}` +
+                `&dates=${datesParam}` +
                 `&location=${encodeURIComponent(location)}` +
                 `&details=${encodeURIComponent('Encontro organizado pela Jerónimo Editora.')}`;
 
@@ -260,15 +297,19 @@
 
         /* --- DOWNLOAD FICHEIRO .ICS (APPLE CALENDAR / OUTLOOK) --- */
         function downloadICS(title, location, dateIso, timeStr) {
-            const startDate = new Date(dateIso);
-            if (timeStr && timeStr.includes('h')) {
-                const hours = parseInt(timeStr.replace('h', ''));
-                if (!isNaN(hours)) startDate.setHours(hours, 0, 0);
-            }
-            const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000);
-            const formatICSDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, '');
+            const timing = parseEventTiming(dateIso, timeStr);
+            const eventTitle = title || `Encontro Jerónimo Editora ${location}`;
+            let dtStartLine = '';
+            let dtEndLine = '';
 
-            const eventTitle = title || `Encontro em ${location}`;
+            if (timing.isAllDay) {
+                dtStartLine = `DTSTART;VALUE=DATE:${formatDateYYYYMMDD(timing.startDay)}`;
+                dtEndLine = `DTEND;VALUE=DATE:${formatDateYYYYMMDD(timing.endDay)}`;
+            } else {
+                const formatICSDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, '');
+                dtStartLine = `DTSTART:${formatICSDate(timing.startDate)}`;
+                dtEndLine = `DTEND:${formatICSDate(timing.endDate)}`;
+            }
 
             const icsData = 
 `BEGIN:VCALENDAR
@@ -278,8 +319,8 @@ BEGIN:VEVENT
 SUMMARY:${eventTitle}
 LOCATION:${location}
 DESCRIPTION:Encontro organizado pela Jerónimo Editora.
-DTSTART:${formatICSDate(startDate)}
-DTEND:${formatICSDate(endDate)}
+${dtStartLine}
+${dtEndLine}
 END:VEVENT
 END:VCALENDAR`;
 
