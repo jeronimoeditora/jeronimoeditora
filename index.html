@@ -1,18 +1,17 @@
-<!DOCTYPE html>
+~<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Jerónimo Editora | Início</title>
     
-    <!-- Favicons e Ícones (Desktop, Mobile e Apple) - Com parâmetro para evitar Cache -->
+    <!-- Favicons e Ícones -->
     <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="Imagens/favicon.png?v=1.0.0">
     <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="Imagens/favicon.png?v=1.0.0">
     <link class="apple-touch-icon" sizes="180x180" href="Imagens/favicon.png?v=1.0.0">
     <link class="shortcut icon" href="Imagens/favicon.png?v=1.0.0">
     
     <script>
-        // Limpeza estética do URL removendo a extensão .html na barra de pesquisa (GitHub Pages)
         if (window.location.pathname.endsWith('.html')) {
             const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
             window.history.replaceState(null, '', cleanUrl);
@@ -25,7 +24,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -66,7 +66,6 @@
     </script>
 
     <style>
-        /* --- ESTABILIDADE E PERFORMANCE --- */
         html, body { 
             scroll-behavior: auto !important;
             overflow-x: hidden; 
@@ -211,6 +210,11 @@
 
         .book-shadow {
             box-shadow: 5px 12px 28px rgba(0,0,0,0.15), 1px 3px 8px rgba(0,0,0,0.1);
+            transition: all 0.35s ease;
+        }
+        .book-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.14);
         }
 
         .dropcap::first-letter {
@@ -763,6 +767,48 @@
 
             </div>
         </section>
+
+        <!-- PRÓXIMOS ENCONTROS (DINÂMICO CONFORME AGENDA.HTML) -->
+        <section class="py-16 sm:py-24 bg-brand-bg border-t border-gray-200/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-200/80 pb-6 mb-12 gap-4">
+                    <div>
+                        <span class="text-brand-gold-dark font-sans text-xs font-bold uppercase tracking-[0.2em] block mb-1">Agenda Jerónimo</span>
+                        <h2 class="font-serif text-3xl md:text-4xl text-brand-accent-blue font-bold">Próximos Encontros</h2>
+                    </div>
+                    <div class="text-left sm:text-right">
+                        <a href="agenda" class="inline-flex items-center justify-center gap-2 bg-brand-accent-blue hover:bg-brand-accent-red text-white font-sans font-bold text-xs uppercase tracking-widest px-5 py-3 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md group hover:-translate-y-0.5 active:translate-y-0">
+                            <span>Ver Agenda</span>
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- GRELHA DINÂMICA DOS PRÓXIMOS ENCONTROS -->
+                <div id="upcoming-events-index-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-center">
+                    <!-- Conteúdo gerado via JavaScript baseado em agenda.html -->
+                </div>
+
+                <!-- BOTAO VER AGENDA E AVISO DA NEWSLETTER -->
+                <div class="mt-12 text-center flex flex-col items-center gap-4">
+                    <div>
+                        <a href="agenda" class="inline-flex items-center gap-2 bg-brand-accent-blue hover:bg-brand-accent-red text-white font-bold uppercase text-xs tracking-widest px-8 py-4 rounded-xl transition-all shadow-md hover:-translate-y-0.5 font-sans">
+                            <i class="far fa-calendar-alt text-brand-gold"></i>
+                            <span>Ver Agenda</span>
+                        </a>
+                    </div>
+                    <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-brand-gold-light border border-brand-gold/30 px-5 py-3 rounded-2xl text-xs sm:text-sm font-sans text-brand-accent-blue shadow-xs max-w-xl mx-auto">
+                        <i class="fas fa-envelope-open-text text-brand-gold-dark text-base"></i>
+                        <span>Subscreva a nossa newsletter para estar a par dos próximos encontros.</span>
+                        <a href="#mc-embedded-subscribe-form" onclick="const emailInput = document.getElementById('mce-EMAIL'); if(emailInput) { emailInput.focus(); emailInput.scrollIntoView({behavior: 'smooth', block: 'center'}); }" class="underline text-brand-accent-red font-bold hover:text-brand-accent-blue ml-1">Subscrever</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </main>
 
     <!-- TOAST DE CONFIRMAÇÃO DO CARRINHO -->
@@ -786,7 +832,6 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        /* --- LOGICA DO CARROSSEL HERO --- */
         let currentSlideIdx = 0;
         const totalSlides = 6;
         let slideInterval;
@@ -891,7 +936,6 @@
             }
         }
 
-        /* --- SISTEMA DO CARRINHO DE COMPRAS --- */
         let toastTimeout;
 
         function addToCart(id, title, price, img, link) {
@@ -1081,7 +1125,7 @@
                             <div class="w-full flex flex-col items-center">
                                 <a ${linkAction} class="inline-flex items-center text-brand-accent-red font-bold text-sm hover:text-brand-accent-blue transition-colors group/link font-sans justify-center">
                                     Ler Artigo
-                                    <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                                    <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </a>
                             </div>
                         </div>
@@ -1126,6 +1170,93 @@
             await Promise.all(fetchPromises);
         }
 
+        const fallbackEventsData = [
+            { id: 1, dateStr: "1 de Julho de 2026", time: "15h", dateIso: "2026-07-01T15:00:00", day: 1, month: "Julho", year: 2026, location: "Braga", image: "Imagens/01072026.png" },
+            { id: 2, dateStr: "30 de Setembro de 2026", time: "21h", dateIso: "2026-09-30T21:00:00", day: 30, month: "Setembro", year: 2026, location: "Braga", image: "Imagens/300926.png" },
+            { id: 3, dateStr: "3 de Outubro de 2026", time: "A definir", dateIso: "2026-10-03T00:00:00", day: 3, month: "Outubro", year: 2026, location: "Lisboa", image: "Imagens/031026.png" },
+            { id: 4, dateStr: "10 de Outubro de 2026", time: "A definir", dateIso: "2026-10-10T00:00:00", day: 10, month: "Outubro", year: 2026, location: "Fátima", image: "Imagens/101026.png" }
+        ];
+
+        async function fetchEventsFromAgenda() {
+            try {
+                const prefix = getPrefix();
+                let resp = await fetch(getSafePath(prefix + 'agenda') + '?v=' + Date.now());
+                if (!resp.ok) {
+                    resp = await fetch(getSafePath(prefix + 'agenda.html') + '?v=' + Date.now());
+                }
+                
+                if (resp.ok) {
+                    const htmlText = await resp.text();
+                    const match = htmlText.match(/const\s+eventsData\s*=\s*(\[\s*\{[\s\S]*?\}\s*\]);/);
+                    if (match && match[1]) {
+                        const dynamicData = new Function('return ' + match[1])();
+                        if (Array.isArray(dynamicData) && dynamicData.length > 0) {
+                            return dynamicData;
+                        }
+                    }
+                }
+            } catch (err) {
+                console.warn("A usar lista local de reserva para encontros.", err);
+            }
+            return fallbackEventsData;
+        }
+
+        async function renderUpcomingEventsIndex() {
+            const grid = document.getElementById('upcoming-events-index-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            const allEvents = await fetchEventsFromAgenda();
+            const now = new Date();
+
+            const upcoming = allEvents
+                .filter(e => new Date(e.dateIso) >= now)
+                .sort((a, b) => new Date(a.dateIso) - new Date(b.dateIso))
+                .slice(0, 3);
+
+            if (upcoming.length === 0) {
+                grid.className = "py-12 text-center w-full flex justify-center items-center col-span-full";
+                grid.innerHTML = `<p class="text-xl text-gray-500 font-serif italic">Sem encontros futuros</p>`;
+                return;
+            }
+
+            if (upcoming.length === 1) {
+                grid.className = "grid grid-cols-1 max-w-md mx-auto gap-6 justify-center w-full";
+            } else if (upcoming.length === 2) {
+                grid.className = "grid grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto gap-6 md:gap-8 justify-center w-full";
+            } else {
+                grid.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-center w-full";
+            }
+
+            upcoming.forEach(e => {
+                const loc = e.location ? e.location.charAt(0).toUpperCase() + e.location.slice(1).toLowerCase() : '';
+                const mon = e.month ? e.month.charAt(0).toUpperCase() + e.month.slice(1).toLowerCase() : '';
+
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden book-shadow flex flex-col group p-4 sm:p-5 text-center">
+                        <a href="agenda" class="w-full aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 mb-4 relative flex items-center justify-center block">
+                            <img src="${e.image}" 
+                                 alt="Encontro em ${loc}" 
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/1080x1350/002147/cfaf5c?text=${loc}+${e.day}+${mon}';">
+                        </a>
+                        
+                        <div class="text-center space-y-1.5 pt-1 pb-1 font-sans">
+                            <p class="font-bold text-sm sm:text-base text-brand-accent-blue flex items-center justify-center gap-1.5">
+                                <i class="far fa-calendar-alt"></i> ${e.day} de ${mon} de ${e.year}
+                            </p>
+                            <p class="font-bold text-sm sm:text-base text-brand-accent-red flex items-center justify-center gap-1.5">
+                                <i class="far fa-clock"></i> ${e.time}
+                            </p>
+                            <p class="font-serif italic text-sm sm:text-base text-gray-500 flex items-center justify-center gap-1.5">
+                                <i class="fas fa-map-marker-alt text-gray-400"></i> ${loc}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
         function getSafePath(file) {
             const currentUrl = window.location.href;
             if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
@@ -1150,6 +1281,7 @@
             setupSwipeGestures(); 
             updateCartUI(); 
             renderLatestArticles();
+            renderUpcomingEventsIndex();
             setTimeout(cleanAllInternalLinks, 500); 
         });
 
