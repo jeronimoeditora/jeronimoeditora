@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Agenda de Encontros | Jerónimo Editora</title>
+    
+    <!-- Favicons e Ícones -->
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="Imagens/favicon.png?v=1.0.0">
+    
+    <script>
+        // Limpeza estética do URL removendo a extensão .html na barra de pesquisa (GitHub Pages)
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400;1,900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Roboto"', 'sans-serif'],
+                        classic: ['"Crimson Text"', 'serif'], 
+                        inter: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8', 
+                        'brand-text': '#333333', 
+                        'brand-accent-red': '#800000', 
+                        'brand-accent-blue': '#002147', 
+                        'brand-gold': '#cfaf5c', 
+                        'brand-gold-dark': '#b38e4a', 
+                        'brand-gold-light': '#fdfaf2',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .event-card-shadow {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06), 0 0 5px rgba(0, 0, 0, 0.03);
+            transition: all 0.35s ease;
+        }
+        .event-card-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.14);
+        }
+
+        /* Otimização Mobile para evitar zoom automático no iOS */
+        input, select {
+            font-size: 16px !important;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Estilo dos cartões para encontros passados */
+        .past-event-card {
+            background-color: #f3f4f6;
+            border-color: #e5e7eb;
+        }
+        .past-event-img {
+            filter: grayscale(100%) opacity(75%);
+            transition: all 0.4s ease;
+        }
+        .past-event-card:hover .past-event-img {
+            filter: grayscale(40%) opacity(90%);
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- LIGHTBOX OVERLAY PARA AMPLIAÇÃO DE IMAGEM -->
+    <div id="lightbox-overlay" class="fixed inset-0 z-[120] bg-black/90 hidden items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl hover:text-brand-gold transition-colors focus:outline-none" aria-label="Fechar">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="lightbox-image" src="" alt="Imagem ampliada" class="max-w-full max-h-[90vh] object-contain shadow-2xl rounded-lg transition-transform duration-300">
+    </div>
+
+    <!-- CONTENTOR DO MENU DINÂMICO -->
+    <div id="nav-placeholder"></div>
+
+    <main class="flex-grow pt-24 md:pt-32 pb-16"> 
+        <div class="max-w-6xl mx-auto px-4 md:px-6 fade-in">
+            
+            <!-- Título Principal -->
+            <div class="text-center mb-8">
+                <h1 class="font-serif text-4xl sm:text-5xl text-brand-accent-blue mb-4 border-b pb-3 text-center border-brand-accent-blue/30 font-normal">
+                    Agenda
+                </h1>
+            </div>
+            
+            <!-- Barra de Filtros -->
+            <div class="mb-12 flex flex-col bg-white p-4 sm:p-5 rounded-2xl shadow-md border border-gray-100 text-left max-w-5xl mx-auto font-sans">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 items-center w-full">
+
+                    <!-- Filtro Estado (Todos, Futuros, Passados) -->
+                    <select id="state-filter" class="h-10 px-3 border border-gray-200 rounded-lg bg-white text-sm cursor-pointer outline-none focus:border-brand-gold" onchange="filterEvents()">
+                        <option value="all">Todos os Encontros</option>
+                        <option value="upcoming">Encontros Futuros</option>
+                        <option value="past">Encontros Passados</option>
+                    </select>
+
+                    <!-- Filtro Mês -->
+                    <select id="month-filter" class="h-10 px-3 border border-gray-200 rounded-lg bg-white text-sm cursor-pointer outline-none focus:border-brand-gold" onchange="filterEvents()">
+                        <option value="all">Mês</option>
+                    </select>
+
+                    <!-- Filtro Localidade -->
+                    <select id="location-filter" class="h-10 px-3 border border-gray-200 rounded-lg bg-white text-sm cursor-pointer outline-none focus:border-brand-gold" onchange="filterEvents()">
+                        <option value="all">Localidade</option>
+                    </select>
+
+                    <!-- Filtro Ano -->
+                    <select id="year-filter" class="h-10 px-3 border border-gray-200 rounded-lg bg-white text-sm cursor-pointer outline-none focus:border-brand-gold" onchange="filterEvents()">
+                        <option value="all">Ano</option>
+                    </select>
+                </div>
+
+                <!-- Linha de Limpeza de Filtros -->
+                <div class="mt-4 pt-3 border-t border-gray-100 flex justify-end items-center">
+                    <button onclick="clearFilters()" class="text-xs font-bold uppercase tracking-wider text-brand-accent-blue hover:text-brand-accent-red transition-colors inline-flex items-center gap-1">
+                        <i class="fas fa-undo"></i> Limpar Filtros
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sem Resultados -->
+            <p id="no-results" class="text-center text-xl text-gray-500 hidden py-16 font-serif italic">Nenhum encontro encontrado para os critérios seleccionados.</p>
+
+            <!-- SECÇÃO 1: ENCONTROS FUTUROS (COLORIDOS) -->
+            <div id="upcoming-section" class="mb-12">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-accent-blue">Encontros Futuros</h2>
+                </div>
+                <div id="upcoming-events-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-center"></div>
+            </div>
+
+            <!-- LINHA SUAVE DOURADA DE SEPARAÇÃO (SEM TEXTO) -->
+            <div id="golden-divider" class="my-14 flex items-center justify-center">
+                <div class="w-full border-t border-brand-gold/30"></div>
+                <div class="px-4 text-brand-gold text-xs flex items-center gap-2">
+                    <i class="fas fa-cross text-[10px]"></i>
+                </div>
+                <div class="w-full border-t border-brand-gold/30"></div>
+            </div>
+
+            <!-- SECÇÃO 2: ENCONTROS PASSADOS (CINZENTO) -->
+            <div id="past-section" class="mt-8">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="w-2.5 h-2.5 rounded-full bg-gray-400"></span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-gray-500">Encontros Passados</h2>
+                </div>
+                <div id="past-events-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-center"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- CONTENTOR DO RODAPÉ DINÂMICO -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        /**
+         * Garante a primeira letra maiúscula para meses e localidades
+         */
+        function capitalizeFirstLetter(str) {
+            if (!str) return '';
+            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        }
+
+        // Base de dados dos encontros da Agenda (Imagens de proporção 1080x1350)
+        const eventsData = [
+            {
+                id: 1,
+                dateStr: "1 de Julho de 2026",
+                time: "15h",
+                dateIso: "2026-07-01T15:00:00",
+                day: 1,
+                month: "Julho",
+                year: 2026,
+                location: "Braga",
+                image: "Imagens/01072026.png"
+            },
+            {
+                id: 2,
+                dateStr: "30 de Setembro de 2026",
+                time: "21h",
+                dateIso: "2026-09-30T21:00:00",
+                day: 30,
+                month: "Setembro",
+                year: 2026,
+                location: "Braga",
+                image: "Imagens/300926.png"
+            },
+            {
+                id: 3,
+                dateStr: "3 de Outubro de 2026",
+                time: "A definir",
+                dateIso: "2026-10-03T00:00:00",
+                day: 3,
+                month: "Outubro",
+                year: 2026,
+                location: "Lisboa",
+                image: "Imagens/031026.png"
+            },
+            {
+                id: 4,
+                dateStr: "10 de Outubro de 2026",
+                time: "A definir",
+                dateIso: "2026-10-10T00:00:00",
+                day: 10,
+                month: "Outubro",
+                year: 2026,
+                location: "Fátima",
+                image: "Imagens/101026.png"
+            }
+        ];
+
+        // Avalia se o encontro é passado em relação à data corrente
+        function isEventPast(eventDateIso) {
+            const now = new Date();
+            const eventDate = new Date(eventDateIso);
+            return eventDate < now;
+        }
+
+        function populateSelectFilters() {
+            const monthFilter = document.getElementById('month-filter');
+            const locationFilter = document.getElementById('location-filter');
+            const yearFilter = document.getElementById('year-filter');
+
+            const months = [...new Set(eventsData.map(e => capitalizeFirstLetter(e.month)))];
+            const locations = [...new Set(eventsData.map(e => capitalizeFirstLetter(e.location)))];
+            const years = [...new Set(eventsData.map(e => e.year))].sort();
+
+            months.forEach(m => {
+                monthFilter.innerHTML += `<option value="${m}">${m}</option>`;
+            });
+
+            locations.forEach(l => {
+                locationFilter.innerHTML += `<option value="${l}">${l}</option>`;
+            });
+
+            years.forEach(y => {
+                yearFilter.innerHTML += `<option value="${y}">${y}</option>`;
+            });
+        }
+
+        function filterEvents() {
+            const stateVal = document.getElementById('state-filter').value;
+            const monthVal = document.getElementById('month-filter').value;
+            const locationVal = document.getElementById('location-filter').value;
+            const yearVal = document.getElementById('year-filter').value;
+
+            let filtered = eventsData.filter(e => {
+                const formattedMonth = capitalizeFirstLetter(e.month);
+                const formattedLocation = capitalizeFirstLetter(e.location);
+                
+                const matchesMonth = monthVal === 'all' || formattedMonth === monthVal;
+                const matchesLocation = locationVal === 'all' || formattedLocation === locationVal;
+                const matchesYear = yearVal === 'all' || e.year.toString() === yearVal;
+
+                const isPast = isEventPast(e.dateIso);
+                let matchesState = true;
+                if (stateVal === 'upcoming') matchesState = !isPast;
+                if (stateVal === 'past') matchesState = isPast;
+
+                return matchesMonth && matchesLocation && matchesYear && matchesState;
+            });
+
+            renderEvents(filtered);
+        }
+
+        function clearFilters() {
+            document.getElementById('state-filter').value = 'all';
+            document.getElementById('month-filter').value = 'all';
+            document.getElementById('location-filter').value = 'all';
+            document.getElementById('year-filter').value = 'all';
+            filterEvents();
+        }
+
+        // Função para abrir imagem ampliada
+        function openLightbox(imgSrc, altText) {
+            const overlay = document.getElementById('lightbox-overlay');
+            const img = document.getElementById('lightbox-image');
+            if (overlay && img) {
+                img.src = imgSrc;
+                img.alt = altText || 'Imagem do Encontro';
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Função para fechar a imagem ampliada
+        function closeLightbox() {
+            const overlay = document.getElementById('lightbox-overlay');
+            if (overlay) {
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Renderização dinâmica dos cartões de encontros
+        function renderEvents(events) {
+            const upcomingContainer = document.getElementById('upcoming-events-container');
+            const pastContainer = document.getElementById('past-events-container');
+            const upcomingSection = document.getElementById('upcoming-section');
+            const pastSection = document.getElementById('past-section');
+            const goldenDivider = document.getElementById('golden-divider');
+            const noResults = document.getElementById('no-results');
+
+            if (!upcomingContainer || !pastContainer) return;
+
+            upcomingContainer.innerHTML = '';
+            pastContainer.innerHTML = '';
+
+            const upcomingList = events.filter(e => !isEventPast(e.dateIso)).sort((a, b) => new Date(a.dateIso) - new Date(b.dateIso));
+            const pastList = events.filter(e => isEventPast(e.dateIso)).sort((a, b) => new Date(b.dateIso) - new Date(a.dateIso));
+
+            if (events.length === 0) {
+                if (noResults) noResults.classList.remove('hidden');
+                if (upcomingSection) upcomingSection.classList.add('hidden');
+                if (pastSection) pastSection.classList.add('hidden');
+                if (goldenDivider) goldenDivider.classList.add('hidden');
+                return;
+            } else {
+                if (noResults) noResults.classList.add('hidden');
+            }
+
+            // Encontros Futuros (Coloridos)
+            if (upcomingList.length > 0) {
+                if (upcomingSection) upcomingSection.classList.remove('hidden');
+                upcomingList.forEach(e => {
+                    const loc = capitalizeFirstLetter(e.location);
+                    const mon = capitalizeFirstLetter(e.month);
+                    
+                    upcomingContainer.innerHTML += `
+                        <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden event-card-shadow flex flex-col group p-4 sm:p-5">
+                            <div class="w-full aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 mb-4 relative flex items-center justify-center cursor-pointer" onclick="openLightbox('${e.image}', '${loc}')">
+                                <img src="${e.image}" 
+                                     alt="Encontro em ${loc}" 
+                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/1080x1350/002147/cfaf5c?text=${loc}+${e.day}+${mon}';">
+                            </div>
+                            
+                            <div class="text-center space-y-1.5 pt-1 pb-1 font-sans">
+                                <p class="font-bold text-sm sm:text-base text-brand-accent-blue flex items-center justify-center gap-1.5">
+                                    <i class="far fa-calendar-alt"></i> ${e.day} de ${mon} de ${e.year}
+                                </p>
+                                <p class="font-bold text-sm sm:text-base text-brand-accent-red flex items-center justify-center gap-1.5">
+                                    <i class="far fa-clock"></i> ${e.time}
+                                </p>
+                                <p class="font-serif italic text-sm sm:text-base text-gray-500 flex items-center justify-center gap-1.5">
+                                    <i class="fas fa-map-marker-alt text-gray-400"></i> ${loc}
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                if (upcomingSection) upcomingSection.classList.add('hidden');
+            }
+
+            // Encontros Passados (Tons de Cinzento)
+            if (pastList.length > 0) {
+                if (pastSection) pastSection.classList.remove('hidden');
+                pastList.forEach(e => {
+                    const loc = capitalizeFirstLetter(e.location);
+                    const mon = capitalizeFirstLetter(e.month);
+
+                    pastContainer.innerHTML += `
+                        <div class="bg-gray-100/70 rounded-2xl border border-gray-200/80 overflow-hidden past-event-card flex flex-col p-4 sm:p-5">
+                            <div class="w-full aspect-[4/5] overflow-hidden rounded-xl bg-gray-200 mb-4 relative flex items-center justify-center cursor-pointer" onclick="openLightbox('${e.image}', '${loc}')">
+                                <img src="${e.image}" 
+                                     alt="Encontro em ${loc}" 
+                                     class="w-full h-full object-cover past-event-img" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/1080x1350/888888/ffffff?text=${loc}+Realizado';">
+                                <span class="absolute top-3 right-3 bg-gray-600/90 text-white text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md shadow-sm">
+                                    Realizado
+                                </span>
+                            </div>
+                            
+                            <div class="text-center space-y-1.5 pt-1 pb-1 font-sans">
+                                <p class="font-bold text-sm sm:text-base text-gray-600 flex items-center justify-center gap-1.5">
+                                    <i class="far fa-calendar-check"></i> ${e.day} de ${mon} de ${e.year}
+                                </p>
+                                <p class="font-bold text-sm sm:text-base text-gray-500 flex items-center justify-center gap-1.5">
+                                    <i class="far fa-clock"></i> ${e.time}
+                                </p>
+                                <p class="font-serif italic text-sm sm:text-base text-gray-400 flex items-center justify-center gap-1.5">
+                                    <i class="fas fa-map-marker-alt"></i> ${loc}
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                if (pastSection) pastSection.classList.add('hidden');
+            }
+
+            if (goldenDivider) {
+                if (upcomingList.length > 0 && pastList.length > 0) {
+                    goldenDivider.classList.remove('hidden');
+                } else {
+                    goldenDivider.classList.add('hidden');
+                }
+            }
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            try {
+                let navResp = await fetch(getSafePath('menu') + '?v=1.0.3');
+                if (!navResp.ok) navResp = await fetch(getSafePath('menu.html') + '?v=1.0.3');
+                if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+
+                let footResp = await fetch(getSafePath('rodape') + '?v=1.0.3');
+                if (!footResp.ok) footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.3');
+                if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) {
+                    el.textContent = total;
+                    el.classList.toggle('opacity-0', total === 0);
+                }
+            });
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        window.onload = () => { 
+            loadComponents();
+            populateSelectFilters();
+            filterEvents();
+        };
+    </script>
+
+    <!-- GoatCounter Analytics Tracker -->
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
