@@ -19,15 +19,13 @@
         }
     </script>
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts e FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400;1,900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script>
         tailwind.config = {
             theme: {
@@ -82,6 +80,9 @@
         .past-event-card:hover .past-event-img {
             filter: grayscale(40%) opacity(90%);
         }
+
+        .cursor-zoom-in { cursor: zoom-in; }
+        .cursor-zoom-out { cursor: zoom-out; }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text font-sans antialiased flex flex-col min-h-screen">
@@ -154,7 +155,7 @@
                 <div id="upcoming-events-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-center"></div>
             </div>
 
-            <!-- LINHA SUAVE DOURADA DE SEPARAÇÃO (SEM TEXTO) -->
+            <!-- LINHA SUAVE DOURADA DE SEPARAÇÃO -->
             <div id="golden-divider" class="my-14 flex items-center justify-center">
                 <div class="w-full border-t border-brand-gold/30"></div>
                 <div class="px-4 text-brand-gold text-xs flex items-center gap-2">
@@ -235,7 +236,62 @@
             }
         ];
 
-        // Avalia se o encontro é passado em relação à data corrente
+        /* --- INTEGRAÇÃO COM GOOGLE CALENDAR --- */
+        function addToGoogleCalendar(title, location, dateIso, timeStr) {
+            const startDate = new Date(dateIso);
+            let endHours = 2; // Duração padrão de 2 horas
+            if (timeStr && timeStr.includes('h')) {
+                const hours = parseInt(timeStr.replace('h', ''));
+                if (!isNaN(hours)) startDate.setHours(hours, 0, 0);
+            }
+            const endDate = new Date(startDate.getTime() + endHours * 60 * 60 * 1000);
+            const formatGDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, '');
+
+            const eventTitle = title || `Encontro em ${location}`;
+
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+                `&text=${encodeURIComponent(eventTitle)}` +
+                `&dates=${formatGDate(startDate)}/${formatGDate(endDate)}` +
+                `&location=${encodeURIComponent(location)}` +
+                `&details=${encodeURIComponent('Encontro organizado pela Jerónimo Editora.')}`;
+
+            window.open(url, '_blank');
+        }
+
+        /* --- DOWNLOAD FICHEIRO .ICS (APPLE CALENDAR / OUTLOOK) --- */
+        function downloadICS(title, location, dateIso, timeStr) {
+            const startDate = new Date(dateIso);
+            if (timeStr && timeStr.includes('h')) {
+                const hours = parseInt(timeStr.replace('h', ''));
+                if (!isNaN(hours)) startDate.setHours(hours, 0, 0);
+            }
+            const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000);
+            const formatICSDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, '');
+
+            const eventTitle = title || `Encontro em ${location}`;
+
+            const icsData = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Jerónimo Editora//Agenda//PT
+BEGIN:VEVENT
+SUMMARY:${eventTitle}
+LOCATION:${location}
+DESCRIPTION:Encontro organizado pela Jerónimo Editora.
+DTSTART:${formatICSDate(startDate)}
+DTEND:${formatICSDate(endDate)}
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', `${eventTitle.replace(/\s+/g, '_')}.ics`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
         function isEventPast(eventDateIso) {
             const now = new Date();
             const eventDate = new Date(eventDateIso);
@@ -297,7 +353,6 @@
             filterEvents();
         }
 
-        // Função para abrir imagem ampliada
         function openLightbox(imgSrc, altText) {
             const overlay = document.getElementById('lightbox-overlay');
             const img = document.getElementById('lightbox-image');
@@ -310,7 +365,6 @@
             }
         }
 
-        // Função para fechar a imagem ampliada
         function closeLightbox() {
             const overlay = document.getElementById('lightbox-overlay');
             if (overlay) {
@@ -320,7 +374,6 @@
             }
         }
 
-        // Renderização dinâmica dos cartões de encontros
         function renderEvents(events) {
             const upcomingContainer = document.getElementById('upcoming-events-container');
             const pastContainer = document.getElementById('past-events-container');
@@ -356,7 +409,7 @@
                     
                     upcomingContainer.innerHTML += `
                         <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden event-card-shadow flex flex-col group p-4 sm:p-5">
-                            <div class="w-full aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 mb-4 relative flex items-center justify-center cursor-pointer" onclick="openLightbox('${e.image}', '${loc}')">
+                            <div class="w-full aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 mb-4 relative flex items-center justify-center cursor-pointer" onclick="openLightbox('${e.image}', 'Encontro em ${loc}')">
                                 <img src="${e.image}" 
                                      alt="Encontro em ${loc}" 
                                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
@@ -374,6 +427,27 @@
                                     <i class="fas fa-map-marker-alt text-gray-400"></i> ${loc}
                                 </p>
                             </div>
+
+                            <!-- Botão Único com Menu Suspenso de Selecção de Calendário -->
+                            <div class="mt-3 pt-3 border-t border-gray-100 flex justify-center font-sans">
+                                <details class="relative inline-block text-left group/cal">
+                                    <summary class="text-xs font-bold text-brand-accent-blue hover:text-brand-accent-red bg-gray-50 hover:bg-gray-100 px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-2 border border-gray-200 shadow-xs list-none select-none">
+                                        <i class="far fa-calendar-plus text-brand-gold-dark"></i>
+                                        <span>Adicionar ao Calendário</span>
+                                        <i class="fas fa-chevron-down text-[10px] text-gray-400 transition-transform group-open/cal:rotate-180"></i>
+                                    </summary>
+                                    <div class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-52 bg-white rounded-xl shadow-xl border border-gray-150 z-30 py-1 font-sans text-left">
+                                        <button onclick="addToGoogleCalendar('Encontro Jerónimo Editora ${loc}', '${loc}', '${e.dateIso}', '${e.time}')" 
+                                                class="w-full px-4 py-2.5 text-xs font-bold text-gray-700 hover:bg-gray-50 hover:text-brand-accent-blue flex items-center gap-2.5 transition-colors">
+                                            <i class="fab fa-google text-brand-gold-dark w-4 text-center"></i> Google Calendar
+                                        </button>
+                                        <button onclick="downloadICS('Encontro Jerónimo Editora ${loc}', '${loc}', '${e.dateIso}', '${e.time}')" 
+                                                class="w-full px-4 py-2.5 text-xs font-bold text-gray-700 hover:bg-gray-50 hover:text-brand-accent-blue flex items-center gap-2.5 transition-colors border-t border-gray-100">
+                                            <i class="far fa-calendar-alt text-brand-accent-red w-4 text-center"></i> Apple / Outlook (iCal)
+                                        </button>
+                                    </div>
+                                </details>
+                            </div>
                         </div>
                     `;
                 });
@@ -390,12 +464,12 @@
 
                     pastContainer.innerHTML += `
                         <div class="bg-gray-100/70 rounded-2xl border border-gray-200/80 overflow-hidden past-event-card flex flex-col p-4 sm:p-5">
-                            <div class="w-full aspect-[4/5] overflow-hidden rounded-xl bg-gray-200 mb-4 relative flex items-center justify-center cursor-pointer" onclick="openLightbox('${e.image}', '${loc}')">
+                            <div class="w-full aspect-[4/5] overflow-hidden rounded-xl bg-gray-200 mb-4 relative flex items-center justify-center cursor-pointer" onclick="openLightbox('${e.image}', 'Encontro em ${loc}')">
                                 <img src="${e.image}" 
                                      alt="Encontro em ${loc}" 
                                      class="w-full h-full object-cover past-event-img" 
                                      onerror="this.onerror=null; this.src='https://placehold.co/1080x1350/888888/ffffff?text=${loc}+Realizado';">
-                                <span class="absolute top-3 right-3 bg-gray-600/90 text-white text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md shadow-sm">
+                                <span class="absolute top-3 right-3 bg-gray-600/90 text-white text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md shadow-sm font-sans">
                                     Realizado
                                 </span>
                             </div>
