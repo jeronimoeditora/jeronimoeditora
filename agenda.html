@@ -356,7 +356,7 @@ END:VCALENDAR`;
             const yearFilter = document.getElementById('year-filter');
 
             const months = [...new Set(eventsData.map(e => capitalizeFirstLetter(e.month)))];
-            const locations = [...new Set(eventsData.map(e => capitalizeFirstLetter(e.location)))];
+            const locations = [...new Set(eventsData.map(e => e.location))];
             const years = [...new Set(eventsData.map(e => e.year))].sort();
 
             months.forEach(m => {
@@ -380,7 +380,7 @@ END:VCALENDAR`;
 
             let filtered = eventsData.filter(e => {
                 const formattedMonth = capitalizeFirstLetter(e.month);
-                const formattedLocation = capitalizeFirstLetter(e.location);
+                const formattedLocation = e.location;
                 
                 const matchesMonth = monthVal === 'all' || formattedMonth === monthVal;
                 const matchesLocation = locationVal === 'all' || formattedLocation === locationVal;
@@ -456,7 +456,7 @@ END:VCALENDAR`;
             if (upcomingList.length > 0) {
                 if (upcomingSection) upcomingSection.classList.remove('hidden');
                 upcomingList.forEach(e => {
-                    const loc = capitalizeFirstLetter(e.location);
+                    const loc = e.location;
                     const mon = capitalizeFirstLetter(e.month);
                     
                     upcomingContainer.innerHTML += `
@@ -511,7 +511,7 @@ END:VCALENDAR`;
             if (pastList.length > 0) {
                 if (pastSection) pastSection.classList.remove('hidden');
                 pastList.forEach(e => {
-                    const loc = capitalizeFirstLetter(e.location);
+                    const loc = e.location;
                     const mon = capitalizeFirstLetter(e.month);
 
                     pastContainer.innerHTML += `
