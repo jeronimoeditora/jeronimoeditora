@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Fulton Sheen, Beato: o dia em que o «microfone de Deus» sobe ao altar | Jerónimo Editora</title>
+    
+    <!-- Meta Tags do Open Graph (Facebook, WhatsApp, etc.) -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Fulton Sheen, Beato: o dia em que o «microfone de Deus» sobe ao altar | Jerónimo Editora">
+    <meta property="og:description" content="Quem foi o mais recente Beato da Igreja e o que podemos aprender com ele">
+    <meta property="og:url" content="https://www.editorajeronimo.pt/artigos-individuais/fulton-sheen-beato">
+    <meta property="og:image" content="https://www.editorajeronimo.pt/Imagens/14.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:site_name" content="Jerónimo Editora">
+
+    <!-- Meta Tags do Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fulton Sheen, Beato: o dia em que o «microfone de Deus» sobe ao altar | Jerónimo Editora">
+    <meta name="twitter:description" content="Quem foi o mais recente Beato da Igreja e o que podemos aprender com ele">
+    <meta name="twitter:image" content="https://www.editorajeronimo.pt/Imagens/14.png">
+    
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
+    
+    <script>
+        // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
+                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
+                        serif: ['"Playfair Display"', 'serif'],
+                        classic: ['"Crimson Text"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body { 
+            scroll-behavior: auto !important;
+            overflow-x: hidden; 
+            width: 100%; 
+            background-color: #F8F8F8; 
+        }
+        * { box-sizing: border-box; }
+
+        .text-readable-article {
+            line-height: 1.85;
+            letter-spacing: -0.003em;
+            word-spacing: 0.05em;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 2px;
+            color: #e05300;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100] pointer-events-none">
+        <div id="scroll-progress-bar" class="h-full bg-brand-accent-orange transition-all duration-75" style="width: 0%"></div>
+    </div>
+
+    <div id="scroll-percentage" class="fixed bottom-6 right-6 bg-brand-accent-blue text-white text-xs font-bold px-3 py-2 rounded-full shadow-xl z-50 opacity-0 transition-opacity duration-300 pointer-events-none flex items-center gap-1">
+        <i class="fas fa-book-open text-brand-gold"></i> <span id="scroll-percentage-text">0%</span>
+    </div>
+
+    <div id="nav-placeholder"></div>
+
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
+        <article class="max-w-4xl mx-auto px-6 fade-in">
+
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center flex flex-col items-center">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3 text-center">Beatos e Santos</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4 text-center">Fulton Sheen, Beato: o dia em que o «microfone de Deus» sobe ao altar</h1>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-500 font-medium font-sans w-full">
+                    <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 17 de Setembro de 2026</span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5 font-inter">
+                        <i class="far fa-user"></i> Escrito por 
+                        <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">10</span> min de leitura</span>
+                </div>
+            </header>
+
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden border border-gray-200 shadow-xs relative bg-gray-100 mb-8">
+                <img src="../Imagens/14.png" alt="Fulton Sheen, Beato: o dia em que o «microfone de Deus» sobe ao altar" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Fulton%20Sheen%2C%20Beato%3A%20o%20dia%20em%20que%20o%20%C2%ABmicrofone%20de%20Deus%C2%BB%20sobe%20ao%20altar';">
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto text-center font-classic">Quem foi o mais recente Beato da Igreja e o que podemos aprender com ele</p>
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto text-justify">
+
+                <p class="dropcap">
+                    Daqui a oito dias, 24 de Setembro de 2026, celebra-se em St. Louis, no Missouri, a Missa de beatificação de Fulton J. Sheen, presidida pelo Cardeal Luis Antonio Tagle, Pró-Prefeito do Dicastério para a Evangelização. Foi por isso que escolhemos precisamente esse dia para lançar em Português <a href="https://www.editorajeronimo.pt/detalhes/vai-para-o-ceu"><u>«Vai Para o Céu»</u></a>, um dos roteiros espirituais mais lidos do futuro Beato. Duas datas cruzam-se por inteiro: a Igreja reconhece formalmente, hoje, aquilo que milhões de leitores, ouvintes e telespectadores já sentiam há décadas, que este homem viveu a fé de um modo heróico, e que a sua palavra continua bem viva.
+                </p>
+
+                <p>
+                    Para perceber a estatura deste homem, vale a pena começar pelo princípio, por um episódio que, em criança, ele próprio nunca esqueceu.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Uma promessa feita aos oito anos</span>
+                </h3>
+
+                <p>
+                    Sheen tinha oito anos e servia como acólito na sua paróquia quando, a meio de uma Missa, deixou cair uma galheta de vidro, que se estilhaçou ruidosamente no chão de mármore. Ficou tão mortificado que nem ousava olhar para o bispo que celebrava, e esperava um raspanete. Em vez disso, no fim da Missa, o bispo John Lancaster Spalding, uma das figuras mais influentes do Catolicismo Americano da sua geração, abraçou-o e disse-lhe, com uma segurança estranha, que quando fosse grande havia de estudar em Lovaina, e que um dia seria como ele. Dezassete anos depois, Fulton Sheen foi ordenado sacerdote naquele mesmo altar. Pouco depois, atravessava os portões da Universidade de Lovaina, na Bélgica, exactamente como o velho bispo tinha previsto.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Um orador que se fez a pulso</span>
+                </h3>
+
+                <p>
+                    Em Lovaina, Sheen doutorou-se com a distinção mais alta, e foi convidado a tentar um super-doutoramento raríssimo, reservado a poucos: anos de estudo adicional, arguição pública por professores vindos de toda a Europa, e uma dissertação filosófica extensa. Nenhum Americano o tinha conseguido até então. Trezentas pessoas assistiram ao seu exame final. Em Lovaina, os resultados eram anunciados através de um jantar simbólico: água para quem apenas passava, cerveja para a distinção, vinho para a grande distinção, e champanhe para a distinção máxima. Nessa noite, serviram-lhe champanhe.
+Mas a inteligência não veio acompanhada de talento natural para falar em público. Quando, ainda estudante, se juntou à equipa de debate do seu colégio, o treinador não lhe poupou nas palavras: disse-lhe que nunca tinha ouvido orador pior, mas prometeu que, antes de o deixar sair daquela sala, o transformaria num bom orador. Sheen levou o aviso a sério; praticava incessantemente, escrevia os seus discursos em Francês e em Latim antes de os traduzir e memorizar em Inglês, sem uma única nota. Anos mais tarde, pregava regularmente para multidões de cinco mil pessoas na igreja Católica mais importante do mundo de língua Inglesa, e a imprensa chamava-lhe o Chesterton Americano.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Da rádio à televisão: um fenómeno cultural</span>
+                </h3>
+
+                <p>
+                    Foi já professor na <i>Catholic University of America</i> que Sheen deu os primeiros passos na rádio, convidado pela conferência episcopal Norte-Americana a catequizar através do <i>Catholic Hour</i>. Corria o início dos anos 1930, em plena Grande Depressão, numa América onde o preconceito anti-Católico corria solto e a Ku Klux Klan contava mais de um milhão de membros. Sheen não escondeu a sua fé: falou de filosofia, de psicologia, do sentido do sofrimento, das grandes angústias da época, sem pedir desculpa por ser Católico. Em poucos anos, o programa reunia milhões de ouvintes, Protestantes e Católicos por igual, e as estórias de conversão multiplicavam-se; chegou a celebrar o casamento de Henry Ford II, herdeiro da Ford, que se converteu ao Catolicismo apesar das ameaças do avô Protestante de o deserdar.
+                </p>
+
+                <p>
+                    Em 1952, deu o salto para a televisão, precisamente no horário que as próprias estações consideravam condenado ao fracasso, espremido entre Frank Sinatra e o <i>Texaco Star Theatre</i> de Milton Berle. Ninguém apostava nele: a estação nem sequer lhe pagou, classificando o programa como serviço público, e distribuía bilhetes grátis a padres só para encher a plateia. O seu programa <i>Life Is Worth Living</i> tornou-se, contra todas as expectativas, um fenómeno: trinta milhões de espectadores por semana, capas na <i>Time</i>, na <i>TV Guide</i> e na <i>Look</i>, um Emmy de melhor personalidade televisiva. Ao recebê-lo, agradeceu, em tom de brincadeira, aos seus verdadeiros autores: os evangelistas Mateus, Marcos, Lucas e João.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>O preço da integridade</span>
+                </h3>
+
+                <p>
+                    Mas o sucesso também lhe custou caro. Durante anos, o governo Americano doava excedentes à Igreja Católica, recebidos pelo Cardeal Spellman, arcebispo de Nova Iorque e superior de Sheen, que os repassava para distribuição aos pobres. Quando Spellman passou a exigir a Sheen milhões de dólares, alegando ter comprado esses bens do próprio bolso, Sheen recusou-se a pagar; sabia que não era verdade. Spellman tentou, sem sucesso, convencer o Papa a afastá-lo da direcção da rede de angariação de fundos das missões; tentou depois suborná-lo com uma diocese rica; mandou abrir três investigações à vida de Sheen à procura de qualquer coisa incriminatória. Não encontrou nada. O caso acabou por ser levado a Roma, e Sheen apresentou os recibos: as mercadorias tinham, de facto, sido doadas. O Papa Pio XII deu-lhe razão. Poucos meses depois, sem qualquer explicação pública, o seu programa de televisão foi cancelado. Spellman nunca lhe perdoou, e Sheen viveu o resto da vida numa obscuridade relativa, primeiro como bispo auxiliar afastado dos púlpitos de Nova Iorque, depois como bispo residencial de Rochester, onde, já depois do Concílio Vaticano II, teve de tomar decisões difíceis, incluindo o afastamento de um sacerdote acusado de abusos, numa altura em que isso estava longe de ser prática comum. Sheen nunca falou mal de Spellman em público, e nem sequer o mencionou na sua autobiografia.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Um homem de oração, em primeiro lugar</span>
+                </h3>
+
+                <p>
+                    Por trás do microfone e das câmaras havia uma disciplina de oração muito concreta. Desde a sua ordenação até à morte, ao longo de sessenta anos, Sheen não faltou a uma única hora diária de adoração ao Santíssimo Sacramento, nem sequer nos dias em que viajava sem descanso. Há quem conte que, numa dessas viagens, encontrando a igreja fechada à chave, terá entrado por uma conduta de carvão só para não falhar o seu compromisso. Noutra ocasião, já bispo, viu à beira da estrada um grupo de crianças aflitas; parou, perguntou o que se passava, e seguiu com elas até à cabeceira de um familiar doente, para rezar por ele; um gesto simples que quem investigou a sua causa aponta como sinal de virtude verdadeiramente heróica. E há ainda o episódio, contado por quem conheceu bem essa investigação, de uma colónia de leprosos onde, ao colocar um crucifixo nas mãos de um doente, Sheen recuou por instinto ao ver o estado da pele e, percebendo de imediato que tinha falhado à caridade, chamou a pessoa de volta e apertou-lhe o crucifixo na mão, tocando-lhe deliberadamente.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Um caminho longo até ao altar</span>
+                </h3>
+
+                <p>
+                    A causa de beatificação de Fulton Sheen está longe de ter sido um processo rápido. A investigação diocesana da sua vida demorou seis anos a concluir-se, com mais de cem testemunhas ouvidas segundo um questionário detalhado que cobria cada uma das virtudes: não bastava terem sido praticadas ocasionalmente, era preciso provar que tinham sido vividas de forma heróica e consistente. O resultado foi enviado a Roma numa positio de cerca de mil páginas.
+                </p>
+
+                <p>
+                    Em 2012, o Papa Bento XVI declarou Sheen Venerável. Em 2019, surgiu uma disputa sobre onde deveria repousar o seu corpo, entre a Arquidiocese de Nova Iorque e a Diocese de Peoria, só resolvida quando os tribunais deram razão à sua sobrinha, Joan Cunningham, que pediu a transferência das relíquias para Peoria. Nesse mesmo ano, o Papa Francisco autorizou o decreto que reconhecia um milagre por sua intercessão. o passo que faltava para a beatificação. Esse milagre envolveu uma criança nascida perto de Peoria, num parto em casa que correu mal: o cordão umbilical enrolou-se e cortou o oxigénio ao bebé, que nasceu sem sinais de vida. Só ao fim de sessenta e um minutos de reanimação é que o coração voltou a bater, e a criança desenvolveu-se depois com perfeita normalidade. Hoje, prestes a completar dezasseis anos, é ele quem entrega a relíquia do futuro Beato ao Cardeal Tagle durante a cerimónia.
+                </p>
+
+                <p>
+                    Ainda assim, a beatificação, já anunciada para 2019, acabou por ser adiada durante vários anos, por prudência de alguns bispos. Foram anos de espera para os muitos fiéis que, entretanto, se organizaram em movimentos de oração e petições a pedir que a causa avançasse. A espera terminou, e o resultado é o mesmo que tantos leitores já sentiam ao fechar um dos seus livros: o de estarem perante um santo.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Um filósofo que não envelhece</span>
+                </h3>
+
+                <p>
+                    Há quem descreva Sheen como um profeta. Mas talvez seja mais rigoroso, como sugerem alguns dos seus estudiosos mais atentos, chamar-lhe filósofo porque a filosofia trata de princípios permanentes, e é isso que torna Sheen tão actual décadas depois de ter escrito a maior parte da sua obra. Como Platão, Aristóteles, Agostinho ou Tomás de Aquino, não envelhece.
+Veja-se o exemplo do seu livro Peace of Soul, de 1949, sobre a separação entre a sexualidade e a vida. O livro tornou-se, quase de imediato, um sucesso de vendas: a primeira tiragem de trinta e cinco mil exemplares esgotou-se antes do fim do mês, seguida de mais duas reimpressões de vinte e cinco mil, só nas semanas seguintes. Nele, Sheen defendia algo simples e, ainda hoje, incómodo: que a vida deve vir sempre antes do que lhe está subordinado. Um dos seus biógrafos resumiu o essencial dessa obra recordando que, para Sheen, «nada realmente importa senão a salvação de uma alma».
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Uma última bênção</span>
+                </h3>
+
+                <p>
+                    Em 1979, o recém-eleito Papa João Paulo II visitou Nova Iorque. Numa catedral com mais de cinco mil pessoas, o já idoso e fragilizado Bispo Sheen estava sentado num lugar discreto, longe das atenções. Mas o Papa chamou-o pelo nome. Quando Sheen se aproximou e começou a prostrar-se, o Papa segurou-o e ergueu-o num abraço, dizendo-lhe que tinha escrito e falado bem do Senhor Jesus Cristo, e chamando-lhe «um filho fiel da Igreja». Poucos meses depois, na manhã de 9 de Dezembro de 1979, Fulton Sheen foi encontrado morto no único lugar onde nunca tinha falhado: diante do Santíssimo Sacramento, a fazer a sua hora santa diária.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>«Vai Para o Céu», em breve nas livrarias</span>
+                </h3>
+
+                <p>
+                    É com este pano de fundo que a Jerónimo Editora publica a 24 de Setembro, em Português, <a href="https://www.editorajeronimo.pt/detalhes/vai-para-o-ceu"><u>«Vai Para o Céu»</u></a>, um roteiro espiritual saído da mesma pena que a Igreja, neste preciso dia, reconhece formalmente como heróica. Parece-nos providencial que esse dia una as duas coisas: a beatificação de um homem que passou a vida a apontar o caminho para o Alto, e a chegada às tuas mãos de um livro que continua, precisamente, esse roteiro.
+                </p>
+
+                <p>
+                    Convidamos-te a lê-lo devagar, capítulo a capítulo, com a certeza de que, desta vez, quem o escreveu já o percorreu até ao fim e pode, agora, interceder por ti.
+                </p>
+
+            </div>
+
+            <!-- Cartão Biográfico do Autor -->
+            <div id="author-section" class="flex flex-col sm:flex-row items-center sm:items-start gap-5 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs max-w-3xl mx-auto my-12 text-center sm:text-left">
+                <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
+                    <a href="../sobreHB" class="block w-full h-full">
+                        <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
+                    </a>
+                </div>
+                <div class="flex flex-col items-center sm:items-start gap-1">
+                    <span class="text-[10px] text-gray-400 font-sans font-bold uppercase tracking-wider block leading-none">Autor:</span>
+                    <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-2 leading-tight">
+                        <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
+                    </h4>
+                    <a href="../sobreHB" class="inline-block px-5 py-2.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all font-sans font-bold text-xs uppercase tracking-wider text-center shadow-xs hover:-translate-y-0.5 active:translate-y-0 mt-1">
+                        Ver Mais <i class="fas fa-chevron-right ml-1 text-[9px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <section id="fontes-section" class="mt-12 pt-6 border-t border-gray-150 text-justify">
+                <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4 text-justify">Fontes</h4>
+                <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2 font-inter text-justify">
+                    <li>Beato Fulton J. Sheen — <a href="https://www.editorajeronimo.pt/detalhes/vai-para-o-ceu"><u>Vai Para o Céu: Um Roteiro Espiritual para a Eternidade</a></u>. Jerónimo Editora, Setembro de 2026.</li>
+                    <li>Fr. Mike Schmitz & Msgr. Jason Gray — Everything You Need to Know About Archbishop Fulton Sheen. Ascension Presents, Julho de 2026. Disponível em: youtube.com/watch?v=ecTYL7WiTV8</li>
+                    <li>Anthony Abbate & Dr. Peter Howard — The Battle over Fulton Sheen's Beatification. Avoiding Babylon, Julho de 2026. Disponível em: youtube.com/watch?v=KtY_snFfuhk</li>
+                    <li>Donald DeMarco — «From Venerable to Blessed», Adoremus, Julho de 2026. Disponível em: adoremus.org/2026/07/from-venerable-to-blessed</li>
+                    <li>Fr. Mike Schmitz — Fulton Sheen Changed My Life. Ascension Presents, Setembro de 2026. Disponível em: youtube.com/watch?v=zVqsKRcanoc</li>
+                    <li>The Celebrity Priest Who Couldn't Be Bought. Truthly, Setembro de 2026. Disponível em: youtube.com/watch?v=YL77iqIRMy0</li>
+                </ul>
+            </section>
+
+            <!-- Botões de Navegação -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-12 border-t border-b border-gray-150 py-8 font-inter text-xs uppercase tracking-wider font-bold">
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all text-center">
+                    <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                </a>
+                <a href="../catalogo-completo" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all text-center">
+                    Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                </a>
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-xl transition-all text-center flex items-center justify-center gap-1.5">
+                    Próximo Artigo <i class="fas fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- SECCÃO DE COMENTÁRIOS ESTILO CUSDIS (PORTUGUÊS, MINIMALISTA, GOOGLE SHEETS AS BACKEND) -->
+            <section class="mt-12 pt-6 border-t border-gray-200">
+                
+                <!-- Título Simples -->
+                <div class="mb-6">
+                    <h4 class="font-sans text-lg font-bold text-gray-800">Comentários</h4>
+                </div>
+
+                <!-- Alerta Superior de Feedback de Erros ou Informações -->
+                <div id="comment-alert" class="hidden mb-4 p-4 rounded-md text-xs font-sans"></div>
+
+                <!-- Formulário Minimalista Cusdis-style -->
+                <form id="comment-form" onsubmit="handleCommentSubmit(event)" class="space-y-4 mb-8">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="w-full sm:w-1/3">
+                            <input type="text" id="comment-author-name" required placeholder="Nome" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors">
+                        </div>
+                    </div>
+                    <div>
+                        <textarea id="comment-body-text" required rows="4" placeholder="Comentário" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors resize-y"></textarea>
+                    </div>
+                    
+                    <!-- Botão de Envio Simples e Minimalista -->
+                    <div class="flex items-center">
+                        <button type="submit" id="comment-submit-btn" class="w-full sm:w-auto border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-sm font-semibold px-6 py-2.5 rounded-md font-sans text-center">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Div de Carregamento (Loading) -->
+                <div id="comments-loading" class="py-6 text-center text-gray-400">
+                    <i class="fas fa-circle-notch fa-spin text-gray-455 text-xl mb-1"></i>
+                    <p class="text-[10px] font-sans">A carregar comentários...</p>
+                </div>
+
+                <!-- Lista de Comentários Cusdis-style -->
+                <div id="comments-list-container" class="space-y-6 pt-2">
+                    <!-- Gerado de forma ultra-limpa por JS -->
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Script de Gestão Inteligente dos Comentários (Sem Firebase, via Google Sheets) -->
+    <script>
+        // 1. O link do formulário Google onde as respostas são submetidas
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfa3Q0IRcH04CukIjG2MkiVgWFsUsg2UhxPtZAI7NZaqh7WLw/formResponse";
+        
+        // 2. Os IDs dos campos do seu formulário Google
+        const GOOGLE_ENTRY_NOME = "entry.291667979";       
+        const GOOGLE_ENTRY_COMENTARIO = "entry.1902103085"; 
+        const GOOGLE_ENTRY_PAGINA = "entry.1583473753";     
+
+        // 3. O link do seu Google Sheets (Necessita de estar público como "Qualquer pessoa com o link" -> "Leitor")
+        const GOOGLE_SHEETS_TSV_URL = "https://docs.google.com/spreadsheets/d/1XcepyAixWdIbTaOxalKsJ2--D-SMxf-XPHY-2Lw4hbU/edit?usp=sharing";
+
+        // Função para normalizar os IDs de página de forma uniforme
+        function normalizePageId(id) {
+            if (!id) return "fulton-sheen-beato";
+            return id.trim()
+                     .toLowerCase()
+                     .replace(/\.html$/, '')
+                     .split('/')
+                     .filter(Boolean)
+                     .pop() || "fulton-sheen-beato";
+        }
+
+        // ID único deste artigo
+        const rawPageId = window.location.pathname.split('/').pop().replace('.html', '') || 'fulton-sheen-beato';
+        const pageId = normalizePageId(rawPageId);
+
+        let fallbackComments = [];
+
+        // Carregar Comentários de forma totalmente automática usando a API oficial do Google Visualization
+        async function fetchComments() {
+            const listContainer = document.getElementById('comments-list-container');
+            const loader = document.getElementById('comments-loading');
+
+            if (GOOGLE_SHEETS_TSV_URL.includes("ExemploFolhaDeCalculoPublicada")) {
+                renderComments(fallbackComments);
+                if (loader) loader.classList.add('hidden');
+                return;
+            }
+
+            try {
+                const fetchUrl = getFetchUrl();
+                
+                const response = await fetch(fetchUrl, {
+                    method: "GET",
+                    credentials: "omit",
+                    cache: "no-store"
+                });
+                if (!response.ok) throw new Error("Erro ao obter dados.");
+                
+                const data = await response.text();
+
+                if (data.trim().startsWith('<html') || data.trim().startsWith('<!DOCTYPE') || data.includes('<meta')) {
+                    throw new Error("A folha de cálculo está configurada como Privada no Google Drive.");
+                }
+
+                const parsedComments = parseGVizData(data);
+                
+                syncLocalPendentes(parsedComments);
+                renderComments(parsedComments);
+            } catch (error) {
+                console.warn("Problema ao importar dados do Google Sheets:", error);
+                renderComments(fallbackComments);
+            } finally {
+                if (loader) loader.classList.add('hidden');
+            }
+        }
+
+        function getFetchUrl() {
+            let url = GOOGLE_SHEETS_TSV_URL.trim();
+            const salt = `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+            
+            if (url.includes('/spreadsheets/d/')) {
+                const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+                if (matches && matches[1]) {
+                    const sheetId = matches[1];
+                    
+                    let gid = '0';
+                    const gidMatches = url.match(/[#?&]gid=([0-9]+)/);
+                    if (gidMatches && gidMatches[1]) {
+                        gid = gidMatches[1];
+                    }
+                    
+                    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${gid}&tqx=out:json&t=${salt}`;
+                }
+            }
+            return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
+        }
+
+        function cleanCompare(str) {
+            if (!str) return "";
+            return str.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        function syncLocalPendentes(allParsedComments) {
+            let meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            if (meusPendentes.length === 0) return;
+
+            const MAX_AGE_MS = 24 * 60 * 60 * 1000;
+
+            const novosPendentes = meusPendentes.filter(pLocal => {
+                const idade = Date.now() - pLocal.timestamp;
+                if (idade > MAX_AGE_MS) return false;
+
+                const aprovadoNaFolha = allParsedComments.some(cSheet => 
+                    cSheet.approved &&
+                    normalizePageId(cSheet.page) === normalizePageId(pLocal.page) && 
+                    cleanCompare(cSheet.name) === cleanCompare(pLocal.name) &&
+                    cleanCompare(cSheet.text) === cleanCompare(pLocal.text)
+                );
+                
+                return !aprovadoNaFolha;
+            });
+
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
+        }
+
+        function parseGVizData(responseText) {
+            try {
+                const jsonStart = responseText.indexOf('{');
+                const jsonEnd = responseText.lastIndexOf('}');
+                if (jsonStart === -1 || jsonEnd === -1) return [];
+                
+                const jsonStr = responseText.substring(jsonStart, jsonEnd + 1);
+                const gvizData = JSON.parse(jsonStr);
+                
+                if (!gvizData || !gvizData.table || !gvizData.table.rows) return [];
+                
+                const table = gvizData.table;
+                const cols = table.cols || [];
+                
+                let timestampIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('carimbo') || c.label.toLowerCase().includes('time') || c.label.toLowerCase().includes('data')));
+                let nameIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('nome') || c.label.toLowerCase().includes('autor') || c.label.toLowerCase().includes('user') || c.label.toLowerCase().includes('name')));
+                let commentIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('coment') || c.label.toLowerCase().includes('texto') || c.label.toLowerCase().includes('mensagem') || c.label.toLowerCase().includes('body') || c.label.toLowerCase().includes('comment')));
+                let pageIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('pág') || c.label.toLowerCase().includes('pag') || c.label.toLowerCase().includes('artigo') || c.label.toLowerCase().includes('url') || c.label.toLowerCase().includes('id')));
+                let approvedIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('aprov') || c.label.toLowerCase().includes('status') || c.label.toLowerCase().includes('moder') || c.label.toLowerCase().includes('aceit') || c.label.toLowerCase().includes('visto')));
+
+                if (timestampIdx === -1) timestampIdx = 0;
+                if (nameIdx === -1) nameIdx = 1;
+                if (commentIdx === -1) commentIdx = 2;
+                if (pageIdx === -1) pageIdx = 3;
+                if (approvedIdx === -1) approvedIdx = 4;
+
+                const comments = [];
+                table.rows.forEach(row => {
+                    if (!row.c || row.c.length < 3) return;
+                    
+                    const rawDate = row.c[timestampIdx]?.f || row.c[timestampIdx]?.v || "";
+                    const name = (row.c[nameIdx] && row.c[nameIdx].v !== undefined && row.c[nameIdx].v !== null) ? String(row.c[nameIdx].v).trim() : "Anónimo";
+                    const text = (row.c[commentIdx] && row.c[commentIdx].v !== undefined && row.c[commentIdx].v !== null) ? String(row.c[commentIdx].v).trim() : "";
+                    const page = (row.c[pageIdx] && row.c[pageIdx].v !== undefined && row.c[pageIdx].v !== null) ? String(row.c[pageIdx].v).trim() : "";
+                    const approvedVal = (row.c[approvedIdx] && row.c[approvedIdx].v !== undefined && row.c[approvedIdx].v !== null) ? String(row.c[approvedIdx].v).trim().toLowerCase() : "";
+
+                    const approved = approvedVal === 'sim';
+
+                    let timestamp = Date.now();
+                    if (rawDate) {
+                        if (typeof rawDate === 'string' && rawDate.startsWith('Date(')) {
+                            try {
+                                const match = rawDate.match(/Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+),(\d+))?\)/);
+                                if (match) {
+                                    const y = parseInt(match[1], 10);
+                                    const m = parseInt(match[2], 10);
+                                    const d = parseInt(match[3], 10);
+                                    const hr = match[4] ? parseInt(match[4], 10) : 0;
+                                    const min = match[5] ? parseInt(match[5], 10) : 0;
+                                    const sec = match[6] ? parseInt(match[6], 10) : 0;
+                                    timestamp = new Date(y, m, d, hr, min, sec).getTime();
+                                }
+                            } catch(e) {}
+                        } else {
+                            timestamp = parseGoogleDate(rawDate);
+                        }
+                    }
+
+                    comments.push({ name, text, timestamp, page, approved });
+                });
+
+                return comments.sort((a, b) => b.timestamp - a.timestamp);
+            } catch (err) {
+                console.error("Falha ao analisar a tabela GViz:", err);
+                return [];
+            }
+        }
+
+        function parseGoogleDate(rawDate) {
+            if (!rawDate) return Date.now();
+            const parts = rawDate.trim().split(/[\s/:\-]/);
+            if (parts.length >= 3) {
+                if (parts[0].length === 4) {
+                    const y = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const d = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                } else {
+                    const d = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const y = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                }
+            }
+            return Date.now();
+        }
+
+        function renderComments(commentsArray) {
+            const listContainer = document.getElementById('comments-list-container');
+            const loader = document.getElementById('comments-loading');
+            if (loader) loader.classList.add('hidden');
+            listContainer.innerHTML = '';
+
+            const currentPageNormalized = normalizePageId(pageId);
+
+            const activeComments = commentsArray.filter(c => {
+                const commentPageNormalized = normalizePageId(c.page);
+                return commentPageNormalized === currentPageNormalized && c.approved;
+            });
+
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+
+            meusPendentes.forEach(p => {
+                if (!activeComments.some(c => cleanCompare(c.text) === cleanCompare(p.text) && cleanCompare(c.name) === cleanCompare(p.name))) {
+                    activeComments.unshift(p);
+                }
+            });
+
+            if (activeComments.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-left py-4 font-sans text-gray-400 text-sm italic">
+                        Não existem comentários de momento. Seja o primeiro a comentar.
+                    </div>
+                `;
+                return;
+            }
+
+            activeComments.forEach(comment => {
+                const dateText = formatCustomDate(comment.timestamp);
+                const commentEl = document.createElement('div');
+                commentEl.className = `py-4 border-b border-gray-150 transition-all space-y-1.5`;
+                
+                commentEl.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-sans font-bold text-gray-800 text-sm">${escapeHtml(comment.name)}</span>
+                            ${comment.isLocalPendente ? '<span class="bg-amber-50 text-amber-800 border border-amber-200 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-sans">Em Aprovação</span>' : ''}
+                        </div>
+                        <span class="text-xs text-gray-400 font-sans">${dateText}</span>
+                    </div>
+                    <div class="text-gray-700 font-sans text-sm leading-relaxed whitespace-pre-wrap">${escapeHtml(comment.text)}</div>
+                `;
+                listContainer.appendChild(commentEl);
+            });
+        }
+
+        async function handleCommentSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('comment-submit-btn');
+            const nameInput = document.getElementById('comment-author-name');
+            const textInput = document.getElementById('comment-body-text');
+
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+
+            if (!name || !text) return;
+
+            btn.disabled = true;
+            btn.textContent = "A enviar...";
+
+            const formData = new FormData();
+            formData.append(GOOGLE_ENTRY_NOME, name);
+            formData.append(GOOGLE_ENTRY_COMENTARIO, text);
+            formData.append(GOOGLE_ENTRY_PAGINA, pageId);
+
+            try {
+                await fetch(GOOGLE_FORM_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                saveLocalPendente({
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    page: pageId,
+                    approved: false,
+                    isLocalPendente: true
+                });
+
+                showAlert("✨ Comentário submetido com sucesso! Ficará visível assim que for aprovado pela editora.", "bg-emerald-50 text-emerald-800 border border-emerald-150 font-semibold");
+                textInput.value = '';
+                nameInput.value = '';
+            } catch (error) {
+                console.error("Erro na submissão:", error);
+                showAlert("Ocorreu um erro ao submeter o comentário. Tente novamente.", "bg-red-50 text-red-800 border border-red-200");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Enviar";
+                fetchComments(); 
+            }
+        }
+
+        function saveLocalPendente(commentObj) {
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            meusPendentes.push(commentObj);
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(meusPendentes));
+        }
+
+        function showAlert(msg, bgClasses) {
+            const alertBox = document.getElementById('comment-alert');
+            if (!alertBox) return;
+            alertBox.className = `p-4 rounded-md text-xs font-sans ${bgClasses}`;
+            alertBox.innerHTML = msg;
+            alertBox.classList.remove('hidden');
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 8000);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function formatCustomDate(timestamp) {
+            if (!timestamp) return 'Agora';
+            const diff = Date.now() - timestamp;
+            if (diff < 60000) return 'Agora mesmo';
+            if (diff < 3600000) return `Há ${Math.round(diff / 60000)} min`;
+            if (diff < 86400000) return `Há ${Math.round(diff / 3600000)} horas`;
+            
+            const d = new Date(timestamp);
+            return d.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchComments);
+    </script>
+
+    <!-- Script 2: Navegação, Menu Mobile, Carrinho e Leitura -->
+    <script>
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
+                return '../';
+            }
+            return '';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId);
+            if (!container) return;
+            const prefix = getPrefix();
+            
+            if (prefix !== '') {
+                container.querySelectorAll('a').forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        if (!href.startsWith('../')) {
+                            link.setAttribute('href', prefix + href);
+                        }
+                    }
+                });
+                container.querySelectorAll('img').forEach(img => {
+                    let src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                        img.setAttribute('src', prefix + src);
+                    }
+                });
+            }
+
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
+                }
+            });
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            const prefix = getPrefix();
+            try {
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    adjustAndCleanLinks('nav-placeholder');
+                }
+
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                    adjustAndCleanLinks('footer-placeholder');
+                }
+
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        function calculateReadingTime() {
+            const contentElement = document.getElementById('article-content');
+            const readingTimeElement = document.getElementById('reading-time');
+            if (!contentElement || !readingTimeElement) return;
+
+            const text = contentElement.innerText || contentElement.textContent;
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+            const readingTime = Math.ceil(words / 200);
+            readingTimeElement.textContent = readingTime;
+        }
+
+        // Monitorização de Scroll para a Barra de Progresso Superior e Percentagem Flutuante
+        window.addEventListener('scroll', () => {
+            const winScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+            const targetEl = document.getElementById('author-section');
+            let scrolled = 0;
+            
+            if (targetEl) {
+                const elementOffsetTop = targetEl.getBoundingClientRect().top + window.scrollY;
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const maxScroll = elementOffsetTop - winHeight + 100;
+                
+                if (maxScroll > 0) {
+                    scrolled = Math.round((winScroll / maxScroll) * 100);
+                } else {
+                    scrolled = 100;
+                }
+            } else {
+                const docHeight = Math.max(
+                    document.body.scrollHeight, 
+                    document.documentElement.scrollHeight,
+                    document.body.offsetHeight, 
+                    document.documentElement.offsetHeight,
+                    document.body.clientHeight, 
+                    document.documentElement.clientHeight
+                );
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const totalScrollable = docHeight - winHeight;
+                if (totalScrollable > 0) {
+                    scrolled = Math.round((winScroll / totalScrollable) * 100);
+                }
+            }
+            
+            if (scrolled > 100) scrolled = 100;
+            if (scrolled < 0) scrolled = 0;
+
+            const progressBar = document.getElementById('scroll-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
+
+            const scrollPercentageText = document.getElementById('scroll-percentage-text');
+            if (scrollPercentageText) {
+                scrollPercentageText.textContent = scrolled + '%';
+            }
+
+            const scrollPercentageDiv = document.getElementById('scroll-percentage');
+            if (scrollPercentageDiv) {
+                if (winScroll > 150) {
+                    scrollPercentageDiv.classList.remove('opacity-0');
+                    scrollPercentageDiv.classList.add('opacity-100');
+                } else {
+                    scrollPercentageDiv.classList.remove('opacity-100');
+                    scrollPercentageDiv.classList.add('opacity-0');
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            calculateReadingTime();
+        });
+    </script>
+</body>
+</html>
