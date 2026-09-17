@@ -189,6 +189,7 @@
                 title: "Vai para o Céu", 
                 author: "Fulton J. Sheen", 
                 price: 17.90, 
+		discountPrice: 16.11, 
                 category: "Espiritualidade", 
                 image: "Imagens/vpccapa.png", 
                 summary: "O guia indispensável do Venerável Arcebispo Sheen sobre a salvação e a vida cristã.", 
@@ -266,7 +267,7 @@
                 cartItems.push({ 
                     id: bookId, 
                     title: bookTitle, 
-                    price: book.price, 
+                    price: book.discountPrice || book.price, 
                     quantity: 1, 
                     image: book.image, 
                     author: book.author, 
@@ -276,7 +277,7 @@
             
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             updateCartUI();
-            document.getElementById('cart-confirmation-details').innerHTML = `<img src="${book.image}" class="w-12 h-16 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/400x600/f3f4f6/333333?text=Livro';" /><div><h4 class="font-bold text-sm">${book.title}</h4><p class="text-brand-price-green font-bold text-sm">${formatPrice(book.price)}</p></div>`;
+            document.getElementById('cart-confirmation-details').innerHTML = `<img src="${book.image}" class="w-12 h-16 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/400x600/f3f4f6/333333?text=Livro';" /><div><h4 class="font-bold text-sm">${book.title}</h4><p class="text-brand-price-green font-bold text-sm">${formatPrice(book.discountPrice || book.price)}</p></div>`;
             document.getElementById('add-to-cart-modal').classList.remove('hidden');
         }
 
@@ -327,7 +328,13 @@
             const whiteCovers = ['tpcbcapa.png', 'etmcapa.png', 'aemjcapa.png', 'blccapa.png', 'dpcapa.png', 'vpccapa.png'];
 
             books.forEach(b => {
-                const priceDisplay = b.isComingSoon && b.price === 0 ? 'Brevemente' : formatPrice(b.price);
+                const hasDiscount = b.discountPrice && b.discountPrice < b.price;
+		const discountPercent = hasDiscount ? Math.round((1 - b.discountPrice / b.price) * 100) : 0;
+		const priceDisplay = b.isComingSoon && b.price === 0 
+    			? 'Brevemente' 
+    			: hasDiscount 
+        			? `<span class="line-through text-gray-400 text-sm md:text-base font-normal mr-2">${formatPrice(b.price)}</span>${formatPrice(b.discountPrice)} <span class="bg-brand-accent-red text-white text-[10px] md:text-xs font-bold px-2 py-0.5 rounded-full align-middle ml-1">-${discountPercent}%</span>`
+        			: formatPrice(b.price);
                 
                 // Botão de Info com transição suave
                 const infoBtnClass = 'text-brand-accent-blue border-2 border-brand-accent-blue hover:bg-brand-accent-blue hover:text-white transition-all duration-200 shadow-sm';
