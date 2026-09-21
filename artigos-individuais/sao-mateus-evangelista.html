@@ -9,7 +9,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="São Mateus, o Publicano que se Tornou Evangelista | Jerónimo Editora">
     <meta property="og:description" content="A propósito da Festa de São Mateus, Apóstolo e Evangelista, celebrada a 21 de Setembro">
-    <meta property="og:url" content="https://www.editorajeronimo.pt/artigos-individuais/sao-mateus-o-publicano-que-se-tornou-evangelista">
+    <meta property="og:url" content="https://www.editorajeronimo.pt/artigos-individuais/sao-mateus-evangelista">
     <meta property="og:image" content="https://www.editorajeronimo.pt/Imagens/15.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -360,17 +360,17 @@
 
         // Função para normalizar os IDs de página de forma uniforme
         function normalizePageId(id) {
-            if (!id) return "sao-mateus-o-publicano-que-se-tornou-evangelista";
+            if (!id) return "sao-mateus-evangelista";
             return id.trim()
                      .toLowerCase()
                      .replace(/\.html$/, '')
                      .split('/')
                      .filter(Boolean)
-                     .pop() || "sao-mateus-o-publicano-que-se-tornou-evangelista";
+                     .pop() || "sao-mateus-evangelista";
         }
 
         // ID único deste artigo
-        const rawPageId = window.location.pathname.split('/').pop().replace('.html', '') || 'sao-mateus-o-publicano-que-se-tornou-evangelista';
+        const rawPageId = window.location.pathname.split('/').pop().replace('.html', '') || 'sao-mateus-evangelista';
         const pageId = normalizePageId(rawPageId);
 
         let fallbackComments = [];
