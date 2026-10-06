@@ -224,10 +224,13 @@
                     <p class="text-base md:text-xl italic text-gray-700 mb-8 border-y border-gray-100 py-8 leading-relaxed font-classic">
                        Muitas pessoas sentem-se frequentemente, e de forma compreensível, intimidadas ou sobrecarregadas pela própria dimensão e complexidade da Bíblia. Mas agora, o popular autor e professor universitário, Peter Kreeft, escreveu um roteiro claro da Bíblia, focando a sua aguda perspicácia e o seu humor cativante na mensagem central de cada livro. Não levará muito tempo até que compreendas por que razão o seu guia das Escrituras se tornou um best-seller! Radiante de inteligência e com o humor característico de Kreeft, Tu Podes Compreender a Bíblia transformará o estudo aborrecido em aventuras espiritualmente gratificantes na Palavra de Deus. Independentemente da forma como te aproximaste - ou não te aproximaste - da Bíblia anteriormente, sairás com uma nova apreciação da sua profundidade e do seu significado. <br><br> Kreeft fornece também orientações práticas para rezar as Escrituras todos os dias, permitindo ao leitor aprofundar as mensagens bíblicas de uma maneira que irá surpreender, deleitar e recompensar.
                     </p>
-
                     <div class="flex flex-col items-center md:items-start gap-6">
-                        <span class="font-classic text-4xl md:text-5xl font-extrabold text-brand-accent-red">15,00€</span>
-                        <button onclick="addToCart('Tu podes compreender a Bíblia', 15.00)" class="w-full md:w-auto bg-brand-accent-red text-white py-4 px-12 rounded-xl font-bold uppercase tracking-widest hover:bg-red-900 transition-all shadow-2xl active:scale-95 text-base">
+                        <div class="flex items-center gap-3 flex-wrap justify-center md:justify-start">
+    				<span class="font-classic text-2xl md:text-3xl text-gray-400 line-through">20,00€</span>
+    				<span class="font-classic text-4xl md:text-5xl font-extrabold text-brand-accent-red">18,00€</span>
+    				<span class="bg-brand-accent-red text-white text-xs md:text-sm font-bold px-3 py-1 rounded-full">-10%</span>
+			</div>
+                        <button onclick="addToCart('Tu podes compreender a Bíblia', 18.00)" class="w-full md:w-auto bg-brand-accent-red text-white py-4 px-12 rounded-xl font-bold uppercase tracking-widest hover:bg-red-900 transition-all shadow-2xl active:scale-95 text-base">
                             Adicionar ao Carrinho
                         </button>
                     </div>
@@ -262,11 +265,11 @@
                 <div id="content-ficha" class="hidden fade-in">
                     <div class="bg-white overflow-hidden rounded-2xl shadow-sm border border-gray-100 p-8">
                         <table class="w-full text-sm md:text-xl font-sans">
-                            <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 w-1/3 px-6">ISBN</td><td class="py-6 px-6">978-989-36716-0-3</td></tr>
-                            <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 w-1/3 px-6">Edição</td><td class="py-6 px-6">1ª, Março de 2026</td></tr>
-                            <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 px-6">Páginas</td><td class="py-6 px-6">321</td></tr>
-                            <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 px-6">Formato</td><td class="py-6 px-6">Capa Mole (14.8 x 21 cm)</td></tr>
-			                <tr class="border-b border-gray-50"><td class="py-6 px-6 font-bold text-brand-accent-blue bg-gray-50/30">Peso</td><td class="py-6 px-6 text-gray-600 font-sans">0,510 kg</td></tr>
+                            <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 w-1/3 px-6">ISBN</td><td class="py-6 px-6">978-989-49176-0-1</td></tr>
+                            <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 w-1/3 px-6">Edição</td><td class="py-6 px-6">2ª, Outubro de 2026</td></tr>
+                            <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 px-6">Páginas</td><td class="py-6 px-6">305</td></tr>
+                            <tr class="border-b"><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 px-6">Formato</td><td class="py-6 px-6">Capa Mole (16 x 22.5 cm)</td></tr>
+			                <tr class="border-b border-gray-50"><td class="py-6 px-6 font-bold text-brand-accent-blue bg-gray-50/30">Peso</td><td class="py-6 px-6 text-gray-600 font-sans">0,505 kg</td></tr>
                             <tr><td class="py-6 font-bold text-brand-accent-blue bg-gray-50/30 px-6">Editora</td><td class="py-6 px-6 text-brand-accent-red font-bold font-serif">Jerónimo Editora</td></tr>
                         </table>
                     </div>
@@ -502,7 +505,7 @@
                     quantity: 1, 
                     image: 'Imagens/tpcbcapa.png', 
                     author: 'Peter Kreeft',
-                    weight: 0.510
+                    weight: 0.505
                 });
             }
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
