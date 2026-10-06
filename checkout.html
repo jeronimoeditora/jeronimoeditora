@@ -96,8 +96,12 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
 
-        .suggestion-card { transition: all 0.3s ease; }
-        .suggestion-card:hover { background-color: rgba(255,255,255,0.1); }
+        .suggestion-card {
+            transition: all 0.3s ease;
+        }
+        .suggestion-card:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
@@ -170,6 +174,7 @@
                                 <input type="text" id="nif" name="nif" class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50">
                             </div>
                             
+                            <!-- Morada física (Ocultada dinamicamente caso o carrinho contenha apenas cursos digitais) -->
                             <div id="physical-address-fields" class="space-y-5">
                                 <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
                                     <div class="md:col-span-3">
@@ -306,16 +311,6 @@
                     <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10">
                         <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2">Carrinho de Compras</h2>
                         
-                        <div id="out-of-stock-global-alert" class="hidden mb-4 p-3.5 bg-amber-900/60 border border-amber-400/50 rounded-xl text-amber-100 text-xs font-sans">
-                            <div class="flex items-center gap-2 font-bold text-amber-300 text-sm mb-1">
-                                <i class="fas fa-exclamation-triangle text-amber-400"></i>
-                                <span>Artigo(s) Temporariamente Sem Stock</span>
-                            </div>
-                            <p id="out-of-stock-text-content" class="leading-relaxed opacity-95">
-                                O artigo selecionado encontra-se de momento esgotado. Pedimos desculpa pelo incómodo e esperamos repor o stock em breve. Por favor, remova este artigo para poder concluir a sua encomenda.
-                            </p>
-                        </div>
-
                         <div id="summary-list" class="space-y-5 mb-6 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar"></div>
 
                         <div id="suggestions-container" class="mt-4 pt-4 border-t border-white/10 hidden">
@@ -352,6 +347,7 @@
                                 </label>
                             </div>
                             
+                            <!-- Alerta de Privacidade Inline (Redimensionado e amigável) -->
                             <div id="privacy-error-box" class="hidden mt-3 p-3 bg-red-950/40 border border-red-500/30 text-red-200 text-xs rounded-lg font-sans">
                                 <i class="fas fa-exclamation-circle mr-1.5"></i> Por favor, aceite os Termos e Condições e a Política de Privacidade para avançar.
                             </div>
@@ -376,15 +372,13 @@
         var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec"; 
         var SHIPPING_MARGIN = 19; 
         
-        var OUT_OF_STOCK_IDS = [1, 2]; 
-
         var bookData = [
-            { id: 1, title: "Tu podes compreender a Bíblia", price: 15.00, weight: 510 },
+            { id: 1, title: "Tu podes compreender a Bíblia", price: 18.00, weight: 505 },
             { id: 2, title: "A Eucaristia é mesmo Jesus", price: 13.50, weight: 254 },
             { id: 3, title: "Eis a Tua Mãe", price: 19.50, weight: 534 },
             { id: 4, title: "A Bíblia é um Livro Católico", price: 17.50, weight: 272 }, 
-            { id: 6, title: "Vai para o Céu", price: 16.11, weight: 360 },
             { id: 5, title: "Duras Palavras", price: 27.90, weight: 681 },
+            { id: 6, title: "Vai para o Céu", price: 16.11, weight: 350 },
             { id: 101, title: "São Jerónimo a Escrever", price: 3.90, weight: 50, image: "Imagens/postal1.png" },
             { id: 102, title: "São Jerónimo 1", price: 3.90, weight: 50, image: "Imagens/postal2.png" },
             { id: 103, title: "São Jerónimo 2", price: 3.90, weight: 50, image: "Imagens/postal3.png" },
@@ -392,16 +386,22 @@
             { id: 105, title: "A Virgem e o Menino com São Jerónimo", price: 3.90, weight: 50, image: "Imagens/postal5.png" }
         ];
 
-        function getCartItems() {
-            try {
-                var data = localStorage.getItem('cartItems');
-                if (!data || typeof data !== 'string' || data.trim() === '') return [];
-                return JSON.parse(data);
-            } catch (e) {
-                console.warn("Erro ao ler o carrinho do localStorage:", e);
-                return [];
-            }
-        }
+        var UNAVAILABLE = {
+            2: "A Eucaristia é mesmo Jesus (esgotado)",
+            7: "A Sagrada Escritura no Magistério da Igreja (ainda não disponível)"
+};
+
+        function removeUnavailableItems() {
+            var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            var removed = items.filter(function(i) { return UNAVAILABLE[i.id]; });
+            if (removed.length === 0) return false;
+            localStorage.setItem('cartItems', JSON.stringify(
+                 items.filter(function(i) { return !UNAVAILABLE[i.id]; })
+            ));
+            alert("Removemos do carrinho artigos indisponíveis:\n- " +
+                 removed.map(function(i) { return UNAVAILABLE[i.id]; }).join("\n- "));
+            return true;
+}
 
         function getSafePath(file) {
             var currentUrl = window.location.href;
@@ -514,29 +514,33 @@
         }
 
         function loadCartSummary() {
-            var items = getCartItems();
+            removeUnavailableItems();
+            var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             var list = document.getElementById('summary-list');
             var destinoElement = document.getElementById('pais');
             var destino = destinoElement ? destinoElement.value : 'PT';
             var subtotal = 0, pesoTotal = 0, html = '';
-            var outOfStockTitles = [];
 
+            // Detecção inteligente de carrinho contendo exclusivamente cursos digitais sob o Antigo Acordo Ortográfico
             var contemFisicos = items.some(function(item) { return item.type !== 'curso'; });
             var contemCursos = items.some(function(item) { return item.type === 'curso'; });
             var apenasCursos = items.length > 0 && !contemFisicos;
 
+            // Adapta a visibilidade dos campos de morada física
             var physicalArea = document.getElementById('physical-address-fields');
             var stepTitle = document.getElementById('billing-step-title');
             
             if (apenasCursos) {
                 if (physicalArea) physicalArea.classList.add('hidden');
                 if (stepTitle) stepTitle.textContent = "1. Detalhes de Contacto";
+                // Remove required das moradas para passar validação nativa do browser
                 document.querySelectorAll('.shipping-input').forEach(function(el) {
                     el.removeAttribute('required');
                 });
             } else {
                 if (physicalArea) physicalArea.classList.remove('hidden');
                 if (stepTitle) stepTitle.textContent = "1. Detalhes de Envio";
+                // Reatribui required aos campos de envio físico
                 document.querySelectorAll('.shipping-input').forEach(function(el) {
                     el.setAttribute('required', 'required');
                 });
@@ -556,17 +560,7 @@
                 }
                 pesoTotal += (itemWeight * item.quantity);
 
-                var titleLower = item.title ? item.title.toLowerCase() : '';
-                var isItemOutOfStock = OUT_OF_STOCK_IDS.includes(Number(item.id)) || 
-                                       titleLower.indexOf('compreender a bíblia') !== -1 ||
-                                       titleLower.indexOf('eucaristia é mesmo jesus') !== -1;
-                
-                if (isItemOutOfStock) {
-                    if (outOfStockTitles.indexOf(item.title) === -1) {
-                        outOfStockTitles.push(item.title);
-                    }
-                }
-
+                // Oculta os botões - 1 + para artigos digitais (Cursos)
                 var quantitySelectorHtml = '';
                 if (item.type === 'curso') {
                     quantitySelectorHtml = `<span class="text-brand-gold text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 bg-white/5 rounded-lg border border-white/10 font-sans flex items-center gap-1.5"><i class="fas fa-video"></i> Curso Digital</span>`;
@@ -581,39 +575,19 @@
                 }
 
                 html += `
-                    <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans ${isItemOutOfStock ? 'bg-amber-950/20 p-2.5 rounded-lg border border-amber-500/30' : ''}">
+                    <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
-                            <span class="font-lora text-sm text-brand-gold leading-tight flex-grow font-bold flex items-center gap-1.5">
-                                ${isItemOutOfStock ? '<i class="fas fa-exclamation-triangle text-amber-400 text-xs" title="Sem stock"></i>' : ''}
+                            <span class="font-lora text-sm text-brand-gold leading-tight flex-grow font-bold">
                                 ${item.title}
                             </span>
                             <span class="font-sans font-bold text-white text-sm">€ ${lineTotal.toFixed(2).replace('.', ',')}</span>
                         </div>
                         <div class="flex items-center justify-between">
                             ${quantitySelectorHtml}
-                            <button onclick="removeItem('${item.id}')" class="text-gray-400 hover:text-white p-2" title="Remover do carrinho"><i class="fas fa-trash-alt"></i></button>
+                            <button onclick="removeItem('${item.id}')" class="text-gray-400 hover:text-white p-2"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>`;
             });
-
-            var globalAlert = document.getElementById('out-of-stock-global-alert');
-            var textContent = document.getElementById('out-of-stock-text-content');
-
-            if (globalAlert) {
-                if (outOfStockTitles.length > 0) {
-                    globalAlert.classList.remove('hidden');
-                    if (textContent) {
-                        var titlesFormatted = outOfStockTitles.map(function(t) { return '<strong>"' + t + '"</strong>'; }).join(' e ');
-                        if (outOfStockTitles.length === 1) {
-                            textContent.innerHTML = 'O livro ' + titlesFormatted + ' encontra-se de momento esgotado. Pedimos desculpa pelo incómodo e esperamos repor o stock em breve. Por favor, remova este artigo para poder concluir a sua encomenda.';
-                        } else {
-                            textContent.innerHTML = 'Os livros ' + titlesFormatted + ' encontram-se de momento esgotados. Pedimos desculpa pelo incómodo e esperamos repor o stock em breve. Por favor, remova estes artigos para poder concluir a sua encomenda.';
-                        }
-                    }
-                } else {
-                    globalAlert.classList.add('hidden');
-                }
-            }
             
             var custoPortes = 0;
             var badge = document.getElementById('optimizacao-badge');
@@ -642,6 +616,7 @@
             document.getElementById('summary-shipping').textContent = `€ ${custoPortes.toFixed(2).replace('.', ',')}`;
             document.getElementById('summary-total').textContent = `€ ${(subtotal + custoPortes).toFixed(2).replace('.', ',')}`;
             
+            // Personaliza o ecrã de feedback de submissão se for exclusivamente cursos ou misto (Antigo Acordo Ortográfico)
             var successMsg = document.getElementById('success-modal-msg');
             if (successMsg) {
                 if (apenasCursos) {
@@ -708,7 +683,7 @@
         function quickAdd(productId) {
             var product = bookData.find(function(b) { return String(b.id) === String(productId); });
             if (!product) return;
-            var items = getCartItems();
+            var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             
             var existingIndex = items.findIndex(function(item) { return String(item.id) === String(product.id); });
             if (existingIndex > -1) {
@@ -730,7 +705,7 @@
         }
 
         function changeQuantity(id, delta) {
-            var items = getCartItems();
+            var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             var idx = items.findIndex(function(i) { return String(i.id) === String(id); });
             if (idx > -1) {
                 items[idx].quantity = Math.max(1, items[idx].quantity + delta);
@@ -740,7 +715,7 @@
         }
 
         function removeItem(id) {
-            var items = getCartItems();
+            var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             localStorage.setItem('cartItems', JSON.stringify(items.filter(function(i) { return String(i.id) !== String(id); })));
             loadCartSummary();
         }
@@ -797,7 +772,7 @@
         function validateFinalButton() {
             var method = document.querySelector('input[name="payment-method"]:checked')?.value;
             var fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
-            var cartItems = getCartItems();
+            var cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
 
             var nomeVal = document.getElementById('nome')?.value.trim();
             var emailVal = document.getElementById('email')?.value.trim();
@@ -806,6 +781,7 @@
             var contemFisicos = cartItems.some(function(item) { return item.type !== 'curso'; });
             var apenasCursos = cartItems.length > 0 && !contemFisicos;
 
+            // Se existirem artigos físicos, valida obrigatoriamente as moradas de envio
             if (!apenasCursos && inputsValid) {
                 var requiredEnvio = ['morada', 'nr-andar', 'cod-postal', 'cidade'];
                 requiredEnvio.forEach(function(id) { 
@@ -823,31 +799,17 @@
                 }
             }
 
-            var outOfStockCount = 0;
-            cartItems.forEach(function(item) {
-                var titleLower = item.title ? item.title.toLowerCase() : '';
-                if (OUT_OF_STOCK_IDS.includes(Number(item.id)) || 
-                    titleLower.indexOf('compreender a bíblia') !== -1 ||
-                    titleLower.indexOf('eucaristia é mesmo jesus') !== -1) {
-                    outOfStockCount++;
-                }
-            });
-
             var btn = document.getElementById('place-order-button');
             if (btn) {
-                if (outOfStockCount > 0) {
-                    btn.disabled = true;
-                    btn.textContent = outOfStockCount > 1 ? "Remova os artigos sem stock" : "Remova o artigo sem stock";
-                } else {
-                    btn.textContent = "Confirmar e Pagar";
-                    btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid;
-                }
+                btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid;
             }
         }
 
         async function placeOrder(e) {
             e.preventDefault();
+            if (removeUnavailableItems()) { loadCartSummary(); return; }
             
+            // Verificação Inteligente da Política de Privacidade
             var privacyChecked = document.getElementById('privacy-policy')?.checked;
             var errorBox = document.getElementById('privacy-error-box');
             
@@ -868,7 +830,7 @@
             loadText.textContent = "A preparar ficheiros...";
             progress.style.width = "20%";
             
-            var cartItems = getCartItems();
+            var cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             var method = document.querySelector('input[name="payment-method"]:checked')?.value;
             var fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
 
@@ -876,6 +838,7 @@
             var contemCursos = cartItems.some(function(item) { return item.type === 'curso'; });
             var apenasCursos = cartItems.length > 0 && !contemFisicos;
 
+            // Lógica inteligente para definir o tipo de correio electrónico e instruções do script
             var tipoEncomenda = "fisica";
             var assuntoEmail = "Confirmação de Encomenda - Jerónimo Editora";
             var instrucoesEmail = "Encomenda constituída exclusivamente por artigos físicos. Proceder à expedição postal.";
@@ -962,7 +925,7 @@
         }
 
         function updateCartUI() {
-            var count = getCartItems().reduce(function(s, i) {
+            var count = JSON.parse(localStorage.getItem('cartItems') || '[]').reduce(function(s, i) {
                 return s + i.quantity;
             }, 0);
             document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(function(el) {
@@ -994,6 +957,7 @@
         });
     </script>
 
+    <!-- GoatCounter Analytics Tracker -->
     <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
