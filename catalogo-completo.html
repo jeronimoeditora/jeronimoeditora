@@ -138,11 +138,12 @@
                 id: 1, 
                 title: "Tu podes compreender a Bíblia", 
                 author: "Peter Kreeft", 
-                price: 15.00, 
+                price: 20.00, 
+		discountPrice: 18.00, 
                 category: "Formação Bíblica", 
                 image: "Imagens/tpcbcapa.png", 
                 summary: "Um guia prático, profundo e estimulante para cada livro da Bíblia.", 
-                techDetails: { pages: 321, isbn: "978-989-36716-0-3", binding: "Capa Mole (14,8 x 21 cm)", weight: "0,510 kg" }, 
+                techDetails: { pages: 305, isbn: "978-989-49176-0-1", binding: "Capa Mole (16 x 22.5 cm)", weight: "0,505 kg" }, 
                 visible: true, 
                 detailsUrl: "detalhes/tu-podes-compreender-a-biblia" 
             },
@@ -157,6 +158,7 @@
                 techDetails: { pages: 164, isbn: "978-989-36716-1-0", binding: "Capa Mole (14,8 x 21 cm)", weight: "0,254 kg" }, 
                 visible: true, 
                 isComingSoon: false, 
+                isSoldOut: true,
                 detailsUrl: "detalhes/a-eucaristia-e-mesmo-jesus" 
             },
             { 
@@ -213,15 +215,16 @@
             },
             { 
                 id: 7, 
-                title: "A Sagrada Escritura no Magistério Bíblico Contemporâneo", 
-                author: "Leão XIII a Francisco", 
-                price: 0.00, 
+                title: "A Sagrada Escritura no Magistério da Igreja", 
+                author: "Magistério", 
+                price: 14.45, 
+		discountPrice: 13.00,
                 category: "Formação Bíblica", 
                 image: "", 
                 summary: "Uma compilação essencial dos ensinamentos da Igreja sobre a Sagrada Escritura.", 
-                techDetails: { pages: 0, isbn: "A definir", binding: "A definir", weight: "A definir" }, 
+                techDetails: { pages: 192, isbn: "978-989-36716-6-5", binding: "Capa mole (14.8 x 21 cm)", weight: "A definir" }, 
                 visible: true, 
-                isComingSoon: true 
+                isComingSoon: true
             }
         ];
 
@@ -229,7 +232,7 @@
          * Redireciona diretamente para a página de detalhes do livro
          */
         function goToBookDetails(detailsUrl, isComingSoon) {
-            if (isComingSoon || !detailsUrl) return;
+            if (!book || book.isComingSoon || book.isSoldOut) return;
             window.location.href = detailsUrl;
         }
 
@@ -340,11 +343,11 @@
                 const infoBtnClass = 'text-brand-accent-blue border-2 border-brand-accent-blue hover:bg-brand-accent-blue hover:text-white transition-all duration-200 shadow-sm';
                 
                 // Botão Comprar: Fundo azul padrão, hover em VERDE (hover:bg-brand-buy-hover)
-                const buyBtnClass = b.isComingSoon 
-                    ? 'bg-gray-300 cursor-not-allowed text-gray-500' 
+                const buyBtnClass = (b.isComingSoon || b.isSoldOut)
+                    ? 'bg-gray-300 cursor-not-allowed text-gray-500'
                     : 'bg-brand-accent-blue text-white hover:bg-brand-buy-hover transition-colors duration-200 shadow-sm';
-                
-                const buyBtnContent = `${cartIcon} <span class="hidden md:inline ml-1 text-sm">${b.isComingSoon ? 'Em breve' : 'Comprar'}</span>`;
+
+                const buyBtnContent = `${cartIcon} <span class="hidden md:inline ml-1 text-sm">${b.isSoldOut ? 'Esgotado' : b.isComingSoon ? 'Em breve' : 'Comprar'}</span>`;
                 
                 let coverHtml = '';
                 if (!b.isComingSoon) {
@@ -376,6 +379,7 @@
                             </div>
                             <!-- Cor do preço alterada para Verde Escuro (text-brand-price-green) -->
                             <span class="text-lg md:text-xl font-classic font-extrabold ${b.isComingSoon ? 'text-gray-400' : 'text-brand-price-green'} mt-3 block">${priceDisplay}</span>
+                            ${b.isSoldOut ? '<span class="block text-xs font-bold text-brand-accent-red uppercase mt-1">Esgotado</span>' : ''}
                         </div>
                         <div class="flex items-center justify-center mt-5 md:mt-6 border-t pt-4 space-x-2 md:space-x-3">
                             <!-- Botão Info -> Abre página de detalhes diretamente -->
@@ -383,7 +387,7 @@
                                 ${infoIcon} <span class="hidden md:inline ml-1 text-sm">Info</span>
                             </button>
                             <!-- Botão Comprar -> Fundo azul, hover em Verde -->
-                            <button class="${buyBtnClass} py-2 px-2 md:px-5 rounded-lg flex items-center justify-center h-10 md:h-11 transition-all font-bold" onclick="${b.isComingSoon ? '' : `addToCart(${b.id}, '${b.title}')`}; event.stopPropagation();">
+                            <button class="${buyBtnClass} ..." ${(b.isComingSoon || b.isSoldOut) ? 'disabled' : ''} onclick="${(b.isComingSoon || b.isSoldOut) ? '' : `addToCart(${b.id}, '${b.title}')`}; event.stopPropagation();">
                                 ${buyBtnContent}
                             </button>
                         </div>
