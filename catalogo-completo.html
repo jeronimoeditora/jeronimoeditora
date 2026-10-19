@@ -108,6 +108,7 @@
                         <option value="Formação Bíblica">Formação Bíblica</option>
                         <option value="Teologia Católica">Teologia Católica</option>
                         <option value="Espiritualidade">Espiritualidade</option>
+                        <option value="História">História</option>
                     </select>
                     <select id="sort-order" class="h-10 px-3 border border-gray-200 rounded-lg bg-white text-sm cursor-pointer outline-none focus:border-brand-gold" onchange="filterAndSortBooks()">
                         <option value="default">Mais recente</option>
@@ -187,6 +188,19 @@
                 detailsUrl: "detalhes/a-biblia-e-um-livro-catolico" 
             },
             { 
+                id: 5, 
+                title: "Duras Palavras", 
+                author: "Trent Horn", 
+                price: 27.90, 
+                category: "Formação Bíblica", 
+                image: "Imagens/dpcapa.png", 
+                summary: "Uma obra esclarecedora sobre as passagens difíceis e desafiadoras da Sagrada Escritura.", 
+                techDetails: { pages: 468, isbn: "978-989-36716-4-1", binding: "Capa Mole (14,8 x 21 cm)", weight: "0,681 kg" }, 
+                visible: true, 
+                isComingSoon: false,
+                detailsUrl: "detalhes/duras-palavras"
+            },
+            { 
                 id: 6, 
                 title: "Vai para o Céu", 
                 author: "Fulton J. Sheen", 
@@ -201,19 +215,6 @@
                 detailsUrl: "detalhes/vai-para-o-ceu" 
             },
             { 
-                id: 5, 
-                title: "Duras Palavras", 
-                author: "Trent Horn", 
-                price: 27.90, 
-                category: "Formação Bíblica", 
-                image: "Imagens/dpcapa.png", 
-                summary: "Uma obra esclarecedora sobre as passagens difíceis e desafiadoras da Sagrada Escritura.", 
-                techDetails: { pages: 468, isbn: "978-989-36716-4-1", binding: "Capa Mole (14,8 x 21 cm)", weight: "0,681 kg" }, 
-                visible: true, 
-                isComingSoon: false,
-                detailsUrl: "detalhes/duras-palavras"
-            },
-            { 
                 id: 7, 
                 title: "A Sagrada Escritura no Magistério da Igreja", 
                 author: "Magistério", 
@@ -226,6 +227,20 @@
                 visible: true, 
                 isComingSoon: false,
                 detailsUrl: "detalhes/sagrada-escritura-magisterio-igreja"
+            },
+            { 
+                id: 8, 
+                title: "Viva Cristo Rei!", 
+                author: "Jesús Lorente Liarte", 
+                price: 22.00, 
+                discountPrice: 19.80, 
+                category: "História", 
+                image: "Imagens/vcrcapa.png", 
+                summary: "Uma história das Guerras Cristeras Mexicanas, o sangrento confronto entre os guerrilheiros Católicos e o exército da República Federal.", 
+                techDetails: { pages: 208, isbn: "978-989-36716-8-9", binding: "Capa Mole (16 x 22.5 cm)", weight: "0,335 kg" }, 
+                visible: true, 
+                isComingSoon: false,
+                detailsUrl: "detalhes/viva-cristo-rei"
             }
         ];
 
