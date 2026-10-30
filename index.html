@@ -1273,7 +1273,7 @@
             }
 
             upcoming.forEach(e => {
-                const loc = e.location ? e.location.charAt(0).toUpperCase() + e.location.slice(1).toLowerCase() : '';
+                const loc = e.location || '';
                 const mon = e.month ? e.month.charAt(0).toUpperCase() + e.month.slice(1).toLowerCase() : '';
 
                 grid.innerHTML += `
