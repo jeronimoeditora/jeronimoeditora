@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Porquê? Todos os Santos e a pergunta de 1755 | Jerónimo Editora</title>
+    
+    <!-- Meta Tags do Open Graph (Facebook, WhatsApp, etc.) -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Porquê? Todos os Santos e a pergunta de 1755 | Jerónimo Editora">
+    <meta property="og:description" content="Comentário às Leituras da Solenidade de Todos os Santos: Ap 7,2-4.9-14 · Sl 23(24) · 1 Jo 3,1-3 · Mt 5,1-12a">
+    <meta property="og:url" content="https://www.editorajeronimo.pt/artigos-individuais/porque-todos-os-santos-e-a-pergunta-de-1755">
+    <meta property="og:image" content="https://www.editorajeronimo.pt/Imagens/19.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:site_name" content="Jerónimo Editora">
+
+    <!-- Meta Tags do Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Porquê? Todos os Santos e a pergunta de 1755 | Jerónimo Editora">
+    <meta name="twitter:description" content="Comentário às Leituras da Solenidade de Todos os Santos: Ap 7,2-4.9-14 · Sl 23(24) · 1 Jo 3,1-3 · Mt 5,1-12a">
+    <meta name="twitter:image" content="https://www.editorajeronimo.pt/Imagens/19.png">
+    
+    <link class="favicon" rel="icon" type="image/png" sizes="32x32" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="favicon" rel="icon" type="image/png" sizes="16x16" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="apple-touch-icon" sizes="180x180" href="../Imagens/favicon.png?v=1.0.0">
+    <link class="shortcut icon" href="../Imagens/favicon.png?v=1.0.0">
+    
+    <script>
+        // Remove a extensão .html da barra de endereço para manter o aspeto limpo e profissional
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
+    
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Roboto:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'], // Menu e rodapé herdam Roboto de forma consistente
+                        inter: ['"Inter"', 'sans-serif'], // Mantemos a Inter para a leitura premium de artigos
+                        serif: ['"Playfair Display"', 'serif'],
+                        classic: ['"Crimson Text"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#2d3748',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-accent-orange': '#e05300',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body { 
+            scroll-behavior: auto !important;
+            overflow-x: hidden; 
+            width: 100%; 
+            background-color: #F8F8F8; 
+        }
+        * { box-sizing: border-box; }
+
+        .text-readable-article {
+            line-height: 1.85;
+            letter-spacing: -0.003em;
+            word-spacing: 0.05em;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 2px;
+            color: #e05300;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100] pointer-events-none">
+        <div id="scroll-progress-bar" class="h-full bg-brand-accent-orange transition-all duration-75" style="width: 0%"></div>
+    </div>
+
+    <div id="scroll-percentage" class="fixed bottom-6 right-6 bg-brand-accent-blue text-white text-xs font-bold px-3 py-2 rounded-full shadow-xl z-50 opacity-0 transition-opacity duration-300 pointer-events-none flex items-center gap-1">
+        <i class="fas fa-book-open text-brand-gold"></i> <span id="scroll-percentage-text">0%</span>
+    </div>
+
+    <div id="nav-placeholder"></div>
+
+    <main class="flex-grow pt-28 md:pt-36 pb-16 font-inter">
+        <article class="max-w-4xl mx-auto px-6 fade-in">
+
+            <header class="border-b border-gray-150 pb-8 mb-8 text-center flex flex-col items-center">
+                <span class="text-brand-accent-orange text-xs uppercase font-extrabold tracking-[0.2em] block mb-3 text-center">Comentário às Leituras</span>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-accent-blue leading-tight mb-4 text-center">Porquê? Todos os Santos e a pergunta de 1755</h1>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-500 font-medium font-sans w-full">
+                    <span class="flex items-center gap-1.5"><i class="far fa-calendar"></i> 1 de Novembro de 2026</span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5 font-inter">
+                        <i class="far fa-user"></i> Escrito por 
+                        <a href="../sobreHB" class="text-brand-accent-blue hover:text-brand-accent-orange hover:underline font-bold transition-colors">Hugo Bacelo</a>
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5"><i class="far fa-clock"></i> <span id="reading-time">10</span> min de leitura</span>
+                </div>
+            </header>
+
+            <div class="w-full h-48 sm:h-72 md:h-96 rounded-2xl overflow-hidden border border-gray-200 shadow-xs relative bg-gray-100 mb-8">
+                <img src="../Imagens/19.png" alt="Porquê? Todos os Santos e a pergunta de 1755" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/002147/cfaf5c?text=Porqu%C3%AA%3F%20Todos%20os%20Santos%20e%20a%20pergunta%20de%201755';">
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-sm md:text-base italic text-gray-500 leading-relaxed max-w-2xl mx-auto text-center font-classic">Comentário às Leituras da Solenidade de Todos os Santos: Ap 7,2-4.9-14 · Sl 23(24) · 1 Jo 3,1-3 · Mt 5,1-12a</p>
+            </div>
+
+            <div id="article-content" class="text-readable-article text-base sm:text-lg text-gray-700 space-y-6 max-w-3xl mx-auto text-justify">
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Proémio: a manhã de 1 de Novembro de 1755</span>
+                </h3>
+
+                <p class="dropcap">
+                    Sábado, 1 de Novembro de 1755. A manhã nasceu em Lisboa como qualquer outra: no porto, os estivadores descarregavam especiarias, açúcar e ouro; os sacerdotes preparavam os sermões da missa; os cocheiros percorriam as ruas estreitas e movimentadas. Era o dia de Todos os Santos, grande celebração para uma população quase inteiramente católica. Ao pôr do sol, a cidade estaria em ruínas e dezenas de milhares de pessoas estariam mortas.
+                </p>
+
+                <p>
+                    Boa parte dos habitantes estava numa das cerca de quarenta igrejas da cidade quando o chão começou a tremer. Os primeiros abalos foram ligeiros, apenas o suficiente para fazer repicar os sinos; em poucos segundos, porém, o rumor tornou-se um rugido. Casas desabaram, cúpulas ruíram sobre os fiéis aterrados e ruas inteiras desapareceram em fendas. O primeiro abalo durou cerca de seis minutos. Estima-se uma magnitude entre 8,5 e 9: o maior sismo da história da Europa.
+                </p>
+
+                <p>
+                    Os sobreviventes correram para o porto, o lugar menos construído em que puderam pensar, e viram o Tejo recuar, deixando a descoberto centenas de metros de leito. Para os Lisboetas de 1755, era como Moisés a atravessar o Mar Vermelho: um autêntico milagre. Acotovelaram-se para ver melhor, e foi por isso que o tsunami, com ondas de cerca de vinte metros, se revelou tão mortífero. Seguiu-se o fogo: acender velas em honra dos santos fazia parte da festa, e as velas e lanternas derrubadas deram origem a uma tempestade de fogo que ardeu seis dias. Morreram cerca de 50 000 pessoas, um quinto da população, e mais de 85% dos edifícios ficaram destruídos.
+                </p>
+
+                <p>
+                    Restava a pergunta. No século XVIII, a explicação dominante para os terramotos resumia-se a três palavras: foi Deus. Os desastres naturais eram quase universalmente vistos como actos de Deus, castigo do mau comportamento. Mas a explicação já não bastava. O terramoto atingira os fiéis em plena celebração; entre os mortos havia milhares de crianças inocentes; e, enquanto a maior parte das igrejas desaparecia do mapa, o bairro dos bordéis, das tabernas e das casas de jogo ficou entre os menos afectados. Começou a pensar-se o que antes seria blasfémia: e se não fosse castigo divino? Kant atribuiu-o a gases em cavernas subterrâneas, hipótese errada, mas uma das primeiras explicações científicas de um terramoto, e Voltaire e outros pensadores do Iluminismo questionaram o que o desastre significava para a antiga crença de que as catástrofes fazem parte de um plano ou de um castigo divino.
+                </p>
+
+                <p>
+                    Em Lisboa, a resposta prática coube ao Marquês de Pombal, a quem o rei deu poder quase total. Enviou centenas de questionários sobre a hora, a duração e as réplicas do abalo, o primeiro estudo sistemático dos efeitos de um terramoto, e reconstruiu a cidade a pensar no próximo, com ruas largas, que servissem de cortafogos, e a «gaiola Pombalina», estrutura de madeira flexível testada em modelos à escala com tropas a marchar à volta.
+                </p>
+
+                <p>
+                    A ciência ensinou-nos o «como». Ficou por responder o «porquê» do sofrimento, sobretudo o dos inocentes e dos justos. É essa a pergunta que as leituras de Todos os Santos, a mesma festa que Lisboa celebrava naquela manhã, nos convidam a levar até ao Céu.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Um mês dedicado aos Novíssimos</span>
+                </h3>
+
+                <p>
+                    Novembro não é formalmente um tempo litúrgico, mas, como começa em Todos os Santos e termina em Cristo Rei, estas quatro semanas têm o sabor de um tempo de meditação sobre os Novíssimos: o Céu, o Inferno, a morte e o juízo.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>A multidão que vem da grande tribulação (Ap 7)</span>
+                </h3>
+
+                <p>
+                    São João contempla o Céu e vê dois grupos: «cento e quarenta e quatro mil, de todas as tribos dos filhos de Israel» e «uma multidão imensa, que ninguém podia contar, de todas as nações, tribos, povos e línguas», de pé diante do trono e do Cordeiro, «vestidos com túnicas brancas e de palmas na mão». Um dos Anciãos identifica-os: «São os que vieram da grande tribulação, os que lavaram as túnicas e as branquearam no sangue do Cordeiro».
+                </p>
+
+                <p>
+                    O número dos marcados gerou muita especulação. As Testemunhas de Jeová tomam-no como o número literal dos que viverão no Céu. É mais provável que seja simbólico (12 × 12 × 1000), sinal de plenitude. Para os primeiros leitores do Apocalipse, a visão era garantia e consolação de que as promessas da aliança a todas as tribos de Israel se cumpririam: haveria uma representação grande e perfeita das Doze Tribos entre os salvos. A multidão incontável são os Cristãos de todos os tempos e povos que se juntaram a este «núcleo» Israelita para louvar Deus Uno e Trino, descendência espiritual de Abraão, porque imitaram a sua fé (Rm 4,11-17; Gn 15,5; 17,5). E João ainda distingue, no Céu, as origens étnicas: certos traços das nossas culturas são bons em si, enriquecem a Igreja e não serão apagados na vida futura.
+                </p>
+
+                <p>
+                    O «selo» na fronte é sinal de pertença e protecção. Em contraste com a marca da besta (Ap 13,16), os justos trazem o nome de Deus (Ap 14,1; 22,4) (CIC 1296). A cena tem paralelo em Ez 9,1-7, onde um mensageiro marca a fronte dos justos com um sinal que, na escrita antiga, tinha a forma da letra Hebraica taw, semelhante a uma cruz. Trata-se talvez de uma graça de perseverança espiritual, e não de uma garantia de sobrevivência física. As túnicas brancas são as dos que suportaram a purificação da provação (Dn 11,35; 12,10). A «grande tribulação» lê-se ou como a que Jesus anunciou para Jerusalém (Mt 24,21) ou como a perseguição de Domiciano.
+                </p>
+
+                <p>
+                    Surge aqui uma resposta, não ao «como» das catástrofes, mas ao lugar do sofrimento na vida Cristã: faz sempre parte do crescimento na santidade. Aproximar-nos de Cristo é «tomar a cruz cada dia» e segui-Lo, mas com confiança, pois, se partilharmos os Seus sofrimentos, partilharemos também a Sua glória (cf. Rm 8,17). O sofrimento é o único modo de o amor se demonstrar e se purificar: sem ele, o amor aparente poderia ser apenas máscara de interesse próprio. Porque não o compreendemos? A nossa cegueira é quase sobrenatural e só a graça de Deus a cura.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>A montanha do Senhor (Sl 23)</span>
+                </h3>
+
+                <p>
+                    «Quem poderá subir à montanha do Senhor? Quem habitará no seu santuário?» A montanha é, em primeiro lugar, o monte Sião, onde se erguia o Templo. Mas Israel cedo percebeu que Sião era uma espécie de sacramento da «montanha celeste», a morada verdadeira e eterna de Deus, a que hoje chamamos Céu.
+                </p>
+
+                <p>
+                    Quem pode partilhar essa morada? «O que tem as mãos inocentes e o coração puro»: a justiça exterior, nas acções (as «mãos»), e a interior, uma alma bem ordenada (o «coração») que experimenta os afectos devidos. A santidade é matéria da pessoa inteira, e o sofrimento, abraçado com fé, esperança e caridade, ajuda a reordenar a alma e os afectos.
+                </p>
+
+                <p>
+                    O justo «será abençoado pelo Senhor e recompensado por Deus, seu Salvador». Nem sempre se vê esta recompensa nesta vida: as indústrias do poder premeiam com frequência os imorais e os inescrupulosos. Para combater o desespero e a amargura, o justo precisa de fazer constantemente actos de fé e de esperança. Esperar o Céu não é uma muleta psicológica, mas um acto de esperança desafiadora diante das trevas da injustiça: a fé de que, apesar das aparências, há uma ordem moral última neste mundo, que é, no fim, bom.
+                </p>
+
+                <p>
+                    O refrão diz quem são estes: «Esta é a geração dos que procuram o Senhor» que poderia em alternativa ser traduzido por «dos que anseiam ver a face do Senhor». «Ansiar ver a face» exprime o desejo de intimidade com Deus, de um encontro face a face como o que Moisés teve (Ex 33,11).
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Filhos de Deus, e ainda por revelar (1 Jo 3)</span>
+                </h3>
+
+                <p>
+                    Esta leitura sublinha a filiação divina, algo exclusivo da fé Cristã. O próprio São João se espanta com tal privilégio e, se o Grego tivesse pontos de exclamação, tê-los-ia usado: «Vede que admirável amor o Pai nos consagrou em nos chamar filhos de Deus. E somo-lo de facto!»
+                </p>
+
+                <p>
+                    Tornamo-nos filhos pela graça da geração divina, recebida pela fé (Jo 1,12-13), na água e no Espírito do Baptismo (Jo 3,5). Cristo é o Filho único do Pai por natureza; nós somos filhos por graça, e São Paulo descreve a nossa filiação em termos de adopção (Gl 4,4-7; CIC 460, 1692). Não é uma dignidade só de nome: resulta de participarmos realmente na natureza divina (1 Jo 3,9; 2 Pd 1,4).
+                </p>
+
+                <p>
+                    E há mais: «ainda não se manifestou o que havemos de ser», talvez uma realidade demasiado maravilhosa para se pôr em palavras nesta vida, como descrever as cores a um cego ou a música a um surdo. Sabemos que «seremos semelhantes a Deus, porque O veremos tal como Ele é». A glória que espera os crentes é a visão directa de Cristo, bênção reservada aos puros (Mt 5,8; CIC 163, 2519), e isso basta-nos. Esta esperança dá-nos coragem para viver já a santidade, mesmo que implique sofrimento e renúncia: «Todo aquele que tem n'Ele esta esperança purifica-se a si mesmo, para ser puro, como Ele é puro».
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>O retrato do santo: as Bem-aventuranças (Mt 5)</span>
+                </h3>
+
+                <p>
+                    O Sermão da Montanha (Mt 5–7) resume a Lei da Nova Aliança e leva à perfeição a Antiga (CIC 1965-68). O cenário recorda a entrega da Lei no Sinai, mas Moisés desceu da montanha para levar a Lei ao povo, ao passo que Jesus ensina os discípulos que subiram até Ele. E «sentou-Se», a postura do Rabino que fala com autoridade. Para Santo Agostinho, a montanha significa os preceitos mais elevados: Deus deu leis menores aos que precisavam do freio do temor e leis maiores aos que estavam prontos para ser libertados pelo amor.
+                </p>
+
+                <p>
+                    As Bem-aventuranças lêem-se hoje porque descrevem a «personalidade de um santo». O termo Grego <i>makarios</i> declara que alguém já recebeu a bênção de Deus (Mt 16,17; Rm 4,7) ou pode esperá-la no futuro (Tg 1,12; Ap 14,13; 22,14). Estas pertencem ao segundo tipo: anunciam bênçãos plenamente realizadas no Céu. E formam uma cadeia.
+                </p>
+
+                <p>
+                    Os pobres em espírito vêm a Deus de mãos vazias, sem méritos próprios: até as boas obras são fruto da Sua graça (CIC 2544-47). Esta pobreza liga-se à material, que nos ensina a depender de Deus, enquanto a riqueza nos prende ao «reino da terra». Daqui nasce o resto. Choram pela sua pobreza e pelos seus pecados (Deus enxugará toda a lágrima: Ap 7,17); são humildes, como Moisés (Nm 12,3) e Jesus (Mt 11,29); têm fome e sede de justiça porque sabem que só Deus a dá (Mt 6,33); são misericordiosos, porque, reconhecendo o próprio pecado, se compadecem dos outros pecadores (CIC 2447). Esta purificação liberta o coração dos apegos ao mundo, e os puros de coração verão Deus, na visão beatífica (CIC 2517-19).
+                </p>
+
+                <p>
+                    Chegamos aos que promovem a paz, «porque serão chamados filhos de Deus» (CIC 2305). Convém parar aqui e abrir a Bíblia: procure a Carta de São Tiago, capítulo 4, versículos 1-10, e leia-a em voz alta. O primo do Senhor assimilou profundamente as Bem-aventuranças. De onde vêm as guerras e os conflitos? Das paixões que combatem dentro de nós: cobiçamos e não possuímos. Quem quer ser amigo do mundo faz-se inimigo de Deus; Deus resiste aos soberbos e dá a sua graça aos humildes; é preciso purificar as mãos e o coração, chorar, humilhar-se diante do Senhor. Reconhecemos as mãos e o coração do salmo e as primeiras bem-aventuranças. A paz de que Jesus fala não é fruto de negociações políticas, como se pacifistas e diplomatas hábeis pertencessem, por isso, ao Reino dos Céus: é a dos que alcançaram a paz com Deus e com os homens, ensinam os outros a tê-la e a encontrar a verdadeira alegria, negando as paixões desordenadas e voltando-se para Deus.
+                </p>
+
+                <p>
+                    Os perseguidos por amor da justiça são um incómodo para quem não quer abdicar das suas cobiças: lembram-lhes que não seguem o caminho de Deus e, ao não colaborar, tornam-se obstáculo. Mas a perseguição gera pobreza e mortificação, que ajudam ao desapego e a conhecer Deus, para que o único tesouro fique «nos céus». Assim, «tudo concorre para o bem dos que amam a Deus» (Rm 8,28), mesmo as perseguições.
+                </p>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-brand-accent-blue pt-4 block text-center">
+                    <span>Uma festa de triunfo</span>
+                </h3>
+
+                <p>
+                    Todos os Santos é uma grande festa de triunfo que, num certo sentido, «excede» a Páscoa: nesta celebramos a vitória do Deus-Homem sobre o mal; hoje, a de seres humanos frágeis, pelo poder de Deus, que vence pela fraqueza, até pela dos Seus servos. Os santos não eram super-homens, nem a santidade está fora do alcance de cada um de nós. Exige apenas a submissão constante à condução do Espírito Santo, momento a momento, dia após dia, e isso é possível pela graça dos sacramentos. Cada um de nós é chamado, pelo Baptismo, à santidade, e Deus não nos chama ao impossível.
+                </p>
+
+                <p>
+                    Aos que ainda perguntam «porquê?», a Igreja responde neste dia com uma multidão que ninguém pode contar: os que passaram pela tribulação e estão agora de pé diante do trono, de túnica branca e palma na mão.
+                </p>
+
+            </div>
+
+            <!-- Cartão Biográfico do Autor -->
+            <div id="author-section" class="flex flex-col sm:flex-row items-center sm:items-start gap-5 bg-white p-6 rounded-2xl border border-gray-100 shadow-xs max-w-3xl mx-auto my-12 text-center sm:text-left">
+                <div class="w-16 h-16 rounded-full border-2 border-brand-accent-orange overflow-hidden flex-shrink-0">
+                    <a href="../sobreHB" class="block w-full h-full">
+                        <img src="../Imagens/hugobacelo.png" alt="Hugo Bacelo" class="w-full h-full object-cover hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/100x100/002147/cfaf5c?text=HB';">
+                    </a>
+                </div>
+                <div class="flex flex-col items-center sm:items-start gap-1">
+                    <span class="text-[10px] text-gray-400 font-sans font-bold uppercase tracking-wider block leading-none">Autor:</span>
+                    <h4 class="font-serif text-xl font-bold text-brand-accent-blue mb-2 leading-tight">
+                        <a href="../sobreHB" class="hover:text-brand-accent-orange transition-colors">Hugo Bacelo</a>
+                    </h4>
+                    <a href="../sobreHB" class="inline-block px-5 py-2.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all font-sans font-bold text-xs uppercase tracking-wider text-center shadow-xs hover:-translate-y-0.5 active:translate-y-0 mt-1">
+                        Ver Mais <i class="fas fa-chevron-right ml-1 text-[9px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <section id="fontes-section" class="mt-12 pt-6 border-t border-gray-150 text-justify">
+                <h4 class="font-serif text-lg font-bold text-brand-accent-blue mb-4 text-justify">Fontes</h4>
+                <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2 font-inter text-justify">
+                    <li>Bergsma, John. The Word of the Lord: Reflections on the Sunday Mass Readings for Solemnities and Feasts. 2021, Emmaus Road Publishing.</li>
+                    <li>Hahn, Scott; Mitch, Curtis J.; et al. Ignatius Catholic Study Bible. Notas a Ap 7,2-4.9-14; Sl 24; 1 Jo 3,1-3; Mt 5,1-12a. 2024, Ignatius Press.</li>
+                    <li>Thoughty2. «History’s Most Devastating Hour No One Talks About». Vídeo: youtube.com/watch?v=IINgYyxLd-U.</li>
+                </ul>
+            </section>
+
+            <!-- Botões de Navegação -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-12 border-t border-b border-gray-150 py-8 font-inter text-xs uppercase tracking-wider font-bold">
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-blue text-white hover:bg-brand-accent-orange rounded-xl transition-all text-center">
+                    <i class="fas fa-arrow-left mr-1.5"></i> Voltar a Artigos
+                </a>
+                <a href="../catalogo-completo" class="w-full sm:w-auto px-6 py-3.5 bg-brand-accent-orange text-white hover:bg-brand-accent-blue rounded-xl transition-all text-center">
+                    Visitar o Catálogo da Editora <i class="fas fa-book-open ml-1.5"></i>
+                </a>
+                <a href="../artigos-geral" class="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-xl transition-all text-center flex items-center justify-center gap-1.5">
+                    Próximo Artigo <i class="fas fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- SECCÃO DE COMENTÁRIOS ESTILO CUSDIS (PORTUGUÊS, MINIMALISTA, GOOGLE SHEETS AS BACKEND) -->
+            <section class="mt-12 pt-6 border-t border-gray-200">
+                
+                <!-- Título Simples -->
+                <div class="mb-6">
+                    <h4 class="font-sans text-lg font-bold text-gray-800">Comentários</h4>
+                </div>
+
+                <!-- Alerta Superior de Feedback de Erros ou Informações -->
+                <div id="comment-alert" class="hidden mb-4 p-4 rounded-md text-xs font-sans"></div>
+
+                <!-- Formulário Minimalista Cusdis-style -->
+                <form id="comment-form" onsubmit="handleCommentSubmit(event)" class="space-y-4 mb-8">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="w-full sm:w-1/3">
+                            <input type="text" id="comment-author-name" required placeholder="Nome" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors">
+                        </div>
+                    </div>
+                    <div>
+                        <textarea id="comment-body-text" required rows="4" placeholder="Comentário" class="w-full px-3 py-2 bg-transparent border border-gray-300 text-sm font-sans focus:outline-none focus:border-gray-500 rounded-md transition-colors resize-y"></textarea>
+                    </div>
+                    
+                    <!-- Botão de Envio Simples e Minimalista -->
+                    <div class="flex items-center">
+                        <button type="submit" id="comment-submit-btn" class="w-full sm:w-auto border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-sm font-semibold px-6 py-2.5 rounded-md font-sans text-center">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Div de Carregamento (Loading) -->
+                <div id="comments-loading" class="py-6 text-center text-gray-400">
+                    <i class="fas fa-circle-notch fa-spin text-gray-455 text-xl mb-1"></i>
+                    <p class="text-[10px] font-sans">A carregar comentários...</p>
+                </div>
+
+                <!-- Lista de Comentários Cusdis-style -->
+                <div id="comments-list-container" class="space-y-6 pt-2">
+                    <!-- Gerado de forma ultra-limpa por JS -->
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Script de Gestão Inteligente dos Comentários (Sem Firebase, via Google Sheets) -->
+    <script>
+        // 1. O link do formulário Google onde as respostas são submetidas
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfa3Q0IRcH04CukIjG2MkiVgWFsUsg2UhxPtZAI7NZaqh7WLw/formResponse";
+        
+        // 2. Os IDs dos campos do seu formulário Google
+        const GOOGLE_ENTRY_NOME = "entry.291667979";       
+        const GOOGLE_ENTRY_COMENTARIO = "entry.1902103085"; 
+        const GOOGLE_ENTRY_PAGINA = "entry.1583473753";     
+
+        // 3. O link do seu Google Sheets (Necessita de estar público como "Qualquer pessoa com o link" -> "Leitor")
+        const GOOGLE_SHEETS_TSV_URL = "https://docs.google.com/spreadsheets/d/1XcepyAixWdIbTaOxalKsJ2--D-SMxf-XPHY-2Lw4hbU/edit?usp=sharing";
+
+        // Função para normalizar os IDs de página de forma uniforme
+        function normalizePageId(id) {
+            if (!id) return "porque-todos-os-santos-e-a-pergunta-de-1755";
+            return id.trim()
+                     .toLowerCase()
+                     .replace(/\.html$/, '')
+                     .split('/')
+                     .filter(Boolean)
+                     .pop() || "porque-todos-os-santos-e-a-pergunta-de-1755";
+        }
+
+        // ID único deste artigo
+        const rawPageId = window.location.pathname.split('/').pop().replace('.html', '') || 'porque-todos-os-santos-e-a-pergunta-de-1755';
+        const pageId = normalizePageId(rawPageId);
+
+        let fallbackComments = [];
+
+        // Carregar Comentários de forma totalmente automática usando a API oficial do Google Visualization
+        async function fetchComments() {
+            const listContainer = document.getElementById('comments-list-container');
+            const loader = document.getElementById('comments-loading');
+
+            if (GOOGLE_SHEETS_TSV_URL.includes("ExemploFolhaDeCalculoPublicada")) {
+                renderComments(fallbackComments);
+                if (loader) loader.classList.add('hidden');
+                return;
+            }
+
+            try {
+                const fetchUrl = getFetchUrl();
+                
+                const response = await fetch(fetchUrl, {
+                    method: "GET",
+                    credentials: "omit",
+                    cache: "no-store"
+                });
+                if (!response.ok) throw new Error("Erro ao obter dados.");
+                
+                const data = await response.text();
+
+                if (data.trim().startsWith('<html') || data.trim().startsWith('<!DOCTYPE') || data.includes('<meta')) {
+                    throw new Error("A folha de cálculo está configurada como Privada no Google Drive.");
+                }
+
+                const parsedComments = parseGVizData(data);
+                
+                syncLocalPendentes(parsedComments);
+                renderComments(parsedComments);
+            } catch (error) {
+                console.warn("Problema ao importar dados do Google Sheets:", error);
+                renderComments(fallbackComments);
+            } finally {
+                if (loader) loader.classList.add('hidden');
+            }
+        }
+
+        function getFetchUrl() {
+            let url = GOOGLE_SHEETS_TSV_URL.trim();
+            const salt = `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+            
+            if (url.includes('/spreadsheets/d/')) {
+                const matches = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+                if (matches && matches[1]) {
+                    const sheetId = matches[1];
+                    
+                    let gid = '0';
+                    const gidMatches = url.match(/[#?&]gid=([0-9]+)/);
+                    if (gidMatches && gidMatches[1]) {
+                        gid = gidMatches[1];
+                    }
+                    
+                    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${gid}&tqx=out:json&t=${salt}`;
+                }
+            }
+            return url + (url.includes('?') ? '&' : '?') + "t=" + salt;
+        }
+
+        function cleanCompare(str) {
+            if (!str) return "";
+            return str.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        function syncLocalPendentes(allParsedComments) {
+            let meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            if (meusPendentes.length === 0) return;
+
+            const MAX_AGE_MS = 24 * 60 * 60 * 1000;
+
+            const novosPendentes = meusPendentes.filter(pLocal => {
+                const idade = Date.now() - pLocal.timestamp;
+                if (idade > MAX_AGE_MS) return false;
+
+                const aprovadoNaFolha = allParsedComments.some(cSheet => 
+                    cSheet.approved &&
+                    normalizePageId(cSheet.page) === normalizePageId(pLocal.page) && 
+                    cleanCompare(cSheet.name) === cleanCompare(pLocal.name) &&
+                    cleanCompare(cSheet.text) === cleanCompare(pLocal.text)
+                );
+                
+                return !aprovadoNaFolha;
+            });
+
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(novosPendentes));
+        }
+
+        function parseGVizData(responseText) {
+            try {
+                const jsonStart = responseText.indexOf('{');
+                const jsonEnd = responseText.lastIndexOf('}');
+                if (jsonStart === -1 || jsonEnd === -1) return [];
+                
+                const jsonStr = responseText.substring(jsonStart, jsonEnd + 1);
+                const gvizData = JSON.parse(jsonStr);
+                
+                if (!gvizData || !gvizData.table || !gvizData.table.rows) return [];
+                
+                const table = gvizData.table;
+                const cols = table.cols || [];
+                
+                let timestampIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('carimbo') || c.label.toLowerCase().includes('time') || c.label.toLowerCase().includes('data')));
+                let nameIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('nome') || c.label.toLowerCase().includes('autor') || c.label.toLowerCase().includes('user') || c.label.toLowerCase().includes('name')));
+                let commentIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('coment') || c.label.toLowerCase().includes('texto') || c.label.toLowerCase().includes('mensagem') || c.label.toLowerCase().includes('body') || c.label.toLowerCase().includes('comment')));
+                let pageIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('pág') || c.label.toLowerCase().includes('pag') || c.label.toLowerCase().includes('artigo') || c.label.toLowerCase().includes('url') || c.label.toLowerCase().includes('id')));
+                let approvedIdx = cols.findIndex(c => c.label && (c.label.toLowerCase().includes('aprov') || c.label.toLowerCase().includes('status') || c.label.toLowerCase().includes('moder') || c.label.toLowerCase().includes('aceit') || c.label.toLowerCase().includes('visto')));
+
+                if (timestampIdx === -1) timestampIdx = 0;
+                if (nameIdx === -1) nameIdx = 1;
+                if (commentIdx === -1) commentIdx = 2;
+                if (pageIdx === -1) pageIdx = 3;
+                if (approvedIdx === -1) approvedIdx = 4;
+
+                const comments = [];
+                table.rows.forEach(row => {
+                    if (!row.c || row.c.length < 3) return;
+                    
+                    const rawDate = row.c[timestampIdx]?.f || row.c[timestampIdx]?.v || "";
+                    const name = (row.c[nameIdx] && row.c[nameIdx].v !== undefined && row.c[nameIdx].v !== null) ? String(row.c[nameIdx].v).trim() : "Anónimo";
+                    const text = (row.c[commentIdx] && row.c[commentIdx].v !== undefined && row.c[commentIdx].v !== null) ? String(row.c[commentIdx].v).trim() : "";
+                    const page = (row.c[pageIdx] && row.c[pageIdx].v !== undefined && row.c[pageIdx].v !== null) ? String(row.c[pageIdx].v).trim() : "";
+                    const approvedVal = (row.c[approvedIdx] && row.c[approvedIdx].v !== undefined && row.c[approvedIdx].v !== null) ? String(row.c[approvedIdx].v).trim().toLowerCase() : "";
+
+                    const approved = approvedVal === 'sim';
+
+                    let timestamp = Date.now();
+                    if (rawDate) {
+                        if (typeof rawDate === 'string' && rawDate.startsWith('Date(')) {
+                            try {
+                                const match = rawDate.match(/Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+),(\d+))?\)/);
+                                if (match) {
+                                    const y = parseInt(match[1], 10);
+                                    const m = parseInt(match[2], 10);
+                                    const d = parseInt(match[3], 10);
+                                    const hr = match[4] ? parseInt(match[4], 10) : 0;
+                                    const min = match[5] ? parseInt(match[5], 10) : 0;
+                                    const sec = match[6] ? parseInt(match[6], 10) : 0;
+                                    timestamp = new Date(y, m, d, hr, min, sec).getTime();
+                                }
+                            } catch(e) {}
+                        } else {
+                            timestamp = parseGoogleDate(rawDate);
+                        }
+                    }
+
+                    comments.push({ name, text, timestamp, page, approved });
+                });
+
+                return comments.sort((a, b) => b.timestamp - a.timestamp);
+            } catch (err) {
+                console.error("Falha ao analisar a tabela GViz:", err);
+                return [];
+            }
+        }
+
+        function parseGoogleDate(rawDate) {
+            if (!rawDate) return Date.now();
+            const parts = rawDate.trim().split(/[\s/:\-]/);
+            if (parts.length >= 3) {
+                if (parts[0].length === 4) {
+                    const y = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const d = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                } else {
+                    const d = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const y = parseInt(parts[2], 10);
+                    const hr = parts[3] ? parseInt(parts[3], 10) : 0;
+                    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+                    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
+                    return new Date(y, m, d, hr, min, sec).getTime();
+                }
+            }
+            return Date.now();
+        }
+
+        function renderComments(commentsArray) {
+            const listContainer = document.getElementById('comments-list-container');
+            const loader = document.getElementById('comments-loading');
+            if (loader) loader.classList.add('hidden');
+            listContainer.innerHTML = '';
+
+            const currentPageNormalized = normalizePageId(pageId);
+
+            const activeComments = commentsArray.filter(c => {
+                const commentPageNormalized = normalizePageId(c.page);
+                return commentPageNormalized === currentPageNormalized && c.approved;
+            });
+
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+
+            meusPendentes.forEach(p => {
+                if (!activeComments.some(c => cleanCompare(c.text) === cleanCompare(p.text) && cleanCompare(c.name) === cleanCompare(p.name))) {
+                    activeComments.unshift(p);
+                }
+            });
+
+            if (activeComments.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-left py-4 font-sans text-gray-400 text-sm italic">
+                        Não existem comentários de momento. Seja o primeiro a comentar.
+                    </div>
+                `;
+                return;
+            }
+
+            activeComments.forEach(comment => {
+                const dateText = formatCustomDate(comment.timestamp);
+                const commentEl = document.createElement('div');
+                commentEl.className = `py-4 border-b border-gray-150 transition-all space-y-1.5`;
+                
+                commentEl.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-sans font-bold text-gray-800 text-sm">${escapeHtml(comment.name)}</span>
+                            ${comment.isLocalPendente ? '<span class="bg-amber-50 text-amber-800 border border-amber-200 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-sans">Em Aprovação</span>' : ''}
+                        </div>
+                        <span class="text-xs text-gray-400 font-sans">${dateText}</span>
+                    </div>
+                    <div class="text-gray-700 font-sans text-sm leading-relaxed whitespace-pre-wrap">${escapeHtml(comment.text)}</div>
+                `;
+                listContainer.appendChild(commentEl);
+            });
+        }
+
+        async function handleCommentSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('comment-submit-btn');
+            const nameInput = document.getElementById('comment-author-name');
+            const textInput = document.getElementById('comment-body-text');
+
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+
+            if (!name || !text) return;
+
+            btn.disabled = true;
+            btn.textContent = "A enviar...";
+
+            const formData = new FormData();
+            formData.append(GOOGLE_ENTRY_NOME, name);
+            formData.append(GOOGLE_ENTRY_COMENTARIO, text);
+            formData.append(GOOGLE_ENTRY_PAGINA, pageId);
+
+            try {
+                await fetch(GOOGLE_FORM_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                saveLocalPendente({
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    page: pageId,
+                    approved: false,
+                    isLocalPendente: true
+                });
+
+                showAlert("✨ Comentário submetido com sucesso! Ficará visível assim que for aprovado pela editora.", "bg-emerald-50 text-emerald-800 border border-emerald-150 font-semibold");
+                textInput.value = '';
+                nameInput.value = '';
+            } catch (error) {
+                console.error("Erro na submissão:", error);
+                showAlert("Ocorreu um erro ao submeter o comentário. Tente novamente.", "bg-red-50 text-red-800 border border-red-200");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Enviar";
+                fetchComments(); 
+            }
+        }
+
+        function saveLocalPendente(commentObj) {
+            const meusPendentes = JSON.parse(localStorage.getItem(`meus_pendentes_${pageId}`) || '[]');
+            meusPendentes.push(commentObj);
+            localStorage.setItem(`meus_pendentes_${pageId}`, JSON.stringify(meusPendentes));
+        }
+
+        function showAlert(msg, bgClasses) {
+            const alertBox = document.getElementById('comment-alert');
+            if (!alertBox) return;
+            alertBox.className = `p-4 rounded-md text-xs font-sans ${bgClasses}`;
+            alertBox.innerHTML = msg;
+            alertBox.classList.remove('hidden');
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 8000);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function formatCustomDate(timestamp) {
+            if (!timestamp) return 'Agora';
+            const diff = Date.now() - timestamp;
+            if (diff < 60000) return 'Agora mesmo';
+            if (diff < 3600000) return `Há ${Math.round(diff / 60000)} min`;
+            if (diff < 86400000) return `Há ${Math.round(diff / 3600000)} horas`;
+            
+            const d = new Date(timestamp);
+            return d.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchComments);
+    </script>
+
+    <!-- Script 2: Navegação, Menu Mobile, Carrinho e Leitura -->
+    <script>
+        function getPrefix() {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/artigos/') || path.includes('/artigos-individuais/')) {
+                return '../';
+            }
+            return '';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+            
+            if (menu.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    menu.classList.remove('translate-x-full');
+                }, 20);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        function adjustAndCleanLinks(placeholderId) {
+            const container = document.getElementById(placeholderId);
+            if (!container) return;
+            const prefix = getPrefix();
+            
+            if (prefix !== '') {
+                container.querySelectorAll('a').forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        if (!href.startsWith('../')) {
+                            link.setAttribute('href', prefix + href);
+                        }
+                    }
+                });
+                container.querySelectorAll('img').forEach(img => {
+                    let src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('/') && !src.startsWith('../')) {
+                        img.setAttribute('src', prefix + src);
+                    }
+                });
+            }
+
+            container.querySelectorAll('a').forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('javascript:')) {
+                    if (href.endsWith('.html')) {
+                        link.setAttribute('href', href.slice(0, -5));
+                    } else if (href.includes('.html?')) {
+                        link.setAttribute('href', href.replace('.html?', '?'));
+                    } else if (href.includes('.html#')) {
+                        link.setAttribute('href', href.replace('.html#', '#'));
+                    }
+                }
+            });
+        }
+
+        function getSafePath(file) {
+            const currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file; 
+            try { 
+                const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href; 
+            } catch (e) { return file; }
+        }
+
+        async function loadComponents() {
+            const prefix = getPrefix();
+            try {
+                let navResp = await fetch(getSafePath(prefix + 'menu') + '?v=1.0.3');
+                if (!navResp.ok) {
+                    navResp = await fetch(getSafePath(prefix + 'menu.html') + '?v=1.0.3');
+                }
+                if (navResp.ok) {
+                    document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                    adjustAndCleanLinks('nav-placeholder');
+                }
+
+                let footResp = await fetch(getSafePath(prefix + 'rodape') + '?v=1.0.3');
+                if (!footResp.ok) {
+                    footResp = await fetch(getSafePath(prefix + 'rodape.html') + '?v=1.0.3');
+                }
+                if (footResp.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                    adjustAndCleanLinks('footer-placeholder');
+                }
+
+                updateCartUI();
+            } catch (e) { 
+                console.warn("Modo offline."); 
+            }
+        }
+
+        function updateCartUI() {
+            const items = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const total = items.reduce((s, i) => s + i.quantity, 0);
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(el => {
+                if (el) { 
+                    el.textContent = total; 
+                    el.classList.toggle('opacity-0', total === 0); 
+                }
+            });
+        }
+
+        function calculateReadingTime() {
+            const contentElement = document.getElementById('article-content');
+            const readingTimeElement = document.getElementById('reading-time');
+            if (!contentElement || !readingTimeElement) return;
+
+            const text = contentElement.innerText || contentElement.textContent;
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+            const readingTime = Math.ceil(words / 200);
+            readingTimeElement.textContent = readingTime;
+        }
+
+        // Monitorização de Scroll para a Barra de Progresso Superior e Percentagem Flutuante
+        window.addEventListener('scroll', () => {
+            const winScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+            const targetEl = document.getElementById('author-section');
+            let scrolled = 0;
+            
+            if (targetEl) {
+                const elementOffsetTop = targetEl.getBoundingClientRect().top + window.scrollY;
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const maxScroll = elementOffsetTop - winHeight + 100;
+                
+                if (maxScroll > 0) {
+                    scrolled = Math.round((winScroll / maxScroll) * 100);
+                } else {
+                    scrolled = 100;
+                }
+            } else {
+                const docHeight = Math.max(
+                    document.body.scrollHeight, 
+                    document.documentElement.scrollHeight,
+                    document.body.offsetHeight, 
+                    document.documentElement.offsetHeight,
+                    document.body.clientHeight, 
+                    document.documentElement.clientHeight
+                );
+                const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                const totalScrollable = docHeight - winHeight;
+                if (totalScrollable > 0) {
+                    scrolled = Math.round((winScroll / totalScrollable) * 100);
+                }
+            }
+            
+            if (scrolled > 100) scrolled = 100;
+            if (scrolled < 0) scrolled = 0;
+
+            const progressBar = document.getElementById('scroll-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
+
+            const scrollPercentageText = document.getElementById('scroll-percentage-text');
+            if (scrollPercentageText) {
+                scrollPercentageText.textContent = scrolled + '%';
+            }
+
+            const scrollPercentageDiv = document.getElementById('scroll-percentage');
+            if (scrollPercentageDiv) {
+                if (winScroll > 150) {
+                    scrollPercentageDiv.classList.remove('opacity-0');
+                    scrollPercentageDiv.classList.add('opacity-100');
+                } else {
+                    scrollPercentageDiv.classList.remove('opacity-100');
+                    scrollPercentageDiv.classList.add('opacity-0');
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            calculateReadingTime();
+        });
+    </script>
+</body>
+</html>
