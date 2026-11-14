@@ -40,6 +40,28 @@
     </script>
 
     <style>
+@keyframes pulse-ring-sm {
+    0%   { box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.5); }
+    70%  { box-shadow: 0 0 0 8px rgba(21, 128, 61, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(21, 128, 61, 0); }
+}
+.preorder-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #15803d;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 9999px;
+    margin-top: 0.5rem;
+    animation: pulse-ring-sm 2s infinite;
+}
+@media (prefers-reduced-motion: reduce) { .preorder-tag { animation: none; } }
+
         .book-shadow {
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 0 5px rgba(0, 0, 0, 0.04);
             transition: all 0.3s ease;
@@ -109,6 +131,7 @@
                         <option value="Teologia Católica">Teologia Católica</option>
                         <option value="Espiritualidade">Espiritualidade</option>
                         <option value="Evangelização">Evangelização</option>
+                        <option value="Ficção">Ficção</option>
                         <option value="História">História</option>
                     </select>
                     <select id="sort-order" class="h-10 px-3 border border-gray-200 rounded-lg bg-white text-sm cursor-pointer outline-none focus:border-brand-gold" onchange="filterAndSortBooks()">
@@ -248,6 +271,36 @@
                 visible: true, 
                 isComingSoon: false,
                 detailsUrl: "detalhes/sim-deus-existe"
+            },
+            {
+                id: 10, 
+                title: "O Verdadeiro Significado do Natal", 
+                author: "Michael Patrick Barber", 
+                price: 22.00, 
+                discountPrice: 19.80, 
+                category: "Formação Bíblica", 
+                image: "Imagens/vsncapa.PNG", 
+                techDetails: { pages: 220, isbn: "978-989-36716-7-2", binding: "Capa Mole (14 x 20 x 1.5 cm)", weight: "0,300 kg" }, 
+                visible: true, 
+                isComingSoon: false,
+                isPreOrder: true,
+                releaseDate: "23 Nov",
+                detailsUrl: "detalhes/verdadeiro-significado-natal"
+            },
+            {
+                id: 11, 
+                title: "Era uma vez em Roma", 
+                author: "Pe. Afonso Sampaio Soares", 
+                price: 17.50, 
+                discountPrice: 15.75, 
+                category: "Ficção", 
+                image: "Imagens/evrcapa.PNG", 
+                techDetails: { pages: 196, isbn: "978-989-49176-5-2", binding: "Capa Mole (14 x 20 x 1.4 cm)", weight: "0,240 kg" }, 
+                visible: true, 
+                isComingSoon: false,
+                isPreOrder: true,
+                releaseDate: "29 Nov",
+                detailsUrl: "detalhes/era-uma-vez-em-roma"
             }
         ];
 
@@ -351,7 +404,7 @@
             const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mr-0 md:mr-1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`;
             const cartIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 2.5h2l2 11h11l1-6h5.5"/><path d="m20.5 7-1.4 5.2a1 1 0 0 1-.95.8H7.5"/><path d="M8 8h9"/><path d="M17 17H7.5"/></svg>`;
             
-            const whiteCovers = ['tpcbcapa.png', 'etmcapa.png', 'aemjcapa.png', 'blccapa.png', 'dpcapa.png', 'vpccapa.png', 'semicapa.png', 'vcrcapa.png', 'sdecapa.PNG'];
+            const whiteCovers = ['tpcbcapa.png', 'etmcapa.png', 'aemjcapa.png', 'blccapa.png', 'dpcapa.png', 'vpccapa.png', 'semicapa.png', 'vcrcapa.png', 'sdecapa.PNG', 'vsncapa.PNG', 'evrcapa.PNG'];
 
             books.forEach(b => {
                 const hasDiscount = b.discountPrice && b.discountPrice < b.price;
@@ -368,10 +421,15 @@
                 // Botão Comprar: Fundo azul padrão, hover em VERDE (hover:bg-brand-buy-hover)
                 const buyBtnClass = (b.isComingSoon || b.isSoldOut)
                     ? 'bg-gray-300 cursor-not-allowed text-gray-500'
-                    : 'bg-brand-accent-blue text-white hover:bg-brand-buy-hover transition-colors duration-200 shadow-sm';
+                    : b.isPreOrder
+                        ? 'bg-brand-gold text-brand-accent-blue hover:bg-brand-gold-dark transition-colors duration-200 shadow-sm'
+                        : 'bg-brand-accent-blue text-white hover:bg-brand-buy-hover transition-colors duration-200 shadow-sm';
 
                 const unavailable = b.isComingSoon || b.isSoldOut;
-                const buyBtnContent = `${cartIcon}<span>${b.isSoldOut ? 'Esgotado' : b.isComingSoon ? 'Em breve' : 'Comprar'}</span>`;
+                const buyBtnContent = `${cartIcon}<span>${b.isSoldOut ? 'Esgotado' : b.isComingSoon ? 'Em breve' : b.isPreOrder ? 'Pré-reservar' : 'Comprar'}</span>`;
+                const preOrderTag = b.isPreOrder
+                    ? `<span class="preorder-tag">Pré-venda · ${b.releaseDate}</span>`
+                    : '';
                 
                 let coverHtml = '';
                 if (!b.isComingSoon) {
