@@ -990,6 +990,15 @@ if (notice) {
             });
         }
 
+function runInjectedScripts(container) {
+    if (!container) return;
+    container.querySelectorAll('script').forEach(function(old) {
+        var s = document.createElement('script');
+        s.text = old.textContent;
+        old.replaceWith(s);
+    });
+}
+
         async function loadComponents() {
             try {
                 var navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
