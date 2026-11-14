@@ -514,6 +514,15 @@
             });
         }
 
+function runInjectedScripts(container) {
+    if (!container) return;
+    container.querySelectorAll('script').forEach(function(old) {
+        var s = document.createElement('script');
+        s.text = old.textContent;
+        old.replaceWith(s);
+    });
+}
+
         async function loadComponents() {
             try {
                 var navResp = await fetch('../menu.html?v=' + Date.now());
@@ -523,6 +532,7 @@
                     if (navPlaceholder) {
                         navPlaceholder.innerHTML = menuHtml;
                         correctPaths(navPlaceholder);
+                        runInjectedScripts(navPlaceholder);
                     }
                 }
 
