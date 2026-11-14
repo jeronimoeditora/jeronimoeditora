@@ -200,9 +200,13 @@
                                     <label class="block text-sm font-medium text-gray-700 mb-1">País *</label>
                                     <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white shipping-input" onchange="loadCartSummary()">
                                         <option value="PT">Portugal (Continente e Ilhas)</option>
+                                        <option value="BRAGA_MAO">Braga (Entrega em mão · sem portes)</option>
                                         <option value="EU_Normal">Europa (Entrega Normal)</option>
                                         <option value="EU_Econ">Europa (Entrega Económica)</option>
                                     </select>
+                                        <p id="braga-note" class="hidden mt-2 text-xs text-green-700 bg-green-50 border border-green-100 rounded-lg p-3 font-sans leading-snug">
+                                            <i class="fas fa-hand-holding-heart mr-1"></i> Entregamos pessoalmente, sem custos, em Braga. Entraremos em contacto para combinar o dia e a hora.
+                                        </p>
                                 </div>
                                 
                                 <div class="pt-6 border-t border-gray-100 mt-4">
@@ -312,7 +316,7 @@
                         <h2 class="font-serif text-xl md:text-2xl font-bold mb-4 border-b border-white/20 pb-2">Carrinho de Compras</h2>
                         
                         <div id="summary-list" class="space-y-5 mb-6 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar"></div>
-
+                        <div id="preorder-notice" class="hidden mt-4 p-3 rounded-lg bg-brand-gold/15 border border-brand-gold/40 text-xs text-brand-gold font-sans leading-snug"></div>
                         <div id="suggestions-container" class="mt-4 pt-4 border-t border-white/10 hidden">
                             <h3 id="suggestions-header" class="text-[9px] font-bold uppercase tracking-wider text-brand-gold mb-3 flex items-center font-sans">
                                 <i class="fas fa-plus-circle mr-2"></i> Complete a sua encomenda
@@ -382,6 +386,8 @@
             { id: 7, title: "A Sagrada Escritura no Magistério da Igreja", price: 13.00, weight: 267 },
             { id: 8, title: "Viva Cristo Rei!", price: 19.80, weight: 335 },
             { id: 9, title: "Sim, Deus Existe", price: 16.20, weight: 200 },
+            { id: 10, title: "O Verdadeiro Significado do Natal", price: 19.80, weight: 300 },
+            { id: 11, title: "Era uma vez em Roma", price: 15.75, weight: 240 },
             { id: 101, title: "São Jerónimo a Escrever", price: 3.90, weight: 50, image: "Imagens/postal1.png" },
             { id: 102, title: "São Jerónimo 1", price: 3.90, weight: 50, image: "Imagens/postal2.png" },
             { id: 103, title: "São Jerónimo 2", price: 3.90, weight: 50, image: "Imagens/postal3.png" },
@@ -392,7 +398,14 @@
         var UNAVAILABLE = {
             2: "A Eucaristia é mesmo Jesus (esgotado)",
             6: "Vai para o Céu (esgotado)",
-};
+        };
+
+        var PREORDER = {
+            10: { title: "O Verdadeiro Significado do Natal", date: "23 de Novembro" },
+            11: { title: "Era uma vez em Roma", date: "29 de Novembro" },
+
+
+        };
 
         function removeUnavailableItems() {
             var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
@@ -594,14 +607,23 @@
             
             var custoPortes = 0;
             var badge = document.getElementById('optimizacao-badge');
-
+            var entregaEmMao = (destino === 'BRAGA_MAO');
+            var bragaNote = document.getElementById('braga-note');
+            if (bragaNote) bragaNote.classList.toggle('hidden', !entregaEmMao);
+            
             if (items.length > 0 && pesoTotal > 0 && !apenasCursos) {
-                var pesoFinal = pesoTotal + SHIPPING_MARGIN;
-                var numPacotes = Math.ceil(pesoFinal / 5000), pesoPorPacote = pesoFinal / numPacotes;
-                for (var i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, destino);
-                
-                if (badge) {
-                    badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Envio Editorial CTT (Portes Físicos)</span>`;
+                if (entregaEmMao) {
+                    custoPortes = 0;
+                    if (badge) {
+                        badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Entrega em mão em Braga · Sem portes</span>`;
+                    }
+                } else {
+                    var pesoFinal = pesoTotal + SHIPPING_MARGIN;
+                    var numPacotes = Math.ceil(pesoFinal / 5000), pesoPorPacote = pesoFinal / numPacotes;
+                    for (var i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, destino);
+                    if (badge) {
+                        badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Envio Editorial CTT (Portes Físicos)</span>`;
+                    }
                 }
             } else {
                 custoPortes = 0;
@@ -627,9 +649,26 @@
                 } else if (contemCursos && contemFisicos) {
                     successMsg.textContent = "Agradecemos a sua preferência. Validaremos o comprovativo com a maior brevidade para proceder à expedição dos artigos físicos e ao envio da respectiva chave de acesso ao curso por correio electrónico.";
                 } else {
-                    successMsg.textContent = "Agradecemos a sua preferência. Validaremos o comprovativo de imediato para dar seguimento à expedição postal da sua encomenda.";
+                    successMsg.textContent = "Agradecemos a sua preferência. Validaremos o comprovativo de imediato para dar seguimento à expedição da sua encomenda.";
                 }
             }
+
+var preItems = items.filter(function(i) { return PREORDER[i.id]; });
+var notice = document.getElementById('preorder-notice');
+if (notice) {
+    if (preItems.length === 0) {
+        notice.classList.add('hidden');
+    } else {
+        var maisTarde = preItems.map(function(i) { return PREORDER[i.id].date; }).sort().pop();
+        var nomes = preItems.map(function(i) { return PREORDER[i.id].title; }).join(', ');
+        var verbo = preItems.length > 1 ? ' só serão expedidos' : ' só será expedido';
+        notice.innerHTML = '<i class="fas fa-clock mr-1.5"></i> <strong>Pré-venda:</strong> ' + nomes + verbo + ' após o lançamento. ' +
+            (items.length > preItems.length
+                ? 'Se encomendar também livros em stock, a encomenda seguirá toda junta, a partir de ' + maisTarde + '.'
+                : 'Envio a partir de ' + maisTarde + '.');
+        notice.classList.remove('hidden');
+    }
+}
 
             renderSuggestions(items);
             validateFinalButton();
@@ -833,6 +872,16 @@
             loadText.textContent = "A preparar ficheiros...";
             progress.style.width = "20%";
             
+            var itensChk = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            var soCursos = itensChk.length > 0 && !itensChk.some(function(i) { return i.type !== 'curso'; });
+            var cpChk = document.getElementById('cod-postal').value.trim();
+            if (!soCursos && document.getElementById('pais').value === 'BRAGA_MAO' && !/^47[01]\d/.test(cpChk)) {
+                document.getElementById('error-message').textContent = "A entrega em mão só está disponível em Braga (códigos postais 4700 a 4719). Escolha outro destino para receber por CTT.";
+                document.getElementById('error-modal').classList.remove('hidden');
+                overlay.classList.add('hidden');
+                return;
+            }
+
             var cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             var method = document.querySelector('input[name="payment-method"]:checked')?.value;
             var fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
@@ -844,7 +893,7 @@
             // Lógica inteligente para definir o tipo de correio electrónico e instruções do script
             var tipoEncomenda = "fisica";
             var assuntoEmail = "Confirmação de Encomenda - Jerónimo Editora";
-            var instrucoesEmail = "Encomenda constituída exclusivamente por artigos físicos. Proceder à expedição postal.";
+            var instrucoesEmail = "Encomenda constituída exclusivamente por artigos físicos. Proceder à expedição.";
 
             if (apenasCursos) {
                 tipoEncomenda = "digital";
@@ -853,7 +902,11 @@
             } else if (contemCursos && contemFisicos) {
                 tipoEncomenda = "mista";
                 assuntoEmail = "Confirmação de Encomenda e Acesso ao Curso - Jerónimo Editora";
-                instrucoesEmail = "Encomenda mista. Proceder à expedição postal dos artigos físicos e enviar chave de acesso do curso por correio electrónico o mais breve possível.";
+                instrucoesEmail = "Encomenda mista. Proceder à expedição dos artigos físicos e enviar chave de acesso do curso por correio electrónico o mais breve possível.";
+            }
+
+            if (!apenasCursos && document.getElementById('pais').value === 'BRAGA_MAO') {
+                instrucoesEmail = "ENTREGA EM MÃO EM BRAGA. NÃO ENVIAR PELOS CTT. Contactar o cliente para combinar a entrega. " + instrucoesEmail;
             }
 
             try {
@@ -885,7 +938,7 @@
                         nr_andar: document.getElementById('nr-andar').value,
                         cod_postal: document.getElementById('cod-postal').value,
                         cidade: document.getElementById('cidade').value,
-                        pais: document.getElementById('pais').value
+                        pais: document.getElementById('pais').value === 'BRAGA_MAO' ? 'Braga (ENTREGA EM MÃO)' : document.getElementById('pais').value
                     },
                     faturacao: (document.getElementById('choice-nao') && document.getElementById('choice-nao').checked && !apenasCursos) ? {
                         morada: document.getElementById('morada-fat').value,
@@ -905,7 +958,7 @@
                         fileName: fileInput.files[0].name
                     },
                     itens: cartItems.map(function(i) {
-                        return { titulo: i.title, qtd: i.quantity, preco_unit: i.price, tipo: i.type || "físico" };
+                        return { titulo: i.title + (PREORDER[i.id] ? " [PRÉ-VENDA " + PREORDER[i.id].date + "]" : ""), qtd: i.quantity, preco_unit: i.price, tipo: i.type || "físico" };
                     })
                 };
                 
@@ -921,10 +974,11 @@
                     document.getElementById('success-modal').classList.remove('hidden');
                     localStorage.removeItem('cartItems');
                 }, 1000);
-            } catch (error) {
-                overlay.classList.add('hidden');
-                document.getElementById('error-modal').classList.remove('hidden');
-            }
+                } catch (error) {
+                    overlay.classList.add('hidden');
+                    document.getElementById('error-message').textContent = "Ocorreu um problema ao processar a sua encomenda. Verifique a sua ligação.";
+                    document.getElementById('error-modal').classList.remove('hidden');
+                }
         }
 
         function updateCartUI() {
