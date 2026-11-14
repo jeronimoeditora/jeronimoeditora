@@ -1005,7 +1005,7 @@ function runInjectedScripts(container) {
                 if (!navResp.ok) {
                     navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
                 }
-                if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
+                if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text(); runInjectedScripts(document.getElementById('nav-placeholder'));
                 
                 var footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
                 if (!footResp.ok) {
