@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+    <title>Encomenda Confirmada | Jerónimo Editora</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto:wght@300;400;500;700;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Roboto"', 'sans-serif'],
+                        lora: ['"Lora"', 'serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#F8F8F8',
+                        'brand-text': '#333333',
+                        'brand-accent-red': '#800000',
+                        'brand-accent-blue': '#002147',
+                        'brand-gold': '#cfaf5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * { font-style: normal !important; }
+        body { font-family: 'Roboto', sans-serif; color: #333333; background-color: #F8F8F8; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        .font-lora { font-family: 'Lora', serif; }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #800000; border-radius: 50%; width: 44px; height: 44px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
+
+    <div id="nav-placeholder" class="mb-24"></div>
+
+    <main class="flex-grow pt-8 pb-16">
+        <div class="max-w-2xl mx-auto px-4 md:px-6">
+
+            <!-- A confirmar -->
+            <section id="estado-a-confirmar" class="bg-white rounded-xl shadow-lg border border-gray-100 p-8 md:p-10 text-center">
+                <div class="loader mx-auto mb-5"></div>
+                <h1 class="font-serif text-2xl md:text-3xl font-bold text-brand-accent-blue mb-2">A confirmar o pagamento</h1>
+                <p class="text-sm text-gray-500 font-sans">Isto demora apenas alguns segundos. Por favor, não feche esta janela.</p>
+            </section>
+
+            <!-- Paga -->
+            <section id="estado-paga" class="hidden fade-in">
+                <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-6 md:p-10">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 rounded-full bg-green-50 border border-green-100 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-check text-green-600 text-2xl"></i>
+                        </div>
+                        <h1 class="font-serif text-3xl md:text-4xl font-bold text-brand-accent-blue mb-3">Obrigado<span id="ok-nome"></span>!</h1>
+                        <p class="font-sans text-gray-600">O pagamento foi confirmado e a sua encomenda está registada.</p>
+                        <p class="font-sans text-xs uppercase tracking-widest text-gray-400 mt-5">Encomenda</p>
+                        <p id="ok-numero" class="font-sans text-2xl font-black text-brand-accent-blue tracking-wide"></p>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-6">
+                        <h2 class="font-serif text-lg font-bold text-brand-accent-red mb-4">Resumo</h2>
+                        <ul id="ok-itens" class="space-y-3 font-sans text-sm"></ul>
+                        <div class="mt-4 pt-4 border-t border-gray-100 space-y-1 font-sans text-sm">
+                            <div class="flex justify-between text-gray-500"><span>Portes de envio</span><span id="ok-portes"></span></div>
+                            <div class="flex justify-between text-lg font-bold text-brand-accent-blue pt-1"><span class="font-serif">Total pago</span><span id="ok-total"></span></div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-5 rounded-xl bg-[#fcf7e8] border border-brand-gold/50">
+                        <h2 class="font-serif text-lg font-bold text-brand-accent-blue mb-3">O que acontece agora</h2>
+                        <ul id="ok-passos" class="space-y-2.5 font-sans text-sm text-gray-700 leading-relaxed"></ul>
+                    </div>
+
+                    <div class="mt-8 flex flex-col sm:flex-row gap-3">
+                        <a href="catalogo-completo" class="flex-1 text-center bg-brand-accent-blue text-white py-3.5 rounded-xl font-bold hover:bg-black transition-colors shadow-md font-sans text-sm uppercase tracking-wider">Continuar a ver livros</a>
+                        <a href="index" class="flex-1 text-center border border-brand-accent-blue text-brand-accent-blue py-3.5 rounded-xl font-bold hover:bg-gray-50 transition-colors font-sans text-sm uppercase tracking-wider">Voltar ao início</a>
+                    </div>
+                </div>
+                <p class="text-center text-xs text-gray-500 font-sans mt-6">Alguma dúvida sobre a sua encomenda? Escreva-nos para <a href="mailto:editorajeronimo@gmail.com" class="underline hover:text-brand-accent-red">editorajeronimo@gmail.com</a>, indicando o número da encomenda.</p>
+            </section>
+
+            <!-- Não concluída -->
+            <section id="estado-falhou" class="hidden fade-in bg-white rounded-xl shadow-lg border border-gray-100 p-8 md:p-10 text-center">
+                <div class="w-16 h-16 rounded-full bg-amber-50 border border-amber-100 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-hourglass-half text-amber-600 text-2xl"></i>
+                </div>
+                <h1 id="falhou-titulo" class="font-serif text-2xl md:text-3xl font-bold text-brand-accent-blue mb-3"></h1>
+                <p id="falhou-texto" class="font-sans text-gray-600 leading-relaxed mb-8"></p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="checkout" class="flex-1 text-center bg-brand-accent-blue text-white py-3.5 rounded-xl font-bold hover:bg-black transition-colors shadow-md font-sans text-sm uppercase tracking-wider">Voltar ao checkout</a>
+                    <a href="contacto" class="flex-1 text-center border border-brand-accent-blue text-brand-accent-blue py-3.5 rounded-xl font-bold hover:bg-gray-50 transition-colors font-sans text-sm uppercase tracking-wider">Contactar a editora</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec";
+
+        // Em localhost usa-se a implantação de teste escolhida no checkout.
+        function urlDoScript() {
+            if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
+                try { var guardado = sessionStorage.getItem('jeronimoScript'); if (guardado) return guardado; } catch (err) {}
+            }
+            return GOOGLE_SCRIPT_URL;
+        }
+
+        async function chamarScript(dados) {
+            var resposta = await fetch(urlDoScript(), { method: 'POST', body: JSON.stringify(dados) });
+            return JSON.parse(await resposta.text());
+        }
+
+        function euro(valor) {
+            return '€ ' + Number(valor || 0).toFixed(2).replace('.', ',');
+        }
+
+        function mostrar(id) {
+            ['estado-a-confirmar', 'estado-paga', 'estado-falhou'].forEach(function(s) {
+                document.getElementById(s).classList.toggle('hidden', s !== id);
+            });
+            window.scrollTo(0, 0);
+        }
+
+        function mostrarFalha(titulo, texto) {
+            document.getElementById('falhou-titulo').textContent = titulo;
+            document.getElementById('falhou-texto').textContent = texto;
+            mostrar('estado-falhou');
+        }
+
+        function linhaPasso(icone, texto) {
+            var li = document.createElement('li');
+            li.className = 'flex gap-3';
+            var i = document.createElement('i');
+            i.className = 'fas ' + icone + ' text-brand-gold mt-1 w-4 text-center flex-shrink-0';
+            var span = document.createElement('span');
+            span.textContent = texto;
+            li.appendChild(i);
+            li.appendChild(span);
+            return li;
+        }
+
+        function mostrarPaga(resposta) {
+            var r = resposta.resumo || {};
+            document.getElementById('ok-nome').textContent = r.primeiroNome ? ', ' + r.primeiroNome : '';
+            document.getElementById('ok-numero').textContent = resposta.encomenda || '';
+
+            var lista = document.getElementById('ok-itens');
+            lista.innerHTML = '';
+            (r.itens || []).forEach(function(item) {
+                var li = document.createElement('li');
+                li.className = 'flex justify-between gap-4';
+                var nome = document.createElement('span');
+                nome.className = 'text-gray-700';
+                nome.textContent = item.qtd + ' × ' + item.titulo;
+                var valor = document.createElement('span');
+                valor.className = 'font-medium text-gray-800 whitespace-nowrap';
+                valor.textContent = euro(item.valor);
+                li.appendChild(nome);
+                li.appendChild(valor);
+                lista.appendChild(li);
+            });
+            document.getElementById('ok-portes').textContent = r.entregaEmMao ? 'Entrega em mão' : euro(r.portes);
+            document.getElementById('ok-total').textContent = euro(r.total);
+
+            var passos = document.getElementById('ok-passos');
+            passos.innerHTML = '';
+            if (r.email) passos.appendChild(linhaPasso('fa-envelope', 'Enviámos a confirmação para ' + r.email + '. Se não a encontrar, veja também a pasta de spam.'));
+            if (r.entregaEmMao) {
+                passos.appendChild(linhaPasso('fa-hand-holding-heart', 'Entraremos em contacto para combinar o dia e a hora da entrega em mão em Braga.'));
+            } else if (r.preVenda) {
+                passos.appendChild(linhaPasso('fa-clock', 'A sua encomenda inclui livros em pré-venda e segue toda junta após o lançamento, a partir de ' + r.preVenda + '.'));
+            } else {
+                passos.appendChild(linhaPasso('fa-box', 'Preparamos a sua encomenda e enviamo-la pelos CTT no prazo aproximado de 2 dias úteis.'));
+            }
+            if (!r.entregaEmMao) passos.appendChild(linhaPasso('fa-truck', 'Receberá um novo e-mail quando a encomenda for expedida.'));
+
+            try { localStorage.removeItem('cartItems'); } catch (err) {}
+            updateCartUI();
+            mostrar('estado-paga');
+        }
+
+        async function confirmar() {
+            var m = window.location.search.match(/[?&]session_id=(cs_(?:test|live)_[A-Za-z0-9]+)/);
+            if (!m) {
+                mostrarFalha('Não há nenhuma encomenda para mostrar', 'Esta página mostra a confirmação depois de um pagamento. Se acabou de pagar e chegou aqui por outro caminho, verifique o seu e-mail.');
+                return;
+            }
+            var resposta = null;
+            // MB WAY e cartão confirmam de imediato; as novas tentativas cobrem pequenos atrasos.
+            for (var tentativa = 0; tentativa < 6; tentativa++) {
+                try {
+                    resposta = await chamarScript({ type: 'checkout_status', session_id: m[1] });
+                    if (resposta.ok && resposta.estado !== 'por pagar') break;
+                } catch (err) { resposta = null; }
+                await new Promise(function(r) { setTimeout(r, 2500); });
+            }
+
+            if (resposta && resposta.ok && resposta.estado === 'paga') {
+                mostrarPaga(resposta);
+            } else if (resposta && resposta.estado === 'expirada') {
+                mostrarFalha('O pagamento não foi concluído', 'A sessão de pagamento expirou e nada foi cobrado. O seu carrinho continua guardado: pode voltar ao checkout e tentar de novo.');
+            } else if (resposta && resposta.estado === 'por pagar') {
+                mostrarFalha('O pagamento ainda não foi concluído', 'Não recebemos a confirmação do pagamento. Se recusou o pedido no MB WAY ou o cartão não foi aceite, nada foi cobrado e pode tentar de novo. Se já pagou, receberá o e-mail de confirmação dentro de alguns minutos.');
+            } else {
+                mostrarFalha('Ainda não conseguimos confirmar', 'Se já pagou, não se preocupe: a encomenda fica registada e receberá o e-mail de confirmação dentro de alguns minutos. Se tiver dúvidas, contacte-nos.');
+            }
+            // O endereço mantém o session_id: recarregar a página volta a mostrar a confirmação.
+        }
+
+        function updateCartUI() {
+            var count = 0;
+            try { count = JSON.parse(localStorage.getItem('cartItems') || '[]').reduce(function(s, i) { return s + i.quantity; }, 0); } catch (err) {}
+            document.querySelectorAll('#cart-count, #cart-count-mobile').forEach(function(el) {
+                if (el) { el.textContent = count; el.classList.toggle('opacity-0', count === 0); }
+            });
+        }
+
+        function getSafePath(file) {
+            var currentUrl = window.location.href;
+            if (currentUrl.startsWith('blob:') || currentUrl.startsWith('file:')) return file;
+            try {
+                var baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                return new URL(file, baseUrl).href;
+            } catch (e) { return file; }
+        }
+
+        function runInjectedScripts(container) {
+            if (!container) return;
+            container.querySelectorAll('script').forEach(function(old) {
+                var s = document.createElement('script');
+                s.text = old.textContent;
+                old.replaceWith(s);
+            });
+        }
+
+        async function loadComponents() {
+            try {
+                var navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
+                if (!navResp.ok) navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
+                if (navResp.ok) { document.getElementById('nav-placeholder').innerHTML = await navResp.text(); runInjectedScripts(document.getElementById('nav-placeholder')); }
+                var footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                if (!footResp.ok) footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
+                if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
+                updateCartUI();
+            } catch (e) { console.warn("Modo offline."); }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadComponents();
+            confirmar();
+        });
+    </script>
+
+    <!-- GoatCounter Analytics Tracker -->
+    <script data-goatcounter="https://editorajeronimo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

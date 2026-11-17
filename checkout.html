@@ -126,15 +126,7 @@
         </div>
     </div>
 
-    <!-- Modais de Sucesso e Erro -->
-    <div id="success-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4 text-center">
-        <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full">
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-green-600 mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center">Pagamento confirmado!</h3>
-            <p class="text-gray-600 mb-2 font-sans text-sm text-center">Encomenda <strong id="success-order-id" class="text-brand-accent-blue"></strong></p>
-            <p id="success-modal-msg" class="text-gray-650 mb-6 font-sans text-sm text-center">Agradecemos a sua encomenda. Receberá um e-mail de confirmação.</p>
-            <a href="index" class="inline-block w-full bg-brand-accent-blue text-white py-3 rounded-xl font-bold hover:bg-black transition-colors shadow-lg text-center font-sans text-sm uppercase tracking-wider">Voltar ao Início</a>
-        </div>
+    <!-- Modal de Erro -->
     </div>
 
     <div id="error-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4 text-center">
@@ -599,18 +591,6 @@
             document.getElementById('summary-shipping').textContent = `€ ${custoPortes.toFixed(2).replace('.', ',')}`;
             document.getElementById('summary-total').textContent = `€ ${(subtotal + custoPortes).toFixed(2).replace('.', ',')}`;
             
-            // Personaliza o ecrã de feedback de submissão se for exclusivamente cursos ou misto (Antigo Acordo Ortográfico)
-            var successMsg = document.getElementById('success-modal-msg');
-            if (successMsg) {
-                if (apenasCursos) {
-                    successMsg.textContent = "Agradecemos a sua preferência. Enviaremos por correio electrónico a chave de acesso ao curso para o contacto indicado.";
-                } else if (contemCursos && contemFisicos) {
-                    successMsg.textContent = "Agradecemos a sua preferência. Daremos seguimento à expedição dos artigos físicos e enviaremos por correio electrónico a chave de acesso ao curso.";
-                } else {
-                    successMsg.textContent = "Agradecemos a sua preferência. Receberá um e-mail de confirmação e daremos seguimento à expedição da sua encomenda.";
-                }
-            }
-
 var preItems = items.filter(function(i) { return PREORDER[i.id]; });
 var notice = document.getElementById('preorder-notice');
 if (notice) {
@@ -917,35 +897,10 @@ if (notice) {
             }
         }
 
-        // Regresso da Stripe: checkout?session_id=cs_...
-        async function verificarRegresso() {
-            var m = window.location.search.match(/[?&]session_id=(cs_(?:test|live)_[A-Za-z0-9]+)/);
-            if (!m) return;
-            mostrarCarregamento("A confirmar o pagamento...");
-            var resposta = null;
-            for (var tentativa = 0; tentativa < 5; tentativa++) {
-                try {
-                    resposta = await chamarScript({ type: 'checkout_status', session_id: m[1] });
-                    if (resposta.ok && resposta.estado !== 'por pagar') break;
-                } catch (err) { resposta = null; }
-                await new Promise(function(r) { setTimeout(r, 2000); });
-            }
-            esconderCarregamento();
-            try { window.history.replaceState(null, '', window.location.pathname); } catch (err) {}
-
-            if (resposta && resposta.estado === 'paga') {
-                // A mensagem depende do tipo de artigos: guarda-se antes de esvaziar o carrinho.
-                var mensagem = document.getElementById('success-modal-msg').textContent;
-                localStorage.removeItem('cartItems');
-                updateCartUI();
-                loadCartSummary();
-                document.getElementById('success-modal-msg').textContent = mensagem;
-                document.getElementById('success-order-id').textContent = resposta.encomenda || '';
-                document.getElementById('success-modal').classList.remove('hidden');
-            } else if (resposta && resposta.estado === 'expirada') {
-                mostrarErro("O pagamento não foi concluído e a sessão expirou. O seu carrinho continua guardado: pode tentar de novo.");
-            } else {
-                mostrarErro("Ainda não recebemos a confirmação do pagamento. Se já pagou, receberá o e-mail de confirmação dentro de alguns minutos.");
+        // Regressos antigos da Stripe (checkout?session_id=...) seguem para a página de confirmação.
+        function verificarRegresso() {
+            if (/[?&]session_id=cs_/.test(window.location.search)) {
+                window.location.replace('encomenda-confirmada' + window.location.search);
             }
         }
 
