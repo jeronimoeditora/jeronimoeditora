@@ -700,8 +700,9 @@ if (notice) {
             loadCartSummary();
         }
 
-        // Chave pública da Stripe (pode estar no site). Em produção, trocar pela pk_live_...
-        var STRIPE_PUBLISHABLE_KEY = "pk_test_51UcpceIlkMoZfw7wGIkzn8N8nEx3JMWDddvuvgEOhVwB1sXkEp8wiV7nO4sjfbWt0FTWkjWclFTp9l3dPaN7cv9700oxr8yCXa";
+        // Chave pública da Stripe (pode estar no site). Tem de ser do mesmo modo que a chave
+        // secreta do script: pk_live_ com sk_live_/rk_live_, pk_test_ com sk_test_.
+        var STRIPE_PUBLISHABLE_KEY = "pk_live_51UcpceIlkMoZfw7whB0z6yxn3Npt6qLYl3LFlyrJK5NiBzkB5K4IbCWiY5YqKA51cfiAbl6I4C64YZLNk5K09g0W00a09XxcVC";
         var stripeCheckout = null;
 
         // Em localhost pode testar-se outra implantação do script: checkout?script=<id da implantação>
