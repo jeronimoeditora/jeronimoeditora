@@ -12,6 +12,8 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Stripe (pagamentos MB WAY e cartão) -->
+    <script src="https://js.stripe.com/endive/stripe.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <script>
@@ -128,8 +130,9 @@
     <div id="success-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4 text-center">
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-green-600 mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center">Pedido recebido!</h3>
-            <p id="success-modal-msg" class="text-gray-650 mb-6 font-sans text-sm text-center">Agradecemos o seu pedido. Iremos validar o comprovativo de imediato.</p>
+            <h3 class="text-2xl font-bold font-serif text-brand-accent-blue mb-2 text-center">Pagamento confirmado!</h3>
+            <p class="text-gray-600 mb-2 font-sans text-sm text-center">Encomenda <strong id="success-order-id" class="text-brand-accent-blue"></strong></p>
+            <p id="success-modal-msg" class="text-gray-650 mb-6 font-sans text-sm text-center">Agradecemos a sua encomenda. Receberá um e-mail de confirmação.</p>
             <a href="index" class="inline-block w-full bg-brand-accent-blue text-white py-3 rounded-xl font-bold hover:bg-black transition-colors shadow-lg text-center font-sans text-sm uppercase tracking-wider">Voltar ao Início</a>
         </div>
     </div>
@@ -250,63 +253,15 @@
                         </form>
                     </section>
 
-                    <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg border border-gray-100">
-                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">2. Método de Pagamento</h2>
-                        <p class="text-xs text-gray-400 mb-6 font-sans">Efectue o pagamento através de um dos seguintes meios:</p>
-                        
-                        <div class="space-y-4">
-                            <div class="border rounded-lg overflow-hidden shadow-sm">
-                                <label class="flex items-center space-x-3 p-4 cursor-pointer hover:bg-gray-50">
-                                    <input type="radio" name="payment-method" id="payment-mbway" value="mbway" checked class="radio-small" onchange="updatePaymentDetails()">
-                                    <span class="text-gray-800 font-bold font-sans">MB WAY</span>
-                                </label>
-                                <div id="mbway-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white">
-                                    <div class="payment-info-box mb-4">
-                                        <i class="fas fa-phone-alt text-[#00c04b] text-xl"></i>
-                                        <div>
-                                            <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1">Contacto:</p>
-                                            <p class="text-xl font-bold text-brand-accent-blue leading-none">939 667 267</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-col items-start w-full">
-                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight font-sans">Anexe o comprovativo após envio via MB WAY *:</p>
-                                        <input type="file" id="proof-file-mbway" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('mbway')" />
-                                        <label for="proof-file-mbway" class="btn-attach font-sans uppercase tracking-wider text-xs">
-                                            <i class="fas fa-upload mr-2"></i> Anexar comprovativo
-                                        </label>
-                                        <div id="file-display-mbway" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
-                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-mbway" class="truncate max-w-[200px]"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="border rounded-lg overflow-hidden shadow-sm">
-                                <label class="flex items-center space-x-3 p-4 cursor-pointer hover:bg-gray-50">
-                                    <input type="radio" name="payment-method" id="payment-transfer" value="bank-transfer" class="radio-small" onchange="updatePaymentDetails()">
-                                    <span class="text-gray-800 font-bold font-sans">Transferência Bancária</span>
-                                </label>
-                                <div id="transfer-details" class="px-4 pb-6 pt-2 border-t border-gray-50 bg-white hidden">
-                                    <div class="payment-info-box mb-4">
-                                        <i class="fas fa-university text-brand-accent-blue opacity-80 text-xl"></i>
-                                        <div class="w-full overflow-hidden">
-                                            <p class="text-[10px] uppercase font-bold text-brand-accent-blue opacity-70 tracking-widest leading-none mb-1">IBAN para Transferência:</p>
-                                            <p class="text-[11px] min-[375px]:text-[12px] sm:text-base font-bold text-brand-accent-blue select-all leading-none whitespace-nowrap tracking-tighter">PT50 0035 0284 0001 5872 4004 0</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-col items-start w-full">
-                                        <p class="text-[11px] text-blue-800 font-bold mb-3 uppercase tracking-tight font-sans">Anexe o comprovativo da transferência *:</p>
-                                        <input type="file" id="proof-file-transfer" accept="image/*,application/pdf" class="hidden" onchange="updateFileName('transfer')" />
-                                        <label for="proof-file-transfer" class="btn-attach font-sans uppercase tracking-wider text-xs">
-                                            <i class="fas fa-upload mr-2"></i> Anexar comprovativo
-                                        </label>
-                                        <div id="file-display-transfer" class="hidden mt-3 text-xs text-green-600 font-medium items-center bg-green-50 px-3 py-1 rounded border border-green-100 font-sans">
-                                            <i class="fas fa-check-circle mr-1"></i> <span id="file-name-transfer" class="truncate max-w-[200px]"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <section id="payment-section" class="bg-white p-5 md:p-6 rounded-xl shadow-lg border border-gray-100">
+                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-2">2. Pagamento</h2>
+                        <p class="text-sm text-gray-600 mt-4 mb-3 font-sans leading-relaxed">Pague aqui mesmo, por <strong>MB WAY</strong> ou <strong>cartão</strong>, de forma segura através da Stripe. Preencha os dados acima, aceite os Termos e carregue em «Continuar para o pagamento».</p>
+                        <p class="text-xs text-gray-500 font-sans"><i class="fas fa-lock mr-1"></i> A encomenda só é registada depois de o pagamento ser confirmado.</p>
+                        <div id="payment-edit" class="hidden mt-4 text-sm font-sans">
+                            <button type="button" onclick="editarDados()" class="underline text-brand-accent-blue hover:text-brand-accent-red"><i class="fas fa-pen mr-1"></i> Alterar dados ou carrinho</button>
                         </div>
+                        <p id="payment-total-note" class="hidden mt-3 p-3 rounded-lg bg-blue-50 border border-blue-100 text-xs text-blue-900 font-sans"></p>
+                        <div id="stripe-checkout" class="mt-4"></div>
                     </section>
                 </div>
 
@@ -365,7 +320,7 @@
                         <div id="validation-error-box" class="hidden mt-4 p-3 bg-red-950/40 border border-red-500/30 text-red-200 text-xs rounded-lg font-sans leading-snug" role="alert"></div>
 
                         <button id="place-order-button" type="button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-all shadow-xl text-lg md:text-xl font-sans uppercase tracking-wider">
-                            Confirmar e Pagar
+                            Continuar para o pagamento
                         </button>
                     </section>
                 </div>
@@ -648,11 +603,11 @@
             var successMsg = document.getElementById('success-modal-msg');
             if (successMsg) {
                 if (apenasCursos) {
-                    successMsg.textContent = "Agradecemos a sua preferência. Validaremos o comprovativo com a maior brevidade e enviaremos um correio electrónico com a respectiva chave de acesso ao curso para o contacto indicado.";
+                    successMsg.textContent = "Agradecemos a sua preferência. Enviaremos por correio electrónico a chave de acesso ao curso para o contacto indicado.";
                 } else if (contemCursos && contemFisicos) {
-                    successMsg.textContent = "Agradecemos a sua preferência. Validaremos o comprovativo com a maior brevidade para proceder à expedição dos artigos físicos e ao envio da respectiva chave de acesso ao curso por correio electrónico.";
+                    successMsg.textContent = "Agradecemos a sua preferência. Daremos seguimento à expedição dos artigos físicos e enviaremos por correio electrónico a chave de acesso ao curso.";
                 } else {
-                    successMsg.textContent = "Agradecemos a sua preferência. Validaremos o comprovativo de imediato para dar seguimento à expedição da sua encomenda.";
+                    successMsg.textContent = "Agradecemos a sua preferência. Receberá um e-mail de confirmação e daremos seguimento à expedição da sua encomenda.";
                 }
             }
 
@@ -765,64 +720,60 @@ if (notice) {
             loadCartSummary();
         }
 
-        function updatePaymentDetails() {
-            var method = document.querySelector('input[name="payment-method"]:checked')?.value;
-            document.getElementById('transfer-details').classList.toggle('hidden', method !== 'bank-transfer');
-            document.getElementById('mbway-details').classList.toggle('hidden', method !== 'mbway');
-            validateFinalButton();
+        // Chave pública da Stripe (pode estar no site). Em produção, trocar pela pk_live_...
+        var STRIPE_PUBLISHABLE_KEY = "pk_test_51UcpceIlkMoZfw7wGIkzn8N8nEx3JMWDddvuvgEOhVwB1sXkEp8wiV7nO4sjfbWt0FTWkjWclFTp9l3dPaN7cv9700oxr8yCXa";
+        var stripeCheckout = null;
+
+        // Em localhost pode testar-se outra implantação do script: checkout?script=<id da implantação>
+        function urlDoScript() {
+            var guardado = null;
+            try { guardado = sessionStorage.getItem('jeronimoScript'); } catch (err) {}
+            if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
+                var m = window.location.search.match(/[?&]script=([A-Za-z0-9_-]+)/);
+                if (m) return 'https://script.google.com/macros/s/' + m[1] + '/exec';
+                if (guardado) return guardado;
+            }
+            return GOOGLE_SCRIPT_URL;
         }
 
-        async function fileToBase64(file) {
-            return new Promise(function(resolve) {
-                var reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onerror = function() { resolve(""); };
-                reader.onload = function(event) {
-                    if (file.type === 'application/pdf' || !file.type.startsWith('image/')) { 
-                        resolve(event.target.result); 
-                        return; 
-                    }
-                    var img = new Image();
-                    img.src = event.target.result;
-                    img.onerror = function() { resolve(event.target.result); };
-                    img.onload = function() {
-                        try {
-                            var canvas = document.createElement('canvas');
-                            var MAX_WIDTH = 1000;
-                            var width = img.width, height = img.height;
-                            if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-                            canvas.width = width; canvas.height = height;
-                            var ctx = canvas.getContext('2d');
-                            ctx.drawImage(img, 0, 0, width, height);
-                            resolve(canvas.toDataURL('image/jpeg', 0.6)); 
-                        } catch (err) {
-                            resolve(event.target.result);
-                        }
-                    };
-                };
+        async function chamarScript(dados) {
+            var resposta = await fetch(urlDoScript(), { method: 'POST', body: JSON.stringify(dados) });
+            var texto = await resposta.text();
+            try { return JSON.parse(texto); } catch (err) { throw new Error("Resposta inesperada do servidor. Tente de novo dentro de momentos."); }
+        }
+
+        function mostrarCarregamento(texto) {
+            document.getElementById('loading-text').textContent = texto;
+            document.getElementById('loading-overlay').classList.remove('hidden');
+        }
+
+        function esconderCarregamento() {
+            document.getElementById('loading-overlay').classList.add('hidden');
+        }
+
+        function mostrarErro(texto) {
+            document.getElementById('error-message').textContent = texto;
+            document.getElementById('error-modal').classList.remove('hidden');
+        }
+
+        // Com o pagamento aberto, os dados e o carrinho ficam fixos (o valor já foi calculado).
+        function bloquearFormulario(bloquear) {
+            document.querySelectorAll('#shipping-form input, #shipping-form select, #privacy-policy').forEach(function(el) {
+                el.disabled = bloquear;
             });
+            ['summary-list', 'suggestions-container'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.classList.toggle('pointer-events-none', bloquear);
+                if (el) el.classList.toggle('opacity-60', bloquear);
+            });
+            document.getElementById('place-order-button').classList.toggle('hidden', bloquear);
+            document.getElementById('payment-edit').classList.toggle('hidden', !bloquear);
         }
 
-        function updateFileName(type) {
-            var input = document.getElementById(`proof-file-${type}`);
-            var display = document.getElementById(`file-display-${type}`);
-            var nameSpan = document.getElementById(`file-name-${type}`);
-            if (input && input.files.length > 0) {
-                nameSpan.textContent = input.files[0].name;
-                display.classList.remove('hidden'); display.classList.add('flex');
-            } else { display.classList.add('hidden'); }
-            validateFinalButton();
-        }
-
-        // Devolve o comprovativo anexado: primeiro o do método seleccionado; se não houver,
-        // aceita o do outro método (evita perder o ficheiro ao mudar de método de pagamento).
-        function getProofFile() {
-            var method = document.querySelector('input[name="payment-method"]:checked')?.value;
-            var primeiro = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
-            var segundo = document.getElementById(method === 'mbway' ? 'proof-file-transfer' : 'proof-file-mbway');
-            if (primeiro && primeiro.files && primeiro.files.length > 0) return primeiro.files[0];
-            if (segundo && segundo.files && segundo.files.length > 0) return segundo.files[0];
-            return null;
+        function editarDados() {
+            if (stripeCheckout) { stripeCheckout.destroy(); stripeCheckout = null; }
+            document.getElementById('payment-total-note').classList.add('hidden');
+            bloquearFormulario(false);
         }
 
         function showValidationError(msg) {
@@ -864,7 +815,6 @@ if (notice) {
 
             var msgs = [];
             if (faltas.length > 0) msgs.push('Por favor, preencha: ' + faltas.join(', ') + '.');
-            if (!getProofFile()) msgs.push('Anexe o comprovativo de pagamento.');
             return msgs.join('<br>');
         }
 
@@ -875,143 +825,128 @@ if (notice) {
             if (box && !box.classList.contains('hidden')) showValidationError('');
         }
 
+        // ------------------------------------------------------------------
+        // PAGAMENTO STRIPE (MB WAY e cartão), embutido nesta página.
+        // O script recalcula preços e portes e só regista a encomenda
+        // depois de a Stripe confirmar o pagamento.
+        // ------------------------------------------------------------------
         async function placeOrder(e) {
             e.preventDefault();
             if (removeUnavailableItems()) { loadCartSummary(); return; }
 
-            // Validação no clique (robusta face a autopreenchimento e a mudanças de método de pagamento)
             var erroValidacao = validarEncomenda();
             if (erroValidacao) { showValidationError(erroValidacao); return; }
             showValidationError('');
 
-            // Verificação Inteligente da Política de Privacidade
-            var privacyChecked = document.getElementById('privacy-policy')?.checked;
             var errorBox = document.getElementById('privacy-error-box');
-            
-            if (!privacyChecked) {
-                if (errorBox) {
-                    errorBox.classList.remove('hidden');
-                    errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-                return; 
-            } else {
-                if (errorBox) errorBox.classList.add('hidden');
+            if (!document.getElementById('privacy-policy').checked) {
+                errorBox.classList.remove('hidden');
+                errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
             }
+            errorBox.classList.add('hidden');
 
-            var overlay = document.getElementById('loading-overlay');
-            var loadText = document.getElementById('loading-text');
-            var progress = document.getElementById('progress-fill');
-            overlay.classList.remove('hidden');
-            loadText.textContent = "A preparar ficheiros...";
-            progress.style.width = "20%";
-            
-            var itensChk = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            var soCursos = itensChk.length > 0 && !itensChk.some(function(i) { return i.type !== 'curso'; });
-            var cpChk = document.getElementById('cod-postal').value.trim();
-            if (!soCursos && document.getElementById('pais').value === 'BRAGA_MAO' && !/^47[01]\d/.test(cpChk)) {
-                document.getElementById('error-message').textContent = "A entrega em mão só está disponível em Braga (códigos postais 4700 a 4719). Escolha outro destino para receber por CTT.";
-                document.getElementById('error-modal').classList.remove('hidden');
-                overlay.classList.add('hidden');
+            var itens = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            var soCursos = itens.length > 0 && !itens.some(function(i) { return i.type !== 'curso'; });
+            var destino = document.getElementById('pais').value;
+            var cp = document.getElementById('cod-postal').value.trim();
+            if (!soCursos && destino === 'BRAGA_MAO' && !/^47[01]\d/.test(cp)) {
+                mostrarErro("A entrega em mão só está disponível em Braga (códigos postais 4700 a 4719). Escolha outro destino para receber por CTT.");
                 return;
             }
 
-            var cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            var method = document.querySelector('input[name="payment-method"]:checked')?.value;
-            var proofFile = getProofFile();
-
-            var contemFisicos = cartItems.some(function(item) { return item.type !== 'curso'; });
-            var contemCursos = cartItems.some(function(item) { return item.type === 'curso'; });
-            var apenasCursos = cartItems.length > 0 && !contemFisicos;
-
-            // Lógica inteligente para definir o tipo de correio electrónico e instruções do script
-            var tipoEncomenda = "fisica";
-            var assuntoEmail = "Confirmação de Encomenda - Jerónimo Editora";
-            var instrucoesEmail = "Encomenda constituída exclusivamente por artigos físicos. Proceder à expedição.";
-
-            if (apenasCursos) {
-                tipoEncomenda = "digital";
-                assuntoEmail = "Acesso ao Curso - Jerónimo Editora";
-                instrucoesEmail = "Encomenda constituída exclusivamente por curso digital. NÃO EXPEDIR ARTIGOS FÍSICOS. Enviar chave de acesso ao curso por correio electrónico o mais breve possível.";
-            } else if (contemCursos && contemFisicos) {
-                tipoEncomenda = "mista";
-                assuntoEmail = "Confirmação de Encomenda e Acesso ao Curso - Jerónimo Editora";
-                instrucoesEmail = "Encomenda mista. Proceder à expedição dos artigos físicos e enviar chave de acesso do curso por correio electrónico o mais breve possível.";
+            if (!STRIPE_PUBLISHABLE_KEY || typeof Stripe === 'undefined') {
+                mostrarErro("Os pagamentos estão temporariamente indisponíveis. Por favor, tente mais tarde ou contacte-nos.");
+                return;
             }
 
-            if (!apenasCursos && document.getElementById('pais').value === 'BRAGA_MAO') {
-                instrucoesEmail = "ENTREGA EM MÃO EM BRAGA. NÃO ENVIAR PELOS CTT. Contactar o cliente para combinar a entrega. " + instrucoesEmail;
-            }
+            mostrarCarregamento("A preparar o pagamento...");
+            var faturacaoDiferente = document.getElementById('choice-nao').checked && !soCursos;
+            var pedido = {
+                type: 'checkout_create',
+                origem: window.location.origin,
+                destino: destino,
+                cliente: {
+                    nome: document.getElementById('nome').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    nif: document.getElementById('nif').value.trim()
+                },
+                envio: soCursos ? {} : {
+                    morada: document.getElementById('morada').value,
+                    nr_andar: document.getElementById('nr-andar').value,
+                    cod_postal: cp,
+                    cidade: document.getElementById('cidade').value
+                },
+                faturacao: faturacaoDiferente ? {
+                    morada: document.getElementById('morada-fat').value,
+                    nr_andar: document.getElementById('nr-andar-fat').value,
+                    cod_postal: document.getElementById('cod-postal-fat').value,
+                    cidade: document.getElementById('cidade-fat').value
+                } : null,
+                itens: itens.map(function(i) { return { id: i.id, qtd: i.quantity }; })
+            };
 
             try {
-                var base64File = "";
-                if (proofFile) {
-                    loadText.textContent = "A enviar comprovativo...";
-                    progress.style.width = "40%";
-                    base64File = await fileToBase64(proofFile);
+                var resposta = await chamarScript(pedido);
+                if (!resposta.ok) throw new Error(resposta.erro || "Não foi possível preparar o pagamento.");
+
+                try { sessionStorage.setItem('jeronimoScript', urlDoScript()); } catch (err) {}
+
+                if (stripeCheckout) { stripeCheckout.destroy(); stripeCheckout = null; }
+                var stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+                stripeCheckout = await stripe.createEmbeddedCheckoutPage({
+                    fetchClientSecret: function() { return Promise.resolve(resposta.clientSecret); }
+                });
+                stripeCheckout.mount('#stripe-checkout');
+
+                var totalPagina = document.getElementById('summary-total').textContent.replace(/[^\d,]/g, '').replace(',', '.');
+                var aviso = document.getElementById('payment-total-note');
+                if (Math.abs(parseFloat(totalPagina) - resposta.total) > 0.009) {
+                    aviso.textContent = "Total a pagar: € " + resposta.total.toFixed(2).replace('.', ',') + ".";
+                    aviso.classList.remove('hidden');
+                } else {
+                    aviso.classList.add('hidden');
                 }
-                
-                var payload = {
-                    type: 'order',
-                    tipo_encomenda: tipoEncomenda,
-                    assunto_email: assuntoEmail,
-                    instrucoes_email: instrucoesEmail,
-                    cliente: {
-                        nome: document.getElementById('nome').value,
-                        email: document.getElementById('email').value,
-                        nif: document.getElementById('nif')?.value || "N/A"
-                    },
-                    envio: apenasCursos ? {
-                        morada: "ENVIO DIGITAL (Chave de Acesso enviada por correio electrónico)",
-                        nr_andar: "N/A",
-                        cod_postal: "N/A",
-                        cidade: "N/A",
-                        pais: "N/A"
-                    } : {
-                        morada: document.getElementById('morada').value,
-                        nr_andar: document.getElementById('nr-andar').value,
-                        cod_postal: document.getElementById('cod-postal').value,
-                        cidade: document.getElementById('cidade').value,
-                        pais: document.getElementById('pais').value === 'BRAGA_MAO' ? 'Braga (ENTREGA EM MÃO)' : document.getElementById('pais').value
-                    },
-                    faturacao: (document.getElementById('choice-nao') && document.getElementById('choice-nao').checked && !apenasCursos) ? {
-                        morada: document.getElementById('morada-fat').value,
-                        nr_andar: document.getElementById('nr-andar-fat').value,
-                        cod_postal: document.getElementById('cod-postal-fat').value,
-                        cidade: document.getElementById('cidade-fat').value
-                    } : {
-                        morada: "N/A",
-                        nr_andar: "N/A",
-                        cod_postal: "N/A",
-                        cidade: "N/A"
-                    },
-                    pagamento: {
-                        metodo: method,
-                        total: document.getElementById('summary-total').textContent,
-                        fileBase64: base64File,
-                        fileName: proofFile ? proofFile.name : ""
-                    },
-                    itens: cartItems.map(function(i) {
-                        return { titulo: i.title + (PREORDER[i.id] ? " [PRÉ-VENDA " + PREORDER[i.id].date + "]" : ""), qtd: i.quantity, preco_unit: i.price, tipo: i.type || "físico" };
-                    })
-                };
-                
-                loadText.textContent = "A submeter dados...";
-                progress.style.width = "70%";
-                await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-                
-                loadText.textContent = "Concluído!";
-                progress.style.width = "100%";
-                
-                setTimeout(function() {
-                    overlay.classList.add('hidden');
-                    document.getElementById('success-modal').classList.remove('hidden');
-                    localStorage.removeItem('cartItems');
-                }, 1000);
-                } catch (error) {
-                    overlay.classList.add('hidden');
-                    document.getElementById('error-message').textContent = "Ocorreu um problema ao processar a sua encomenda. Verifique a sua ligação.";
-                    document.getElementById('error-modal').classList.remove('hidden');
-                }
+
+                bloquearFormulario(true);
+                esconderCarregamento();
+                document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch (err) {
+                esconderCarregamento();
+                mostrarErro(err.message || "Não foi possível preparar o pagamento. Verifique a sua ligação.");
+            }
+        }
+
+        // Regresso da Stripe: checkout?session_id=cs_...
+        async function verificarRegresso() {
+            var m = window.location.search.match(/[?&]session_id=(cs_(?:test|live)_[A-Za-z0-9]+)/);
+            if (!m) return;
+            mostrarCarregamento("A confirmar o pagamento...");
+            var resposta = null;
+            for (var tentativa = 0; tentativa < 5; tentativa++) {
+                try {
+                    resposta = await chamarScript({ type: 'checkout_status', session_id: m[1] });
+                    if (resposta.ok && resposta.estado !== 'por pagar') break;
+                } catch (err) { resposta = null; }
+                await new Promise(function(r) { setTimeout(r, 2000); });
+            }
+            esconderCarregamento();
+            try { window.history.replaceState(null, '', window.location.pathname); } catch (err) {}
+
+            if (resposta && resposta.estado === 'paga') {
+                // A mensagem depende do tipo de artigos: guarda-se antes de esvaziar o carrinho.
+                var mensagem = document.getElementById('success-modal-msg').textContent;
+                localStorage.removeItem('cartItems');
+                updateCartUI();
+                loadCartSummary();
+                document.getElementById('success-modal-msg').textContent = mensagem;
+                document.getElementById('success-order-id').textContent = resposta.encomenda || '';
+                document.getElementById('success-modal').classList.remove('hidden');
+            } else if (resposta && resposta.estado === 'expirada') {
+                mostrarErro("O pagamento não foi concluído e a sessão expirou. O seu carrinho continua guardado: pode tentar de novo.");
+            } else {
+                mostrarErro("Ainda não recebemos a confirmação do pagamento. Se já pagou, receberá o e-mail de confirmação dentro de alguns minutos.");
+            }
         }
 
         function updateCartUI() {
@@ -1053,6 +988,7 @@ function runInjectedScripts(container) {
             loadComponents();
             loadCartSummary();
             handleBillingChoice();
+            verificarRegresso();
         });
     </script>
 
