@@ -361,7 +361,10 @@
                             </p>
                         </div>
 
-                        <button id="place-order-button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-all shadow-xl text-lg md:text-xl disabled:bg-gray-500 disabled:cursor-not-allowed font-sans uppercase tracking-wider" disabled>
+                        <!-- Alerta de validação (indica o que falta preencher) -->
+                        <div id="validation-error-box" class="hidden mt-4 p-3 bg-red-950/40 border border-red-500/30 text-red-200 text-xs rounded-lg font-sans leading-snug" role="alert"></div>
+
+                        <button id="place-order-button" type="button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 mt-6 rounded-lg hover:bg-yellow-600 transition-all shadow-xl text-lg md:text-xl font-sans uppercase tracking-wider">
                             Confirmar e Pagar
                         </button>
                     </section>
@@ -811,46 +814,76 @@ if (notice) {
             validateFinalButton();
         }
 
-        function validateFinalButton() {
+        // Devolve o comprovativo anexado: primeiro o do método seleccionado; se não houver,
+        // aceita o do outro método (evita perder o ficheiro ao mudar de método de pagamento).
+        function getProofFile() {
             var method = document.querySelector('input[name="payment-method"]:checked')?.value;
-            var fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
-            var cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            var primeiro = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
+            var segundo = document.getElementById(method === 'mbway' ? 'proof-file-transfer' : 'proof-file-mbway');
+            if (primeiro && primeiro.files && primeiro.files.length > 0) return primeiro.files[0];
+            if (segundo && segundo.files && segundo.files.length > 0) return segundo.files[0];
+            return null;
+        }
 
-            var nomeVal = document.getElementById('nome')?.value.trim();
-            var emailVal = document.getElementById('email')?.value.trim();
-            var inputsValid = !!(nomeVal && emailVal);
+        function showValidationError(msg) {
+            var box = document.getElementById('validation-error-box');
+            if (!box) return;
+            if (!msg) { box.classList.add('hidden'); box.innerHTML = ''; return; }
+            box.innerHTML = '<i class="fas fa-exclamation-circle mr-1.5"></i> ' + msg;
+            box.classList.remove('hidden');
+            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Valida no momento do clique e devolve uma mensagem com o que falta ("" se estiver tudo correcto).
+        function validarEncomenda() {
+            var cartItems = [];
+            try { cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]'); } catch (e) { cartItems = []; }
+            if (cartItems.length === 0) return "O seu carrinho está vazio.";
+
+            var faltas = [];
+            var val = function(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+
+            if (!val('nome')) faltas.push('Nome completo');
+            if (!val('email')) faltas.push('E-mail / Contacto');
 
             var contemFisicos = cartItems.some(function(item) { return item.type !== 'curso'; });
-            var apenasCursos = cartItems.length > 0 && !contemFisicos;
+            if (contemFisicos) {
+                if (!val('morada')) faltas.push('Morada completa');
+                if (!val('nr-andar')) faltas.push('Nº / Andar');
+                if (!val('cod-postal')) faltas.push('Código Postal');
+                if (!val('cidade')) faltas.push('Cidade');
 
-            // Se existirem artigos físicos, valida obrigatoriamente as moradas de envio
-            if (!apenasCursos && inputsValid) {
-                var requiredEnvio = ['morada', 'nr-andar', 'cod-postal', 'cidade'];
-                requiredEnvio.forEach(function(id) { 
-                    var el = document.getElementById(id);
-                    if (el && !el.value.trim()) inputsValid = false; 
-                });
-
-                var isDifferentBilling = document.getElementById('choice-nao').checked;
-                if (isDifferentBilling) {
-                    var requiredBilling = ['morada-fat', 'nr-andar-fat', 'cod-postal-fat', 'cidade-fat'];
-                    requiredBilling.forEach(function(id) { 
-                        var el = document.getElementById(id);
-                        if (el && !el.value.trim()) inputsValid = false; 
-                    });
+                var choiceNao = document.getElementById('choice-nao');
+                if (choiceNao && choiceNao.checked) {
+                    if (!val('morada-fat')) faltas.push('Morada de facturação');
+                    if (!val('nr-andar-fat')) faltas.push('Nº / Andar de facturação');
+                    if (!val('cod-postal-fat')) faltas.push('Cód. Postal de facturação');
+                    if (!val('cidade-fat')) faltas.push('Cidade de facturação');
                 }
             }
 
-            var btn = document.getElementById('place-order-button');
-            if (btn) {
-                btn.disabled = !fileInput || fileInput.files.length === 0 || cartItems.length === 0 || !inputsValid;
-            }
+            var msgs = [];
+            if (faltas.length > 0) msgs.push('Por favor, preencha: ' + faltas.join(', ') + '.');
+            if (!getProofFile()) msgs.push('Anexe o comprovativo de pagamento.');
+            return msgs.join('<br>');
+        }
+
+        // O botão deixou de ser desactivado: a validação é feita ao clicar (ver placeOrder).
+        // Mantém-se esta função apenas para limpar o aviso quando o utilizador corrige os dados.
+        function validateFinalButton() {
+            var box = document.getElementById('validation-error-box');
+            if (box && !box.classList.contains('hidden')) showValidationError('');
         }
 
         async function placeOrder(e) {
             e.preventDefault();
             if (removeUnavailableItems()) { loadCartSummary(); return; }
-            
+
+            // Validação no clique (robusta face a autopreenchimento e a mudanças de método de pagamento)
+            var erroValidacao = validarEncomenda();
+            if (erroValidacao) { showValidationError(erroValidacao); return; }
+            showValidationError('');
+
             // Verificação Inteligente da Política de Privacidade
             var privacyChecked = document.getElementById('privacy-policy')?.checked;
             var errorBox = document.getElementById('privacy-error-box');
@@ -884,7 +917,7 @@ if (notice) {
 
             var cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
             var method = document.querySelector('input[name="payment-method"]:checked')?.value;
-            var fileInput = document.getElementById(method === 'mbway' ? 'proof-file-mbway' : 'proof-file-transfer');
+            var proofFile = getProofFile();
 
             var contemFisicos = cartItems.some(function(item) { return item.type !== 'curso'; });
             var contemCursos = cartItems.some(function(item) { return item.type === 'curso'; });
@@ -911,10 +944,10 @@ if (notice) {
 
             try {
                 var base64File = "";
-                if (fileInput && fileInput.files.length > 0) {
+                if (proofFile) {
                     loadText.textContent = "A enviar comprovativo...";
                     progress.style.width = "40%";
-                    base64File = await fileToBase64(fileInput.files[0]);
+                    base64File = await fileToBase64(proofFile);
                 }
                 
                 var payload = {
@@ -955,7 +988,7 @@ if (notice) {
                         metodo: method,
                         total: document.getElementById('summary-total').textContent,
                         fileBase64: base64File,
-                        fileName: fileInput.files[0].name
+                        fileName: proofFile ? proofFile.name : ""
                     },
                     itens: cartItems.map(function(i) {
                         return { titulo: i.title + (PREORDER[i.id] ? " [PRÉ-VENDA " + PREORDER[i.id].date + "]" : ""), qtd: i.quantity, preco_unit: i.price, tipo: i.type || "físico" };
