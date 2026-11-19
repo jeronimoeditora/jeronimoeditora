@@ -114,6 +114,28 @@
                 <h1 class="font-serif text-3xl md:text-4xl text-brand-accent-blue mt-2 text-center font-bold">Finalizar Compra</h1>
             </div>
 
+            <!-- Cartão de regresso após gerar referência Multibanco (visível no topo ao voltar atrás no navegador) -->
+            <div id="multibanco-top-banner" class="hidden mb-6 p-5 md:p-6 rounded-xl bg-white border-2 border-brand-gold shadow-xl font-sans fade-in">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="text-left">
+                        <p class="text-sm md:text-base font-bold text-brand-accent-blue mb-1">
+                            <i class="fas fa-receipt text-brand-gold mr-2"></i> Referência Multibanco gerada
+                        </p>
+                        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+                            Se já anotou a <strong>Entidade</strong> e <strong>Referência</strong> para pagar no Multibanco ou Homebanking, clique abaixo para concluir. Receberá a confirmação da encomenda por e-mail assim que o pagamento for liquidado.
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:items-end gap-2 shrink-0">
+                        <button type="button" onclick="concluirRegressoMultibanco()" class="w-full sm:w-auto bg-brand-accent-blue text-white font-bold px-5 py-3 rounded-xl hover:bg-brand-accent-red transition-colors text-xs uppercase tracking-wider shadow-md">
+                            Concluir e Voltar ao Site
+                        </button>
+                        <button type="button" onclick="cancelarPendenteMultibanco()" class="text-xs underline text-gray-500 hover:text-brand-accent-blue">
+                            Ainda não gerei · Usar outro método
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <!-- Aviso de artigos indisponíveis removidos -->
             <div id="unavailable-banner" class="hidden mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-sans flex items-start justify-between gap-3">
                 <div id="unavailable-banner-text"></div>
@@ -263,6 +285,15 @@
                                 </div>
                             </div>
                         </form>
+
+                        <div id="step1-bottom-edit" class="hidden items-center justify-between gap-3 pt-5 mt-5 border-t border-gray-100 font-sans">
+                            <span class="text-xs font-bold text-green-700 bg-green-50 border border-green-200 px-2.5 py-1 rounded-full">
+                                <i class="fas fa-check mr-1"></i> Dados confirmados
+                            </span>
+                            <button type="button" onclick="editarDados()" class="text-xs font-bold underline text-brand-accent-blue hover:text-brand-accent-red">
+                                <i class="fas fa-pen mr-1"></i> Editar dados
+                            </button>
+                        </div>
                     </section>
 
                     <!-- SECÇÃO 2: Pagamento -->
@@ -302,6 +333,9 @@
                         </div>
                         <p id="payment-total-note" class="hidden mt-3 p-3 rounded-lg bg-blue-50 border border-blue-100 text-xs text-blue-900 font-sans"></p>
                         <div id="stripe-checkout" class="mt-4"></div>
+                        <p id="multibanco-hint" class="hidden mt-3 p-3 rounded-lg bg-gray-50 border border-gray-200 text-xs text-gray-600 font-sans leading-relaxed">
+                            <i class="fas fa-info-circle text-brand-accent-blue mr-1"></i> <strong>Nota Multibanco:</strong> Ao confirmar com Multibanco, a Stripe abrirá a página com a Entidade e Referência. Depois de anotar ou guardar os dados, prima o botão <strong>«Voltar» (←)</strong> do navegador para regressar à Jerónimo Editora.
+                        </p>
 
                         <!-- Confirmação directa no checkout embutido -->
                         <div id="embedded-complete-box" class="hidden mt-4 p-5 rounded-xl bg-green-50 border border-green-200 text-center font-sans">
@@ -1136,10 +1170,17 @@
             });
             document.getElementById('place-order-button').classList.toggle('hidden', bloquear);
             document.getElementById('payment-edit').classList.toggle('hidden', !bloquear);
+            var mbHint = document.getElementById('multibanco-hint');
+            if (mbHint) mbHint.classList.toggle('hidden', !bloquear);
             var badge = document.getElementById('step1-confirmed-badge');
             if (badge) {
                 badge.classList.toggle('hidden', !bloquear);
                 badge.classList.toggle('flex', bloquear);
+            }
+            var bottomEdit = document.getElementById('step1-bottom-edit');
+            if (bottomEdit) {
+                bottomEdit.classList.toggle('hidden', !bloquear);
+                bottomEdit.classList.toggle('flex', bloquear);
             }
             var stickyBar = document.getElementById('mobile-sticky-bar');
             if (stickyBar) stickyBar.classList.toggle('hidden', bloquear);
@@ -1254,6 +1295,15 @@
             window.location.href = 'index';
         }
 
+        function cancelarPendenteMultibanco() {
+            try { sessionStorage.removeItem('jeronimoMultibancoPending'); } catch (e) {}
+            var topBanner = document.getElementById('multibanco-top-banner');
+            var secBanner = document.getElementById('multibanco-return-banner');
+            if (topBanner) topBanner.classList.add('hidden');
+            if (secBanner) secBanner.classList.add('hidden');
+            editarDados();
+        }
+
         async function placeOrder(e) {
             e.preventDefault();
             if (removeUnavailableItems()) { loadCartSummary(); return; }
@@ -1358,8 +1408,11 @@
             }
             try {
                 if (sessionStorage.getItem('jeronimoMultibancoPending') === '1' && JSON.parse(localStorage.getItem('cartItems') || '[]').length > 0) {
-                    var banner = document.getElementById('multibanco-return-banner');
-                    if (banner) banner.classList.remove('hidden');
+                    var topBanner = document.getElementById('multibanco-top-banner');
+                    var secBanner = document.getElementById('multibanco-return-banner');
+                    if (topBanner) topBanner.classList.remove('hidden');
+                    if (secBanner) secBanner.classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             } catch (e) {}
         }
@@ -1431,6 +1484,10 @@
             handleBillingChoice(false);
             verificarRegresso();
             configurarObservadorBarraMobile();
+        });
+
+        window.addEventListener('pageshow', function() {
+            verificarRegresso();
         });
     </script>
 
