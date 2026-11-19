@@ -41,14 +41,14 @@
         .font-lora { font-family: 'Lora', serif; }
         .legal-content p { margin-bottom: 1.25rem; line-height: 1.7; font-size: 0.95rem; text-align: justify; }
         .legal-content h3 { font-size: 1.35rem; color: #002147; font-weight: 700; margin-top: 2rem; margin-bottom: 0.75rem; border-left: 4px solid #800000; padding-left: 0.75rem; }
-        .legal-content ul { list-style-type: square; margin-left: 1.5rem; margin-bottom: 1.25rem; space-y: 0.5rem; }
+        .legal-content ul { list-style-type: square; margin-left: 1.5rem; margin-bottom: 1.25rem; }
         .legal-content li { font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.5rem; }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
-    <!-- CONTENTOR DO MENU (Carregado dinamicamente do GitHub) -->
-    <div id="nav-placeholder" class="mb-24"></div>
+    <!-- CONTENTOR DO MENU -->
+    <div id="nav-placeholder"></div>
 
     <main class="flex-grow pt-8 pb-16">
         <div class="max-w-4xl mx-auto px-4 md:px-6">
@@ -61,15 +61,15 @@
 
                 <div class="legal-content text-gray-700 font-lora">
                     <p>
-                        Bem-vindo ao site da Jerónimo Editora. As presentes Condições Gerais de Venda regulam as transacções comerciais efectuadas através do checkout deste site, bem como os direitos e obrigações das partes no âmbito de contratos de compra e venda de livros físicos e outros produtos.
+                        Bem-vindo ao site da Jerónimo Editora (<strong>www.editorajeronimo.pt</strong>). As presentes Condições Gerais de Venda e Utilização regulam o acesso e a utilização deste site, bem como as transacções comerciais efectuadas através da nossa loja online, abrangendo livros físicos, artigos religiosos e editoriais (designadamente postais), pré-vendas e cursos de formação digitais.
                     </p>
                     <p>
-                        Ao finalizar uma encomenda e aceitar os presentes Termos, o utilizador concorda plenamente e sem reservas em vincular-se às condições abaixo descritas.
+                        Ao navegar no site ou ao finalizar uma encomenda, o utilizador concorda plenamente e sem reservas em vincular-se às condições abaixo descritas.
                     </p>
 
                     <h3>1. Identificação da Entidade Operadora</h3>
                     <p>
-                        A exploração do site e a comercialização dos produtos apresentados são da responsabilidade de:
+                        A exploração do site e a comercialização dos produtos e conteúdos apresentados são da responsabilidade de:
                     </p>
                     <ul class="font-sans">
                         <li><strong>Identidade do Vendedor:</strong> Hugo Alexandre Mendes Bacelo (Jerónimo Editora)</li>
@@ -79,78 +79,123 @@
                         <li><strong>Email de contacto principal:</strong> editorajeronimo@gmail.com</li>
                     </ul>
 
-                    <h3>2. Preços e Características dos Produtos</h3>
+                    <h3>2. Preços, Facturação e Disponibilidade</h3>
                     <p>
-                        Todos os preços indicados no site são apresentados em Euros (€) e <strong>incluem o IVA à taxa legal em vigor</strong> aplicável em Portugal Continental (actualmente fixada em 6% para livros físicos). 
+                        Todos os preços indicados no site são apresentados em Euros (€) e <strong>incluem o IVA à taxa legal em vigor</strong> aplicável em Portugal (actualmente 6% para livros físicos e 23% para artigos de estacionário/postais e conteúdos digitais). Os portes de envio, quando aplicáveis, acrescem ao valor dos artigos e são apresentados de forma discriminada no resumo do carrinho antes da confirmação do pagamento.
                     </p>
                     <p>
-                        A Jerónimo Editora envida todos os esforços para garantir a exactidão das informações, descrições e preços dos livros disponibilizados no site, reservando-se o direito de actualizar preços ou rectificar lapsos pontuais de escrita antes de aceitar a encomenda.
+                        A indicação do Número de Identificação Fiscal (NIF) no checkout é opcional, podendo o cliente preenchê-lo caso pretenda factura com NIF.
+                    </p>
+                    <p>
+                        A Jerónimo Editora envida todos os esforços para assegurar a exactidão das informações, descrições, imagens e preços apresentados. Caso ocorra um lapso manifesto no preço indicado antes da expedição, contactaremos o cliente para que possa confirmar a encomenda ao preço correcto ou optar pelo cancelamento com reembolso integral. Se, após a compra, se verificar ruptura imprevista de stock de algum exemplar, informaremos de imediato o cliente e procederemos ao reembolso integral no prazo máximo de <strong>14 dias</strong>.
                     </p>
 
-                    <h3>3. Processamento, Envio e Portes</h3>
+                    <h3>3. Processo de Encomenda, Arquivo e Celebração do Contrato</h3>
                     <p>
-                        As regras de envio e manuseamento das suas encomendas de mercadoria física cumprem as directrizes abaixo descritas:
+                        Para efectuar uma compra, o utilizador segue os seguintes passos técnicos: (i) adiciona os artigos pretendidos ao carrinho de compras; (ii) preenche os seus dados de contacto e morada de entrega (quando aplicável); (iii) revê o resumo da encomenda e o valor total com portes; e (iv) conclui o pagamento no módulo seguro da Stripe.
+                    </p>
+                    <p>
+                        Até ao momento em que conclui o pagamento, o utilizador pode rever e corrigir qualquer campo do formulário, bem como alterar quantidades ou remover artigos do carrinho. O contrato é celebrado em língua portuguesa e fica concluído assim que o pagamento é confirmado pela Stripe. Após essa confirmação, o cliente recebe um email com o resumo e o número da encomenda, que serve de comprovativo. O registo da encomenda fica arquivado nos sistemas internos da Jerónimo Editora para efeitos de gestão e cumprimento fiscal, podendo o cliente solicitar cópia ou esclarecimentos a qualquer momento através de <strong>editorajeronimo@gmail.com</strong>.
+                    </p>
+
+                    <h3>4. Métodos de Pagamento (Stripe)</h3>
+                    <p>
+                        Para garantir a segurança, rapidez e fiabilidade das transacções, os pagamentos são processados directamente na página de checkout através da plataforma certificada <strong>Stripe</strong>, mediante os seguintes meios:
                     </p>
                     <ul>
-                        <li><strong>Método de Envio:</strong> A expedição dos artigos físicos é efectuada através do serviço de correio editorial dos <strong>CTT (Correios de Portugal, S.A.)</strong>, garantindo um manuseamento seguro e apropriado.</li>
-                        <li><strong>Portes de Envio:</strong> O custo dos portes de envio é inteiramente calculado de forma automática no checkout, tendo por base as tarifas editoriais oficiais dos CTT aplicadas ao peso final da encomenda (acrescido de uma margem padrão de segurança para embalagem). <strong>Não se aplica a oferta de portes de envio gratuitos</strong>.</li>
-                        <li><strong>Prazo de Expedição:</strong> A expedição do livro físico é processada no prazo aproximado de <strong>2 dias úteis</strong> contados a partir da confirmação do respectivo pagamento.</li>
-                        <li><strong>Confirmação por Email:</strong> O cliente receberá um email logo após a submissão e processamento da sua encomenda, com o resumo da transacção.</li>
+                        <li><strong>MB WAY:</strong> Pagamento imediato no checkout, mediante confirmação do pedido na aplicação MB WAY do telemóvel indicado.</li>
+                        <li><strong>Cartão de débito ou crédito e Carteiras Digitais:</strong> Pagamento seguro no próprio checkout (Visa, Mastercard e demais redes suportadas, incluindo <strong>Apple Pay</strong> e <strong>Google Pay</strong> nos dispositivos e navegadores compatíveis).</li>
+                        <li><strong>Multibanco:</strong> Geração de entidade, referência e montante no checkout. A referência Multibanco possui um prazo de validade indicado no ecrã; caso o pagamento não seja efectuado dentro desse prazo, a encomenda caduca automaticamente sem qualquer encargo.</li>
                     </ul>
-
-                    <h3>4. Métodos de Pagamento e Validação</h3>
                     <p>
-                        Para a segurança e eficiência da sua transacção, disponibilizamos os seguintes métodos de pagamento:
+                        <strong>Segurança dos Dados de Pagamento:</strong> Os dados do cartão, número MB WAY ou referência de pagamento são introduzidos directamente no formulário seguro da Stripe e nunca passam nem ficam armazenados nos servidores da Jerónimo Editora. A encomenda só é registada e encaminhada para expedição depois de a Stripe confirmar a boa cobrança do pagamento.
+                    </p>
+
+                    <h3>5. Envio, Entrega e Portes</h3>
+                    <p>
+                        As regras de expedição e entrega das encomendas de artigos físicos obedecem às seguintes condições:
                     </p>
                     <ul>
-                        <li><strong>MB WAY:</strong> Pagamento no próprio checkout, aceitando o pedido de pagamento na aplicação MB WAY do telemóvel indicado.</li>
-                        <li><strong>Cartão de débito ou crédito:</strong> Pagamento no próprio checkout.</li>
+                        <li><strong>Envio Postal via CTT:</strong> A expedição é realizada através dos <strong>CTT (Correios de Portugal, S.A.)</strong> para Portugal (Continente e Ilhas) e para destinos na Europa. O valor dos portes é calculado automaticamente no checkout com base nas tarifas postais aplicáveis ao peso da encomenda. Caso o cliente adquira livros acompanhados de postais, os postais não aumentam o valor dos portes.</li>
+                        <li><strong>Entrega Gratuita em Mão no Concelho de Braga:</strong> Para moradas situadas no concelho de Braga (códigos postais 4700 a 4719), a Jerónimo Editora disponibiliza a <strong>entrega em mão sem custos de portes</strong>, entrando em contacto com o cliente para combinar o local e a hora da entrega (habitualmente no prazo de 24 a 48 horas úteis após confirmação do pagamento). Caso prefira, o cliente pode optar pelo envio postal via CTT mediante o pagamento dos respectivos portes.</li>
+                        <li><strong>Prazos de Expedição e Entrega:</strong> Para artigos disponíveis em stock, a expedição pelos CTT ocorre no prazo aproximado de <strong>2 dias úteis</strong> após a confirmação do pagamento, sendo o prazo indicativo de entrega de 2 a 4 dias úteis em Portugal e de 5 a 10 dias úteis na Europa.</li>
+                        <li><strong>Morada Incorrecta ou Encomenda Não Levantada:</strong> O envio é efectuado para a morada indicada pelo cliente no checkout. Caso a encomenda seja devolvida por morada incompleta, incorrecta ou por não ter sido reclamada dentro do prazo estipulado pelos CTT, a Jerónimo Editora contactará o cliente, ficando os custos de um novo envio a cargo do destinatário.</li>
+                        <li><strong>Extravio ou Atrasos Excepcionais:</strong> Circunstâncias alheias à editora (como greves postais ou constrangimentos logísticos extraordinários) podem ocasionar atrasos. Se uma encomenda expedida não chegar ao destino, o cliente deverá comunicá-lo à editora no prazo máximo de 30 dias após a data prevista de entrega.</li>
                     </ul>
+
+                    <h3>6. Pré-Vendas</h3>
                     <p>
-                        <strong>Processamento e Confirmação:</strong> Os pagamentos são processados de forma segura pela Stripe, prestadora de serviços de pagamento. Os dados do cartão e do MB WAY são introduzidos directamente no formulário da Stripe e não ficam guardados pela Jerónimo Editora. A encomenda só é registada depois de a Stripe confirmar o pagamento; nesse momento o cliente recebe um email de confirmação com o número da encomenda.
+                        A Jerónimo Editora disponibiliza periodicamente obras em regime de <strong>pré-venda</strong> antes da sua data oficial de lançamento. Nas encomendas em pré-venda, o pagamento é efectuado no acto da compra e o envio realiza-se assim que o livro estiver disponível, a partir da data indicada na ficha do livro e no resumo do checkout.
+                    </p>
+                    <p>
+                        Caso o cliente encomende na mesma transacção obras em pré-venda e livros já em stock, toda a encomenda será expedida em conjunto após a disponibilidade do título em pré-venda mais tardio. Se, por motivo imprevisto, não for possível cumprir o prazo de lançamento anunciado, o cliente será informado e poderá optar por manter a encomenda ou solicitar o reembolso integral.
                     </p>
 
-                    <h3>5. Livre Resolução e Devoluções</h3>
+                    <h3>7. Cursos de Formação e Conteúdos Digitais</h3>
                     <p>
-                        O cliente que actue na qualidade de consumidor final tem o direito de livre resolução do contrato de compra e venda no prazo máximo de <strong>14 dias seguidos</strong> contados a partir do dia seguinte ao da entrega física do livro na morada indicada, sem necessidade de indicar qualquer motivo.
-                    </p>
-                    <p>
-                        Para exercer este direito, o cliente deverá comunicar a sua intenção enviando um email dirigido a <strong>editorajeronimo@gmail.com</strong>.
+                        A aquisição de <strong>cursos de formação online</strong> (como o curso <em>«Conhecer a Santa Missa»</em> e outras formações disponibilizadas no site) rege-se pelas seguintes regras:
                     </p>
                     <ul>
-                        <li><strong>Custos de Devolução por Correio:</strong> No âmbito das compras de livros físicos, <strong>a Jerónimo Editora assumirá integralmente os custos postais de devolução</strong> do produto devolvido, devendo o cliente seguir as instruções fornecidas pela editora para o respectivo reenvio do volume.</li>
-                        <li><strong>Estado dos Livros:</strong> O livro devolvido deve apresentar-se rigorosamente no estado original de recepção, sem marcas de uso, dobras ou danos na capa e no miolo, acompanhado da factura e da respectiva embalagem.</li>
-                        <li><strong>Reembolso:</strong> O reembolso dos pagamentos recebidos será efectuado sem atrasos indevidos após a recepção física e validação do estado do livro nas nossas instalações, sendo devolvido pelo mesmo meio de pagamento utilizado na compra (MB WAY ou cartão).</li>
+                        <li><strong>Entrega Digital:</strong> Não existem portes de envio. Após a confirmação do pagamento pela Stripe, a Jerónimo Editora envia para o endereço de email indicado no checkout a respectiva <strong>chave de acesso</strong> e as instruções de entrada na área do curso.</li>
+                        <li><strong>Licença de Utilização Pessoal:</strong> O acesso ao curso destina-se exclusivamente ao uso pessoal e individual do comprador. É expressamente proibida a partilha da chave de acesso com terceiros, bem como a gravação, cópia, reprodução ou exibição pública dos vídeos e materiais didácticos.</li>
+                        <li><strong>Garantia de Conformidade Digital:</strong> Nos termos do Decreto-Lei n.º 84/2021, os conteúdos e serviços digitais beneficiam da garantia legal de conformidade pelo prazo de 2 anos. Caso surja qualquer falha técnica de acesso imputável à plataforma, o cliente deverá contactar a editora para rápida resolução.</li>
                     </ul>
 
-                    <h3>6. Secção de Produtos e Cursos Digitais</h3>
+                    <h3>8. Direito de Livre Resolução, Devoluções e Garantia Legal</h3>
                     <p>
-                        Os termos, prazos de entrega e condições técnicas associados ao fornecimento e acesso a cursos, transmissões de vídeo ou quaisquer outros conteúdos estritamente digitais encontram-se temporariamente em fase de definição. Caso adquira este tipo de produtos, os prazos e condições particulares ser-lhe-ão transmitidos oportunamente ou actualizados neste documento aquando do lançamento oficial.
+                        Nos termos do Decreto-Lei n.º 24/2014, o cliente que actue na qualidade de consumidor tem o direito de resolver livremente o contrato no prazo de <strong>14 dias seguidos</strong>, sem necessidade de indicar qualquer motivo:
+                    </p>
+                    <ul>
+                        <li><strong>Artigos Físicos (Livros e Postais):</strong> O prazo de 14 dias conta-se a partir do dia seguinte àquele em que o consumidor (ou um terceiro por si indicado, que não seja o transportador) adquire a posse física dos bens. Para exercer este direito, basta enviar uma comunicação inequívoca para <strong>editorajeronimo@gmail.com</strong> (podendo utilizar o formulário-tipo abaixo) antes do termo do prazo.</li>
+                        <li><strong>Custos e Condições de Devolução:</strong> No âmbito da livre resolução de compras de livros físicos, <strong>a Jerónimo Editora assume os custos postais de devolução</strong>, fornecendo ao cliente as instruções para o reenvio. Os artigos devem ser devolvidos no prazo de 14 dias após a comunicação de resolução, rigorosamente no mesmo estado em que foram recebidos, sem marcas de uso, dobras, anotações ou danos.</li>
+                        <li><strong>Excepção nos Cursos e Conteúdos Digitais:</strong> Nos termos do artigo 17.º, n.º 1, alínea l) do Decreto-Lei n.º 24/2014, o direito de livre resolução caduca a partir do momento em que a execução/fornecimento do conteúdo digital tenha início com o consentimento prévio e expresso do consumidor (activação da chave de acesso ao curso). Enquanto a chave de acesso não tiver sido activada, o consumidor mantém o direito de resolver o contrato no prazo de 14 dias.</li>
+                        <li><strong>Reembolso:</strong> O reembolso de todos os pagamentos recebidos (incluindo eventuais portes iniciais de envio) será efectuado no prazo máximo de 14 dias a contar da recepção da decisão de resolução, podendo a editora reter o reembolso até receber os artigos devolvidos ou prova do respectivo envio. O reembolso é realizado através da Stripe para o mesmo meio de pagamento utilizado na compra (MB WAY, cartão ou conta associada ao pagamento Multibanco).</li>
+                        <li><strong>Garantia Legal de Conformidade (3 Anos):</strong> Nos termos do Decreto-Lei n.º 84/2021, os bens físicos beneficiam da garantia legal de conformidade pelo prazo de <strong>3 anos</strong> a contar da entrega. Se um livro chegar danificado no transporte ou apresentar defeito de fabrico/impressão, o cliente deverá contactar <strong>editorajeronimo@gmail.com</strong> (juntando, se possível, fotografias do dano e da embalagem), assegurando a Jerónimo Editora a substituição sem encargos ou o reembolso integral, com portes de devolução e reenvio por conta da editora.</li>
+                    </ul>
+
+                    <div class="my-6 p-5 bg-gray-50 border border-gray-200 rounded-xl font-sans text-xs text-gray-700 leading-relaxed">
+                        <p class="font-bold text-brand-accent-blue uppercase tracking-wider mb-2">Formulário-Tipo de Livre Resolução (Anexo ao Decreto-Lei n.º 24/2014)</p>
+                        <p class="mb-2"><em>(Só deve preencher e enviar o presente formulário por email para <strong>editorajeronimo@gmail.com</strong> se quiser resolver o contrato)</em></p>
+                        <ul class="list-none ml-0 space-y-1.5 mb-0">
+                            <li>— <strong>Para:</strong> Hugo Alexandre Mendes Bacelo (Jerónimo Editora), Rua dos Galos, Braga, Portugal — Email: editorajeronimo@gmail.com</li>
+                            <li>— Pela presente comunico que resolvo o meu contrato de compra e venda relativo ao(s) seguinte(s) bem(ns) / serviço(s): <em>[indicar título(s) e n.º da encomenda]</em></li>
+                            <li>— Solicitado em <em>[data da encomenda]</em> / recebido em <em>[data de recepção]</em></li>
+                            <li>— Nome do(s) consumidor(es): <em>[nome completo]</em></li>
+                            <li>— Endereço do(s) consumidor(es): <em>[morada completa]</em></li>
+                            <li>— Data: <em>[data do envio]</em></li>
+                        </ul>
+                    </div>
+
+                    <h3>9. Artigos, Agenda e Agendamento de Palestras</h3>
+                    <p>
+                        O site disponibiliza artigos de formação teológica e bíblica, informação sobre encontros e actividades comunitárias (incluindo o movimento <em>Aprendizes do Verbo</em>) e um formulário para pedido de agendamento de palestras e conferências com Hugo Bacelo. A submissão de um pedido de agendamento de palestra constitui uma manifestação de interesse, ficando a realização do evento sujeita a confirmação de disponibilidade e acordo directo entre as partes.
                     </p>
 
-                    <h3>7. Resolução Alternativa de Litígios de Consumo (RAL)</h3>
+                    <h3>10. Propriedade Intelectual</h3>
                     <p>
-                        Em caso de litígio decorrente de um contrato de compra e venda celebrado através deste site, e sem prejuízo do direito de recorrer à via judicial, o consumidor pode submeter o diferendo à resolução alternativa de litígios. 
+                        Todos os conteúdos presentes no site <strong>www.editorajeronimo.pt</strong> — incluindo textos, artigos, traduções, edições, capas, fotografias, ilustrações, vídeos dos cursos, logótipos e design gráfico — são protegidos pelo Código do Direito de Autor e dos Direitos Conexos e pertencem à Jerónimo Editora ou aos respectivos autores e titulares de direitos. É proibida qualquer reprodução, distribuição, modificação ou utilização comercial sem autorização prévia por escrito.
                     </p>
+
+                    <h3>11. Resolução Alternativa de Litígios e Livro de Reclamações</h3>
                     <p>
-                        A Jerónimo Editora encontra-se sediada no distrito de Braga e, por conseguinte, concorda em aderir formalmente ao centro de arbitragem de consumo de referência para esta área geográfica:
+                        Em caso de litígio de consumo decorrente de um contrato celebrado através deste site, o consumidor pode recorrer a uma Entidade de Resolução Alternativa de Litígios de Consumo (RAL). Encontrando-se a Jerónimo Editora sediada em Braga, informa-se da existência da seguinte entidade competente na região:
                     </p>
                     <ul class="font-sans">
-                        <li><strong>Centro de Informação, Mediação e Arbitragem de Consumo (CIAB) - Tribunal Arbitral de Consumo</strong></li>
+                        <li><strong>Centro de Informação, Mediação e Arbitragem de Consumo (CIAB) – Tribunal Arbitral de Consumo</strong></li>
                         <li><strong>Morada:</strong> Rua D. Afonso Henriques, n.º 1, 4700-030 Braga</li>
                         <li><strong>Website oficial:</strong> <a href="https://www.ciab.pt" target="_blank" rel="noopener" class="text-brand-accent-red underline font-bold">www.ciab.pt</a></li>
                     </ul>
                     <p>
-                        Para litígios de consumo transfronteiriços iniciados online, o consumidor pode também recorrer à Plataforma de Resolução de Litígios em Linha (Plataforma RLL) disponibilizada pela Comissão Europeia, acessível através de: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener" class="text-brand-accent-red underline">https://ec.europa.eu/consumers/odr</a>.
+                        O utilizador dispõe igualmente de acesso à plataforma oficial do <strong>Livro de Reclamações Electrónico</strong>, acessível em <a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener" class="text-brand-accent-red underline font-bold">www.livroreclamacoes.pt</a>, bem como à Plataforma Europeia de Resolução de Litígios em Linha (<a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener" class="text-brand-accent-red underline">ec.europa.eu/consumers/odr</a>).
                     </p>
 
-                    <h3>8. Legislação Aplicável e Foro</h3>
+                    <h3>12. Legislação Aplicável e Foro</h3>
                     <p>
-                        Todos os contratos de compra e venda celebrados ao abrigo dos presentes Termos estão sujeitos e serão interpretados em harmonia com as leis vigentes na República Portuguesa. Para resolução de litígios que não possam ser dirimidos por vias alternativas amigáveis, é eleito como foro competente o Tribunal Judicial da Comarca de Braga, com expressa renúncia a qualquer outro.
+                        Os presentes Termos e Condições e todos os contratos celebrados ao seu abrigo regem-se pela lei portuguesa. Para resolução de quaisquer litígios emergentes da sua interpretação ou execução que não possam ser dirimidos amigavelmente ou por via arbitral, é competente o Tribunal Judicial da Comarca de Braga, sem prejuízo das normas legais imperativas aplicáveis aos consumidores.
                     </p>
                     
                     <p class="text-xs text-gray-550 italic font-sans text-right mt-8 border-t pt-4">
-                        Última actualização: Junho de 2026.
+                        Última actualização: Novembro de 2026.
                     </p>
                 </div>
             </div>
@@ -158,7 +203,7 @@
         </div>
     </main>
 
-    <!-- CONTENTOR DO RODAPÉ (Carregado dinamicamente do GitHub) -->
+    <!-- CONTENTOR DO RODAPÉ -->
     <div id="footer-placeholder"></div>
 
     <script>
@@ -171,11 +216,27 @@
             } catch (e) { return file; }
         }
 
+        function runInjectedScripts(container) {
+            if (!container) return;
+            container.querySelectorAll('script').forEach(function(old) {
+                const s = document.createElement('script');
+                s.text = old.textContent;
+                old.replaceWith(s);
+            });
+        }
+
         async function loadComponents() {
             try {
-                const navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
-                if (navResp.ok) document.getElementById('nav-placeholder').innerHTML = await navResp.text();
-                const footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                let navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
+                if (!navResp.ok) navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
+                if (navResp.ok) {
+                    const navEl = document.getElementById('nav-placeholder');
+                    navEl.classList.add('mb-24');
+                    navEl.innerHTML = await navResp.text();
+                    runInjectedScripts(navEl);
+                }
+                let footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
+                if (!footResp.ok) footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
                 if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
             } catch (e) { console.warn("Modo offline."); }
         }
