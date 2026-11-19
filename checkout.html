@@ -12,7 +12,7 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Stripe (pagamentos MB WAY, cartão e Multibanco) -->
+    <!-- Stripe (pagamentos MB WAY, cartão, Multibanco e carteiras digitais) -->
     <script src="https://js.stripe.com/endive/stripe.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -49,36 +49,10 @@
             box-shadow: 0 0 0 2px rgba(0, 33, 71, 0.15);
         }
         
-        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        .payment-info-box {
-            background-color: #f0f7ff;
-            border: 1px solid #e0efff;
-            border-radius: 0.75rem;
-            padding: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
         .radio-small { width: 1.2rem; height: 1.2rem; cursor: pointer; }
-
-        .btn-attach {
-            background-color: #001f3f;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 700;
-            font-size: 0.875rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-attach:hover { background-color: #800000; }
 
         .loader {
             border: 3px solid #f3f3f3;
@@ -98,12 +72,8 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
 
-        .suggestion-card {
-            transition: all 0.3s ease;
-        }
-        .suggestion-card:hover {
-            background-color: rgba(255,255,255,0.1);
-        }
+        .suggestion-card { transition: all 0.3s ease; }
+        .suggestion-card:hover { background-color: rgba(255,255,255,0.1); }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
@@ -119,53 +89,66 @@
     <!-- Overlay de Carregamento -->
     <div id="loading-overlay" class="fixed inset-0 z-[110] bg-white bg-opacity-95 flex flex-col items-center justify-center hidden">
         <div class="loader mb-4"></div>
-        <p id="loading-text" class="text-brand-accent-blue font-bold font-sans text-lg text-center px-6">A iniciar...</p>
+        <p id="loading-text" class="text-brand-accent-blue font-bold font-sans text-lg text-center px-6">A preparar o pagamento...</p>
         <p id="loading-subtext" class="text-xs text-gray-400 mt-2">Por favor, não feche esta janela.</p>
     </div>
 
-    <!-- Modal de Erro / Aviso -->
+    <!-- Modal de Erro -->
     <div id="error-modal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 flex items-center justify-center hidden px-4 text-center">
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-red-600 mb-4"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
             <h3 class="text-2xl font-bold font-serif text-brand-accent-red mb-2 text-center">Atenção</h3>
-            <p class="text-gray-600 mb-6 font-sans text-sm text-center whitespace-pre-line" id="error-message">Ocorreu um problema ao processar a sua encomenda. Verifique a sua ligação.</p>
-            <button type="button" onclick="document.getElementById('error-modal').classList.add('hidden')" class="w-full bg-brand-accent-blue text-white py-3 rounded-xl font-bold hover:bg-black transition-colors font-sans text-sm uppercase tracking-wider">Fechar</button>
+            <p class="text-gray-600 mb-6 font-sans text-sm text-center" id="error-message">Ocorreu um problema ao processar a sua encomenda. Verifique a sua ligação.</p>
+            <button onclick="document.getElementById('error-modal').classList.add('hidden')" class="w-full bg-brand-accent-blue text-white py-3 rounded-xl font-bold hover:bg-black transition-colors font-sans text-sm uppercase tracking-wider">Tentar novamente</button>
         </div>
     </div>
 
-    <!-- Cabeçalho -->
-    <div id="nav-placeholder" class="mb-24"></div>
+    <div id="nav-placeholder"></div>
 
     <main class="flex-grow pt-8 pb-24 lg:pb-12">
         <div class="max-w-6xl mx-auto px-4 md:px-6">
-            <div class="mb-4">
-                <a href="catalogo-completo" class="inline-flex items-center gap-1.5 text-xs font-sans font-medium text-brand-accent-blue hover:text-brand-accent-red transition-colors">
-                    <i class="fas fa-arrow-left text-[10px]"></i> Continuar a comprar
+            <div class="mb-6">
+                <a href="catalogo-completo" class="inline-flex items-center text-xs font-sans font-medium text-gray-500 hover:text-brand-accent-blue transition-colors">
+                    <i class="fas fa-arrow-left mr-1.5"></i> Continuar a comprar
+                </a>
+                <h1 class="font-serif text-3xl md:text-4xl text-brand-accent-blue mt-2 text-center font-bold">Finalizar Compra</h1>
+            </div>
+
+            <!-- Aviso de artigos indisponíveis removidos -->
+            <div id="unavailable-banner" class="hidden mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-sans flex items-start justify-between gap-3">
+                <div id="unavailable-banner-text"></div>
+                <button type="button" onclick="document.getElementById('unavailable-banner').classList.add('hidden')" class="text-amber-700 hover:text-amber-950 font-bold">✕</button>
+            </div>
+
+            <!-- Estado de Carrinho Vazio -->
+            <div id="empty-cart-view" class="hidden bg-white p-8 md:p-12 rounded-xl shadow-lg border border-gray-150 text-center max-w-xl mx-auto my-8">
+                <div class="w-16 h-16 rounded-full bg-brand-accent-blue/10 text-brand-accent-blue flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-shopping-bag text-2xl"></i>
+                </div>
+                <h2 class="font-serif text-2xl font-bold text-brand-accent-blue mb-2">O seu carrinho está vazio</h2>
+                <p class="text-sm text-gray-600 font-sans mb-6">Explore os nossos livros de formação bíblica, pré-vendas, postais e cursos online.</p>
+                <a href="catalogo-completo" class="inline-flex items-center justify-center bg-brand-accent-blue text-white font-bold px-8 py-3.5 rounded-xl hover:bg-brand-accent-red transition-colors font-sans text-sm uppercase tracking-wider shadow-md">
+                    Explorar Catálogo
                 </a>
             </div>
-            <h1 class="font-serif text-3xl md:text-4xl text-brand-accent-blue mb-8 text-center font-bold">Finalizar Compra</h1>
 
-            <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Conteúdo Principal do Checkout -->
+            <div id="checkout-grid" class="flex flex-col lg:flex-row gap-8">
                 
                 <!-- COLUNA ESQUERDA: Dados do Utilizador e Pagamento -->
                 <div class="lg:w-7/12 order-2 lg:order-1">
-                    <section id="shipping-section" class="bg-white p-5 md:p-6 rounded-xl shadow-lg mb-8 border border-gray-150 transition-all">
+                    <section class="bg-white p-5 md:p-6 rounded-xl shadow-lg mb-6 border border-gray-150">
                         <div class="flex flex-wrap justify-between items-center gap-2 border-b pb-3 mb-1">
-                            <div class="flex items-center gap-3">
-                                <span id="step1-badge" class="w-7 h-7 rounded-full bg-brand-accent-red text-white text-xs font-bold flex items-center justify-center font-sans shrink-0">1</span>
-                                <h2 id="billing-step-title" class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red">Detalhes de Envio</h2>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span id="section1-done-badge" class="hidden text-xs font-bold text-green-700 bg-green-50 border border-green-200 px-2.5 py-1 rounded-full font-sans">
+                            <h2 id="billing-step-title" class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red">1. Detalhes de Envio</h2>
+                            <div id="step1-confirmed-badge" class="hidden items-center gap-3">
+                                <span class="text-xs font-bold text-green-700 bg-green-50 border border-green-200 px-2.5 py-1 rounded-full font-sans">
                                     <i class="fas fa-check mr-1"></i> Dados confirmados
                                 </span>
-                                <button id="section1-edit-btn" type="button" onclick="editarDados()" class="hidden text-xs font-bold text-brand-accent-blue hover:text-brand-accent-red underline font-sans px-2 py-1">
-                                    <i class="fas fa-pen mr-1"></i> Editar
-                                </button>
+                                <button type="button" onclick="editarDados()" class="text-xs font-bold underline text-brand-accent-blue hover:text-brand-accent-red font-sans">Editar</button>
                             </div>
                         </div>
                         
-                        <form id="shipping-form" class="space-y-5 mt-6">
+                        <form id="shipping-form" class="space-y-5 mt-5" novalidate>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">Nome completo *</label>
@@ -173,7 +156,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">E-mail *</label>
-                                    <input type="email" id="email" name="email" autocomplete="email" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50" placeholder="exemplo@email.pt">
+                                    <input type="email" id="email" name="email" autocomplete="email" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50" placeholder="nome@exemplo.pt">
                                     <label for="newsletter-optin" class="mt-2 flex items-start space-x-2 cursor-pointer select-none">
                                         <input type="checkbox" id="newsletter-optin" name="newsletter" checked class="mt-0.5 rounded border-gray-300 accent-[#002147] cursor-pointer w-3.5 h-3.5">
                                         <span class="text-xs text-gray-600 leading-snug font-sans">Quero subscrever à Newsletter para receber novidades da Jerónimo Editora</span>
@@ -206,48 +189,57 @@
                                 <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
                                     <div class="sm:col-span-4">
                                         <label id="label-cod-postal" class="block text-sm font-medium text-gray-700 mb-1">Código Postal *</label>
-                                        <input type="text" id="cod-postal" name="cod_postal" autocomplete="postal-code" inputmode="numeric" maxlength="8" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input" placeholder="0000-000">
+                                        <input type="text" id="cod-postal" name="cod_postal" autocomplete="postal-code" inputmode="numeric" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input" placeholder="0000-000">
                                     </div>
                                     <div class="sm:col-span-8">
-                                        <label id="label-cidade" class="block text-sm font-medium text-gray-700 mb-1">Cidade *</label>
+                                        <label id="label-cidade" class="block text-sm font-medium text-gray-700 mb-1">Cidade / Localidade *</label>
                                         <input type="text" id="cidade" name="cidade" autocomplete="address-level2" required class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 shipping-input">
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">País *</label>
-                                    <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white shipping-input" onchange="handlePaisChange()">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Destino de Envio *</label>
+                                    <select id="pais" name="pais" required class="block w-full p-3 border border-gray-300 rounded-lg bg-white shipping-input" onchange="aoMudarDestino()">
                                         <option value="PT">Portugal (Continente e Ilhas)</option>
                                         <option value="EU_Normal">Europa (Entrega Normal)</option>
                                         <option value="EU_Econ">Europa (Entrega Económica)</option>
                                     </select>
-                                    <div id="braga-note" class="hidden mt-3 text-xs text-green-800 bg-green-50 border border-green-200 rounded-lg p-3.5 font-sans leading-relaxed fade-in">
-                                        <p class="font-bold text-green-900 mb-1">
-                                            <i class="fas fa-hand-holding-heart mr-1.5"></i> Entrega em mão no concelho de Braga — Portes Grátis!
-                                        </p>
-                                        <p class="mb-2">Como a sua morada pertence ao concelho de Braga, não precisa de pagar portes: entraremos em contacto para combinar o local e a hora da entrega.</p>
-                                        <label for="braga-prefer-ctt" class="inline-flex items-center space-x-2 cursor-pointer select-none text-[11px] text-green-900 underline">
-                                            <input type="checkbox" id="braga-prefer-ctt" class="rounded border-green-400 accent-[#002147] cursor-pointer w-3.5 h-3.5" onchange="loadCartSummary()">
-                                            <span>Prefiro envio por CTT para casa (com portes de envio)</span>
+                                    <div id="braga-note" class="hidden mt-3 text-xs text-green-800 bg-green-50 border border-green-200 rounded-lg p-3.5 font-sans leading-relaxed">
+                                        <p class="font-bold mb-1"><i class="fas fa-hand-holding-heart mr-1.5"></i> Entrega gratuita em mão no concelho de Braga!</p>
+                                        <p>Como a sua morada é em Braga, <strong>não paga portes</strong> — entraremos em contacto para combinar o local e a hora de entrega.</p>
+                                        <label class="mt-2.5 flex items-center space-x-2 cursor-pointer text-gray-700">
+                                            <input type="checkbox" id="braga-prefer-ctt" class="rounded border-gray-300 accent-[#002147] cursor-pointer w-3.5 h-3.5" onchange="loadCartSummary()">
+                                            <span>Prefiro receber por correio (CTT) com portes normais</span>
                                         </label>
                                     </div>
                                 </div>
+
+                                <!-- Opção de Oferta / Dedicatória -->
+                                <div class="pt-4 border-t border-gray-100">
+                                    <label class="flex items-center space-x-2.5 cursor-pointer select-none">
+                                        <input type="checkbox" id="is-gift" class="rounded border-gray-300 accent-[#002147] cursor-pointer w-4 h-4" onchange="toggleGiftField()">
+                                        <span class="text-sm font-medium text-gray-700 font-sans"><i class="fas fa-gift text-brand-accent-red mr-1.5"></i> É para oferta? (Incluir nota ou dedicatória)</span>
+                                    </label>
+                                    <div id="gift-note-container" class="hidden mt-3 fade-in">
+                                        <input type="text" id="gift-note" maxlength="120" class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 text-sm" placeholder="Escreva aqui o nome do destinatário ou uma breve mensagem...">
+                                    </div>
+                                </div>
                                 
-                                <div class="pt-6 border-t border-gray-100 mt-4">
+                                <div class="pt-5 border-t border-gray-100">
                                     <span class="block text-sm font-medium text-gray-700 mb-3">A morada de facturação é igual à de envio?</span>
                                     <div class="flex items-center space-x-8">
                                         <label class="flex items-center space-x-2 cursor-pointer">
-                                            <input type="radio" name="billing-choice" id="choice-sim" value="sim" class="radio-small" onchange="handleBillingChoice()" checked>
+                                            <input type="radio" name="billing-choice" id="choice-sim" value="sim" class="radio-small" onchange="handleBillingChoice(false)" checked>
                                             <span class="text-sm text-gray-700 font-medium font-sans">Sim</span>
                                         </label>
                                         <label class="flex items-center space-x-2 cursor-pointer">
-                                            <input type="radio" name="billing-choice" id="choice-nao" value="nao" class="radio-small" onchange="handleBillingChoice()">
+                                            <input type="radio" name="billing-choice" id="choice-nao" value="nao" class="radio-small" onchange="handleBillingChoice(true)">
                                             <span class="text-sm text-gray-700 font-medium font-sans">Não</span>
                                         </label>
                                     </div>
                                 </div>
 
-                                <div id="billing-address-container" class="hidden space-y-5 pt-6 border-t border-gray-100 mt-4 fade-in bg-gray-50/50 p-4 rounded-lg">
-                                    <h3 class="text-lg font-bold text-brand-text mb-4 underline font-serif">Morada de Facturação</h3>
+                                <div id="billing-address-container" class="hidden space-y-5 pt-5 border-t border-gray-100 fade-in bg-gray-50/50 p-4 rounded-lg">
+                                    <h3 class="text-lg font-bold text-brand-text mb-3 underline font-serif">Morada de Facturação</h3>
                                     <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
                                         <div class="md:col-span-3">
                                             <label class="block text-sm font-medium text-gray-700 mb-1">Morada *</label>
@@ -261,57 +253,66 @@
                                     <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
                                         <div class="sm:col-span-4">
                                             <label class="block text-sm font-medium text-gray-700 mb-1">Cód. Postal *</label>
-                                            <input type="text" id="cod-postal-fat" name="cod_postal_fat" inputmode="numeric" maxlength="8" placeholder="0000-000" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field">
+                                            <input type="text" id="cod-postal-fat" name="cod_postal_fat" inputmode="numeric" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field" placeholder="0000-000">
                                         </div>
                                         <div class="sm:col-span-8">
-                                            <label class="block text-sm font-medium text-gray-700 mb-1">Cidade *</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Cidade / Localidade *</label>
                                             <input type="text" id="cidade-fat" name="cidade_fat" class="block w-full p-3 border border-gray-300 rounded-lg bg-white billing-field">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Opção B7: É para oferta? -->
-                            <div class="pt-5 border-t border-gray-100">
-                                <label for="is-gift" class="inline-flex items-center space-x-2.5 cursor-pointer select-none">
-                                    <input type="checkbox" id="is-gift" name="is_gift" class="rounded border-gray-300 accent-[#002147] cursor-pointer w-4 h-4" onchange="toggleGiftField()">
-                                    <span class="text-sm font-medium text-gray-700 font-sans"><i class="fas fa-gift text-brand-accent-red mr-1.5"></i> É para oferta? <span class="text-gray-400 font-normal">(Incluir dedicatória ou nota)</span></span>
-                                </label>
-                                <div id="gift-note-container" class="hidden mt-3 fade-in">
-                                    <textarea id="nota-oferta" name="nota_oferta" rows="2" maxlength="160" placeholder="Escreva aqui uma breve dedicatória ou nota para a encomenda..." class="block w-full p-3 border border-gray-300 rounded-lg bg-gray-50/50 text-sm"></textarea>
-                                    <p class="text-[11px] text-gray-400 mt-1 font-sans">Máximo 160 caracteres.</p>
-                                </div>
-                            </div>
                         </form>
                     </section>
 
+                    <!-- SECÇÃO 2: Pagamento -->
                     <section id="payment-section" class="bg-white p-5 md:p-6 rounded-xl shadow-lg border border-gray-100">
-                        <div class="flex items-center gap-3 border-b pb-3 mb-4">
-                            <span class="w-7 h-7 rounded-full bg-brand-accent-red text-white text-xs font-bold flex items-center justify-center font-sans shrink-0">2</span>
-                            <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red">Pagamento</h2>
-                        </div>
-
-                        <p class="text-sm text-gray-600 mb-2 font-sans leading-relaxed">Pague aqui mesmo, por <strong>MB WAY</strong>, <strong>cartão</strong> ou <strong>Multibanco</strong>, de forma segura através da Stripe.</p>
-                        <p class="text-xs text-gray-500 font-sans"><i class="fas fa-lock text-green-700 mr-1.5"></i> A encomenda só é registada depois de o pagamento ser confirmado.</p>
-
-                        <!-- Botão principal antes de abrir a Stripe -->
-                        <div id="payment-pre-cta" class="mt-5">
-                            <!-- Alerta de validação (indica o que falta preencher) -->
-                            <div id="validation-error-box" class="hidden mb-4 p-3.5 bg-red-50 border border-red-200 text-red-800 text-xs rounded-lg font-sans leading-snug" role="alert"></div>
-
-                            <button id="place-order-button" type="button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 px-4 rounded-xl hover:bg-yellow-500 active:scale-[0.99] transition-all shadow-lg text-base sm:text-lg font-sans uppercase tracking-wider cursor-pointer leading-snug">
-                                Continuar para o pagamento <span id="btn-total-amount" class="block sm:inline whitespace-nowrap font-extrabold mt-0.5 sm:mt-0"></span>
-                            </button>
-                        </div>
-
-                        <p id="mbway-tip" class="hidden mt-4 text-xs text-blue-800 bg-blue-50 border border-blue-100 rounded-lg p-3 font-sans">
-                            <i class="fas fa-mobile-alt mr-1.5"></i> Se escolher pagar por <strong>MB WAY</strong>, confirme o pedido de pagamento na aplicação MB WAY do seu telemóvel.
+                        <h2 class="font-serif text-xl md:text-2xl font-bold text-brand-accent-red mb-1 border-b pb-3">2. Pagamento</h2>
+                        <p class="text-sm text-gray-600 mt-4 mb-2 font-sans leading-relaxed">
+                            Pague aqui mesmo, por <strong>MB WAY</strong>, <strong>cartão</strong>, <strong>Apple Pay</strong>, <strong>Google Pay</strong> ou <strong>Multibanco</strong>, de forma segura através da Stripe.
                         </p>
+                        <p class="text-xs text-gray-500 font-sans mb-4">
+                            <i class="fas fa-lock mr-1"></i> A encomenda só é registada depois de o pagamento ser confirmado.
+                        </p>
+
+                        <!-- Banner de regresso após gerar referência Multibanco -->
+                        <div id="multibanco-return-banner" class="hidden mb-4 p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-950 font-sans leading-relaxed">
+                            <p class="font-bold mb-1"><i class="fas fa-receipt mr-1.5 text-amber-700"></i> Gerou a referência Multibanco na Stripe?</p>
+                            <p class="mb-3">Se já anotou a Entidade e Referência para pagar no Multibanco ou Homebanking, pode regressar ao início. Receberá a confirmação por e-mail assim que o pagamento for liquidado.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <button type="button" onclick="concluirRegressoMultibanco()" class="bg-brand-accent-blue text-white font-bold px-4 py-2 rounded-lg hover:bg-black transition-colors">
+                                    Já guardei a referência · Voltar ao Início
+                                </button>
+                                <button type="button" onclick="document.getElementById('multibanco-return-banner').classList.add('hidden')" class="underline text-gray-600 hover:text-gray-900 px-2 py-2">
+                                    Continuar no checkout
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Alerta de validação -->
+                        <div id="validation-error-box" class="hidden mb-4 p-3.5 bg-red-50 border border-red-200 text-red-800 text-xs rounded-lg font-sans leading-relaxed" role="alert"></div>
+
+                        <button id="place-order-button" type="button" onclick="placeOrder(event)" class="w-full bg-brand-gold text-brand-accent-blue font-bold py-4 px-4 rounded-xl hover:bg-yellow-500 transition-all shadow-lg text-base md:text-lg font-sans uppercase tracking-wider">
+                            <span>Continuar para o pagamento</span>
+                            <span id="btn-total-amount" class="block sm:inline sm:ml-2 whitespace-nowrap font-extrabold"></span>
+                        </button>
+
                         <div id="payment-edit" class="hidden mt-4 text-sm font-sans">
-                            <button type="button" onclick="editarDados()" class="underline text-brand-accent-blue hover:text-brand-accent-red font-medium"><i class="fas fa-pen mr-1"></i> Alterar dados ou carrinho</button>
+                            <button type="button" onclick="editarDados()" class="underline text-brand-accent-blue hover:text-brand-accent-red"><i class="fas fa-pen mr-1"></i> Alterar dados ou carrinho</button>
                         </div>
                         <p id="payment-total-note" class="hidden mt-3 p-3 rounded-lg bg-blue-50 border border-blue-100 text-xs text-blue-900 font-sans"></p>
                         <div id="stripe-checkout" class="mt-4"></div>
+
+                        <!-- Confirmação directa no checkout embutido -->
+                        <div id="embedded-complete-box" class="hidden mt-4 p-5 rounded-xl bg-green-50 border border-green-200 text-center font-sans">
+                            <i class="fas fa-check-circle text-green-600 text-3xl mb-2"></i>
+                            <h3 class="font-serif text-xl font-bold text-brand-accent-blue mb-1">Pagamento concluído!</h3>
+                            <p class="text-xs text-gray-600 mb-4">O seu pagamento foi confirmado pela Stripe. Enviámos o resumo da encomenda para o seu e-mail.</p>
+                            <div class="flex flex-wrap justify-center gap-3">
+                                <a href="index" class="bg-brand-accent-blue text-white font-bold px-5 py-2.5 rounded-lg text-xs uppercase tracking-wider hover:bg-black transition-colors">Voltar ao Início</a>
+                                <a href="catalogo-completo" class="bg-white border border-gray-300 text-gray-700 font-bold px-5 py-2.5 rounded-lg text-xs uppercase tracking-wider hover:bg-gray-100 transition-colors">Explorar Catálogo</a>
+                            </div>
+                        </div>
                     </section>
                 </div>
 
@@ -319,17 +320,16 @@
                 <div class="lg:w-5/12 order-1 lg:order-2 h-fit lg:sticky lg:top-24">
                     <section class="bg-brand-accent-blue p-5 md:p-6 rounded-xl shadow-2xl text-white border border-white/10">
                         <div class="flex items-center justify-between gap-3 border-b border-white/20 pb-3 mb-4">
-                            <div class="flex flex-wrap items-center gap-2 min-w-0">
-                                <h2 class="font-serif text-xl md:text-2xl font-bold leading-tight">Carrinho de Compras</h2>
-                                <span id="cart-items-badge" class="shrink-0 whitespace-nowrap text-[11px] font-bold bg-white/15 text-brand-gold px-2.5 py-0.5 rounded-full font-sans">0 artigos</span>
+                            <div class="flex items-baseline gap-2 min-w-0">
+                                <h2 class="font-serif text-xl md:text-2xl font-bold truncate">Carrinho de Compras</h2>
+                                <span id="mobile-cart-badge" class="lg:hidden text-xs text-brand-gold font-sans font-bold whitespace-nowrap"></span>
                             </div>
-                            <button type="button" id="toggle-summary-btn" onclick="toggleMobileSummary()" class="lg:hidden shrink-0 whitespace-nowrap text-xs text-brand-gold hover:text-white font-sans font-medium flex items-center gap-1 py-1.5 px-2.5 rounded bg-white/10" aria-expanded="false">
-                                <span id="toggle-summary-label">Ver artigos</span>
-                                <i id="toggle-summary-icon" class="fas fa-chevron-down text-[10px]"></i>
+                            <button type="button" id="toggle-cart-btn" onclick="toggleMobileCart()" class="lg:hidden shrink-0 whitespace-nowrap text-xs font-sans font-bold text-brand-gold bg-white/10 px-2.5 py-1.5 rounded-lg border border-white/15">
+                                <span id="toggle-cart-label">Ver artigos</span> <i id="toggle-cart-icon" class="fas fa-chevron-down ml-1"></i>
                             </button>
                         </div>
                         
-                        <div id="collapsible-summary-body" class="hidden lg:block">
+                        <div id="collapsible-cart-body" class="hidden lg:block">
                             <div id="summary-list" class="space-y-5 mb-6 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar"></div>
                             <div id="preorder-notice" class="hidden mt-4 p-3 rounded-lg bg-brand-gold/15 border border-brand-gold/40 text-xs text-brand-gold font-sans leading-snug"></div>
                             <div id="suggestions-container" class="mt-4 pt-4 border-t border-white/10 hidden">
@@ -350,55 +350,56 @@
                                     <span>Portes de Envio:</span>
                                     <span id="summary-shipping" class="font-bold text-brand-gold">€ 0,00</span>
                                 </div>
-                                <div id="optimizacao-badge" class="mt-2"></div>
-                                <p id="delivery-estimate" class="hidden mt-1.5 text-[11px] text-white/75 font-sans text-right"></p>
+                                <div id="optimizacao-badge" class="mt-2 flex flex-wrap justify-end gap-1.5"></div>
                             </div>
                         </div>
 
-                        <div class="flex justify-between items-center mt-5 pt-3 border-t border-brand-gold">
+                        <div class="flex justify-between items-center mt-5 pt-3 border-t border-brand-gold mb-4">
                             <span class="font-serif text-xl font-bold">Total:</span>
                             <span id="summary-total" class="text-2xl md:text-3xl font-extrabold text-brand-gold font-sans">€ 0,00</span>
                         </div>
 
-                        <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-white/70 font-sans">
-                            <span><i class="fas fa-shield-alt text-brand-gold mr-1.5"></i> Pagamento seguro via Stripe</span>
-                            <span>IVA incluído</span>
+                        <div class="mt-4 pt-4 border-t border-white/15 text-xs text-left font-sans space-y-2.5">
+                            <p class="text-white/80 flex items-center gap-2">
+                                <i class="fas fa-shield-alt text-brand-gold"></i>
+                                <span>Pagamento seguro via <strong>Stripe</strong></span>
+                            </p>
+                            <p class="text-white/90 leading-relaxed">
+                                Ao finalizar a encomenda, declara que leu e aceita os <a href="termos-condicoes" target="_blank" class="underline text-brand-gold hover:text-white font-bold">Termos e Condições</a> e que tomou conhecimento da <a href="politica-privacidade" target="_blank" class="underline text-brand-gold hover:text-white font-bold">Política de Privacidade</a>
+                            </p>
                         </div>
 
-                        <p class="mt-3 pt-3 border-t border-white/10 text-[11px] text-white/80 leading-relaxed font-sans">
-                            Ao finalizar a encomenda, declara que leu e aceita os <a href="termos-condicoes" target="_blank" class="underline text-brand-gold hover:text-white font-bold">Termos e Condições</a> e que tomou conhecimento da <a href="politica-privacidade" target="_blank" class="underline text-brand-gold hover:text-white font-bold">Política de Privacidade</a>
-                        </p>
-
-                        <!-- B9: Selo de confiança editorial e apoio directo -->
-                        <div class="mt-4 pt-3 border-t border-white/10 text-[11px] text-white/70 font-sans leading-relaxed">
-                            <p class="font-bold text-brand-gold mb-1"><i class="fas fa-book-open mr-1.5"></i> Apoio directo da Editora</p>
-                            <p>Dúvidas com a sua encomenda? Contacte-nos por <a href="mailto:editorajeronimo@gmail.com" class="underline hover:text-white">e-mail</a> ou telefone/WhatsApp: <a href="tel:+351939667267" class="underline hover:text-white font-medium">939 667 267</a>.</p>
+                        <!-- Apoio directo da Editora -->
+                        <div class="mt-4 pt-3 border-t border-white/10 text-[11px] text-white/65 font-sans flex flex-wrap items-center justify-between gap-2">
+                            <span>Dúvidas na encomenda?</span>
+                            <div class="flex items-center gap-3">
+                                <a href="mailto:editorajeronimo@gmail.com" class="hover:text-brand-gold underline"><i class="fas fa-envelope mr-1"></i>E-mail</a>
+                                <a href="tel:+351939667267" class="hover:text-brand-gold underline"><i class="fas fa-phone mr-1"></i>939 667 267</a>
+                            </div>
                         </div>
                     </section>
                 </div>
             </div>
         </div>
-
-        <!-- Barra fixa inferior para telemóvel (ajuda a saltar rapidamente para a Secção 2) -->
-        <div id="mobile-jump-bar" class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200 px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex items-center justify-between gap-3 transition-transform duration-300">
-            <div>
-                <p class="text-[10px] uppercase tracking-wider text-gray-500 font-bold font-sans leading-none mb-1">Total a pagar</p>
-                <p id="sticky-mobile-total" class="text-lg font-extrabold text-brand-accent-blue font-sans leading-none">€ 0,00</p>
-            </div>
-            <button type="button" onclick="scrollToPaymentSection()" class="bg-brand-gold text-brand-accent-blue font-bold py-2.5 px-5 rounded-lg shadow-md text-xs uppercase tracking-wider font-sans flex items-center gap-2 active:scale-95 transition-transform">
-                <span>Ir para Pagamento</span>
-                <i class="fas fa-arrow-down text-[11px]"></i>
-            </button>
-        </div>
     </main>
 
-    <!-- Rodapé -->
+    <!-- Barra fixa inferior no telemóvel -->
+    <div id="mobile-sticky-bar" class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-brand-accent-blue text-white px-4 py-3 shadow-2xl border-t border-white/15 flex items-center justify-between gap-3">
+        <div>
+            <span class="block text-[10px] uppercase tracking-wider text-white/70 font-sans">Total a pagar</span>
+            <span id="sticky-mobile-total" class="text-lg font-extrabold text-brand-gold font-sans">€ 0,00</span>
+        </div>
+        <button type="button" onclick="irParaPagamentoMobile()" class="bg-brand-gold text-brand-accent-blue font-bold px-5 py-2.5 rounded-lg text-xs uppercase tracking-wider font-sans shadow-md">
+            Ir para Pagamento
+        </button>
+    </div>
+
     <div id="footer-placeholder"></div>
 
     <script>
         var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyakr7WiLIkHBThyYCMA2QQnsYJp1lwLI03ljeackFjFYrHqqd2IGxEABn5YQF2uSyG-A/exec"; 
         var SHIPPING_MARGIN = 19; 
-        var FORM_STORAGE_KEY = "jeronimoCheckoutDraft";
+        var POSTAL_IDS = [101, 102, 103, 104, 105];
         
         var bookData = [
             { id: 1, title: "Tu podes compreender a Bíblia", price: 18.00, weight: 505 },
@@ -419,8 +420,6 @@
             { id: 105, title: "A Virgem e o Menino com São Jerónimo", price: 3.90, weight: 50, image: "Imagens/postal5.png" }
         ];
 
-        var POSTCARD_IDS = [101, 102, 103, 104, 105];
-
         var UNAVAILABLE = {
             2: "A Eucaristia é mesmo Jesus (esgotado)",
             6: "Vai para o Céu (esgotado)"
@@ -431,8 +430,8 @@
             11: { title: "Era uma vez em Roma", date: "29 de Novembro" }
         };
 
-        function isPostcard(id) {
-            return POSTCARD_IDS.indexOf(Number(id)) !== -1;
+        function isPostalItem(item) {
+            return POSTAL_IDS.indexOf(Number(item.id)) !== -1;
         }
 
         function removeUnavailableItems() {
@@ -442,8 +441,12 @@
             localStorage.setItem('cartItems', JSON.stringify(
                 items.filter(function(i) { return !UNAVAILABLE[i.id]; })
             ));
-            mostrarErro("Removemos do carrinho artigos indisponíveis:\n- " +
-                removed.map(function(i) { return UNAVAILABLE[i.id]; }).join("\n- "));
+            var banner = document.getElementById('unavailable-banner');
+            var textEl = document.getElementById('unavailable-banner-text');
+            if (banner && textEl) {
+                textEl.innerHTML = '<strong>Artigos indisponíveis removidos do carrinho:</strong> ' + removed.map(function(i) { return UNAVAILABLE[i.id]; }).join(', ') + '.';
+                banner.classList.remove('hidden');
+            }
             return true;
         }
 
@@ -471,172 +474,212 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Validação matemática do NIF português (dígito de controlo oficial)
-        function validarNIFPortugues(nif) {
-            if (!/^\d{9}$/.test(nif)) return false;
-            var primeiroDigito = parseInt(nif.charAt(0), 10);
-            var doisPrimeiros = parseInt(nif.substring(0, 2), 10);
-            var prefixosValidos1 = [1, 2, 3, 5, 6, 8];
-            var prefixosValidos2 = [45, 70, 71, 72, 74, 75, 77, 78, 79, 90, 91, 98, 99];
-            if (prefixosValidos1.indexOf(primeiroDigito) === -1 && prefixosValidos2.indexOf(doisPrimeiros) === -1) {
-                return false;
+        function toggleMobileCart() {
+            var body = document.getElementById('collapsible-cart-body');
+            var label = document.getElementById('toggle-cart-label');
+            var icon = document.getElementById('toggle-cart-icon');
+            if (!body) return;
+            var aberto = !body.classList.contains('hidden');
+            body.classList.toggle('hidden', aberto);
+            if (label) label.textContent = aberto ? 'Ver artigos' : 'Ocultar artigos';
+            if (icon) {
+                icon.classList.toggle('fa-chevron-down', aberto);
+                icon.classList.toggle('fa-chevron-up', !aberto);
             }
-            var soma = 0;
-            for (var i = 0; i < 8; i++) {
-                soma += parseInt(nif.charAt(i), 10) * (9 - i);
-            }
-            var resto = soma % 11;
-            var digitoControlo = resto < 2 ? 0 : 11 - resto;
-            return digitoControlo === parseInt(nif.charAt(8), 10);
         }
 
-        // Formata código postal PT (0000-000) e sugere cidade automaticamente
+        function irParaPagamentoMobile() {
+            var target = document.getElementById('payment-section');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function toggleGiftField() {
+            var cb = document.getElementById('is-gift');
+            var box = document.getElementById('gift-note-container');
+            if (cb && box) {
+                box.classList.toggle('hidden', !cb.checked);
+                if (cb.checked) document.getElementById('gift-note').focus();
+            }
+            guardarRascunhoFormulario();
+        }
+
         function formatarCodigoPostal(valor) {
             var digitos = valor.replace(/\D/g, '').slice(0, 7);
             if (digitos.length > 4) return digitos.slice(0, 4) + '-' + digitos.slice(4);
             return digitos;
         }
 
-        // Adapta o input de Código Postal conforme País (Portugal vs Europa)
-        function adaptarCampoCodigoPostal() {
-            var paisEl = document.getElementById('pais');
-            var cpEl = document.getElementById('cod-postal');
-            if (!paisEl || !cpEl) return;
-            if (paisEl.value === 'PT') {
-                cpEl.setAttribute('inputmode', 'numeric');
-                cpEl.setAttribute('maxlength', '8');
-                cpEl.setAttribute('placeholder', '0000-000');
-                cpEl.value = formatarCodigoPostal(cpEl.value);
-            } else {
-                cpEl.setAttribute('inputmode', 'text');
-                cpEl.setAttribute('maxlength', '12');
-                cpEl.setAttribute('placeholder', 'Código postal');
-            }
+        function isConcelhoBraga(cp) {
+            return /^47[01]\d/.test((cp || '').trim());
         }
 
-        function handlePaisChange() {
-            adaptarCampoCodigoPostal();
-            guardarRascunhoFormulario();
-            loadCartSummary();
+        function validarNIF(nif) {
+            var limpo = (nif || '').replace(/\s+/g, '');
+            if (!limpo) return true;
+            if (!/^\d{9}$/.test(limpo)) return false;
+            var primeiro = limpo.charAt(0);
+            if (['1', '2', '3', '5', '6', '8', '9'].indexOf(primeiro) === -1) return false;
+            var soma = 0;
+            for (var i = 0; i < 8; i++) soma += parseInt(limpo.charAt(i), 10) * (9 - i);
+            var resto = soma % 11;
+            var digitoControlo = resto < 2 ? 0 : 11 - resto;
+            return digitoControlo === parseInt(limpo.charAt(8), 10);
         }
 
         function inferirCidadePorCP(cp) {
             var m = cp.match(/^(\d{4})/);
             if (!m) return '';
             var prefixo = parseInt(m[1], 10);
-            if (prefixo >= 4700 && prefixo <= 4719) return 'Braga';
-            if (prefixo >= 4000 && prefixo <= 4350) return 'Porto';
             if (prefixo >= 1000 && prefixo <= 1990) return 'Lisboa';
+            if (prefixo >= 2000 && prefixo <= 2005) return 'Santarém';
+            if (prefixo >= 2200 && prefixo <= 2205) return 'Abrantes';
+            if (prefixo >= 2300 && prefixo <= 2305) return 'Tomar';
+            if (prefixo >= 2330 && prefixo <= 2335) return 'Entroncamento';
+            if (prefixo >= 2350 && prefixo <= 2355) return 'Torres Novas';
+            if (prefixo >= 2400 && prefixo <= 2415) return 'Leiria';
+            if (prefixo >= 2500 && prefixo <= 2505) return 'Caldas da Rainha';
+            if (prefixo >= 2560 && prefixo <= 2565) return 'Torres Vedras';
+            if (prefixo >= 2600 && prefixo <= 2605) return 'Vila Franca de Xira';
+            if (prefixo >= 2670 && prefixo <= 2695) return 'Loures';
+            if (prefixo >= 2675 && prefixo <= 2679) return 'Odivelas';
+            if (prefixo >= 2700 && prefixo <= 2720) return 'Amadora';
+            if (prefixo >= 2710 && prefixo <= 2725) return 'Sintra';
+            if (prefixo >= 2750 && prefixo <= 2775) return 'Cascais';
+            if (prefixo >= 2780 && prefixo <= 2795) return 'Oeiras';
+            if (prefixo >= 2800 && prefixo <= 2825) return 'Almada';
+            if (prefixo >= 2830 && prefixo <= 2835) return 'Barreiro';
+            if (prefixo >= 2840 && prefixo <= 2855) return 'Seixal';
+            if (prefixo >= 2870 && prefixo <= 2875) return 'Montijo';
+            if (prefixo >= 2900 && prefixo <= 2910) return 'Setúbal';
             if (prefixo >= 3000 && prefixo <= 3045) return 'Coimbra';
-            if (prefixo >= 4800 && prefixo <= 4835) return 'Guimarães';
+            if (prefixo >= 3060 && prefixo <= 3065) return 'Cantanhede';
+            if (prefixo >= 3080 && prefixo <= 3085) return 'Figueira da Foz';
+            if (prefixo >= 3500 && prefixo <= 3515) return 'Viseu';
+            if (prefixo >= 3700 && prefixo <= 3701) return 'São João da Madeira';
+            if (prefixo >= 3720 && prefixo <= 3725) return 'Oliveira de Azeméis';
+            if (prefixo >= 3750 && prefixo <= 3755) return 'Águeda';
+            if (prefixo >= 3800 && prefixo <= 3810) return 'Aveiro';
+            if (prefixo >= 3830 && prefixo <= 3835) return 'Ílhavo';
+            if (prefixo >= 3880 && prefixo <= 3885) return 'Ovar';
+            if (prefixo >= 4000 && prefixo <= 4350) return 'Porto';
+            if (prefixo >= 4400 && prefixo <= 4435) return 'Vila Nova de Gaia';
+            if (prefixo >= 4420 && prefixo <= 4425) return 'Gondomar';
+            if (prefixo >= 4440 && prefixo <= 4445) return 'Valongo';
+            if (prefixo >= 4450 && prefixo <= 4465) return 'Matosinhos';
+            if (prefixo >= 4470 && prefixo <= 4475) return 'Maia';
+            if (prefixo >= 4480 && prefixo <= 4485) return 'Vila do Conde';
+            if (prefixo >= 4490 && prefixo <= 4495) return 'Póvoa de Varzim';
+            if (prefixo >= 4500 && prefixo <= 4505) return 'Espinho';
+            if (prefixo >= 4520 && prefixo <= 4525) return 'Santa Maria da Feira';
+            if (prefixo >= 4560 && prefixo <= 4565) return 'Penafiel';
+            if (prefixo >= 4580 && prefixo <= 4585) return 'Paredes';
+            if (prefixo >= 4590 && prefixo <= 4595) return 'Paços de Ferreira';
+            if (prefixo >= 4600 && prefixo <= 4605) return 'Amarante';
+            if (prefixo >= 4610 && prefixo <= 4615) return 'Felgueiras';
+            if (prefixo >= 4620 && prefixo <= 4625) return 'Lousada';
+            if (prefixo >= 4700 && prefixo <= 4719) return 'Braga';
+            if (prefixo >= 4720 && prefixo <= 4725) return 'Amares';
+            if (prefixo >= 4730 && prefixo <= 4735) return 'Vila Verde';
+            if (prefixo >= 4740 && prefixo <= 4745) return 'Esposende';
             if (prefixo >= 4750 && prefixo <= 4755) return 'Barcelos';
             if (prefixo >= 4760 && prefixo <= 4775) return 'Vila Nova de Famalicão';
+            if (prefixo >= 4780 && prefixo <= 4795) return 'Santo Tirso';
+            if (prefixo >= 4785 && prefixo <= 4786) return 'Trofa';
+            if (prefixo >= 4800 && prefixo <= 4835) return 'Guimarães';
+            if (prefixo >= 4815 && prefixo <= 4816) return 'Vizela';
+            if (prefixo >= 4820 && prefixo <= 4825) return 'Fafe';
+            if (prefixo >= 4830 && prefixo <= 4831) return 'Póvoa de Lanhoso';
+            if (prefixo >= 4850 && prefixo <= 4855) return 'Vieira do Minho';
+            if (prefixo >= 4860 && prefixo <= 4865) return 'Cabeceiras de Basto';
+            if (prefixo >= 4890 && prefixo <= 4895) return 'Celorico de Basto';
             if (prefixo >= 4900 && prefixo <= 4935) return 'Viana do Castelo';
-            if (prefixo >= 3800 && prefixo <= 3810) return 'Aveiro';
-            if (prefixo >= 2400 && prefixo <= 2415) return 'Leiria';
-            if (prefixo >= 2900 && prefixo <= 2910) return 'Setúbal';
+            if (prefixo >= 4910 && prefixo <= 4915) return 'Caminha';
+            if (prefixo >= 4930 && prefixo <= 4931) return 'Valença';
+            if (prefixo >= 4950 && prefixo <= 4955) return 'Monção';
+            if (prefixo >= 4970 && prefixo <= 4975) return 'Arcos de Valdevez';
+            if (prefixo >= 4990 && prefixo <= 4995) return 'Ponte de Lima';
+            if (prefixo >= 5000 && prefixo <= 5005) return 'Vila Real';
+            if (prefixo >= 5300 && prefixo <= 5305) return 'Bragança';
+            if (prefixo >= 5370 && prefixo <= 5375) return 'Mirandela';
+            if (prefixo >= 5400 && prefixo <= 5405) return 'Chaves';
+            if (prefixo >= 6000 && prefixo <= 6005) return 'Castelo Branco';
+            if (prefixo >= 6200 && prefixo <= 6205) return 'Covilhã';
+            if (prefixo >= 6300 && prefixo <= 6305) return 'Guarda';
             if (prefixo >= 7000 && prefixo <= 7005) return 'Évora';
+            if (prefixo >= 7300 && prefixo <= 7305) return 'Portalegre';
+            if (prefixo >= 7350 && prefixo <= 7355) return 'Elvas';
+            if (prefixo >= 7800 && prefixo <= 7805) return 'Beja';
             if (prefixo >= 8000 && prefixo <= 8005) return 'Faro';
+            if (prefixo >= 8100 && prefixo <= 8125) return 'Loulé';
+            if (prefixo >= 8200 && prefixo <= 8205) return 'Albufeira';
+            if (prefixo >= 8500 && prefixo <= 8505) return 'Portimão';
+            if (prefixo >= 8600 && prefixo <= 8605) return 'Lagos';
+            if (prefixo >= 8700 && prefixo <= 8705) return 'Olhão';
+            if (prefixo >= 8800 && prefixo <= 8805) return 'Tavira';
             if (prefixo >= 9000 && prefixo <= 9030) return 'Funchal';
             if (prefixo >= 9500 && prefixo <= 9504) return 'Ponta Delgada';
+            if (prefixo >= 9700 && prefixo <= 9705) return 'Angra do Heroísmo';
+            if (prefixo >= 9900 && prefixo <= 9905) return 'Horta';
             return '';
         }
 
-        function isConcelhoBraga(cp) {
-            return /^47[01]\d/.test((cp || '').trim());
-        }
+        function preencherCidadeAutomatica(cp, cidadeEl, callbackPosPreenchimento) {
+            if (!cidadeEl) return;
+            var podePreencher = !cidadeEl.value.trim() || cidadeEl.dataset.autoFilled === 'true';
+            if (!podePreencher) return;
 
-        // Devolve o destino efectivo para cálculo de portes e envio ao script ('BRAGA_MAO' automático em Braga)
-        function getDestinoEfetivo() {
-            var paisEl = document.getElementById('pais');
-            var pais = paisEl ? paisEl.value : 'PT';
-            if (pais !== 'PT') return pais;
-            var cpEl = document.getElementById('cod-postal');
-            var cp = cpEl ? cpEl.value.trim() : '';
-            var preferCtt = document.getElementById('braga-prefer-ctt');
-            if (isConcelhoBraga(cp) && !(preferCtt && preferCtt.checked)) {
-                return 'BRAGA_MAO';
+            var cidadeSugerida = inferirCidadePorCP(cp);
+            if (cidadeSugerida) {
+                cidadeEl.value = cidadeSugerida;
+                cidadeEl.dataset.autoFilled = 'true';
+                limparDestaqueCampo(cidadeEl);
+                if (callbackPosPreenchimento) callbackPosPreenchimento();
             }
-            return 'PT';
+
+            if (/^\d{4}-\d{3}$/.test(cp)) {
+                fetch('https://json.geoapi.pt/cp/' + cp)
+                    .then(function(r) { return r.ok ? r.json() : null; })
+                    .then(function(data) {
+                        if (!data) return;
+                        var local = data.Concelho || data.Localidade || '';
+                        if (local && (!cidadeEl.value.trim() || cidadeEl.dataset.autoFilled === 'true')) {
+                            cidadeEl.value = local;
+                            cidadeEl.dataset.autoFilled = 'true';
+                            limparDestaqueCampo(cidadeEl);
+                            if (callbackPosPreenchimento) callbackPosPreenchimento();
+                        }
+                    })
+                    .catch(function() {});
+            }
         }
 
-        function toggleGiftField() {
-            var cb = document.getElementById('is-gift');
-            var container = document.getElementById('gift-note-container');
-            if (!cb || !container) return;
-            container.classList.toggle('hidden', !cb.checked);
-            if (!cb.checked) {
-                var nota = document.getElementById('nota-oferta');
-                if (nota) nota.value = '';
+        function aoMudarDestino() {
+            var paisEl = document.getElementById('pais');
+            var cpEl = document.getElementById('cod-postal');
+            if (paisEl && cpEl) {
+                if (paisEl.value === 'PT') {
+                    cpEl.setAttribute('inputmode', 'numeric');
+                    cpEl.placeholder = '0000-000';
+                } else {
+                    cpEl.setAttribute('inputmode', 'text');
+                    cpEl.placeholder = 'Código postal';
+                }
             }
             guardarRascunhoFormulario();
+            loadCartSummary();
         }
 
-        function guardarRascunhoFormulario() {
-            try {
-                var dados = {
-                    nome: document.getElementById('nome')?.value || '',
-                    email: document.getElementById('email')?.value || '',
-                    telemovel: document.getElementById('telemovel')?.value || '',
-                    nif: document.getElementById('nif')?.value || '',
-                    newsletter: document.getElementById('newsletter-optin')?.checked !== false,
-                    morada: document.getElementById('morada')?.value || '',
-                    nr_andar: document.getElementById('nr-andar')?.value || '',
-                    cod_postal: document.getElementById('cod-postal')?.value || '',
-                    cidade: document.getElementById('cidade')?.value || '',
-                    pais: document.getElementById('pais')?.value || 'PT',
-                    braga_prefer_ctt: document.getElementById('braga-prefer-ctt')?.checked || false,
-                    billing_choice: document.querySelector('input[name="billing-choice"]:checked')?.value || 'sim',
-                    morada_fat: document.getElementById('morada-fat')?.value || '',
-                    nr_andar_fat: document.getElementById('nr-andar-fat')?.value || '',
-                    cod_postal_fat: document.getElementById('cod-postal-fat')?.value || '',
-                    cidade_fat: document.getElementById('cidade-fat')?.value || '',
-                    is_gift: document.getElementById('is-gift')?.checked || false,
-                    nota_oferta: document.getElementById('nota-oferta')?.value || ''
-                };
-                sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(dados));
-            } catch (e) {}
+        function limparDestaqueCampo(el) {
+            if (!el) return;
+            el.classList.remove('border-red-500', 'ring-2', 'ring-red-200');
         }
 
-        function restaurarRascunhoFormulario() {
-            try {
-                var bruto = sessionStorage.getItem(FORM_STORAGE_KEY);
-                if (!bruto) return;
-                var dados = JSON.parse(bruto);
-                if (!dados) return;
-                var setVal = function(id, v) { var el = document.getElementById(id); if (el && v !== undefined) el.value = v; };
-                setVal('nome', dados.nome);
-                setVal('email', dados.email);
-                setVal('telemovel', dados.telemovel);
-                setVal('nif', dados.nif);
-                if (dados.pais) setVal('pais', dados.pais);
-                adaptarCampoCodigoPostal();
-                setVal('morada', dados.morada);
-                setVal('nr-andar', dados.nr_andar);
-                setVal('cod-postal', dados.cod_postal);
-                setVal('cidade', dados.cidade);
-                var newsEl = document.getElementById('newsletter-optin');
-                if (newsEl && typeof dados.newsletter === 'boolean') newsEl.checked = dados.newsletter;
-                var cttEl = document.getElementById('braga-prefer-ctt');
-                if (cttEl && typeof dados.braga_prefer_ctt === 'boolean') cttEl.checked = dados.braga_prefer_ctt;
-                if (dados.billing_choice === 'nao') {
-                    var naoRadio = document.getElementById('choice-nao');
-                    if (naoRadio) naoRadio.checked = true;
-                    setVal('morada-fat', dados.morada_fat);
-                    setVal('nr-andar-fat', dados.nr_andar_fat);
-                    setVal('cod-postal-fat', dados.cod_postal_fat);
-                    setVal('cidade-fat', dados.cidade_fat);
-                }
-                if (dados.is_gift) {
-                    var giftEl = document.getElementById('is-gift');
-                    if (giftEl) giftEl.checked = true;
-                    setVal('nota-oferta', dados.nota_oferta);
-                    toggleGiftField();
-                }
-            } catch (e) {}
+        function destacarCampoErro(el) {
+            if (!el) return;
+            el.classList.add('border-red-500', 'ring-2', 'ring-red-200');
         }
 
-        function handleBillingChoice() {
+        function handleBillingChoice(limparAoAbrir) {
             var choiceInput = document.querySelector('input[name="billing-choice"]:checked');
             var container = document.getElementById('billing-address-container');
             if (!choiceInput || !container) return;
@@ -653,10 +696,16 @@
             } else {
                 container.classList.remove('hidden');
                 fields.forEach(function(f) {
+                    if (limparAoAbrir) f.value = '';
                     f.removeAttribute('readonly');
                     f.classList.remove('bg-gray-100', 'text-gray-400', 'cursor-not-allowed');
                     f.classList.add('bg-white');
+                    limparDestaqueCampo(f);
                 });
+                if (limparAoAbrir) {
+                    var cidadeFatEl = document.getElementById('cidade-fat');
+                    if (cidadeFatEl) cidadeFatEl.dataset.autoFilled = 'false';
+                }
             }
             guardarRascunhoFormulario();
             validateFinalButton();
@@ -672,24 +721,77 @@
             }
         }
 
-        function destacarCampoInvalido(id) {
+        function guardarRascunhoFormulario() {
+            try {
+                var dados = {
+                    nome: document.getElementById('nome')?.value || '',
+                    email: document.getElementById('email')?.value || '',
+                    telemovel: document.getElementById('telemovel')?.value || '',
+                    nif: document.getElementById('nif')?.value || '',
+                    newsletter: document.getElementById('newsletter-optin')?.checked !== false,
+                    morada: document.getElementById('morada')?.value || '',
+                    nr_andar: document.getElementById('nr-andar')?.value || '',
+                    cod_postal: document.getElementById('cod-postal')?.value || '',
+                    cidade: document.getElementById('cidade')?.value || '',
+                    pais: document.getElementById('pais')?.value || 'PT',
+                    braga_prefer_ctt: !!document.getElementById('braga-prefer-ctt')?.checked,
+                    is_gift: !!document.getElementById('is-gift')?.checked,
+                    gift_note: document.getElementById('gift-note')?.value || '',
+                    billing_choice: document.querySelector('input[name="billing-choice"]:checked')?.value || 'sim',
+                    morada_fat: document.getElementById('morada-fat')?.value || '',
+                    nr_andar_fat: document.getElementById('nr-andar-fat')?.value || '',
+                    cod_postal_fat: document.getElementById('cod-postal-fat')?.value || '',
+                    cidade_fat: document.getElementById('cidade-fat')?.value || ''
+                };
+                sessionStorage.setItem('jeronimoCheckoutDraft', JSON.stringify(dados));
+            } catch (e) {}
+        }
+
+        function restaurarRascunhoFormulario() {
+            try {
+                var raw = sessionStorage.getItem('jeronimoCheckoutDraft');
+                if (!raw) return;
+                var d = JSON.parse(raw);
+                if (d.nome) document.getElementById('nome').value = d.nome;
+                if (d.email) document.getElementById('email').value = d.email;
+                if (d.telemovel) document.getElementById('telemovel').value = d.telemovel;
+                if (d.nif) document.getElementById('nif').value = d.nif;
+                if (typeof d.newsletter === 'boolean') document.getElementById('newsletter-optin').checked = d.newsletter;
+                if (d.morada) document.getElementById('morada').value = d.morada;
+                if (d.nr_andar) document.getElementById('nr-andar').value = d.nr_andar;
+                if (d.cod_postal) document.getElementById('cod-postal').value = d.cod_postal;
+                if (d.cidade) document.getElementById('cidade').value = d.cidade;
+                if (d.pais) document.getElementById('pais').value = d.pais;
+                if (d.braga_prefer_ctt) document.getElementById('braga-prefer-ctt').checked = true;
+                if (d.is_gift) {
+                    document.getElementById('is-gift').checked = true;
+                    document.getElementById('gift-note-container').classList.remove('hidden');
+                }
+                if (d.gift_note) document.getElementById('gift-note').value = d.gift_note;
+                if (d.billing_choice === 'nao') {
+                    document.getElementById('choice-nao').checked = true;
+                    if (d.morada_fat) document.getElementById('morada-fat').value = d.morada_fat;
+                    if (d.nr_andar_fat) document.getElementById('nr-andar-fat').value = d.nr_andar_fat;
+                    if (d.cod_postal_fat) document.getElementById('cod-postal-fat').value = d.cod_postal_fat;
+                    if (d.cidade_fat) document.getElementById('cidade-fat').value = d.cidade_fat;
+                }
+            } catch (e) {}
+        }
+
+        ['nome', 'email', 'telemovel', 'nif', 'morada', 'nr-andar', 'cidade', 'gift-note'].forEach(function(id) {
             var el = document.getElementById(id);
-            if (!el) return;
-            el.classList.add('border-red-500', 'bg-red-50/40');
-            el.classList.remove('border-gray-300');
-        }
+            if (el) {
+                el.addEventListener('input', function() {
+                    limparDestaqueCampo(this);
+                    if (id === 'cidade') this.dataset.autoFilled = 'false';
+                    var choiceInput = document.querySelector('input[name="billing-choice"]:checked');
+                    if (choiceInput && choiceInput.value === 'sim') syncBillingAddress();
+                    guardarRascunhoFormulario();
+                    validateFinalButton();
+                });
+            }
+        });
 
-        function limparDestaqueCampo(el) {
-            if (!el) return;
-            el.classList.remove('border-red-500', 'bg-red-50/40');
-            el.classList.add('border-gray-300');
-        }
-
-        function limparTodosDestaques() {
-            document.querySelectorAll('#shipping-form input, #shipping-form select').forEach(limparDestaqueCampo);
-        }
-
-        // Eventos dos campos de envio
         var cpInput = document.getElementById('cod-postal');
         if (cpInput) {
             cpInput.addEventListener('input', function() {
@@ -698,11 +800,10 @@
                 if (!paisEl || paisEl.value === 'PT') {
                     this.value = formatarCodigoPostal(this.value);
                     var cidadeEl = document.getElementById('cidade');
-                    var cidadeSugerida = inferirCidadePorCP(this.value);
-                    if (cidadeEl && cidadeSugerida && (!cidadeEl.value.trim() || cidadeEl.dataset.autoFilled === 'true')) {
-                        cidadeEl.value = cidadeSugerida;
-                        cidadeEl.dataset.autoFilled = 'true';
-                    }
+                    preencherCidadeAutomatica(this.value, cidadeEl, function() {
+                        syncBillingAddress();
+                        guardarRascunhoFormulario();
+                    });
                 }
                 if (!isConcelhoBraga(this.value)) {
                     var preferCtt = document.getElementById('braga-prefer-ctt');
@@ -720,105 +821,26 @@
                 limparDestaqueCampo(this);
                 this.value = formatarCodigoPostal(this.value);
                 var cidadeFatEl = document.getElementById('cidade-fat');
-                var cidadeSugerida = inferirCidadePorCP(this.value);
-                if (cidadeFatEl && cidadeSugerida && (!cidadeFatEl.value.trim() || cidadeFatEl.dataset.autoFilled === 'true')) {
-                    cidadeFatEl.value = cidadeSugerida;
-                    cidadeFatEl.dataset.autoFilled = 'true';
-                }
-                guardarRascunhoFormulario();
-                validateFinalButton();
-            });
-        }
-
-        var cidadeInput = document.getElementById('cidade');
-        if (cidadeInput) {
-            cidadeInput.addEventListener('input', function() {
-                limparDestaqueCampo(this);
-                this.dataset.autoFilled = 'false';
-                syncBillingAddress();
-                guardarRascunhoFormulario();
-                validateFinalButton();
-            });
-        }
-
-        var cidadeFatInput = document.getElementById('cidade-fat');
-        if (cidadeFatInput) {
-            cidadeFatInput.addEventListener('input', function() {
-                limparDestaqueCampo(this);
-                this.dataset.autoFilled = 'false';
-                guardarRascunhoFormulario();
-                validateFinalButton();
-            });
-        }
-
-        ['nome', 'email', 'telemovel', 'nif', 'morada', 'nr-andar', 'nota-oferta'].forEach(function(id) {
-            var el = document.getElementById(id);
-            if (el) {
-                el.addEventListener('input', function() {
-                    if (id === 'nif') this.value = this.value.replace(/\D/g, '').slice(0, 9);
-                    limparDestaqueCampo(this);
-                    var choiceInput = document.querySelector('input[name="billing-choice"]:checked');
-                    if (choiceInput && choiceInput.value === 'sim') syncBillingAddress();
+                preencherCidadeAutomatica(this.value, cidadeFatEl, function() {
                     guardarRascunhoFormulario();
-                    validateFinalButton();
                 });
-            }
-        });
-
-        var newsCheckbox = document.getElementById('newsletter-optin');
-        if (newsCheckbox) {
-            newsCheckbox.addEventListener('change', guardarRascunhoFormulario);
+                guardarRascunhoFormulario();
+                validateFinalButton();
+            });
         }
 
         document.querySelectorAll('.billing-field').forEach(function(field) {
+            if (field.id === 'cod-postal-fat') return;
             field.addEventListener('input', function() {
                 limparDestaqueCampo(this);
+                if (this.id === 'cidade-fat') this.dataset.autoFilled = 'false';
                 guardarRascunhoFormulario();
                 validateFinalButton();
             });
         });
 
-        function toggleMobileSummary() {
-            var body = document.getElementById('collapsible-summary-body');
-            var label = document.getElementById('toggle-summary-label');
-            var icon = document.getElementById('toggle-summary-icon');
-            var btn = document.getElementById('toggle-summary-btn');
-            if (!body) return;
-            var escondido = body.classList.toggle('hidden');
-            if (label) label.textContent = escondido ? 'Ver artigos' : 'Ocultar';
-            if (icon) {
-                icon.classList.toggle('fa-chevron-up', !escondido);
-                icon.classList.toggle('fa-chevron-down', escondido);
-            }
-            if (btn) btn.setAttribute('aria-expanded', String(!escondido));
-        }
-
-        function scrollToPaymentSection() {
-            var sec = document.getElementById('payment-section');
-            if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        var paymentSectionVisible = false;
-        function atualizarBarraMobile() {
-            var bar = document.getElementById('mobile-jump-bar');
-            if (!bar) return;
-            var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            var esconder = items.length === 0 || paymentSectionVisible || stripeCheckout !== null;
-            bar.classList.toggle('translate-y-full', esconder);
-            bar.classList.toggle('pointer-events-none', esconder);
-        }
-
-        function initMobileJumpBar() {
-            var sec = document.getElementById('payment-section');
-            if (!sec || typeof IntersectionObserver === 'undefined') return;
-            var observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    paymentSectionVisible = entry.isIntersecting;
-                    atualizarBarraMobile();
-                });
-            }, { threshold: 0.15 });
-            observer.observe(sec);
-        }
+        var nlInput = document.getElementById('newsletter-optin');
+        if (nlInput) nlInput.addEventListener('change', guardarRascunhoFormulario);
 
         function obterTarifa(peso, destino) {
             var pesoKg = peso / 1000;
@@ -851,183 +873,141 @@
             return 0;
         }
 
+        function obterDestinoEfectivo() {
+            var paisEl = document.getElementById('pais');
+            var pais = paisEl ? paisEl.value : 'PT';
+            var cp = document.getElementById('cod-postal')?.value || '';
+            var preferCtt = document.getElementById('braga-prefer-ctt')?.checked;
+            if (pais === 'PT' && isConcelhoBraga(cp) && !preferCtt) return 'BRAGA_MAO';
+            return pais;
+        }
+
         function loadCartSummary() {
             removeUnavailableItems();
             var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            var list = document.getElementById('summary-list');
-            var paisElement = document.getElementById('pais');
-            var paisSelecionado = paisElement ? paisElement.value : 'PT';
-            var cpAtual = document.getElementById('cod-postal') ? document.getElementById('cod-postal').value.trim() : '';
-            var destino = getDestinoEfetivo();
-            var subtotal = 0, pesoSemPostais = 0, pesoUmPostal = 0, html = '';
+            var emptyView = document.getElementById('empty-cart-view');
+            var gridView = document.getElementById('checkout-grid');
+            var stickyBar = document.getElementById('mobile-sticky-bar');
 
-            // Detecção inteligente de carrinho contendo exclusivamente cursos digitais
-            var contemFisicos = items.some(function(item) { return item.type !== 'curso'; });
-            var apenasCursos = items.length > 0 && !contemFisicos;
-
-            // Adapta a visibilidade dos campos de morada física
-            var physicalArea = document.getElementById('physical-address-fields');
-            var stepTitle = document.getElementById('billing-step-title');
-            
-            if (apenasCursos) {
-                if (physicalArea) physicalArea.classList.add('hidden');
-                if (stepTitle) stepTitle.textContent = "Detalhes de Contacto";
-                document.querySelectorAll('.shipping-input').forEach(function(el) {
-                    el.removeAttribute('required');
-                });
+            if (items.length === 0) {
+                if (emptyView) emptyView.classList.remove('hidden');
+                if (gridView) gridView.classList.add('hidden');
+                if (stickyBar) stickyBar.classList.add('hidden');
+                updateCartUI();
+                return;
             } else {
-                if (physicalArea) physicalArea.classList.remove('hidden');
-                if (stepTitle) stepTitle.textContent = "Detalhes de Envio";
-                document.querySelectorAll('.shipping-input').forEach(function(el) {
-                    el.setAttribute('required', 'required');
-                });
+                if (emptyView) emptyView.classList.add('hidden');
+                if (gridView) gridView.classList.remove('hidden');
+                if (stickyBar) stickyBar.classList.remove('hidden');
             }
 
-            var totalArtigos = 0;
+            var list = document.getElementById('summary-list');
+            var pais = document.getElementById('pais')?.value || 'PT';
+            var cp = document.getElementById('cod-postal')?.value || '';
+            var destino = obterDestinoEfectivo();
+            var subtotal = 0, pesoLivros = 0, totalUnidades = 0, html = '';
+
+            var contemFisicos = items.some(function(item) { return item.type !== 'curso'; });
+            var apenasCursos = items.length > 0 && !contemFisicos;
+            var temNaoPostaisFisicos = items.some(function(item) { return item.type !== 'curso' && !isPostalItem(item); });
+            var apenasPostais = contemFisicos && !temNaoPostaisFisicos;
+
+            var physicalArea = document.getElementById('physical-address-fields');
+            var stepTitle = document.getElementById('billing-step-title');
+            if (apenasCursos) {
+                if (physicalArea) physicalArea.classList.add('hidden');
+                if (stepTitle) stepTitle.textContent = "1. Detalhes de Contacto";
+                document.querySelectorAll('.shipping-input').forEach(function(el) { el.removeAttribute('required'); });
+            } else {
+                if (physicalArea) physicalArea.classList.remove('hidden');
+                if (stepTitle) stepTitle.textContent = "1. Detalhes de Envio";
+                document.querySelectorAll('.shipping-input').forEach(function(el) { el.setAttribute('required', 'required'); });
+            }
+
             items.forEach(function(item) {
                 var lineTotal = item.price * item.quantity;
                 subtotal += lineTotal;
-                totalArtigos += item.quantity;
+                totalUnidades += item.quantity;
                 
                 var book = bookData.find(function(b) { return String(b.id) === String(item.id); });
                 var itemWeight = (item.type === 'curso') ? 0 : 272;
-                
-                if (book) {
-                    itemWeight = book.weight; 
-                } else if (item.weight) {
-                    itemWeight = item.weight < 5 ? parseFloat(item.weight) * 1000 : parseFloat(item.weight);
-                }
-                if (isPostcard(item.id)) {
-                    if (pesoUmPostal === 0) pesoUmPostal = itemWeight;
-                } else {
-                    pesoSemPostais += (itemWeight * item.quantity);
+                if (book) itemWeight = book.weight;
+                else if (item.weight) itemWeight = item.weight < 5 ? parseFloat(item.weight) * 1000 : parseFloat(item.weight);
+
+                if (item.type !== 'curso' && !isPostalItem(item)) {
+                    pesoLivros += (itemWeight * item.quantity);
                 }
 
-                var quantitySelectorHtml = '';
-                if (item.type === 'curso') {
-                    quantitySelectorHtml = `<span class="text-brand-gold text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 bg-white/5 rounded-lg border border-white/10 font-sans flex items-center gap-1.5"><i class="fas fa-video"></i> Curso Digital</span>`;
-                } else {
-                    quantitySelectorHtml = `
-                        <div class="flex items-center space-x-3 bg-white/10 rounded-lg px-2 py-1 border border-white/20">
+                var quantitySelectorHtml = item.type === 'curso'
+                    ? `<span class="text-brand-gold text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 bg-white/5 rounded-lg border border-white/10 font-sans flex items-center gap-1.5"><i class="fas fa-video"></i> Curso Digital</span>`
+                    : `<div class="flex items-center space-x-3 bg-white/10 rounded-lg px-2 py-1 border border-white/20">
                             <button type="button" onclick="changeQuantity('${item.id}', -1)" class="text-white hover:text-brand-gold p-1"><i class="fas fa-minus text-xs"></i></button>
                             <span class="text-white text-sm font-bold w-4 text-center">${item.quantity}</span>
                             <button type="button" onclick="changeQuantity('${item.id}', 1)" class="text-white hover:text-brand-gold p-1"><i class="fas fa-plus text-xs"></i></button>
-                        </div>
-                    `;
-                }
+                       </div>`;
 
                 html += `
                     <div class="flex flex-col border-b border-white/10 pb-4 last:border-0 font-sans">
                         <div class="flex justify-between items-start mb-2 gap-3 text-left">
-                            <span class="font-lora text-sm text-brand-gold leading-tight flex-grow font-bold">
-                                ${item.title}
-                            </span>
+                            <span class="font-lora text-sm text-brand-gold leading-tight flex-grow font-bold">${item.title}</span>
                             <span class="font-sans font-bold text-white text-sm whitespace-nowrap">€ ${lineTotal.toFixed(2).replace('.', ',')}</span>
                         </div>
                         <div class="flex items-center justify-between">
                             ${quantitySelectorHtml}
-                            <button type="button" onclick="removeItem('${item.id}')" class="text-gray-400 hover:text-white p-2" title="Remover"><i class="fas fa-trash-alt"></i></button>
+                            <button type="button" onclick="removeItem('${item.id}')" class="text-gray-400 hover:text-white p-2"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>`;
             });
-
-            var itemsBadge = document.getElementById('cart-items-badge');
-            if (itemsBadge) {
-                itemsBadge.textContent = totalArtigos === 1 ? '1 artigo' : totalArtigos + ' artigos';
-            }
-
-            // Se o carrinho estiver vazio, garante que o corpo do resumo fica visível no telemóvel
-            if (items.length === 0) {
-                var body = document.getElementById('collapsible-summary-body');
-                var label = document.getElementById('toggle-summary-label');
-                var icon = document.getElementById('toggle-summary-icon');
-                var btn = document.getElementById('toggle-summary-btn');
-                if (body) body.classList.remove('hidden');
-                if (label) label.textContent = 'Ocultar';
-                if (icon) { icon.classList.add('fa-chevron-up'); icon.classList.remove('fa-chevron-down'); }
-                if (btn) btn.setAttribute('aria-expanded', 'true');
-            }
             
             var custoPortes = 0;
             var badge = document.getElementById('optimizacao-badge');
-            var estimateEl = document.getElementById('delivery-estimate');
-            var emBraga = (paisSelecionado === 'PT' && isConcelhoBraga(cpAtual));
-            var entregaEmMao = (destino === 'BRAGA_MAO');
             var bragaNote = document.getElementById('braga-note');
+            var emBraga = (!apenasCursos && pais === 'PT' && isConcelhoBraga(cp));
             if (bragaNote) bragaNote.classList.toggle('hidden', !emBraga);
-            var preItems = items.filter(function(i) { return PREORDER[i.id]; });
-
-            // Regras de portes:
-            // - Livro(s) + postal(ais): conta apenas o peso dos livros
-            // - Apenas postal(ais) (1 ou mais): conta apenas 1 vez o porte de um postal consoante o destino
-            var pesoParaPortes = pesoSemPostais > 0 ? pesoSemPostais : pesoUmPostal;
+            var entregaEmMao = (destino === 'BRAGA_MAO');
             
-            if (items.length > 0 && pesoParaPortes > 0 && !apenasCursos) {
+            if (contemFisicos && !apenasCursos) {
                 if (entregaEmMao) {
                     custoPortes = 0;
                     if (badge) {
-                        badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Entrega em mão em Braga · Sem portes</span>`;
-                    }
-                    if (estimateEl) {
-                        estimateEl.innerHTML = preItems.length > 0
-                            ? `<i class="far fa-clock mr-1"></i> Entrega combinada após lançamento`
-                            : `<i class="far fa-clock mr-1"></i> Entrega combinada em 24h a 48h`;
-                        estimateEl.classList.remove('hidden');
+                        badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide">Entrega em mão em Braga · Sem portes</span>
+                                           <span class="bg-white/10 text-[10px] px-2 py-0.5 rounded-full text-white/90 font-medium">24h a 48h</span>`;
                     }
                 } else {
-                    var pesoFinal = pesoParaPortes + SHIPPING_MARGIN;
+                    var pesoParaCalculo = apenasPostais ? 50 : pesoLivros;
+                    var pesoFinal = pesoParaCalculo + SHIPPING_MARGIN;
                     var numPacotes = Math.ceil(pesoFinal / 5000), pesoPorPacote = pesoFinal / numPacotes;
                     for (var i = 0; i < numPacotes; i++) custoPortes += obterTarifa(pesoPorPacote, destino);
+                    var prazoTexto = destino === 'PT' ? '2 a 4 dias úteis' : '5 a 10 dias úteis';
                     if (badge) {
-                        badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Envio Editorial CTT (Portes Físicos)</span>`;
-                    }
-                    if (estimateEl) {
-                        var prazoTexto = destino === 'PT' ? '2 a 4 dias úteis' : '5 a 10 dias úteis';
-                        estimateEl.innerHTML = preItems.length > 0
-                            ? `<i class="far fa-clock mr-1"></i> Expedição após lançamento (${prazoTexto})`
-                            : `<i class="far fa-clock mr-1"></i> Prazo estimado: ${prazoTexto}`;
-                        estimateEl.classList.remove('hidden');
+                        badge.innerHTML = `<span class="bg-green-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide">Envio Editorial CTT</span>
+                                           <span class="bg-white/10 text-[10px] px-2 py-0.5 rounded-full text-white/90 font-medium">${prazoTexto}</span>`;
                     }
                 }
             } else {
                 custoPortes = 0;
                 if (badge) {
-                    if (apenasCursos) {
-                        badge.innerHTML = `<span class="bg-amber-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide shadow-xs">Processamento Digital</span>`;
-                    } else {
-                        badge.innerHTML = ``;
-                    }
-                }
-                if (estimateEl) {
-                    if (apenasCursos) {
-                        estimateEl.innerHTML = `<i class="far fa-clock mr-1"></i> Acesso enviado por e-mail após confirmação`;
-                        estimateEl.classList.remove('hidden');
-                    } else {
-                        estimateEl.classList.add('hidden');
-                    }
+                    badge.innerHTML = `<span class="bg-amber-600 text-[10px] px-2 py-0.5 rounded-full text-white font-bold uppercase tracking-wide">Processamento Digital</span>
+                                       <span class="bg-white/10 text-[10px] px-2 py-0.5 rounded-full text-white/90 font-medium">Acesso por e-mail</span>`;
                 }
             }
             
-            var emptyCartHtml = `
-                <div class="text-center py-6 px-2">
-                    <i class="fas fa-shopping-bag text-3xl text-brand-gold/60 mb-3"></i>
-                    <p class="font-lora text-base text-white/80 mb-4">O seu carrinho está vazio.</p>
-                    <a href="catalogo-completo" class="inline-flex items-center gap-2 bg-brand-gold text-brand-accent-blue font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-lg hover:bg-yellow-500 transition-colors font-sans shadow">
-                        <i class="fas fa-book"></i> Explorar Catálogo
-                    </a>
-                </div>`;
+            var totalGeral = subtotal + custoPortes;
+            var totalFormatado = `€ ${totalGeral.toFixed(2).replace('.', ',')}`;
 
-            list.innerHTML = html || emptyCartHtml;
-            var totalFormatado = `€ ${(subtotal + custoPortes).toFixed(2).replace('.', ',')}`;
+            list.innerHTML = html;
             document.getElementById('summary-subtotal').textContent = `€ ${subtotal.toFixed(2).replace('.', ',')}`;
             document.getElementById('summary-shipping').textContent = `€ ${custoPortes.toFixed(2).replace('.', ',')}`;
             document.getElementById('summary-total').textContent = totalFormatado;
-            
+
             var btnAmount = document.getElementById('btn-total-amount');
-            if (btnAmount) btnAmount.textContent = items.length > 0 ? `· ${totalFormatado}` : '';
+            if (btnAmount) btnAmount.textContent = totalFormatado;
             var stickyTotal = document.getElementById('sticky-mobile-total');
             if (stickyTotal) stickyTotal.textContent = totalFormatado;
+            var mobileBadge = document.getElementById('mobile-cart-badge');
+            if (mobileBadge) mobileBadge.textContent = `(${totalUnidades} ${totalUnidades === 1 ? 'artigo' : 'artigos'})`;
             
+            var preItems = items.filter(function(i) { return PREORDER[i.id]; });
             var notice = document.getElementById('preorder-notice');
             if (notice) {
                 if (preItems.length === 0) {
@@ -1045,26 +1025,19 @@
             }
 
             renderSuggestions(items);
+            updateCartUI();
             validateFinalButton();
-            atualizarBarraMobile();
         }
 
         function renderSuggestions(currentItems) {
             var container = document.getElementById('suggestions-container');
             var list = document.getElementById('suggestions-list');
-            
             var suggestions = bookData.filter(function(b) {
                 return [101, 103].includes(b.id) && !currentItems.some(function(item) { return String(item.id) === String(b.id); });
             });
-            
-            if (suggestions.length === 0) {
-                container.classList.add('hidden');
-                return;
-            }
-            
+            if (suggestions.length === 0) { container.classList.add('hidden'); return; }
             container.classList.remove('hidden');
             var html = '';
-            
             suggestions.forEach(function(s) {
                 html += `
                     <div class="flex-shrink-0 w-40 bg-white/5 rounded-xl p-3 border border-white/10 flex flex-col items-center text-center suggestion-card">
@@ -1077,23 +1050,19 @@
                         <p class="text-[9px] font-bold text-white uppercase tracking-wider leading-tight h-8 overflow-hidden mb-2">Postal: ${s.title}</p>
                         <div class="flex items-center justify-between w-full mt-auto font-sans">
                             <span class="text-[15px] text-brand-gold font-bold">€ ${s.price.toFixed(2).replace('.', ',')}</span>
-                            <button type="button" onclick="quickAdd('${s.id}')" class="bg-brand-gold text-brand-accent-blue rounded-full w-7 h-7 flex items-center justify-center hover:bg-yellow-500 transition-colors shadow-sm" title="Adicionar ao carrinho">
+                            <button type="button" onclick="quickAdd('${s.id}')" class="bg-brand-gold text-brand-accent-blue rounded-full w-7 h-7 flex items-center justify-center hover:bg-yellow-500 transition-colors shadow-sm">
                                 <i class="fas fa-plus text-[10px]"></i>
                             </button>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
-            
             html += `
                 <a href="produtos" class="flex-shrink-0 w-32 bg-brand-gold/10 rounded-xl p-3 border border-brand-gold/30 flex flex-col items-center justify-center text-center suggestion-card hover:bg-brand-gold/20">
                     <div class="w-10 h-10 bg-brand-gold/20 rounded-full flex items-center justify-center mb-3">
                         <i class="fas fa-arrow-right text-brand-gold"></i>
                     </div>
                     <p class="text-[9px] font-bold text-brand-gold uppercase tracking-wider leading-tight">Ver mais em Produtos</p>
-                </a>
-            `;
-            
+                </a>`;
             list.innerHTML = html;
         }
 
@@ -1101,25 +1070,11 @@
             var product = bookData.find(function(b) { return String(b.id) === String(productId); });
             if (!product) return;
             var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            
             var existingIndex = items.findIndex(function(item) { return String(item.id) === String(product.id); });
-            if (existingIndex > -1) {
-                items[existingIndex].quantity += 1;
-            } else {
-                items.push({ 
-                    id: product.id, 
-                    title: product.title, 
-                    price: product.price, 
-                    quantity: 1,
-                    image: product.image || "",
-                    author: product.author || "Jerónimo Editora",
-                    weight: product.weight ? parseFloat(product.weight) / 1000 : 0.050
-                });
-            }
-            
+            if (existingIndex > -1) items[existingIndex].quantity += 1;
+            else items.push({ id: product.id, title: product.title, price: product.price, quantity: 1, image: product.image || "", author: "Jerónimo Editora", weight: product.weight ? parseFloat(product.weight) / 1000 : 0.050 });
             localStorage.setItem('cartItems', JSON.stringify(items));
             loadCartSummary();
-            updateCartUI();
         }
 
         function changeQuantity(id, delta) {
@@ -1129,7 +1084,6 @@
                 items[idx].quantity = Math.max(1, items[idx].quantity + delta);
                 localStorage.setItem('cartItems', JSON.stringify(items));
                 loadCartSummary();
-                updateCartUI();
             }
         }
 
@@ -1137,15 +1091,11 @@
             var items = JSON.parse(localStorage.getItem('cartItems') || '[]');
             localStorage.setItem('cartItems', JSON.stringify(items.filter(function(i) { return String(i.id) !== String(id); })));
             loadCartSummary();
-            updateCartUI();
         }
 
-        // Chave pública da Stripe (pode estar no site). Tem de ser do mesmo modo que a chave
-        // secreta do script: pk_live_ com sk_live_/rk_live_, pk_test_ com sk_test_.
         var STRIPE_PUBLISHABLE_KEY = "pk_live_51UcpceIlkMoZfw7whB0z6yxn3Npt6qLYl3LFlyrJK5NiBzkB5K4IbCWiY5YqKA51cfiAbl6I4C64YZLNk5K09g0W00a09XxcVC";
         var stripeCheckout = null;
 
-        // Em localhost pode testar-se outra implantação do script: checkout?script=<id da implantação>
         function urlDoScript() {
             var guardado = null;
             try { guardado = sessionStorage.getItem('jeronimoScript'); } catch (err) {}
@@ -1177,126 +1127,120 @@
             document.getElementById('error-modal').classList.remove('hidden');
         }
 
-        // Com o pagamento aberto, os dados e o carrinho ficam fixos (o valor já foi calculado).
         function bloquearFormulario(bloquear) {
-            document.querySelectorAll('#shipping-form input, #shipping-form select, #shipping-form textarea').forEach(function(el) {
-                el.disabled = bloquear;
-            });
+            document.querySelectorAll('#shipping-form input, #shipping-form select').forEach(function(el) { el.disabled = bloquear; });
             ['summary-list', 'suggestions-container'].forEach(function(id) {
                 var el = document.getElementById(id);
                 if (el) el.classList.toggle('pointer-events-none', bloquear);
                 if (el) el.classList.toggle('opacity-60', bloquear);
             });
-            document.getElementById('payment-pre-cta').classList.toggle('hidden', bloquear);
+            document.getElementById('place-order-button').classList.toggle('hidden', bloquear);
             document.getElementById('payment-edit').classList.toggle('hidden', !bloquear);
-            var tip = document.getElementById('mbway-tip');
-            if (tip) tip.classList.toggle('hidden', !bloquear);
-
-            var doneBadge = document.getElementById('section1-done-badge');
-            var editBtn = document.getElementById('section1-edit-btn');
-            var step1Badge = document.getElementById('step1-badge');
-            if (doneBadge) doneBadge.classList.toggle('hidden', !bloquear);
-            if (editBtn) editBtn.classList.toggle('hidden', !bloquear);
-            if (step1Badge) {
-                step1Badge.innerHTML = bloquear ? '<i class="fas fa-check text-[11px]"></i>' : '1';
-                step1Badge.classList.toggle('bg-green-600', bloquear);
-                step1Badge.classList.toggle('bg-brand-accent-red', !bloquear);
+            var badge = document.getElementById('step1-confirmed-badge');
+            if (badge) {
+                badge.classList.toggle('hidden', !bloquear);
+                badge.classList.toggle('flex', bloquear);
             }
-            atualizarBarraMobile();
+            var stickyBar = document.getElementById('mobile-sticky-bar');
+            if (stickyBar) stickyBar.classList.toggle('hidden', bloquear);
         }
 
         function editarDados() {
             if (stripeCheckout) { stripeCheckout.destroy(); stripeCheckout = null; }
             document.getElementById('payment-total-note').classList.add('hidden');
             bloquearFormulario(false);
-            var sec1 = document.getElementById('shipping-section');
-            if (sec1) sec1.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        function showValidationError(msg) {
+        function showValidationError(msg, primeiroCampo) {
             var box = document.getElementById('validation-error-box');
             if (!box) return;
             if (!msg) { box.classList.add('hidden'); box.innerHTML = ''; return; }
             box.innerHTML = '<i class="fas fa-exclamation-circle mr-1.5"></i> ' + msg;
             box.classList.remove('hidden');
-            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (primeiroCampo) {
+                primeiroCampo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                primeiroCampo.focus();
+            } else {
+                box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
 
-        // Valida no momento do clique e devolve uma mensagem com o que falta ("" se estiver tudo correcto).
         function validarEncomenda() {
-            limparTodosDestaques();
             var cartItems = [];
             try { cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]'); } catch (e) { cartItems = []; }
-            if (cartItems.length === 0) return { erro: "O seu carrinho está vazio.", primeiroCampo: null };
+            if (cartItems.length === 0) return { erro: "O seu carrinho está vazio.", campo: null };
 
             var faltas = [];
             var errosFormato = [];
             var primeiroCampo = null;
-            var val = function(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; };
-            var marcar = function(id, label) {
-                faltas.push(label);
-                destacarCampoInvalido(id);
-                if (!primeiroCampo) primeiroCampo = id;
+            var verificar = function(id, label) {
+                var el = document.getElementById(id);
+                if (!el || !el.value.trim()) {
+                    faltas.push(label);
+                    destacarCampoErro(el);
+                    if (!primeiroCampo) primeiroCampo = el;
+                    return '';
+                }
+                return el.value.trim();
             };
 
-            if (!val('nome')) marcar('nome', 'Nome completo');
-
-            var emailVal = val('email');
-            if (!emailVal) {
-                marcar('email', 'E-mail');
-            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-                errosFormato.push('Introduza um endereço de e-mail válido.');
-                destacarCampoInvalido('email');
-                if (!primeiroCampo) primeiroCampo = 'email';
+            verificar('nome', 'Nome completo');
+            var emailVal = verificar('email', 'E-mail');
+            if (emailVal && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+                errosFormato.push('Indique um endereço de e-mail válido.');
+                var emailEl = document.getElementById('email');
+                destacarCampoErro(emailEl);
+                if (!primeiroCampo) primeiroCampo = emailEl;
             }
 
-            var telVal = val('telemovel');
-            var telDigitos = telVal.replace(/\D/g, '');
-            if (!telVal) {
-                marcar('telemovel', 'Telemóvel');
-            } else if (telDigitos.length < 9) {
-                errosFormato.push('O número de telemóvel deve ter pelo menos 9 dígitos.');
-                destacarCampoInvalido('telemovel');
-                if (!primeiroCampo) primeiroCampo = 'telemovel';
+            var telVal = verificar('telemovel', 'Telemóvel');
+            if (telVal && telVal.replace(/\D/g, '').length < 9) {
+                errosFormato.push('Indique um número de telemóvel válido.');
+                var telEl = document.getElementById('telemovel');
+                destacarCampoErro(telEl);
+                if (!primeiroCampo) primeiroCampo = telEl;
             }
 
-            var nifVal = val('nif');
-            if (nifVal && !validarNIFPortugues(nifVal)) {
+            var nifEl = document.getElementById('nif');
+            if (nifEl && nifEl.value.trim() && !validarNIF(nifEl.value)) {
                 errosFormato.push('O NIF introduzido não é válido (verifique os 9 dígitos).');
-                destacarCampoInvalido('nif');
-                if (!primeiroCampo) primeiroCampo = 'nif';
+                destacarCampoErro(nifEl);
+                if (!primeiroCampo) primeiroCampo = nifEl;
             }
 
             var contemFisicos = cartItems.some(function(item) { return item.type !== 'curso'; });
             if (contemFisicos) {
-                if (!val('morada')) marcar('morada', 'Morada completa');
-                if (!val('nr-andar')) marcar('nr-andar', 'Nº / Andar');
-
-                var cpVal = val('cod-postal');
-                var paisVal = val('pais') || 'PT';
-                if (!cpVal) {
-                    marcar('cod-postal', 'Código Postal');
-                } else if (paisVal === 'PT' && !/^\d{4}-\d{3}$/.test(cpVal)) {
-                    errosFormato.push('Introduza o Código Postal completo no formato 0000-000.');
-                    destacarCampoInvalido('cod-postal');
-                    if (!primeiroCampo) primeiroCampo = 'cod-postal';
+                verificar('morada', 'Morada completa');
+                verificar('nr-andar', 'Nº / Andar');
+                var cpVal = verificar('cod-postal', 'Código Postal');
+                var paisVal = document.getElementById('pais')?.value || 'PT';
+                if (cpVal && paisVal === 'PT' && !/^\d{4}-\d{3}$/.test(cpVal)) {
+                    errosFormato.push('O Código Postal deve ter 7 dígitos (formato 0000-000).');
+                    var cpEl = document.getElementById('cod-postal');
+                    destacarCampoErro(cpEl);
+                    if (!primeiroCampo) primeiroCampo = cpEl;
                 }
-
-                if (!val('cidade')) marcar('cidade', 'Cidade');
+                verificar('cidade', 'Cidade');
 
                 var choiceNao = document.getElementById('choice-nao');
                 if (choiceNao && choiceNao.checked) {
-                    if (!val('morada-fat')) marcar('morada-fat', 'Morada de facturação');
-                    if (!val('nr-andar-fat')) marcar('nr-andar-fat', 'Nº / Andar de facturação');
-                    if (!val('cod-postal-fat')) marcar('cod-postal-fat', 'Cód. Postal de facturação');
-                    if (!val('cidade-fat')) marcar('cidade-fat', 'Cidade de facturação');
+                    verificar('morada-fat', 'Morada de facturação');
+                    verificar('nr-andar-fat', 'Nº / Andar de facturação');
+                    var cpFatVal = verificar('cod-postal-fat', 'Cód. Postal de facturação');
+                    if (cpFatVal && !/^\d{4}-\d{3}$/.test(cpFatVal)) {
+                        errosFormato.push('O Código Postal de facturação deve ter o formato 0000-000.');
+                        var cpFatEl = document.getElementById('cod-postal-fat');
+                        destacarCampoErro(cpFatEl);
+                        if (!primeiroCampo) primeiroCampo = cpFatEl;
+                    }
+                    verificar('cidade-fat', 'Cidade de facturação');
                 }
             }
 
             var msgs = [];
-            if (faltas.length > 0) msgs.push('Por favor, preencha: ' + faltas.join(', ') + '.');
-            if (errosFormato.length > 0) msgs = msgs.concat(errosFormato);
-            return { erro: msgs.join('<br>'), primeiroCampo: primeiroCampo };
+            if (faltas.length > 0) msgs.push('Por favor, preencha: <strong>' + faltas.join(', ') + '</strong>.');
+            errosFormato.forEach(function(m) { msgs.push(m); });
+            return { erro: msgs.join('<br>'), campo: primeiroCampo };
         }
 
         function validateFinalButton() {
@@ -1304,29 +1248,23 @@
             if (box && !box.classList.contains('hidden')) showValidationError('');
         }
 
-        // ------------------------------------------------------------------
-        // PAGAMENTO STRIPE (MB WAY, cartão e Multibanco), embutido nesta página.
-        // ------------------------------------------------------------------
+        function concluirRegressoMultibanco() {
+            localStorage.removeItem('cartItems');
+            try { sessionStorage.removeItem('jeronimoCheckoutDraft'); sessionStorage.removeItem('jeronimoMultibancoPending'); } catch (e) {}
+            window.location.href = 'index';
+        }
+
         async function placeOrder(e) {
             e.preventDefault();
             if (removeUnavailableItems()) { loadCartSummary(); return; }
 
             var validacao = validarEncomenda();
-            if (validacao.erro) {
-                showValidationError(validacao.erro);
-                if (validacao.primeiroCampo) {
-                    var campo = document.getElementById(validacao.primeiroCampo);
-                    if (campo) {
-                        setTimeout(function() { campo.focus({ preventScroll: true }); }, 350);
-                    }
-                }
-                return;
-            }
+            if (validacao.erro) { showValidationError(validacao.erro, validacao.campo); return; }
             showValidationError('');
 
             var itens = JSON.parse(localStorage.getItem('cartItems') || '[]');
             var soCursos = itens.length > 0 && !itens.some(function(i) { return i.type !== 'curso'; });
-            var destino = getDestinoEfetivo();
+            var destino = obterDestinoEfectivo();
             var cp = document.getElementById('cod-postal').value.trim();
 
             if (!STRIPE_PUBLISHABLE_KEY || typeof Stripe === 'undefined') {
@@ -1335,22 +1273,14 @@
             }
 
             mostrarCarregamento("A preparar o pagamento...");
-            var subscreveNewsletter = document.getElementById('newsletter-optin')?.checked;
             var nomeBase = document.getElementById('nome').value.trim();
-            var telemovel = document.getElementById('telemovel').value.trim();
-            var isGift = document.getElementById('is-gift')?.checked;
-            var notaOferta = document.getElementById('nota-oferta')?.value.trim();
+            var telBase = document.getElementById('telemovel').value.trim();
+            var querNewsletter = document.getElementById('newsletter-optin')?.checked;
+            var nomeComExtras = nomeBase + (telBase ? ' · Tel: ' + telBase : '') + (querNewsletter ? ' [Newsletter]' : '');
 
-            // O telemóvel e a etiqueta [Newsletter] seguem no campo cliente.nome sem alterar o Apps Script
-            var nomeCompleto = nomeBase + (telemovel ? " · Tel: " + telemovel : "") + (subscreveNewsletter ? " [Newsletter]" : "");
-            if (soCursos && isGift) {
-                nomeCompleto += " [OFERTA" + (notaOferta ? ": " + notaOferta : "") + "]";
-            }
-
-            var nrAndarEnvio = document.getElementById('nr-andar').value.trim();
-            if (!soCursos && isGift) {
-                nrAndarEnvio += " [OFERTA" + (notaOferta ? ": " + notaOferta : "") + "]";
-            }
+            var notaOferta = (document.getElementById('is-gift')?.checked && document.getElementById('gift-note')?.value.trim())
+                ? ' [OFERTA: ' + document.getElementById('gift-note').value.trim() + ']'
+                : '';
 
             var faturacaoDiferente = document.getElementById('choice-nao').checked && !soCursos;
             var pedido = {
@@ -1358,21 +1288,21 @@
                 origem: window.location.origin,
                 destino: destino,
                 cliente: {
-                    nome: nomeCompleto,
+                    nome: nomeComExtras,
                     email: document.getElementById('email').value.trim(),
                     nif: document.getElementById('nif').value.trim()
                 },
                 envio: soCursos ? {} : {
-                    morada: document.getElementById('morada').value,
-                    nr_andar: nrAndarEnvio,
+                    morada: document.getElementById('morada').value.trim(),
+                    nr_andar: document.getElementById('nr-andar').value.trim() + notaOferta,
                     cod_postal: cp,
-                    cidade: document.getElementById('cidade').value
+                    cidade: document.getElementById('cidade').value.trim()
                 },
                 faturacao: faturacaoDiferente ? {
-                    morada: document.getElementById('morada-fat').value,
-                    nr_andar: document.getElementById('nr-andar-fat').value,
-                    cod_postal: document.getElementById('cod-postal-fat').value,
-                    cidade: document.getElementById('cidade-fat').value
+                    morada: document.getElementById('morada-fat').value.trim(),
+                    nr_andar: document.getElementById('nr-andar-fat').value.trim(),
+                    cod_postal: document.getElementById('cod-postal-fat').value.trim(),
+                    cidade: document.getElementById('cidade-fat').value.trim()
                 } : null,
                 itens: itens.map(function(i) { return { id: i.id, qtd: i.quantity }; })
             };
@@ -1381,12 +1311,24 @@
                 var resposta = await chamarScript(pedido);
                 if (!resposta.ok) throw new Error(resposta.erro || "Não foi possível preparar o pagamento.");
 
-                try { sessionStorage.setItem('jeronimoScript', urlDoScript()); } catch (err) {}
+                try {
+                    sessionStorage.setItem('jeronimoScript', urlDoScript());
+                    sessionStorage.setItem('jeronimoMultibancoPending', '1');
+                } catch (err) {}
 
                 if (stripeCheckout) { stripeCheckout.destroy(); stripeCheckout = null; }
                 var stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
                 stripeCheckout = await stripe.createEmbeddedCheckoutPage({
-                    fetchClientSecret: function() { return Promise.resolve(resposta.clientSecret); }
+                    fetchClientSecret: function() { return Promise.resolve(resposta.clientSecret); },
+                    onComplete: function() {
+                        localStorage.removeItem('cartItems');
+                        try { sessionStorage.removeItem('jeronimoCheckoutDraft'); sessionStorage.removeItem('jeronimoMultibancoPending'); } catch (e) {}
+                        if (stripeCheckout) { stripeCheckout.destroy(); stripeCheckout = null; }
+                        document.getElementById('payment-edit').classList.add('hidden');
+                        document.getElementById('multibanco-return-banner').classList.add('hidden');
+                        document.getElementById('embedded-complete-box').classList.remove('hidden');
+                        updateCartUI();
+                    }
                 });
                 stripeCheckout.mount('#stripe-checkout');
 
@@ -1408,11 +1350,18 @@
             }
         }
 
-        // Regressos antigos da Stripe (checkout?session_id=...) seguem para a página de confirmação.
         function verificarRegresso() {
             if (/[?&]session_id=cs_/.test(window.location.search)) {
+                try { sessionStorage.removeItem('jeronimoMultibancoPending'); } catch (e) {}
                 window.location.replace('encomenda-confirmada' + window.location.search);
+                return;
             }
+            try {
+                if (sessionStorage.getItem('jeronimoMultibancoPending') === '1' && JSON.parse(localStorage.getItem('cartItems') || '[]').length > 0) {
+                    var banner = document.getElementById('multibanco-return-banner');
+                    if (banner) banner.classList.remove('hidden');
+                }
+            } catch (e) {}
         }
 
         function updateCartUI() {
@@ -1436,33 +1385,52 @@
         async function loadComponents() {
             try {
                 var navResp = await fetch(getSafePath('menu') + '?v=1.0.2');
-                if (!navResp.ok) {
-                    navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
-                }
+                if (!navResp.ok) navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
                 if (navResp.ok) {
                     var navEl = document.getElementById('nav-placeholder');
+                    navEl.classList.add('mb-24');
                     navEl.innerHTML = await navResp.text();
                     runInjectedScripts(navEl);
                 }
-                
                 var footResp = await fetch(getSafePath('rodape') + '?v=1.0.2');
-                if (!footResp.ok) {
-                    footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
-                }
-                if (footResp.ok) {
-                    document.getElementById('footer-placeholder').innerHTML = await footResp.text();
-                }
+                if (!footResp.ok) footResp = await fetch(getSafePath('rodape.html') + '?v=1.0.2');
+                if (footResp.ok) document.getElementById('footer-placeholder').innerHTML = await footResp.text();
                 updateCartUI();
             } catch (e) { console.warn("Modo offline."); }
         }
 
+        function configurarObservadorBarraMobile() {
+            var paymentSec = document.getElementById('payment-section');
+            var stickyBar = document.getElementById('mobile-sticky-bar');
+            if (!paymentSec || !stickyBar || typeof IntersectionObserver === 'undefined') return;
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    var formularioBloqueado = document.getElementById('place-order-button')?.classList.contains('hidden');
+                    if (formularioBloqueado) { stickyBar.classList.add('hidden'); return; }
+                    stickyBar.classList.toggle('hidden', entry.isIntersecting);
+                });
+            }, { threshold: 0.25 });
+            observer.observe(paymentSec);
+        }
+
+        function inicializarCarrinhoPreview() {
+            var isPreviewSandbox = window.location.protocol === 'blob:' || window.location.protocol === 'about:' || !window.location.hostname;
+            if (isPreviewSandbox && localStorage.getItem('cartItems') === null) {
+                localStorage.setItem('cartItems', JSON.stringify([
+                    { id: 1, title: "Tu podes compreender a Bíblia", price: 18.00, quantity: 1, weight: 0.505 },
+                    { id: 101, title: "São Jerónimo a Escrever", price: 3.90, quantity: 1, weight: 0.050 }
+                ]));
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             loadComponents();
+            inicializarCarrinhoPreview();
             restaurarRascunhoFormulario();
             loadCartSummary();
-            handleBillingChoice();
-            initMobileJumpBar();
+            handleBillingChoice(false);
             verificarRegresso();
+            configurarObservadorBarraMobile();
         });
     </script>
 

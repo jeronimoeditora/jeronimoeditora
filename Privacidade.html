@@ -48,7 +48,7 @@
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
     <!-- CONTENTOR DO MENU -->
-    <div id="nav-placeholder" class="mb-24"></div>
+    <div id="nav-placeholder"></div>
 
     <main class="flex-grow pt-8 pb-16">
         <div class="max-w-4xl mx-auto px-4 md:px-6">
@@ -85,7 +85,7 @@
                     </p>
                     <ul>
                         <li><strong>Encomendas de Livros, Produtos e Cursos Digitais (Checkout):</strong> Nome completo, endereço de email, contacto telefónico, morada de envio e de facturação (para artigos físicos), NIF (quando indicado opcionalmente pelo cliente) e eventual nota de oferta/dedicatória. Estes dados destinam-se ao processamento da encomenda, expedição postal ou entrega em mão em Braga, envio da chave de acesso aos cursos digitais e emissão de factura.</li>
-                        <li><strong>Pagamentos (Stripe):</strong> O método de pagamento escolhido (MB WAY, cartão ou Multibanco), o montante e a referência de confirmação devolvida pela Stripe. Os números de cartão, códigos de segurança ou dados bancários são introduzidos directamente no formulário seguro da Stripe e nunca chegam aos servidores da Jerónimo Editora.</li>
+                        <li><strong>Pagamentos (Stripe):</strong> O método de pagamento escolhido (MB WAY, cartão, Apple Pay, Google Pay ou Multibanco), o montante e a referência de confirmação devolvida pela Stripe. Os números de cartão, códigos de segurança ou dados bancários são introduzidos directamente no formulário seguro da Stripe e nunca chegam aos servidores da Jerónimo Editora.</li>
                         <li><strong>Newsletter e Novidades Editoriais:</strong> Endereço de email (e nome, quando indicado no checkout), recolhidos mediante subscrição voluntária no formulário do rodapé ou através da opção disponibilizada no checkout, para envio de lançamentos, artigos de formação e cursos da Jerónimo Editora e de Hugo Bacelo.</li>
                         <li><strong>Formulários de Contacto e Agendamento de Palestras:</strong> Nome, email, telefone, paróquia ou entidade organizadora, tema pretendido e mensagem enviada através das páginas de <em>Contactos</em> ou <em>Agendar Palestra</em>, com a finalidade de responder ao pedido ou organizar a conferência.</li>
                         <li><strong>Acesso a Cursos de Formação:</strong> Endereço de email e validação da chave de acesso atribuída ao aluno para disponibilização dos conteúdos formativos adquiridos.</li>
@@ -107,14 +107,14 @@
                         A Jerónimo Editora não vende, aluga nem cede dados pessoais a terceiros para fins comerciais. Para assegurar o funcionamento técnico da loja, dos pagamentos, das entregas e das comunicações, recorremos exclusivamente aos seguintes prestadores de serviços (subcontratantes):
                     </p>
                     <ul>
-                        <li><strong>Stripe Payments Europe, Ltd.:</strong> Prestadora de serviços de pagamento responsável pelo processamento seguro das transacções por MB WAY, cartão e Multibanco.</li>
+                        <li><strong>Stripe Payments Europe, Ltd.:</strong> Prestadora de serviços de pagamento responsável pelo processamento seguro das transacções por MB WAY, cartão, carteiras digitais e Multibanco.</li>
                         <li><strong>CTT – Correios de Portugal, S.A.:</strong> Operador postal ao qual são transmitidos o nome, contacto e morada de entrega para expedição das encomendas físicas.</li>
                         <li><strong>Google LLC (Google Workspace / Google Apps Script / Google Sheets / Google Drive):</strong> Infra-estrutura utilizada para registo interno de encomendas, envio de notificações de confirmação e disponibilização de recursos de estudo (incluindo materiais partilhados no âmbito do grupo <em>Aprendizes do Verbo</em>).</li>
                         <li><strong>Mailchimp (The Rocket Science Group LLC / Intuit Inc.):</strong> Plataforma utilizada para gestão e envio da newsletter aos subscritores.</li>
                         <li><strong>GitHub, Inc. (GitHub Pages):</strong> Serviço de alojamento web onde o site se encontra hospedado.</li>
                     </ul>
                     <p>
-                        Sempre que algum destes prestadores trate dados fora do Espaço Económico Europeu (designadamente nos Estados Unidos da América), a transferência encontra-se protegida ao abrigo do <strong>EU-US Data Privacy Framework</strong> e/ou das <strong>Cláusulas Contratuais-Tipo</strong> aprovadas pela Comissão Europeia, garantindo um nível de protecção equivalente ao exigido na União Europeia.
+                        Sempre que algum destes prestadores trate dados fora do Espaço Económico Europeu (designadamente nos Estados Unidos da América), a transferência encontra-se protegida ao abrigo do <strong>EU-US Data Privacy Framework</strong> e/ou das <strong>Cláusulas Contratuais-Tipo</strong> aprovadas pela Comissão Europeia, podendo o titular solicitar cópia dessas garantias através do nosso email de contacto.
                     </p>
 
                     <h3>5. Cookies, Armazenamento no Navegador e Estatísticas de Visitas</h3>
@@ -203,6 +203,7 @@
                 if (!navResp.ok) navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
                 if (navResp.ok) {
                     const navEl = document.getElementById('nav-placeholder');
+                    navEl.classList.add('mb-24');
                     navEl.innerHTML = await navResp.text();
                     runInjectedScripts(navEl);
                 }

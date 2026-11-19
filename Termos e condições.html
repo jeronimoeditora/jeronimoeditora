@@ -48,7 +48,7 @@
 <body class="bg-brand-bg text-brand-text antialiased flex flex-col min-h-screen">
 
     <!-- CONTENTOR DO MENU -->
-    <div id="nav-placeholder" class="mb-24"></div>
+    <div id="nav-placeholder"></div>
 
     <main class="flex-grow pt-8 pb-16">
         <div class="max-w-4xl mx-auto px-4 md:px-6">
@@ -81,21 +81,21 @@
 
                     <h3>2. Preços, Facturação e Disponibilidade</h3>
                     <p>
-                        Todos os preços indicados no site são apresentados em Euros (€) e <strong>incluem o IVA à taxa legal em vigor</strong> aplicável em Portugal (actualmente 6% para livros e 23% para os restantes artigos e conteúdos digitais). Os portes de envio, quando aplicáveis, acrescem ao valor dos artigos e são apresentados de forma discriminada no resumo do carrinho antes da confirmação do pagamento.
+                        Todos os preços indicados no site são apresentados em Euros (€) e <strong>incluem o IVA à taxa legal em vigor</strong> aplicável em Portugal (actualmente 6% para livros físicos e 23% para artigos de estacionário/postais e conteúdos digitais). Os portes de envio, quando aplicáveis, acrescem ao valor dos artigos e são apresentados de forma discriminada no resumo do carrinho antes da confirmação do pagamento.
                     </p>
                     <p>
                         A indicação do Número de Identificação Fiscal (NIF) no checkout é opcional, podendo o cliente preenchê-lo caso pretenda factura com NIF.
                     </p>
                     <p>
-                        A Jerónimo Editora envida todos os esforços para assegurar a exactidão das informações, descrições, imagens e preços apresentados. Caso ocorra um lapso manifesto no preço indicado ou indisponibilidade imprevista de algum exemplar após a encomenda, contactaremos o cliente antes da expedição para que possa confirmar a encomenda ao preço correcto ou optar pelo cancelamento com reembolso integral no prazo máximo de 14 dias.
+                        A Jerónimo Editora envida todos os esforços para assegurar a exactidão das informações, descrições, imagens e preços apresentados. Caso ocorra um lapso manifesto no preço indicado antes da expedição, contactaremos o cliente para que possa confirmar a encomenda ao preço correcto ou optar pelo cancelamento com reembolso integral. Se, após a compra, se verificar ruptura imprevista de stock de algum exemplar, informaremos de imediato o cliente e procederemos ao reembolso integral no prazo máximo de <strong>14 dias</strong>.
                     </p>
 
-                    <h3>3. Processo de Encomenda e Celebração do Contrato</h3>
+                    <h3>3. Processo de Encomenda, Arquivo e Celebração do Contrato</h3>
                     <p>
-                        Para efectuar uma compra, o utilizador adiciona os artigos pretendidos ao carrinho de compras, preenche os seus dados de contacto e morada de entrega (quando aplicável) e prossegue para o pagamento.
+                        Para efectuar uma compra, o utilizador segue os seguintes passos técnicos: (i) adiciona os artigos pretendidos ao carrinho de compras; (ii) preenche os seus dados de contacto e morada de entrega (quando aplicável); (iii) revê o resumo da encomenda e o valor total com portes; e (iv) conclui o pagamento no módulo seguro da Stripe.
                     </p>
                     <p>
-                        Até ao momento em que conclui o pagamento, o utilizador pode rever e corrigir qualquer campo do formulário, bem como alterar quantidades ou remover artigos do carrinho. O contrato é celebrado em língua portuguesa e considera-se concluído assim que o pagamento é confirmado pela Stripe. Após essa confirmação, o cliente recebe um email com o resumo e o número da encomenda, que deve conservar como comprovativo.
+                        Até ao momento em que conclui o pagamento, o utilizador pode rever e corrigir qualquer campo do formulário, bem como alterar quantidades ou remover artigos do carrinho. O contrato é celebrado em língua portuguesa e fica concluído assim que o pagamento é confirmado pela Stripe. Após essa confirmação, o cliente recebe um email com o resumo e o número da encomenda, que serve de comprovativo. O registo da encomenda fica arquivado nos sistemas internos da Jerónimo Editora para efeitos de gestão e cumprimento fiscal, podendo o cliente solicitar cópia ou esclarecimentos a qualquer momento através de <strong>editorajeronimo@gmail.com</strong>.
                     </p>
 
                     <h3>4. Métodos de Pagamento (Stripe)</h3>
@@ -104,7 +104,7 @@
                     </p>
                     <ul>
                         <li><strong>MB WAY:</strong> Pagamento imediato no checkout, mediante confirmação do pedido na aplicação MB WAY do telemóvel indicado.</li>
-                        <li><strong>Cartão de débito ou crédito:</strong> Pagamento seguro no próprio checkout (Visa, Mastercard e demais redes suportadas, incluindo carteiras digitais compatíveis como Apple Pay ou Google Pay quando disponíveis no dispositivo).</li>
+                        <li><strong>Cartão de débito ou crédito e Carteiras Digitais:</strong> Pagamento seguro no próprio checkout (Visa, Mastercard e demais redes suportadas, incluindo <strong>Apple Pay</strong> e <strong>Google Pay</strong> nos dispositivos e navegadores compatíveis).</li>
                         <li><strong>Multibanco:</strong> Geração de entidade, referência e montante no checkout. A referência Multibanco possui um prazo de validade indicado no ecrã; caso o pagamento não seja efectuado dentro desse prazo, a encomenda caduca automaticamente sem qualquer encargo.</li>
                     </ul>
                     <p>
@@ -146,12 +146,25 @@
                         Nos termos do Decreto-Lei n.º 24/2014, o cliente que actue na qualidade de consumidor tem o direito de resolver livremente o contrato no prazo de <strong>14 dias seguidos</strong>, sem necessidade de indicar qualquer motivo:
                     </p>
                     <ul>
-                        <li><strong>Artigos Físicos (Livros e Postais):</strong> O prazo de 14 dias conta-se a partir do dia seguinte àquele em que o consumidor (ou um terceiro por si indicado) adquire a posse física dos bens. Para exercer este direito, basta enviar uma comunicação inequívoca para <strong>editorajeronimo@gmail.com</strong> (indicando o número da encomenda, o seu nome e morada) antes do termo do prazo.</li>
+                        <li><strong>Artigos Físicos (Livros e Postais):</strong> O prazo de 14 dias conta-se a partir do dia seguinte àquele em que o consumidor (ou um terceiro por si indicado, que não seja o transportador) adquire a posse física dos bens. Para exercer este direito, basta enviar uma comunicação inequívoca para <strong>editorajeronimo@gmail.com</strong> (podendo utilizar o formulário-tipo abaixo) antes do termo do prazo.</li>
                         <li><strong>Custos e Condições de Devolução:</strong> No âmbito da livre resolução de compras de livros físicos, <strong>a Jerónimo Editora assume os custos postais de devolução</strong>, fornecendo ao cliente as instruções para o reenvio. Os artigos devem ser devolvidos no prazo de 14 dias após a comunicação de resolução, rigorosamente no mesmo estado em que foram recebidos, sem marcas de uso, dobras, anotações ou danos.</li>
                         <li><strong>Excepção nos Cursos e Conteúdos Digitais:</strong> Nos termos do artigo 17.º, n.º 1, alínea l) do Decreto-Lei n.º 24/2014, o direito de livre resolução caduca a partir do momento em que a execução/fornecimento do conteúdo digital tenha início com o consentimento prévio e expresso do consumidor (activação da chave de acesso ao curso). Enquanto a chave de acesso não tiver sido activada, o consumidor mantém o direito de resolver o contrato no prazo de 14 dias.</li>
                         <li><strong>Reembolso:</strong> O reembolso de todos os pagamentos recebidos (incluindo eventuais portes iniciais de envio) será efectuado no prazo máximo de 14 dias a contar da recepção da decisão de resolução, podendo a editora reter o reembolso até receber os artigos devolvidos ou prova do respectivo envio. O reembolso é realizado através da Stripe para o mesmo meio de pagamento utilizado na compra (MB WAY, cartão ou conta associada ao pagamento Multibanco).</li>
-                        <li><strong>Garantia Legal de Conformidade (3 Anos):</strong> Nos termos do Decreto-Lei n.º 84/2021, os bens físicos beneficiam da garantia legal de conformidade pelo prazo de <strong>3 anos</strong> a contar da entrega. Se um livro chegar danificado no transporte ou apresentar defeito de fabrico/impressão, o cliente deverá contactar <strong>editorajeronimo@gmail.com</strong> (juntando, se possível, fotografias do dano), assegurando a Jerónimo Editora a substituição sem encargos ou o reembolso integral, com portes de devolução e reenvio por conta da editora.</li>
+                        <li><strong>Garantia Legal de Conformidade (3 Anos):</strong> Nos termos do Decreto-Lei n.º 84/2021, os bens físicos beneficiam da garantia legal de conformidade pelo prazo de <strong>3 anos</strong> a contar da entrega. Se um livro chegar danificado no transporte ou apresentar defeito de fabrico/impressão, o cliente deverá contactar <strong>editorajeronimo@gmail.com</strong> (juntando, se possível, fotografias do dano e da embalagem), assegurando a Jerónimo Editora a substituição sem encargos ou o reembolso integral, com portes de devolução e reenvio por conta da editora.</li>
                     </ul>
+
+                    <div class="my-6 p-5 bg-gray-50 border border-gray-200 rounded-xl font-sans text-xs text-gray-700 leading-relaxed">
+                        <p class="font-bold text-brand-accent-blue uppercase tracking-wider mb-2">Formulário-Tipo de Livre Resolução (Anexo ao Decreto-Lei n.º 24/2014)</p>
+                        <p class="mb-2"><em>(Só deve preencher e enviar o presente formulário por email para <strong>editorajeronimo@gmail.com</strong> se quiser resolver o contrato)</em></p>
+                        <ul class="list-none ml-0 space-y-1.5 mb-0">
+                            <li>— <strong>Para:</strong> Hugo Alexandre Mendes Bacelo (Jerónimo Editora), Rua dos Galos, Braga, Portugal — Email: editorajeronimo@gmail.com</li>
+                            <li>— Pela presente comunico que resolvo o meu contrato de compra e venda relativo ao(s) seguinte(s) bem(ns) / serviço(s): <em>[indicar título(s) e n.º da encomenda]</em></li>
+                            <li>— Solicitado em <em>[data da encomenda]</em> / recebido em <em>[data de recepção]</em></li>
+                            <li>— Nome do(s) consumidor(es): <em>[nome completo]</em></li>
+                            <li>— Endereço do(s) consumidor(es): <em>[morada completa]</em></li>
+                            <li>— Data: <em>[data do envio]</em></li>
+                        </ul>
+                    </div>
 
                     <h3>9. Artigos, Agenda e Agendamento de Palestras</h3>
                     <p>
@@ -173,7 +186,7 @@
                         <li><strong>Website oficial:</strong> <a href="https://www.ciab.pt" target="_blank" rel="noopener" class="text-brand-accent-red underline font-bold">www.ciab.pt</a></li>
                     </ul>
                     <p>
-                        O utilizador dispõe igualmente de acesso à plataforma oficial do <strong>Livro de Reclamações Electrónico</strong>, acessível em <a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener" class="text-brand-accent-red underline font-bold">www.livroreclamacoes.pt</a>.
+                        O utilizador dispõe igualmente de acesso à plataforma oficial do <strong>Livro de Reclamações Electrónico</strong>, acessível em <a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener" class="text-brand-accent-red underline font-bold">www.livroreclamacoes.pt</a>, bem como à Plataforma Europeia de Resolução de Litígios em Linha (<a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener" class="text-brand-accent-red underline">ec.europa.eu/consumers/odr</a>).
                     </p>
 
                     <h3>12. Legislação Aplicável e Foro</h3>
@@ -218,6 +231,7 @@
                 if (!navResp.ok) navResp = await fetch(getSafePath('menu.html') + '?v=1.0.2');
                 if (navResp.ok) {
                     const navEl = document.getElementById('nav-placeholder');
+                    navEl.classList.add('mb-24');
                     navEl.innerHTML = await navResp.text();
                     runInjectedScripts(navEl);
                 }
